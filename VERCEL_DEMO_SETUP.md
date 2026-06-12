@@ -79,8 +79,6 @@ Success response:
 
 Then **remove `SETUP_SECRET`** from Vercel (security) and redeploy.
 
-> Current production `SETUP_SECRET` (remove after use): `commodityplaybook-seed-once-2025`
-
 ### Method B — Local script (if port 5432 works)
 
 Use phone hotspot if home Wi‑Fi blocks Postgres:
