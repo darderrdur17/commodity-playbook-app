@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
-import { execFileSync } from "child_process";
-import path from "path";
-import { seedDatabase } from "../../../../prisma/seed";
 import { prisma } from "@/lib/prisma";
+import { setupProductionDatabase } from "@/lib/setup-database";
 
 export const maxDuration = 60;
 export const dynamic = "force-dynamic";
@@ -27,28 +25,20 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const prismaBin = path.join(process.cwd(), "node_modules", ".bin", "prisma");
-    execFileSync(prismaBin, ["db", "push", "--accept-data-loss"], {
-      stdio: "pipe",
-      env: process.env,
-    });
-
-    await seedDatabase();
+    const { alreadySeeded } = await setupProductionDatabase();
 
     return NextResponse.json({
       success: true,
-      message: "Database schema pushed and demo accounts seeded.",
+      alreadySeeded,
+      message: alreadySeeded
+        ? "Database already seeded."
+        : "Database schema applied and demo accounts seeded.",
       demo: { email: "elite.insider@demo.com", password: "Demo1234!" },
     });
   } catch (err) {
     console.error("[setup-db]", err);
-    const stderr =
-      err && typeof err === "object" && "stderr" in err
-        ? String((err as { stderr: Buffer }).stderr)
-        : "";
-    const message =
-      err instanceof Error ? `${err.message}${stderr ? `\n${stderr}` : ""}` : "Setup failed";
-    return NextResponse.json({ error: message.slice(0, 500) }, { status: 500 });
+    const message = err instanceof Error ? err.message : "Setup failed";
+    return NextResponse.json({ error: message }, { status: 500 });
   } finally {
     await prisma.$disconnect();
   }
