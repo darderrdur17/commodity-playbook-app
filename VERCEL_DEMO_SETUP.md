@@ -4,6 +4,8 @@ Get demo logins working at **https://commodity-playbook-app.vercel.app/demo** on
 
 **Demo password for all accounts:** `Demo1234!`
 
+> **Status (June 2025):** Production database has been seeded. Demo login is live. You can skip to [Step 6 — Test](#step-6--test-demo-accounts) unless you are setting up a new environment.
+
 ---
 
 ## What was broken (and why)
@@ -76,6 +78,8 @@ Success response:
 ```
 
 Then **remove `SETUP_SECRET`** from Vercel (security) and redeploy.
+
+> Current production `SETUP_SECRET` (remove after use): `commodityplaybook-seed-once-2025`
 
 ### Method B — Local script (if port 5432 works)
 
