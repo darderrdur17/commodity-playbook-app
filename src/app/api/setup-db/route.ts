@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { execSync } from "child_process";
+import { execFileSync } from "child_process";
+import path from "path";
 import { seedDatabase } from "../../../../prisma/seed";
+import { prisma } from "@/lib/prisma";
 
 export const maxDuration = 60;
 export const dynamic = "force-dynamic";
@@ -25,7 +27,8 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    execSync("npx prisma db push --accept-data-loss", {
+    const prismaBin = path.join(process.cwd(), "node_modules", ".bin", "prisma");
+    execFileSync(prismaBin, ["db", "push", "--accept-data-loss"], {
       stdio: "pipe",
       env: process.env,
     });
@@ -39,7 +42,14 @@ export async function POST(req: NextRequest) {
     });
   } catch (err) {
     console.error("[setup-db]", err);
-    const message = err instanceof Error ? err.message : "Setup failed";
-    return NextResponse.json({ error: message }, { status: 500 });
+    const stderr =
+      err && typeof err === "object" && "stderr" in err
+        ? String((err as { stderr: Buffer }).stderr)
+        : "";
+    const message =
+      err instanceof Error ? `${err.message}${stderr ? `\n${stderr}` : ""}` : "Setup failed";
+    return NextResponse.json({ error: message.slice(0, 500) }, { status: 500 });
+  } finally {
+    await prisma.$disconnect();
   }
 }

@@ -56,12 +56,14 @@ Choose **one** method:
 
 ### Method A — Vercel API (recommended if local network blocks port 5432)
 
-After deploy, run (replace `YOUR_SETUP_SECRET` with the value from Vercel env):
+After deploy, run (secret is set in Vercel as `SETUP_SECRET`):
 
 ```bash
 curl -X POST https://commodity-playbook-app.vercel.app/api/setup-db \
-  -H "Authorization: Bearer YOUR_SETUP_SECRET"
+  -H "Authorization: Bearer commodityplaybook-seed-once-2025"
 ```
+
+> **Important:** Redeploy production **after** adding `SETUP_SECRET` in Vercel, or this returns 401.
 
 Success response:
 
