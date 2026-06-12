@@ -191,7 +191,7 @@ export default function OnboardingPage() {
   const progress = isResult ? 100 : (step / (QUIZ.length + 1)) * 100;
 
   return (
-    <div className="min-h-screen bg-secondary flex flex-col items-center justify-center px-6 py-12">
+    <div className="min-h-screen bg-secondary flex flex-col items-center justify-center px-4 sm:px-6 py-8 sm:py-12">
       <GradientOrbs />
       <div className="relative z-10 w-full max-w-2xl">
         {/* Progress */}

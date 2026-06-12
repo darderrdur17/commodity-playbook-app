@@ -20,12 +20,15 @@
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
   }
 
   body {
     @apply bg-white text-gray-800;
     font-family: var(--font-inter);
     line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-tap-highlight-color: transparent;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -223,5 +226,10 @@
     @apply border text-accent;
     border-color: rgba(223,242,255,0.28);
     background: rgba(223,242,255,0.1);
+  }
+
+  /* Consistent page horizontal padding on mobile */
+  .page-container {
+    @apply w-full max-w-[1200px] mx-auto px-4 sm:px-6;
   }
 }

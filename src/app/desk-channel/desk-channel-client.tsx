@@ -31,7 +31,7 @@ export function DeskChannelClient({ userTier }: Props) {
   }, [search, category]);
 
   const content = (
-    <div className="max-w-[1100px] mx-auto px-6 py-10">
+    <div className="page-container py-8 sm:py-10">
       {/* Hero */}
       <section className="rounded-2xl bg-primary-800 px-6 sm:px-8 py-10 mb-8 relative overflow-hidden">
         <div className="absolute -top-20 -right-20 w-64 h-64 rounded-full opacity-10" style={{ background: "radial-gradient(circle, #3280ff 0%, transparent 70%)" }} />

@@ -118,7 +118,7 @@ export function AdminClient({ adminName }: { adminName: string }) {
     <div className="min-h-screen bg-secondary">
       {/* Header */}
       <div className="bg-gray-900 text-white">
-        <div className="max-w-[1200px] mx-auto px-6 py-8">
+        <div className="page-container py-6 sm:py-8">
           <div className="flex items-start justify-between gap-4 flex-wrap">
             <div>
               <Link href="/dashboard" className="inline-flex items-center gap-1.5 text-sm text-gray-400 hover:text-white mb-4 transition-colors">
@@ -142,7 +142,7 @@ export function AdminClient({ adminName }: { adminName: string }) {
         </div>
       </div>
 
-      <div className="max-w-[1200px] mx-auto px-6 py-8">
+      <div className="page-container py-6 sm:py-8">
         {/* Stats */}
         {stats && (
           <Reveal className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-8">

@@ -187,7 +187,7 @@ export default function HomePage() {
   return (
     <div className="overflow-hidden">
       {/* ── HERO ─────────────────────────────────────────────────── */}
-      <section className="relative min-h-[92vh] flex items-center bg-navy section-dark overflow-hidden">
+      <section className="relative min-h-[85vh] sm:min-h-[92vh] flex items-center bg-navy section-dark overflow-hidden">
         <GradientOrbs />
         <HeroParticles count={16} />
 
@@ -203,20 +203,20 @@ export default function HomePage() {
           }}
         />
 
-        <div className="relative z-10 w-full max-w-[1200px] mx-auto px-6 py-24">
+        <div className="relative z-10 w-full max-w-[1200px] mx-auto px-4 sm:px-6 py-16 sm:py-24">
           <div className="max-w-3xl">
             {/* Track toggle */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="inline-flex items-center gap-1 p-1 rounded-full border border-white/15 bg-white/8 backdrop-blur-sm mb-8"
+              className="inline-flex items-center gap-1 p-1 rounded-full border border-white/15 bg-white/8 backdrop-blur-sm mb-8 max-w-full overflow-x-auto"
             >
               {(["career", "sales"] as Track[]).map((t) => (
                 <button
                   key={t}
                   onClick={() => setActiveTrack(t)}
-                  className={`px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider transition-all duration-200 ${
+                  className={`px-3 sm:px-4 py-2 sm:py-1.5 rounded-full text-[10px] sm:text-xs font-bold uppercase tracking-wider transition-all duration-200 whitespace-nowrap min-h-[44px] sm:min-h-0 ${
                     activeTrack === t
                       ? "bg-white text-primary-800 shadow-sm"
                       : "text-white/60 hover:text-white"
@@ -268,7 +268,7 @@ export default function HomePage() {
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -12 }}
                 transition={{ duration: 0.4, delay: 0.1 }}
-                className="text-white/65 text-lg font-light leading-relaxed max-w-2xl mb-10"
+                className="text-white/65 text-base sm:text-lg font-light leading-relaxed max-w-2xl mb-8 sm:mb-10"
               >
                 {track.sub}
               </motion.p>
@@ -279,20 +279,20 @@ export default function HomePage() {
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.2 }}
-              className="flex flex-wrap items-center gap-4"
+              className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3 sm:gap-4"
             >
-              <Link href={track.ctaHref}>
+              <Link href={track.ctaHref} className="w-full sm:w-auto">
                 <Button
                   size="xl"
                   variant="primary-dark"
-                  className="group shadow-xl shadow-black/20"
+                  className="group shadow-xl shadow-black/20 w-full sm:w-auto"
                 >
                   {track.cta}
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Button>
               </Link>
-              <Link href="/pricing">
-                <Button size="xl" variant="outline-dark">
+              <Link href="/pricing" className="w-full sm:w-auto">
+                <Button size="xl" variant="outline-dark" className="w-full sm:w-auto">
                   See All Plans
                 </Button>
               </Link>
@@ -303,9 +303,9 @@ export default function HomePage() {
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 0.4 }}
-              className="flex items-center gap-4 mt-10"
+              className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4 mt-8 sm:mt-10"
             >
-              <div className="flex -space-x-2">
+              <div className="flex -space-x-2 flex-shrink-0">
                 {[0, 1, 2, 3].map((i) => (
                   <div
                     key={i}
@@ -347,7 +347,7 @@ export default function HomePage() {
 
         {/* Scroll indicator */}
         <motion.div
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1"
+          className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 hidden sm:flex flex-col items-center gap-1"
           animate={{ y: [0, 6, 0] }}
           transition={{ duration: 2, repeat: Infinity }}
         >
@@ -357,12 +357,12 @@ export default function HomePage() {
       </section>
 
       {/* ── STATS BAR ─────────────────────────────────────────────── */}
-      <section className="border-y border-border bg-secondary py-8">
-        <div className="max-w-[1200px] mx-auto px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 divide-x divide-border">
+      <section className="border-y border-border bg-secondary py-6 sm:py-8">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-6 md:divide-x md:divide-border">
             {STATS.map((stat, i) => (
-              <Reveal key={stat.label} delay={i * 0.1} className="text-center px-4">
-                <p className="font-serif text-3xl font-bold text-primary-800">
+              <Reveal key={stat.label} delay={i * 0.1} className="text-center px-2 sm:px-4">
+                <p className="font-serif text-2xl sm:text-3xl font-bold text-primary-800">
                   <AnimatedCounter value={stat.value} suffix={stat.suffix} />
                 </p>
                 <p className="text-xs text-muted-fg uppercase tracking-wider mt-1">{stat.label}</p>
@@ -373,7 +373,7 @@ export default function HomePage() {
       </section>
 
       {/* ── WHAT'S INSIDE ─────────────────────────────────────────── */}
-      <section className="py-24 max-w-[1200px] mx-auto px-6">
+      <section className="py-16 sm:py-24 page-container">
         <Reveal className="text-center mb-14">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-soft text-primary-800 text-xs font-bold uppercase tracking-widest mb-4">
             <Zap className="w-3.5 h-3.5" /> What's Inside
@@ -418,8 +418,8 @@ export default function HomePage() {
       </section>
 
       {/* ── PRICING ───────────────────────────────────────────────── */}
-      <section className="bg-secondary py-24">
-        <div className="max-w-[1200px] mx-auto px-6">
+      <section className="bg-secondary py-16 sm:py-24">
+        <div className="page-container">
           <Reveal className="text-center mb-14">
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-soft text-primary-800 text-xs font-bold uppercase tracking-widest mb-4">
               <Award className="w-3.5 h-3.5" /> Choose Your Plan
@@ -506,7 +506,7 @@ export default function HomePage() {
       </section>
 
       {/* ── TESTIMONIALS ─────────────────────────────────────────── */}
-      <section className="py-24 max-w-[1200px] mx-auto px-6">
+      <section className="py-16 sm:py-24 page-container">
         <Reveal className="text-center mb-14">
           <div className="flex items-center justify-center gap-1 mb-4">
             {[...Array(5)].map((_, i) => (
@@ -547,9 +547,9 @@ export default function HomePage() {
       </section>
 
       {/* ── CTA BANNER ─────────────────────────────────────────────── */}
-      <section className="bg-primary-800 section-dark py-20 relative overflow-hidden">
+      <section className="bg-primary-800 section-dark py-16 sm:py-20 relative overflow-hidden">
         <GradientOrbs />
-        <div className="relative z-10 max-w-[1200px] mx-auto px-6 text-center">
+        <div className="relative z-10 page-container text-center">
           <Reveal>
             <h2 className="font-serif text-[clamp(28px,5vw,52px)] font-bold tracking-tight text-white mb-5">
               Start your playbook today.
@@ -559,14 +559,14 @@ export default function HomePage() {
             <p className="text-white/65 text-lg mb-8 max-w-lg mx-auto">
               Join 2,400+ commodity traders and sales professionals who've used the Playbook to get ahead.
             </p>
-            <div className="flex flex-wrap items-center justify-center gap-4">
-              <Link href="/signup">
-                <Button size="xl" variant="primary-dark" className="shadow-xl">
+            <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center justify-center gap-3 sm:gap-4">
+              <Link href="/signup" className="w-full sm:w-auto">
+                <Button size="xl" variant="primary-dark" className="shadow-xl w-full sm:w-auto">
                   Get Started Free <ArrowRight className="w-5 h-5" />
                 </Button>
               </Link>
-              <Link href="/glossary">
-                <Button size="xl" variant="outline-dark">
+              <Link href="/glossary" className="w-full sm:w-auto">
+                <Button size="xl" variant="outline-dark" className="w-full sm:w-auto">
                   Browse Glossary
                 </Button>
               </Link>

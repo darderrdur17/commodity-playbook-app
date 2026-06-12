@@ -1,16 +1,40 @@
 import Stripe from "stripe";
 
-export const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: "2025-02-24.acacia",
-  typescript: true,
-});
+let stripeClient: Stripe | null = null;
 
-export const STRIPE_PRICES = {
-  PRO_ONE_TIME: process.env.STRIPE_PRO_PRICE_ID!,
-  ELITE_MONTHLY: process.env.STRIPE_ELITE_PRICE_ID!,
-} as const;
+/** Lazy Stripe client — avoids build failure when STRIPE_SECRET_KEY is unset at compile time. */
+export function getStripe(): Stripe {
+  const key = process.env.STRIPE_SECRET_KEY;
+  if (!key) {
+    throw new Error("STRIPE_SECRET_KEY is not configured");
+  }
+
+  if (!stripeClient) {
+    stripeClient = new Stripe(key, {
+      apiVersion: "2025-02-24.acacia",
+      typescript: true,
+    });
+  }
+
+  return stripeClient;
+}
+
+export function getStripePrices() {
+  const pro = process.env.STRIPE_PRO_PRICE_ID;
+  const elite = process.env.STRIPE_ELITE_PRICE_ID;
+
+  if (!pro || !elite) {
+    throw new Error("STRIPE_PRO_PRICE_ID and STRIPE_ELITE_PRICE_ID must be configured");
+  }
+
+  return {
+    PRO_ONE_TIME: pro,
+    ELITE_MONTHLY: elite,
+  } as const;
+}
 
 export async function createOrRetrieveCustomer(userId: string, email: string) {
+  const stripe = getStripe();
   const { prisma } = await import("@/lib/prisma");
 
   const user = await prisma.user.findUnique({
@@ -36,7 +60,8 @@ export async function createOrRetrieveCustomer(userId: string, email: string) {
 }
 
 export function getTierFromPriceId(priceId: string) {
-  if (priceId === STRIPE_PRICES.ELITE_MONTHLY) return "ELITE";
-  if (priceId === STRIPE_PRICES.PRO_ONE_TIME) return "PRO";
+  const prices = getStripePrices();
+  if (priceId === prices.ELITE_MONTHLY) return "ELITE";
+  if (priceId === prices.PRO_ONE_TIME) return "PRO";
   return "STARTER";
 }

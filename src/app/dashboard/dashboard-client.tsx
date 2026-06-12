@@ -128,20 +128,20 @@ export function DashboardClient({ user, stats }: Props) {
   const greeting = user.name?.split(" ")[0] || "there";
 
   return (
-    <div className="max-w-[1200px] mx-auto px-6 py-10">
+    <div className="page-container py-8 sm:py-10">
       {/* ── HEADER ── */}
       <Reveal className="mb-10">
         <div className="flex items-start justify-between flex-wrap gap-4">
           <div>
             <p className="text-sm text-muted-fg mb-1">Welcome back,</p>
-            <h1 className="font-serif text-3xl font-bold text-gray-900">
+            <h1 className="font-serif text-2xl sm:text-3xl font-bold text-gray-900">
               {greeting} 👋
             </h1>
           </div>
-          <div className="flex items-center gap-3">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3 w-full sm:w-auto">
             {user.tier !== "ELITE" && (
-              <Link href="/pricing">
-                <Button size="sm" variant="outline">
+              <Link href="/pricing" className="w-full sm:w-auto">
+                <Button size="sm" variant="outline" className="w-full sm:w-auto">
                   <Star className="w-3.5 h-3.5" />
                   Upgrade to {user.tier === "STARTER" ? "Pro" : "Elite"}
                 </Button>
@@ -183,9 +183,9 @@ export function DashboardClient({ user, stats }: Props) {
           },
         ].map((stat) => (
           <StaggerItem key={stat.label}>
-            <div className="bg-white rounded-xl border border-border p-5">
+            <div className="bg-white rounded-xl border border-border p-4 sm:p-5">
               <div className="flex items-center justify-between mb-3">
-                <p className="text-xs font-bold uppercase tracking-widest text-muted-fg">
+                <p className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-muted-fg">
                   {stat.label}
                 </p>
                 <div
@@ -195,7 +195,7 @@ export function DashboardClient({ user, stats }: Props) {
                   <stat.icon className="w-4 h-4" style={{ color: stat.color }} />
                 </div>
               </div>
-              <p className="font-serif text-2xl font-bold text-gray-900">{stat.value}</p>
+              <p className="font-serif text-xl sm:text-2xl font-bold text-gray-900 truncate">{stat.value}</p>
             </div>
           </StaggerItem>
         ))}
@@ -327,14 +327,14 @@ export function DashboardClient({ user, stats }: Props) {
       {/* ── UPGRADE CTA (if not Elite) ── */}
       {user.tier !== "ELITE" && (
         <Reveal>
-          <div className="rounded-2xl bg-primary-800 p-8 text-white relative overflow-hidden">
+          <div className="rounded-2xl bg-primary-800 p-6 sm:p-8 text-white relative overflow-hidden">
             <div className="absolute top-0 right-0 w-64 h-64 rounded-full opacity-10" style={{ background: "radial-gradient(circle, #3280ff 0%, transparent 70%)", filter: "blur(40px)" }} />
             <div className="relative z-10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
               <div>
                 <Badge variant="dark" className="mb-3">
                   {user.tier === "STARTER" ? "Upgrade to Pro" : "Upgrade to Elite"}
                 </Badge>
-                <h3 className="font-serif text-2xl font-bold text-white mb-2">
+                <h3 className="font-serif text-xl sm:text-2xl font-bold text-white mb-2">
                   {user.tier === "STARTER"
                     ? "Unlock the full playbook, resume templates, career roadmap and more."
                     : "Unlock case studies, Mentor Connect, Desk Channel and job openings."}
@@ -345,8 +345,8 @@ export function DashboardClient({ user, stats }: Props) {
                     : "SGD 299/month — cancel anytime."}
                 </p>
               </div>
-              <Link href="/pricing" className="flex-shrink-0">
-                <Button size="lg" variant="primary-dark" className="whitespace-nowrap">
+              <Link href="/pricing" className="flex-shrink-0 w-full sm:w-auto">
+                <Button size="lg" variant="primary-dark" className="whitespace-nowrap w-full sm:w-auto">
                   {user.tier === "STARTER" ? "Get Pro" : "Get Elite"}
                   <ArrowRight className="w-4 h-4" />
                 </Button>

@@ -103,9 +103,9 @@ export default function PricingPage() {
   return (
     <div className="overflow-hidden">
       {/* Hero */}
-      <section className="bg-primary-800 section-dark py-20 relative overflow-hidden">
+      <section className="bg-primary-800 section-dark py-14 sm:py-20 relative overflow-hidden">
         <GradientOrbs />
-        <div className="relative z-10 max-w-[1100px] mx-auto px-6 text-center">
+        <div className="relative z-10 page-container text-center">
           <Reveal>
             <div className="pill pill-dark mb-5 mx-auto">
               <Zap className="w-3 h-3" /> Simple Pricing
@@ -121,7 +121,7 @@ export default function PricingPage() {
       </section>
 
       {/* Pricing cards */}
-      <section className="max-w-[1100px] mx-auto px-6 -mt-8 mb-16 relative z-10">
+      <section className="page-container -mt-8 mb-12 sm:mb-16 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {/* Starter */}
           <Reveal>
@@ -218,11 +218,13 @@ export default function PricingPage() {
       </section>
 
       {/* Feature comparison */}
-      <section className="max-w-[1100px] mx-auto px-6 mb-20">
-        <Reveal className="text-center mb-8">
-          <h2 className="font-serif text-3xl font-bold text-gray-900">Full feature comparison</h2>
+      <section className="page-container mb-12 sm:mb-20">
+        <Reveal className="text-center mb-6 sm:mb-8">
+          <h2 className="font-serif text-2xl sm:text-3xl font-bold text-gray-900">Full feature comparison</h2>
+          <p className="text-xs text-muted-fg mt-2 sm:hidden">Swipe to compare plans →</p>
         </Reveal>
-        <div className="rounded-2xl border border-border overflow-hidden">
+        <div className="rounded-2xl border border-border overflow-x-auto -mx-4 sm:mx-0 px-4 sm:px-0">
+          <div className="min-w-[560px]">
           {/* Header */}
           <div className="grid grid-cols-4 gap-0 bg-secondary">
             <div className="p-4 col-span-1" />
@@ -256,11 +258,12 @@ export default function PricingPage() {
               ))}
             </React.Fragment>
           ))}
+          </div>
         </div>
       </section>
 
       {/* FAQs */}
-      <section className="max-w-[700px] mx-auto px-6 mb-20">
+      <section className="max-w-[700px] mx-auto px-4 sm:px-6 mb-12 sm:mb-20">
         <Reveal className="text-center mb-8">
           <h2 className="font-serif text-3xl font-bold text-gray-900">Frequently asked questions</h2>
         </Reveal>
@@ -292,8 +295,8 @@ export default function PricingPage() {
       </section>
 
       {/* CTA */}
-      <section className="bg-secondary py-16">
-        <div className="max-w-[600px] mx-auto px-6 text-center">
+      <section className="bg-secondary py-12 sm:py-16">
+        <div className="max-w-[600px] mx-auto px-4 sm:px-6 text-center">
           <Reveal>
             <Shield className="w-8 h-8 text-primary-400 mx-auto mb-4" />
             <h2 className="font-serif text-2xl font-bold text-gray-900 mb-3">

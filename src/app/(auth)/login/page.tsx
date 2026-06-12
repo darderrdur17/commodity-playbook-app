@@ -111,7 +111,7 @@ function LoginForm() {
       </div>
 
       {/* Right panel — form */}
-      <div className="w-full lg:w-1/2 flex items-center justify-center px-6 py-12 bg-white">
+      <div className="w-full lg:w-1/2 flex items-center justify-center px-4 sm:px-6 py-8 sm:py-12 bg-white">
         <motion.div
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -191,12 +191,12 @@ function LoginForm() {
               </button>
             </div>
 
-            <div className="flex items-center justify-between pt-1">
-              <label className="flex items-center gap-2 cursor-pointer">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 pt-1">
+              <label className="flex items-center gap-2 cursor-pointer min-h-[44px]">
                 <input type="checkbox" className="rounded border-border" />
                 <span className="text-sm text-gray-600">Remember me</span>
               </label>
-              <Link href="/forgot-password" className="text-sm text-primary-400 hover:text-primary-500">
+              <Link href="/forgot-password" className="text-sm text-primary-400 hover:text-primary-500 min-h-[44px] flex items-center">
                 Forgot password?
               </Link>
             </div>

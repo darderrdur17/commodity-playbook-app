@@ -22,7 +22,7 @@ export function PlaybookHubClient({ userTier, progress }: Props) {
   const isPro = hasAccess(userTier, "PRO");
 
   return (
-    <div className="max-w-[1100px] mx-auto px-6 py-10">
+    <div className="page-container py-8 sm:py-10">
       {/* Hero */}
       <section className="rounded-2xl bg-primary-800 px-8 py-12 mb-10 relative overflow-hidden">
         <div className="absolute -top-24 -right-24 w-80 h-80 rounded-full opacity-10" style={{ background: "radial-gradient(circle, #3280ff 0%, transparent 70%)" }} />

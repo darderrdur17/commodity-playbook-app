@@ -18,6 +18,13 @@ const NAV_LINKS = [
   { label: "Glossary", href: "/glossary" },
 ];
 
+const COMMUNITY_LINKS = [
+  { label: "Desk Channel", href: "/desk-channel" },
+  { label: "Mentor Connect", href: "/mentor-connect" },
+  { label: "Job Openings", href: "/job-openings" },
+  { label: "Job Board Waitlist", href: "/waitlist" },
+];
+
 export function Nav() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -50,12 +57,13 @@ export function Nav() {
       <header
         className={cn(
           "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+          "pt-[env(safe-area-inset-top)]",
           scrolled
             ? "bg-white/95 backdrop-blur-lg border-b border-border shadow-sm"
             : "bg-white/90 backdrop-blur-md border-b border-border"
         )}
       >
-        <div className="max-w-[1200px] mx-auto px-6 h-16 flex items-center justify-between">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-2.5 group">
             <div className="w-5 h-5 bg-primary-400 transform rotate-45 group-hover:rotate-90 transition-transform duration-400" />
@@ -164,16 +172,32 @@ export function Nav() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25, ease: "easeInOut" }}
-            className="fixed top-16 left-0 right-0 z-40 bg-white border-b border-border overflow-hidden"
+            className="fixed top-[calc(4rem+env(safe-area-inset-top,0px))] left-0 right-0 z-40 bg-white border-b border-border overflow-hidden max-h-[calc(100dvh-4rem-env(safe-area-inset-top,0px))] overflow-y-auto"
           >
-            <nav className="max-w-[1200px] mx-auto px-6 py-4 flex flex-col gap-1">
+            <nav className="max-w-[1200px] mx-auto px-4 sm:px-6 py-4 flex flex-col gap-1">
               {NAV_LINKS.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
                   className={cn(
-                    "px-3 py-2.5 rounded-lg text-sm font-medium transition-colors",
+                    "px-3 py-2.5 rounded-lg text-sm font-medium transition-colors min-h-[44px] flex items-center",
                     pathname === link.href
+                      ? "bg-primary-soft text-primary-400"
+                      : "text-gray-700 hover:bg-secondary"
+                  )}
+                >
+                  {link.label}
+                </Link>
+              ))}
+              <div className="h-px bg-border my-2" />
+              <p className="px-3 text-[10px] font-bold uppercase tracking-widest text-muted-fg mb-1">Community</p>
+              {COMMUNITY_LINKS.map((link) => (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={cn(
+                    "px-3 py-2.5 rounded-lg text-sm font-medium transition-colors min-h-[44px] flex items-center",
+                    pathname === link.href || pathname.startsWith(link.href + "/")
                       ? "bg-primary-soft text-primary-400"
                       : "text-gray-700 hover:bg-secondary"
                   )}
@@ -184,8 +208,11 @@ export function Nav() {
               <div className="h-px bg-border my-2" />
               {session ? (
                 <>
-                  <Link href="/dashboard" className="px-3 py-2.5 rounded-lg text-sm font-medium text-gray-700 hover:bg-secondary flex items-center gap-2">
+                  <Link href="/dashboard" className="px-3 py-2.5 rounded-lg text-sm font-medium text-gray-700 hover:bg-secondary flex items-center gap-2 min-h-[44px]">
                     <LayoutDashboard className="w-4 h-4" /> Dashboard
+                  </Link>
+                  <Link href="/account" className="px-3 py-2.5 rounded-lg text-sm font-medium text-gray-700 hover:bg-secondary flex items-center gap-2 min-h-[44px]">
+                    <User className="w-4 h-4" /> Account
                   </Link>
                   <button
                     onClick={() => signOut({ callbackUrl: "/" })}

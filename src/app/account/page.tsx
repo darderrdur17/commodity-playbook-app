@@ -34,7 +34,7 @@ export default async function AccountPage() {
   const personaInfo = user.persona ? PERSONA_LABELS[user.persona] : null;
 
   return (
-    <div className="max-w-[640px] mx-auto px-6 py-10">
+    <div className="max-w-[640px] mx-auto px-4 sm:px-6 py-8 sm:py-10">
       <Reveal>
         <h1 className="font-serif text-3xl font-bold text-gray-900 mb-2">Account</h1>
         <p className="text-muted-fg text-sm mb-8">Manage your membership and profile settings.</p>

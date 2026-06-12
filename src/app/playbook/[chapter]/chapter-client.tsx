@@ -87,7 +87,7 @@ export function ChapterClient({ chapter, content, chapters }: Props) {
 
       {/* Sticky chapter header */}
       <div className="sticky top-16 z-40 bg-white/95 backdrop-blur-sm border-b border-border">
-        <div className="max-w-[900px] mx-auto px-6 py-3 flex items-center justify-between gap-4">
+        <div className="page-container py-3 flex items-center justify-between gap-3 sm:gap-4">
           <Link href="/playbook" className="flex items-center gap-1.5 text-sm text-muted-fg hover:text-primary-400 transition-colors">
             <ArrowLeft className="w-4 h-4" /> All Chapters
           </Link>
@@ -103,7 +103,7 @@ export function ChapterClient({ chapter, content, chapters }: Props) {
         </div>
       </div>
 
-      <div className="max-w-[900px] mx-auto px-6 py-10">
+      <div className="max-w-[900px] mx-auto px-4 sm:px-6 py-8 sm:py-10">
         {/* Chapter hero */}
         <div
           className="rounded-2xl p-8 mb-10 text-white relative overflow-hidden"

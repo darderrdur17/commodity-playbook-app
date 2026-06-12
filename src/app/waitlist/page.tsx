@@ -50,7 +50,7 @@ export default function WaitlistPage() {
   return (
     <div className="min-h-screen bg-secondary">
       <section className="bg-primary-800 section-dark py-16 px-6">
-        <div className="max-w-[700px] mx-auto text-center">
+        <div className="page-container text-center py-12 sm:py-16">
           <Reveal>
             <div className="pill pill-dark mb-4 mx-auto">
               <Bell className="w-3 h-3" /> Coming Soon
@@ -65,7 +65,7 @@ export default function WaitlistPage() {
         </div>
       </section>
 
-      <div className="max-w-[520px] mx-auto px-6 py-10">
+      <div className="max-w-[520px] mx-auto px-4 sm:px-6 py-8 sm:py-10">
         {success ? (
           <motion.div
             initial={{ opacity: 0, scale: 0.96 }}
