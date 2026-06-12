@@ -4,22 +4,30 @@ import React, { useState, useMemo } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Search, ChevronDown, ChevronUp, MessageSquare, ThumbsUp } from "lucide-react";
-import { DESK_CATEGORIES, DESK_QA, type DeskCategory } from "@/data/desk-channel";
+import { DESK_CATEGORIES, DESK_QA, type DeskCategory, type DeskQA } from "@/data/desk-channel";
 import { TierGate } from "@/components/tier-gate";
 import { Reveal } from "@/components/animations";
 import { Button } from "@/components/ui/button";
 
 interface Props {
   userTier: string;
+  categories?: typeof DESK_CATEGORIES;
+  questions?: DeskQA[];
+  requiredTier?: "PRO" | "ELITE";
 }
 
-export function DeskChannelClient({ userTier }: Props) {
+export function DeskChannelClient({
+  userTier,
+  categories = DESK_CATEGORIES,
+  questions = DESK_QA,
+  requiredTier = "ELITE",
+}: Props) {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState<DeskCategory | "all">("all");
   const [openId, setOpenId] = useState<string | null>(null);
 
   const filtered = useMemo(() => {
-    return DESK_QA.filter((q) => {
+    return questions.filter((q) => {
       const matchCat = category === "all" || q.category === category;
       const matchSearch =
         !search ||
@@ -28,7 +36,7 @@ export function DeskChannelClient({ userTier }: Props) {
         q.tags.some((t) => t.toLowerCase().includes(search.toLowerCase()));
       return matchCat && matchSearch;
     });
-  }, [search, category]);
+  }, [search, category, questions]);
 
   const content = (
     <div className="page-container py-8 sm:py-10">
@@ -66,7 +74,7 @@ export function DeskChannelClient({ userTier }: Props) {
             Categories
           </p>
           <div className="flex lg:flex-col gap-2 overflow-x-auto pb-2 lg:pb-0">
-            {DESK_CATEGORIES.map((cat) => (
+            {categories.map((cat) => (
               <button
                 key={cat.id}
                 onClick={() => setCategory(cat.id as DeskCategory | "all")}
@@ -211,7 +219,7 @@ export function DeskChannelClient({ userTier }: Props) {
   );
 
   return (
-    <TierGate requiredTier="ELITE" userTier={userTier} compact>
+    <TierGate requiredTier={requiredTier} userTier={userTier} compact>
       {content}
     </TierGate>
   );

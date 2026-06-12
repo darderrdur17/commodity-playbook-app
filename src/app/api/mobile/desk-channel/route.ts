@@ -1,13 +1,16 @@
 import { NextRequest, NextResponse } from "next/server";
-import { DESK_CATEGORIES, DESK_QA } from "@/data/desk-channel";
-import { getMobileUser, hasTierAccess } from "@/lib/mobile-auth";
+import { getDeskChannelData } from "@/lib/content/accessors";
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+import { requireMobileContentAccess } from "@/lib/mobile-content";
 
 export async function GET(req: NextRequest) {
-  const user = await getMobileUser(req);
-  if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  if (!hasTierAccess(user.tier, "ELITE")) {
-    return NextResponse.json({ error: "Elite membership required" }, { status: 403 });
-  }
+  const access = await requireMobileContentAccess(req, "desk-channel");
+  if (access.error) return access.error;
 
-  return NextResponse.json({ categories: DESK_CATEGORIES, questions: DESK_QA });
+  const data = await getDeskChannelData();
+  return NextResponse.json(
+    { categories: data.categories, questions: data.questions },
+    { headers: { "Cache-Control": "no-store" } }
+  );
 }

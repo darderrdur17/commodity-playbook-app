@@ -2,136 +2,73 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { ArrowRight, TrendingUp, Clock, DollarSign, BookOpen, Star } from "lucide-react";
+import { ArrowRight, Clock, DollarSign, AlertTriangle, TrendingUp, Building2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { TierGate } from "@/components/tier-gate";
-import { Reveal, StaggerChildren, StaggerItem } from "@/components/animations";
+import { Reveal } from "@/components/animations";
+import { CAREER_ROLES, type CareerRole } from "@/data/career-roadmap";
+// roles prop overrides static default when loaded from CMS
 
-const ROLES = [
-  {
-    id: "analyst",
-    title: "Junior Commodity Analyst",
-    level: "Entry",
-    color: "#3280ff",
-    yoe: "0–2 years",
-    comp: "SGD 60–90K",
-    description: "Your entry point onto the desk. Focus on price reporting, data analysis, and market monitoring.",
-    skills: ["Excel / Python basics", "Market fundamentals", "Report writing", "Bloomberg / Reuters"],
-    nextRole: "Senior Analyst",
-    actionItems: [
-      "Complete Chapters A–C of the Playbook",
-      "Pass the Market Knowledge Test",
-      "Build a working supply/demand model",
-      "Network with 3 practitioners in your target segment",
-    ],
-  },
-  {
-    id: "sr-analyst",
-    title: "Senior Commodity Analyst",
-    level: "Mid",
-    color: "#0040f5",
-    yoe: "2–4 years",
-    comp: "SGD 90–140K",
-    description: "Develop independent market views. Contribute to trading decisions with quality research.",
-    skills: ["Market view construction", "Macro overlay", "Presentation skills", "Quantitative analysis"],
-    nextRole: "Junior Trader",
-    actionItems: [
-      "Own one segment's weekly market note",
-      "Present a trade idea to the book runner",
-      "Build counterparty relationships externally",
-      "Develop a proprietary data edge",
-    ],
-  },
-  {
-    id: "jr-trader",
-    title: "Junior Trader",
-    level: "Mid",
-    color: "#0131cc",
-    yoe: "3–5 years",
-    comp: "SGD 120–200K + bonus",
-    description: "Execute trades with P&L responsibility. Manage a small book under senior oversight.",
-    skills: ["Trade execution", "Risk management", "Counterparty negotiation", "P&L attribution"],
-    nextRole: "Trader",
-    actionItems: [
-      "Run a small speculative book independently",
-      "Complete all 5 Playbook chapters",
-      "Study all 10 case studies with P&L focus",
-      "Build your own pricing model for one product",
-    ],
-  },
-  {
-    id: "trader",
-    title: "Trader",
-    level: "Senior",
-    color: "#0830a0",
-    yoe: "5–8 years",
-    comp: "SGD 200–500K + bonus",
-    description: "Full P&L responsibility for a commodity or segment. Drive commercial strategy for the desk.",
-    skills: ["Book management", "Market origination", "Team mentoring", "Strategic deal structuring"],
-    nextRole: "Senior Trader / Head of Desk",
-    actionItems: [
-      "Generate origination opportunities beyond spot",
-      "Mentor a junior analyst effectively",
-      "Build a proprietary network of counterparties",
-      "Deliver consistent alpha over 3+ years",
-    ],
-  },
-  {
-    id: "head-desk",
-    title: "Head of Desk / Director",
-    level: "Leadership",
-    color: "#05145c",
-    yoe: "10+ years",
-    comp: "SGD 500K–2M+ (all-in)",
-    description: "Lead a trading team. Drive P&L strategy, manage risk appetite, and develop talent.",
-    skills: ["Leadership", "Business development", "Regulatory navigation", "Talent management"],
-    nextRole: "MD / Global Head",
-    actionItems: [
-      "Develop next-generation talent on the desk",
-      "Own the segment's commercial strategy",
-      "Manage senior bank and counterparty relationships",
-      "Drive innovation in product or market coverage",
-    ],
-  },
-];
+const CAT_COLORS: Record<string, string> = {
+  front: "#3280ff",
+  ops: "#0F766E",
+  middle: "#5B21B6",
+  adjacent: "#B45309",
+};
+
+const DIFF_LABELS: Record<CareerRole["difficulty"], string> = {
+  low: "Lower entry barrier",
+  med: "Medium entry barrier",
+  high: "High entry barrier",
+};
 
 interface Props {
   userTier: string;
   persona: string | null;
+  roles?: CareerRole[];
+  requiredTier?: "PRO" | "ELITE";
 }
 
-export function CareerRoadmapClient({ userTier, persona }: Props) {
-  const [activeRole, setActiveRole] = useState(ROLES[0].id);
-  const role = ROLES.find((r) => r.id === activeRole) || ROLES[0];
+export function CareerRoadmapClient({
+  userTier,
+  roles = CAREER_ROLES,
+  requiredTier = "PRO",
+}: Props) {
+  const [activeSlug, setActiveSlug] = useState(roles[0]?.slug ?? "");
+  const role = roles.find((r) => r.slug === activeSlug) || roles[0];
+  if (!role) {
+    return <div className="page-container py-10 text-muted-fg">No career roles configured.</div>;
+  }
+
+  const color = CAT_COLORS[role.cat] || "#3280ff";
 
   return (
     <div className="page-container py-8 sm:py-10">
-      {/* Hero */}
-      <section className="rounded-2xl bg-primary-800 px-8 py-12 mb-10 relative overflow-hidden">
+      <section className="rounded-2xl bg-primary-800 px-6 sm:px-8 py-10 mb-8 relative overflow-hidden">
         <div className="absolute -top-20 -right-20 w-64 h-64 rounded-full opacity-10" style={{ background: "radial-gradient(circle, #3280ff 0%, transparent 70%)" }} />
         <Reveal className="relative z-10">
           <div className="pill pill-dark mb-4">
-            <span className="w-1.5 h-1.5 rounded-full bg-accent" /> Pro Access
+            <span className="w-1.5 h-1.5 rounded-full bg-accent" /> Pro · 10 Roles
           </div>
-          <h1 className="font-serif text-4xl font-bold text-white mb-3">Career Roadmap</h1>
-          <p className="text-white/65 text-lg max-w-xl">
-            10 role blueprints with compensation benchmarks, skill matrices, and 90-day action plans for each stage of a commodity trading career.
+          <h1 className="font-serif text-3xl sm:text-4xl font-bold text-white mb-3">Career Roadmap</h1>
+          <p className="text-white/65 text-base sm:text-lg max-w-xl">
+            Role blueprints from the Pro Pack — comp benchmarks, typical backgrounds, red flags, and upgrade paths across front office, operations, middle office, and adjacent functions.
           </p>
         </Reveal>
       </section>
 
-      <TierGate requiredTier="PRO" userTier={userTier}>
+      <TierGate requiredTier={requiredTier} userTier={userTier}>
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {/* Role selector */}
           <div className="lg:col-span-1">
-            <h2 className="font-serif font-bold text-gray-900 mb-4">Career Stages</h2>
+            <h2 className="font-serif font-bold text-gray-900 mb-4">Roles</h2>
             <div className="space-y-2">
-              {ROLES.map((r, i) => (
+              {roles.map((r) => (
                 <button
-                  key={r.id}
-                  onClick={() => setActiveRole(r.id)}
+                  key={r.slug}
+                  type="button"
+                  onClick={() => setActiveSlug(r.slug)}
                   className={`w-full text-left px-4 py-3.5 rounded-xl border-2 transition-all ${
-                    activeRole === r.id
+                    activeSlug === r.slug
                       ? "border-primary-400 bg-primary-soft"
                       : "border-border hover:border-primary-line bg-white"
                   }`}
@@ -139,13 +76,13 @@ export function CareerRoadmapClient({ userTier, persona }: Props) {
                   <div className="flex items-center gap-2.5">
                     <div
                       className="w-7 h-7 rounded-lg flex items-center justify-center text-white text-xs font-bold flex-shrink-0"
-                      style={{ background: r.color }}
+                      style={{ background: CAT_COLORS[r.cat] }}
                     >
-                      {i + 1}
+                      {r.id}
                     </div>
-                    <div>
-                      <p className="font-semibold text-sm text-gray-900 leading-tight">{r.title}</p>
-                      <p className="text-xs text-muted-fg">{r.yoe}</p>
+                    <div className="min-w-0">
+                      <p className="font-semibold text-sm text-gray-900 leading-tight truncate">{r.title}</p>
+                      <p className="text-xs text-muted-fg">{r.categoryLabel}</p>
                     </div>
                   </div>
                 </button>
@@ -153,89 +90,89 @@ export function CareerRoadmapClient({ userTier, persona }: Props) {
             </div>
           </div>
 
-          {/* Role detail */}
           <div className="lg:col-span-2">
             <motion.div
-              key={activeRole}
+              key={activeSlug}
               initial={{ opacity: 0, x: 16 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.3 }}
               className="space-y-5"
             >
-              <div className="bg-white rounded-2xl border border-border p-7">
-                <div className="flex items-start justify-between gap-4 mb-4">
-                  <div>
-                    <Badge
-                      size="sm"
-                      className="mb-3"
-                      style={{
-                        background: `${role.color}12`,
-                        color: role.color,
-                        borderColor: `${role.color}30`,
-                      }}
-                    >
-                      {role.level} Level
-                    </Badge>
-                    <h2 className="font-serif text-2xl font-bold text-gray-900">{role.title}</h2>
-                    <p className="text-muted-fg text-sm mt-1">{role.description}</p>
-                  </div>
+              <div className="bg-white rounded-2xl border border-border p-6 sm:p-7">
+                <div className="flex flex-wrap gap-2 mb-4">
+                  {role.tags.map((t) => (
+                    <Badge key={t.label} size="sm">{t.label}</Badge>
+                  ))}
                 </div>
+                <h2 className="font-serif text-2xl font-bold text-gray-900 mb-2">{role.title}</h2>
+                <p className="text-muted-fg text-sm mb-5">{role.summary}</p>
 
-                <div className="grid grid-cols-2 gap-4 mb-5">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-5">
                   <div className="bg-secondary rounded-xl p-4">
                     <div className="flex items-center gap-2 text-muted-fg text-xs mb-1">
-                      <Clock className="w-3.5 h-3.5" /> Experience
+                      <Clock className="w-3.5 h-3.5" /> Typical timeline
                     </div>
-                    <p className="font-semibold text-gray-900">{role.yoe}</p>
+                    <p className="font-semibold text-gray-900 text-sm">{role.timeline}</p>
+                    <p className="text-xs text-muted-fg mt-1">{DIFF_LABELS[role.difficulty]}</p>
                   </div>
                   <div className="bg-secondary rounded-xl p-4">
                     <div className="flex items-center gap-2 text-muted-fg text-xs mb-1">
-                      <DollarSign className="w-3.5 h-3.5" /> Base Comp (SGD)
+                      <Building2 className="w-3.5 h-3.5" /> Typical firms
                     </div>
-                    <p className="font-semibold text-gray-900">{role.comp}</p>
+                    <p className="font-semibold text-gray-900 text-sm">{role.firms}</p>
                   </div>
                 </div>
 
                 <div className="mb-5">
-                  <p className="text-xs font-bold uppercase tracking-widest text-muted-fg mb-2">
-                    Key Skills
+                  <p className="text-xs font-bold uppercase tracking-widest text-muted-fg mb-2">What the role actually involves</p>
+                  <p className="text-sm text-gray-700 leading-relaxed">{role.what}</p>
+                </div>
+
+                <div className="mb-5">
+                  <p className="text-xs font-bold uppercase tracking-widest text-muted-fg mb-2 flex items-center gap-1.5">
+                    <DollarSign className="w-3.5 h-3.5" /> Compensation benchmarks (SGD)
                   </p>
-                  <div className="flex flex-wrap gap-2">
-                    {role.skills.map((s) => (
-                      <span key={s} className="px-3 py-1 rounded-full bg-secondary text-xs font-medium text-gray-700">
-                        {s}
-                      </span>
+                  <div className="space-y-2">
+                    {role.comp.map((c) => (
+                      <div key={c.label} className="flex justify-between text-sm border-b border-border pb-2">
+                        <span className="text-muted-fg">{c.label}</span>
+                        <span className="font-semibold text-gray-900">{c.range}</span>
+                      </div>
                     ))}
                   </div>
                 </div>
 
-                {role.nextRole && (
-                  <div className="flex items-center gap-2 text-sm text-muted-fg">
-                    <TrendingUp className="w-4 h-4 text-primary-400" />
-                    Next step: <span className="font-semibold text-gray-900">{role.nextRole}</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
+                <div className="flex items-start gap-2 text-sm text-primary-800 bg-primary-soft rounded-xl p-4">
+                  <TrendingUp className="w-4 h-4 mt-0.5 flex-shrink-0" style={{ color }} />
+                  <div>
+                    <p className="font-semibold mb-1">Upgrade path</p>
+                    <p className="text-primary-900/80">{role.upgrade}</p>
                   </div>
-                )}
+                </div>
               </div>
 
-              {/* 90-day action plan */}
-              <div className="bg-white rounded-2xl border border-border p-7">
-                <h3 className="font-serif font-bold text-gray-900 mb-4 flex items-center gap-2">
-                  <Star className="w-4 h-4 text-amber-400" /> 90-Day Action Plan
-                </h3>
-                <div className="space-y-3">
-                  {role.actionItems.map((item, i) => (
-                    <div key={i} className="flex items-start gap-3">
-                      <div
-                        className="w-6 h-6 rounded-full flex items-center justify-center text-white text-xs font-bold flex-shrink-0 mt-0.5"
-                        style={{ background: role.color }}
-                      >
-                        {i + 1}
-                      </div>
-                      <p className="text-sm text-gray-700">{item}</p>
-                    </div>
+              <div className="bg-white rounded-2xl border border-border p-6 sm:p-7">
+                <h3 className="font-serif font-bold text-gray-900 mb-3">Typical backgrounds</h3>
+                <ul className="space-y-2 mb-6">
+                  {role.backgrounds.map((b, i) => (
+                    <li key={i} className="text-sm text-gray-700 flex gap-2">
+                      <span className="text-primary-400">·</span>
+                      <span dangerouslySetInnerHTML={{ __html: b.replace(/\*\*/g, "") }} />
+                    </li>
                   ))}
-                </div>
+                </ul>
+
+                <h3 className="font-serif font-bold text-gray-900 mb-3 flex items-center gap-2">
+                  <AlertTriangle className="w-4 h-4 text-amber-500" /> Red flags for hiring managers
+                </h3>
+                <ul className="space-y-2">
+                  {role.redFlags.map((f, i) => (
+                    <li key={i} className="text-sm text-gray-700 flex gap-2">
+                      <span className="text-amber-500">!</span>
+                      {f}
+                    </li>
+                  ))}
+                </ul>
               </div>
             </motion.div>
           </div>

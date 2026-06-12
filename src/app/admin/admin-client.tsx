@@ -2,15 +2,16 @@
 
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import {
   Users, Shield, MessageSquare, Mail, Crown, TrendingUp,
-  CheckCircle, Clock, ArrowLeft, RefreshCw
+  CheckCircle, Clock, ArrowLeft, RefreshCw, FileJson, Pencil,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Reveal } from "@/components/animations";
 import { PERSONA_LABELS, formatDate } from "@/lib/utils";
+import { AdminContentTab } from "./admin-content-tab";
+import { AdminUserDetailPanel, type AdminUserDetail } from "./admin-user-detail";
 
 interface Stats {
   totalUsers: number;
@@ -19,21 +20,6 @@ interface Stats {
   waitlistCount: number;
   mentor: { pending: number; answered: number };
   subscribers: number;
-  personas: { persona: string; count: number }[];
-}
-
-interface UserRow {
-  id: string;
-  name: string | null;
-  email: string;
-  role: string;
-  tier: string;
-  track: string;
-  persona: string | null;
-  mentorCredits: number;
-  resumeCredits: number;
-  createdAt: string;
-  _count: { mentorQuestions: number; progress: number };
 }
 
 interface MentorQ {
@@ -54,15 +40,16 @@ interface WaitlistEntry {
   createdAt: string;
 }
 
-export function AdminClient({ adminName }: { adminName: string }) {
+export function AdminClient({ adminName, adminId }: { adminName: string; adminId: string }) {
   const [stats, setStats] = useState<Stats | null>(null);
-  const [users, setUsers] = useState<UserRow[]>([]);
+  const [users, setUsers] = useState<AdminUserDetail[]>([]);
   const [mentorQs, setMentorQs] = useState<MentorQ[]>([]);
   const [waitlist, setWaitlist] = useState<WaitlistEntry[]>([]);
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState<"users" | "mentor" | "waitlist">("users");
+  const [activeTab, setActiveTab] = useState<"users" | "content" | "mentor" | "waitlist">("users");
   const [answerDraft, setAnswerDraft] = useState<Record<string, string>>({});
   const [saving, setSaving] = useState<string | null>(null);
+  const [selectedUser, setSelectedUser] = useState<AdminUserDetail | null>(null);
 
   async function loadAll() {
     setLoading(true);
@@ -86,17 +73,6 @@ export function AdminClient({ adminName }: { adminName: string }) {
     loadAll();
   }, []);
 
-  async function updateUserTier(userId: string, tier: string) {
-    setSaving(userId);
-    await fetch("/api/admin/users", {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ userId, tier }),
-    });
-    await loadAll();
-    setSaving(null);
-  }
-
   async function submitAnswer(id: string) {
     const answer = answerDraft[id];
     if (!answer || answer.length < 10) return;
@@ -116,7 +92,6 @@ export function AdminClient({ adminName }: { adminName: string }) {
 
   return (
     <div className="min-h-screen bg-secondary">
-      {/* Header */}
       <div className="bg-gray-900 text-white">
         <div className="page-container py-6 sm:py-8">
           <div className="flex items-start justify-between gap-4 flex-wrap">
@@ -143,9 +118,8 @@ export function AdminClient({ adminName }: { adminName: string }) {
       </div>
 
       <div className="page-container py-6 sm:py-8">
-        {/* Stats */}
         {stats && (
-          <Reveal className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 mb-8">
+          <Reveal className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 mb-8">
             {[
               { label: "Total Users", value: stats.totalUsers, icon: Users, color: "#3280ff" },
               { label: "Starter", value: stats.tiers.starter, icon: TrendingUp, color: "#16a34a" },
@@ -165,47 +139,60 @@ export function AdminClient({ adminName }: { adminName: string }) {
           </Reveal>
         )}
 
-        {/* Tabs */}
         <div className="flex gap-2 mb-6 flex-wrap">
-          {(["users", "mentor", "waitlist"] as const).map((tab) => (
+          {([
+            ["users", `Customers (${users.length})`, Users],
+            ["content", "Content CMS", FileJson],
+            ["mentor", `Mentor (${mentorQs.filter((q) => !q.isAnswered).length} pending)`, MessageSquare],
+            ["waitlist", `Waitlist (${waitlist.length})`, Mail],
+          ] as const).map(([tab, label, Icon]) => (
             <button
               key={tab}
+              type="button"
               onClick={() => setActiveTab(tab)}
-              className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
+              className={`inline-flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
                 activeTab === tab
                   ? "bg-primary-400 text-white"
                   : "bg-white text-muted-fg border border-border hover:border-primary-line"
               }`}
             >
-              {tab === "users" ? `Users (${users.length})` : tab === "mentor" ? `Mentor Q&A (${mentorQs.filter((q) => !q.isAnswered).length} pending)` : `Waitlist (${waitlist.length})`}
+              <Icon className="w-3.5 h-3.5" />
+              {label}
             </button>
           ))}
           <Link href="/demo" className="ml-auto">
-            <Button variant="outline" size="sm">View Demo Accounts</Button>
+            <Button variant="outline" size="sm">Demo Accounts</Button>
           </Link>
         </div>
 
-        {/* Users tab */}
         {activeTab === "users" && (
           <div className="bg-white rounded-xl border border-border overflow-hidden">
+            <div className="px-4 py-3 border-b border-border bg-secondary">
+              <p className="text-sm text-muted-fg">Click a row to view and edit customer details, tier, role, and credits.</p>
+            </div>
             <div className="overflow-x-auto">
-              <table className="w-full text-sm">
+              <table className="w-full text-sm min-w-[800px]">
                 <thead>
                   <tr className="border-b border-border bg-secondary text-left">
-                    <th className="px-4 py-3 font-semibold text-muted-fg">User</th>
+                    <th className="px-4 py-3 font-semibold text-muted-fg">Customer</th>
                     <th className="px-4 py-3 font-semibold text-muted-fg">Role</th>
                     <th className="px-4 py-3 font-semibold text-muted-fg">Tier</th>
                     <th className="px-4 py-3 font-semibold text-muted-fg">Persona</th>
                     <th className="px-4 py-3 font-semibold text-muted-fg">Track</th>
                     <th className="px-4 py-3 font-semibold text-muted-fg">Credits</th>
-                    <th className="px-4 py-3 font-semibold text-muted-fg">Actions</th>
+                    <th className="px-4 py-3 font-semibold text-muted-fg">Joined</th>
+                    <th className="px-4 py-3 font-semibold text-muted-fg" />
                   </tr>
                 </thead>
                 <tbody>
                   {users.map((u) => (
-                    <tr key={u.id} className="border-b border-border hover:bg-secondary/50">
+                    <tr
+                      key={u.id}
+                      className="border-b border-border hover:bg-secondary/50 cursor-pointer"
+                      onClick={() => setSelectedUser(u)}
+                    >
                       <td className="px-4 py-3">
-                        <p className="font-medium text-gray-900">{u.name || "—"}</p>
+                        <p className="font-medium text-gray-900">{u.name || "-"}</p>
                         <p className="text-xs text-muted-fg">{u.email}</p>
                       </td>
                       <td className="px-4 py-3">
@@ -216,28 +203,18 @@ export function AdminClient({ adminName }: { adminName: string }) {
                         )}
                       </td>
                       <td className="px-4 py-3">
-                        <Badge variant={tierBadge(u.tier) as any} size="sm">{u.tier}</Badge>
+                        <Badge variant={tierBadge(u.tier) as "starter" | "pro" | "elite"} size="sm">{u.tier}</Badge>
                       </td>
                       <td className="px-4 py-3 text-xs">
-                        {u.persona ? PERSONA_LABELS[u.persona]?.label : "—"}
+                        {u.persona ? PERSONA_LABELS[u.persona]?.label : "-"}
                       </td>
                       <td className="px-4 py-3 text-xs">{u.track}</td>
                       <td className="px-4 py-3 text-xs text-muted-fg">
-                        M:{u.mentorCredits} · R:{u.resumeCredits}
+                        M:{u.mentorCredits} / R:{u.resumeCredits}
                       </td>
+                      <td className="px-4 py-3 text-xs text-muted-fg">{formatDate(u.createdAt)}</td>
                       <td className="px-4 py-3">
-                        {u.role !== "ADMIN" && (
-                          <select
-                            className="text-xs border border-border rounded-lg px-2 py-1"
-                            value={u.tier}
-                            disabled={saving === u.id}
-                            onChange={(e) => updateUserTier(u.id, e.target.value)}
-                          >
-                            <option value="STARTER">Starter</option>
-                            <option value="PRO">Pro</option>
-                            <option value="ELITE">Elite</option>
-                          </select>
-                        )}
+                        <Pencil className="w-4 h-4 text-muted-fg" />
                       </td>
                     </tr>
                   ))}
@@ -247,7 +224,8 @@ export function AdminClient({ adminName }: { adminName: string }) {
           </div>
         )}
 
-        {/* Mentor tab */}
+        {activeTab === "content" && <AdminContentTab />}
+
         {activeTab === "mentor" && (
           <div className="space-y-4">
             {mentorQs.length === 0 ? (
@@ -256,12 +234,7 @@ export function AdminClient({ adminName }: { adminName: string }) {
               </div>
             ) : (
               mentorQs.map((q) => (
-                <motion.div
-                  key={q.id}
-                  initial={{ opacity: 0, y: 8 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="bg-white rounded-xl border border-border p-5"
-                >
+                <div key={q.id} className="bg-white rounded-xl border border-border p-5">
                   <div className="flex items-start justify-between gap-3 mb-3">
                     <div>
                       <div className="flex items-center gap-2 mb-1">
@@ -274,7 +247,7 @@ export function AdminClient({ adminName }: { adminName: string }) {
                       </div>
                       <p className="text-sm text-gray-800">{q.question}</p>
                       <p className="text-xs text-muted-fg mt-1">
-                        From {q.user.name || q.user.email} · {q.user.tier} · {formatDate(q.createdAt)}
+                        From {q.user.name || q.user.email} | {q.user.tier} | {formatDate(q.createdAt)}
                       </p>
                     </div>
                   </div>
@@ -283,7 +256,7 @@ export function AdminClient({ adminName }: { adminName: string }) {
                       {q.answer}
                     </div>
                   ) : (
-                    <div className="flex gap-2 mt-2">
+                    <div className="flex gap-2 mt-2 flex-col sm:flex-row">
                       <textarea
                         className="flex-1 text-sm border border-border rounded-lg p-2.5 resize-none h-20 focus:outline-none focus:ring-2 focus:ring-primary-400"
                         placeholder="Write mentor answer..."
@@ -292,6 +265,7 @@ export function AdminClient({ adminName }: { adminName: string }) {
                       />
                       <Button
                         size="sm"
+                        className="sm:self-end"
                         onClick={() => submitAnswer(q.id)}
                         loading={saving === q.id}
                         disabled={!answerDraft[q.id] || answerDraft[q.id].length < 10}
@@ -300,16 +274,15 @@ export function AdminClient({ adminName }: { adminName: string }) {
                       </Button>
                     </div>
                   )}
-                </motion.div>
+                </div>
               ))
             )}
           </div>
         )}
 
-        {/* Waitlist tab */}
         {activeTab === "waitlist" && (
-          <div className="bg-white rounded-xl border border-border overflow-hidden">
-            <table className="w-full text-sm">
+          <div className="bg-white rounded-xl border border-border overflow-x-auto">
+            <table className="w-full text-sm min-w-[500px]">
               <thead>
                 <tr className="border-b border-border bg-secondary text-left">
                   <th className="px-4 py-3 font-semibold text-muted-fg">Email</th>
@@ -322,7 +295,7 @@ export function AdminClient({ adminName }: { adminName: string }) {
                 {waitlist.map((w) => (
                   <tr key={w.id} className="border-b border-border">
                     <td className="px-4 py-3">{w.email}</td>
-                    <td className="px-4 py-3">{w.name || "—"}</td>
+                    <td className="px-4 py-3">{w.name || "-"}</td>
                     <td className="px-4 py-3">{w.track}</td>
                     <td className="px-4 py-3 text-muted-fg">{formatDate(w.createdAt)}</td>
                   </tr>
@@ -332,6 +305,15 @@ export function AdminClient({ adminName }: { adminName: string }) {
           </div>
         )}
       </div>
+
+      {selectedUser && (
+        <AdminUserDetailPanel
+          user={selectedUser}
+          isSelf={selectedUser.id === adminId}
+          onClose={() => setSelectedUser(null)}
+          onSaved={loadAll}
+        />
+      )}
     </div>
   );
 }

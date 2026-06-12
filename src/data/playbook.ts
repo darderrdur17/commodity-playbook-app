@@ -1,136 +1,106 @@
+import playbookSections from "./playbook-sections.json";
+
+export interface PlaybookSection {
+  id: string;
+  number: string;
+  title: string;
+  desc: string;
+  hook: string;
+  paragraphs: string[];
+  pullQuote?: string;
+  wtmfy?: string;
+  handoff?: string;
+}
+
 export const CHAPTERS = [
   {
     id: "a",
     letter: "A",
-    title: "Industry Architecture",
-    subtitle: "How the commodity market actually works",
+    title: "Industry Foundations",
+    subtitle: "Physical vs. paper markets, energy landscape, how trades make money, refinery economics, shipping basics",
     color: "#0830a0",
     pages: 42,
-    readTime: "45 min",
-    preview: true, // available to Starter
-    sections: [
-      { title: "The commodity value chain end-to-end", pages: "1–8" },
-      { title: "Producer, trader, refiner, consumer — roles explained", pages: "9–16" },
-      { title: "Five commodity segments: energy, metals, agriculture, freight, financials", pages: "17–26" },
-      { title: "How price discovery actually works", pages: "27–34" },
-      { title: "The trading firm ecosystem: IOCs, independents, banks", pages: "35–42" },
-    ],
+    readTime: "80 min",
+    preview: true,
+    sections: playbookSections.a.map((s) => ({ title: s.title, pages: s.number })),
     keyTakeaways: [
-      "Understand where value is created along the supply chain",
-      "Map the 5 segments and their key participants",
-      "Explain price benchmark methodology in an interview",
-      "Differentiate physical and financial trading roles",
+      "Distinguish physical trading from paper markets and explain why both matter",
+      "Map oil, LNG, gas, and power — and how price signals connect across them",
+      "Identify the six revenue levers a desk uses beyond flat price",
+      "Read crack spreads, freight, storage, and PRAs as commercial signals",
     ],
   },
   {
     id: "b",
     letter: "B",
-    title: "Desk Operations",
-    subtitle: "The mechanics of a trading desk",
+    title: "Physical & Paper Trading Markets",
+    subtitle: "Trade lifecycle, futures, swaps, options, hedging mechanics, basis and differentials, EFS",
     color: "#0131cc",
     pages: 38,
-    readTime: "40 min",
+    readTime: "80 min",
     preview: false,
-    sections: [
-      { title: "A day in the life: pre-market, market open, close", pages: "1–8" },
-      { title: "Trade lifecycle from execution to settlement", pages: "9–18" },
-      { title: "Risk management systems and PnL attribution", pages: "19–28" },
-      { title: "Logistics, shipping, and operations teams", pages: "29–34" },
-      { title: "Counterparty credit and compliance", pages: "35–38" },
-    ],
+    sections: playbookSections.b.map((s) => ({ title: s.title, pages: s.number })),
     keyTakeaways: [
-      "Trace a trade from origination to cash settlement",
-      "Explain daily MTM and risk limit frameworks",
-      "Understand the ops team's role in a commodity firm",
-      "Know basic credit and ISDA concepts",
+      "Trace a physical trade from enquiry to settlement",
+      "Explain how futures, swaps, and options hedge physical exposure",
+      "Articulate basis risk and why location differentials matter",
+      "Describe how the trading book stacks physical, paper, and freight",
     ],
   },
   {
     id: "c",
     letter: "C",
-    title: "Market Intelligence",
-    subtitle: "Reading and anticipating commodity markets",
+    title: "Shipping, Freight & Cargo Logistics",
+    subtitle: "Vessel classes, freight rate mechanics, laytime, cargo nominations, AIS tracking, diversion decisions",
     color: "#0040f5",
     pages: 44,
-    readTime: "50 min",
+    readTime: "80 min",
     preview: false,
-    sections: [
-      { title: "Supply/demand fundamentals: what drives commodity prices", pages: "1–10" },
-      { title: "Macro overlay: currencies, interest rates, geopolitics", pages: "11–20" },
-      { title: "Flow data: imports, exports, inventory levels", pages: "21–30" },
-      { title: "Interpreting price curves: contango, backwardation, spreads", pages: "31–38" },
-      { title: "Building a market view and communicating it", pages: "39–44" },
-    ],
+    sections: playbookSections.c.map((s) => ({ title: s.title, pages: s.number })),
     keyTakeaways: [
-      "Build a structured supply/demand model",
-      "Read price curves and identify market signals",
-      "Incorporate macro factors into a commodity view",
-      "Present a market thesis to a trading team",
+      "Match vessel classes to cargo types and route economics",
+      "Calculate laytime and demurrage exposure on a fixture",
+      "Use AIS and flow data as market intelligence",
+      "Evaluate a cargo diversion decision under time pressure",
     ],
   },
   {
     id: "d",
     letter: "D",
-    title: "Commercial Skills",
-    subtitle: "Negotiation, deal-making and counterparty relationships",
+    title: "Market Intelligence & Price Discovery",
+    subtitle: "Market views, EIA reports, forward curves, price assessments, supply disruptions, COT data",
     color: "#115cff",
     pages: 36,
-    readTime: "38 min",
+    readTime: "80 min",
     preview: false,
-    sections: [
-      { title: "Commercial negotiation frameworks for commodity deals", pages: "1–8" },
-      { title: "Pricing mechanics: fixed, floating, formulas", pages: "9–16" },
-      { title: "Structuring term vs. spot deals", pages: "17–24" },
-      { title: "Building and maintaining counterparty relationships", pages: "25–30" },
-      { title: "The desk's external stakeholders: banks, brokers, regulators", pages: "31–36" },
-    ],
+    sections: playbookSections.d.map((s) => ({ title: s.title, pages: s.number })),
     keyTakeaways: [
-      "Structure a commodity pricing formula",
-      "Negotiate a physical supply contract",
-      "Manage a counterparty credit relationship",
-      "Position yourself as a trusted market counterparty",
+      "Build a structured market view from fundamentals and macro",
+      "Read the EIA report and forward curve for actionable signals",
+      "Understand Platts/Argus assessment methodology",
+      "Integrate positioning data and seasonality into desk workflow",
     ],
   },
   {
     id: "e",
     letter: "E",
-    title: "Career Mastery",
-    subtitle: "Positioning yourself for the long career",
+    title: "Commercial Decision-Making & Risk",
+    subtitle: "Arbitrage windows, cargo diversion, hedge timing, P&L attribution, VaR, cutting losses",
     color: "#3280ff",
     pages: 40,
-    readTime: "42 min",
+    readTime: "80 min",
     preview: false,
-    sections: [
-      { title: "Career paths: analyst, trader, originator, risk, operations", pages: "1–10" },
-      { title: "What hiring managers actually look for", pages: "11–18" },
-      { title: "Interview frameworks and case study approaches", pages: "19–26" },
-      { title: "Compensation structures and negotiation", pages: "27–32" },
-      { title: "Building your personal brand in commodities", pages: "33–40" },
-    ],
+    sections: playbookSections.e.map((s) => ({ title: s.title, pages: s.number })),
     keyTakeaways: [
-      "Map your target career path with concrete milestones",
-      "Prepare for the toughest desk interview questions",
-      "Negotiate comp confidently with market data",
-      "Build a professional network that opens doors",
+      "Think commercially under uncertainty — size positions to conviction",
+      "Run an arbitrage window calculation with freight and basis",
+      "Attribute P&L across flat price, time, location, and freight",
+      "Apply VaR limits and know when to cut a losing thesis",
     ],
   },
-];
+] as const;
 
-export const CHAPTER_CONTENT: Record<string, string[]> = {
-  a: [
-    "## 1. The Commodity Value Chain",
-    "Commodity markets exist to connect producers of raw materials with end consumers. Between those two endpoints lies a complex web of traders, processors, logistics providers, and financiers.",
-    "The value chain for a barrel of crude oil, for example, runs: exploration & production → crude trading → refining → product trading → retail/industrial consumption. Each link in that chain presents opportunities for traders to add value through arbitrage, blending, timing, or structured finance.",
-    "Physical traders specialise in moving commodities efficiently — finding the cheapest supply, the highest-value outlet, and the most cost-effective route between them. The margin is the spread between what they buy and sell, net of all costs.",
-    "## 2. The Five Commodity Segments",
-    "**Energy** is the largest and most liquid segment. It includes crude oil, refined products (gasoline, diesel, jet fuel, fuel oil), natural gas, LNG, coal, and increasingly, carbon. Singapore and Geneva are the hub cities for physical energy trading.",
-    "**Metals** splits into base metals (copper, aluminium, zinc, nickel, lead, tin) traded primarily through the LME, and precious metals (gold, silver, platinum). Metals trading is deeply linked to industrial demand — China's construction cycle is the single biggest driver of base metal prices.",
-    "**Agriculture** covers soft commodities (grains, oilseeds, sugar, coffee, cocoa) and hard commodities (rubber, palm oil). Seasonal patterns are pronounced — weather events and crop cycles drive dramatic price swings.",
-    "**Freight** is often overlooked but is a commodity in itself. The cost of moving a Capesize bulk carrier across the Pacific affects the landed cost of every coal tonne or iron ore shipment. Many commodity traders hedge freight separately.",
-    "**Financial commodities** include emissions allowances (EUAs, California carbon), renewable energy certificates, and water rights — a fast-growing segment driven by energy transition.",
-    "## 3. Price Benchmark Methodology",
-    "Physical commodity prices are not set on centralised exchanges in the way equities are. Instead, they rely on a mix of exchange prices (LME, CME, ICE), over-the-counter broker markets, and price reporting agency (PRA) assessments.",
-    "Platts (S&P Global Commodity Insights) and Argus Media publish daily price assessments for hundreds of physical commodity grades and locations. These are based on reported transaction data and market intelligence from a small window around the close of trading.",
-    "Understanding how these benchmarks are constructed — and their limitations — is critical for any trading or commercial role. PRAs have discretion in their methodology, and knowing when a benchmark is 'thin' (low volume) vs. 'deep' (actively traded) affects how you interpret and use it.",
-  ],
-};
+export function getChapterSections(chapterId: string): PlaybookSection[] {
+  const key = chapterId as keyof typeof playbookSections;
+  return (playbookSections[key] as PlaybookSection[]) || [];
+}

@@ -4,7 +4,7 @@ import {
   TextInput, ActivityIndicator, Alert,
 } from "react-native";
 import { router } from "expo-router";
-import { MessageSquare, Briefcase, Bell, Users, ChevronRight, Lock } from "lucide-react-native";
+import { MessageSquare, Briefcase, Bell, Users, ChevronRight, Lock, BookOpen } from "lucide-react-native";
 import { authApi, getToken } from "../../lib/api";
 
 const NAVY = "#0830a0";
@@ -12,6 +12,14 @@ const PRIMARY = "#3280ff";
 const ELITE = "#B45309";
 
 const COMMUNITY_LINKS = [
+  {
+    title: "Case Studies",
+    desc: "10 real-world scenarios with P&L breakdowns",
+    route: "/community/case-studies",
+    tier: "ELITE",
+    icon: BookOpen,
+    color: ELITE,
+  },
   {
     title: "Desk Channel",
     desc: "40 practitioner Q&As across 5 segments",

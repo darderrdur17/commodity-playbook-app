@@ -1,6 +1,9 @@
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
+import { getContentTierForSlug, getDeskChannelData } from "@/lib/content/accessors";
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 import { DeskChannelClient } from "./desk-channel-client";
 
 export const metadata = { title: "Desk Channel" };
@@ -15,5 +18,16 @@ export default async function DeskChannelPage() {
   });
   if (!user) redirect("/login");
 
-  return <DeskChannelClient userTier={user.tier} />;
+  const [desk, requiredTier] = await Promise.all([
+    getDeskChannelData(),
+    getContentTierForSlug("desk-channel"),
+  ]);
+  return (
+    <DeskChannelClient
+      userTier={user.tier}
+      categories={desk.categories}
+      questions={desk.questions}
+      requiredTier={requiredTier as "PRO" | "ELITE"}
+    />
+  );
 }

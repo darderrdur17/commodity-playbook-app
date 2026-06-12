@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo } from "react";
 import {
   View, Text, ScrollView, TextInput, TouchableOpacity,
-  StyleSheet, ActivityIndicator,
+  StyleSheet, ActivityIndicator, RefreshControl,
 } from "react-native";
 import { communityApi } from "../../lib/api";
 
@@ -10,15 +10,26 @@ const PRIMARY = "#3280ff";
 export default function DeskChannelScreen() {
   const [questions, setQuestions] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
   const [error, setError] = useState("");
   const [search, setSearch] = useState("");
   const [openId, setOpenId] = useState<string | null>(null);
 
+  async function load() {
+    try {
+      const data = await communityApi.getDeskChannel();
+      setQuestions(data.questions);
+      setError("");
+    } catch (e: any) {
+      setError(e.message);
+    } finally {
+      setLoading(false);
+      setRefreshing(false);
+    }
+  }
+
   useEffect(() => {
-    communityApi.getDeskChannel()
-      .then((data) => setQuestions(data.questions))
-      .catch((e) => setError(e.message))
-      .finally(() => setLoading(false));
+    load();
   }, []);
 
   const filtered = useMemo(() => {
@@ -58,7 +69,10 @@ export default function DeskChannelScreen() {
           placeholderTextColor="#9ca3af"
         />
       </View>
-      <ScrollView contentContainerStyle={styles.list}>
+      <ScrollView
+        contentContainerStyle={styles.list}
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={() => { setRefreshing(true); load(); }} />}
+      >
         {filtered.map((q) => (
           <TouchableOpacity
             key={q.id}

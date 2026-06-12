@@ -1,0 +1,42 @@
+[
+  {
+    "id": "switcher",
+    "persona": "CAREER_SWITCHER",
+    "label": "The Switcher",
+    "roleBand": "Banking · Management Consulting · Engineering · O&G Technical",
+    "positioningChallenge": "You have relevant skills but they are buried under the wrong language. Your financial modelling reads as banking, your project management reads as consulting. The template reframes everything using commodity trading vocabulary.",
+    "templateFile": "switcher_resume_template.docx"
+  },
+  {
+    "id": "insider",
+    "persona": "INSIDER",
+    "label": "The Insider",
+    "roleBand": "Scheduling · Operations · ETRM · Logistics · Trade Support",
+    "positioningChallenge": "Your operational experience is genuinely valuable — but it reads as execution, not commercial. The template reframes operational knowledge as the execution-to-commercial bridge that desk candidates can't offer.",
+    "templateFile": "insider_resume_template.docx"
+  },
+  {
+    "id": "analyst",
+    "persona": "ANALYST_TRADER",
+    "label": "Analyst-to-Trader",
+    "roleBand": "Analytics · Quantitative Research · Data Science · Risk Modelling",
+    "positioningChallenge": "Strongest technical profile, weakest commercial narrative. Models need P&L implications. The template shows you as \"quantitative commercial\" — someone who builds models to take positions, not just to report on them.",
+    "templateFile": "analyst_trader_resume_template.docx"
+  },
+  {
+    "id": "vendor",
+    "persona": "VENDOR",
+    "label": "The Vendor",
+    "roleBand": "Platts · Argus · ICIS · Kpler · Vortexa · Wood Mackenzie · ICIS",
+    "positioningChallenge": "Vendor candidates almost always write a sales resume for a market knowledge role. Remove revenue targets. Replace with: what market you covered, what analysis you produced, and what decision it enabled inside a trading firm.",
+    "templateFile": "vendor_resume_template.docx"
+  },
+  {
+    "id": "fresh_grad",
+    "persona": "FRESH_GRAD",
+    "label": "Fresh Graduate",
+    "roleBand": "",
+    "positioningChallenge": "",
+    "templateFile": "fresh_grad_resume_template.docx"
+  }
+]

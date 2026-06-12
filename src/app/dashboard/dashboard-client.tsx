@@ -14,6 +14,7 @@ import { AnimatedProgress, Reveal, StaggerChildren, StaggerItem } from "@/compon
 import { PERSONA_LABELS, TIER_LABELS, hasAccess, formatCurrency } from "@/lib/utils";
 
 interface Props {
+  contentTiers?: Record<string, string>;
   user: {
     id: string;
     name: string | null;
@@ -34,6 +35,7 @@ interface Props {
 
 const CONTENT_CARDS = [
   {
+    slug: "playbook",
     icon: BookOpen,
     title: "Full Playbook",
     desc: "5 chapters covering the complete commodity trading landscape",
@@ -43,6 +45,7 @@ const CONTENT_CARDS = [
     color: "#3280ff",
   },
   {
+    slug: "resume-templates",
     icon: FileText,
     title: "Resume Templates",
     desc: "5 tailored templates with persona analysis quiz",
@@ -52,6 +55,7 @@ const CONTENT_CARDS = [
     color: "#3280ff",
   },
   {
+    slug: "career-roadmap",
     icon: Map,
     title: "Career Roadmap",
     desc: "10 role blueprints with comp benchmarks and action plans",
@@ -61,6 +65,7 @@ const CONTENT_CARDS = [
     color: "#3280ff",
   },
   {
+    slug: "interview-questions",
     icon: BarChart3,
     title: "Interview Questions",
     desc: "50 desk interview questions with model answers",
@@ -70,6 +75,7 @@ const CONTENT_CARDS = [
     color: "#3280ff",
   },
   {
+    slug: "knowledge-test",
     icon: TrendingUp,
     title: "Knowledge Test",
     desc: "20-question gap analysis with personalised recommendations",
@@ -79,6 +85,7 @@ const CONTENT_CARDS = [
     color: "#3280ff",
   },
   {
+    slug: "case-studies",
     icon: Briefcase,
     title: "Case Studies",
     desc: "10 real-world trading scenarios with full P&L breakdowns",
@@ -88,6 +95,7 @@ const CONTENT_CARDS = [
     color: "#B45309",
   },
   {
+    slug: "desk-channel",
     icon: MessageSquare,
     title: "Desk Channel",
     desc: "40 Q&As from practitioners across 5 segments",
@@ -97,6 +105,7 @@ const CONTENT_CARDS = [
     color: "#B45309",
   },
   {
+    slug: "mentor-connect",
     icon: Users,
     title: "Mentor Connect",
     desc: "One question. One mentor. One honest answer.",
@@ -106,6 +115,7 @@ const CONTENT_CARDS = [
     color: "#B45309",
   },
   {
+    slug: "job-openings",
     icon: Briefcase,
     title: "Job Openings",
     desc: "Curated commodity trading roles across 5 regions",
@@ -122,7 +132,7 @@ const QUICK_LINKS = [
   { label: "Job Board Waitlist", href: "/waitlist", free: true },
 ];
 
-export function DashboardClient({ user, stats }: Props) {
+export function DashboardClient({ contentTiers = {}, user, stats }: Props) {
   const tierInfo = TIER_LABELS[user.tier] || TIER_LABELS.STARTER;
   const personaInfo = user.persona ? PERSONA_LABELS[user.persona] : null;
   const greeting = user.name?.split(" ")[0] || "there";
@@ -277,7 +287,8 @@ export function DashboardClient({ user, stats }: Props) {
 
           {/* Tiered content */}
           {CONTENT_CARDS.map((card, i) => {
-            const unlocked = hasAccess(user.tier, card.requiredTier as "PRO" | "ELITE");
+            const tier = (contentTiers[card.slug] || card.requiredTier) as "PRO" | "ELITE";
+            const unlocked = hasAccess(user.tier, tier);
             return (
               <Reveal key={card.title} delay={i * 0.05}>
                 <div
@@ -302,7 +313,7 @@ export function DashboardClient({ user, stats }: Props) {
                   <p className="text-xs text-muted-fg mb-3 leading-relaxed">{card.desc}</p>
                   <div className="flex items-center justify-between">
                     <Badge
-                      variant={card.requiredTier === "ELITE" ? "elite" : "pro"}
+                      variant={tier === "ELITE" ? "elite" : "pro"}
                       size="sm"
                     >
                       {card.badge}

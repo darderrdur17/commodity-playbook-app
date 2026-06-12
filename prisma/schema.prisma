@@ -83,6 +83,8 @@ model User {
   mentorQuestions    MentorQuestion[]
   quizResults        QuizResult[]
   jobWaitlistEntry   JobWaitlistEntry?
+  contentUpdates     ContentModule[]  @relation("ContentUpdates")
+  assetUploads       ContentAsset[]   @relation("AssetUploads")
 
   @@index([email])
   @@index([stripeCustomerId])
@@ -175,6 +177,43 @@ model JobWaitlistEntry {
   createdAt DateTime @default(now())
 
   user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+}
+
+// ── CMS: tier-gated publishable content ─────────────────────────────
+model ContentModule {
+  id           String   @id @default(cuid())
+  slug         String   @unique
+  title        String
+  description  String?
+  requiredTier Tier     @default(STARTER)
+  payload      Json
+  published    Boolean  @default(true)
+  version      Int      @default(1)
+  updatedById  String?
+  updatedBy    User?    @relation("ContentUpdates", fields: [updatedById], references: [id], onDelete: SetNull)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([slug])
+  @@index([requiredTier])
+}
+
+model ContentAsset {
+  id           String   @id @default(cuid())
+  fileName     String
+  mimeType     String
+  size         Int
+  data         Bytes
+  moduleSlug   String?
+  assetKey     String?  @unique
+  requiredTier Tier     @default(PRO)
+  label        String?
+  uploadedById String?
+  uploadedBy   User?    @relation("AssetUploads", fields: [uploadedById], references: [id], onDelete: SetNull)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  @@index([moduleSlug])
 }
 
 // ── Email Subscriber (for Weekly Digest) ────────────────────────────

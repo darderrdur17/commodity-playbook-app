@@ -1,6 +1,9 @@
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
+import { getContentTiersMap } from "@/lib/content/accessors";
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 import { DashboardClient } from "./dashboard-client";
 
 export const metadata = {
@@ -28,8 +31,11 @@ export default async function DashboardPage() {
     ? Math.round(user.progress.reduce((s, p) => s + p.progress, 0) / (5 * 100) * 100)
     : 0;
 
+  const contentTiers = await getContentTiersMap();
+
   return (
     <DashboardClient
+      contentTiers={contentTiers}
       user={{
         id: user.id,
         name: user.name,

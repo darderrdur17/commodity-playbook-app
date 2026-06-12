@@ -1,7 +1,8 @@
 import * as SecureStore from "expo-secure-store";
 import Constants from "expo-constants";
 
-const API_URL = Constants.expoConfig?.extra?.apiUrl || "https://commodityplaybook.com";
+export const API_URL =
+  Constants.expoConfig?.extra?.apiUrl || "https://commodity-playbook-app.vercel.app";
 
 export async function getToken(): Promise<string | null> {
   return await SecureStore.getItemAsync("auth_token");
@@ -17,18 +18,25 @@ export async function removeToken(): Promise<void> {
 
 async function request<T>(
   path: string,
-  options?: RequestInit
+  options?: RequestInit & { bustCache?: boolean }
 ): Promise<T> {
   const token = await getToken();
   const headers: Record<string, string> = {
     "Content-Type": "application/json",
+    "Cache-Control": "no-cache",
+    Pragma: "no-cache",
     ...(token && { Authorization: `Bearer ${token}` }),
     ...(options?.headers as Record<string, string>),
   };
 
-  const res = await fetch(`${API_URL}${path}`, {
+  const url = options?.bustCache
+    ? `${API_URL}${path}${path.includes("?") ? "&" : "?"}_=${Date.now()}`
+    : `${API_URL}${path}`;
+
+  const res = await fetch(url, {
     ...options,
     headers,
+    cache: "no-store",
   });
 
   if (!res.ok) {
@@ -39,7 +47,46 @@ async function request<T>(
   return res.json();
 }
 
-// Auth
+export type ContentSlug =
+  | "glossary"
+  | "playbook"
+  | "resume-templates"
+  | "career-roadmap"
+  | "interview-questions"
+  | "knowledge-test"
+  | "case-studies"
+  | "desk-channel"
+  | "job-openings";
+
+/** Unified CMS sync — same database as web admin edits. */
+export const contentApi = {
+  get: <T>(slug: ContentSlug, query?: string) =>
+    request<T>(
+      `/api/mobile/content/${slug}${query ? `?${query}` : ""}`,
+      { bustCache: true }
+    ),
+
+  getTiers: () =>
+    request<{ tiers: Record<string, string> }>("/api/mobile/content/tiers", {
+      bustCache: true,
+    }),
+
+  assetUrl: (id: string) => `${API_URL}/api/content/assets/${id}`,
+
+  downloadAsset: async (id: string, fileName: string) => {
+    const token = await getToken();
+    const res = await fetch(`${API_URL}/api/content/assets/${id}`, {
+      headers: {
+        ...(token && { Authorization: `Bearer ${token}` }),
+        "Cache-Control": "no-cache",
+      },
+      cache: "no-store",
+    });
+    if (!res.ok) throw new Error("Download failed");
+    return { blob: await res.blob(), fileName };
+  },
+};
+
 export const authApi = {
   login: (email: string, password: string) =>
     request<{ token: string; user: any }>("/api/mobile/auth/login", {
@@ -53,10 +100,9 @@ export const authApi = {
       body: JSON.stringify({ name, email, password }),
     }),
 
-  me: () => request<{ user: any }>("/api/mobile/auth/me"),
+  me: () => request<{ user: any }>("/api/mobile/auth/me", { bustCache: true }),
 };
 
-// Playbook
 export const playbookApi = {
   getProgress: () => request<any[]>("/api/user/progress"),
   updateProgress: (chapterId: string, progress: number) =>
@@ -66,12 +112,10 @@ export const playbookApi = {
     }),
 };
 
-// Glossary
 export const glossaryApi = {
-  getAll: () => request<any[]>("/api/glossary"),
+  getAll: () => contentApi.get<{ terms: Array<{ term: string; definition: string; category: string }> }>("glossary"),
 };
 
-// Mentor
 export const mentorApi = {
   getQuestions: () => request<any[]>("/api/mentor-connect"),
   submitQuestion: (segment: string, question: string, isPublic: boolean) =>
@@ -81,17 +125,37 @@ export const mentorApi = {
     }),
 };
 
-// Community
 export const communityApi = {
-  getDeskChannel: () =>
-    request<{ categories: any[]; questions: any[] }>("/api/mobile/desk-channel"),
-
-  getJobOpenings: () =>
-    request<{ jobs: any[]; filters: any }>("/api/mobile/job-openings"),
-
+  getDeskChannel: () => contentApi.get<{ categories: any[]; questions: any[] }>("desk-channel"),
+  getJobOpenings: () => contentApi.get<{ jobs: any[]; regions: any[]; levels: any[]; segments: any[] }>("job-openings"),
   joinWaitlist: (data: { email: string; name?: string; track: string; gdprOpt: boolean }) =>
     request("/api/waitlist", {
       method: "POST",
       body: JSON.stringify(data),
     }),
+};
+
+export const caseStudiesApi = {
+  list: () => contentApi.get<{ studies: any[] }>("case-studies"),
+  get: (slug: string) =>
+    contentApi.get<{ card: any; sections: any[] | null }>("case-studies", `detail=${encodeURIComponent(slug)}`),
+};
+
+export const playbookMetaApi = {
+  getChapters: () =>
+    request<{
+      requiredTier: string;
+      sections: Record<string, any[]>;
+      chapters: Array<{
+        id: string;
+        letter: string;
+        title: string;
+        subtitle: string;
+        color: string;
+        readTime: string;
+        sectionCount: number;
+        preview: boolean;
+        unlocked: boolean;
+      }>;
+    }>("/api/mobile/playbook", { bustCache: true }),
 };

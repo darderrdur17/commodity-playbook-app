@@ -1,6 +1,9 @@
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
+import { getCareerRoles, getContentTierForSlug } from "@/lib/content/accessors";
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 import { CareerRoadmapClient } from "./career-roadmap-client";
 
 export const metadata = { title: "Career Roadmap" };
@@ -16,5 +19,16 @@ export default async function CareerRoadmapPage() {
 
   if (!user) redirect("/login");
 
-  return <CareerRoadmapClient userTier={user.tier} persona={user.persona} />;
+  const [roles, requiredTier] = await Promise.all([
+    getCareerRoles(),
+    getContentTierForSlug("career-roadmap"),
+  ]);
+  return (
+    <CareerRoadmapClient
+      userTier={user.tier}
+      persona={user.persona}
+      roles={roles}
+      requiredTier={requiredTier as "PRO" | "ELITE"}
+    />
+  );
 }

@@ -12,21 +12,33 @@ import { formatDate } from "@/lib/utils";
 
 interface Props {
   userTier: string;
+  jobs?: typeof JOB_OPENINGS;
+  regions?: typeof JOB_REGIONS;
+  levels?: typeof JOB_LEVELS;
+  segments?: typeof JOB_SEGMENTS;
+  requiredTier?: "PRO" | "ELITE";
 }
 
-export function JobOpeningsClient({ userTier }: Props) {
+export function JobOpeningsClient({
+  userTier,
+  jobs = JOB_OPENINGS,
+  regions = JOB_REGIONS,
+  levels = JOB_LEVELS,
+  segments = JOB_SEGMENTS,
+  requiredTier = "ELITE",
+}: Props) {
   const [region, setRegion] = useState("All");
   const [level, setLevel] = useState("All");
   const [segment, setSegment] = useState("All");
 
   const filtered = useMemo(() => {
-    return JOB_OPENINGS.filter((j) => {
+    return jobs.filter((j) => {
       if (region !== "All" && j.region !== region) return false;
       if (level !== "All" && j.level !== level) return false;
       if (segment !== "All" && j.segment !== segment) return false;
       return true;
     });
-  }, [region, level, segment]);
+  }, [region, level, segment, jobs]);
 
   const content = (
     <div className="page-container py-8 sm:py-10">
@@ -61,9 +73,9 @@ export function JobOpeningsClient({ userTier }: Props) {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
           {[
-            { label: "Region", value: region, set: setRegion, options: JOB_REGIONS },
-            { label: "Level", value: level, set: setLevel, options: JOB_LEVELS },
-            { label: "Segment", value: segment, set: setSegment, options: JOB_SEGMENTS },
+            { label: "Region", value: region, set: setRegion, options: regions },
+            { label: "Level", value: level, set: setLevel, options: levels },
+            { label: "Segment", value: segment, set: setSegment, options: segments },
           ].map((f) => (
             <div key={f.label}>
               <label className="text-xs text-muted-fg mb-1 block">{f.label}</label>
@@ -152,7 +164,7 @@ export function JobOpeningsClient({ userTier }: Props) {
   );
 
   return (
-    <TierGate requiredTier="ELITE" userTier={userTier} compact>
+    <TierGate requiredTier={requiredTier} userTier={userTier} compact>
       {content}
     </TierGate>
   );

@@ -5,21 +5,30 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { BookOpen, Clock, ChevronRight, Lock, CheckCircle } from "lucide-react";
 import { CHAPTERS } from "@/data/playbook";
+
+type Chapter = (typeof CHAPTERS)[number];
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { AnimatedProgress, Reveal, StaggerChildren, StaggerItem } from "@/components/animations";
 import { hasAccess } from "@/lib/utils";
 
 interface Props {
+  chapters: readonly Chapter[];
   userTier: string;
   progress: Array<{ chapterId: string; progress: number; completed: boolean }>;
+  requiredTier?: "PRO" | "ELITE";
 }
 
-export function PlaybookHubClient({ userTier, progress }: Props) {
+export function PlaybookHubClient({
+  chapters,
+  userTier,
+  progress,
+  requiredTier = "PRO",
+}: Props) {
   const getChapterProgress = (id: string) => progress.find((p) => p.chapterId === id);
   const completedCount = progress.filter((p) => p.completed).length;
   const totalProgress = progress.reduce((s, p) => s + p.progress, 0) / (5 * 100) * 100;
-  const isPro = hasAccess(userTier, "PRO");
+  const isPro = hasAccess(userTier, requiredTier);
 
   return (
     <div className="page-container py-8 sm:py-10">
@@ -35,7 +44,7 @@ export function PlaybookHubClient({ userTier, progress }: Props) {
             The Full Playbook
           </h1>
           <p className="text-white/65 text-lg max-w-xl mb-6">
-            5 chapters. 200+ pages. Everything you need to understand, navigate, and excel in commodity trading.
+            5 chapters · 40 sections · Industry foundations through commercial decision-making — sourced from the Pro Pack playbook.
           </p>
           {isPro && (
             <div className="flex items-center gap-4 flex-wrap">
@@ -57,7 +66,7 @@ export function PlaybookHubClient({ userTier, progress }: Props) {
 
       {/* Chapters */}
       <StaggerChildren className="space-y-4">
-        {CHAPTERS.map((chapter, i) => {
+        {chapters.map((chapter, i) => {
           const prog = getChapterProgress(chapter.id);
           const isUnlocked = isPro || chapter.preview;
           const isCompleted = prog?.completed;

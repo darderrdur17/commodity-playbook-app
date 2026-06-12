@@ -14,14 +14,24 @@ export default function JobOpeningsScreen() {
   const [region, setRegion] = useState("All");
   const [level, setLevel] = useState("All");
 
+  async function load() {
+    try {
+      const data = await communityApi.getJobOpenings();
+      setJobs(data.jobs);
+      setFilters({
+        regions: data.regions || ["All"],
+        levels: data.levels || ["All"],
+      });
+      setError("");
+    } catch (e: any) {
+      setError(e.message);
+    } finally {
+      setLoading(false);
+    }
+  }
+
   useEffect(() => {
-    communityApi.getJobOpenings()
-      .then((data) => {
-        setJobs(data.jobs);
-        setFilters(data.filters);
-      })
-      .catch((e) => setError(e.message))
-      .finally(() => setLoading(false));
+    load();
   }, []);
 
   const filtered = useMemo(() => {

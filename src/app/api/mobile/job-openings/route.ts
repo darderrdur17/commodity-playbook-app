@@ -1,16 +1,19 @@
 import { NextRequest, NextResponse } from "next/server";
-import { JOB_OPENINGS, JOB_REGIONS, JOB_LEVELS, JOB_SEGMENTS } from "@/data/job-openings";
-import { getMobileUser, hasTierAccess } from "@/lib/mobile-auth";
+import { getJobOpeningsData } from "@/lib/content/accessors";
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+import { requireMobileContentAccess } from "@/lib/mobile-content";
 
 export async function GET(req: NextRequest) {
-  const user = await getMobileUser(req);
-  if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-  if (!hasTierAccess(user.tier, "ELITE")) {
-    return NextResponse.json({ error: "Elite membership required" }, { status: 403 });
-  }
+  const access = await requireMobileContentAccess(req, "job-openings");
+  if (access.error) return access.error;
 
-  return NextResponse.json({
-    jobs: JOB_OPENINGS,
-    filters: { regions: JOB_REGIONS, levels: JOB_LEVELS, segments: JOB_SEGMENTS },
-  });
+  const data = await getJobOpeningsData();
+  return NextResponse.json(
+    {
+      jobs: data.jobs,
+      filters: { regions: data.regions, levels: data.levels, segments: data.segments },
+    },
+    { headers: { "Cache-Control": "no-store" } }
+  );
 }

@@ -1,90 +1,106 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import {
-  View, Text, ScrollView, TouchableOpacity, StyleSheet,
-  FlatList, Alert
+  View, Text, FlatList, TouchableOpacity, StyleSheet,
+  Alert, ActivityIndicator, RefreshControl,
 } from "react-native";
+import { router } from "expo-router";
+import { playbookMetaApi, getToken } from "../../lib/api";
 
 const NAVY = "#0830a0";
 const PRIMARY = "#3280ff";
 
-const CHAPTERS = [
-  {
-    id: "a", letter: "A", title: "Industry Architecture",
-    subtitle: "How the commodity market actually works",
-    color: "#0830a0", pages: 42, preview: true,
-  },
-  {
-    id: "b", letter: "B", title: "Desk Operations",
-    subtitle: "The mechanics of a trading desk",
-    color: "#0131cc", pages: 38, preview: false,
-  },
-  {
-    id: "c", letter: "C", title: "Market Intelligence",
-    subtitle: "Reading and anticipating commodity markets",
-    color: "#0040f5", pages: 44, preview: false,
-  },
-  {
-    id: "d", letter: "D", title: "Commercial Skills",
-    subtitle: "Negotiation, deal-making and counterparty relationships",
-    color: "#115cff", pages: 36, preview: false,
-  },
-  {
-    id: "e", letter: "E", title: "Career Mastery",
-    subtitle: "Positioning yourself for the long career",
-    color: "#3280ff", pages: 40, preview: false,
-  },
-];
+type Chapter = {
+  id: string;
+  letter: string;
+  title: string;
+  subtitle: string;
+  color: string;
+  readTime: string;
+  sectionCount: number;
+  preview: boolean;
+  unlocked: boolean;
+};
 
 export default function PlaybookTab() {
-  const [userTier] = useState("STARTER"); // Replace with actual session
+  const [chapters, setChapters] = useState<Chapter[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
+
+  const load = useCallback(async () => {
+    try {
+      const token = await getToken();
+      if (!token) {
+        router.replace("/(auth)/login");
+        return;
+      }
+      const data = await playbookMetaApi.getChapters();
+      setChapters(data.chapters);
+    } catch {
+      router.replace("/(auth)/login");
+    } finally {
+      setLoading(false);
+      setRefreshing(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    load();
+  }, [load]);
+
+  if (loading) {
+    return (
+      <View style={styles.center}>
+        <ActivityIndicator color={PRIMARY} size="large" />
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
-      {/* Header */}
       <View style={styles.header}>
         <Text style={styles.headerTitle}>The Full Playbook</Text>
-        <Text style={styles.headerSub}>5 chapters · 200+ pages</Text>
+        <Text style={styles.headerSub}>5 chapters · 40 sections</Text>
       </View>
 
       <FlatList
-        data={CHAPTERS}
+        data={chapters}
         keyExtractor={(c) => c.id}
-        contentContainerStyle={{ padding: 16, gap: 10 }}
-        renderItem={({ item: chapter }) => {
-          const isUnlocked = userTier !== "STARTER" || chapter.preview;
-          return (
-            <TouchableOpacity
-              style={[styles.chapterCard, !isUnlocked && styles.chapterLocked]}
-              onPress={() => {
-                if (!isUnlocked) {
-                  Alert.alert("Pro Required", "Upgrade to Pro to access this chapter.");
-                }
-              }}
-              activeOpacity={0.7}
-            >
-              <View style={[styles.chapterLetter, { backgroundColor: chapter.color }]}>
-                <Text style={styles.chapterLetterText}>{chapter.letter}</Text>
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={() => { setRefreshing(true); load(); }} />}
+        contentContainerStyle={{ padding: 16, gap: 10, paddingBottom: 32 }}
+        renderItem={({ item: chapter }) => (
+          <TouchableOpacity
+            style={[styles.chapterCard, !chapter.unlocked && styles.chapterLocked]}
+            onPress={() => {
+              if (!chapter.unlocked) {
+                Alert.alert("Upgrade Required", "Upgrade to Pro to access this chapter.");
+                return;
+              }
+              router.push(`/playbook/${chapter.id}` as any);
+            }}
+            activeOpacity={0.7}
+          >
+            <View style={[styles.chapterLetter, { backgroundColor: chapter.color }]}>
+              <Text style={styles.chapterLetterText}>{chapter.letter}</Text>
+            </View>
+            <View style={styles.chapterInfo}>
+              <View style={styles.chapterTitleRow}>
+                <Text style={styles.chapterTitle}>{chapter.title}</Text>
+                {chapter.preview && (
+                  <View style={styles.previewBadge}>
+                    <Text style={styles.previewBadgeText}>Preview</Text>
+                  </View>
+                )}
+                {!chapter.unlocked && (
+                  <View style={styles.lockBadge}>
+                    <Text style={styles.lockBadgeText}>Pro</Text>
+                  </View>
+                )}
               </View>
-              <View style={styles.chapterInfo}>
-                <View style={styles.chapterTitleRow}>
-                  <Text style={styles.chapterTitle}>{chapter.title}</Text>
-                  {chapter.preview && (
-                    <View style={styles.previewBadge}>
-                      <Text style={styles.previewBadgeText}>Preview</Text>
-                    </View>
-                  )}
-                  {!isUnlocked && (
-                    <View style={styles.lockBadge}>
-                      <Text style={styles.lockBadgeText}>🔒 Pro</Text>
-                    </View>
-                  )}
-                </View>
-                <Text style={styles.chapterSub}>{chapter.subtitle}</Text>
-                <Text style={styles.chapterMeta}>{chapter.pages} pages</Text>
-              </View>
-            </TouchableOpacity>
-          );
-        }}
+              <Text style={styles.chapterSub} numberOfLines={2}>{chapter.subtitle}</Text>
+              <Text style={styles.chapterMeta}>{chapter.sectionCount} sections · {chapter.readTime}</Text>
+            </View>
+          </TouchableOpacity>
+        )}
       />
     </View>
   );
@@ -92,6 +108,7 @@ export default function PlaybookTab() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "#f9fafb" },
+  center: { flex: 1, alignItems: "center", justifyContent: "center" },
   header: {
     backgroundColor: NAVY,
     padding: 20,
@@ -101,13 +118,12 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 22,
     fontWeight: "bold",
-    fontFamily: "serif",
     marginBottom: 4,
   },
   headerSub: { color: "rgba(255,255,255,0.55)", fontSize: 13 },
   chapterCard: {
     flexDirection: "row",
-    alignItems: "center",
+    alignItems: "flex-start",
     gap: 14,
     backgroundColor: "#fff",
     borderRadius: 14,
@@ -124,10 +140,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     flexShrink: 0,
   },
-  chapterLetterText: { color: "#fff", fontSize: 20, fontWeight: "bold", fontFamily: "serif" },
-  chapterInfo: { flex: 1 },
+  chapterLetterText: { color: "#fff", fontSize: 20, fontWeight: "bold" },
+  chapterInfo: { flex: 1, minWidth: 0 },
   chapterTitleRow: { flexDirection: "row", alignItems: "center", gap: 6, flexWrap: "wrap" },
-  chapterTitle: { fontSize: 14, fontWeight: "700", color: "#1a1a1a" },
+  chapterTitle: { fontSize: 14, fontWeight: "700", color: "#1a1a1a", flexShrink: 1 },
   chapterSub: { fontSize: 12, color: "#677184", marginTop: 2 },
   chapterMeta: { fontSize: 11, color: "#9ca3af", marginTop: 3 },
   previewBadge: {

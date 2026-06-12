@@ -1,0 +1,259 @@
+import { prisma } from "@/lib/prisma";
+import type { Tier } from "@prisma/client";
+import { CONTENT_MODULE_META, getModuleMeta, type ContentSlug } from "./modules";
+import { getDefaultPayload, getAllDefaultPayloads } from "./defaults";
+import { applyCmsSchemaSql } from "@/lib/setup-database";
+
+let cmsTablesReady: boolean | null = null;
+
+export async function ensureContentInfrastructure() {
+  if (cmsTablesReady) return;
+  try {
+    await prisma.contentModule.findFirst({ take: 1 });
+    cmsTablesReady = true;
+  } catch {
+    await applyCmsSchemaSql();
+    cmsTablesReady = true;
+  }
+}
+
+async function tryReadPublishedPayload<T>(slug: ContentSlug): Promise<T | null> {
+  try {
+    const row = await prisma.contentModule.findUnique({ where: { slug } });
+    if (row?.published) return row.payload as T;
+  } catch {
+    // CMS tables missing or DB unavailable — fall back to static defaults
+  }
+  return null;
+}
+
+export async function seedContentModulesIfEmpty() {
+  await ensureContentInfrastructure();
+  const count = await prisma.contentModule.count();
+  if (count > 0) return { seeded: false, count };
+
+  const defaults = getAllDefaultPayloads();
+  for (const meta of CONTENT_MODULE_META) {
+    await prisma.contentModule.create({
+      data: {
+        slug: meta.slug,
+        title: meta.title,
+        description: meta.description,
+        requiredTier: meta.requiredTier,
+        payload: defaults[meta.slug] as object,
+        published: true,
+        version: 1,
+      },
+    });
+  }
+  return { seeded: true, count: CONTENT_MODULE_META.length };
+}
+
+export async function listContentModules() {
+  await ensureContentInfrastructure();
+  await seedContentModulesIfEmpty();
+
+  const rows = await prisma.contentModule.findMany({ orderBy: { slug: "asc" } });
+  return rows.map((r) => ({
+    id: r.id,
+    slug: r.slug,
+    title: r.title,
+    description: r.description,
+    requiredTier: r.requiredTier,
+    published: r.published,
+    version: r.version,
+    updatedAt: r.updatedAt.toISOString(),
+    payloadSize: JSON.stringify(r.payload).length,
+  }));
+}
+
+export async function getContentModuleRecord(slug: string) {
+  await ensureContentInfrastructure();
+  await seedContentModulesIfEmpty();
+
+  const row = await prisma.contentModule.findUnique({ where: { slug } });
+  if (!row) {
+    const meta = getModuleMeta(slug);
+    if (!meta) return null;
+    return {
+      slug: meta.slug,
+      title: meta.title,
+      description: meta.description,
+      requiredTier: meta.requiredTier,
+      published: true,
+      version: 0,
+      payload: getDefaultPayload(meta.slug as ContentSlug),
+      source: "default" as const,
+    };
+  }
+  return {
+    slug: row.slug,
+    title: row.title,
+    description: row.description,
+    requiredTier: row.requiredTier,
+    published: row.published,
+    version: row.version,
+    payload: row.payload,
+    source: "database" as const,
+    updatedAt: row.updatedAt.toISOString(),
+  };
+}
+
+export async function getPublishedPayload<T>(slug: ContentSlug): Promise<T> {
+  const fromDb = await tryReadPublishedPayload<T>(slug);
+  if (fromDb !== null) return fromDb;
+  return getDefaultPayload(slug) as T;
+}
+
+export async function updateContentModule(
+  slug: string,
+  data: {
+    payload?: unknown;
+    requiredTier?: Tier;
+    published?: boolean;
+    title?: string;
+    description?: string;
+  },
+  updatedById: string
+) {
+  await ensureContentInfrastructure();
+  const meta = getModuleMeta(slug);
+  if (!meta) throw new Error("Unknown content module");
+
+  const existing = await prisma.contentModule.findUnique({ where: { slug } });
+  if (!existing) {
+    return prisma.contentModule.create({
+      data: {
+        slug,
+        title: data.title ?? meta.title,
+        description: data.description ?? meta.description,
+        requiredTier: data.requiredTier ?? meta.requiredTier,
+        payload: (data.payload ?? getDefaultPayload(slug as ContentSlug)) as object,
+        published: data.published ?? true,
+        version: 1,
+        updatedById,
+      },
+    });
+  }
+
+  return prisma.contentModule.update({
+    where: { slug },
+    data: {
+      ...(data.title !== undefined && { title: data.title }),
+      ...(data.description !== undefined && { description: data.description }),
+      ...(data.requiredTier !== undefined && { requiredTier: data.requiredTier }),
+      ...(data.published !== undefined && { published: data.published }),
+      ...(data.payload !== undefined && { payload: data.payload as object }),
+      version: existing.version + 1,
+      updatedById,
+    },
+  });
+}
+
+export async function resetContentModule(slug: string, updatedById: string) {
+  const meta = getModuleMeta(slug);
+  if (!meta) throw new Error("Unknown content module");
+  return updateContentModule(
+    slug,
+    { payload: getDefaultPayload(slug as ContentSlug), requiredTier: meta.requiredTier, published: true },
+    updatedById
+  );
+}
+
+export async function listContentAssets(moduleSlug?: string) {
+  await ensureContentInfrastructure();
+  return prisma.contentAsset.findMany({
+    where: moduleSlug ? { moduleSlug } : undefined,
+    orderBy: { createdAt: "desc" },
+    select: {
+      id: true,
+      fileName: true,
+      mimeType: true,
+      size: true,
+      moduleSlug: true,
+      assetKey: true,
+      requiredTier: true,
+      label: true,
+      createdAt: true,
+      updatedAt: true,
+    },
+  });
+}
+
+export async function getContentAsset(id: string) {
+  return prisma.contentAsset.findUnique({ where: { id } });
+}
+
+export async function upsertContentAsset(input: {
+  fileName: string;
+  mimeType: string;
+  data: Buffer;
+  moduleSlug?: string;
+  assetKey?: string;
+  requiredTier?: Tier;
+  label?: string;
+  uploadedById: string;
+}) {
+  await ensureContentInfrastructure();
+  if (input.assetKey) {
+    return prisma.contentAsset.upsert({
+      where: { assetKey: input.assetKey },
+      create: {
+        fileName: input.fileName,
+        mimeType: input.mimeType,
+        size: input.data.length,
+        data: input.data,
+        moduleSlug: input.moduleSlug,
+        assetKey: input.assetKey,
+        requiredTier: input.requiredTier ?? "PRO",
+        label: input.label,
+        uploadedById: input.uploadedById,
+      },
+      update: {
+        fileName: input.fileName,
+        mimeType: input.mimeType,
+        size: input.data.length,
+        data: input.data,
+        moduleSlug: input.moduleSlug,
+        requiredTier: input.requiredTier ?? "PRO",
+        label: input.label,
+        uploadedById: input.uploadedById,
+      },
+    });
+  }
+  return prisma.contentAsset.create({
+    data: {
+      fileName: input.fileName,
+      mimeType: input.mimeType,
+      size: input.data.length,
+      data: input.data,
+      moduleSlug: input.moduleSlug,
+      requiredTier: input.requiredTier ?? "PRO",
+      label: input.label,
+      uploadedById: input.uploadedById,
+    },
+  });
+}
+
+export async function deleteContentAsset(id: string) {
+  return prisma.contentAsset.delete({ where: { id } });
+}
+
+/** Public read — maps assetKey/fileName to tier-gated download URLs. */
+export async function getContentAssetUrlMap(moduleSlug: string): Promise<Record<string, string>> {
+  try {
+    const assets = await prisma.contentAsset.findMany({
+      where: { moduleSlug },
+      select: { id: true, assetKey: true, fileName: true },
+    });
+    const map: Record<string, string> = {};
+    for (const asset of assets) {
+      const url = `/api/content/assets/${asset.id}`;
+      if (asset.assetKey) map[asset.assetKey] = url;
+      map[asset.fileName] = url;
+    }
+    return map;
+  } catch {
+    return {};
+  }
+}

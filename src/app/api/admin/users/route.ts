@@ -23,7 +23,10 @@ export async function GET() {
       resumeCredits: true,
       onboardingDone: true,
       stripeStatus: true,
+      stripeCurrentPeriodEnd: true,
+      jobWaitlist: true,
       createdAt: true,
+      updatedAt: true,
       _count: {
         select: {
           mentorQuestions: true,
@@ -40,8 +43,14 @@ const updateSchema = z.object({
   userId: z.string(),
   tier: z.enum(["STARTER", "PRO", "ELITE"]).optional(),
   role: z.enum(["USER", "ADMIN"]).optional(),
+  track: z.enum(["CAREER", "SALES"]).optional(),
+  persona: z
+    .enum(["FRESH_GRAD", "CAREER_SWITCHER", "INSIDER", "ANALYST_TRADER", "VENDOR"])
+    .nullable()
+    .optional(),
   mentorCredits: z.number().min(0).optional(),
   resumeCredits: z.number().min(0).optional(),
+  onboardingDone: z.boolean().optional(),
 });
 
 export async function PATCH(req: NextRequest) {
@@ -72,6 +81,9 @@ export async function PATCH(req: NextRequest) {
       role: true,
       mentorCredits: true,
       resumeCredits: true,
+      track: true,
+      persona: true,
+      onboardingDone: true,
     },
   });
 

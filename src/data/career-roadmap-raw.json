@@ -1,0 +1,492 @@
+[
+  {
+    "id": 1,
+    "cat": "front",
+    "title": "Trading Analyst",
+    "tags": [
+      {
+        "l": "Front office",
+        "c": "rt-blue"
+      },
+      {
+        "l": "High entry",
+        "c": "rt-red"
+      },
+      {
+        "l": "Crude · LNG · Products",
+        "c": "rt-gray"
+      }
+    ],
+    "summary": "The most aspirational junior entry point on a commodity desk. Trading analysts sit directly behind the trader, building models, maintaining position sheets, and translating market data into actionable intelligence. The feedback loop is fast and the learning curve is steep.",
+    "diff": "high",
+    "timeline": "6–18 months from adjacent role",
+    "firms": "Trafigura, Vitol, Glencore, BP, Shell, Gunvor",
+    "what": "A trading analyst's core job is to make the trader faster and smarter — maintaining live P&amp;L and position sheets, building forward curve models, writing daily market commentary the trader actually reads, and flagging data signals before the trader asks. The thing that determines whether you thrive is not intelligence: it is speed of iteration under market pressure. The ability to produce clean, reliable output quickly is the non-negotiable skill.",
+    "backgrounds": [
+      "<strong>Finance or economics graduates</strong> with strong Excel and Python fundamentals who can explain a crack spread in plain English",
+      "<strong>Engineering graduates</strong> who have developed commercial instinct alongside technical ability and can translate physical market logic into quantitative models",
+      "<strong>Former commodity researchers or price reporters</strong> who have built deep market knowledge and want to move closer to capital"
+    ],
+    "redflags": [
+      "Cannot explain the physical market behind the commodity they want to trade — quoting flat price without understanding the supply chain underneath it",
+      "Models are technically correct but commercially illiterate — outputs that look right but don't reflect how the market actually prices",
+      "Slow under pressure — if you need 30 minutes to update a position sheet, you will not survive a volatile trading session"
+    ],
+    "comp": [
+      {
+        "l": "Junior (0–2 yrs)",
+        "r": "SGD 70–100k"
+      },
+      {
+        "l": "Mid (2–4 yrs)",
+        "r": "SGD 100–150k"
+      },
+      {
+        "l": "Senior (4+ yrs)",
+        "r": "SGD 150–220k + bonus"
+      }
+    ],
+    "upgrade": "The natural move is to junior book runner — taking responsibility for a small geographic or product sub-book with its own P&amp;L. Typical timeline at a major trader is 2–4 years as an analyst. The skill to develop inside the role: the ability to hold and defend a market view, not just model one. Analysts who start showing commercial conviction early get a book faster."
+  },
+  {
+    "id": 2,
+    "cat": "front",
+    "title": "Trader",
+    "tags": [
+      {
+        "l": "Front office",
+        "c": "rt-blue"
+      },
+      {
+        "l": "Very high entry",
+        "c": "rt-red"
+      },
+      {
+        "l": "P&L owner",
+        "c": "rt-gray"
+      }
+    ],
+    "summary": "The trader owns the P&L. They manage a book of physical and financial positions across a commodity or geography, taking and managing risk on behalf of the firm. Direct junior trader hiring is rare — most traders entered through analyst, scheduling, or lateral routes.",
+    "diff": "high",
+    "timeline": "3–8 years from entry-level adjacent role",
+    "firms": "Vitol, Trafigura, Glencore, Gunvor, Mercuria, BP, Shell, TotalEnergies",
+    "what": "A trader manages a book of physical and financial positions, taking and managing risk on behalf of the firm. The day starts before the market opens — reviewing overnight moves, physical cargo nominations, and supply disruptions affecting open positions. The thing that separates a good trader from a great one is not the ability to predict price: it is the ability to size positions correctly relative to conviction, and to cut losses without ego when the thesis is wrong.",
+    "backgrounds": [
+      "<strong>Internal promotion from trading analyst</strong> — by far the most common route at major commodity houses",
+      "<strong>Lateral hire from another commodity desk</strong> or asset class, bringing a live book and existing counterparty relationships",
+      "<strong>Scheduling or operations professionals</strong> who developed exceptional commercial instinct and were given a small book to prove it"
+    ],
+    "redflags": [
+      "Applying directly for trader roles without a track record of commercial decision-making — the desk needs evidence you can manage risk, not just analyse it",
+      "No demonstrated ability to hold and defend a market view under pressure — analysis without conviction is not trading",
+      "Traders from financial markets who cannot explain physical commodity mechanics — paper trading skills do not transfer directly to physical books"
+    ],
+    "comp": [
+      {
+        "l": "Junior trader (2–4 yrs exp)",
+        "r": "SGD 150–250k base + discretionary"
+      },
+      {
+        "l": "Mid-level (4–8 yrs)",
+        "r": "SGD 250–500k total comp"
+      },
+      {
+        "l": "Senior / book runner (8+ yrs)",
+        "r": "SGD 600k–2M+ P&amp;L-linked"
+      }
+    ],
+    "upgrade": "Senior traders run larger books with greater capital allocation. The best become book heads or manage junior traders. The other trajectory — common at major trading houses — is into origination or commercial leadership, leveraging the market relationships built while trading."
+  },
+  {
+    "id": 3,
+    "cat": "ops",
+    "title": "Scheduling / Operations",
+    "tags": [
+      {
+        "l": "Operations",
+        "c": "rt-teal"
+      },
+      {
+        "l": "Medium entry",
+        "c": "rt-amber"
+      },
+      {
+        "l": "Crude · LNG · Gas",
+        "c": "rt-gray"
+      }
+    ],
+    "summary": "Schedulers are the operational backbone of physical commodity trading. The most accessible entry point into downstream trading and one of the most credible paths to a commercial role.",
+    "diff": "low",
+    "timeline": "3–9 months from adjacent role",
+    "firms": "Shell, BP, TotalEnergies, ExxonMobil, Pavilion Energy, NOCs, mid-size traders",
+    "what": "A scheduler's day is a constant negotiation between what the trader did and what the real world will allow. You manage cargo nominations, track vessels on AIS, coordinate with load and discharge terminals, resolve demurrage disputes, and confirm deliveries. The single determining factor for success: can you make fast, good-enough decisions with incomplete information, or do you need certainty before you act?",
+    "backgrounds": [
+      "<strong>Supply chain, logistics, or operations professionals</strong> who understand physical movement coordination and want to move into commodity-specific scheduling",
+      "<strong>Engineering graduates</strong> — particularly chemical, process, or mechanical — who have worked in refinery or terminal operations",
+      "<strong>Maritime professionals</strong> with vessel operations or port logistics backgrounds who want to move from shipping into commodity trading operations"
+    ],
+    "redflags": [
+      "Cannot think operationally under time pressure — scheduling decisions often have a 2-hour window before the consequence is locked in",
+      "No understanding of the financial implications of operational decisions — a scheduler who doesn't know what demurrage costs the desk is not yet commercially aware",
+      "Over-reliance on having perfect information before acting — ambiguity is constant in physical operations"
+    ],
+    "comp": [
+      {
+        "l": "Junior scheduler (0–2 yrs)",
+        "r": "SGD 55–80k"
+      },
+      {
+        "l": "Mid (2–5 yrs)",
+        "r": "SGD 80–130k"
+      },
+      {
+        "l": "Senior / lead (5+ yrs)",
+        "r": "SGD 130–200k"
+      }
+    ],
+    "upgrade": "The scheduling-to-commercial pathway is the most established internal promotion route in physical commodity trading. The transition typically happens in year 3–5 when a scheduler has deep cargo flow knowledge and counterparty relationships to add commercial value. The skill to develop: quantify the commercial impact of your operational decisions explicitly."
+  },
+  {
+    "id": 4,
+    "cat": "middle",
+    "title": "Risk Analyst",
+    "tags": [
+      {
+        "l": "Middle office",
+        "c": "rt-purple"
+      },
+      {
+        "l": "Medium entry",
+        "c": "rt-amber"
+      },
+      {
+        "l": "Risk · Derivatives",
+        "c": "rt-gray"
+      }
+    ],
+    "summary": "Risk analysts set and monitor the guardrails that govern how much risk the trading desk can take. The best challenge traders on their commercial assumptions — not just run the VaR calculation.",
+    "diff": "med",
+    "timeline": "6–12 months from banking or finance",
+    "firms": "Vitol, Mercuria, Shell, BP, BNP Paribas, Macquarie, Société Générale",
+    "what": "A commodity risk analyst maintains position limits, monitors VaR and exposure across the desk's books, reviews new trade approvals for complex structures, and produces the daily risk report senior management reviews before the market opens. The relationship with traders is one of constructive tension — too deferential and you allow excessive risk-taking; too restrictive and you prevent legitimate commercial activity.",
+    "backgrounds": [
+      "<strong>Market risk professionals from investment banking</strong> with derivatives pricing and VaR methodology experience who want to move into commodity-specific risk",
+      "<strong>Treasury or ALM professionals</strong> with interest rate or FX risk backgrounds who are willing to build commodity market knowledge",
+      "<strong>Commodity trading analysts</strong> who have developed strong quantitative skills and want to specialise in risk methodology"
+    ],
+    "redflags": [
+      "Only understands the mathematics but not the market — a VaR limit breach means nothing if you can't explain why the position was taken",
+      "Cannot challenge a trader's assumptions credibly — if traders don't respect your market understanding, your limits become a formality",
+      "No experience with commodity-specific risk concepts — basis risk, physical delivery risk, and curve risk versus generic financial risk metrics"
+    ],
+    "comp": [
+      {
+        "l": "Junior (0–3 yrs)",
+        "r": "SGD 65–95k"
+      },
+      {
+        "l": "Mid (3–6 yrs)",
+        "r": "SGD 95–160k"
+      },
+      {
+        "l": "Senior / manager (6+ yrs)",
+        "r": "SGD 160–280k"
+      }
+    ],
+    "upgrade": "Senior risk managers move into chief risk officer roles or risk infrastructure leadership. A parallel path is into structuring, where risk framework expertise is used to design complex hedging solutions for clients. The skill to develop inside the role: the ability to write a one-page risk summary that a senior trader finds genuinely useful, not just technically correct."
+  },
+  {
+    "id": 5,
+    "cat": "front",
+    "title": "Commercial / Origination",
+    "tags": [
+      {
+        "l": "Front office",
+        "c": "rt-blue"
+      },
+      {
+        "l": "High entry",
+        "c": "rt-red"
+      },
+      {
+        "l": "Deal-driven",
+        "c": "rt-gray"
+      }
+    ],
+    "summary": "Originators source the deal flow that gives the trading desk a natural book to trade around. One of the highest-value functions in the firm — and the least understood from the outside.",
+    "diff": "high",
+    "timeline": "12–24 months from banking or consulting",
+    "firms": "Shell, TotalEnergies, BP, Gunvor, Trafigura, Pavilion Energy, commodity banks",
+    "what": "A commercial professional's day is split between external relationship management and internal commercial structuring. Externally: meetings with producers, refinery procurement teams, and NOC counterparts. Internally: working with the trading desk to define terms the firm can price and risk-manage, and with legal to structure contracts. Originating a meaningful LNG SPA or crude term deal can take 12–24 months. The skill that separates the best: understanding what the counterparty needs commercially, not just their price, and structuring a deal that creates value for both sides.",
+    "backgrounds": [
+      "<strong>Investment banking coverage professionals</strong> who have worked with energy sector clients and have strong financial structuring and client relationship skills",
+      "<strong>Management consultants</strong> who have done substantial commodity or energy sector project work and have developed commercial credibility with industry clients",
+      "<strong>Upstream commercial professionals</strong> — landmen, commercial analysts at E&amp;P companies — who want to move downstream"
+    ],
+    "redflags": [
+      "Cannot discuss deal economics credibly — originators who only talk relationships without understanding the margin logic of the deal they're trying to close",
+      "No understanding of how the trading desk prices and risk-manages the deal being originated — if the structure isn't tradeable, the desk won't support it",
+      "Weak on contract fundamentals — misunderstanding force majeure, destination flexibility, or pricing mechanisms creates commercial and legal exposure"
+    ],
+    "comp": [
+      {
+        "l": "Junior commercial (0–3 yrs)",
+        "r": "SGD 80–130k"
+      },
+      {
+        "l": "Mid (3–7 yrs)",
+        "r": "SGD 130–220k + deal bonus"
+      },
+      {
+        "l": "Senior originator (7+ yrs)",
+        "r": "SGD 220–500k+ total"
+      }
+    ],
+    "upgrade": "Senior originators move into head of origination or commercial director roles, or transition to trading if they've developed a strong enough market view alongside their relationship network. The most valuable transition: when an originator develops a commodity-specific market view good enough to position the deals they originate against the forward curve."
+  },
+  {
+    "id": 6,
+    "cat": "middle",
+    "title": "Quantitative / Data Analyst",
+    "tags": [
+      {
+        "l": "Middle office",
+        "c": "rt-purple"
+      },
+      {
+        "l": "Medium entry",
+        "c": "rt-amber"
+      },
+      {
+        "l": "Python · Modelling",
+        "c": "rt-gray"
+      }
+    ],
+    "summary": "Quant and data analysts build the quantitative infrastructure of the trading desk. The fastest-growing function in commodity trading and the most natural entry point for engineering, data science, and economics backgrounds.",
+    "diff": "med",
+    "timeline": "3–12 months from adjacent technical role",
+    "firms": "Trafigura, Vitol, Shell, BP, Gunvor, commodity hedge funds",
+    "what": "A quant analyst's output is the model or tool that makes a trader faster or more rigorous — a forward curve calibration model, a supply/demand dashboard pulling EIA and Platts data, or a scenario analysis tool that stress-tests the desk's portfolio against supply disruption events. The thing that determines career trajectory: whether your models produce outputs traders actually use to make decisions, or outputs that sit in a shared folder.",
+    "backgrounds": [
+      "<strong>Engineering graduates</strong> — chemical, petroleum, mechanical — with strong quantitative skills and commodity market domain knowledge",
+      "<strong>Economists with Python or R skills</strong> who have worked on energy or commodity research and want to move closer to trading decision-making",
+      "<strong>Data scientists from adjacent industries</strong> — utilities, energy trading platforms, price reporting agencies — with commodity-specific datasets and models"
+    ],
+    "redflags": [
+      "Technical output with no commercial framing — models that answer the wrong question, however precisely they answer it",
+      "Cannot explain their model's output in plain English to a non-technical trader — if the desk can't use it, the model has no value",
+      "No knowledge of the physical commodity underlying the data being modelled — a freight rate model without understanding charterparty mechanics will have the wrong variables"
+    ],
+    "comp": [
+      {
+        "l": "Junior (0–2 yrs)",
+        "r": "SGD 70–110k"
+      },
+      {
+        "l": "Mid (2–5 yrs)",
+        "r": "SGD 110–180k"
+      },
+      {
+        "l": "Senior quant (5+ yrs)",
+        "r": "SGD 180–300k"
+      }
+    ],
+    "upgrade": "The quant-to-trading transition is well-established at major commodity houses. The typical path: quant analyst builds a model the desk relies on, develops market views through the model, and is eventually given a small book to test those views with capital. The alternative: move into a quantitative research role at a commodity hedge fund."
+  },
+  {
+    "id": 7,
+    "cat": "adjacent",
+    "title": "Research Analyst",
+    "tags": [
+      {
+        "l": "Adjacent",
+        "c": "rt-green"
+      },
+      {
+        "l": "Medium entry",
+        "c": "rt-amber"
+      },
+      {
+        "l": "Publishing-focused",
+        "c": "rt-gray"
+      }
+    ],
+    "summary": "Commodity research analysts publish market views — supply/demand forecasts, price outlooks, scenario analysis — that inform trading decisions, client strategies, and corporate planning. The path from research to the desk is real but specific.",
+    "diff": "med",
+    "timeline": "6–18 months from economics, journalism, or policy",
+    "firms": "S&amp;P Global Platts, Argus Media, Kpler, Vortexa, Wood Mackenzie, Rystad Energy, commodity banks",
+    "what": "A research analyst spends most of their time building supply/demand models, tracking physical market data, and writing. The output is a report, price forecast, or market commentary published to clients or internal stakeholders. The quality of the work is judged by whether people read it and change their decisions as a result. The thing that determines career trajectory: whether your views are commercially useful.",
+    "backgrounds": [
+      "<strong>Economics or energy policy graduates</strong> with strong analytical writing and quantitative modelling skills",
+      "<strong>Journalists or editors at commodity price reporting agencies</strong> who have developed deep market knowledge through price assessment",
+      "<strong>Graduate researchers in energy or environmental science</strong> with commodity-specific datasets and comfort communicating technical findings to commercial audiences"
+    ],
+    "redflags": [
+      "Research that is thorough but not actionable — the market doesn't need another 80-page supply/demand model, it needs a clear view on what happens next and why",
+      "No market-specific knowledge of how physical commodities trade — understanding macro energy transitions but not cargo pricing or physical differentials is limiting",
+      "Cannot communicate findings concisely — the ability to deliver a market view in three sentences before expanding is a core skill"
+    ],
+    "comp": [
+      {
+        "l": "Junior (0–2 yrs)",
+        "r": "SGD 55–85k"
+      },
+      {
+        "l": "Mid (2–5 yrs)",
+        "r": "SGD 85–140k"
+      },
+      {
+        "l": "Senior / lead (5+ yrs)",
+        "r": "SGD 140–220k"
+      }
+    ],
+    "upgrade": "Research analysts who develop strong commercial credibility often move into commodity trading firms as senior analysts or strategy roles. An increasingly common alternative path is into ESG or energy transition advisory, where commodity market knowledge combined with analytical rigour is in high demand."
+  },
+  {
+    "id": 8,
+    "cat": "ops",
+    "title": "ETRM Specialist",
+    "tags": [
+      {
+        "l": "Operations",
+        "c": "rt-teal"
+      },
+      {
+        "l": "Lower entry",
+        "c": "rt-green"
+      },
+      {
+        "l": "Endur · RightAngle",
+        "c": "rt-gray"
+      }
+    ],
+    "summary": "ETRM specialists implement, configure, and maintain the software systems that every commodity trading desk runs on. A specialist track that commands a genuine premium where deep expertise is scarce.",
+    "diff": "low",
+    "timeline": "3–9 months from IT, consulting, or finance systems",
+    "firms": "All major commodity trading firms, energy majors, utilities — typically via Sapient, Accenture, or direct",
+    "what": "An ETRM specialist's work is invisible when done correctly and catastrophic when done incorrectly. You configure the system of record that every trade, position, risk metric, and physical delivery depends on. The hardest part is not the technical configuration — it is translating what a trader or scheduler needs into system logic, which requires enough market understanding to know whether a workaround will create problems downstream at settlement.",
+    "backgrounds": [
+      "<strong>IT professionals or business analysts from financial services</strong> who have exposure to trading systems and want to specialise in commodity-specific ETRM platforms",
+      "<strong>Implementation consultants from Sapient, Accenture, or Infosys</strong> who have worked on ETRM implementations and want to move in-house",
+      "<strong>Finance or operations professionals</strong> who have been heavy ETRM users (schedulers, back-office) and have developed enough system knowledge to move into a specialist role"
+    ],
+    "redflags": [
+      "No hands-on experience with at least one major ETRM platform — the market pays for specific system expertise, not generic IT skills",
+      "Cannot bridge business and technical requirements — ETRM specialists who only understand the technology and not the trading business create systems that are technically functional but commercially useless",
+      "Underestimates the complexity of commodity trade representation — physical delivery, Platts pricing, laytime calculations, and multi-leg structured deals all require non-trivial configuration"
+    ],
+    "comp": [
+      {
+        "l": "Junior ETRM analyst (0–2 yrs)",
+        "r": "SGD 60–90k"
+      },
+      {
+        "l": "Mid specialist (2–5 yrs)",
+        "r": "SGD 90–160k"
+      },
+      {
+        "l": "Senior architect (5+ yrs)",
+        "r": "SGD 160–280k"
+      }
+    ],
+    "upgrade": "Senior ETRM specialists become architects of the firm's trading technology stack. The alternative path is into ETRM product roles at the vendors themselves (ION/Openlink, Brady), where market expertise combined with system knowledge commands a premium."
+  },
+  {
+    "id": 9,
+    "cat": "adjacent",
+    "title": "Vendor Solutions / PreSales",
+    "tags": [
+      {
+        "l": "Adjacent",
+        "c": "rt-green"
+      },
+      {
+        "l": "Medium entry",
+        "c": "rt-amber"
+      },
+      {
+        "l": "SaaS · ETRM · Data",
+        "c": "rt-gray"
+      }
+    ],
+    "summary": "Vendor solutions and presales professionals represent commodity technology and data companies to trading firms, energy companies, and utilities. One of the most underappreciated routes into the commodity ecosystem for candidates from consulting or tech backgrounds.",
+    "diff": "med",
+    "timeline": "6–18 months from consulting, tech sales, or commodity operations",
+    "firms": "S&amp;P Global Platts, Argus Media, Kpler, Vortexa, ION/Openlink, Brady Technologies, Sapient",
+    "what": "A presales professional's job is to understand a client's business problem deeply enough to demonstrate — credibly and specifically — how the vendor's product solves it. In commodity technology, that means understanding how trading desks actually work: how positions are booked, how risk is calculated, how physical deliveries are scheduled. The best presales professionals in this space are former practitioners who moved vendor-side, or deeply curious individuals who have built genuine market knowledge alongside their commercial skills.",
+    "backgrounds": [
+      "<strong>Commodity operations or ETRM professionals</strong> who have moved vendor-side, bringing real practitioner credibility to client conversations",
+      "<strong>Management consultants or implementation specialists</strong> who have worked on commodity trading projects and want to leverage that project experience commercially",
+      "<strong>Technology sales professionals from adjacent industries</strong> — financial services software, energy management platforms — who are willing to invest seriously in commodity market knowledge"
+    ],
+    "redflags": [
+      "Cannot speak credibly about commodity market mechanics — presales professionals who only know the product and not the market lose credibility immediately with experienced trading desk counterparts",
+      "Confuses features with solutions — the strongest presales professionals lead with the client's problem, not the product's capabilities",
+      "No experience with enterprise sales cycles in commodity trading — deals can take 12–24 months and involve multiple stakeholders across IT, trading, risk, and finance"
+    ],
+    "comp": [
+      {
+        "l": "Solutions consultant (0–3 yrs)",
+        "r": "SGD 80–130k base + commission"
+      },
+      {
+        "l": "Senior solutions / sales (3–7 yrs)",
+        "r": "SGD 130–220k + commission"
+      },
+      {
+        "l": "Commercial lead / director (7+ yrs)",
+        "r": "SGD 220–400k+ total"
+      }
+    ],
+    "upgrade": "Senior presales professionals move into commercial leadership — VP Sales, Regional Director — at vendors, or transition into product management roles where commodity market expertise defines what the platform builds next. The alternative: return to industry in a commercial or strategy role, where vendor-side experience of seeing how many different trading desks operate is genuinely differentiating."
+  },
+  {
+    "id": 10,
+    "cat": "adjacent",
+    "title": "Commodity Trade Finance",
+    "tags": [
+      {
+        "l": "Adjacent",
+        "c": "rt-green"
+      },
+      {
+        "l": "High entry",
+        "c": "rt-red"
+      },
+      {
+        "l": "Banking · Structured finance",
+        "c": "rt-gray"
+      }
+    ],
+    "summary": "Commodity trade finance professionals structure the financing arrangements that enable physical commodity trades — borrowing base facilities, repo structures, inventory finance, and letters of credit. One of the most intellectually demanding adjacent functions to the trading desk.",
+    "diff": "high",
+    "timeline": "12–24 months from banking or commodity finance",
+    "firms": "BNP Paribas, Société Générale, ING, ABN AMRO, Natixis, Macquarie, DBS, OCBC commodity finance desks",
+    "what": "A commodity trade finance professional assesses the credit and commercial quality of commodity transactions, structures financing facilities that match the physical trade's cash flow profile, and monitors exposure against collateral. The job requires understanding both the financial engineering of the facility and the physical commodity trade it is financing. The thing that determines career trajectory: whether you develop genuine commodity market knowledge alongside your financial structuring skills.",
+    "backgrounds": [
+      "<strong>Structured finance or trade finance professionals from commercial banks</strong> who have commodity sector exposure and want to deepen their market knowledge",
+      "<strong>Credit analysts at commodity trading firms</strong> who have been exposed to counterparty credit assessment and want to move into the financing side",
+      "<strong>Treasury professionals at energy companies</strong> who have managed working capital facilities and want to move into origination of those structures on the bank side"
+    ],
+    "redflags": [
+      "No understanding of commodity-specific collateral risks — crude oil cargo value is not just spot price times volume. Quality, market liquidity, freight costs, and storage feasibility all affect realisation value",
+      "Cannot structure a borrowing base or repo agreement from first principles — professionals who only process existing facilities without understanding the structural logic are limited in career progression",
+      "Underestimates counterparty risk in commodity trading — assessing a major trader's credit is not the same as assessing a corporate borrower"
+    ],
+    "comp": [
+      {
+        "l": "Junior analyst (0–3 yrs)",
+        "r": "SGD 75–120k base"
+      },
+      {
+        "l": "Associate / AVP (3–6 yrs)",
+        "r": "SGD 120–200k base + bonus"
+      },
+      {
+        "l": "VP / Director (6+ yrs)",
+        "r": "SGD 200–400k+ total"
+      }
+    ],
+    "upgrade": "Senior commodity trade finance professionals move into commodity banking leadership — head of commodity trade finance, regional coverage head — or transition to commodity trading firms' treasury functions. The most valuable transition: into commodity-specific structured products where physical market knowledge combined with financial engineering creates genuinely complex and high-margin work."
+  }
+]

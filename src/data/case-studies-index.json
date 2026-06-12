@@ -1,0 +1,137 @@
+[
+  {
+    "id": "01",
+    "category": "Physical Arbitrage",
+    "title": "The Inventory Divergence",
+    "catchLine": "\"Three bullish draws. Flat price unmoved. Which signal do you trust?\"",
+    "description": "EIA shows a 4.2mb crude draw — the third consecutive bullish surprise. Brent barely moves. The desk has to decide whether the physical signal is real or already priced in, and whether to hold, add, or cut. A masterclass in reading divergence between inventory data and flat price response.",
+    "readMinutes": 14,
+    "status": "published"
+  },
+  {
+    "id": "02",
+    "category": "Physical Arbitrage",
+    "title": "The Cargo Diversion Window",
+    "catchLine": "\"JKM opened $4.40 above TTF. The vessel was already loading. The desk had 4 hours.\"",
+    "description": "An LNG cargo is mid-load at a Trinidad terminal, originally destined for the UK. The JKM/TTF spread widens sharply after an unplanned Japanese terminal outage. The desk runs the arb calculation — gross spread, freight rerouting cost, canal fees, buyer credit — and makes a diversion call under time pressure.",
+    "readMinutes": 16,
+    "status": "published"
+  },
+  {
+    "id": "03",
+    "category": "Physical Arbitrage",
+    "title": "Crack Spread Compression",
+    "catchLine": "\"Crude spiked $6 in five sessions. The refinery margin collapsed. The desk saw it coming.\"",
+    "description": "A geopolitical event sends Brent up $6/bbl over five sessions. Gasoline and distillate prices lag — and the 3-2-1 crack spread compresses sharply. Refiners begin cutting run rates. A crude desk that had read the forward curve correctly was positioned short the crack spread before the compression — with the P&L to prove it.",
+    "readMinutes": 13,
+    "status": "published"
+  },
+  {
+    "id": "04",
+    "category": "Cross-Market",
+    "title": "When the Dollar Spoke First",
+    "catchLine": "\"DXY strengthened 3.3% in 11 sessions. Brent's bulls were right — but three weeks early.\"",
+    "description": "Three consecutive bullish EIA draws — and the price falls anyway. The US Dollar Index was strengthening quietly in the background, driving speculative long liquidation that overwhelmed physical buying. A cross-market read of DXY, COT positioning, and 10-year yields told the story before the price confirmed it.",
+    "readMinutes": 18,
+    "status": "published"
+  },
+  {
+    "id": "05",
+    "category": "Cross-Market",
+    "title": "Asian Utility Stocks Led JKM by Three Weeks",
+    "catchLine": "\"Tokyo Electric and KEPCO sold off. The LNG desk watched — and cut their long before anyone else.\"",
+    "description": "Equity prices of Northeast Asian utility companies began falling three weeks before JKM spot prices softened. The desk running cross-asset surveillance picked up the signal — utilities cutting capex guidance implies lower energy procurement ahead. How one analyst's equity screen became a $2.1M short entry on JKM spot.",
+    "readMinutes": 15,
+    "status": "published"
+  },
+  {
+    "id": "06",
+    "category": "Cross-Market",
+    "title": "Iron Ore to Crude — The Chinese Demand Chain",
+    "catchLine": "\"Chinese steel output fell for the third consecutive month. The crude desk repositioned six weeks before the IEA confirmed demand softness.\"",
+    "description": "Iron ore prices and Chinese steel production data lead crude oil demand by 6–8 weeks via the industrial activity chain. When iron ore futures on the Dalian exchange signal a production slowdown, refiners see weaker demand for crude before the official figures emerge. A step-by-step walkthrough of the leading indicator chain.",
+    "readMinutes": 16,
+    "status": "published"
+  },
+  {
+    "id": "07",
+    "category": "Freight &amp; Logistics",
+    "title": "VLCC Rate Spike — The Arb That Almost Wasn't",
+    "catchLine": "\"The spread was $2.80/bbl. Then VLCC rates moved 40% in four sessions. Net margin: zero.\"",
+    "description": "A Middle East Gulf–to–Asia arbitrage looked compelling at $2.80/bbl net margin. While the desk was arranging the vessel fixture, VLCC rates spiked 40% on news of Saudi Arabia increasing loadings. The arb closed before the cargo could be secured. The desk that got there one session earlier captured $1.8M. This one didn't.",
+    "readMinutes": 12,
+    "status": "published"
+  },
+  {
+    "id": "08",
+    "category": "Freight &amp; Logistics",
+    "title": "Locking Freight Before the Rate Spike",
+    "catchLine": "\"Three VLCCs fixed at $38,000/day in February. Spot rates hit $56,000/day in April.\"",
+    "description": "A desk that reads seasonal freight patterns correctly can turn freight from a cost into a revenue line. This case study walks through how a time charter position placed in the seasonal low generated $16,000/day per vessel when spot rates spiked — and how the desk managed the freight position alongside its commodity exposure.",
+    "readMinutes": 13,
+    "status": "published"
+  },
+  {
+    "id": "09",
+    "category": "Supply Disruption",
+    "title": "Australian LNG Train Trip — 3 Hours to Position",
+    "catchLine": "\"The outage was announced at 9:47am. By 12:30pm, the desk had a position and a vessel.\"",
+    "description": "An unplanned LNG train trip at a major Australian facility reduces expected loadings by 4 cargoes over three weeks. The desk assesses: magnitude of the supply gap, available Atlantic Basin replacement cargoes, the freight cost of rerouting, and JKM's likely response. A three-hour real-time decision log — with the full P&L outcome.",
+    "readMinutes": 17,
+    "status": "published"
+  },
+  {
+    "id": "10",
+    "category": "Supply Disruption",
+    "title": "The Warm Winter That Moved TTF",
+    "catchLine": "\"European temperatures ran 3°C above seasonal average for six weeks. TTF fell 18%. The desk saw it in the weather data before the price moved.\"",
+    "description": "Seasonal demand deviation is one of the most reliable commodity trading signals — but only if you track the deviation early enough to act before consensus catches up. This case study shows how a weather data workflow, integrated with storage levels and LNG send-out data, generated a short TTF trade entry 11 days before the market repriced.",
+    "readMinutes": 14,
+    "status": "published"
+  },
+  {
+    "id": "11",
+    "category": "Risk Management",
+    "title": "The Position That Should Have Been Cut",
+    "catchLine": "\"The thesis was wrong by week two. The position was held for six. A $600K loss became a $4.2M loss.\"",
+    "description": "The most instructive case study in the library — not because of the trade that worked, but because of the one that didn't. A Brent long built on a supply disruption thesis that resolved faster than expected. Six weeks of cognitive bias, missed stops, and escalating commitment. The full loss management failure — and what the desk learned.",
+    "readMinutes": 15,
+    "status": "published"
+  },
+  {
+    "id": "12",
+    "category": "Risk Management",
+    "title": "The Basis Trap — Hedged but Not Protected",
+    "catchLine": "\"The position was 95% hedged. The desk still lost $1.8M. The differential moved — and the hedge didn't cover it.\"",
+    "description": "A West African crude desk hedged a 1.2mb cargo with ICE Brent futures at 95% hedge ratio. The Brent flat price stayed flat. But the Bonny Light/Dated Brent differential collapsed by $1.50/bbl during the voyage — a basis move the hedge didn't cover. The mechanics of basis risk, why it happens, and how to manage it explicitly.",
+    "readMinutes": 13,
+    "status": "published"
+  },
+  {
+    "id": "13",
+    "category": "Coming Soon",
+    "title": "The Inventory Divergence",
+    "catchLine": "\"Three bullish draws. Flat price unmoved. Which signal do you trust?\"",
+    "description": "",
+    "readMinutes": 0,
+    "status": "coming-soon"
+  },
+  {
+    "id": "14",
+    "category": "Coming Soon",
+    "title": "Credit Spreads Predicted the Shale Slowdown",
+    "catchLine": "\"High-yield energy credit spreads widened 3 months before US production growth stalled.\"",
+    "description": "",
+    "readMinutes": 0,
+    "status": "coming-soon"
+  },
+  {
+    "id": "15",
+    "category": "Coming Soon",
+    "title": "Sanctions, Shadows, and the Urals Discount",
+    "catchLine": "\"The discount started at $2. It ended at $30. How the shadow fleet changed the arbitrage permanently.\"",
+    "description": "",
+    "readMinutes": 0,
+    "status": "coming-soon"
+  }
+]

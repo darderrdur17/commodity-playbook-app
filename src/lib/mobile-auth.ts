@@ -17,7 +17,7 @@ export async function getMobileUser(req: NextRequest) {
   }
 }
 
-export function hasTierAccess(userTier: string, required: "PRO" | "ELITE") {
+export function hasTierAccess(userTier: string, required: "STARTER" | "PRO" | "ELITE") {
   const levels = { STARTER: 0, PRO: 1, ELITE: 2 };
   return (levels[userTier as keyof typeof levels] ?? 0) >= levels[required];
 }

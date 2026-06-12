@@ -1,0 +1,652 @@
+{
+  "a": [
+    {
+      "id": "a1",
+      "number": "A.1",
+      "title": "What Is Physical Commodity Trading?",
+      "desc": "The difference between physical and paper markets — why a cargo is not a futures contract.",
+      "hook": "Most people think commodity trading is about predicting where prices go. The traders who actually make money know it's about something else entirely.",
+      "paragraphs": [
+        "When a commodity trader executes a deal, they are not placing a bet on a price chart. They are arranging the physical movement of a real substance — a cargo of LNG on a vessel 400 nautical miles off Singapore, a parcel of crude already loaded at Ras Tanura, a batch of gasoil sitting in a tank farm in Rotterdam — from where it is to where it needs to be, at a price that makes the journey worthwhile.",
+        "This is physical trading. It involves a vessel, a loading port, a delivery window, a cargo specification, a counterparty who actually needs the molecules, and an operations team making sure the whole chain executes on time. The paper market — futures on ICE or NYMEX, swaps, options — exists alongside the physical market but is not the same thing. A paper position can be opened and closed in seconds. A physical cargo cannot.",
+        "The two markets are deeply connected — physical traders use paper instruments to hedge price exposure, and paper markets are anchored to physical price assessments — but the disciplines are different. A physical trader needs to understand freight, cargo specs, laytime, demurrage, and credit. Most major commodity firms do both, but the commercial logic of the desk starts with the physical.",
+        "Physical trading is logistics with a P&L attached. Every barrel has to be somewhere, on something, going somewhere else — and the gap between what it costs to move it and what someone will pay for it when it arrives is where the money is made."
+      ],
+      "pullQuote": "Physical trading is logistics with a P&L attached. Every barrel has to be somewhere, on something, going somewhere else — and the gap between what it costs to move it and what someone will pay for it when it arrives is where the money is made.",
+      "wtmfy": "Whether you are entering a trading role, an analytics function, or a scheduling position, understanding the physical market is the baseline. The desk measures everything against physical reality — cargo availability, vessel positions, terminal throughput. Speak that language and you can follow the commercial logic behind every desk decision.",
+      "handoff": "Which markets make up the physical commodity landscape — and how do oil, LNG, gas, and power connect to each other?"
+    },
+    {
+      "id": "a2",
+      "number": "A.2",
+      "title": "The Energy Markets Landscape",
+      "desc": "Oil, LNG, natural gas, and power — how each market is structured and how they connect.",
+      "hook": "Commodity trading is not one industry. It is four overlapping industries that share infrastructure, pricing signals, and often the same desk.",
+      "paragraphs": [
+        "The energy commodity market is commonly discussed as if it were a single entity — but in practice it is four distinct markets, each with its own pricing structure, physical infrastructure, and commercial logic. Crude oil and refined products form the largest and most liquid market. Crude is extracted, shipped to refineries, and converted into gasoline, gasoil, jet fuel, fuel oil, and naphtha. Each product has its own market, benchmark, and demand drivers.",
+        "LNG — liquefied natural gas — is the fastest-growing segment. Natural gas is supercooled to liquid at -162°C, loaded onto specialised carriers, and shipped globally. Key benchmarks are JKM (Japan Korea Marker) for Asian spot prices and TTF for European gas. The JKM/TTF spread determines whether Atlantic Basin cargoes flow east or stay in Europe — one of the most important arbitrage signals in commodity markets today.",
+        "Pipeline gas is geographically constrained — it cannot be rerouted the way a ship can. Power markets sit at the end of the chain, converting primary energy into electricity. Each commodity feeds into the next: an Australian LNG export drop affects European TTF, which affects coal-to-gas switching, which affects CO2 prices. Learning to trace these connections is the commercial analyst's core skill.",
+        "Energy markets are not separate silos. When Australian LNG exports drop, it affects European TTF prices, which affects coal-to-gas switching in power, which affects carbon prices. Tracing these connections is what separates a market reader from a news reader."
+      ],
+      "pullQuote": "Energy markets are not separate silos. When Australian LNG exports drop, it affects European TTF prices, which affects coal-to-gas switching in power, which affects carbon prices. Tracing these connections is what separates a market reader from a news reader.",
+      "wtmfy": "When you read about a refinery outage, trace it to product supply, then crude demand, then freight for vessels heading there. When you read about a cold snap in Northeast Asia, trace it to LNG demand, JKM prices, then Atlantic cargo flows. The market is always a chain of connected reactions.",
+      "handoff": "Now that you can see the markets — how does a trading desk actually make money across all of them?"
+    },
+    {
+      "id": "a3",
+      "number": "A.3",
+      "title": "How a Trade Makes Money",
+      "desc": "The six revenue levers a commodity trader pulls — flat price, time spread, location, quality, freight, optionality.",
+      "hook": "Most people assume commodity trading profit comes from buying low and selling high on flat price. Most commodity trading profit does not come from that at all.",
+      "paragraphs": [
+        "Flat price — the outright price of crude or a product — is one source of revenue. But for most physical commodity desks, it is not the primary one. The reason is simple: flat price is the most competed, most watched signal in the market. Everyone has a view on where Brent is going. The real commercial edge comes from signals that are harder to read, faster to act on, and less efficiently priced.",
+        "There are six distinct levers a physical desk pulls. Flat price: buying low, selling high — the simplest but most competed. Time spread: exploiting price differences between delivery dates. A contango market rewards storage; backwardation rewards selling promptly. Location differential: the price gap between two regions. Moving a cargo from where it is cheap to where it is expensive, if freight allows.",
+        "Quality differential: different crude grades and product specs trade at different prices. Sourcing the right grade at the right differential for a specific refinery is a skill in itself. Freight: locking in cheap shipping before the market tightens generates P&L from the differential between what you pay and what the market moves to. Optionality: a cargo with flexible loading window or destination flexibility is worth more. Desks that structure optionality into positions earn when conditions change.",
+        "The best trades are the ones where you are right on three levers at once — the location arb is open, the time spread is working in your favour, and you have the freight locked before anyone else. That is when you make real money."
+      ],
+      "pullQuote": "The best trades are the ones where you are right on three levers at once — the location arb is open, the time spread is working in your favour, and you have the freight locked before anyone else. That is when you make real money.",
+      "wtmfy": "When you review a commodity trade or a market scenario, identify which of the six levers it is using — and which it is not. Most trades combine two or three levers simultaneously. Understanding which levers a desk is long or short on any given day is the foundation of commercial awareness that hiring managers test for.",
+      "handoff": "Section A.4 goes deeper into one specific lever — refinery economics and the crack spread — showing how crude input cost connects to product revenue in real time."
+    },
+    {
+      "id": "a4",
+      "number": "A.4",
+      "title": "Refinery Economics & Crack Spreads",
+      "desc": "Crude slate, product yields, and what the crack spread signals to the desk.",
+      "hook": "A refinery does not just convert crude oil into products. It converts the price difference between crude and products into margin — and that margin tells the market something important every single day.",
+      "paragraphs": [
+        "The refinery sits at the centre of the oil value chain. It buys crude at one price, processes it through distillation, cracking, and treating units, and sells the resulting products — gasoline, gasoil, jet fuel, fuel oil, naphtha — at a higher price. The difference between the revenue from products and the cost of crude input is the crack spread — the refinery's gross margin.",
+        "The standard benchmark is the 3-2-1 crack spread: three barrels of crude yield two barrels of gasoline and one barrel of distillate. The formula is (2 × gasoline price + 1 × distillate price − 3 × crude price) ÷ 3. At $95/bbl gasoline, $90/bbl distillate, and $75/bbl crude, the 3-2-1 crack is $18.33/bbl. After operating costs of roughly $5–8/bbl, the net refinery margin is around $10–13/bbl.",
+        "What makes crack spreads commercially important is what they signal. A widening crack signals strong product demand or tight crude supply — refiners are earning well and running hard. A compressing crack signals oversupply in products or a crude price spike that hasn't passed through to consumers yet. Refiners respond by adjusting run rates — which directly affects how much crude they buy and how much product hits the market.",
+        "The crack spread doesn't just tell you if refining is profitable — it tells you which direction the physical market is about to move. A refiner cutting runs today is tightening product supply in three weeks."
+      ],
+      "pullQuote": "The crack spread doesn't just tell you if refining is profitable — it tells you which direction the physical market is about to move. A refiner cutting runs today is tightening product supply in three weeks.",
+      "wtmfy": "Check crack spreads before reading headline crude prices. If cracks are compressing while crude rallies, the rally may not hold — refiners will pull back demand. If cracks are widening while crude is flat, watch for product-led price action. The crack is the leading indicator; flat price often follows.",
+      "handoff": "Section A.5 addresses the logistics layer that determines whether a refinery can actually access the crude it needs — shipping, freight, and cargo economics."
+    },
+    {
+      "id": "a5",
+      "number": "A.5",
+      "title": "Shipping, Freight & Cargo Economics",
+      "desc": "Vessel classes, freight rate mechanics, laytime, and how freight changes the arbitrage calculus.",
+      "hook": "Freight is not just a cost in commodity trading. It is a variable that can open or close an arbitrage window overnight — and a source of P&L in its own right.",
+      "paragraphs": [
+        "Every physical commodity trade involves transportation. The economics of that transportation — vessel class, freight rate, route, speed, port costs — directly determine whether a trade is viable. A VLCC (Very Large Crude Carrier) carries 2 million barrels of crude and is used on long-haul routes like Middle East Gulf to Asia or the Americas. A Suezmax carries around 1 million barrels and is sized to transit the Suez Canal. An Aframax carries 500,000–750,000 barrels on shorter regional routes. LNG carriers are entirely different — purpose-built, insulated, and carrying between 125,000 and 210,000 cubic metres of liquefied gas.",
+        "Freight rates are quoted in Worldscale points for tankers — a percentage of a standard rate that accounts for vessel size and route — or in $/day for time charters. The Baltic Exchange publishes the key indices: the BDTI (Baltic Dirty Tanker Index) for crude tankers, the BCTI (Baltic Clean Tanker Index) for product tankers, and the BLNG for LNG carriers. When freight rates rise, the cost of moving a cargo increases — which narrows any arbitrage spread and may make a previously viable trade uneconomic.",
+        "Laytime is the time allowed for loading or discharging a cargo under the charter party. If the vessel exceeds this time, the charterer pays demurrage — typically $20,000–$60,000 per day for a VLCC. If loading completes early, the owner may pay dispatch. Laytime calculations depend on NOR (Notice of Readiness) tendering, port congestion, weather exceptions, and the specific charter party terms — and disputes over demurrage are extremely common.",
+        "The arbitrage calc is the easy part. The hard part is knowing whether the freight you need is actually available at the rate you assumed — and whether it will still be open by the time your cargo arrives."
+      ],
+      "pullQuote": "The arbitrage calc is the easy part. The hard part is knowing whether the freight you need is actually available at the rate you assumed — and whether it will still be open by the time your cargo arrives.",
+      "wtmfy": "Always run your freight assumption before committing to a physical trade. A 10% freight rate move on a VLCC changes the economics of a long-haul crude arbitrage by $0.30–$0.50/bbl. On a 2 million barrel cargo, that is $600,000–$1 million of P&L difference. Freight is never just a cost line.",
+      "handoff": "Section A.6 looks at the storage layer — how tank farms, floating storage, and inventory levels signal what the physical market is actually doing beneath the surface of price movements."
+    },
+    {
+      "id": "a6",
+      "number": "A.6",
+      "title": "Storage, Terminals & the Inventory Signal",
+      "desc": "What tank levels and floating storage tell a trader about supply balance.",
+      "hook": "The EIA inventory report comes out every Wednesday at 10:30am New York time. What the desk looks for in those 90 seconds tells you everything about how physical traders actually read the market.",
+      "paragraphs": [
+        "Physical commodity storage is the buffer between supply and demand. When supply exceeds demand, inventory builds — in tank farms, pipelines, and increasingly in vessels used as floating storage. When demand exceeds supply, inventories draw. The level and direction of inventory change is one of the most reliable signals of physical market balance available to a trader.",
+        "The EIA Weekly Petroleum Status Report is released every Wednesday and covers US crude and product inventories — crude stocks, gasoline, distillates, and refinery inputs. The market watches the crude draw or build against analyst consensus. A draw that beats expectations — say, a 4.2 million barrel draw against a consensus estimate of 1.8 million barrels — is a bullish signal. But the desk also watches days of forward cover (how many days of consumption current stocks represent), refinery utilisation rates, and the split between commercial stocks and the Strategic Petroleum Reserve.",
+        "Floating storage — vessels anchored and used as storage rather than in transit — appears when the contango in the forward curve is large enough to cover vessel hire costs plus insurance and financing. During COVID in 2020, floating storage reached record levels as onshore tanks filled and the curve went into extreme contango. Tracking floating storage via AIS data gives traders a real-time read on supply balance that is not captured in any official inventory report.",
+        "The inventory signal is not the number — it is the number relative to the expectation, relative to the seasonal norm, and relative to what the price already moved in anticipation. All three together tell you whether the signal is real."
+      ],
+      "pullQuote": "The inventory signal is not the number — it is the number relative to the expectation, relative to the seasonal norm, and relative to what the price already moved in anticipation. All three together tell you whether the signal is real.",
+      "wtmfy": "When reading an EIA report, never focus only on the headline crude number. Check the product split, the refinery utilisation rate, and the import/export flows. And always compare to the 5-year seasonal average — a 3 million barrel build in March is very different from the same build in August when seasonal patterns diverge sharply.",
+      "handoff": "Section A.7 explains how the prices in that inventory data — and every other commodity price — actually get set by price reporting agencies."
+    },
+    {
+      "id": "a7",
+      "number": "A.7",
+      "title": "The Role of Price Reporting Agencies",
+      "desc": "How Platts and Argus assess prices — and why the last 30 minutes of the window moves markets.",
+      "hook": "Every day at a specific time, a small team of price reporters at Platts and Argus publish benchmark prices that govern trillions of dollars of commodity contracts globally. Understanding how they do it explains something important about how physical commodity markets actually work.",
+      "paragraphs": [
+        "Physical commodity prices are not set by an exchange. Unlike crude futures on ICE or NYMEX, which are traded continuously in an open market, physical prices for crude grades, refined products, and LNG are assessed by Price Reporting Agencies (PRAs) — primarily Platts (now S&P Global Commodity Insights), Argus Media, and ICIS. These assessments are then used as reference prices in billions of dollars of physical supply contracts and financial derivatives.",
+        "The dominant methodology is the Market on Close (MOC) process, used by Platts for crude and products. During a defined assessment window — typically the last 30 minutes of the trading day — reporters gather bids, offers, and transactions from market participants. They assess the price at which a cargo could be bought or sold at the close of that window, applying a set of published criteria to determine which submissions are credible. The result is a single assessed price — the benchmark.",
+        "This structure has significant commercial implications. Because the benchmark is set in the last 30 minutes, large market participants can and do influence assessments by placing strategic bids or offers during the window. This is not illegal — it is how the market works — but it means a trader who understands the MOC process can read assessment-day positioning as a market signal in itself. Understanding assessment timing, the methodology differences between Platts and Argus, and how benchmarks like Dated Brent or JKM are constructed is essential for anyone working near the front office.",
+        "Price reporters don't just record what the market does — they assess what they believe a fair transaction would look like, based on available evidence. That distinction matters enormously when the market is thin and a small number of participants are setting the reference price for millions of barrels."
+      ],
+      "pullQuote": "Price reporters don't just record what the market does — they assess what they believe a fair transaction would look like, based on available evidence. That distinction matters enormously when the market is thin and a small number of participants are setting the reference price for millions of barrels.",
+      "wtmfy": "If you work in scheduling, analytics, risk, or trade finance, you will encounter Platts and Argus assessments constantly — in contract pricing, hedge references, and settlement calculations. Understanding how those prices are constructed helps you identify when an assessment may not reflect true market conditions — and when that discrepancy is a commercial risk or opportunity.",
+      "handoff": "The final section of Chapter A brings the commercial infrastructure together — how the desk manages its risk across all of these markets simultaneously."
+    },
+    {
+      "id": "a8",
+      "number": "A.8",
+      "title": "Risk Management on the Desk",
+      "desc": "VaR, position limits, and how the desk manages market and credit exposure.",
+      "hook": "Every trading desk operates inside a set of risk constraints it cannot breach. Understanding those constraints — how they are set, how they are monitored, and what happens when a position approaches a limit — is as important as understanding the trades themselves.",
+      "paragraphs": [
+        "Value at Risk (VaR) is the most commonly used measure of market risk on a commodity trading desk. It estimates the maximum loss a portfolio of positions could suffer over a given time horizon at a given confidence level — typically 95% or 99% over a one-day or ten-day period. A VaR of $5 million at 95% confidence over one day means the desk should not expect to lose more than $5 million on more than 5% of trading days. VaR is used to set position limits — the maximum market exposure a trader or desk can carry — and is recalculated daily using current market data and the desk's live position.",
+        "Beyond VaR, desks manage several distinct risk types simultaneously. Price risk — the risk that flat price moves against the position — is the most obvious. Basis risk is the risk that the hedge and the physical position don't move together perfectly. Credit risk is the risk that a counterparty defaults before a trade settles. Operational risk covers vessel delays, cargo rejections, and documentation failures. Liquidity risk is the risk that a position cannot be exited at a reasonable price when needed.",
+        "Risk managers and traders interact daily on a commodity desk — and the relationship is not always comfortable. A risk manager's job is to enforce the limits and ask the questions a trader under P&L pressure might not want to answer. A trader's job is to take positions within those limits and explain their thesis clearly. When a position approaches a VaR limit, the risk manager can require the trader to reduce exposure — regardless of whether the trader believes the position is right. This separation of authority is what prevents single positions from becoming existential threats to the firm.",
+        "Risk management is not about preventing losses. It is about ensuring that no single loss, however bad, can threaten the desk's ability to keep trading. The limit exists so that being wrong once doesn't mean being out of business."
+      ],
+      "pullQuote": "Risk management is not about preventing losses. It is about ensuring that no single loss, however bad, can threaten the desk's ability to keep trading. The limit exists so that being wrong once doesn't mean being out of business.",
+      "wtmfy": "If you are targeting a risk, analytics, or middle-office role, this section is your starting point — but also read it if you are targeting a front-office role. Traders who understand the risk framework their desk operates within make better commercial decisions, because they know exactly how much latitude they have before the risk manager intervenes.",
+      "handoff": "Chapter A is complete. Chapter B builds on these foundations — moving from what commodity markets are to how the physical and paper instruments that trade within them actually work."
+    }
+  ],
+  "b": [
+    {
+      "id": "b1",
+      "number": "B.1",
+      "title": "The Physical Trade Lifecycle",
+      "desc": "From cargo enquiry to final settlement — every step a physical deal goes through.",
+      "hook": "A physical commodity trade is not a single transaction. It is a chain of at least a dozen separate steps — each of which can go wrong, each of which has commercial and legal implications, and each of which requires a different function of the desk to execute correctly.",
+      "paragraphs": [
+        "The lifecycle of a physical commodity deal begins with an enquiry — a buyer or seller reaches out to the market to test appetite. This is followed by negotiation of the commercial terms: volume, quality specification, price formula, loading port, delivery window, and payment terms. Once terms are agreed, a confirmation is exchanged — a legally binding document that records every agreed term. For large LNG deals this confirmation may be 20–30 pages; for spot crude trades it may be a one-page recap.",
+        "Once confirmed, the deal enters the operations phase. The scheduling team manages the vessel nomination, coordinates with the terminal for a loading slot, arranges the bill of lading and other shipping documents, and monitors the cargo in transit. For a DES trade, the seller owns and manages the vessel through to delivery; for an FOB trade, the buyer takes responsibility from the loading port. The operations team tracks the vessel via AIS and manages any changes to the delivery window.",
+        "Settlement occurs after delivery — the final invoice is calculated using the pricing formula in the confirmation, the cargo quantity is confirmed via an independent surveyor's report, and payment is made within the agreed credit terms (typically 30 days). The deal then flows into the back office for P&L booking in the ETRM system — connecting the physical trade to the hedge positions that were placed alongside it.",
+        "Every step of the trade lifecycle is a potential failure point. The front office closes the deal in an hour. Operations manages it for three weeks. The desk that ignores the operational layer will eventually have a very expensive surprise."
+      ],
+      "pullQuote": "Every step of the trade lifecycle is a potential failure point. The front office closes the deal in an hour. Operations manages it for three weeks. The desk that ignores the operational layer will eventually have a very expensive surprise.",
+      "wtmfy": "If you are targeting a scheduling, operations, or ETRM role, map every step of this lifecycle to the function that executes it — front office, middle office, back office, legal, and credit. Understanding where handoffs occur and what can go wrong at each one is what separates an effective operations professional from one who just processes paperwork.",
+      "handoff": "Section B.2 covers the paper instruments that run alongside every physical deal — futures, swaps, and options that manage the price risk while the physical cargo is in transit."
+    },
+    {
+      "id": "b2",
+      "number": "B.2",
+      "title": "Futures, Swaps & Options",
+      "desc": "The paper instruments a desk uses alongside physical positions.",
+      "hook": "Physical commodity traders are not just buying and selling cargoes. Every cargo they own carries a price risk that has to be managed — and the tools they use to manage it are futures, swaps, and options.",
+      "paragraphs": [
+        "A futures contract is a standardised, exchange-traded agreement to buy or sell a specific commodity at a specific price on a specific date. WTI crude futures on NYMEX and Brent futures on ICE are the most actively traded commodity futures contracts in the world. Futures are used by physical traders to hedge price exposure — if you own a cargo of crude, you sell futures to lock in the current price and remove the risk that the price falls before you sell the cargo.",
+        "A swap is an over-the-counter (OTC) contract where two parties exchange cash flows based on the difference between a floating price and a fixed price. Unlike futures, swaps are customised — they can reference any benchmark, any volume, any time period. For LNG traders, a JKM swap allows them to fix the price of a cargo that will be priced against the JKM assessment at delivery. Swaps are bilateral and carry counterparty credit risk; futures are exchange-cleared and carry no credit risk to the counterparty.",
+        "Options give the buyer the right — but not the obligation — to buy or sell a commodity at a specific price. A cap protects against price rising above a level; a floor protects against it falling below. Options cost a premium upfront but preserve upside. Physical traders use options when they want asymmetric protection — hedging downside risk while keeping the ability to benefit if the market moves in their favour.",
+        "The physical cargo is the position. The futures or swap is the hedge. The P&L lives in the difference between what you locked in on the paper and what you actually sell the physical for. Understanding that relationship is the entire job."
+      ],
+      "pullQuote": "The physical cargo is the position. The futures or swap is the hedge. The P&L lives in the difference between what you locked in on the paper and what you actually sell the physical for. Understanding that relationship is the entire job.",
+      "wtmfy": "Even if you are not targeting a trading role, understanding these instruments is essential. Schedulers manage positions that are partially hedged. Risk managers monitor the hedge ratio. Analysts build the curve that prices the swaps. Every function on a commodity desk touches these instruments in some way.",
+      "handoff": "Section B.3 goes one level deeper — showing exactly how a physical position is hedged using paper instruments, and where the hedge can fail."
+    },
+    {
+      "id": "b3",
+      "number": "B.3",
+      "title": "Hedging a Physical Position",
+      "desc": "How a desk removes price risk from a cargo using paper markets.",
+      "hook": "A hedge is not a bet in the opposite direction. It is a deliberate decision to remove price risk from a position — and the discipline of when to hedge, how much to hedge, and when not to hedge is one of the most important commercial skills on the desk.",
+      "paragraphs": [
+        "When a physical trader buys a cargo of crude at $78/bbl, they immediately face the risk that the price will fall before they sell it. To remove that risk, they sell futures or swaps at the same price — creating a hedge. If crude falls to $74/bbl, the physical cargo loses $4/bbl, but the short futures position gains $4/bbl. The losses and gains offset — the desk is flat the market. If crude rises to $82/bbl, the physical cargo gains $4/bbl but the futures position loses $4/bbl. Again, flat the market.",
+        "In practice, hedges are rarely perfect. Basis risk is the risk that the physical price and the futures price do not move together exactly. A cargo of West African crude priced against Dated Brent may be hedged with ICE Brent futures — but if the Brent-WA differential widens, the hedge loses effectiveness. The desk is still exposed to the differential move even though it thought it was hedged. Managing basis risk is a significant part of day-to-day risk management.",
+        "The decision of how much to hedge — the hedge ratio — is both commercial and strategic. A 100% hedge removes all price risk but also all upside. A 50% hedge retains some exposure to the market's direction. Some desks have mandatory hedge ratios enforced by risk policy; others allow trader discretion. The choice depends on the firm's risk appetite, the desk's P&L mandate, and the trader's confidence in their market view.",
+        "Being perfectly hedged means being perfectly wrong — you gave away all your upside to remove your downside. The art is knowing how much risk you actually need to carry to generate the return the business requires."
+      ],
+      "pullQuote": "Being perfectly hedged means being perfectly wrong — you gave away all your upside to remove your downside. The art is knowing how much risk you actually need to carry to generate the return the business requires.",
+      "wtmfy": "Every time you see a commodity firm report a trading loss, the question to ask is not 'why did the price go against them?' but 'why wasn't the position hedged?' The answer usually involves one of three things: deliberate directional exposure, basis risk that wasn't accounted for, or a hedge that worked in theory but couldn't be executed in the market at the assumed rate.",
+      "handoff": "Section B.4 unpacks basis risk in more detail — why the same commodity trades at different prices in different places, and how that differential affects every hedged position on the desk."
+    },
+    {
+      "id": "b4",
+      "number": "B.4",
+      "title": "Basis & the Differential",
+      "desc": "Why the same commodity trades at different prices in different places.",
+      "hook": "Dubai crude is not Brent crude. Dated Brent is not ICE Brent futures. HSFO in Singapore is not HSFO in Rotterdam. Every commodity trades at a spread to every benchmark — and understanding that spread is what separates a physical trader from a paper one.",
+      "paragraphs": [
+        "Basis is the difference between the physical commodity price and the benchmark futures price. For a US Gulf Coast refiner buying domestic crude, the basis is the difference between the wellhead price of a specific crude grade and WTI futures. Basis reflects the cost of transportation to the delivery point of the futures contract, quality differences between the physical grade and the benchmark grade, and any supply/demand imbalances specific to that location.",
+        "In practice, traders talk about differentials — the premium or discount at which a physical commodity trades relative to a benchmark. Dubai crude trades at a differential to Brent. West African Bonny Light trades at a premium to Dated Brent because of its lower sulphur content and higher gasoline yield. Russian Urals trades at a discount because it is heavier and higher in sulphur. These differentials move constantly based on refinery demand, freight rates, and regional supply dynamics.",
+        "Basis risk arises when a hedge is placed using a benchmark that does not perfectly track the physical commodity being hedged. A Singapore gasoil trader who hedges a physical gasoil cargo with ICE gasoil futures is exposed to the Singapore-Rotterdam gasoil differential — the basis. If Singapore gasoil weakens relative to Rotterdam, the physical cargo loses value even though the futures hedge holds. Basis risk is real, difficult to eliminate entirely, and the source of many trading losses that are mistakenly attributed to 'being wrong on the market'.",
+        "Traders lose money on basis all the time while being right on flat price. You can nail the direction of Brent perfectly and still lose money on a West African cargo if you didn't account for the differential move."
+      ],
+      "pullQuote": "Traders lose money on basis all the time while being right on flat price. You can nail the direction of Brent perfectly and still lose money on a West African cargo if you didn't account for the differential move.",
+      "wtmfy": "When you are reading about commodity price differentials in the news — Urals at a discount to Brent, JKM premium to TTF narrowing — you are reading about basis. Understanding what drives those differentials (quality, freight, regional supply, sanctions) is what connects the financial market to the physical one.",
+      "handoff": "Section B.5 covers the EFS — the mechanism that physically connects the paper and physical markets and allows a desk to move exposure from one to the other."
+    },
+    {
+      "id": "b5",
+      "number": "B.5",
+      "title": "The Exchange of Futures for Swaps (EFS)",
+      "desc": "How traders move between physical and paper positions.",
+      "hook": "The EFS is one of the least-discussed mechanisms in commodity markets — and one of the most important for understanding how physical and paper markets stay connected to each other.",
+      "paragraphs": [
+        "An Exchange of Futures for Swaps (EFS) is a privately negotiated transaction in which one party exchanges a futures position for an OTC swap position. The exchange takes place at an agreed price and is then registered with the exchange. The result is that one party ends up with a futures contract and the other ends up with a swap — each has moved from one instrument to the other without entering the open market.",
+        "EFS transactions are used when a trader wants to move from a standardised exchange-traded position to a customised OTC position — or vice versa. For example, a physical LNG trader who has hedged a cargo with JKM futures may want to convert that hedge into a JKM swap with a different settlement date to better match the physical cargo's pricing period. The EFS allows this conversion without the market impact of unwinding the futures position and placing a new swap separately.",
+        "EFS activity is a useful market intelligence signal. High EFS volume in a specific commodity and tenor suggests that physical market participants are actively adjusting their hedge positions — often because physical market conditions are changing. When a large volume of crude futures is exchanged into longer-dated swaps, it may signal that desks are repositioning for a change in the forward curve structure.",
+        "Every time the physical and paper markets seem to be telling different stories, look at the EFS volume. It's often where traders are quietly moving their positions from one world to the other."
+      ],
+      "pullQuote": "Every time the physical and paper markets seem to be telling different stories, look at the EFS volume. It's often where traders are quietly moving their positions from one world to the other.",
+      "wtmfy": "For most students and career switchers, the EFS is a concept to understand rather than a mechanism to operate. Knowing what it is and why it exists helps you understand how the physical and paper markets remain connected — and how large desks manage their positions across both simultaneously.",
+      "handoff": "Section B.6 covers options — the instruments that give a desk asymmetric exposure: protection on the downside with the ability to benefit from upside."
+    },
+    {
+      "id": "b6",
+      "number": "B.6",
+      "title": "Options in Commodity Markets",
+      "desc": "Caps, floors, collars — how optionality is priced and used.",
+      "hook": "Options give you the right to act without the obligation. In commodity markets, that asymmetry — protecting against the bad outcome while keeping the good one — has real and measurable value.",
+      "paragraphs": [
+        "A commodity call option gives the buyer the right to purchase a commodity at a fixed price (the strike price) before a specific date. A put option gives the right to sell at the strike price. The buyer pays a premium upfront for this right. If the market moves in the buyer's favour, they exercise the option and benefit. If the market moves against them, they let the option expire and only lose the premium — unlike a futures contract, where losses are uncapped.",
+        "In commodity markets, options are used in several common structures. A cap is a call option that protects a buyer against prices rising above a level — used by utilities and airlines to fix their maximum fuel cost. A floor is a put option that protects a seller against prices falling below a level — used by producers to guarantee a minimum revenue. A collar combines a cap and a floor — the buyer gives up some upside in exchange for paying a lower premium, or no premium at all if the collar is costless.",
+        "Option pricing is driven primarily by implied volatility — the market's expectation of how much the underlying commodity price will move. High volatility means options are expensive because the probability of the option being in-the-money is higher. Physical commodity traders watch implied volatility as a market signal: a sudden spike in crude option volatility often precedes or accompanies a significant physical market event — a supply disruption, an OPEC announcement, or a demand shock.",
+        "The premium you pay for an option is the price of sleeping well at night. The question is whether the cost of that peace of mind is justified by the risk you're actually carrying."
+      ],
+      "pullQuote": "The premium you pay for an option is the price of sleeping well at night. The question is whether the cost of that peace of mind is justified by the risk you're actually carrying.",
+      "wtmfy": "Options are used extensively in trade finance and hedging structures for commodity deals — particularly long-term LNG offtake agreements and producer hedging programmes. Understanding the basic mechanics — what a cap and floor do, what affects the premium, how optionality in a physical contract has measurable value — gives you a significant edge in analytical and structuring roles.",
+      "handoff": "Section B.7 steps back from the instruments and looks at the commercial strategy behind how desks structure their book — the choice between term contracts and spot market exposure."
+    },
+    {
+      "id": "b7",
+      "number": "B.7",
+      "title": "Term Contracts vs. Spot Trading",
+      "desc": "The commercial logic behind long-term offtake and spot market exposure.",
+      "hook": "A commodity desk that trades only spot is taking maximum market exposure. One that trades only on long-term contracts is leaving significant upside on the table. The mix between term and spot is one of the most consequential strategic decisions a commodity firm makes.",
+      "paragraphs": [
+        "A term contract is a multi-year supply agreement between a producer and a buyer — typically at a price linked to a benchmark with an agreed formula. LNG term contracts are the clearest example: a Japanese utility might sign a 20-year contract with an Australian LNG producer, with volume and price formula agreed upfront. Term contracts provide certainty for both parties — the producer finances the investment, the buyer secures supply. But they also remove the ability to benefit from spot market moves.",
+        "The spot market is where uncontracted volumes trade — cargo by cargo, at the current market price. Trading firms active in the spot market can capture arbitrage opportunities, respond to supply disruptions, and earn from volatility in ways that term-contract buyers cannot. But they also face the risk that spot prices move sharply against them, and they must continuously source supply and place cargoes without the certainty of contracted volumes.",
+        "Most large commodity traders and energy companies run a portfolio approach — anchoring their book with enough term contracts to guarantee base supply and revenue, then trading the margin on the spot market. The optimal ratio between term and spot exposure depends on the firm's risk tolerance, the volatility of the underlying commodity, and the desk's ability to manage spot market positions actively. A common structure for LNG is 70–80% term, 20–30% spot — but this shifts significantly during periods of high market volatility.",
+        "A term contract is certainty. A spot position is optionality. Most commodity firms need both — and the firms that manage the balance best are the ones that consistently outperform their peers."
+      ],
+      "pullQuote": "A term contract is certainty. A spot position is optionality. Most commodity firms need both — and the firms that manage the balance best are the ones that consistently outperform their peers.",
+      "wtmfy": "If you are targeting an origination or commercial role, understanding the term vs. spot trade-off is central to how you will structure deals and advise clients. If you are targeting an analytics or scheduling role, understanding this distinction explains why some cargo programmes are fixed and others are dynamic — and why your scheduling flexibility changes depending on the contract type.",
+      "handoff": "Section B.8 shows how all of these positions — physical cargoes, futures hedges, swap exposures, term contracts, and spot trades — stack up together in a trading book."
+    },
+    {
+      "id": "b8",
+      "number": "B.8",
+      "title": "The Trading Book — How Positions Stack Up",
+      "desc": "How a desk tracks its combined physical, paper, and freight exposure.",
+      "hook": "At any given moment, a commodity trading desk has dozens of positions simultaneously — physical cargoes on the water, futures hedges on the exchange, OTC swaps with counterparties, freight fixtures, and term contract obligations. The trading book is how the desk sees all of them at once.",
+      "paragraphs": [
+        "The trading book is the consolidated view of all open positions on the desk — physical and paper, long and short, hedged and unhedged. It is maintained in an ETRM system (Energy Trading and Risk Management platform) — typically Endur, RightAngle, or Allegro — which books every trade, marks positions to market daily, calculates P&L, and feeds risk metrics to the risk management function.",
+        "A well-structured trading book shows, for every commodity and time period: the net physical long or short position (how many barrels or MMBtu the desk owns or owes), the hedge position (the offsetting paper contracts), the net unhedged exposure (the open position), and the current mark-to-market P&L on each leg. Traders review their book every morning before markets open — checking overnight price moves, assessing whether any positions need to be adjusted, and planning the day's trading activity.",
+        "The interaction between physical and paper positions in the book creates a number of important metrics that risk managers monitor daily. Hedge effectiveness — what percentage of the physical exposure is covered by paper hedges. Greeks — for options positions, the sensitivity of the position value to price changes (delta), volatility changes (vega), and time decay (theta). And roll risk — the risk that a paper position approaching expiry cannot be rolled forward at an acceptable price.",
+        "The trading book is the desk's truth. A trader's P&L is not what they think they've made — it's what the book says, marked to today's market prices, with every position they actually have, not the ones they wish they had."
+      ],
+      "pullQuote": "The trading book is the desk's truth. A trader's P&L is not what they think they've made — it's what the book says, marked to today's market prices, with every position they actually have, not the ones they wish they had.",
+      "wtmfy": "ETRM system knowledge is explicitly valued in almost every commodity trading job description outside the front office. Understanding what a trading book is, what goes into it, and how positions are marked to market gives you the context to add value in scheduling, analytics, risk, finance, or technology roles — not just trading.",
+      "handoff": "Chapter B is complete. Chapter C takes everything off the desk and into the physical world — vessels, ports, nominations, and the logistics layer that every commercial decision ultimately depends on."
+    }
+  ],
+  "c": [
+    {
+      "id": "c1",
+      "number": "C.1",
+      "title": "Vessel Classes & What They Carry",
+      "desc": "VLCCs, Suezmax, Aframax, LNG carriers — what each class moves and why it matters.",
+      "hook": "The vessel class determines what trade is even possible. A VLCC cannot enter most Asian import terminals. An Aframax cannot make the Middle East Gulf–Far East route economical. Before any arbitrage calc, the desk asks: what vessel can actually do this voyage?",
+      "paragraphs": [
+        "The tanker market is segmented by vessel size, each class defined by its carrying capacity and the routes and terminals it can access. A VLCC (Very Large Crude Carrier) carries 1.8–2.2 million barrels of crude and is the workhouse of long-haul crude trades — Middle East Gulf to Asia, West Africa to the US, and North Sea to Asia. Its scale makes it the most cost-effective vessel for high-volume, long-distance routes, but its draft restricts access to many ports.",
+        "A Suezmax carries around 1 million barrels — sized to transit the Suez Canal loaded. It is used on routes where a VLCC cannot access the port or where cargo sizes are smaller. An Aframax carries 500,000–750,000 barrels and is the dominant vessel in the Baltic, the Mediterranean, and cross-Caribbean trades. A Panamax is sized to transit the Panama Canal — important for US Gulf to Asia routes.",
+        "LNG carriers are a completely different category — purpose-built, double-hulled, and insulated to maintain cargo at -162°C. They range from 125,000 m³ to 210,000 m³ (Q-Flex and Q-Max classes for Qatar). The specialised nature of LNG carriers means the fleet is much smaller than the crude tanker fleet, and vessel availability is a genuine constraint on LNG trade volumes. LNG carrier hire rates are quoted in $/day and tracked via the Baltic Exchange LNG Carrier Index.",
+        "The vessel class is not just a logistics detail. It determines which routes are viable, which terminals can receive the cargo, and ultimately which arbitrages are executable. The desk that doesn't know its vessel classes doesn't know its market."
+      ],
+      "pullQuote": "The vessel class is not just a logistics detail. It determines which routes are viable, which terminals can receive the cargo, and ultimately which arbitrages are executable. The desk that doesn't know its vessel classes doesn't know its market.",
+      "wtmfy": "In a scheduling or operations role, vessel class knowledge is non-negotiable. In a trading or analytics role, understanding which vessel type is needed for a specific route tells you immediately which freight index to track and what the realistic freight cost assumption is for any trade you are evaluating.",
+      "handoff": "Section C.2 covers how the freight rates for those vessels are set — the Baltic Exchange, spot fixtures, and the market mechanics that drive the cost of every cargo movement."
+    },
+    {
+      "id": "c2",
+      "number": "C.2",
+      "title": "How Freight Rates Are Set",
+      "desc": "The Baltic Exchange indices, spot fixtures, and time charter markets.",
+      "hook": "Freight rates can double in a week or halve in a month. Understanding what drives that volatility — and being positioned to act on it before the rest of the market — is a genuine commercial edge on any commodity desk.",
+      "paragraphs": [
+        "Freight rates for crude tankers are quoted in Worldscale points — a percentage of a published standard rate that accounts for vessel size, route distance, and standard costs. WS100 is the flat rate; WS120 means 20% above flat, WS80 means 20% below. The Baltic Exchange publishes indices for each vessel class: the BDTI (Baltic Dirty Tanker Index) aggregates routes for crude tankers, the BCTI for clean product tankers, and the BLNG for LNG carriers. These indices are reported daily and are the standard reference for freight market activity.",
+        "The spot freight market is where voyage charters are fixed — a specific vessel hired for a specific voyage at an agreed rate. The rate is set by negotiation between the shipowner or broker and the charterer, reflecting current vessel availability on the relevant route, cargo size, port conditions, and overall market sentiment. When many cargoes are seeking vessels simultaneously — for example, at the start of a new OPEC production cycle — rates spike. When vessel supply exceeds cargo demand, rates collapse.",
+        "The time charter market is where vessels are hired for a period — 6 months, 1 year, 3 years — at a fixed daily rate. A charterer paying $35,000/day for a VLCC on a 12-month time charter is betting that spot freight rates will average above that level during the period. Time charters provide certainty of vessel access and protection against freight rate spikes — but at a cost premium over spot if rates remain low.",
+        "Freight is a commodity in its own right — it has its own supply and demand balance, its own seasonal patterns, and its own arbitrage signals. The desk that treats freight as just a cost has already given away part of its edge."
+      ],
+      "pullQuote": "Freight is a commodity in its own right — it has its own supply and demand balance, its own seasonal patterns, and its own arbitrage signals. The desk that treats freight as just a cost has already given away part of its edge.",
+      "wtmfy": "Freight rate literacy is useful in every function near the commodity desk. For schedulers, it informs vessel selection and charter decisions. For analysts, it is a key input to any arbitrage or P&L model. For traders, it is a variable that can be traded — not just assumed.",
+      "handoff": "Section C.3 covers what happens once the vessel is fixed — the port operations, laytime mechanics, and demurrage costs that determine whether the voyage stays within budget."
+    },
+    {
+      "id": "c3",
+      "number": "C.3",
+      "title": "Laytime, Demurrage & Port Economics",
+      "desc": "Why every hour in port costs money — and how it's calculated.",
+      "hook": "Demurrage is one of the most contested financial items in commodity trading — and one of the most avoidable. A 2-day delay at a terminal on a VLCC can cost $80,000 or more. Most of it is preventable with better operations.",
+      "paragraphs": [
+        "Laytime is the number of hours agreed in the charter party within which the charterer must complete loading or discharging the cargo. It begins once the vessel has arrived at the port, tendered its Notice of Readiness (NOR), and is cleared to proceed to berth. If loading is completed within the allowed laytime, no additional payment is required. If it takes longer, the charterer pays demurrage — the daily rate specified in the charter party — for every hour of delay.",
+        "Demurrage rates for VLCCs typically run $25,000–$60,000 per day. Aframax rates are lower, typically $15,000–$30,000 per day. LNG carrier demurrage is higher — often $60,000–$100,000 per day for a modern Q-Flex. Demurrage claims are a regular feature of physical commodity trading — when multiple vessels arrive at the same terminal at the same time, berth queues form and laytime runs. Terminal operators, loading masters, and port agents all play roles in managing the clock. If loading completes early, dispatch — the reverse of demurrage — may be owed to the charterer by the shipowner.",
+        "Laytime calculations are governed by specific clause language in the charter party — which events start and stop the clock, how weather delays are treated, how weekend and holiday time is counted. Even seemingly small differences in clause language — 'SHEX' (Sundays and Holidays Excepted) vs. 'SHINC' (Sundays and Holidays Included) — can have significant financial implications on a slow-loading cargo. Demurrage disputes are common and are often resolved through negotiation or arbitration.",
+        "Demurrage is the penalty for poor coordination. It is almost always preventable — but it requires the terminal, the vessel, the loader, and the receiver to all be in sync. When they're not, someone pays for it. In most charter parties, that someone is the charterer."
+      ],
+      "pullQuote": "Demurrage is the penalty for poor coordination. It is almost always preventable — but it requires the terminal, the vessel, the loader, and the receiver to all be in sync. When they're not, someone pays for it. In most charter parties, that someone is the charterer.",
+      "wtmfy": "If you are targeting a scheduling or operations role, laytime and demurrage are non-negotiable knowledge. If you are in an analytical or commercial role, understanding demurrage helps you evaluate the true operational cost of a trade beyond the freight rate — and identify where poorly managed operations are eating into trading P&L.",
+      "handoff": "Section C.4 looks at the nomination process — how physical liftings are coordinated between buyer, seller, vessel, and terminal before a single barrel moves."
+    },
+    {
+      "id": "c4",
+      "number": "C.4",
+      "title": "Cargo Nominations & Scheduling",
+      "desc": "How physical liftings are coordinated between buyer, seller, and vessel.",
+      "hook": "A cargo nomination is where the commercial deal and the physical world meet. Get it wrong — miss a window, nominate the wrong vessel, submit late — and you are in breach of contract. Get it right, consistently, at scale, and you are running an elite operations function.",
+      "paragraphs": [
+        "Once a physical commodity deal is confirmed, the operations process begins with a nomination. The buyer nominates a vessel by submitting the vessel's details — name, flag, deadweight, age, class — to the seller within the timeframe specified in the contract. The seller has the right to reject a vessel that does not meet the contractual specifications — too old, wrong flag, unacceptable insurer. Once the vessel is accepted, the loading window (or laycan) is agreed — typically a range of dates within which the vessel must arrive at the loading port.",
+        "A cargo programme is the schedule of all liftings for a given production facility or terminal over a month or quarter. For an LNG liquefaction plant exporting 20+ cargoes per month, the cargo programme must balance vessel availability, terminal constraints, buyer obligations, and maintenance windows simultaneously. Scheduling teams manage this programme continuously — adjusting for vessel delays, terminal downtime, and changes in buyer demand. A well-run cargo programme maximises throughput and minimises demurrage; a poorly-run one generates losses, disputes, and damaged counterparty relationships.",
+        "When a cargo must be adjusted — loading date shifted, volume changed, vessel substituted — both parties must agree to the variation. These variations are negotiated between the operations and scheduling teams, often under time pressure, and require documenting formally to avoid disputes at settlement. For term contracts with complex flexibility provisions, the scheduling process can involve dozens of communication touches per cargo.",
+        "Scheduling is where commercial decisions become physical reality. A trader can close a deal in an hour. The scheduling team lives with it for 30 days — managing every variation, every delay, every dispute until the cargo is delivered and the invoice is settled."
+      ],
+      "pullQuote": "Scheduling is where commercial decisions become physical reality. A trader can close a deal in an hour. The scheduling team lives with it for 30 days — managing every variation, every delay, every dispute until the cargo is delivered and the invoice is settled.",
+      "wtmfy": "Scheduling and operations roles are consistently undervalued as entry points into commodity trading — but they offer the fastest route to deep operational knowledge of how physical markets actually work. Every trader who came up through operations understands the commercial implications of execution risk in a way that desk-only analysts often don't.",
+      "handoff": "Section C.5 covers AIS tracking — the technology layer that gives desks real-time visibility into where every vessel is, what it is carrying, and what that movement means for market supply and demand."
+    },
+    {
+      "id": "c5",
+      "number": "C.5",
+      "title": "AIS Tracking & Real-Time Flow Data",
+      "desc": "Using vessel position data as a market intelligence signal.",
+      "hook": "Every commercial vessel on the ocean broadcasts its position, speed, and destination every few seconds. That data is available to anyone. The traders who know how to read it see supply disruptions, cargo diversions, and market shifts before they show up in any price report.",
+      "paragraphs": [
+        "AIS (Automatic Identification System) is a maritime tracking system required on all commercial vessels over 300 gross tonnes. Each vessel broadcasts its position, speed, heading, destination, and cargo status continuously via radio signal and satellite relay. Platforms like Kpler, Vortexa, MarineTraffic, and Bloomberg's vessel tracking tools aggregate this data and present it in real time — showing where every LNG carrier, VLCC, and Aframax is, where it is heading, and what it is carrying.",
+        "Commodity trading desks use AIS data as a real-time market intelligence tool. If an LNG carrier deviates significantly from its filed route — turning north toward Europe when its destination was logged as Japan — that is a cargo diversion signal. The desk can see it via AIS before any market report covers it, giving a window to act on the supply implication before the price adjusts. Similarly, a cluster of loaded VLCCs anchoring off Singapore signals floating storage is building — a bearish indicator for crude that shows up in AIS data days before it appears in official inventory statistics.",
+        "Platforms like Kpler and Vortexa go beyond raw AIS tracking — they use machine learning to infer cargo grades, volumes, and trade flows from vessel movements and port call patterns. This allows desks to estimate LNG exports from a specific liquefaction plant, track crude flows from a sanctioned country, or monitor the build-up of product supply in a regional hub — all from vessel movement data, without relying on official reporting.",
+        "By the time the EIA report comes out, the smart money already knows what's in it — because they've been watching the vessels for two weeks. AIS data is the physical market's live signal. Price is the lagging indicator."
+      ],
+      "pullQuote": "By the time the EIA report comes out, the smart money already knows what's in it — because they've been watching the vessels for two weeks. AIS data is the physical market's live signal. Price is the lagging indicator.",
+      "wtmfy": "AIS platform literacy — knowing how to use Kpler or Vortexa to answer a specific market question — is an increasingly valued skill in commodity analytics and intelligence roles. Even a basic ability to interpret vessel tracking data puts you ahead of the vast majority of candidates entering the industry.",
+      "handoff": "Section C.6 brings AIS intelligence and freight economics together in the cargo diversion decision — the moment when all of this information must be synthesised into a real-time commercial call."
+    },
+    {
+      "id": "c6",
+      "number": "C.6",
+      "title": "The Cargo Diversion Decision",
+      "desc": "When and why a vessel changes destination mid-voyage — and the economics behind it.",
+      "hook": "A cargo diversion is the physical commodity market's fastest response mechanism to a price signal. When a spread opens wide enough to cover freight and risk, a vessel mid-voyage can change destination in hours. The desk that moves first captures the margin; the desk that moves second finds the window has already closed.",
+      "paragraphs": [
+        "A cargo diversion occurs when a vessel changes its destination mid-voyage — typically because a price differential between the original destination and an alternative has widened enough to make rerouting profitable after accounting for all additional costs. The decision involves the cargo owner, the vessel operator, and often the original cargo buyer — who must agree to release the cargo or accept a price adjustment.",
+        "The economics of a diversion are calculated in real time. The desk must quantify: the gross price differential between the two destinations, the additional freight cost of the longer or different route, any canal or port cost changes, the additional voyage time and its carrying cost, the contractual flexibility provisions that allow diversion, and the counterparty credit of the new buyer. All of this must be resolved — often in hours — before another desk spots the same opportunity and the spread begins to close.",
+        "The DES vs. FOB distinction is critical for diversions. Under a DES (Delivered Ex-Ship) contract, the seller controls the vessel and can make the diversion decision unilaterally — subject to the terms of the original sale contract. Under an FOB contract, the buyer owns the vessel from the loading port and makes the diversion decision. Understanding which party controls the vessel determines who captures the diversion P&L and who needs to negotiate a release.",
+        "The cargo diversion window is measured in hours, not days. By the time a market report confirms the arbitrage is open, the fastest desks have already fixed the vessels. Speed and preparation are more valuable than analysis after the fact."
+      ],
+      "pullQuote": "The cargo diversion window is measured in hours, not days. By the time a market report confirms the arbitrage is open, the fastest desks have already fixed the vessels. Speed and preparation are more valuable than analysis after the fact.",
+      "wtmfy": "The cargo diversion is the most commercially intensive moment in physical commodity trading — requiring real-time integration of freight, pricing, operations, legal, and credit inputs. For students and career changers, understanding the decision logic end-to-end is one of the clearest signals of commercial awareness you can demonstrate in an interview.",
+      "handoff": "Section C.7 moves to the documentation layer — the bills of lading, letters of indemnity, and certificates that make a physical commodity trade legally real."
+    },
+    {
+      "id": "c7",
+      "number": "C.7",
+      "title": "Trade Documentation & Operations",
+      "desc": "Bills of lading, LOIs, and the paperwork that makes a physical trade real.",
+      "hook": "A commodity trade is not complete until the documentation is right. The cargo on the vessel is worth nothing until the bill of lading is issued. And a bill of lading issued with incorrect information can create a commercial and legal crisis that takes months to resolve.",
+      "paragraphs": [
+        "The bill of lading (BL) is the central document in every physical commodity trade. It serves three functions simultaneously: it is evidence of the contract of carriage between shipper and carrier; it is a receipt for the cargo showing quantity and condition at loading; and it is a document of title — whoever holds the original bill of lading has legal title to the cargo. BLs are issued in three originals; to take delivery of the cargo, the receiver must surrender an original BL at the discharge port.",
+        "When a cargo is traded before the BL can be physically transferred to the new buyer — which is common in rapidly-moving spot markets — the parties use a Letter of Indemnity (LOI). The LOI allows the receiver to take delivery without presenting the original BL, in exchange for the seller's indemnity against any loss that results. LOIs are common but carry risk — if the underlying trade goes wrong, the indemnity can be called upon. Many banks and sophisticated counterparties limit their LOI exposure carefully.",
+        "Additional key documents include the Certificate of Quality (CoQ) — the independent inspector's analysis of the cargo's physical properties (API gravity, sulphur content, water content, etc.) — and the Certificate of Quantity (CQ) — the volume delivered, measured by an independent surveyor. Both certificates are used to calculate the final invoice and are the basis for any quality or quantity claims.",
+        "The paperwork is not admin. It is the legal and financial infrastructure of the trade. A BL issued with the wrong quantity, a missing CoQ, or an LOI from an uncredited counterparty can cost more to resolve than the cargo was worth."
+      ],
+      "pullQuote": "The paperwork is not admin. It is the legal and financial infrastructure of the trade. A BL issued with the wrong quantity, a missing CoQ, or an LOI from an uncredited counterparty can cost more to resolve than the cargo was worth.",
+      "wtmfy": "Document management is handled by the back office in most large firms, but understanding what each document represents — and what can go wrong when documentation is incomplete or incorrect — is essential for anyone working in scheduling, operations, trade finance, or legal roles in commodity trading.",
+      "handoff": "Section C.8 completes the Shipping chapter by showing how freight exposure is not just managed as a cost but actively traded as a source of P&L."
+    },
+    {
+      "id": "c8",
+      "number": "C.8",
+      "title": "Freight as a Revenue Source",
+      "desc": "How desks generate P&L from freight positions, not just from commodity price.",
+      "hook": "The most sophisticated commodity trading desks do not just manage freight as a cost. They take freight positions — locking in vessel economics before the market moves — and earn from the differential between what they pay and what the market moves to.",
+      "paragraphs": [
+        "A commodity desk that secures freight at a rate below the market level earns a freight premium — the difference between the cheap fixture and the current market rate. This can be achieved by fixing vessels early, before a seasonal demand surge, or by locking in time charters at rates that prove below the subsequent spot market. The desk that locks in a VLCC at $35,000/day in January and watches spot rates move to $55,000/day by March has effectively earned $20,000/day on that vessel — even before the commodity cargo is loaded.",
+        "Forward Freight Agreements (FFAs) are financial derivatives that allow a desk to take a position on future freight rates without owning or hiring a vessel. An FFA is a contract to pay or receive the difference between a fixed rate and the actual Baltic Exchange route rate on a future date. A desk that sells FFAs at $45,000/day and watches spot rates fall to $35,000/day earns $10,000/day on the paper position. FFAs are used both to hedge existing freight exposure and to take directional views on freight rates as a standalone trade.",
+        "The interaction between commodity price and freight creates complex P&L dynamics. Rising commodity prices increase the value of cargoes already on the water; rising freight rates increase the cost of moving them. A desk that is long physical cargo and short freight (via FFAs) profits from the commodity rise but hedges the freight cost increase. The ability to manage both legs simultaneously — commodity and freight — is one of the distinguishing capabilities of the largest commodity trading firms.",
+        "Freight is not a tax on trade. It is a market with its own supply and demand balance, its own seasonality, and its own arbitrage signals. The desk that figures this out generates revenue from two markets simultaneously instead of one."
+      ],
+      "pullQuote": "Freight is not a tax on trade. It is a market with its own supply and demand balance, its own seasonality, and its own arbitrage signals. The desk that figures this out generates revenue from two markets simultaneously instead of one.",
+      "wtmfy": "For analysts and structurers, freight as a P&L source means that any commodity trade model that treats freight as a fixed cost input is incomplete. The sensitivity of the overall trade P&L to freight rate movements — and the options available to hedge or monetise that sensitivity — should be part of every trade analysis.",
+      "handoff": "Chapter C is complete. Chapter D shifts from the physical to the informational — how desks build market intelligence, form views, and use data to anticipate price moves before the rest of the market."
+    }
+  ],
+  "d": [
+    {
+      "id": "d1",
+      "number": "D.1",
+      "title": "How a Trader Forms a Market View",
+      "desc": "The information sources, signals, and reasoning process behind a position.",
+      "hook": "A market view is not a prediction. It is a structured argument — built from data, tested against the physical market, and held with enough conviction to put real money behind it while remaining open enough to change when the evidence changes.",
+      "paragraphs": [
+        "A commodity trader's market view is built from multiple information layers, each of which contributes a different piece of the picture. The fundamental layer covers supply and demand: production rates, refinery runs, LNG liquefaction capacity, inventory levels, seasonal demand patterns. The flow layer covers physical movement: vessel positions, port congestion, cargo flows from AIS data. The positioning layer covers what other market participants are doing: speculative positioning from COT data, physical buying interest from broker activity.",
+        "The art of forming a view is knowing which layer is dominant in the current market environment. In a supply disruption, fundamentals dominate — the physical availability of cargo is the primary driver. In a quiet, balanced market, positioning often dominates — speculative flows and option hedging mechanics drive more price movement than fundamental changes. A trader who applies the wrong lens to the current market environment will consistently misread the signals.",
+        "Once a view is formed, the trader must assess its conviction level and size the position accordingly. A high-conviction view — where the fundamental thesis is clear, the timing is supported by technical signals, and the risk/reward is attractive — justifies a full position. A low-conviction view — where the thesis is plausible but the timing is uncertain — might justify a smaller position or no position at all. The discipline of sizing positions in proportion to conviction, and not in proportion to the desire to make money, is one of the hardest skills to develop.",
+        "A good view is not one that turns out to be right. A good view is one that is well-reasoned, properly sized, and held with the right conviction level for the available evidence. Being right for bad reasons is as dangerous as being wrong."
+      ],
+      "pullQuote": "A good view is not one that turns out to be right. A good view is one that is well-reasoned, properly sized, and held with the right conviction level for the available evidence. Being right for bad reasons is as dangerous as being wrong.",
+      "wtmfy": "Market view formation is not just a front-office skill. Analytics professionals build the data infrastructure that supports view formation. Risk managers challenge the conviction level of views being translated into positions. Schedulers implement the operational consequences of views. Understanding the process of forming a market view helps every function around the desk do its job better.",
+      "handoff": "Section D.2 goes into the most widely watched weekly fundamental signal — the EIA petroleum status report — and shows how the desk actually reads it."
+    },
+    {
+      "id": "d2",
+      "number": "D.2",
+      "title": "Reading the EIA Report",
+      "desc": "The weekly inventory release — what it contains and what the desk looks for.",
+      "hook": "The EIA Weekly Petroleum Status Report is released every Wednesday at 10:30am Eastern Time. For the next 90 seconds, nothing else matters in the crude oil market. What the desk does in those 90 seconds — and in the two weeks of data preparation before them — is what separates an informed trader from one who reads headlines.",
+      "paragraphs": [
+        "The EIA report covers the previous week's US petroleum data — crude oil stocks, gasoline stocks, distillate stocks, total petroleum stocks, refinery inputs, refinery utilisation rates, crude imports, crude production, and product demand implied by deliveries. The headline number markets focus on first is the crude inventory change — the week-on-week build or draw in commercial crude stocks. But experienced traders look beyond the headline immediately.",
+        "The desk compares the actual number to two benchmarks: the analyst consensus (the average estimate from a survey of market analysts published by Reuters or Bloomberg the day before), and the 5-year seasonal average for that week. A 3 million barrel draw sounds bullish in isolation — but if the consensus was expecting a 5 million barrel draw, the actual number is bearish relative to expectations. And if the 5-year average for that week shows a seasonal draw of 4 million barrels, the actual is also below seasonal norms. Both comparisons together give the real signal.",
+        "Beyond crude, the desk analyses the product split — what happened to gasoline and distillate stocks, and whether the changes are consistent with the crude number. A crude draw with a gasoline build might indicate refinery throughput increased but demand didn't absorb the output — a less bullish signal than a crude draw with product draws across the board. The report also shows days of forward supply — how many days of current consumption the existing stock represents — which contextualises the absolute inventory level.",
+        "The number that matters is not the crude draw — it is the crude draw minus the expectation, adjusted for what the seasonal average says should be happening. Only then do you know whether the market is actually tighter or looser than people thought."
+      ],
+      "pullQuote": "The number that matters is not the crude draw — it is the crude draw minus the expectation, adjusted for what the seasonal average says should be happening. Only then do you know whether the market is actually tighter or looser than people thought.",
+      "wtmfy": "EIA literacy is one of the most immediately applicable skills you can develop before entering the industry. The report is free, weekly, and publicly available at eia.gov. Reading it for 12 consecutive weeks — tracking the actual vs. consensus delta and noting what the market does in response — will teach you more about how physical oil markets work than most university courses.",
+      "handoff": "Section D.3 connects the inventory data to the forward curve — showing what the curve's shape signals about physical market balance beyond what any single report can capture."
+    },
+    {
+      "id": "d3",
+      "number": "D.3",
+      "title": "The Forward Curve — Structure & Signals",
+      "desc": "Contango, backwardation, and what the curve shape tells the desk about physical supply balance.",
+      "hook": "The forward curve is the commodity market's continuous opinion poll on the future. Its shape — sloping up, sloping down, or humped — tells you something important about the current physical balance of the market that no single data point can match.",
+      "paragraphs": [
+        "The forward curve plots the prices at which a commodity can be bought or sold for delivery at different future dates. When front-month prices are lower than deferred prices — the curve slopes upward — the market is in contango. When front-month prices are higher than deferred prices, the market is in backwardation. These two states reflect fundamentally different physical market conditions and call for different commercial responses.",
+        "Contango signals oversupply or weak near-term demand. The gap between spot and forward prices creates an incentive to buy the cheap spot commodity, store it, and sell it forward at the higher price — the carry trade. The spread must be large enough to cover storage costs, insurance, financing, and the cost of tying up capital. When the carry trade is profitable, inventories build as storage is filled. This additional physical demand from storage gradually narrows the contango — it is self-limiting.",
+        "Backwardation signals tight physical supply or strong near-term demand. Buyers are willing to pay a premium for prompt delivery over future delivery because they need the commodity now — not in three months. Storage is uneconomic in backwardation because the opportunity cost of holding inventory is high. Refiners draw down stocks, floating storage is released, and the prompt market tightens further. Backwardation tends to persist until new supply arrives or demand softens — at which point the curve flips back toward flat or contango.",
+        "The curve shape tells you more than any headline. Before you read a news story, look at where M1 is trading versus M6. The market already knows — it is telling you in the structure."
+      ],
+      "pullQuote": "The curve shape tells you more than any headline. Before you read a news story, look at where M1 is trading versus M6. The market already knows — it is telling you in the structure.",
+      "wtmfy": "The forward curve is published daily for every major commodity. Learning to read it — identifying whether it is in contango or backwardation, how steeply, and whether the structure is changing — is one of the most immediately applicable market skills you can develop. Bloomberg, ICE, and CME all provide forward curve data; many free platforms show at least the front three or four months.",
+      "handoff": "Section D.4 explains how the prices that populate that forward curve are actually assessed and published — the price reporting agency methodology."
+    },
+    {
+      "id": "d4",
+      "number": "D.4",
+      "title": "Price Assessment Methodology",
+      "desc": "How Platts, Argus, and ICIS assess physical commodity prices.",
+      "hook": "The price assessments published by Platts and Argus are referenced in contracts covering billions of dollars of commodity supply. Understanding how those assessments are produced is not just academic — it is a commercial skill that affects how you negotiate, hedge, and settle trades.",
+      "paragraphs": [
+        "The dominant price reporting methodology for crude oil and refined products is Market on Close (MOC), developed by Platts. During the final 30 minutes of the trading day — the assessment window — reporters collect bids, offers, and completed transactions from market participants via a regulated platform. They apply a published set of criteria to assess which submissions are credible and calculate the benchmark price at the close of the window. The resulting assessment — Dated Brent, HSFO 380 Singapore, Singapore Gasoil — becomes the reference price for physical contracts and financial derivatives linked to it.",
+        "Argus uses a similar but distinct methodology — its assessments are typically based on reported transactions during the trading day rather than a specific close-of-day window. This means Argus and Platts assessments for the same commodity can diverge slightly, particularly in thin or fast-moving markets. Physical contracts will specify which agency's assessment applies — and switching from one to the other can have significant commercial implications, as the two assessments sometimes move differently.",
+        "Market participants are aware that the MOC window can be influenced by strategic participation — placing large bids or offers to push the assessment in a direction that benefits existing positions. This is legal within the framework of the methodology, but regulated. The UK's FCA, the US CFTC, and the EU's REMIT regime all monitor assessment window activity. Understanding the boundary between legitimate market participation and manipulation is a compliance-critical topic for anyone working near the front office.",
+        "Price reporters don't just record what happened in the market. They assess what they believe a fair transaction would look like, based on the available evidence. That distinction matters when the market is thin and a small number of participants are determining the reference price for millions of barrels."
+      ],
+      "pullQuote": "Price reporters don't just record what happened in the market. They assess what they believe a fair transaction would look like, based on the available evidence. That distinction matters when the market is thin and a small number of participants are determining the reference price for millions of barrels.",
+      "wtmfy": "Every physical commodity contract references a price assessment. Understanding which benchmark applies, how it is calculated, and what drives divergence between assessments helps you evaluate contract terms, identify settlement disputes, and assess the quality of a mark-to-market price in an ETRM system.",
+      "handoff": "Section D.5 covers supply disruption analysis — how the desk interprets an unplanned outage or supply shock and decides how to respond commercially."
+    },
+    {
+      "id": "d5",
+      "number": "D.5",
+      "title": "Supply Disruption Analysis",
+      "desc": "How the desk responds to unplanned outages and supply events in real time.",
+      "hook": "An LNG train trips offline. A pipeline blows. A hurricane shuts the US Gulf. In the next 60 minutes, three things happen simultaneously: the physical market responds, the paper market reprices, and every desk capable of moving a cargo starts running the economics.",
+      "paragraphs": [
+        "When a supply disruption occurs, the desk's first question is not 'how much will the price move?' but 'how much supply is actually at risk, for how long, and can it be replaced?' This disruption magnitude assessment requires understanding the scale of the affected facility, the timeline for restart (planned maintenance vs. unplanned trip), the inventory buffer at the impacted destination, and the availability of alternative supply from other sources.",
+        "The second question is 'what cargo diversion opportunities does this create?' A 3-week LNG plant outage in Australia reduces supply to Asian buyers. If they cannot wait for the plant to restart, they must source spot cargoes from the Atlantic Basin — pushing JKM up. If the JKM/TTF spread widens beyond the freight cost of rerouting Atlantic cargoes, those cargoes will flow east. The desk that has already mapped the available Atlantic tonnage and the logistics of rerouting it can move within hours of the disruption announcement.",
+        "The third question is 'how will the disruption resolve, and what happens to the price then?' Temporary supply disruptions that are quickly resolved can create sharp price spikes followed by equally sharp reversals. Desks that buy into a disruption spike without considering the timeline to restoration risk being caught on the wrong side of the reversal. The best disruption plays balance the near-term upside from the supply shortfall against the medium-term risk of restoration — and size positions accordingly.",
+        "The disruption is the trigger. The question that determines whether you make money is not how big the disruption is — it's whether you can source the replacement supply before anyone else does and get it to the right place before the window closes."
+      ],
+      "pullQuote": "The disruption is the trigger. The question that determines whether you make money is not how big the disruption is — it's whether you can source the replacement supply before anyone else does and get it to the right place before the window closes.",
+      "wtmfy": "Supply disruption analysis is a core skill for commodity analysts and market intelligence professionals — but it also matters for schedulers (who manage cargo programmes when supply changes), risk managers (who need to re-assess positions when a disruption changes the market), and commercial managers (who may need to invoke force majeure clauses). Understanding the full chain of commercial implications from a single supply disruption is a strong demonstration of commercial awareness in any interview.",
+      "handoff": "Section D.6 covers positioning data — what speculative flows and COT reports tell a physical trader about market sentiment beyond the fundamental data."
+    },
+    {
+      "id": "d6",
+      "number": "D.6",
+      "title": "Positioning Data & Speculative Flows",
+      "desc": "What COT reports and open interest tell a physical trader about market sentiment.",
+      "hook": "Fundamentals tell you what should happen to prices. Positioning data tells you what the money is already doing about it. Sometimes the gap between those two tells you more than either one alone.",
+      "paragraphs": [
+        "The US CFTC (Commodity Futures Trading Commission) publishes the Commitments of Traders (COT) report every Friday, covering positions held by different categories of market participants in NYMEX and CBOT futures markets. The report breaks positions into commercial hedgers (physical market participants), non-commercial speculators (managed money, hedge funds), and swap dealers. The net long or short position of non-commercial participants — the speculative community — is the number most closely watched by physical commodity traders.",
+        "When managed money builds an extremely large net long position in crude futures, the physical market is not always as bullish as the position implies — speculative money can be moved by momentum, sentiment, and macro factors that are disconnected from physical supply and demand. Conversely, when speculative shorts are at record levels, even a small bullish fundamental surprise can trigger a sharp short-covering rally as speculators exit positions simultaneously. Physical traders use COT data to calibrate how much of the current price reflects genuine physical tightness versus speculative positioning.",
+        "Open interest — the total number of outstanding futures contracts — is a complementary signal. Rising open interest alongside rising prices suggests new money is entering the market on the long side — a genuine bullish signal. Rising open interest alongside falling prices suggests new short positions are being built — a bearish signal. Falling open interest alongside price moves suggests existing positions are being closed — a reversal may be imminent.",
+        "When managed money is record long and the fundamental picture doesn't support it, the risk is not that you're wrong on the fundamental — it's that you're right on the fundamental but wrong on the timing because the speculative unwind happens before the physical tightness shows up in the price."
+      ],
+      "pullQuote": "When managed money is record long and the fundamental picture doesn't support it, the risk is not that you're wrong on the fundamental — it's that you're right on the fundamental but wrong on the timing because the speculative unwind happens before the physical tightness shows up in the price.",
+      "wtmfy": "COT data is published weekly and free to access at cftc.gov. Building a habit of reading the weekly positioning report alongside the EIA report gives you a two-dimensional view of the crude market — one fundamental, one behavioural — that is more complete than either alone.",
+      "handoff": "Section D.7 covers seasonal demand patterns — the predictable, recurring demand shifts that create recurring trading opportunities if you know where to look."
+    },
+    {
+      "id": "d7",
+      "number": "D.7",
+      "title": "Seasonal Patterns & Demand Calendars",
+      "desc": "How time of year shapes commodity demand and where the recurring opportunities sit.",
+      "hook": "Commodity markets repeat themselves every year. Not perfectly — but predictably enough that a trader who understands seasonal patterns consistently positions for moves the rest of the market treats as surprises.",
+      "paragraphs": [
+        "Every commodity has a demand calendar — a seasonal pattern driven by weather, consumption cycles, and industrial activity. Crude oil and gasoline peak in summer (US driving season), creating a seasonal draw in gasoline stocks and widening gasoline crack spreads from March to August. Distillates and heating oil peak in winter, with Northern Hemisphere temperatures driving demand from October to February. Naphtha demand in Asia peaks in spring when petrochemical plants ramp up ethylene production.",
+        "LNG seasonal patterns are driven by the heating and cooling needs of end consumers. Northeast Asian LNG demand peaks in winter (December–February) for heating and in summer (July–August) for air conditioning. European LNG demand surges when pipeline gas supply is constrained — particularly in Q4 as storage is refilled. Australian LNG exports increase when maintenance windows close and production ramps back up after the southern hemisphere winter.",
+        "Seasonal patterns create predictable trading opportunities — but the opportunity is in the deviation from the seasonal expectation, not the seasonal move itself. A warm winter in Europe that reduces heating demand below seasonal norms will push TTF lower than the forward curve implied — and a trader positioned for this deviation earns from the correction. The baseline seasonal expectation is already priced into the market; the alpha comes from correctly forecasting where the actual demand will deviate from that baseline.",
+        "Seasonality is already in the price. The edge is not in knowing that driving season boosts gasoline — everyone knows that. The edge is in knowing whether this year's driving season will be stronger or weaker than the market's seasonal assumption."
+      ],
+      "pullQuote": "Seasonality is already in the price. The edge is not in knowing that driving season boosts gasoline — everyone knows that. The edge is in knowing whether this year's driving season will be stronger or weaker than the market's seasonal assumption.",
+      "wtmfy": "Building a seasonal commodity calendar — tracking actual demand vs. seasonal expectations across crude, LNG, and refined products week by week — is one of the most practical things you can do to develop market intelligence skills before you join the industry. The data is available free from EIA, the IEA, and the Baltic Exchange.",
+      "handoff": "Section D.8 brings all the intelligence tools together in a practical framework — how to build a personal market intelligence workflow that surfaces signal from noise."
+    },
+    {
+      "id": "d8",
+      "number": "D.8",
+      "title": "Building a Market Intelligence Workflow",
+      "desc": "The tools, data sources, and daily habits the desk actually uses to stay ahead of the market.",
+      "hook": "Market intelligence is not about having access to more data than anyone else. It is about having the right data, processed in the right order, at the right time of day — so you see the signal that matters before the rest of the market does.",
+      "paragraphs": [
+        "A structured market intelligence workflow starts with a morning read — the data sources and signals a trader checks before markets open. This typically includes: overnight price moves in flat price and key differentials, any AIS signals from Kpler or Vortexa showing unexpected vessel movements, any significant news events overnight (supply disruptions, geopolitical developments, demand updates), and a review of the desk's own position against current market levels. The morning read should take no more than 30 minutes — its purpose is situation awareness, not analysis.",
+        "During the trading day, the desk tracks a specific set of live signals relevant to their commodity and position. For a crude desk, this includes Brent prompt month price, the Brent/WTI spread, the Dubai/Brent differential, VLCC freight rates on key routes, and any breaking supply news. For an LNG desk, this includes JKM, TTF, the JKM/TTF spread, LNG carrier hire rates, and Australian send-out data. The specific signals vary by commodity and market — but the principle is the same: a small set of indicators, monitored continuously, from which unusual moves trigger deeper investigation.",
+        "The weekly cadence anchors around the recurring data releases: EIA petroleum status report (Wednesday), EIA natural gas storage (Thursday), Baltic Exchange Friday indices, and CFTC COT report (Friday close, published the following Friday). Building a weekly analytical routine around these releases — preparing expectations in advance and comparing them to actuals — is the discipline that separates informed market participants from reactive ones.",
+        "The best intelligence edge is not real-time data — it is having thought about the question before the data arrives. Preparing your expectation in advance means you can assess the actual number in 10 seconds instead of 10 minutes. In volatile markets, those 9 minutes and 50 seconds are where the money is."
+      ],
+      "pullQuote": "The best intelligence edge is not real-time data — it is having thought about the question before the data arrives. Preparing your expectation in advance means you can assess the actual number in 10 seconds instead of 10 minutes. In volatile markets, those 9 minutes and 50 seconds are where the money is.",
+      "wtmfy": "The market intelligence workflow described in this section is something you can begin building immediately — before you enter the industry. Set up free data alerts for Brent and WTI on your phone. Bookmark eia.gov and cftc.gov and check them weekly. Create a simple spreadsheet tracking EIA actuals vs. consensus each Wednesday. After 12 weeks, you will have built a habit and a dataset that demonstrates genuine market engagement to any interviewer.",
+      "handoff": "Chapter D is complete. Chapter E is the final chapter — bringing all the commercial knowledge, market intelligence tools, and risk management frameworks together in the context of real desk decisions."
+    }
+  ],
+  "e": [
+    {
+      "id": "e1",
+      "number": "E.1",
+      "title": "How a Trader Thinks",
+      "desc": "The mental model behind every commercial decision — thesis, exit, downside.",
+      "hook": "A trade idea and a trade are two very different things. Most people in and around commodity markets have plenty of trade ideas. The discipline is in knowing which ones to act on — and how.",
+      "paragraphs": [
+        "Before entering any position, an experienced commodity trader asks three questions. First: What is my thesis? Not 'I think crude will go up' — that is not a thesis. A thesis is a specific causal argument: EIA data will show three consecutive bullish draws next month because refinery utilisation is rising faster than import volumes are replacing the Libyan production shortfall. A good thesis names the cause, the mechanism, and the expected market response.",
+        "Second: What is my exit? Every position should have a defined exit point before it is entered — both the target (the price level at which the thesis is proven and profits are taken) and the stop (the price level at which the thesis is disproven and losses are cut). A position without an exit plan will inevitably be held too long on the losing side and exited too early on the winning side, because human psychology pushes in both directions simultaneously.",
+        "Third: What is my downside? The trader calculates the maximum loss they would accept if the thesis is wrong — and sizes the position so that this loss is within their risk limits and their own tolerance for being wrong. A high-conviction trade in a liquid market with a clear stop might justify a full position. A speculative view in a thin market without a clear catalyst might justify 20% of that position.",
+        "The three questions are not bureaucratic. They are the difference between trading and gambling. Gambling is taking a position because you feel like it might work. Trading is taking a position because you have a thesis, an exit, and a clearly defined maximum loss."
+      ],
+      "pullQuote": "The three questions are not bureaucratic. They are the difference between trading and gambling. Gambling is taking a position because you feel like it might work. Trading is taking a position because you have a thesis, an exit, and a clearly defined maximum loss.",
+      "wtmfy": "These three questions apply to any commercial decision — not just futures trades. Before presenting a market view, a deal structure, or an operational recommendation, ask yourself: what is my thesis, what would disprove it, and what is the maximum cost if I am wrong? Structuring your thinking this way makes you significantly more persuasive and more rigorous simultaneously.",
+      "handoff": "Section E.2 applies this framework to the most visible commercial opportunity in physical commodity markets — the arbitrage window."
+    },
+    {
+      "id": "e2",
+      "number": "E.2",
+      "title": "The Arbitrage Window",
+      "desc": "How regional price gaps open, close, and get exploited in physical commodity markets.",
+      "hook": "The arbitrage window is the physical commodity market's most time-sensitive opportunity. When a price gap between two markets exceeds the cost of bridging them, money flows toward the higher-priced market until the gap closes. The desk that moves first captures the margin. The desk that moves second finds the window already closed.",
+      "paragraphs": [
+        "An arbitrage window opens when the price differential between two regional markets for the same commodity exceeds the total cost of moving a cargo from the lower-priced market to the higher-priced one. The calculation is straightforward in principle: Gross spread − freight − port costs − boil-off − credit margin = net arb margin. A positive net arb margin means the window is open; a negative margin means it is not viable.",
+        "The forces that open a window are the same forces that close it — because exploiting the arb is what closes it. When Atlantic Basin LNG desks divert cargoes toward Asia to capture a wide JKM/TTF spread, those additional cargoes increase supply in Asia (pushing JKM down) and reduce supply in Europe (pushing TTF up). Simultaneously, the increased demand for LNG carriers on the long Asia route pushes freight rates higher — further compressing the net arb margin. The window closes not because the fundamental imbalance resolves, but because the act of exploiting it resolves the imbalance.",
+        "Speed of execution is the primary determinant of whether a desk captures an arb or watches it close. The four capabilities that determine execution speed are: freight access (vessel availability and pre-fixed rates), counterparty network (a buyer at the destination who can commit quickly), contractual flexibility (DES contracts with destination flexibility or spot cargoes with no destination restriction), and internal approval speed (the ability to get commercial approval without bureaucratic delay).",
+        "The arb window is not a gift. It is a race. By the time most of the market knows it's open, the fastest desks are already fixing vessels. Speed and preparation — not analysis after the fact — determine who captures the margin."
+      ],
+      "pullQuote": "The arb window is not a gift. It is a race. By the time most of the market knows it's open, the fastest desks are already fixing vessels. Speed and preparation — not analysis after the fact — determine who captures the margin.",
+      "wtmfy": "Understanding the arbitrage mechanism is the single most direct answer to the interview question 'how do commodity trading desks make money?' Being able to explain — with a specific example and worked numbers — how a regional price gap opens, how it is calculated, and why it closes naturally demonstrates commercial intelligence in a way that generic answers about supply and demand do not.",
+      "handoff": "Section E.3 provides the decision framework for the most consequential and time-pressured version of the arb decision — the mid-voyage cargo diversion."
+    },
+    {
+      "id": "e3",
+      "number": "E.3",
+      "title": "The Cargo Diversion Decision Tree",
+      "desc": "The full commercial logic for rerouting a vessel mid-voyage — with a downloadable decision framework.",
+      "hook": "A cargo diversion is the most compressed commercial decision in physical commodity trading. In the time it takes to make the call — hours, sometimes less — the spread may have already narrowed, the freight rates may have moved, and the best counterparty may have already committed to another desk.",
+      "paragraphs": [
+        "The cargo diversion decision begins with a spread calculation — but the spread alone is not sufficient to make the call. The desk must work through a sequence of questions simultaneously: Is the spread wide enough after all costs? Is a suitable vessel available at the assumed freight rate? Does the contractual structure of the cargo allow diversion — is it DES with destination flexibility, or FOB where the original buyer controls the vessel? If the original buyer must release the cargo, what is their compensation demand?",
+        "The second layer of the decision covers operational feasibility. Can the vessel reach the new destination within the available loading or delivery window? Is the receiving terminal at the new destination available and capable of accepting the cargo — correct draft, regasification capacity, product specification compatibility? Is the counterparty at the new destination creditworthy and able to commit immediately? Each question must be answered before committing to the diversion — because reversing a diversion decision mid-execution is extremely costly.",
+        "The third layer covers risk management. What is the P&L sensitivity to the spread narrowing by 20% after the decision is made? What happens to the position if freight rates move further against the desk after the vessel is re-fixed? Is the diversion approved within the desk's position limits and VaR framework? A diversion that looks compelling on a base-case calculation may be unacceptable once stress scenarios are applied — and the risk manager's involvement in this assessment is not optional.",
+        "The diversion decision is not one question — it's twelve questions, asked in parallel, with a clock running. The desks that answer them fastest and most completely are the ones that capture the margin. Preparation — mapping the answers to each question before the market moves — is the only way to be fast enough."
+      ],
+      "pullQuote": "The diversion decision is not one question — it's twelve questions, asked in parallel, with a clock running. The desks that answer them fastest and most completely are the ones that capture the margin. Preparation — mapping the answers to each question before the market moves — is the only way to be fast enough.",
+      "wtmfy": "The cargo diversion decision tree is one of the most comprehensive commercial decision frameworks in commodity trading — and demonstrating that you understand every question in it is one of the strongest signals of commercial intelligence you can send in any interview for a trading, origination, or analytics role.",
+      "handoff": "Section E.4 covers timing — specifically the hedge timing decision that determines whether the desk removes price risk before or after price moves against it."
+    },
+    {
+      "id": "e4",
+      "number": "E.4",
+      "title": "Timing a Hedge",
+      "desc": "How desks manage price risk between when a cargo is booked and when it is delivered.",
+      "hook": "The hedge decision is not binary — it is continuous. The question is not whether to hedge but when, how much, and at what price. Getting all three right is the edge that separates the best risk managers from the rest.",
+      "paragraphs": [
+        "When a physical trader buys a cargo, they immediately carry price risk — the risk that the commodity price falls before they sell it. They can hedge that risk by selling futures or swaps. But the decision of when to hedge is commercially significant. A trader who hedges immediately locks in the current price and removes all subsequent risk — but also removes all subsequent upside. A trader who delays hedging retains price exposure, hoping to sell the hedge at a better level — but risks the price moving further against them.",
+        "The hedge ratio — what percentage of the physical position is hedged with paper — is equally important. A 100% hedge is fully protected but captures no upside. A 50% hedge retains significant exposure. Mandatory hedge ratios enforced by risk policy remove trader discretion; desks with more flexible risk mandates allow traders to choose their hedge ratio based on their market view and risk appetite. Some desks hedge in tranches — placing 40% of the hedge immediately, then adding to it as the market evolves.",
+        "Basis risk affects the effectiveness of every hedge. If a West African crude cargo is hedged with ICE Brent futures, the hedge is effective only to the extent that the WA differential to Dated Brent remains stable. If the differential widens — WA crude weakens relative to Brent — the physical cargo loses value more than the futures hedge gains. The trader is exposed to the differential move despite being 'hedged' on flat price. Managing basis risk requires either hedging the differential separately or accepting that a proportion of the position will always be unhedged.",
+        "Being perfectly hedged means giving up all your upside to remove your downside. Most desks don't want that — they want to be selectively hedged, protecting against the bad scenario while retaining some ability to benefit if the view is right."
+      ],
+      "pullQuote": "Being perfectly hedged means giving up all your upside to remove your downside. Most desks don't want that — they want to be selectively hedged, protecting against the bad scenario while retaining some ability to benefit if the view is right.",
+      "wtmfy": "Hedge timing and hedge ratio decisions are made by traders — but they are evaluated by risk managers, implemented by the back office, and their effectiveness is assessed by finance. Understanding the full cycle of a hedging decision — from commercial logic through to ETRM booking and P&L attribution — makes you more effective in any function around the desk.",
+      "handoff": "Section E.5 shows what the P&L of a hedged physical position actually looks like — mapping every dollar of profit or loss to one of the six commercial levers."
+    },
+    {
+      "id": "e5",
+      "number": "E.5",
+      "title": "The P&L Attribution Map",
+      "desc": "Where trading profit actually comes from — all six levers mapped to a real cargo.",
+      "hook": "Most trading P&L reports say 'crude trading made $X million this month.' What they don't say is how much of that came from flat price calls, how much came from basis, how much came from freight, and how much came from optionality. The attribution is where the real commercial intelligence lives.",
+      "paragraphs": [
+        "P&L attribution is the process of decomposing a trading desk's profit or loss into its component sources. For a physical commodity desk running multiple concurrent positions, the total P&L in any period is the sum of contributions from: flat price moves (the change in value due to the overall price level moving), time spread (value earned or lost from holding positions across different delivery dates), location differential (value from moving commodity between markets), quality differential (value from the grade premium or discount), freight (P&L from freight positions relative to market), and optionality (value from flexibility provisions in contracts or vessel charters).",
+        "On any given trade, some levers contribute positively and others negatively. A cargo that made money overall might have lost $500,000 on flat price (the market moved against the trader), gained $800,000 on location differential (the destination market was stronger than expected), and gained $300,000 on freight (rates were fixed below market). The net $600,000 profit came not from being right on the flat price — where the desk was wrong — but from being right on the basis and the freight.",
+        "Understanding P&L attribution matters for multiple reasons. Risk managers use it to assess which positions are generating alpha and which are just lucky flat price bets. Traders use it to evaluate their own edge — are they consistently making money on basis, or consistently losing on freight? Analysts use it to build better models — if freight is consistently misforecast, the model needs improvement. Attribution transforms a P&L number into a learning tool.",
+        "The P&L number tells you whether you made money. The attribution tells you why — and why matters enormously, because a desk that makes money for the wrong reasons will eventually make money for none."
+      ],
+      "pullQuote": "The P&L number tells you whether you made money. The attribution tells you why — and why matters enormously, because a desk that makes money for the wrong reasons will eventually make money for none.",
+      "wtmfy": "P&L attribution is a back-office and risk function in most firms, but the commercial logic behind it is essential for analysts, traders, and anyone evaluating the performance of a trading strategy. Being able to look at a P&L report and ask 'which lever generated this?' demonstrates a level of commercial sophistication that most candidates cannot match.",
+      "handoff": "Section E.6 covers the risk management framework that surrounds all of these positions — VaR, limits, and how risk managers and traders interact when positions approach the boundary."
+    },
+    {
+      "id": "e6",
+      "number": "E.6",
+      "title": "VaR, Limits & Risk Management",
+      "desc": "How the desk measures and controls its combined market exposure in real time.",
+      "hook": "A trading desk without risk limits is not a trading desk — it is a fund. The limits are not constraints on ambition. They are the infrastructure that allows ambition to persist through the inevitable periods when the market is wrong about what you're right about.",
+      "paragraphs": [
+        "Value at Risk (VaR) is the industry-standard metric for measuring commodity trading desk market risk. It estimates the maximum loss a portfolio of positions could suffer over a defined time horizon (typically 1 day or 10 days) at a defined confidence level (typically 95% or 99%). A VaR of $8 million at 95% confidence over one day means the desk should not expect to lose more than $8 million on 95% of trading days — or roughly 19 out of every 20 trading days.",
+        "VaR is calculated daily using historical price data and the current position. As positions change and market volatility changes, VaR changes — a large position in a highly volatile market may generate the same VaR as a larger position in a less volatile one. Risk managers set VaR limits for the desk, individual traders, and specific commodities or strategies. When a position approaches a limit, the risk manager flags it and may require the trader to reduce exposure — regardless of whether the trader believes the position is correct.",
+        "Beyond VaR, desks manage position limits (maximum notional exposure in a commodity), stop-loss limits (the maximum daily or monthly loss before the desk must reduce positions), and stress test results (how the portfolio performs under severe but plausible scenarios — e.g., a $30/bbl crude price move over 5 days). Each of these limits serves a different purpose: VaR manages routine risk, stop-losses prevent loss escalation, and stress tests protect against tail events that VaR underestimates.",
+        "Risk management is not about preventing the desk from losing money. It is about ensuring that no single loss — however bad — can threaten the firm's ability to continue operating. The limit protects the institution, not the trader."
+      ],
+      "pullQuote": "Risk management is not about preventing the desk from losing money. It is about ensuring that no single loss — however bad — can threaten the firm's ability to continue operating. The limit protects the institution, not the trader.",
+      "wtmfy": "Risk management is a discipline in its own right — and a growing function in every commodity trading firm as regulatory requirements increase. Even if you are targeting a front-office role, understanding VaR, limits, and the risk manager's role demonstrates the commercial maturity that senior hiring managers value. And if you are targeting a risk or middle-office role, this section is your starting point for a much deeper specialisation.",
+      "handoff": "Section E.7 addresses the hardest skill in commodity trading — knowing when a position is wrong and cutting it cleanly, without the emotional distortions that turn small losses into large ones."
+    },
+    {
+      "id": "e7",
+      "number": "E.7",
+      "title": "When the Trade Goes Wrong",
+      "desc": "Stop-loss discipline, loss management, and how desks cut positions without emotional bias.",
+      "hook": "Losing money is not the failure. Failing to cut a losing position when the thesis is disproven is the failure. The distinction between those two things is the most important discipline in commodity trading — and the one that most people, at every level of experience, consistently struggle with.",
+      "paragraphs": [
+        "When a position moves against the desk, there are two possibilities: the thesis is wrong, or the thesis is early. A position that is wrong should be cut — the evidence has changed, the market is telling you something you didn't know, and holding on increases the loss without improving the odds of recovery. A position that is early may be worth holding — the thesis is still intact, the fundamental picture supports the view, and the market will eventually confirm it. The challenge is that under loss pressure, these two states feel identical — and human psychology consistently misclassifies wrong positions as early ones.",
+        "Stop-loss discipline is the practice of committing to a maximum loss on a position before entering it and cutting the position automatically when that loss is reached — without re-evaluating the thesis under the influence of the current loss. The stop-loss is not a prediction about what the market will do at that level; it is a commitment about how much of the thesis you are willing to fund before accepting that it is disproven. A trader who consistently moves their stop-loss further away from entry is not showing flexibility — they are demonstrating the inability to accept being wrong.",
+        "The communication of losses up the management chain is a distinct skill from loss management itself. A position that has moved significantly against the desk must be reported promptly, with a clear account of the current thesis status (wrong or early), the remaining exposure, and the plan for managing it. Traders who delay reporting losses — hoping the position will recover before they have to explain it — universally make the situation worse. Risk managers who discover losses that were not reported promptly lose trust in the trader permanently.",
+        "The stop-loss is not there to tell you when the market is wrong. It is there to tell you when you are. The willingness to act on that information, without flinching, is the single most important risk management discipline on any desk."
+      ],
+      "pullQuote": "The stop-loss is not there to tell you when the market is wrong. It is there to tell you when you are. The willingness to act on that information, without flinching, is the single most important risk management discipline on any desk.",
+      "wtmfy": "The psychology of loss and the discipline of cutting positions are relevant to every function that makes recommendations — not just traders. An analyst who does not revisit a view when the evidence changes, an originator who does not walk away from a deal when the economics deteriorate, a scheduler who does not flag an operational problem early enough — all exhibit the same failure mode as a trader who won't cut a losing position. The discipline is universal.",
+      "handoff": "Section E.8 is the final section of the Playbook — a complete week on the desk, where every skill from all five chapters is applied to a realistic commercial scenario in real time."
+    },
+    {
+      "id": "e8",
+      "number": "E.8",
+      "title": "A Week on the Desk — Putting It All Together",
+      "desc": "A narrative case study of a complete trading week — connecting every skill from the Playbook to a live commercial scenario.",
+      "hook": "Everything in the Playbook has been building to this. One week, one desk, one set of markets — and every commercial decision made in real time, with the information available at the time, not the benefit of hindsight.",
+      "paragraphs": [
+        "The scenario is a crude oil trading desk at a mid-sized commodity trading firm. It is Monday morning. The desk carries a net long position of 3 million barrels of North Sea Brent crude against ICE futures hedges. The hedge ratio is 80% — 20% of the position is open to flat price. The prior week's EIA report showed a 2.1 million barrel crude draw against a consensus estimate of 0.9 million — a bullish surprise. Brent is trading at $81.50, up $1.20 from Friday's close. The forward curve is in modest backwardation — M1 at $81.50, M3 at $80.20. The desk also has a VLCC fixed at WS95 on the Middle East Gulf–Rotterdam route, loading next Thursday.",
+        "Monday: The desk reviews overnight developments — news of an unplanned shutdown at a North Sea production platform has reduced expected loadings by approximately 500,000 barrels over the next two weeks. The fundamental case for the long position strengthens. The trader increases the open position from 20% to 35% by buying back some of the ICE hedge. Risk management flags the increased VaR. The trader provides the thesis: supply disruption tightens the near-term physical balance; the backwardation should steepen. The risk manager approves within limits. Wednesday: EIA report. The desk's expectation was a 1.5 million barrel draw based on the production platform news and the prior week's trend. Actual: a 3.8 million barrel draw. Brent rallies $2.40 in 15 minutes. The trader increases the hedge from 65% to 85% — locking in the majority of the week's gain. The forward curve moves into stronger backwardation.",
+        "Thursday: The VLCC loads at Ras Tanura. During loading, the independent surveyor finds a quality issue — sulphur content marginally above specification. The scheduling team negotiates a small price adjustment with the Rotterdam receiver. The cargo is accepted; demurrage of 14 hours is accrued during the inspection delay. Friday: The position is reviewed. The open position is reduced to 15% ahead of the weekend. Net P&L for the week: $4.2 million. Attribution: $2.8M from flat price (backwardation trade worked); $0.9M from time spread (front of curve strengthened relative to back); -$0.3M from basis (North Sea physical/ICE differential widened); $0.8M from freight (WS95 fixture below current WS110 market); -$0.1M from demurrage (operationally avoidable).",
+        "A good week on the desk is not one where everything goes perfectly. It is one where the thesis was sound, the risk was controlled, the losses were small and understood, and the gains reflected genuine commercial skill — not luck."
+      ],
+      "pullQuote": "A good week on the desk is not one where everything goes perfectly. It is one where the thesis was sound, the risk was controlled, the losses were small and understood, and the gains reflected genuine commercial skill — not luck.",
+      "wtmfy": "The skills that determined the outcomes in each day of this week — view formation, hedge timing, supply disruption analysis, scheduling coordination, freight positioning, and P&L attribution — are the skills covered in all five chapters of this Playbook. If you can follow the commercial logic of each decision in this case study and articulate why each choice was made, you have achieved the core learning objective of the Full Playbook.",
+      "handoff": "Chapter E — and the Full Playbook — is complete. Return to the Hub to access your resume templates, infographic library, career roadmap, and glossary."
+    }
+  ]
+}

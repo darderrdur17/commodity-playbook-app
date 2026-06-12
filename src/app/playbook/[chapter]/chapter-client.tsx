@@ -3,21 +3,21 @@
 import React, { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowLeft, ArrowRight, BookOpen, Clock, CheckCircle, ChevronRight } from "lucide-react";
+import { ArrowLeft, ArrowRight, BookOpen, Clock, CheckCircle, ChevronDown, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { AnimatedProgress } from "@/components/animations";
-import { CHAPTERS } from "@/data/playbook";
+import { CHAPTERS, type PlaybookSection } from "@/data/playbook";
 
 interface Props {
-  chapter: typeof CHAPTERS[0];
-  content: string[];
-  userTier: string;
+  chapter: (typeof CHAPTERS)[number];
+  sections: PlaybookSection[];
   chapters: typeof CHAPTERS;
 }
 
-export function ChapterClient({ chapter, content, chapters }: Props) {
+export function ChapterClient({ chapter, sections, chapters }: Props) {
   const [readProgress, setReadProgress] = useState(0);
   const [saved, setSaved] = useState(false);
+  const [openSection, setOpenSection] = useState<string | null>(sections[0]?.id ?? null);
   const contentRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: contentRef });
 
@@ -51,41 +51,13 @@ export function ChapterClient({ chapter, content, chapters }: Props) {
     return unsub;
   }, [scrollYProgress, chapter.id, saved]);
 
-  function renderContent(text: string, idx: number) {
-    if (text.startsWith("## ")) {
-      return (
-        <h2 key={idx} className="font-serif text-2xl font-bold text-gray-900 mt-10 mb-4">
-          {text.slice(3)}
-        </h2>
-      );
-    }
-    if (text.startsWith("**") && text.endsWith("**")) {
-      return (
-        <p key={idx} className="font-semibold text-gray-900 mt-4 mb-2">
-          {text.slice(2, -2)}
-        </p>
-      );
-    }
-    // Handle bold inline text
-    const parts = text.split(/\*\*(.*?)\*\*/g);
-    return (
-      <p key={idx} className="text-gray-700 leading-relaxed mb-4">
-        {parts.map((part, i) =>
-          i % 2 === 1 ? <strong key={i} className="font-semibold text-gray-900">{part}</strong> : part
-        )}
-      </p>
-    );
-  }
-
   return (
     <div className="relative">
-      {/* Reading progress bar */}
       <motion.div
         className="fixed top-16 left-0 right-0 h-0.5 bg-primary-400 z-50 origin-left"
         style={{ scaleX: scrollYProgress }}
       />
 
-      {/* Sticky chapter header */}
       <div className="sticky top-16 z-40 bg-white/95 backdrop-blur-sm border-b border-border">
         <div className="page-container py-3 flex items-center justify-between gap-3 sm:gap-4">
           <Link href="/playbook" className="flex items-center gap-1.5 text-sm text-muted-fg hover:text-primary-400 transition-colors">
@@ -104,7 +76,6 @@ export function ChapterClient({ chapter, content, chapters }: Props) {
       </div>
 
       <div className="max-w-[900px] mx-auto px-4 sm:px-6 py-8 sm:py-10">
-        {/* Chapter hero */}
         <div
           className="rounded-2xl p-8 mb-10 text-white relative overflow-hidden"
           style={{ background: chapter.color }}
@@ -121,28 +92,13 @@ export function ChapterClient({ chapter, content, chapters }: Props) {
               </div>
             </div>
             <p className="text-white/70 text-sm mb-4">{chapter.subtitle}</p>
-            <div className="flex items-center gap-4 text-white/60 text-sm">
-              <span className="flex items-center gap-1.5"><BookOpen className="w-4 h-4" /> {chapter.pages} pages</span>
+            <div className="flex items-center gap-4 text-white/60 text-sm flex-wrap">
+              <span className="flex items-center gap-1.5"><BookOpen className="w-4 h-4" /> {sections.length} sections</span>
               <span className="flex items-center gap-1.5"><Clock className="w-4 h-4" /> {chapter.readTime}</span>
             </div>
           </div>
         </div>
 
-        {/* Table of contents */}
-        <div className="bg-secondary rounded-xl p-5 mb-8">
-          <p className="text-xs font-bold uppercase tracking-widest text-muted-fg mb-3">Contents</p>
-          <div className="space-y-1.5">
-            {chapter.sections.map((s, i) => (
-              <div key={i} className="flex items-center gap-2 text-sm text-gray-700">
-                <span className="font-mono text-xs text-primary-400">{s.pages}</span>
-                <ChevronRight className="w-3 h-3 text-muted-fg" />
-                {s.title}
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Key takeaways */}
         <div className="bg-primary-soft border border-primary-line rounded-xl p-5 mb-8">
           <p className="text-xs font-bold uppercase tracking-widest text-primary-800 mb-3">Key Takeaways</p>
           <ul className="space-y-2">
@@ -155,25 +111,67 @@ export function ChapterClient({ chapter, content, chapters }: Props) {
           </ul>
         </div>
 
-        {/* Chapter content */}
-        <div ref={contentRef} className="prose max-w-none">
-          {content.map((block, i) => renderContent(block, i))}
+        <div ref={contentRef} className="space-y-3">
+          {sections.map((section) => {
+            const isOpen = openSection === section.id;
+            return (
+              <div key={section.id} className="rounded-xl border border-border bg-white overflow-hidden">
+                <button
+                  type="button"
+                  onClick={() => setOpenSection(isOpen ? null : section.id)}
+                  className="w-full flex items-start gap-3 p-5 text-left hover:bg-secondary/50 transition-colors"
+                >
+                  <span className="font-mono text-xs text-primary-400 mt-1 flex-shrink-0">{section.number}</span>
+                  <div className="flex-1 min-w-0">
+                    <p className="font-serif font-bold text-gray-900">{section.title}</p>
+                    <p className="text-sm text-muted-fg mt-0.5">{section.desc}</p>
+                  </div>
+                  <ChevronDown className={`w-5 h-5 text-muted-fg flex-shrink-0 transition-transform ${isOpen ? "rotate-180" : ""}`} />
+                </button>
+                {isOpen && (
+                  <div className="px-5 pb-6 border-t border-border pt-5">
+                    <p className="text-gray-900 font-medium italic border-l-4 border-primary-400 pl-4 mb-5">
+                      {section.hook}
+                    </p>
+                    {section.paragraphs.map((p, i) => (
+                      <p key={i} className="text-gray-700 leading-relaxed mb-4">{p}</p>
+                    ))}
+                    {section.pullQuote && (
+                      <blockquote className="bg-secondary rounded-xl p-5 my-5 border-l-4 border-primary-400">
+                        <p className="font-serif text-gray-800 italic">{section.pullQuote}</p>
+                      </blockquote>
+                    )}
+                    {section.wtmfy && (
+                      <div className="bg-primary-soft rounded-xl p-5 mt-5">
+                        <p className="text-xs font-bold uppercase tracking-widest text-primary-800 mb-2">What this means for you</p>
+                        <p className="text-sm text-primary-900">{section.wtmfy}</p>
+                      </div>
+                    )}
+                    {section.handoff && (
+                      <p className="text-sm text-muted-fg mt-5 flex items-center gap-1">
+                        <ChevronRight className="w-4 h-4" /> {section.handoff}
+                      </p>
+                    )}
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </div>
 
-        {/* Chapter navigation */}
-        <div className="flex items-center justify-between mt-16 pt-8 border-t border-border">
+        <div className="flex items-center justify-between mt-16 pt-8 border-t border-border gap-4 flex-wrap">
           {prevChapter ? (
             <Link href={`/playbook/${prevChapter.id}`}>
               <Button variant="outline">
                 <ArrowLeft className="w-4 h-4" />
-                Chapter {prevChapter.letter}: {prevChapter.title}
+                Chapter {prevChapter.letter}
               </Button>
             </Link>
           ) : <div />}
           {nextChapter && (
             <Link href={`/playbook/${nextChapter.id}`}>
               <Button>
-                Chapter {nextChapter.letter}: {nextChapter.title}
+                Chapter {nextChapter.letter}
                 <ArrowRight className="w-4 h-4" />
               </Button>
             </Link>

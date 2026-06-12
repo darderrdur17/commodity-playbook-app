@@ -9,5 +9,10 @@ export default async function AdminPage() {
   if (!session?.user?.id) redirect("/login?callbackUrl=/admin");
   if (session.user.role !== "ADMIN") redirect("/dashboard");
 
-  return <AdminClient adminName={session.user.name || "Admin"} />;
+  return (
+    <AdminClient
+      adminName={session.user.name || "Admin"}
+      adminId={session.user.id}
+    />
+  );
 }

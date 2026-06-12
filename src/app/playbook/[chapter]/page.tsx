@@ -1,24 +1,24 @@
 import { auth } from "@/lib/auth";
 import { redirect, notFound } from "next/navigation";
 import { prisma } from "@/lib/prisma";
-import { CHAPTERS, CHAPTER_CONTENT } from "@/data/playbook";
+import { getContentTierForSlug, getPlaybookChapters, getPlaybookSections } from "@/lib/content/accessors";
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 import { hasAccess } from "@/lib/utils";
 import { ChapterClient } from "./chapter-client";
 
-export function generateStaticParams() {
-  return CHAPTERS.map((c) => ({ chapter: c.id }));
-}
-
 export async function generateMetadata({ params }: { params: Promise<{ chapter: string }> }) {
   const { chapter } = await params;
-  const ch = CHAPTERS.find((c) => c.id === chapter);
+  const chapters = await getPlaybookChapters();
+  const ch = chapters.find((c) => c.id === chapter);
   if (!ch) return { title: "Chapter Not Found" };
   return { title: `Chapter ${ch.letter}: ${ch.title}` };
 }
 
 export default async function ChapterPage({ params }: { params: Promise<{ chapter: string }> }) {
   const { chapter } = await params;
-  const chapterData = CHAPTERS.find((c) => c.id === chapter);
+  const chapters = await getPlaybookChapters();
+  const chapterData = chapters.find((c) => c.id === chapter);
   if (!chapterData) notFound();
 
   const session = await auth();
@@ -31,25 +31,19 @@ export default async function ChapterPage({ params }: { params: Promise<{ chapte
 
   if (!user) redirect("/login");
 
-  const isPro = hasAccess(user.tier, "PRO");
-  if (!isPro && !chapterData.preview) {
+  const requiredTier = await getContentTierForSlug("playbook");
+  const hasPlaybookAccess = hasAccess(user.tier, requiredTier as "PRO" | "ELITE");
+  if (!hasPlaybookAccess && !chapterData.preview) {
     redirect("/pricing?locked=playbook");
   }
 
-  const content = CHAPTER_CONTENT[chapter] || [
-    `## ${chapterData.title}`,
-    `This chapter covers ${chapterData.subtitle}. Full content available to Pro and Elite members.`,
-    ...chapterData.sections.map(
-      (s) => `## ${s.title}\n\nDetailed content for pages ${s.pages} — covering the key concepts, frameworks, and practical applications relevant to commodity trading professionals.`
-    ),
-  ];
+  const sections = await getPlaybookSections(chapter);
 
   return (
     <ChapterClient
       chapter={chapterData}
-      content={content}
-      userTier={user.tier}
-      chapters={CHAPTERS}
+      sections={sections}
+      chapters={chapters}
     />
   );
 }

@@ -1,0 +1,143 @@
+import type { PlaybookSection } from "@/data/playbook";
+import type { CaseStudyCard, CaseStudySection } from "@/data/case-studies";
+import type { DeskQA } from "@/data/desk-channel";
+import type { GlossaryTerm } from "@/data/glossary";
+import { getPublishedPayload } from "./repository";
+import { CHAPTERS } from "@/data/playbook";
+import { CASE_STUDIES, CASE_STUDY_DETAILS } from "@/data/case-studies";
+import { DESK_CATEGORIES, DESK_QA } from "@/data/desk-channel";
+import { GLOSSARY_TERMS } from "@/data/glossary";
+import { INTERVIEW_QUESTIONS, INTERVIEW_CATEGORIES } from "@/data/interview-questions";
+import { KNOWLEDGE_TEST } from "@/data/knowledge-test";
+import { CAREER_ROLES } from "@/data/career-roadmap";
+import { RESUME_TEMPLATES, PERSONA_QUIZ_QUESTIONS } from "@/data/resume-templates";
+import { JOB_OPENINGS, JOB_REGIONS, JOB_LEVELS, JOB_SEGMENTS } from "@/data/job-openings";
+import playbookSections from "@/data/playbook-sections.json";
+
+type PlaybookPayload = {
+  chapters: typeof CHAPTERS;
+  sections: typeof playbookSections;
+};
+
+type CaseStudiesPayload = {
+  studies: CaseStudyCard[];
+  details: Record<string, CaseStudySection[]>;
+};
+
+export async function getPlaybookChapters() {
+  const data = await getPublishedPayload<PlaybookPayload>("playbook");
+  return data.chapters ?? CHAPTERS;
+}
+
+export async function getPlaybookSections(chapterId: string): Promise<PlaybookSection[]> {
+  const data = await getPublishedPayload<PlaybookPayload>("playbook");
+  const sections = data.sections ?? playbookSections;
+  const key = chapterId as keyof typeof sections;
+  return (sections[key] as PlaybookSection[]) || [];
+}
+
+export async function getCaseStudiesList() {
+  const data = await getPublishedPayload<CaseStudiesPayload>("case-studies");
+  return data.studies ?? CASE_STUDIES;
+}
+
+export async function getCaseStudyBySlug(slug: string) {
+  const data = await getPublishedPayload<CaseStudiesPayload>("case-studies");
+  const studies = data.studies ?? CASE_STUDIES;
+  const details = data.details ?? CASE_STUDY_DETAILS;
+  const card = studies.find((c) => c.slug === slug);
+  if (!card) return null;
+  return { card, sections: details[slug] || null };
+}
+
+export async function getDeskChannelData() {
+  const data = await getPublishedPayload<{
+    categories: typeof DESK_CATEGORIES;
+    questions: DeskQA[];
+  }>("desk-channel");
+  return {
+    categories: data.categories ?? DESK_CATEGORIES,
+    questions: data.questions ?? DESK_QA,
+  };
+}
+
+export async function getGlossaryTerms() {
+  const data = await getPublishedPayload<{ terms: GlossaryTerm[] }>("glossary");
+  return data.terms ?? GLOSSARY_TERMS;
+}
+
+export async function getInterviewQuestionsData() {
+  const data = await getPublishedPayload<{
+    questions: typeof INTERVIEW_QUESTIONS;
+    categories: typeof INTERVIEW_CATEGORIES;
+  }>("interview-questions");
+  return {
+    questions: data.questions ?? INTERVIEW_QUESTIONS,
+    categories: data.categories ?? INTERVIEW_CATEGORIES,
+  };
+}
+
+export async function getKnowledgeTestQuestions() {
+  const data = await getPublishedPayload<{ questions: typeof KNOWLEDGE_TEST }>("knowledge-test");
+  return data.questions ?? KNOWLEDGE_TEST;
+}
+
+export async function getCareerRoles() {
+  const data = await getPublishedPayload<{ roles: typeof CAREER_ROLES }>("career-roadmap");
+  return data.roles ?? CAREER_ROLES;
+}
+
+export async function getResumeTemplatesData() {
+  const data = await getPublishedPayload<{
+    templates: typeof RESUME_TEMPLATES;
+    quiz: typeof PERSONA_QUIZ_QUESTIONS;
+  }>("resume-templates");
+  return {
+    templates: data.templates ?? RESUME_TEMPLATES,
+    quiz: data.quiz ?? PERSONA_QUIZ_QUESTIONS,
+  };
+}
+
+export async function getJobOpeningsData() {
+  const data = await getPublishedPayload<{
+    jobs: typeof JOB_OPENINGS;
+    regions: typeof JOB_REGIONS;
+    levels: typeof JOB_LEVELS;
+    segments: typeof JOB_SEGMENTS;
+  }>("job-openings");
+  return {
+    jobs: data.jobs ?? JOB_OPENINGS,
+    regions: data.regions ?? JOB_REGIONS,
+    levels: data.levels ?? JOB_LEVELS,
+    segments: data.segments ?? JOB_SEGMENTS,
+  };
+}
+
+export async function getContentTierForSlug(slug: string) {
+  const { getModuleMeta } = await import("./modules");
+  const meta = getModuleMeta(slug);
+  try {
+    const { prisma } = await import("@/lib/prisma");
+    const row = await prisma.contentModule.findUnique({
+      where: { slug },
+      select: { requiredTier: true, published: true },
+    });
+    if (row?.published) return row.requiredTier;
+  } catch {
+    // fall through to module default
+  }
+  return meta?.requiredTier ?? "STARTER";
+}
+
+export async function getContentTiersMap() {
+  const { CONTENT_MODULE_META } = await import("./modules");
+  const entries = await Promise.all(
+    CONTENT_MODULE_META.map(async (meta) => [meta.slug, await getContentTierForSlug(meta.slug)] as const)
+  );
+  return Object.fromEntries(entries) as Record<string, string>;
+}
+
+export async function getResumeTemplateAssetUrls() {
+  const { getContentAssetUrlMap } = await import("./repository");
+  return getContentAssetUrlMap("resume-templates");
+}

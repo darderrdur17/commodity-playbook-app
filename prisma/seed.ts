@@ -182,6 +182,12 @@ async function main() {
   });
   console.log("  ✓ Sample waitlist entry created");
 
+  const { seedContentModulesIfEmpty } = await import("../src/lib/content/repository");
+  const contentResult = await seedContentModulesIfEmpty();
+  if (contentResult.seeded) {
+    console.log(`  ✓ Seeded ${contentResult.count} content modules`);
+  }
+
   console.log(`\n✅ Done! All accounts use password: ${DEMO_PASSWORD}`);
   console.log("   Try them at http://localhost:3000/demo\n");
 }

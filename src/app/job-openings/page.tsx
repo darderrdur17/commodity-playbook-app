@@ -1,6 +1,9 @@
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
+import { getContentTierForSlug, getJobOpeningsData } from "@/lib/content/accessors";
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
 import { JobOpeningsClient } from "./job-openings-client";
 
 export const metadata = { title: "Job Openings" };
@@ -15,5 +18,18 @@ export default async function JobOpeningsPage() {
   });
   if (!user) redirect("/login");
 
-  return <JobOpeningsClient userTier={user.tier} />;
+  const [jobs, requiredTier] = await Promise.all([
+    getJobOpeningsData(),
+    getContentTierForSlug("job-openings"),
+  ]);
+  return (
+    <JobOpeningsClient
+      userTier={user.tier}
+      jobs={jobs.jobs}
+      regions={jobs.regions}
+      levels={jobs.levels}
+      segments={jobs.segments}
+      requiredTier={requiredTier as "PRO" | "ELITE"}
+    />
+  );
 }
