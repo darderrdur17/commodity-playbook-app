@@ -186,9 +186,15 @@ async function main() {
   console.log("   Try them at http://localhost:3000/demo\n");
 }
 
-main()
-  .catch((e) => {
-    console.error(e);
-    process.exit(1);
-  })
-  .finally(() => prisma.$disconnect());
+export async function seedDatabase() {
+  await main();
+}
+
+if (require.main === module) {
+  seedDatabase()
+    .catch((e) => {
+      console.error(e);
+      process.exit(1);
+    })
+    .finally(() => prisma.$disconnect());
+}
