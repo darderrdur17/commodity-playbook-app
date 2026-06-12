@@ -89,9 +89,12 @@ export default function DemoPage() {
         {/* Admin */}
         {adminAccount && (
           <Reveal className="mb-10">
-            <h2 className="font-serif text-xl font-bold text-gray-900 mb-4 flex items-center gap-2">
+            <h2 className="font-serif text-xl font-bold text-gray-900 mb-1 flex items-center gap-2">
               <Shield className="w-5 h-5 text-red-500" /> Admin Account
             </h2>
+            <p className="text-sm text-muted-fg mb-4">
+              Opens the Admin Dashboard — use the <strong>Content CMS</strong> tab to edit JSON and upload files for every tier pack.
+            </p>
             <DemoCard
               account={adminAccount}
               loading={loadingEmail === adminAccount.email}

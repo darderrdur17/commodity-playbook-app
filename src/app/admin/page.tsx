@@ -3,6 +3,7 @@ import { redirect } from "next/navigation";
 import { AdminClient } from "./admin-client";
 
 export const metadata = { title: "Admin Dashboard" };
+export const dynamic = "force-dynamic";
 
 export default async function AdminPage() {
   const session = await auth();

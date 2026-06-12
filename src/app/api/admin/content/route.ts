@@ -8,5 +8,8 @@ export async function GET() {
 
   await seedContentModulesIfEmpty();
   const modules = await listContentModules();
-  return NextResponse.json({ modules });
+  return NextResponse.json(
+    { modules },
+    { headers: { "Cache-Control": "no-store" } }
+  );
 }

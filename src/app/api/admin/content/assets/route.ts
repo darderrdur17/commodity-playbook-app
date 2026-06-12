@@ -4,7 +4,13 @@ import {
   resolveContentAssetMimeType,
   validateContentAssetFile,
 } from "@/lib/content/asset-files";
-import { listContentAssets, upsertContentAsset } from "@/lib/content/repository";
+import {
+  attachUploadedAssetToModule,
+  listContentAssets,
+  upsertContentAsset,
+} from "@/lib/content/repository";
+import type { ContentSlug } from "@/lib/content/modules";
+import { getModuleMeta } from "@/lib/content/modules";
 import type { Tier } from "@prisma/client";
 
 export async function GET(req: NextRequest) {
@@ -49,11 +55,21 @@ export async function POST(req: NextRequest) {
     uploadedById: session.user.id,
   });
 
+  if (moduleSlug && getModuleMeta(moduleSlug)) {
+    await attachUploadedAssetToModule(
+      moduleSlug as ContentSlug,
+      { id: asset.id, fileName: asset.fileName, assetKey: asset.assetKey },
+      session.user.id
+    );
+  }
+
   return NextResponse.json({
     id: asset.id,
     fileName: asset.fileName,
     size: asset.size,
     url: `/api/content/assets/${asset.id}`,
     assetKey: asset.assetKey,
+    moduleSlug: asset.moduleSlug,
+    replaced: Boolean(assetKey),
   });
 }

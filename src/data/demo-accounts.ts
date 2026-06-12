@@ -30,7 +30,7 @@ export const DEMO_ACCOUNTS: DemoAccount[] = [
     persona: "INSIDER",
     mentorCredits: 10,
     resumeCredits: 10,
-    description: "Full platform admin — manage users, mentor Q&A, waitlist, and stats.",
+    description: "Full admin — edit & upload all tier content (JSON + files), manage customers, mentor Q&A, and waitlist.",
     emoji: "🛡️",
     redirectTo: "/admin",
   },

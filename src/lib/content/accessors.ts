@@ -139,5 +139,11 @@ export async function getContentTiersMap() {
 
 export async function getResumeTemplateAssetUrls() {
   const { getContentAssetUrlMap } = await import("./repository");
-  return getContentAssetUrlMap("resume-templates");
+  const map = await getContentAssetUrlMap("resume-templates");
+  const data = await getResumeTemplatesData();
+  for (const t of data.templates) {
+    const assetId = (t as { assetId?: string }).assetId;
+    if (assetId) map[t.templateFile] = `/api/content/assets/${assetId}`;
+  }
+  return map;
 }

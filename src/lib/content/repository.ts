@@ -239,6 +239,60 @@ export async function deleteContentAsset(id: string) {
   return prisma.contentAsset.delete({ where: { id } });
 }
 
+type UploadedAssetRef = {
+  id: string;
+  fileName: string;
+  assetKey: string;
+  url: string;
+  updatedAt: string;
+};
+
+/** After admin upload — register file on module payload so members + editor see it. */
+export async function attachUploadedAssetToModule(
+  moduleSlug: ContentSlug,
+  asset: { id: string; fileName: string; assetKey: string | null },
+  updatedById: string
+) {
+  const existing = await prisma.contentModule.findUnique({ where: { slug: moduleSlug } });
+  if (!existing) return;
+
+  const payload = { ...(existing.payload as Record<string, unknown>) };
+  const key = asset.assetKey || asset.fileName;
+  const ref: UploadedAssetRef = {
+    id: asset.id,
+    fileName: asset.fileName,
+    assetKey: key,
+    url: `/api/content/assets/${asset.id}`,
+    updatedAt: new Date().toISOString(),
+  };
+
+  const uploaded = Array.isArray(payload.uploadedAssets)
+    ? [...(payload.uploadedAssets as UploadedAssetRef[])]
+    : [];
+  const idx = uploaded.findIndex((a) => a.assetKey === key || a.id === asset.id);
+  if (idx >= 0) uploaded[idx] = ref;
+  else uploaded.push(ref);
+  payload.uploadedAssets = uploaded;
+
+  if (moduleSlug === "resume-templates" && Array.isArray(payload.templates)) {
+    payload.templates = (payload.templates as Record<string, unknown>[]).map((t) => {
+      if (t.templateFile === key || t.templateFile === asset.fileName) {
+        return { ...t, assetId: asset.id };
+      }
+      return t;
+    });
+  }
+
+  await prisma.contentModule.update({
+    where: { slug: moduleSlug },
+    data: {
+      payload: payload as object,
+      version: existing.version + 1,
+      updatedById,
+    },
+  });
+}
+
 /** Public read — maps assetKey/fileName to tier-gated download URLs. */
 export async function getContentAssetUrlMap(moduleSlug: string): Promise<Record<string, string>> {
   try {
