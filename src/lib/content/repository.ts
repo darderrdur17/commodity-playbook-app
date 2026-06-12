@@ -11,10 +11,13 @@ export async function ensureContentInfrastructure() {
   try {
     await prisma.contentModule.findFirst({ take: 1 });
     cmsTablesReady = true;
+    return;
   } catch {
-    await applyCmsSchemaSql();
-    cmsTablesReady = true;
+    // Table missing — create CMS schema
   }
+  await applyCmsSchemaSql();
+  await prisma.contentModule.findFirst({ take: 1 });
+  cmsTablesReady = true;
 }
 
 async function tryReadPublishedPayload<T>(slug: ContentSlug): Promise<T | null> {

@@ -3,28 +3,33 @@ import path from "path";
 import { prisma } from "@/lib/prisma";
 import { seedDatabase } from "../../prisma/seed";
 
+function stripSqlComments(sql: string): string {
+  return sql.replace(/--[^\n\r]*/g, "").replace(/\/\*[\s\S]*?\*\//g, "");
+}
+
 function parseSqlStatements(sql: string): string[] {
+  const cleaned = stripSqlComments(sql);
   const statements: string[] = [];
   let current = "";
   let inDollarQuote = false;
 
-  for (let i = 0; i < sql.length; i++) {
-    if (sql[i] === "$" && sql[i + 1] === "$") {
+  for (let i = 0; i < cleaned.length; i++) {
+    if (cleaned[i] === "$" && cleaned[i + 1] === "$") {
       inDollarQuote = !inDollarQuote;
       current += "$$";
       i++;
       continue;
     }
-    if (!inDollarQuote && sql[i] === ";") {
-      const trimmed = current.replace(/^--[^\n]*\n?/gm, "").trim();
+    if (!inDollarQuote && cleaned[i] === ";") {
+      const trimmed = current.trim();
       if (trimmed.length > 0) statements.push(trimmed);
       current = "";
       continue;
     }
-    current += sql[i];
+    current += cleaned[i];
   }
 
-  const trimmed = current.replace(/^--[^\n]*\n?/gm, "").trim();
+  const trimmed = current.trim();
   if (trimmed.length > 0) statements.push(trimmed);
   return statements;
 }

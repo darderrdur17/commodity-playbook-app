@@ -1,4 +1,4 @@
--- CMS tables only (idempotent; safe to re-run)
+-- CMS tables only (idempotent, safe to re-run)
 CREATE TABLE IF NOT EXISTS "ContentModule" (
     "id" TEXT NOT NULL,
     "slug" TEXT NOT NULL,

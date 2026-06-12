@@ -17,9 +17,14 @@ export async function GET(req: NextRequest) {
   const session = await requireAdmin();
   if (!session) return NextResponse.json({ error: "Forbidden" }, { status: 403 });
 
-  const moduleSlug = req.nextUrl.searchParams.get("module") || undefined;
-  const assets = await listContentAssets(moduleSlug);
-  return NextResponse.json({ assets });
+  try {
+    const moduleSlug = req.nextUrl.searchParams.get("module") || undefined;
+    const assets = await listContentAssets(moduleSlug);
+    return NextResponse.json({ assets });
+  } catch (err) {
+    console.error("[admin/content/assets] GET failed:", err);
+    return NextResponse.json({ error: "Failed to load assets" }, { status: 500 });
+  }
 }
 
 export async function POST(req: NextRequest) {
