@@ -279,7 +279,14 @@ export async function attachUploadedAssetToModule(
 
   if (moduleSlug === "resume-templates" && Array.isArray(payload.templates)) {
     payload.templates = (payload.templates as Record<string, unknown>[]).map((t) => {
-      if (t.templateFile === key || t.templateFile === asset.fileName) {
+      const templateFile = t.templateFile as string | undefined;
+      const matchesTemplate =
+        templateFile &&
+        (templateFile === key ||
+          templateFile === asset.fileName ||
+          key.endsWith(`/${templateFile}`) ||
+          asset.fileName === templateFile);
+      if (matchesTemplate) {
         return { ...t, assetId: asset.id };
       }
       return t;

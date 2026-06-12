@@ -7,7 +7,9 @@ import { Badge } from "@/components/ui/badge";
 import {
   CONTENT_ASSET_ACCEPT,
   CONTENT_ASSET_MAX_BYTES,
+  buildContentAssetKey,
   formatAssetTypeLabel,
+  validateContentAssetFile,
 } from "@/lib/content/asset-files";
 
 interface ModuleRow {
@@ -50,6 +52,7 @@ export function AdminContentTab() {
   const [message, setMessage] = useState("");
   const [loadError, setLoadError] = useState("");
   const [uploading, setUploading] = useState(false);
+  const uploadInputRef = useRef<HTMLInputElement>(null);
   const replaceInputRef = useRef<HTMLInputElement>(null);
   const [replaceAssetId, setReplaceAssetId] = useState<string | null>(null);
 
@@ -150,6 +153,11 @@ export function AdminContentTab() {
       setMessage("Select a content module first.");
       return;
     }
+    const clientError = validateContentAssetFile(file.name, file.size);
+    if (clientError) {
+      setMessage(clientError);
+      return;
+    }
     setUploading(true);
     setMessage("");
     try {
@@ -157,7 +165,9 @@ export function AdminContentTab() {
       form.append("file", file);
       if (selectedSlug) form.append("moduleSlug", selectedSlug);
       form.append("requiredTier", tier);
-      form.append("assetKey", file.name);
+      if (selectedSlug) {
+        form.append("assetKey", buildContentAssetKey(selectedSlug, file.name));
+      }
 
       const url = replaceId
         ? `/api/admin/content/assets/${replaceId}`
@@ -179,9 +189,19 @@ export function AdminContentTab() {
       );
       await loadModules();
       if (selectedSlug) await selectModule(selectedSlug);
+    } catch {
+      setMessage("Upload failed — check your connection and try again.");
     } finally {
       setUploading(false);
     }
+  }
+
+  function triggerUploadPicker() {
+    if (!selectedSlug) {
+      setMessage("Select a content module on the left before uploading.");
+      return;
+    }
+    uploadInputRef.current?.click();
   }
 
   function onUpload(e: React.ChangeEvent<HTMLInputElement>) {
@@ -236,9 +256,16 @@ export function AdminContentTab() {
   return (
     <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
       <input
+        ref={uploadInputRef}
+        type="file"
+        className="sr-only"
+        accept={CONTENT_ASSET_ACCEPT}
+        onChange={onUpload}
+      />
+      <input
         ref={replaceInputRef}
         type="file"
-        className="hidden"
+        className="sr-only"
         accept={CONTENT_ASSET_ACCEPT}
         onChange={onReplaceUpload}
       />
@@ -299,23 +326,35 @@ export function AdminContentTab() {
               ? `New uploads attach to "${selectedSlug}". PDF, Word, images, etc. (max ${CONTENT_ASSET_MAX_BYTES / (1024 * 1024)}MB). Same filename replaces an existing file.`
               : "Select a module on the left, then upload."}
           </p>
-          <label
-            className={`flex items-center justify-center gap-2 border border-dashed rounded-lg p-4 transition-colors ${
+          <button
+            type="button"
+            onClick={triggerUploadPicker}
+            disabled={uploading}
+            className={`w-full flex items-center justify-center gap-2 border border-dashed rounded-lg p-4 transition-colors ${
               selectedSlug
-                ? "border-border cursor-pointer hover:border-primary-400"
-                : "border-border/50 cursor-not-allowed opacity-60"
+                ? "border-border cursor-pointer hover:border-primary-400 hover:bg-secondary/40"
+                : "border-border/50 opacity-60"
             }`}
           >
             <Upload className="w-4 h-4 text-primary-400" />
             <span className="text-sm font-medium">{uploading ? "Uploading..." : "Upload new file"}</span>
-            <input
-              type="file"
-              className="hidden"
-              accept={CONTENT_ASSET_ACCEPT}
-              onChange={onUpload}
-              disabled={uploading || !selectedSlug}
-            />
-          </label>
+          </button>
+          {message && (
+            <p
+              className={`mt-3 text-xs px-3 py-2 rounded-lg ${
+                message.includes("Invalid") ||
+                message.includes("failed") ||
+                message.includes("Could not") ||
+                message.includes("Unsupported") ||
+                message.includes("too large") ||
+                message.includes("Select a content")
+                  ? "bg-red-50 text-red-700"
+                  : "bg-green-50 text-green-800"
+              }`}
+            >
+              {message}
+            </p>
+          )}
           <ul className="mt-3 space-y-2 max-h-48 overflow-y-auto">
             {moduleAssets.length === 0 && (
               <li className="text-xs text-muted-fg text-center py-2">No files for this module yet.</li>

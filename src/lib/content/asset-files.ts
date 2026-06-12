@@ -1,5 +1,11 @@
 /** Admin CMS uploads: documents, images, and common office formats. */
-export const CONTENT_ASSET_MAX_BYTES = 5 * 1024 * 1024;
+/** Keep under Vercel's ~4.5MB request body limit. */
+export const CONTENT_ASSET_MAX_BYTES = 4 * 1024 * 1024;
+
+/** Unique per module — avoids global filename collisions in ContentAsset.assetKey. */
+export function buildContentAssetKey(moduleSlug: string, fileName: string): string {
+  return `${moduleSlug}/${fileName}`;
+}
 
 const EXTENSION_MIME: Record<string, string> = {
   pdf: "application/pdf",
