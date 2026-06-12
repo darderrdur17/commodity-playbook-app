@@ -1,0 +1,189 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ── Auth.js required models ──────────────────────────────────────────
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// ── Core User model ──────────────────────────────────────────────────
+model User {
+  id             String    @id @default(cuid())
+  name           String?
+  email          String    @unique
+  emailVerified  DateTime?
+  image          String?
+  passwordHash   String?
+
+  // Business logic fields
+  role           Role      @default(USER)
+  tier           Tier      @default(STARTER)
+  track          Track     @default(CAREER)
+  persona        Persona?
+  onboardingDone Boolean   @default(false)
+
+  // Stripe billing
+  stripeCustomerId       String?   @unique
+  stripeSubscriptionId   String?
+  stripePriceId          String?
+  stripeCurrentPeriodEnd DateTime?
+  stripeStatus           String?   @default("inactive")
+
+  // Engagement
+  mentorCredits   Int @default(0)
+  resumeCredits   Int @default(0)
+  jobWaitlist     Boolean @default(false)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  accounts           Account[]
+  sessions           Session[]
+  progress           ChapterProgress[]
+  mentorQuestions    MentorQuestion[]
+  quizResults        QuizResult[]
+  jobWaitlistEntry   JobWaitlistEntry?
+
+  @@index([email])
+  @@index([stripeCustomerId])
+}
+
+// ── Enums ────────────────────────────────────────────────────────────
+enum Role {
+  USER
+  ADMIN
+}
+
+enum Tier {
+  STARTER
+  PRO
+  ELITE
+}
+
+enum Track {
+  CAREER
+  SALES
+}
+
+enum Persona {
+  FRESH_GRAD
+  CAREER_SWITCHER
+  INSIDER
+  ANALYST_TRADER
+  VENDOR
+}
+
+// ── Content Progress ─────────────────────────────────────────────────
+model ChapterProgress {
+  id         String   @id @default(cuid())
+  userId     String
+  chapterId  String   // "a" | "b" | "c" | "d" | "e"
+  completed  Boolean  @default(false)
+  progress   Int      @default(0) // 0-100
+  completedAt DateTime?
+  updatedAt  DateTime @updatedAt
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, chapterId])
+}
+
+// ── Mentor Connect ───────────────────────────────────────────────────
+model MentorQuestion {
+  id         String   @id @default(cuid())
+  userId     String
+  segment    String   // "physical-trading" | "finance" | "analytics" | "operations" | "sales"
+  question   String   @db.Text
+  answer     String?  @db.Text
+  isAnswered Boolean  @default(false)
+  isPublic   Boolean  @default(false)
+  createdAt  DateTime @default(now())
+  answeredAt DateTime?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// ── Persona Quiz Results ─────────────────────────────────────────────
+model QuizResult {
+  id        String   @id @default(cuid())
+  userId    String
+  persona   Persona
+  scores    Json     // { fresh_grad: 20, career_switcher: 45, ... }
+  completedAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// ── Knowledge Test ───────────────────────────────────────────────────
+model KnowledgeTestResult {
+  id          String   @id @default(cuid())
+  userId      String
+  score       Int
+  totalQ      Int      @default(20)
+  gapAreas    Json     // string[]
+  completedAt DateTime @default(now())
+}
+
+// ── Job Waitlist ─────────────────────────────────────────────────────
+model JobWaitlistEntry {
+  id        String   @id @default(cuid())
+  userId    String?  @unique
+  email     String   @unique
+  name      String?
+  track     Track    @default(CAREER)
+  gdprOpt   Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  user User? @relation(fields: [userId], references: [id], onDelete: SetNull)
+}
+
+// ── Email Subscriber (for Weekly Digest) ────────────────────────────
+model EmailSubscriber {
+  id          String   @id @default(cuid())
+  email       String   @unique
+  name        String?
+  subscribed  Boolean  @default(true)
+  source      String?  // "starter-signup" | "waitlist" | "manual"
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

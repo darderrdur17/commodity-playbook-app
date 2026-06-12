@@ -1,0 +1,36 @@
+import { auth } from "@/lib/auth";
+import { redirect } from "next/navigation";
+import { prisma } from "@/lib/prisma";
+import { MentorConnectClient } from "./mentor-connect-client";
+
+export const metadata = { title: "Mentor Connect" };
+
+export default async function MentorConnectPage() {
+  const session = await auth();
+  if (!session?.user?.id) redirect("/login?callbackUrl=/mentor-connect");
+
+  const user = await prisma.user.findUnique({
+    where: { id: session.user.id },
+    include: {
+      mentorQuestions: { orderBy: { createdAt: "desc" } },
+    },
+  });
+
+  if (!user) redirect("/login");
+
+  return (
+    <MentorConnectClient
+      userTier={user.tier}
+      mentorCredits={user.mentorCredits}
+      questions={user.mentorQuestions.map((q) => ({
+        id: q.id,
+        segment: q.segment,
+        question: q.question,
+        answer: q.answer,
+        isAnswered: q.isAnswered,
+        createdAt: q.createdAt.toISOString(),
+        answeredAt: q.answeredAt?.toISOString(),
+      }))}
+    />
+  );
+}

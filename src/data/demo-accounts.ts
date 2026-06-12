@@ -1,0 +1,119 @@
+/**
+ * Demo accounts for local/staging testing.
+ * Password for all accounts: Demo1234!
+ * Run `npm run db:seed` after `npm run db:push` to create them.
+ */
+
+export const DEMO_PASSWORD = "Demo1234!";
+
+export type DemoAccount = {
+  email: string;
+  name: string;
+  role: "USER" | "ADMIN";
+  tier: "STARTER" | "PRO" | "ELITE";
+  track: "CAREER" | "SALES";
+  persona: "FRESH_GRAD" | "CAREER_SWITCHER" | "INSIDER" | "ANALYST_TRADER" | "VENDOR";
+  mentorCredits: number;
+  resumeCredits: number;
+  description: string;
+  emoji: string;
+  redirectTo: "/dashboard" | "/admin";
+};
+
+export const DEMO_ACCOUNTS: DemoAccount[] = [
+  {
+    email: "admin@demo.com",
+    name: "Admin User",
+    role: "ADMIN",
+    tier: "ELITE",
+    track: "CAREER",
+    persona: "INSIDER",
+    mentorCredits: 10,
+    resumeCredits: 10,
+    description: "Full platform admin — manage users, mentor Q&A, waitlist, and stats.",
+    emoji: "🛡️",
+    redirectTo: "/admin",
+  },
+  {
+    email: "starter.fresh@demo.com",
+    name: "Maya Tan (Starter)",
+    role: "USER",
+    tier: "STARTER",
+    track: "CAREER",
+    persona: "FRESH_GRAD",
+    mentorCredits: 0,
+    resumeCredits: 0,
+    description: "Free Starter tier — Chapter A preview, glossary, weekly digest.",
+    emoji: "🎓",
+    redirectTo: "/dashboard",
+  },
+  {
+    email: "starter.vendor@demo.com",
+    name: "Chris Lim (Starter)",
+    role: "USER",
+    tier: "STARTER",
+    track: "SALES",
+    persona: "VENDOR",
+    mentorCredits: 0,
+    resumeCredits: 0,
+    description: "Sales track Starter — exploring desk language before upgrading.",
+    emoji: "🤝",
+    redirectTo: "/dashboard",
+  },
+  {
+    email: "pro.switcher@demo.com",
+    name: "Sarah Wong (Pro)",
+    role: "USER",
+    tier: "PRO",
+    track: "CAREER",
+    persona: "CAREER_SWITCHER",
+    mentorCredits: 0,
+    resumeCredits: 3,
+    description: "Pro member — full playbook, resume templates, career roadmap.",
+    emoji: "🔄",
+    redirectTo: "/dashboard",
+  },
+  {
+    email: "pro.analyst@demo.com",
+    name: "James Park (Pro)",
+    role: "USER",
+    tier: "PRO",
+    track: "CAREER",
+    persona: "ANALYST_TRADER",
+    mentorCredits: 0,
+    resumeCredits: 2,
+    description: "Pro analyst — playbook progress, interview prep, knowledge test.",
+    emoji: "📊",
+    redirectTo: "/dashboard",
+  },
+  {
+    email: "elite.insider@demo.com",
+    name: "Priya Sharma (Elite)",
+    role: "USER",
+    tier: "ELITE",
+    track: "CAREER",
+    persona: "INSIDER",
+    mentorCredits: 3,
+    resumeCredits: 5,
+    description: "Elite insider — case studies, desk channel, mentor connect.",
+    emoji: "⚡",
+    redirectTo: "/dashboard",
+  },
+  {
+    email: "elite.vendor@demo.com",
+    name: "Marcus Lee (Elite)",
+    role: "USER",
+    tier: "ELITE",
+    track: "SALES",
+    persona: "VENDOR",
+    mentorCredits: 2,
+    resumeCredits: 3,
+    description: "Elite sales track — full content plus job openings tracker.",
+    emoji: "💼",
+    redirectTo: "/dashboard",
+  },
+];
+
+export function getDemoAccountByEmail(email: string) {
+  return DEMO_ACCOUNTS.find((a) => a.email === email);
+}
