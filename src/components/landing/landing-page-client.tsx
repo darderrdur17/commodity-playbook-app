@@ -113,11 +113,7 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
             <div className="relative z-10 w-full max-w-[1200px] mx-auto px-4 sm:px-6 py-16 sm:py-24">
               <div className="max-w-3xl">
                 <Reveal>
-                  <Logo
-                    variant="wordmark-tagline"
-                    className="mb-8"
-                    imageClassName="max-h-14 sm:max-h-[72px] brightness-110"
-                  />
+                  <Logo variant="lockup-dark" showTagline className="mb-8" priority />
                   <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-accent/30 bg-accent/10 text-accent text-[10px] font-bold uppercase tracking-[0.2em] mb-5">
                     <span className="w-1.5 h-1.5 rounded-full bg-accent" />
                     {career.eyebrow}

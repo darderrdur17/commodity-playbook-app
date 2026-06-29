@@ -31,7 +31,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
           {/* Brand */}
           <div className="md:col-span-1">
-            <Logo variant="wordmark-tagline" className="mb-4" imageClassName="max-h-16 brightness-110" />
+            <Logo variant="lockup-dark" showTagline className="mb-4" />
             <p className="text-sm leading-relaxed text-gray-500 mb-5">
               The definitive Playbook guide to understanding commodity trading — how markets work, how revenue is made, and how to build a career or close a sale inside them. From first desk to senior coverage.
             </p>

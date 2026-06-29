@@ -2,9 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
-type LogoVariant = "horizontal" | "mark" | "white" | "wordmark-tagline";
+type LogoVariant = "horizontal" | "mark" | "white" | "wordmark-tagline" | "lockup-dark";
 
-const SOURCES: Record<LogoVariant, { src: string; width: number; height: number }> = {
+const SOURCES: Record<Exclude<LogoVariant, "lockup-dark">, { src: string; width: number; height: number }> = {
   horizontal: { src: "/brand/logo-horizontal.png", width: 220, height: 40 },
   mark: { src: "/brand/logo-mark.png", width: 40, height: 40 },
   white: { src: "/brand/logo-white.png", width: 220, height: 40 },
@@ -17,6 +17,46 @@ interface LogoProps {
   className?: string;
   imageClassName?: string;
   priority?: boolean;
+  /** Show tagline under the lockup (dark backgrounds only) */
+  showTagline?: boolean;
+}
+
+/** Icon + wordmark — matches nav on light, inverted on dark (no white PNG box) */
+function LogoLockupDark({
+  className,
+  showTagline = false,
+  priority = false,
+}: {
+  className?: string;
+  showTagline?: boolean;
+  priority?: boolean;
+}) {
+  return (
+    <span className={cn("inline-flex flex-col gap-2.5", className)}>
+      <span className="inline-flex items-center gap-2.5">
+        <Image
+          src="/brand/logo-mark.png"
+          alt=""
+          width={36}
+          height={36}
+          priority={priority}
+          className="h-8 w-8 sm:h-9 sm:w-9 object-contain shrink-0"
+          aria-hidden
+        />
+        <span className="font-sans font-bold text-[17px] sm:text-[18px] tracking-tight leading-none">
+          <span className="text-white">Commodity</span>
+          <span className="bg-gradient-to-r from-white to-accent bg-clip-text text-transparent">
+            Playbook
+          </span>
+        </span>
+      </span>
+      {showTagline && (
+        <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-gray-500 pl-[44px] sm:pl-[46px]">
+          Break in. Move up. Stay sharp.
+        </span>
+      )}
+    </span>
+  );
 }
 
 export function Logo({
@@ -25,7 +65,20 @@ export function Logo({
   className,
   imageClassName,
   priority = false,
+  showTagline = false,
 }: LogoProps) {
+  if (variant === "lockup-dark") {
+    const lockup = (
+      <LogoLockupDark className={className} showTagline={showTagline} priority={priority} />
+    );
+    if (!href) return lockup;
+    return (
+      <Link href={href} className="inline-flex shrink-0">
+        {lockup}
+      </Link>
+    );
+  }
+
   const { src, width, height } = SOURCES[variant];
   const img = (
     <Image
