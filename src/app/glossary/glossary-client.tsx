@@ -10,6 +10,8 @@ import {
   GLOSSARY_CATEGORY_BADGES,
   type GlossaryTerm,
 } from "@/data/glossary";
+import { getPersonaGlossaryGuide } from "@/data/glossary-persona";
+import { PERSONA_LABELS } from "@/lib/utils";
 import { Reveal } from "@/components/animations";
 import { Button } from "@/components/ui/button";
 
@@ -37,9 +39,17 @@ const CATEGORY_BADGE_BG: Record<string, string> = {
   "Market Intelligence & Analytics": "#eaf3de",
 };
 
-export function GlossaryClient({ terms = GLOSSARY_TERMS }: { terms?: GlossaryTerm[] }) {
+export function GlossaryClient({
+  terms = GLOSSARY_TERMS,
+  persona = null,
+}: {
+  terms?: GlossaryTerm[];
+  persona?: string | null;
+}) {
   const [search, setSearch] = useState("");
   const [activeCategory, setActiveCategory] = useState<string>("All");
+  const personaGuide = getPersonaGlossaryGuide(persona);
+  const personaLabel = persona ? PERSONA_LABELS[persona]?.label : null;
 
   const categoryCounts = useMemo(() => {
     const counts: Record<string, number> = {};
@@ -108,6 +118,42 @@ export function GlossaryClient({ terms = GLOSSARY_TERMS }: { terms?: GlossaryTer
           </div>
         </Reveal>
       </section>
+
+      {personaGuide && personaLabel ? (
+        <Reveal className="mb-8 rounded-xl border border-primary-line bg-primary-soft/40 px-5 py-4">
+          <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-primary-800 mb-1">
+            Recommended for {personaLabel}
+          </p>
+          <p className="font-semibold text-gray-900 text-sm mb-1">{personaGuide.headline}</p>
+          <p className="text-sm text-muted-fg leading-relaxed mb-3">{personaGuide.tip}</p>
+          <div className="flex flex-wrap gap-2">
+            {personaGuide.priorityCategories.map((cat) => {
+              const active = activeCategory === cat;
+              return (
+                <button
+                  key={cat}
+                  type="button"
+                  onClick={() => setActiveCategory(cat)}
+                  className={`px-3 py-1 rounded-full text-xs font-semibold border transition-all ${
+                    active
+                      ? "bg-primary-800 text-white border-primary-800"
+                      : "bg-white text-primary-800 border-primary-line hover:border-primary-800"
+                  }`}
+                >
+                  {GLOSSARY_CATEGORY_BADGES[cat] ?? cat}
+                </button>
+              );
+            })}
+            <button
+              type="button"
+              onClick={() => setActiveCategory("All")}
+              className="px-3 py-1 rounded-full text-xs font-semibold border border-border text-muted-fg hover:text-gray-900"
+            >
+              Browse all {terms.length} terms
+            </button>
+          </div>
+        </Reveal>
+      ) : null}
 
       <div className="sticky top-16 z-30 bg-white/95 backdrop-blur-sm border-y border-border py-4 mb-10 -mx-4 px-4 sm:-mx-6 sm:px-6">
         <div className="flex flex-col lg:flex-row lg:items-center gap-3">

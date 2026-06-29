@@ -4,7 +4,7 @@ import {
   StyleSheet, ActivityIndicator, RefreshControl,
 } from "react-native";
 import * as WebBrowser from "expo-web-browser";
-import { API_URL, authApi, contentApi } from "../../lib/api";
+import { authApi, contentApi } from "../../lib/api";
 import { PERSONA_ID_TO_API, scorePersonaQuiz, type PersonaId } from "../../lib/persona-quiz";
 
 const PRIMARY = "#3280ff";
@@ -18,10 +18,19 @@ const ARCHETYPE_LABELS: Record<PersonaId, { name: string; emoji: string }> = {
   fresh_grad: { name: "The Fresh Graduate", emoji: "🎓" },
 };
 
+const API_TO_PERSONA: Record<string, PersonaId> = {
+  CAREER_SWITCHER: "switcher",
+  INSIDER: "insider",
+  ANALYST_TRADER: "analyst",
+  VENDOR: "vendor",
+  FRESH_GRAD: "fresh_grad",
+};
+
 export default function ResumeTemplatesScreen() {
   const [templates, setTemplates] = useState<any[]>([]);
   const [quizSteps, setQuizSteps] = useState<any[]>([]);
   const [assetUrls, setAssetUrls] = useState<Record<string, string>>({});
+  const [profilePersona, setProfilePersona] = useState<PersonaId | null>(null);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [step, setStep] = useState(0);
@@ -32,10 +41,14 @@ export default function ResumeTemplatesScreen() {
 
   async function load() {
     try {
-      const data = await contentApi.get<{ templates: any[]; quizSteps?: any[]; assetUrls: Record<string, string> }>("resume-templates");
+      const [data, personaRes] = await Promise.all([
+        contentApi.get<{ templates: any[]; quizSteps?: any[]; assetUrls: Record<string, string> }>("resume-templates"),
+        authApi.getPersona().catch(() => ({ persona: null })),
+      ]);
       setTemplates(data.templates);
       setQuizSteps(data.quizSteps || []);
       setAssetUrls(data.assetUrls || {});
+      setProfilePersona(personaRes.persona ? API_TO_PERSONA[personaRes.persona] ?? null : null);
     } finally {
       setLoading(false);
       setRefreshing(false);
@@ -49,10 +62,15 @@ export default function ResumeTemplatesScreen() {
     [answers]
   );
 
-  const recommendedId = quizComplete && Object.keys(answers).length >= 4 ? scoreResult.personaId : null;
+  const recommendedId = useMemo((): PersonaId | null => {
+    if (quizComplete && Object.keys(answers).length >= 4) return scoreResult.personaId;
+    if (profilePersona) return profilePersona;
+    return null;
+  }, [quizComplete, answers, scoreResult.personaId, profilePersona]);
 
   useEffect(() => {
-    if (!recommendedId || savedRef.current === recommendedId) return;
+    if (!quizComplete || !recommendedId) return;
+    if (savedRef.current === recommendedId) return;
     savedRef.current = recommendedId;
 
     async function save() {
@@ -60,6 +78,7 @@ export default function ResumeTemplatesScreen() {
       try {
         const me = await authApi.me();
         await authApi.savePersona(PERSONA_ID_TO_API[recommendedId!], me.user?.track);
+        setProfilePersona(recommendedId);
         setSaveStatus("saved");
       } catch {
         savedRef.current = null;
@@ -67,15 +86,23 @@ export default function ResumeTemplatesScreen() {
       }
     }
     save();
-  }, [recommendedId]);
+  }, [quizComplete, recommendedId]);
 
   async function openTemplate(template: any) {
     const cmsUrl = assetUrls[template.templateFile];
-    if (cmsUrl) {
-      await WebBrowser.openBrowserAsync(`${API_URL}${cmsUrl}`);
-      return;
+    const assetId = cmsUrl?.match(/\/api\/content\/assets\/([^/?]+)/)?.[1];
+    if (assetId) {
+      try {
+        const { blob } = await contentApi.downloadAsset(assetId, template.templateFile);
+        const url = URL.createObjectURL(blob);
+        await WebBrowser.openBrowserAsync(url);
+        return;
+      } catch {
+        Alert.alert("Download failed", "Sign in with a Pro account and try again.");
+        return;
+      }
     }
-    await WebBrowser.openBrowserAsync(`${API_URL}/templates/${template.templateFile}`);
+    Alert.alert("Template unavailable", "Run db:seed on the server to sync resume template files.");
   }
 
   const currentStep = quizSteps[step];
@@ -105,6 +132,14 @@ export default function ResumeTemplatesScreen() {
             {saveStatus === "error" && (
               <Text style={styles.errorText}>Could not save persona. Sign in and retry.</Text>
             )}
+            {templates.find((t) => t.id === recommendedId) ? (
+              <TouchableOpacity
+                style={[styles.btn, { marginTop: 12, alignSelf: "stretch" }]}
+                onPress={() => openTemplate(templates.find((t) => t.id === recommendedId))}
+              >
+                <Text style={styles.btnText}>Download {ARCHETYPE_LABELS[recommendedId].name} template</Text>
+              </TouchableOpacity>
+            ) : null}
             <TouchableOpacity
               style={styles.secondaryBtn}
               onPress={() => {

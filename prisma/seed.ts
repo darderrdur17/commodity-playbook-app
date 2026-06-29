@@ -272,11 +272,21 @@ async function main() {
   });
   console.log("  ✓ Sample waitlist entry created");
 
-  const { seedContentModulesIfEmpty } = await import("../src/lib/content/repository");
+  const { seedContentModulesIfEmpty, syncGlossaryFromDefaults } = await import(
+    "../src/lib/content/repository"
+  );
   const contentResult = await seedContentModulesIfEmpty();
   if (contentResult.seeded) {
     console.log(`  ✓ Seeded ${contentResult.count} content modules`);
   }
+  const glossarySync = await syncGlossaryFromDefaults();
+  console.log(`  ✓ Glossary synced (${glossarySync.termCount} terms, trader explanations)`);
+
+  const { syncResumeTemplateAssets } = await import("../src/lib/content/resume-template-seed");
+  const resumeSync = await syncResumeTemplateAssets();
+  console.log(
+    `  ✓ Resume templates synced (${resumeSync.synced}/${resumeSync.total} .docx files${resumeSync.missing ? `, ${resumeSync.missing} missing from shared folder` : ""})`
+  );
 
   const { seedContentAssetsIfMissing } = await import("./seed-assets");
   const assetResult = await seedContentAssetsIfMissing();

@@ -20,6 +20,11 @@ import { PERSONA_ARCHETYPES } from "@/data/persona-archetypes";
 import { scorePersonaQuiz, type PersonaId } from "@/lib/persona-quiz";
 import { personaIdToApi } from "@/lib/persona-map";
 import { PERSONA_LABELS } from "@/lib/utils";
+import {
+  resolveResumeTemplateDownloadUrl,
+  resolveResumeTemplateFileUrl,
+} from "@/lib/resume-template-download";
+import { getRecommendedRoleSlugs } from "@/data/persona-career";
 
 interface Props {
   userTier: string;
@@ -106,14 +111,14 @@ export function ResumeTemplatesClient({
 
   const progressPct = quizComplete ? 100 : Math.round(((step + 1) / quizSteps.length) * 100);
 
-  const templateDownloadUrl =
-    recommended &&
-    (assetUrls[archetype?.templateFile ?? ""] ||
-      assetUrls[`resume-templates/${recommended.templateFile}`] ||
-      `/templates/${recommended.templateFile}`);
+  const downloadHref = recommendedId
+    ? resolveResumeTemplateDownloadUrl(recommendedId, assetUrls)
+    : "";
 
-  const downloadHref =
-    typeof templateDownloadUrl === "string" ? templateDownloadUrl : `/templates/${recommended?.templateFile ?? ""}`;
+  const recommendedCareerRoles = useMemo(
+    () => getRecommendedRoleSlugs(recommendedId ? personaIdToApi(recommendedId) : persona, answers.q3),
+    [recommendedId, persona, answers.q3]
+  );
 
   useEffect(() => {
     if (!quizComplete || !recommendedId) return;
@@ -220,16 +225,32 @@ export function ResumeTemplatesClient({
                     </div>
                   )}
                   <div className="flex flex-col sm:flex-row gap-3">
-                    <a href={downloadHref} download className="flex-1">
+                    <a href={downloadHref} download={archetype.templateFile} className="flex-1">
                       <Button className="w-full">
                         <Download className="w-4 h-4" />
                         Download {archetype.name} template
                       </Button>
                     </a>
-                    <Button variant="outline" onClick={retakeQuiz} className="flex-1">
+                    <Link href="/career-roadmap" className="flex-1">
+                      <Button variant="outline" className="w-full">
+                        View career roadmap
+                        <ArrowRight className="w-4 h-4" />
+                      </Button>
+                    </Link>
+                    <Button variant="outline" onClick={retakeQuiz} className="flex-1 sm:flex-none">
                       Retake quiz
                     </Button>
                   </div>
+                  {recommendedCareerRoles.length > 0 && (
+                    <p className="text-xs text-muted-fg mt-4 leading-relaxed">
+                      Recommended roadmap roles for your profile:{" "}
+                      {recommendedCareerRoles.slice(0, 4).join(" · ")} — see full blueprints on the{" "}
+                      <Link href="/career-roadmap" className="text-primary-800 font-semibold hover:underline">
+                        Career Roadmap
+                      </Link>
+                      .
+                    </p>
+                  )}
                 </div>
                 <p className="text-xs text-muted-fg text-center mt-4">
                   Template file: {archetype.templateFile}
@@ -366,12 +387,8 @@ export function ResumeTemplatesClient({
                   </p>
                 )}
                 <a
-                  href={
-                    assetUrls[arch?.templateFile ?? ""] ||
-                    assetUrls[`resume-templates/${t.templateFile}`] ||
-                    `/templates/${t.templateFile}`
-                  }
-                  download
+                  href={resolveResumeTemplateFileUrl(t.templateFile, assetUrls)}
+                  download={t.templateFile}
                 >
                   <Button className="w-full" variant={isRecommended ? "default" : "outline"}>
                     <Download className="w-4 h-4" />

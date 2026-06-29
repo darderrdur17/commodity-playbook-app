@@ -1,6 +1,7 @@
 import { prisma } from "@/lib/prisma";
 import type { Tier } from "@prisma/client";
 import { CONTENT_MODULE_META, getModuleMeta, type ContentSlug } from "./modules";
+import { GLOSSARY_TERMS } from "@/data/glossary";
 import { getDefaultPayload, getAllDefaultPayloads } from "./defaults";
 import { applyCmsSchemaSql } from "@/lib/setup-database";
 
@@ -50,6 +51,40 @@ export async function seedContentModulesIfEmpty() {
     });
   }
   return { seeded: true, count: CONTENT_MODULE_META.length };
+}
+
+/** Keep CMS glossary in sync with desk-glossary_updated_24.06.html extract */
+export async function syncGlossaryFromDefaults() {
+  await ensureContentInfrastructure();
+  const meta = getModuleMeta("glossary");
+  if (!meta) throw new Error("Glossary module not configured");
+
+  const payload = { terms: GLOSSARY_TERMS } as object;
+  const existing = await prisma.contentModule.findUnique({ where: { slug: "glossary" } });
+
+  if (!existing) {
+    await prisma.contentModule.create({
+      data: {
+        slug: "glossary",
+        title: meta.title,
+        description: meta.description,
+        requiredTier: meta.requiredTier,
+        payload,
+        published: true,
+        version: 1,
+      },
+    });
+    return { updated: true, termCount: GLOSSARY_TERMS.length, created: true };
+  }
+
+  await prisma.contentModule.update({
+    where: { slug: "glossary" },
+    data: {
+      payload,
+      version: existing.version + 1,
+    },
+  });
+  return { updated: true, termCount: GLOSSARY_TERMS.length, created: false };
 }
 
 export async function listContentModules() {

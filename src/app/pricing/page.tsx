@@ -17,7 +17,7 @@ const FEATURES_TABLE = [
     items: [
       { name: "5 desk infographics", starter: true, pro: true, elite: true },
       { name: "Chapter A preview (40+ pages)", starter: true, pro: true, elite: true },
-      { name: "Desk Glossary (100 terms)", starter: true, pro: true, elite: true },
+      { name: "Desk Glossary (196 terms)", starter: true, pro: true, elite: true },
       { name: "Weekly Market Digest (email)", starter: true, pro: true, elite: true },
       { name: "Job Board waitlist", starter: true, pro: true, elite: true },
     ],
@@ -135,7 +135,7 @@ export default function PricingPage() {
                 Your first step onto the desk. Explore the playbook and get desk-ready resources instantly.
               </p>
               <ul className="space-y-2.5 mb-8 flex-1">
-                {["5 desk infographics", "Chapter A preview", "Desk Glossary (100 terms)", "Weekly Market Digest", "Job Board waitlist"].map((f) => (
+                {["5 desk infographics", "Chapter A preview", "Desk Glossary (196 terms)", "Weekly Market Digest", "Job Board waitlist"].map((f) => (
                   <li key={f} className="flex items-center gap-2 text-sm text-gray-700">
                     <Check className="w-4 h-4 text-green-500 flex-shrink-0" /> {f}
                   </li>

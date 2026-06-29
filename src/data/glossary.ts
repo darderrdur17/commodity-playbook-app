@@ -17,7 +17,7 @@ export const GLOSSARY_CATEGORIES = [
   "Market Intelligence & Analytics",
 ] as const;
 
-/** Short badge labels — matches desk-glossary_updated HTML */
+/** Short badge labels — matches desk-glossary_updated_24.06.html */
 export const GLOSSARY_CATEGORY_BADGES: Record<string, string> = {
   "Physical markets": "Physical",
   "Pricing & Derivatives": "Pricing",
@@ -32,1179 +32,1179 @@ export const GLOSSARY_CATEGORY_BADGES: Record<string, string> = {
 
 export const GLOSSARY_TERMS: GlossaryTerm[] = [
   {
-    "term": "Physical market",
-    "definition": "The market for actual commodity delivery — real barrels, cargoes or molecules changing hands. Contrasted with the paper market where futures and swaps trade without physical obligation.",
-    "context": "When a trader says 'the physical is tight', they mean actual supply at a location is scarce regardless of what futures say.",
-    "category": "Physical markets"
+    term: "Physical market",
+    definition: "The market for actual commodity delivery — real barrels, cargoes or molecules changing hands. Contrasted with the paper market where futures and swaps trade without physical obligation.",
+    context: "When a trader says 'the physical is tight', they mean actual supply at a location is scarce regardless of what futures say.",
+    category: "Physical markets",
   },
   {
-    "term": "Paper market",
-    "definition": "Derivatives markets (futures, swaps, options) where positions can be closed before delivery. Most volume is paper — only a fraction results in physical delivery.",
-    "context": "A trader can be long 10 cargoes on paper and short the same in physical — the mismatch is basis risk.",
-    "category": "Physical markets"
+    term: "Paper market",
+    definition: "Derivatives markets (futures, swaps, options) where positions can be closed before delivery. Most volume is paper — only a fraction results in physical delivery.",
+    context: "A trader can be long 10 cargoes on paper and short the same in physical — the mismatch is basis risk.",
+    category: "Physical markets",
   },
   {
-    "term": "Cargo",
-    "definition": "A shipment of commodity — typically crude oil or LNG — transported by vessel. Defined by vessel, quantity, loading port, discharge port, and delivery window.",
-    "context": "'We lifted a cargo' means the company took physical ownership of a shipment at the load port.",
-    "category": "Physical markets"
+    term: "Cargo",
+    definition: "A shipment of commodity — typically crude oil or LNG — transported by vessel. Defined by vessel, quantity, loading port, discharge port, and delivery window.",
+    context: "'We lifted a cargo' means the company took physical ownership of a shipment at the load port.",
+    category: "Physical markets",
   },
   {
-    "term": "Lifting",
-    "definition": "Taking physical delivery of a cargo at the load port. The buyer 'lifts' the cargo once the vessel is loaded and title transfers.",
-    "context": "Lifting schedules are set monthly by equity producers — each partner lifts their proportional share.",
-    "category": "Physical markets"
+    term: "Lifting",
+    definition: "Taking physical delivery of a cargo at the load port. The buyer 'lifts' the cargo once the vessel is loaded and title transfers.",
+    context: "Lifting schedules are set monthly by equity producers — each partner lifts their proportional share.",
+    category: "Physical markets",
   },
   {
-    "term": "Title transfer",
-    "definition": "The moment ownership of the commodity passes from seller to buyer. Determines who bears price risk, insurance and freight responsibility from that point.",
-    "context": "Under FOB terms, title transfers at the load port flange. Under DES, it transfers at the discharge port.",
-    "category": "Physical markets"
+    term: "Title transfer",
+    definition: "The moment ownership of the commodity passes from seller to buyer. Determines who bears price risk, insurance and freight responsibility from that point.",
+    context: "Under FOB terms, title transfers at the load port flange. Under DES, it transfers at the discharge port.",
+    category: "Physical markets",
   },
   {
-    "term": "FOB",
-    "definition": "Free On Board. Seller delivers the commodity to the vessel at the load port. Buyer arranges and pays for shipping from that point. Title transfers at load port.",
-    "context": "Most crude oil term contracts between producers and majors are on FOB terms — the buyer controls the vessel.",
-    "category": "Physical markets"
+    term: "FOB",
+    definition: "Free On Board. Seller delivers the commodity to the vessel at the load port. Buyer arranges and pays for shipping from that point. Title transfers at load port.",
+    context: "Most crude oil term contracts between producers and majors are on FOB terms — the buyer controls the vessel.",
+    category: "Physical markets",
   },
   {
-    "term": "DES",
-    "definition": "Delivered Ex-Ship. Seller arranges and pays for shipping, delivering the commodity to the discharge port. Risk transfers at the discharge port.",
-    "context": "Most LNG SPA contracts are DES — the producer owns the cargo and vessel risk until arrival.",
-    "category": "Physical markets"
+    term: "DES",
+    definition: "Delivered Ex-Ship. Seller arranges and pays for shipping, delivering the commodity to the discharge port. Risk transfers at the discharge port.",
+    context: "Most LNG SPA contracts are DES — the producer owns the cargo and vessel risk until arrival.",
+    category: "Physical markets",
   },
   {
-    "term": "CIF",
-    "definition": "Cost, Insurance and Freight. Seller pays freight and insurance to the named discharge port. Risk transfers when cargo crosses the ship's rail at the load port.",
-    "context": "CIF is common in refined products trades where sellers want to control logistics but transfer risk earlier than DES.",
-    "category": "Physical markets"
+    term: "CIF",
+    definition: "Cost, Insurance and Freight. Seller pays freight and insurance to the named discharge port. Risk transfers when cargo crosses the ship's rail at the load port.",
+    context: "CIF is common in refined products trades where sellers want to control logistics but transfer risk earlier than DES.",
+    category: "Physical markets",
   },
   {
-    "term": "Arbitrage",
-    "definition": "Exploiting price differences between two markets or locations by simultaneously buying in the cheaper market and selling in the more expensive one. In commodities, this usually involves moving a cargo.",
-    "context": "'The arb is open' means the price difference between two regions exceeds the cost of shipping between them.",
-    "category": "Physical markets"
+    term: "Arbitrage",
+    definition: "Exploiting price differences between two markets or locations by simultaneously buying in the cheaper market and selling in the more expensive one. In commodities, this usually involves moving a cargo.",
+    context: "'The arb is open' means the price difference between two regions exceeds the cost of shipping between them.",
+    category: "Physical markets",
   },
   {
-    "term": "Basis",
-    "definition": "The price difference between a physical commodity at a specific location and the benchmark futures price. Basis reflects local supply/demand, quality differentials, and freight.",
-    "context": "A trader might say 'WTI basis is at a 50-cent discount' meaning local crude trades 50c below the NYMEX futures price.",
-    "category": "Physical markets"
+    term: "Basis",
+    definition: "The price difference between a physical commodity at a specific location and the benchmark futures price. Basis reflects local supply/demand, quality differentials, and freight.",
+    context: "A trader might say 'WTI basis is at a 50-cent discount' meaning local crude trades 50c below the NYMEX futures price.",
+    category: "Physical markets",
   },
   {
-    "term": "Flat price",
-    "definition": "The outright price of a commodity in absolute terms (e.g. USD per barrel). Distinguished from the spread or differential.",
-    "context": "'I don't have a flat price view' means the trader isn't taking directional long/short bets — they're trading spreads.",
-    "category": "Physical markets"
+    term: "Flat price",
+    definition: "The outright price of a commodity in absolute terms (e.g. USD per barrel). Distinguished from the spread or differential.",
+    context: "'I don't have a flat price view' means the trader isn't taking directional long/short bets — they're trading spreads.",
+    category: "Physical markets",
   },
   {
-    "term": "Differential",
-    "definition": "The premium or discount of a physical cargo versus a benchmark price. Reflects grade, quality, location, and timing.",
-    "context": "Brent crude might trade at a +$0.30 differential to Dated Brent. Urals crude might trade at a -$2.00 differential.",
-    "category": "Physical markets"
+    term: "Differential",
+    definition: "The premium or discount of a physical cargo versus a benchmark price. Reflects grade, quality, location, and timing.",
+    context: "Brent crude might trade at a +$0.30 differential to Dated Brent. Urals crude might trade at a -$2.00 differential.",
+    category: "Physical markets",
   },
   {
-    "term": "Backhaul",
-    "definition": "A vessel returning to its load region carrying a different cargo after delivery. Economically efficient — vessel earns freight both ways rather than ballasting empty.",
-    "context": "An LNG carrier delivering from Australia to Japan might pick up a Middle East cargo on the backhaul to Europe.",
-    "category": "Shipping"
+    term: "Backhaul",
+    definition: "A vessel returning to its load region carrying a different cargo after delivery. Economically efficient — vessel earns freight both ways rather than ballasting empty.",
+    context: "An LNG carrier delivering from Australia to Japan might pick up a Middle East cargo on the backhaul to Europe.",
+    category: "Shipping",
   },
   {
-    "term": "Ballast",
-    "definition": "A vessel sailing without cargo, typically returning to a load port. Ballasting costs money — fuel with no revenue. Shipowners try to minimise ballast legs.",
-    "context": "'The vessel is ballasting to the Gulf' means it's sailing empty to pick up the next cargo.",
-    "category": "Shipping"
+    term: "Ballast",
+    definition: "A vessel sailing without cargo, typically returning to a load port. Ballasting costs money — fuel with no revenue. Shipowners try to minimise ballast legs.",
+    context: "'The vessel is ballasting to the Gulf' means it's sailing empty to pick up the next cargo.",
+    category: "Shipping",
   },
   {
-    "term": "STS transfer",
-    "definition": "Ship-to-Ship transfer. Transferring cargo between two vessels at sea, typically using hoses and fenders. Used for blending, transshipment, or sanctions avoidance.",
-    "context": "STS transfers are common in crude oil logistics when discharge ports cannot handle large tankers (VLCCs).",
-    "category": "Shipping"
+    term: "STS transfer",
+    definition: "Ship-to-Ship transfer. Transferring cargo between two vessels at sea, typically using hoses and fenders. Used for blending, transshipment, or sanctions avoidance.",
+    context: "STS transfers are common in crude oil logistics when discharge ports cannot handle large tankers (VLCCs).",
+    category: "Shipping",
   },
   {
-    "term": "Floating storage",
-    "definition": "Using a vessel as temporary storage by keeping it anchored with cargo on board. Economic when onshore storage is full or when the forward curve is in steep contango.",
-    "context": "In the 2020 oil price crash, traders chartered VLCCs for floating storage to capture the deep contango in the futures curve.",
-    "category": "Shipping"
+    term: "Floating storage",
+    definition: "Using a vessel as temporary storage by keeping it anchored with cargo on board. Economic when onshore storage is full or when the forward curve is in steep contango.",
+    context: "In the 2020 oil price crash, traders chartered VLCCs for floating storage to capture the deep contango in the futures curve.",
+    category: "Shipping",
   },
   {
-    "term": "Refinery margin",
-    "definition": "The profit a refinery earns from processing crude into products, net of operating costs. Measured as a spread between product revenues and crude feedstock cost.",
-    "context": "A refinery margin of USD 8/bbl means for every barrel of crude processed, the refinery earns USD 8 after input cost.",
-    "category": "Oil & Products"
+    term: "Refinery margin",
+    definition: "The profit a refinery earns from processing crude into products, net of operating costs. Measured as a spread between product revenues and crude feedstock cost.",
+    context: "A refinery margin of USD 8/bbl means for every barrel of crude processed, the refinery earns USD 8 after input cost.",
+    category: "Oil & Products",
   },
   {
-    "term": "Crack spread",
-    "definition": "The price difference between crude oil and the refined products derived from it (gasoline, diesel, jet fuel). Represents gross refinery margin.",
-    "context": "A 3-2-1 crack spread uses 3 barrels of crude to produce 2 barrels of gasoline and 1 barrel of heating oil.",
-    "category": "Oil & Products"
+    term: "Crack spread",
+    definition: "The price difference between crude oil and the refined products derived from it (gasoline, diesel, jet fuel). Represents gross refinery margin.",
+    context: "A 3-2-1 crack spread uses 3 barrels of crude to produce 2 barrels of gasoline and 1 barrel of heating oil.",
+    category: "Oil & Products",
   },
   {
-    "term": "Crude slate",
-    "definition": "The mix of crude oil grades that a refinery processes. Refineries optimise their slate based on crude differentials, their own configuration, and target product yields.",
-    "context": "A complex refinery might run a heavier, sourer crude slate than a simple refinery because it can extract more value.",
-    "category": "Oil & Products"
+    term: "Crude slate",
+    definition: "The mix of crude oil grades that a refinery processes. Refineries optimise their slate based on crude differentials, their own configuration, and target product yields.",
+    context: "A complex refinery might run a heavier, sourer crude slate than a simple refinery because it can extract more value.",
+    category: "Oil & Products",
   },
   {
-    "term": "Feedstock",
-    "definition": "The raw material input to a processing unit. For a refinery: crude oil. For a petrochemical plant: naphtha or LPG. Quality and cost of feedstock directly drives margin.",
-    "context": "'We switched feedstock' means the refinery changed the grade or source of crude being processed.",
-    "category": "Oil & Products"
+    term: "Feedstock",
+    definition: "The raw material input to a processing unit. For a refinery: crude oil. For a petrochemical plant: naphtha or LPG. Quality and cost of feedstock directly drives margin.",
+    context: "'We switched feedstock' means the refinery changed the grade or source of crude being processed.",
+    category: "Oil & Products",
   },
   {
-    "term": "Forward curve",
-    "definition": "A chart of futures prices across delivery dates. The shape — contango, backwardation, or flat — encodes market expectations about future supply/demand balance.",
-    "context": "Reading the forward curve is day-one literacy on any commodity desk. A kinked curve often signals a specific supply event.",
-    "category": "Pricing & Derivatives"
+    term: "Forward curve",
+    definition: "A chart of futures prices across delivery dates. The shape — contango, backwardation, or flat — encodes market expectations about future supply/demand balance.",
+    context: "Reading the forward curve is day-one literacy on any commodity desk. A kinked curve often signals a specific supply event.",
+    category: "Pricing & Derivatives",
   },
   {
-    "term": "Contango",
-    "definition": "A market where futures prices for later delivery are higher than near-term prices. Suggests current oversupply or weak near-term demand. Costs money to hold long positions (negative roll yield).",
-    "context": "In deep contango, traders buy physical, store it, and sell forward futures — the spread must exceed storage and financing costs.",
-    "category": "Pricing & Derivatives"
+    term: "Contango",
+    definition: "A market where futures prices for later delivery are higher than near-term prices. Suggests current oversupply or weak near-term demand. Costs money to hold long positions (negative roll yield).",
+    context: "In deep contango, traders buy physical, store it, and sell forward futures — the spread must exceed storage and financing costs.",
+    category: "Pricing & Derivatives",
   },
   {
-    "term": "Backwardation",
-    "definition": "A market where near-term futures prices are higher than forward prices. Suggests current tightness. Rewards holders of physical commodity (positive roll yield).",
-    "context": "'The market is in backwardation' — the front month is the most expensive. Squeezes anyone short the physical.",
-    "category": "Pricing & Derivatives"
+    term: "Backwardation",
+    definition: "A market where near-term futures prices are higher than forward prices. Suggests current tightness. Rewards holders of physical commodity (positive roll yield).",
+    context: "'The market is in backwardation' — the front month is the most expensive. Squeezes anyone short the physical.",
+    category: "Pricing & Derivatives",
   },
   {
-    "term": "Roll yield",
-    "definition": "The gain or loss from rolling a futures position from a near-term to a later-dated contract. Positive in backwardation (roll into cheaper contracts), negative in contango.",
-    "context": "ETF investors in contango markets lose money even if flat price doesn't move — the roll eats their returns.",
-    "category": "Pricing & Derivatives"
+    term: "Roll yield",
+    definition: "The gain or loss from rolling a futures position from a near-term to a later-dated contract. Positive in backwardation (roll into cheaper contracts), negative in contango.",
+    context: "ETF investors in contango markets lose money even if flat price doesn't move — the roll eats their returns.",
+    category: "Pricing & Derivatives",
   },
   {
-    "term": "Dated Brent",
-    "definition": "The benchmark price for physical North Sea crude oil, set by Platts based on actual cargo transactions. The reference price for most global crude oil contracts.",
-    "context": "'The cargo priced against Dated Brent' means the final settlement price is based on Platts' assessed Dated Brent around loading.",
-    "category": "Pricing & Derivatives"
+    term: "Dated Brent",
+    definition: "The benchmark price for physical North Sea crude oil, set by Platts based on actual cargo transactions. The reference price for most global crude oil contracts.",
+    context: "'The cargo priced against Dated Brent' means the final settlement price is based on Platts' assessed Dated Brent around loading.",
+    category: "Pricing & Derivatives",
   },
   {
-    "term": "Platts assessment",
-    "definition": "Price assessments published by S&P Global Commodity Insights (formerly Platts) based on reported trades and bids/offers during a daily window. Industry standard reference for physical pricing.",
-    "context": "Many long-term supply agreements price against Platts assessments — 'average of Platts for the month of delivery'.",
-    "category": "Pricing & Derivatives"
+    term: "Platts assessment",
+    definition: "Price assessments published by S&P Global Commodity Insights (formerly Platts) based on reported trades and bids/offers during a daily window. Industry standard reference for physical pricing.",
+    context: "Many long-term supply agreements price against Platts assessments — 'average of Platts for the month of delivery'.",
+    category: "Pricing & Derivatives",
   },
   {
-    "term": "Argus",
-    "definition": "A competing price reporting agency to Platts. Publishes its own benchmark assessments for crude, products, LNG and other commodities. Some contracts specifically use Argus rather than Platts.",
-    "context": "'The deal was priced on Argus' — both parties agreed to use Argus NWE naphtha assessment as the reference.",
-    "category": "Pricing & Derivatives"
+    term: "Argus",
+    definition: "A competing price reporting agency to Platts. Publishes its own benchmark assessments for crude, products, LNG and other commodities. Some contracts specifically use Argus rather than Platts.",
+    context: "'The deal was priced on Argus' — both parties agreed to use Argus NWE naphtha assessment as the reference.",
+    category: "Pricing & Derivatives",
   },
   {
-    "term": "EFS",
-    "definition": "Exchange of Futures for Swaps. A privately negotiated transaction where one party exchanges a futures position for a swap position at an agreed differential.",
-    "context": "Commonly used to move from a standardised futures position to a customised OTC swap that better matches physical exposure.",
-    "category": "Pricing & Derivatives"
+    term: "EFS",
+    definition: "Exchange of Futures for Swaps. A privately negotiated transaction where one party exchanges a futures position for a swap position at an agreed differential.",
+    context: "Commonly used to move from a standardised futures position to a customised OTC swap that better matches physical exposure.",
+    category: "Pricing & Derivatives",
   },
   {
-    "term": "EFP",
-    "definition": "Exchange of Futures for Physical. A privately negotiated deal where a futures position is exchanged for a physical commodity delivery at an agreed basis.",
-    "context": "A producer might use an EFP to convert a short futures hedge into actual delivery of crude to a specific buyer.",
-    "category": "Pricing & Derivatives"
+    term: "EFP",
+    definition: "Exchange of Futures for Physical. A privately negotiated deal where a futures position is exchanged for a physical commodity delivery at an agreed basis.",
+    context: "A producer might use an EFP to convert a short futures hedge into actual delivery of crude to a specific buyer.",
+    category: "Pricing & Derivatives",
   },
   {
-    "term": "Swap",
-    "definition": "An OTC derivatives contract where two parties exchange cash flows — typically one party pays fixed price and receives floating (market price), or vice versa. Used to hedge price exposure without physical delivery.",
-    "context": "A refinery buys crude and sells products. To lock in margin, it enters a crack spread swap — fixing the spread between crude cost and product revenue.",
-    "category": "Pricing & Derivatives"
+    term: "Swap",
+    definition: "An OTC derivatives contract where two parties exchange cash flows — typically one party pays fixed price and receives floating (market price), or vice versa. Used to hedge price exposure without physical delivery.",
+    context: "A refinery buys crude and sells products. To lock in margin, it enters a crack spread swap — fixing the spread between crude cost and product revenue.",
+    category: "Pricing & Derivatives",
   },
   {
-    "term": "Asian option",
-    "definition": "An option whose payoff is based on the average price over a period, not the price at expiry. Common in commodity markets because physical contracts often price on monthly averages.",
-    "context": "An Asian call on Brent averaging over the calendar month pays out if the monthly average exceeds the strike.",
-    "category": "Pricing & Derivatives"
+    term: "Asian option",
+    definition: "An option whose payoff is based on the average price over a period, not the price at expiry. Common in commodity markets because physical contracts often price on monthly averages.",
+    context: "An Asian call on Brent averaging over the calendar month pays out if the monthly average exceeds the strike.",
+    category: "Pricing & Derivatives",
   },
   {
-    "term": "OTC",
-    "definition": "Over-the-Counter. Trades negotiated bilaterally between counterparties, not on an exchange. More flexible in structure but carries counterparty credit risk.",
-    "context": "Most commodity swaps and complex derivatives are OTC. Exchange trades are standardised; OTC trades are bespoke.",
-    "category": "Pricing & Derivatives"
+    term: "OTC",
+    definition: "Over-the-Counter. Trades negotiated bilaterally between counterparties, not on an exchange. More flexible in structure but carries counterparty credit risk.",
+    context: "Most commodity swaps and complex derivatives are OTC. Exchange trades are standardised; OTC trades are bespoke.",
+    category: "Pricing & Derivatives",
   },
   {
-    "term": "Spark spread",
-    "definition": "The difference between the price of electricity and the cost of the gas used to generate it. Measures gas-fired power plant profitability.",
-    "context": "A positive spark spread means it's profitable to run the gas plant. A negative spark spread means the plant loses money on every MWh generated.",
-    "category": "Pricing & Derivatives"
+    term: "Spark spread",
+    definition: "The difference between the price of electricity and the cost of the gas used to generate it. Measures gas-fired power plant profitability.",
+    context: "A positive spark spread means it's profitable to run the gas plant. A negative spark spread means the plant loses money on every MWh generated.",
+    category: "Pricing & Derivatives",
   },
   {
-    "term": "Dark spread",
-    "definition": "The equivalent of the spark spread but for coal-fired power plants — electricity price minus coal fuel cost. Used to assess relative fuel switching economics.",
-    "context": "When dark spreads are higher than spark spreads, the market favours coal over gas for power generation — which is itself a signal for gas demand.",
-    "category": "Pricing & Derivatives"
+    term: "Dark spread",
+    definition: "The equivalent of the spark spread but for coal-fired power plants — electricity price minus coal fuel cost. Used to assess relative fuel switching economics.",
+    context: "When dark spreads are higher than spark spreads, the market favours coal over gas for power generation — which is itself a signal for gas demand.",
+    category: "Pricing & Derivatives",
   },
   {
-    "term": "JKM",
-    "definition": "Japan Korea Marker. The benchmark price for LNG delivered to Northeast Asia, assessed by Platts. The Asian equivalent of Henry Hub or TTF for LNG.",
-    "context": "'JKM is trading at a premium to TTF' means LNG is more expensive in Asia than Europe — flows will naturally move east.",
-    "category": "Pricing & Derivatives"
+    term: "JKM",
+    definition: "Japan Korea Marker. The benchmark price for LNG delivered to Northeast Asia, assessed by Platts. The Asian equivalent of Henry Hub or TTF for LNG.",
+    context: "'JKM is trading at a premium to TTF' means LNG is more expensive in Asia than Europe — flows will naturally move east.",
+    category: "Pricing & Derivatives",
   },
   {
-    "term": "TTF",
-    "definition": "Title Transfer Facility. The virtual trading hub and benchmark price for natural gas in Northwest Europe. The European equivalent of Henry Hub.",
-    "context": "TTF is the reference price for most European gas contracts and LNG cargoes delivered to Europe.",
-    "category": "Pricing & Derivatives"
+    term: "TTF",
+    definition: "Title Transfer Facility. The virtual trading hub and benchmark price for natural gas in Northwest Europe. The European equivalent of Henry Hub.",
+    context: "TTF is the reference price for most European gas contracts and LNG cargoes delivered to Europe.",
+    category: "Pricing & Derivatives",
   },
   {
-    "term": "Henry Hub",
-    "definition": "The physical delivery point in Louisiana that serves as the benchmark for US natural gas futures traded on NYMEX. The most liquid gas benchmark globally.",
-    "context": "'HH is at $2.50' — Henry Hub is the anchor reference from which US LNG export economics are often calculated.",
-    "category": "Pricing & Derivatives"
+    term: "Henry Hub",
+    definition: "The physical delivery point in Louisiana that serves as the benchmark for US natural gas futures traded on NYMEX. The most liquid gas benchmark globally.",
+    context: "'HH is at $2.50' — Henry Hub is the anchor reference from which US LNG export economics are often calculated.",
+    category: "Pricing & Derivatives",
   },
   {
-    "term": "Netback",
-    "definition": "The value of a commodity at a reference point, calculated by working backwards from the end-sale price minus all costs (freight, insurance, processing). Used to compare value across supply origins.",
-    "context": "If JKM is $10/MMBtu and shipping from Qatar costs $1, the Qatar FOB netback is ~$9. If US FOB is $8 + $3 freight, the US netback is lower.",
-    "category": "Pricing & Derivatives"
+    term: "Netback",
+    definition: "The value of a commodity at a reference point, calculated by working backwards from the end-sale price minus all costs (freight, insurance, processing). Used to compare value across supply origins.",
+    context: "If JKM is $10/MMBtu and shipping from Qatar costs $1, the Qatar FOB netback is ~$9. If US FOB is $8 + $3 freight, the US netback is lower.",
+    category: "Pricing & Derivatives",
   },
   {
-    "term": "Benchmark crude",
-    "definition": "A widely-traded, well-defined crude grade used as a reference for pricing other crudes. The main benchmarks are Brent (global), WTI (US), and Dubai/Oman (Middle East).",
-    "context": "'Priced against Brent' — the contract uses Brent as the reference, with the physical crude sold at a premium or discount.",
-    "category": "Pricing & Derivatives"
+    term: "Benchmark crude",
+    definition: "A widely-traded, well-defined crude grade used as a reference for pricing other crudes. The main benchmarks are Brent (global), WTI (US), and Dubai/Oman (Middle East).",
+    context: "'Priced against Brent' — the contract uses Brent as the reference, with the physical crude sold at a premium or discount.",
+    category: "Pricing & Derivatives",
   },
   {
-    "term": "Strip",
-    "definition": "A series of consecutive futures contracts covering multiple months or quarters. Buying the strip means buying all months in the sequence at once.",
-    "context": "'I'm long the Cal 26 strip' means the trader owns futures contracts for every month of calendar year 2026.",
-    "category": "Pricing & Derivatives"
+    term: "Strip",
+    definition: "A series of consecutive futures contracts covering multiple months or quarters. Buying the strip means buying all months in the sequence at once.",
+    context: "'I'm long the Cal 26 strip' means the trader owns futures contracts for every month of calendar year 2026.",
+    category: "Pricing & Derivatives",
   },
   {
-    "term": "Prompt",
-    "definition": "The nearest-dated futures contract that is still actively traded — typically the front month. 'Prompt' can also refer to near-term physical delivery.",
-    "context": "'The prompt is bid' means buying pressure in the nearest futures contract — usually a sign of physical tightness.",
-    "category": "Pricing & Derivatives"
+    term: "Prompt",
+    definition: "The nearest-dated futures contract that is still actively traded — typically the front month. 'Prompt' can also refer to near-term physical delivery.",
+    context: "'The prompt is bid' means buying pressure in the nearest futures contract — usually a sign of physical tightness.",
+    category: "Pricing & Derivatives",
   },
   {
-    "term": "MTM",
-    "definition": "Mark-to-Market. Revaluing open positions at current market prices daily. MTM determines unrealised P&L and is the basis for margin calls on exchange-traded positions.",
-    "context": "'MTM is down $2M today' means the portfolio lost $2M in unrealised value as prices moved against open positions.",
-    "category": "Risk & P&L"
+    term: "MTM",
+    definition: "Mark-to-Market. Revaluing open positions at current market prices daily. MTM determines unrealised P&L and is the basis for margin calls on exchange-traded positions.",
+    context: "'MTM is down $2M today' means the portfolio lost $2M in unrealised value as prices moved against open positions.",
+    category: "Risk & P&L",
   },
   {
-    "term": "VaR",
-    "definition": "Value at Risk. A statistical measure of the maximum expected loss over a given time horizon at a specified confidence level (e.g. 95% or 99%). Used to size and limit trading positions.",
-    "context": "'VaR is $5M at 95%' means there's a 5% chance of losing more than $5M on a given day. Limits are set at the desk level.",
-    "category": "Risk & P&L"
+    term: "VaR",
+    definition: "Value at Risk. A statistical measure of the maximum expected loss over a given time horizon at a specified confidence level (e.g. 95% or 99%). Used to size and limit trading positions.",
+    context: "'VaR is $5M at 95%' means there's a 5% chance of losing more than $5M on a given day. Limits are set at the desk level.",
+    category: "Risk & P&L",
   },
   {
-    "term": "Greeks",
-    "definition": "Sensitivity measures for options positions. Delta (sensitivity to price), Gamma (rate of change of delta), Vega (sensitivity to volatility), Theta (time decay), Rho (sensitivity to interest rates).",
-    "context": "'I need to delta-hedge this option position' — buying or selling the underlying to offset the option's directional exposure.",
-    "category": "Risk & P&L"
+    term: "Greeks",
+    definition: "Sensitivity measures for options positions. Delta (sensitivity to price), Gamma (rate of change of delta), Vega (sensitivity to volatility), Theta (time decay), Rho (sensitivity to interest rates).",
+    context: "'I need to delta-hedge this option position' — buying or selling the underlying to offset the option's directional exposure.",
+    category: "Risk & P&L",
   },
   {
-    "term": "Delta",
-    "definition": "The rate of change of an option's value relative to a $1 move in the underlying price. A delta of 0.5 means the option moves $0.50 for every $1 move in the underlying.",
-    "context": "A delta-neutral portfolio has zero net directional exposure — gains and losses from price moves cancel out across positions.",
-    "category": "Risk & P&L"
+    term: "Delta",
+    definition: "The rate of change of an option's value relative to a $1 move in the underlying price. A delta of 0.5 means the option moves $0.50 for every $1 move in the underlying.",
+    context: "A delta-neutral portfolio has zero net directional exposure — gains and losses from price moves cancel out across positions.",
+    category: "Risk & P&L",
   },
   {
-    "term": "Position limits",
-    "definition": "Maximum allowed size of a trader's open position, set by risk management. Limits exist by commodity, tenor, and sometimes geography. Breaching limits triggers an immediate review.",
-    "context": "'I'm at my limit' — the trader cannot add more exposure in that contract without risk approval or closing existing positions.",
-    "category": "Risk & P&L"
+    term: "Position limits",
+    definition: "Maximum allowed size of a trader's open position, set by risk management. Limits exist by commodity, tenor, and sometimes geography. Breaching limits triggers an immediate review.",
+    context: "'I'm at my limit' — the trader cannot add more exposure in that contract without risk approval or closing existing positions.",
+    category: "Risk & P&L",
   },
   {
-    "term": "Exposure",
-    "definition": "The total financial risk in a portfolio — how much value could be lost if prices move adversely. Can refer to commodity price exposure, credit exposure, or both.",
-    "context": "'What's your crude exposure?' — the risk manager wants to know the net barrel equivalent of all crude positions.",
-    "category": "Risk & P&L"
+    term: "Exposure",
+    definition: "The total financial risk in a portfolio — how much value could be lost if prices move adversely. Can refer to commodity price exposure, credit exposure, or both.",
+    context: "'What's your crude exposure?' — the risk manager wants to know the net barrel equivalent of all crude positions.",
+    category: "Risk & P&L",
   },
   {
-    "term": "Stop-loss",
-    "definition": "A pre-agreed price level at which a position is automatically closed to prevent further losses. Enforced either automatically by the system or as a self-imposed discipline.",
-    "context": "'I have a stop at $80' — if the price falls to $80, the position is liquidated regardless of the trader's view.",
-    "category": "Risk & P&L"
+    term: "Stop-loss",
+    definition: "A pre-agreed price level at which a position is automatically closed to prevent further losses. Enforced either automatically by the system or as a self-imposed discipline.",
+    context: "'I have a stop at $80' — if the price falls to $80, the position is liquidated regardless of the trader's view.",
+    category: "Risk & P&L",
   },
   {
-    "term": "P&L attribution",
-    "definition": "Breaking down daily profit or loss by the factors that caused it — price moves, volume changes, new trades, time decay. Essential for understanding what's actually working.",
-    "context": "'Most of today's P&L is from the gasoline position, not crude' — attribution tells you where the money came from.",
-    "category": "Risk & P&L"
+    term: "P&L attribution",
+    definition: "Breaking down daily profit or loss by the factors that caused it — price moves, volume changes, new trades, time decay. Essential for understanding what's actually working.",
+    context: "'Most of today's P&L is from the gasoline position, not crude' — attribution tells you where the money came from.",
+    category: "Risk & P&L",
   },
   {
-    "term": "Netting",
-    "definition": "Offsetting long and short positions in the same or related instruments to reduce gross exposure. Reduces both risk and margin requirements.",
-    "context": "A trader long 1,000 lots of Brent futures and short 800 lots nets to a 200-lot long position for risk calculation.",
-    "category": "Risk & P&L"
+    term: "Netting",
+    definition: "Offsetting long and short positions in the same or related instruments to reduce gross exposure. Reduces both risk and margin requirements.",
+    context: "A trader long 1,000 lots of Brent futures and short 800 lots nets to a 200-lot long position for risk calculation.",
+    category: "Risk & P&L",
   },
   {
-    "term": "Margin call",
-    "definition": "A demand from an exchange or broker for additional collateral when the value of a futures position has moved against you. Must be met immediately or the position is liquidated.",
-    "context": "A large adverse move overnight can trigger a margin call before markets open. Commodity firms need substantial liquidity buffers for this.",
-    "category": "Risk & P&L"
+    term: "Margin call",
+    definition: "A demand from an exchange or broker for additional collateral when the value of a futures position has moved against you. Must be met immediately or the position is liquidated.",
+    context: "A large adverse move overnight can trigger a margin call before markets open. Commodity firms need substantial liquidity buffers for this.",
+    category: "Risk & P&L",
   },
   {
-    "term": "Credit line",
-    "definition": "The maximum value of outstanding OTC trades a firm is permitted with a specific counterparty. Set by credit risk based on counterparty financial strength.",
-    "context": "'We're at our credit limit with Glencore' — no new OTC trades can be added until existing ones settle or the limit is raised.",
-    "category": "Risk & P&L"
+    term: "Credit line",
+    definition: "The maximum value of outstanding OTC trades a firm is permitted with a specific counterparty. Set by credit risk based on counterparty financial strength.",
+    context: "'We're at our credit limit with Glencore' — no new OTC trades can be added until existing ones settle or the limit is raised.",
+    category: "Risk & P&L",
   },
   {
-    "term": "Counterparty risk",
-    "definition": "The risk that the other party in a trade defaults before settlement. Higher for long-dated OTC trades. Mitigated by credit lines, collateral, and netting agreements (ISDA).",
-    "context": "Exchange-traded futures eliminate counterparty risk by using a central clearing house. OTC trades carry bilateral counterparty risk.",
-    "category": "Risk & P&L"
+    term: "Counterparty risk",
+    definition: "The risk that the other party in a trade defaults before settlement. Higher for long-dated OTC trades. Mitigated by credit lines, collateral, and netting agreements (ISDA).",
+    context: "Exchange-traded futures eliminate counterparty risk by using a central clearing house. OTC trades carry bilateral counterparty risk.",
+    category: "Risk & P&L",
   },
   {
-    "term": "ISDA",
-    "definition": "International Swaps and Derivatives Association. The industry body that publishes the standard master agreement governing OTC derivatives trades. Having an ISDA in place is a prerequisite for OTC trading.",
-    "context": "'We don't have an ISDA with them yet' — the legal documentation isn't in place, so no OTC derivatives can be traded.",
-    "category": "Risk & P&L"
+    term: "ISDA",
+    definition: "International Swaps and Derivatives Association. The industry body that publishes the standard master agreement governing OTC derivatives trades. Having an ISDA in place is a prerequisite for OTC trading.",
+    context: "'We don't have an ISDA with them yet' — the legal documentation isn't in place, so no OTC derivatives can be traded.",
+    category: "Risk & P&L",
   },
   {
-    "term": "Book",
-    "definition": "A trader's entire portfolio of positions — physical, futures, swaps, and options. The 'book' is the unit of P&L and risk management.",
-    "context": "'Who runs the naphtha book?' — which trader is responsible for all naphtha positions and their P&L.",
-    "category": "Risk & P&L"
+    term: "Book",
+    definition: "A trader's entire portfolio of positions — physical, futures, swaps, and options. The 'book' is the unit of P&L and risk management.",
+    context: "'Who runs the naphtha book?' — which trader is responsible for all naphtha positions and their P&L.",
+    category: "Risk & P&L",
   },
   {
-    "term": "Long",
-    "definition": "Owning more of a commodity than you have sold. A long position profits when prices rise. Physical traders are long when they own cargo they haven't yet sold.",
-    "context": "'I'm long 3 cargoes of Brent' — the desk owns 3 cargoes it has not yet sold. They need prices to rise or buyers to emerge.",
-    "category": "Risk & P&L"
+    term: "Long",
+    definition: "Owning more of a commodity than you have sold. A long position profits when prices rise. Physical traders are long when they own cargo they haven't yet sold.",
+    context: "'I'm long 3 cargoes of Brent' — the desk owns 3 cargoes it has not yet sold. They need prices to rise or buyers to emerge.",
+    category: "Risk & P&L",
   },
   {
-    "term": "Short",
-    "definition": "Having sold more than you own — you owe delivery but don't have the commodity yet. A short position profits when prices fall.",
-    "context": "'I'm short the December' — the trader has sold December futures without owning the underlying. They need to buy before delivery.",
-    "category": "Risk & P&L"
+    term: "Short",
+    definition: "Having sold more than you own — you owe delivery but don't have the commodity yet. A short position profits when prices fall.",
+    context: "'I'm short the December' — the trader has sold December futures without owning the underlying. They need to buy before delivery.",
+    category: "Risk & P&L",
   },
   {
-    "term": "Hedge",
-    "definition": "A trade taken to offset the price risk of an existing physical position. A physical long is hedged by selling futures; a physical short is hedged by buying futures.",
-    "context": "'The cargo is fully hedged' — the price risk of the physical cargo has been locked in via futures or swaps. Only basis risk remains.",
-    "category": "Risk & P&L"
+    term: "Hedge",
+    definition: "A trade taken to offset the price risk of an existing physical position. A physical long is hedged by selling futures; a physical short is hedged by buying futures.",
+    context: "'The cargo is fully hedged' — the price risk of the physical cargo has been locked in via futures or swaps. Only basis risk remains.",
+    category: "Risk & P&L",
   },
   {
-    "term": "Basis risk",
-    "definition": "The remaining price risk after hedging — the difference between the hedge instrument price and the physical commodity price. Perfect hedges eliminate flat price risk but basis risk always remains.",
-    "context": "A crude trader hedges with Brent futures but physically trades WTI crude. If the WTI-Brent spread moves unexpectedly, basis risk creates P&L volatility.",
-    "category": "Risk & P&L"
+    term: "Basis risk",
+    definition: "The remaining price risk after hedging — the difference between the hedge instrument price and the physical commodity price. Perfect hedges eliminate flat price risk but basis risk always remains.",
+    context: "A crude trader hedges with Brent futures but physically trades WTI crude. If the WTI-Brent spread moves unexpectedly, basis risk creates P&L volatility.",
+    category: "Risk & P&L",
   },
   {
-    "term": "Curve risk",
-    "definition": "The risk that the shape of the forward curve changes — not just flat price, but the spread between different delivery months. Particularly important for storage and carry traders.",
-    "context": "A trader long the front month and short the back month is exposed to curve risk — if the curve flattens, the spread trade loses money.",
-    "category": "Risk & P&L"
+    term: "Curve risk",
+    definition: "The risk that the shape of the forward curve changes — not just flat price, but the spread between different delivery months. Particularly important for storage and carry traders.",
+    context: "A trader long the front month and short the back month is exposed to curve risk — if the curve flattens, the spread trade loses money.",
+    category: "Risk & P&L",
   },
   {
-    "term": "Volatility",
-    "definition": "A measure of how much a price moves over time. High volatility means larger daily price swings. Options are more expensive in high-volatility environments.",
-    "context": "'Vol is bid' — implied volatility in the options market is rising. The market is paying more for protection against large moves.",
-    "category": "Risk & P&L"
+    term: "Volatility",
+    definition: "A measure of how much a price moves over time. High volatility means larger daily price swings. Options are more expensive in high-volatility environments.",
+    context: "'Vol is bid' — implied volatility in the options market is rising. The market is paying more for protection against large moves.",
+    category: "Risk & P&L",
   },
   {
-    "term": "Nomination",
-    "definition": "The formal notice sent to a pipeline, terminal, or vessel operator specifying the quantity, timing, and specifications of commodity to be delivered. Nominations are contractually binding.",
-    "context": "'We need to nominate by 5pm' — the deadline for submitting the pipeline injection schedule for the following gas day.",
-    "category": "Operations & Scheduling"
+    term: "Nomination",
+    definition: "The formal notice sent to a pipeline, terminal, or vessel operator specifying the quantity, timing, and specifications of commodity to be delivered. Nominations are contractually binding.",
+    context: "'We need to nominate by 5pm' — the deadline for submitting the pipeline injection schedule for the following gas day.",
+    category: "Operations & Scheduling",
   },
   {
-    "term": "Scheduling",
-    "definition": "The function responsible for coordinating physical commodity movements — cargo nominations, vessel tracking, pipeline flows, terminal operations, and delivery confirmation.",
-    "context": "Scheduling is the operational backbone of physical trading. A bad nomination can cost more than a bad trade.",
-    "category": "Operations & Scheduling"
+    term: "Scheduling",
+    definition: "The function responsible for coordinating physical commodity movements — cargo nominations, vessel tracking, pipeline flows, terminal operations, and delivery confirmation.",
+    context: "Scheduling is the operational backbone of physical trading. A bad nomination can cost more than a bad trade.",
+    category: "Operations & Scheduling",
   },
   {
-    "term": "ETRM",
-    "definition": "Energy Trading and Risk Management system. The enterprise software platform that records all trades, manages positions, tracks physical deliveries, and calculates risk metrics.",
-    "context": "Common ETRM systems include Openlink Endur, RightAngle, Aspect, and Brady. Every commodity desk runs on one.",
-    "category": "Operations & Scheduling"
+    term: "ETRM",
+    definition: "Energy Trading and Risk Management system. The enterprise software platform that records all trades, manages positions, tracks physical deliveries, and calculates risk metrics.",
+    context: "Common ETRM systems include Openlink Endur, RightAngle, Aspect, and Brady. Every commodity desk runs on one.",
+    category: "Operations & Scheduling",
   },
   {
-    "term": "Endur",
-    "definition": "Openlink Endur — one of the most widely used ETRM systems in commodity trading. Handles physical and financial trades, scheduling, risk, and settlement.",
-    "context": "'It's in Endur' — the trade has been formally booked in the system of record. Before that, it only exists in the trader's head.",
-    "category": "Operations & Scheduling"
+    term: "Endur",
+    definition: "Openlink Endur — one of the most widely used ETRM systems in commodity trading. Handles physical and financial trades, scheduling, risk, and settlement.",
+    context: "'It's in Endur' — the trade has been formally booked in the system of record. Before that, it only exists in the trader's head.",
+    category: "Operations & Scheduling",
   },
   {
-    "term": "RightAngle",
-    "definition": "A leading ETRM system widely used in oil, petroleum products, and natural gas trading companies, particularly for physical operations and supply chain management.",
-    "context": "Many oil majors and refiners use RightAngle for downstream operations — nominations, inventory, and supply scheduling.",
-    "category": "Operations & Scheduling"
+    term: "RightAngle",
+    definition: "A leading ETRM system widely used in oil, petroleum products, and natural gas trading companies, particularly for physical operations and supply chain management.",
+    context: "Many oil majors and refiners use RightAngle for downstream operations — nominations, inventory, and supply scheduling.",
+    category: "Operations & Scheduling",
   },
   {
-    "term": "Settlement",
-    "definition": "The process of finalising a trade — exchanging payment and (for physical trades) confirming delivery. Financial settlement involves cash transfer; physical settlement involves commodity transfer.",
-    "context": "'Settlement failed' — a payment or delivery confirmation was not received on time. Triggers an operational crisis.",
-    "category": "Operations & Scheduling"
+    term: "Settlement",
+    definition: "The process of finalising a trade — exchanging payment and (for physical trades) confirming delivery. Financial settlement involves cash transfer; physical settlement involves commodity transfer.",
+    context: "'Settlement failed' — a payment or delivery confirmation was not received on time. Triggers an operational crisis.",
+    category: "Operations & Scheduling",
   },
   {
-    "term": "Demurrage",
-    "definition": "A penalty charge paid to a shipowner when a vessel is detained at port beyond the agreed loading/discharge time (laytime). One of the most common sources of dispute in physical commodity contracts.",
-    "context": "'We're on demurrage' — the vessel has exceeded its allowed time at berth. The cargo owner is now paying a daily rate to the shipowner.",
-    "category": "Operations & Scheduling"
+    term: "Demurrage",
+    definition: "A penalty charge paid to a shipowner when a vessel is detained at port beyond the agreed loading/discharge time (laytime). One of the most common sources of dispute in physical commodity contracts.",
+    context: "'We're on demurrage' — the vessel has exceeded its allowed time at berth. The cargo owner is now paying a daily rate to the shipowner.",
+    category: "Operations & Scheduling",
   },
   {
-    "term": "Laytime",
-    "definition": "The contractually agreed time allowed for loading or discharging a cargo. Once laytime expires, demurrage begins. Measured in days and hours, specified in the charterparty.",
-    "context": "Laytime calculations are complex — port congestion, weather, and berth availability all affect when laytime starts and stops.",
-    "category": "Operations & Scheduling"
+    term: "Laytime",
+    definition: "The contractually agreed time allowed for loading or discharging a cargo. Once laytime expires, demurrage begins. Measured in days and hours, specified in the charterparty.",
+    context: "Laytime calculations are complex — port congestion, weather, and berth availability all affect when laytime starts and stops.",
+    category: "Operations & Scheduling",
   },
   {
-    "term": "NOR",
-    "definition": "Notice of Readiness. Formal notification from the vessel master that the ship has arrived at port and is ready to load or discharge. Typically triggers the start of laytime.",
-    "context": "'NOR tendered at 0800' — the vessel notified port authorities and the cargo owner that it is in position and ready to begin operations.",
-    "category": "Operations & Scheduling"
+    term: "NOR",
+    definition: "Notice of Readiness. Formal notification from the vessel master that the ship has arrived at port and is ready to load or discharge. Typically triggers the start of laytime.",
+    context: "'NOR tendered at 0800' — the vessel notified port authorities and the cargo owner that it is in position and ready to begin operations.",
+    category: "Operations & Scheduling",
   },
   {
-    "term": "Worldscale",
-    "definition": "A standardised freight rate index used as a benchmark for tanker charters. A rate of Worldscale 100 (WS100) equals the standard flat rate for a given route. Actual rates are quoted as a percentage of WS.",
-    "context": "'Agreed at WS85' means the freight rate is 85% of the Worldscale flat rate for that route. Lower WS = cheaper freight.",
-    "category": "Operations & Scheduling"
+    term: "Worldscale",
+    definition: "A standardised freight rate index used as a benchmark for tanker charters. A rate of Worldscale 100 (WS100) equals the standard flat rate for a given route. Actual rates are quoted as a percentage of WS.",
+    context: "'Agreed at WS85' means the freight rate is 85% of the Worldscale flat rate for that route. Lower WS = cheaper freight.",
+    category: "Operations & Scheduling",
   },
   {
-    "term": "TCE",
-    "definition": "Time Charter Equivalent. The daily earnings of a vessel after deducting voyage costs (fuel, port charges). Used to compare profitability across different voyages and vessel types.",
-    "context": "Owners compare TCE rates across routes to decide where to deploy vessels. A higher TCE route attracts more tonnage.",
-    "category": "Operations & Scheduling"
+    term: "TCE",
+    definition: "Time Charter Equivalent. The daily earnings of a vessel after deducting voyage costs (fuel, port charges). Used to compare profitability across different voyages and vessel types.",
+    context: "Owners compare TCE rates across routes to decide where to deploy vessels. A higher TCE route attracts more tonnage.",
+    category: "Operations & Scheduling",
   },
   {
-    "term": "Charterparty",
-    "definition": "The contract between shipowner and charterer governing the terms of a vessel charter — freight rate, laytime, demurrage, vessel specifications, and route.",
-    "context": "All demurrage disputes, NOR procedures, and laytime calculations refer back to the charterparty terms.",
-    "category": "Operations & Scheduling"
+    term: "Charterparty",
+    definition: "The contract between shipowner and charterer governing the terms of a vessel charter — freight rate, laytime, demurrage, vessel specifications, and route.",
+    context: "All demurrage disputes, NOR procedures, and laytime calculations refer back to the charterparty terms.",
+    category: "Operations & Scheduling",
   },
   {
-    "term": "Charterer",
-    "definition": "The company that hires a vessel from a shipowner for a specific voyage (voyage charter) or period of time (time charter). In commodity trading, the cargo owner is usually the charterer.",
-    "context": "'We're the charterer on this cargo' — the trading company has hired the vessel and controls its routing and scheduling.",
-    "category": "Operations & Scheduling"
+    term: "Charterer",
+    definition: "The company that hires a vessel from a shipowner for a specific voyage (voyage charter) or period of time (time charter). In commodity trading, the cargo owner is usually the charterer.",
+    context: "'We're the charterer on this cargo' — the trading company has hired the vessel and controls its routing and scheduling.",
+    category: "Operations & Scheduling",
   },
   {
-    "term": "Inventory",
-    "definition": "The physical stock of a commodity held at a location — in tanks, warehouses, or storage facilities. Inventory levels are watched closely by the market as supply/demand indicators.",
-    "context": "'EIA showed a 5 million barrel build' — US crude inventories rose by 5 million barrels last week, a bearish signal for flat price.",
-    "category": "Operations & Scheduling"
+    term: "Inventory",
+    definition: "The physical stock of a commodity held at a location — in tanks, warehouses, or storage facilities. Inventory levels are watched closely by the market as supply/demand indicators.",
+    context: "'EIA showed a 5 million barrel build' — US crude inventories rose by 5 million barrels last week, a bearish signal for flat price.",
+    category: "Operations & Scheduling",
   },
   {
-    "term": "AIS",
-    "definition": "Automatic Identification System. A tracking system that transmits vessel position, speed, and destination in real time. Used by traders to monitor cargo movements and estimate supply flows.",
-    "context": "'AIS shows the tanker diverted' — vessel tracking data reveals a cargo changed direction, suggesting a deal was done or buyer changed.",
-    "category": "Operations & Scheduling"
+    term: "AIS",
+    definition: "Automatic Identification System. A tracking system that transmits vessel position, speed, and destination in real time. Used by traders to monitor cargo movements and estimate supply flows.",
+    context: "'AIS shows the tanker diverted' — vessel tracking data reveals a cargo changed direction, suggesting a deal was done or buyer changed.",
+    category: "Operations & Scheduling",
   },
   {
-    "term": "Counterpart confirmation",
-    "definition": "The formal written confirmation of trade terms sent between counterparties after a verbal deal is struck. Must be checked carefully — discrepancies create legal and financial exposure.",
-    "context": "'Confirmation is out' — the operations team has sent the formal trade confirmation. Waiting for the counterparty to sign back.",
-    "category": "Operations & Scheduling"
+    term: "Counterpart confirmation",
+    definition: "The formal written confirmation of trade terms sent between counterparties after a verbal deal is struck. Must be checked carefully — discrepancies create legal and financial exposure.",
+    context: "'Confirmation is out' — the operations team has sent the formal trade confirmation. Waiting for the counterparty to sign back.",
+    category: "Operations & Scheduling",
   },
   {
-    "term": "Offtake agreement",
-    "definition": "A long-term contract committing a buyer to purchase a specified quantity of commodity from a producer or project over multiple years. Common in LNG and upstream projects.",
-    "context": "Project finance for LNG liquefaction trains typically requires offtake agreements to demonstrate revenue certainty before debt is committed.",
-    "category": "Operations & Scheduling"
+    term: "Offtake agreement",
+    definition: "A long-term contract committing a buyer to purchase a specified quantity of commodity from a producer or project over multiple years. Common in LNG and upstream projects.",
+    context: "Project finance for LNG liquefaction trains typically requires offtake agreements to demonstrate revenue certainty before debt is committed.",
+    category: "Operations & Scheduling",
   },
   {
-    "term": "LNG train",
-    "definition": "A single liquefaction processing unit at an LNG export facility. Large projects have multiple trains running in parallel. Each train has a nameplate capacity measured in MTPA.",
-    "context": "'Train 3 at Sabine Pass went down' — one of the facility's liquefaction units is offline, reducing export capacity.",
-    "category": "Gas & LNG"
+    term: "LNG train",
+    definition: "A single liquefaction processing unit at an LNG export facility. Large projects have multiple trains running in parallel. Each train has a nameplate capacity measured in MTPA.",
+    context: "'Train 3 at Sabine Pass went down' — one of the facility's liquefaction units is offline, reducing export capacity.",
+    category: "Gas & LNG",
   },
   {
-    "term": "Nameplate capacity",
-    "definition": "The maximum design throughput of an LNG facility under ideal conditions. Actual output is typically 90–110% of nameplate depending on feedgas quality, ambient temperature, and operational efficiency.",
-    "context": "Projects often outperform nameplate capacity in winter when cooling conditions improve liquefaction efficiency.",
-    "category": "Gas & LNG"
+    term: "Nameplate capacity",
+    definition: "The maximum design throughput of an LNG facility under ideal conditions. Actual output is typically 90–110% of nameplate depending on feedgas quality, ambient temperature, and operational efficiency.",
+    context: "Projects often outperform nameplate capacity in winter when cooling conditions improve liquefaction efficiency.",
+    category: "Gas & LNG",
   },
   {
-    "term": "MTPA",
-    "definition": "Million tonnes per annum. The standard unit for measuring LNG production and trade volumes at a facility or contract level.",
-    "context": "A 10 MTPA LNG project is roughly 1.35 billion cubic feet per day of gas — a substantial source of global supply.",
-    "category": "Gas & LNG"
+    term: "MTPA",
+    definition: "Million tonnes per annum. The standard unit for measuring LNG production and trade volumes at a facility or contract level.",
+    context: "A 10 MTPA LNG project is roughly 1.35 billion cubic feet per day of gas — a substantial source of global supply.",
+    category: "Gas & LNG",
   },
   {
-    "term": "MMBtu",
-    "definition": "Million British thermal units. The standard energy unit for pricing natural gas and LNG globally. LNG prices (JKM, TTF, Henry Hub) are quoted in USD per MMBtu.",
-    "context": "'JKM is at $12/MMBtu' — LNG delivered to Japan/Korea costs $12 per million BTU of energy content.",
-    "category": "Gas & LNG"
+    term: "MMBtu",
+    definition: "Million British thermal units. The standard energy unit for pricing natural gas and LNG globally. LNG prices (JKM, TTF, Henry Hub) are quoted in USD per MMBtu.",
+    context: "'JKM is at $12/MMBtu' — LNG delivered to Japan/Korea costs $12 per million BTU of energy content.",
+    category: "Gas & LNG",
   },
   {
-    "term": "Regasification",
-    "definition": "The process of converting LNG back from liquid to gas for injection into the natural gas grid. Occurs at an import terminal. Capacity is a constraint on LNG demand.",
-    "context": "'European regasification capacity is saturated' — import terminals are running at maximum throughput, limiting further LNG inflows.",
-    "category": "Gas & LNG"
+    term: "Regasification",
+    definition: "The process of converting LNG back from liquid to gas for injection into the natural gas grid. Occurs at an import terminal. Capacity is a constraint on LNG demand.",
+    context: "'European regasification capacity is saturated' — import terminals are running at maximum throughput, limiting further LNG inflows.",
+    category: "Gas & LNG",
   },
   {
-    "term": "Liquefaction",
-    "definition": "Cooling natural gas to approximately -162°C to convert it to liquid form for transport by ship. The most capital-intensive step in the LNG supply chain.",
-    "context": "A 10 MTPA liquefaction plant costs USD 10–20 billion to build — hence the need for long-term offtake contracts before FID.",
-    "category": "Gas & LNG"
+    term: "Liquefaction",
+    definition: "Cooling natural gas to approximately -162°C to convert it to liquid form for transport by ship. The most capital-intensive step in the LNG supply chain.",
+    context: "A 10 MTPA liquefaction plant costs USD 10–20 billion to build — hence the need for long-term offtake contracts before FID.",
+    category: "Gas & LNG",
   },
   {
-    "term": "FID",
-    "definition": "Final Investment Decision. The formal commitment by a company's board to proceed with a major capital project — an LNG plant, pipeline, or terminal. Triggers construction spending.",
-    "context": "'The project reached FID' — the company has committed to building. First LNG is typically 5–7 years after FID for a greenfield project.",
-    "category": "Gas & LNG"
+    term: "FID",
+    definition: "Final Investment Decision. The formal commitment by a company's board to proceed with a major capital project — an LNG plant, pipeline, or terminal. Triggers construction spending.",
+    context: "'The project reached FID' — the company has committed to building. First LNG is typically 5–7 years after FID for a greenfield project.",
+    category: "Gas & LNG",
   },
   {
-    "term": "SPA",
-    "definition": "Sale and Purchase Agreement. The long-term contract governing LNG supply between seller and buyer. Specifies volume, price formula, delivery terms, and contract duration (often 15–20 years).",
-    "context": "LNG project financing depends on SPAs. Banks require contracted revenue before lending to a liquefaction project.",
-    "category": "Gas & LNG"
+    term: "SPA",
+    definition: "Sale and Purchase Agreement. The long-term contract governing LNG supply between seller and buyer. Specifies volume, price formula, delivery terms, and contract duration (often 15–20 years).",
+    context: "LNG project financing depends on SPAs. Banks require contracted revenue before lending to a liquefaction project.",
+    category: "Gas & LNG",
   },
   {
-    "term": "Destination flexibility",
-    "definition": "A contractual right allowing the LNG buyer to divert a cargo to a different discharge port than originally specified. Commercially valuable — allows arbitrage between regional markets.",
-    "context": "US LNG contracts are typically FOB with full destination flexibility. Qatari contracts traditionally restrict destination to specified regions.",
-    "category": "Gas & LNG"
+    term: "Destination flexibility",
+    definition: "A contractual right allowing the LNG buyer to divert a cargo to a different discharge port than originally specified. Commercially valuable — allows arbitrage between regional markets.",
+    context: "US LNG contracts are typically FOB with full destination flexibility. Qatari contracts traditionally restrict destination to specified regions.",
+    category: "Gas & LNG",
   },
   {
-    "term": "Diversion",
-    "definition": "Redirecting an LNG cargo to a different delivery port after loading. Enabled by destination flexibility clauses. Profit from diversion is often shared between buyer and seller.",
-    "context": "'We diverted the cargo to Spain' — a cargo originally scheduled for Japan was redirected to Europe where prices were higher.",
-    "category": "Gas & LNG"
+    term: "Diversion",
+    definition: "Redirecting an LNG cargo to a different delivery port after loading. Enabled by destination flexibility clauses. Profit from diversion is often shared between buyer and seller.",
+    context: "'We diverted the cargo to Spain' — a cargo originally scheduled for Japan was redirected to Europe where prices were higher.",
+    category: "Gas & LNG",
   },
   {
-    "term": "Heel",
-    "definition": "The small volume of LNG kept onboard a vessel at all times to maintain tank cooling. Without the heel, tanks would warm up and require expensive re-cooling before the next cargo.",
-    "context": "Heel management is a scheduling consideration — transferring heel between vessels has a cost and affects cargo economics.",
-    "category": "Gas & LNG"
+    term: "Heel",
+    definition: "The small volume of LNG kept onboard a vessel at all times to maintain tank cooling. Without the heel, tanks would warm up and require expensive re-cooling before the next cargo.",
+    context: "Heel management is a scheduling consideration — transferring heel between vessels has a cost and affects cargo economics.",
+    category: "Gas & LNG",
   },
   {
-    "term": "Boil-off gas",
-    "definition": "LNG that naturally vaporises during transport due to heat ingress. This gas is either used as vessel fuel or compressed and re-liquefied. Boil-off rate (BOR) is a key vessel specification.",
-    "context": "A vessel with a 0.1% daily boil-off rate loses 0.1% of its cargo volume per day at sea — material on long voyages.",
-    "category": "Gas & LNG"
+    term: "Boil-off gas",
+    definition: "LNG that naturally vaporises during transport due to heat ingress. This gas is either used as vessel fuel or compressed and re-liquefied. Boil-off rate (BOR) is a key vessel specification.",
+    context: "A vessel with a 0.1% daily boil-off rate loses 0.1% of its cargo volume per day at sea — material on long voyages.",
+    category: "Gas & LNG",
   },
   {
-    "term": "Send-out",
-    "definition": "The volume of gas discharged from an LNG import terminal into the gas grid, measured daily or hourly. A key operational metric for import terminal operators.",
-    "context": "'Send-out is at 95% capacity' — the terminal is running near maximum throughput, limiting ability to accept additional cargoes.",
-    "category": "Gas & LNG"
+    term: "Send-out",
+    definition: "The volume of gas discharged from an LNG import terminal into the gas grid, measured daily or hourly. A key operational metric for import terminal operators.",
+    context: "'Send-out is at 95% capacity' — the terminal is running near maximum throughput, limiting ability to accept additional cargoes.",
+    category: "Gas & LNG",
   },
   {
-    "term": "Cooldown",
-    "definition": "The process of gradually chilling LNG tanks and equipment before introducing LNG. Required after maintenance or for new facilities. Takes days and uses significant LNG volume.",
-    "context": "A terminal coming back from maintenance needs a cooldown period — it cannot receive cargoes immediately, which constrains scheduling.",
-    "category": "Gas & LNG"
+    term: "Cooldown",
+    definition: "The process of gradually chilling LNG tanks and equipment before introducing LNG. Required after maintenance or for new facilities. Takes days and uses significant LNG volume.",
+    context: "A terminal coming back from maintenance needs a cooldown period — it cannot receive cargoes immediately, which constrains scheduling.",
+    category: "Gas & LNG",
   },
   {
-    "term": "Tolling",
-    "definition": "A structure where a third party pays to use an LNG facility's processing capacity (liquefaction or regasification) without owning the plant. The toller supplies their own gas and pays a fee per unit processed.",
-    "context": "US LNG export projects often use tolling structures — buyers supply their own gas to the liquefaction plant and pay a fee, taking on commodity price risk themselves.",
-    "category": "Gas & LNG"
+    term: "Tolling",
+    definition: "A structure where a third party pays to use an LNG facility's processing capacity (liquefaction or regasification) without owning the plant. The toller supplies their own gas and pays a fee per unit processed.",
+    context: "US LNG export projects often use tolling structures — buyers supply their own gas to the liquefaction plant and pay a fee, taking on commodity price risk themselves.",
+    category: "Gas & LNG",
   },
   {
-    "term": "FOB vs DES netback",
-    "definition": "The calculation comparing whether it is more valuable to sell LNG FOB (at the liquefaction plant) or to ship it and sell DES (at the import terminal). The answer depends on freight costs and regional price differentials.",
-    "context": "If JKM is at a $4 premium to the FOB netback equivalent, the seller is better off shipping DES to Asia — provided they control the vessel.",
-    "category": "Gas & LNG"
+    term: "FOB vs DES netback",
+    definition: "The calculation comparing whether it is more valuable to sell LNG FOB (at the liquefaction plant) or to ship it and sell DES (at the import terminal). The answer depends on freight costs and regional price differentials.",
+    context: "If JKM is at a $4 premium to the FOB netback equivalent, the seller is better off shipping DES to Asia — provided they control the vessel.",
+    category: "Gas & LNG",
   },
   {
-    "term": "Spot cargo",
-    "definition": "An LNG cargo sold on a one-off basis rather than under a long-term SPA. Spot cargoes fill gaps in supply or demand and are priced at current market rates.",
-    "context": "The growth of LNG spot trading has made the market more like crude oil — short-term price signals now matter as much as long-term contracts.",
-    "category": "Gas & LNG"
+    term: "Spot cargo",
+    definition: "An LNG cargo sold on a one-off basis rather than under a long-term SPA. Spot cargoes fill gaps in supply or demand and are priced at current market rates.",
+    context: "The growth of LNG spot trading has made the market more like crude oil — short-term price signals now matter as much as long-term contracts.",
+    category: "Gas & LNG",
   },
   {
-    "term": "Regas terminal",
-    "definition": "A facility where LNG tankers discharge their cargo into storage tanks, and the LNG is converted back to gas for pipeline injection. Also called an import terminal or FSRU.",
-    "context": "Europe's rapid buildout of new regas terminals after 2022 was central to its ability to replace Russian pipeline gas with LNG.",
-    "category": "Gas & LNG"
+    term: "Regas terminal",
+    definition: "A facility where LNG tankers discharge their cargo into storage tanks, and the LNG is converted back to gas for pipeline injection. Also called an import terminal or FSRU.",
+    context: "Europe's rapid buildout of new regas terminals after 2022 was central to its ability to replace Russian pipeline gas with LNG.",
+    category: "Gas & LNG",
   },
   {
-    "term": "FSRU",
-    "definition": "Floating Storage and Regasification Unit. A vessel permanently moored offshore that acts as both an LNG storage tank and a regasification facility. Faster and cheaper to deploy than land-based terminals.",
-    "context": "Several European countries deployed FSRUs in 2022–23 as a rapid response to the Russian gas supply crisis.",
-    "category": "Gas & LNG"
+    term: "FSRU",
+    definition: "Floating Storage and Regasification Unit. A vessel permanently moored offshore that acts as both an LNG storage tank and a regasification facility. Faster and cheaper to deploy than land-based terminals.",
+    context: "Several European countries deployed FSRUs in 2022–23 as a rapid response to the Russian gas supply crisis.",
+    category: "Gas & LNG",
   },
   {
-    "term": "Spot",
-    "definition": "A transaction for near-term delivery at the current market price, as opposed to a forward or term contract. 'The spot market' is today's physical clearing price.",
-    "context": "A refiner short a barrel will buy spot to cover — spot prices spike when everyone needs the same prompt cargo at once.",
-    "category": "Physical markets"
+    term: "Spot",
+    definition: "A transaction for near-term delivery at the current market price, as opposed to a forward or term contract. 'The spot market' is today's physical clearing price.",
+    context: "A refiner short a barrel will buy spot to cover — spot prices spike when everyone needs the same prompt cargo at once.",
+    category: "Physical markets",
   },
   {
-    "term": "Term contract",
-    "definition": "A supply agreement covering repeated deliveries over a period (a quarter, a year) at a formula price, rather than a one-off spot deal.",
-    "context": "Producers sell most volume on term to majors and refiners, keeping only a slice back for the spot market.",
-    "category": "Physical markets"
+    term: "Term contract",
+    definition: "A supply agreement covering repeated deliveries over a period (a quarter, a year) at a formula price, rather than a one-off spot deal.",
+    context: "Producers sell most volume on term to majors and refiners, keeping only a slice back for the spot market.",
+    category: "Physical markets",
   },
   {
-    "term": "Prompt",
-    "definition": "The nearest delivery date or contract — the 'front' of the market. Prompt tightness shows up as backwardation and high spot premiums.",
-    "context": "'The prompt is bid' means buyers are chasing immediate barrels, usually a sign of a physical squeeze.",
-    "category": "Physical markets"
+    term: "Prompt",
+    definition: "The nearest delivery date or contract — the 'front' of the market. Prompt tightness shows up as backwardation and high spot premiums.",
+    context: "'The prompt is bid' means buyers are chasing immediate barrels, usually a sign of a physical squeeze.",
+    category: "Physical markets",
   },
   {
-    "term": "Pipeline gas",
-    "definition": "Natural gas delivered by pipeline rather than as LNG. Geographically constrained — it cannot be rerouted like a cargo — but cheaper where the infrastructure already exists.",
-    "context": "Europe's loss of Russian pipeline gas after 2022 forced it to compete for flexible LNG cargoes, tying TTF to global LNG prices.",
-    "category": "Gas & LNG"
+    term: "Pipeline gas",
+    definition: "Natural gas delivered by pipeline rather than as LNG. Geographically constrained — it cannot be rerouted like a cargo — but cheaper where the infrastructure already exists.",
+    context: "Europe's loss of Russian pipeline gas after 2022 forced it to compete for flexible LNG cargoes, tying TTF to global LNG prices.",
+    category: "Gas & LNG",
   },
   {
-    "term": "Take-or-pay",
-    "definition": "A contract clause obliging the buyer to pay for a minimum volume whether or not they take delivery. It underpins the financing of pipelines and LNG plants.",
-    "context": "Take-or-pay means the buyer carries volume risk — they pay even if demand disappears, which is why destination flexibility is so prized.",
-    "category": "Gas & LNG"
+    term: "Take-or-pay",
+    definition: "A contract clause obliging the buyer to pay for a minimum volume whether or not they take delivery. It underpins the financing of pipelines and LNG plants.",
+    context: "Take-or-pay means the buyer carries volume risk — they pay even if demand disappears, which is why destination flexibility is so prized.",
+    category: "Gas & LNG",
   },
   {
-    "term": "Injection season",
-    "definition": "The warmer months (roughly April–October in the Northern Hemisphere) when gas demand is low and storage is filled ahead of winter.",
-    "context": "A cool summer slows injection and leaves storage short heading into winter — a bullish setup for gas prices.",
-    "category": "Gas & LNG"
+    term: "Injection season",
+    definition: "The warmer months (roughly April–October in the Northern Hemisphere) when gas demand is low and storage is filled ahead of winter.",
+    context: "A cool summer slows injection and leaves storage short heading into winter — a bullish setup for gas prices.",
+    category: "Gas & LNG",
   },
   {
-    "term": "Withdrawal season",
-    "definition": "The colder months when gas is drawn out of storage to meet heating demand. Cold snaps accelerate withdrawals and tighten the market.",
-    "context": "A severe cold spell during withdrawal season can drain storage fast and send prompt gas and JKM sharply higher.",
-    "category": "Gas & LNG"
+    term: "Withdrawal season",
+    definition: "The colder months when gas is drawn out of storage to meet heating demand. Cold snaps accelerate withdrawals and tighten the market.",
+    context: "A severe cold spell during withdrawal season can drain storage fast and send prompt gas and JKM sharply higher.",
+    category: "Gas & LNG",
   },
   {
-    "term": "Charterparty",
-    "definition": "The contract between a shipowner and a charterer setting the terms for hiring a vessel — rate, route, laytime, and who bears which costs.",
-    "context": "Disputes over demurrage and off-hire almost always come down to the precise wording of the charterparty.",
-    "category": "Shipping"
+    term: "Charterparty",
+    definition: "The contract between a shipowner and a charterer setting the terms for hiring a vessel — rate, route, laytime, and who bears which costs.",
+    context: "Disputes over demurrage and off-hire almost always come down to the precise wording of the charterparty.",
+    category: "Shipping",
   },
   {
-    "term": "Voyage charter",
-    "definition": "Hiring a vessel for a single voyage at a freight rate per tonne of cargo. The owner bears the voyage costs — bunkers, port charges, canal tolls.",
-    "context": "A trader moving one cargo usually takes a voyage charter rather than committing to a vessel for months.",
-    "category": "Shipping"
+    term: "Voyage charter",
+    definition: "Hiring a vessel for a single voyage at a freight rate per tonne of cargo. The owner bears the voyage costs — bunkers, port charges, canal tolls.",
+    context: "A trader moving one cargo usually takes a voyage charter rather than committing to a vessel for months.",
+    category: "Shipping",
   },
   {
-    "term": "Time charter",
-    "definition": "Hiring a vessel for a fixed period at a daily hire rate. The charterer directs the vessel and pays voyage costs such as bunkers and port dues.",
-    "context": "Desks that move regular volumes time-charter vessels to guarantee tonnage and control their own scheduling.",
-    "category": "Shipping"
+    term: "Time charter",
+    definition: "Hiring a vessel for a fixed period at a daily hire rate. The charterer directs the vessel and pays voyage costs such as bunkers and port dues.",
+    context: "Desks that move regular volumes time-charter vessels to guarantee tonnage and control their own scheduling.",
+    category: "Shipping",
   },
   {
-    "term": "Worldscale",
-    "definition": "The freight-rate index for tankers. Rates are quoted as a percentage of a published nominal rate (WS100) for each route, reset annually.",
-    "context": "'VLCC MEG–Asia is at WS55' tells a trader the freight cost without quoting dollars — everyone converts WS to $/bbl in their head.",
-    "category": "Shipping"
+    term: "Worldscale",
+    definition: "The freight-rate index for tankers. Rates are quoted as a percentage of a published nominal rate (WS100) for each route, reset annually.",
+    context: "'VLCC MEG–Asia is at WS55' tells a trader the freight cost without quoting dollars — everyone converts WS to $/bbl in their head.",
+    category: "Shipping",
   },
   {
-    "term": "Laytime",
-    "definition": "The time allowed under the charterparty for loading and discharging cargo before demurrage starts to accrue.",
-    "context": "If a port is congested and laytime runs out before the vessel berths, the charterer starts paying demurrage.",
-    "category": "Shipping"
+    term: "Laytime",
+    definition: "The time allowed under the charterparty for loading and discharging cargo before demurrage starts to accrue.",
+    context: "If a port is congested and laytime runs out before the vessel berths, the charterer starts paying demurrage.",
+    category: "Shipping",
   },
   {
-    "term": "Demurrage",
-    "definition": "A penalty the charterer pays the owner when loading or discharging takes longer than the agreed laytime.",
-    "context": "Demurrage is one of the most common commercial disputes in physical trading — terminals blame vessels, vessels blame terminals.",
-    "category": "Shipping"
+    term: "Demurrage",
+    definition: "A penalty the charterer pays the owner when loading or discharging takes longer than the agreed laytime.",
+    context: "Demurrage is one of the most common commercial disputes in physical trading — terminals blame vessels, vessels blame terminals.",
+    category: "Shipping",
   },
   {
-    "term": "Notice of Readiness",
-    "definition": "The formal notice a vessel tenders on arrival declaring it is ready to load or discharge. Tendering a valid NOR typically starts the laytime clock.",
-    "context": "Whether NOR was validly tendered — at the right place, in the right form — often decides who pays the demurrage.",
-    "category": "Shipping"
+    term: "Notice of Readiness",
+    definition: "The formal notice a vessel tenders on arrival declaring it is ready to load or discharge. Tendering a valid NOR typically starts the laytime clock.",
+    context: "Whether NOR was validly tendered — at the right place, in the right form — often decides who pays the demurrage.",
+    category: "Shipping",
   },
   {
-    "term": "Laycan",
-    "definition": "The laydays/cancelling window — the date range within which a vessel must arrive and tender NOR. Miss it and the charterer can cancel.",
-    "context": "'The cargo has a 5–7 March laycan' means the vessel must present in that window or the deal is at risk.",
-    "category": "Shipping"
+    term: "Laycan",
+    definition: "The laydays/cancelling window — the date range within which a vessel must arrive and tender NOR. Miss it and the charterer can cancel.",
+    context: "'The cargo has a 5–7 March laycan' means the vessel must present in that window or the deal is at risk.",
+    category: "Shipping",
   },
   {
-    "term": "Bill of lading",
-    "definition": "The shipping document issued on loading that serves as receipt for the cargo, evidence of the contract of carriage, and document of title.",
-    "context": "Banks release payment under a letter of credit against the bill of lading — control of the B/L is control of the cargo.",
-    "category": "Shipping"
+    term: "Bill of lading",
+    definition: "The shipping document issued on loading that serves as receipt for the cargo, evidence of the contract of carriage, and document of title.",
+    context: "Banks release payment under a letter of credit against the bill of lading — control of the B/L is control of the cargo.",
+    category: "Shipping",
   },
   {
-    "term": "VLCC",
-    "definition": "Very Large Crude Carrier — a tanker of roughly 2 million barrels capacity, the workhorse of long-haul crude trades.",
-    "context": "When VLCC rates spike, long-haul arbitrage from the Atlantic Basin to Asia can shut even when the price spread looks open.",
-    "category": "Shipping"
+    term: "VLCC",
+    definition: "Very Large Crude Carrier — a tanker of roughly 2 million barrels capacity, the workhorse of long-haul crude trades.",
+    context: "When VLCC rates spike, long-haul arbitrage from the Atlantic Basin to Asia can shut even when the price spread looks open.",
+    category: "Shipping",
   },
   {
-    "term": "Aframax",
-    "definition": "A mid-sized crude tanker of roughly 600,000–800,000 barrels, used on shorter regional routes and in ports too small for VLCCs.",
-    "context": "Where a VLCC cannot berth, cargoes move on Aframaxes or are built up via ship-to-ship transfers.",
-    "category": "Shipping"
+    term: "Aframax",
+    definition: "A mid-sized crude tanker of roughly 600,000–800,000 barrels, used on shorter regional routes and in ports too small for VLCCs.",
+    context: "Where a VLCC cannot berth, cargoes move on Aframaxes or are built up via ship-to-ship transfers.",
+    category: "Shipping",
   },
   {
-    "term": "Bunkers",
-    "definition": "Marine fuel burned by a vessel. Bunker cost is one of the largest variable costs of a voyage and moves with oil prices.",
-    "context": "After IMO 2020, the spread between high- and low-sulphur bunkers became a real factor in voyage economics.",
-    "category": "Shipping"
+    term: "Bunkers",
+    definition: "Marine fuel burned by a vessel. Bunker cost is one of the largest variable costs of a voyage and moves with oil prices.",
+    context: "After IMO 2020, the spread between high- and low-sulphur bunkers became a real factor in voyage economics.",
+    category: "Shipping",
   },
   {
-    "term": "IMO 2020",
-    "definition": "The International Maritime Organization rule, effective 2020, capping marine fuel sulphur at 0.5% (from 3.5%) for vessels without scrubbers.",
-    "context": "IMO 2020 reshaped the fuel oil market overnight — demand shifted from high-sulphur grades toward low-sulphur fuel and marine gasoil.",
-    "category": "Shipping"
+    term: "IMO 2020",
+    definition: "The International Maritime Organization rule, effective 2020, capping marine fuel sulphur at 0.5% (from 3.5%) for vessels without scrubbers.",
+    context: "IMO 2020 reshaped the fuel oil market overnight — demand shifted from high-sulphur grades toward low-sulphur fuel and marine gasoil.",
+    category: "Shipping",
   },
   {
-    "term": "WTI",
-    "definition": "West Texas Intermediate — the US light sweet crude benchmark, delivered at Cushing, Oklahoma, and the basis for NYMEX crude futures.",
-    "context": "The Brent–WTI spread reflects US logistics and export economics; it widens when US crude backs up at Cushing.",
-    "category": "Oil & Products"
+    term: "WTI",
+    definition: "West Texas Intermediate — the US light sweet crude benchmark, delivered at Cushing, Oklahoma, and the basis for NYMEX crude futures.",
+    context: "The Brent–WTI spread reflects US logistics and export economics; it widens when US crude backs up at Cushing.",
+    category: "Oil & Products",
   },
   {
-    "term": "Brent",
-    "definition": "The light sweet crude grade and futures complex (ICE Brent) used as the global oil benchmark. Most internationally traded crude prices off Brent.",
-    "context": "When people say 'oil is at $80' they usually mean front-month Brent or WTI futures, not any particular physical cargo.",
-    "category": "Oil & Products"
+    term: "Brent",
+    definition: "The light sweet crude grade and futures complex (ICE Brent) used as the global oil benchmark. Most internationally traded crude prices off Brent.",
+    context: "When people say 'oil is at $80' they usually mean front-month Brent or WTI futures, not any particular physical cargo.",
+    category: "Oil & Products",
   },
   {
-    "term": "Dubai/Oman",
-    "definition": "The medium sour crude benchmark used to price Middle East crude sold into Asia — the third major benchmark alongside Brent and WTI.",
-    "context": "Asian refiners watch the Brent–Dubai (EFS) spread to judge whether Atlantic Basin crude is competitive against Gulf barrels.",
-    "category": "Oil & Products"
+    term: "Dubai/Oman",
+    definition: "The medium sour crude benchmark used to price Middle East crude sold into Asia — the third major benchmark alongside Brent and WTI.",
+    context: "Asian refiners watch the Brent–Dubai (EFS) spread to judge whether Atlantic Basin crude is competitive against Gulf barrels.",
+    category: "Oil & Products",
   },
   {
-    "term": "API gravity",
-    "definition": "A measure of crude density. Higher API means lighter crude (more valuable light products); lower API means heavier crude.",
-    "context": "A light, sweet 40-API crude commands a premium over a heavy, sour 22-API grade because it yields more gasoline and diesel.",
-    "category": "Oil & Products"
+    term: "API gravity",
+    definition: "A measure of crude density. Higher API means lighter crude (more valuable light products); lower API means heavier crude.",
+    context: "A light, sweet 40-API crude commands a premium over a heavy, sour 22-API grade because it yields more gasoline and diesel.",
+    category: "Oil & Products",
   },
   {
-    "term": "Sweet vs sour",
-    "definition": "A classification of crude by sulphur content. Sweet crude is low-sulphur and easier to refine; sour crude is high-sulphur and needs more complex processing.",
-    "context": "Only complex refineries with desulphurisation units can profitably run sour crude — which is why it trades at a discount.",
-    "category": "Oil & Products"
+    term: "Sweet vs sour",
+    definition: "A classification of crude by sulphur content. Sweet crude is low-sulphur and easier to refine; sour crude is high-sulphur and needs more complex processing.",
+    context: "Only complex refineries with desulphurisation units can profitably run sour crude — which is why it trades at a discount.",
+    category: "Oil & Products",
   },
   {
-    "term": "Condensate",
-    "definition": "A very light hydrocarbon liquid produced with natural gas, sitting between crude and NGLs. Used as a refinery feed and as a diluent.",
-    "context": "Condensate is often blended into heavy crude to make it flow through pipelines or to hit a cargo's API specification.",
-    "category": "Oil & Products"
+    term: "Condensate",
+    definition: "A very light hydrocarbon liquid produced with natural gas, sitting between crude and NGLs. Used as a refinery feed and as a diluent.",
+    context: "Condensate is often blended into heavy crude to make it flow through pipelines or to hit a cargo's API specification.",
+    category: "Oil & Products",
   },
   {
-    "term": "Naphtha",
-    "definition": "A light refined product used as petrochemical feedstock (to make plastics) and as a gasoline blendstock.",
-    "context": "Asian naphtha cracks track petrochemical demand — when plastics demand is weak, naphtha cracks collapse.",
-    "category": "Oil & Products"
+    term: "Naphtha",
+    definition: "A light refined product used as petrochemical feedstock (to make plastics) and as a gasoline blendstock.",
+    context: "Asian naphtha cracks track petrochemical demand — when plastics demand is weak, naphtha cracks collapse.",
+    category: "Oil & Products",
   },
   {
-    "term": "Gasoil",
-    "definition": "The middle-distillate stream covering diesel and heating oil. Usually the highest-value major product and a key driver of refinery margins.",
-    "context": "When diesel cracks blow out, refineries maximise distillate yield and run harder — pulling more crude into the system.",
-    "category": "Oil & Products"
+    term: "Gasoil",
+    definition: "The middle-distillate stream covering diesel and heating oil. Usually the highest-value major product and a key driver of refinery margins.",
+    context: "When diesel cracks blow out, refineries maximise distillate yield and run harder — pulling more crude into the system.",
+    category: "Oil & Products",
   },
   {
-    "term": "Jet fuel",
-    "definition": "A kerosene-type middle distillate used in aviation. Demand is highly sensitive to air-travel activity.",
-    "context": "Jet demand collapsed in 2020 and refiners diverted kerosene into the diesel pool, weighing on distillate cracks.",
-    "category": "Oil & Products"
+    term: "Jet fuel",
+    definition: "A kerosene-type middle distillate used in aviation. Demand is highly sensitive to air-travel activity.",
+    context: "Jet demand collapsed in 2020 and refiners diverted kerosene into the diesel pool, weighing on distillate cracks.",
+    category: "Oil & Products",
   },
   {
-    "term": "Gasoline",
-    "definition": "The light-distillate motor fuel (mogas, or RBOB in the US). Demand is seasonal, peaking in the summer driving season.",
-    "context": "US gasoline cracks peak ahead of summer — refiners build inventory in spring to capture the seasonal margin.",
-    "category": "Oil & Products"
+    term: "Gasoline",
+    definition: "The light-distillate motor fuel (mogas, or RBOB in the US). Demand is seasonal, peaking in the summer driving season.",
+    context: "US gasoline cracks peak ahead of summer — refiners build inventory in spring to capture the seasonal margin.",
+    category: "Oil & Products",
   },
   {
-    "term": "Fuel oil",
-    "definition": "The heavy residual product at the bottom of the barrel, used as marine bunker fuel and in power generation. Split into high- and low-sulphur grades.",
-    "context": "IMO 2020 split fuel oil into VLSFO and HSFO markets — the HSFO discount became a scrubber-economics signal.",
-    "category": "Oil & Products"
+    term: "Fuel oil",
+    definition: "The heavy residual product at the bottom of the barrel, used as marine bunker fuel and in power generation. Split into high- and low-sulphur grades.",
+    context: "IMO 2020 split fuel oil into VLSFO and HSFO markets — the HSFO discount became a scrubber-economics signal.",
+    category: "Oil & Products",
   },
   {
-    "term": "Distillate",
-    "definition": "The middle-of-the-barrel product group — diesel, gasoil, jet, heating oil — and the most economically important products for most refiners.",
-    "context": "'Distillate-led margins' means refinery profitability is being driven by diesel and jet rather than gasoline.",
-    "category": "Oil & Products"
+    term: "Distillate",
+    definition: "The middle-of-the-barrel product group — diesel, gasoil, jet, heating oil — and the most economically important products for most refiners.",
+    context: "'Distillate-led margins' means refinery profitability is being driven by diesel and jet rather than gasoline.",
+    category: "Oil & Products",
   },
   {
-    "term": "FCC unit",
-    "definition": "Fluid Catalytic Cracker — a refinery unit that breaks heavy gasoil into lighter, higher-value products such as gasoline. It defines a refinery's complexity.",
-    "context": "When an FCC goes down for maintenance, gasoline supply tightens regionally and cracks can spike.",
-    "category": "Oil & Products"
+    term: "FCC unit",
+    definition: "Fluid Catalytic Cracker — a refinery unit that breaks heavy gasoil into lighter, higher-value products such as gasoline. It defines a refinery's complexity.",
+    context: "When an FCC goes down for maintenance, gasoline supply tightens regionally and cracks can spike.",
+    category: "Oil & Products",
   },
   {
-    "term": "Refinery turnaround",
-    "definition": "A planned, periodic shutdown of refinery units for maintenance, typically in the spring and autumn shoulder seasons. It reduces product supply while it lasts.",
-    "context": "Heavy turnaround season tightens product balances — traders track the maintenance calendar to anticipate crack moves.",
-    "category": "Oil & Products"
+    term: "Refinery turnaround",
+    definition: "A planned, periodic shutdown of refinery units for maintenance, typically in the spring and autumn shoulder seasons. It reduces product supply while it lasts.",
+    context: "Heavy turnaround season tightens product balances — traders track the maintenance calendar to anticipate crack moves.",
+    category: "Oil & Products",
   },
   {
-    "term": "LME",
-    "definition": "London Metal Exchange — the global venue for trading and pricing industrial metals (copper, aluminium, zinc, nickel, lead, tin) and the reference for physical deals.",
-    "context": "Physical metal deals price off the LME cash or 3-month price plus a regional physical premium.",
-    "category": "Metals & Mining"
+    term: "LME",
+    definition: "London Metal Exchange — the global venue for trading and pricing industrial metals (copper, aluminium, zinc, nickel, lead, tin) and the reference for physical deals.",
+    context: "Physical metal deals price off the LME cash or 3-month price plus a regional physical premium.",
+    category: "Metals & Mining",
   },
   {
-    "term": "LME 3-month",
-    "definition": "The LME's distinctive prompt structure, where the most-quoted contract is a rolling 3-month forward alongside daily prompt dates rather than monthly futures.",
-    "context": "Traders quote 'cash/3s' — the spread between LME cash and 3-month — to read tightness in a metal.",
-    "category": "Metals & Mining"
+    term: "LME 3-month",
+    definition: "The LME's distinctive prompt structure, where the most-quoted contract is a rolling 3-month forward alongside daily prompt dates rather than monthly futures.",
+    context: "Traders quote 'cash/3s' — the spread between LME cash and 3-month — to read tightness in a metal.",
+    category: "Metals & Mining",
   },
   {
-    "term": "Warrant",
-    "definition": "The document of title for a specific lot of metal held in an LME-registered warehouse. Holding the warrant means owning deliverable metal.",
-    "context": "When warrants are cancelled — marked for removal — it signals metal is leaving the system, often read as a tightening signal.",
-    "category": "Metals & Mining"
+    term: "Warrant",
+    definition: "The document of title for a specific lot of metal held in an LME-registered warehouse. Holding the warrant means owning deliverable metal.",
+    context: "When warrants are cancelled — marked for removal — it signals metal is leaving the system, often read as a tightening signal.",
+    category: "Metals & Mining",
   },
   {
-    "term": "Concentrate",
-    "definition": "Partially processed ore — for example copper concentrate at roughly 25–30% metal — sold by miners to smelters for refining into metal.",
-    "context": "Miners and smelters split the value of the concentrate via negotiated treatment and refining charges.",
-    "category": "Metals & Mining"
+    term: "Concentrate",
+    definition: "Partially processed ore — for example copper concentrate at roughly 25–30% metal — sold by miners to smelters for refining into metal.",
+    context: "Miners and smelters split the value of the concentrate via negotiated treatment and refining charges.",
+    category: "Metals & Mining",
   },
   {
-    "term": "TC/RC",
-    "definition": "Treatment and Refining Charges — the fees a smelter deducts to turn concentrate into refined metal. They move inversely with concentrate availability.",
-    "context": "Falling TC/RCs mean concentrate is scarce relative to smelter capacity — smelters lose pricing power.",
-    "category": "Metals & Mining"
+    term: "TC/RC",
+    definition: "Treatment and Refining Charges — the fees a smelter deducts to turn concentrate into refined metal. They move inversely with concentrate availability.",
+    context: "Falling TC/RCs mean concentrate is scarce relative to smelter capacity — smelters lose pricing power.",
+    category: "Metals & Mining",
   },
   {
-    "term": "Cathode",
-    "definition": "Refined copper in its standard traded form — sheets of about 99.99% purity, the deliverable shape against LME copper.",
-    "context": "The premium for physical cathode over the LME price reflects regional tightness and logistics, not the flat price.",
-    "category": "Metals & Mining"
+    term: "Cathode",
+    definition: "Refined copper in its standard traded form — sheets of about 99.99% purity, the deliverable shape against LME copper.",
+    context: "The premium for physical cathode over the LME price reflects regional tightness and logistics, not the flat price.",
+    category: "Metals & Mining",
   },
   {
-    "term": "Doré",
-    "definition": "Semi-pure gold or silver bars produced at a mine site, later refined to market purity — the form in which precious metal first leaves a mine.",
-    "context": "A miner sells doré to a refiner under an offtake deal, priced off the benchmark minus refining costs.",
-    "category": "Metals & Mining"
+    term: "Doré",
+    definition: "Semi-pure gold or silver bars produced at a mine site, later refined to market purity — the form in which precious metal first leaves a mine.",
+    context: "A miner sells doré to a refiner under an offtake deal, priced off the benchmark minus refining costs.",
+    category: "Metals & Mining",
   },
   {
-    "term": "Offtake agreement",
-    "definition": "A long-term contract under which a buyer commits to purchase a mine's future output, often used to help finance the mine's development.",
-    "context": "Trading houses provide financing in exchange for offtake — securing volume and a marketing margin on the metal.",
-    "category": "Metals & Mining"
+    term: "Offtake agreement",
+    definition: "A long-term contract under which a buyer commits to purchase a mine's future output, often used to help finance the mine's development.",
+    context: "Trading houses provide financing in exchange for offtake — securing volume and a marketing margin on the metal.",
+    category: "Metals & Mining",
   },
   {
-    "term": "Ore grade",
-    "definition": "The concentration of valuable metal in ore — grams per tonne for gold, percent for copper. Higher grade means more metal per tonne mined.",
-    "context": "As high-grade deposits deplete, falling average grades push up the cost curve and support long-run prices.",
-    "category": "Metals & Mining"
+    term: "Ore grade",
+    definition: "The concentration of valuable metal in ore — grams per tonne for gold, percent for copper. Higher grade means more metal per tonne mined.",
+    context: "As high-grade deposits deplete, falling average grades push up the cost curve and support long-run prices.",
+    category: "Metals & Mining",
   },
   {
-    "term": "Cut-off grade",
-    "definition": "The minimum ore grade that is economic to mine and process at a given price. Material below it is treated as waste.",
-    "context": "A higher metal price lowers the cut-off grade — suddenly more of the deposit becomes economic ore.",
-    "category": "Metals & Mining"
+    term: "Cut-off grade",
+    definition: "The minimum ore grade that is economic to mine and process at a given price. Material below it is treated as waste.",
+    context: "A higher metal price lowers the cut-off grade — suddenly more of the deposit becomes economic ore.",
+    category: "Metals & Mining",
   },
   {
-    "term": "Stripping ratio",
-    "definition": "In open-pit mining, the tonnes of waste rock that must be removed to access one tonne of ore. A key cost driver.",
-    "context": "A rising stripping ratio as a pit deepens steadily increases unit costs over a mine's life.",
-    "category": "Metals & Mining"
+    term: "Stripping ratio",
+    definition: "In open-pit mining, the tonnes of waste rock that must be removed to access one tonne of ore. A key cost driver.",
+    context: "A rising stripping ratio as a pit deepens steadily increases unit costs over a mine's life.",
+    category: "Metals & Mining",
   },
   {
-    "term": "Iron ore 62% Fe",
-    "definition": "The benchmark grade for seaborne iron ore — 62% iron content, delivered to China — and the reference for most iron ore trade.",
-    "context": "Premiums and discounts for higher (65%) or lower (58%) grades widen with steel-mill margins.",
-    "category": "Metals & Mining"
+    term: "Iron ore 62% Fe",
+    definition: "The benchmark grade for seaborne iron ore — 62% iron content, delivered to China — and the reference for most iron ore trade.",
+    context: "Premiums and discounts for higher (65%) or lower (58%) grades widen with steel-mill margins.",
+    category: "Metals & Mining",
   },
   {
-    "term": "Physical premium",
-    "definition": "The amount buyers pay over the exchange price to obtain metal at a specific location and form, reflecting freight, logistics and local tightness.",
-    "context": "The US Midwest aluminium premium can move independently of the LME price, driven by regional supply and tariffs.",
-    "category": "Metals & Mining"
+    term: "Physical premium",
+    definition: "The amount buyers pay over the exchange price to obtain metal at a specific location and form, reflecting freight, logistics and local tightness.",
+    context: "The US Midwest aluminium premium can move independently of the LME price, driven by regional supply and tariffs.",
+    category: "Metals & Mining",
   },
   {
-    "term": "Battery metals",
-    "definition": "The metals central to electric-vehicle and storage demand — lithium, cobalt, nickel and graphite. A fast-growing, less mature market.",
-    "context": "Battery-metal prices are far more volatile than base metals because the supply chains are young and demand forecasts swing widely.",
-    "category": "Metals & Mining"
+    term: "Battery metals",
+    definition: "The metals central to electric-vehicle and storage demand — lithium, cobalt, nickel and graphite. A fast-growing, less mature market.",
+    context: "Battery-metal prices are far more volatile than base metals because the supply chains are young and demand forecasts swing widely.",
+    category: "Metals & Mining",
   },
   {
-    "term": "Class 1 nickel",
-    "definition": "High-purity nickel (at least 99.8%), deliverable to the LME and usable in batteries — distinct from lower-grade Class 2 nickel used in stainless steel.",
-    "context": "The 2022 LME nickel squeeze exposed how thin the Class 1 deliverable market is versus total nickel output.",
-    "category": "Metals & Mining"
+    term: "Class 1 nickel",
+    definition: "High-purity nickel (at least 99.8%), deliverable to the LME and usable in batteries — distinct from lower-grade Class 2 nickel used in stainless steel.",
+    context: "The 2022 LME nickel squeeze exposed how thin the Class 1 deliverable market is versus total nickel output.",
+    category: "Metals & Mining",
   },
   {
-    "term": "Alumina",
-    "definition": "The refined intermediate (aluminium oxide) produced from bauxite ore and smelted into aluminium. It is usually priced as a percentage of the aluminium price.",
-    "context": "An alumina refinery outage can spike alumina prices and squeeze aluminium smelter margins worldwide.",
-    "category": "Metals & Mining"
+    term: "Alumina",
+    definition: "The refined intermediate (aluminium oxide) produced from bauxite ore and smelted into aluminium. It is usually priced as a percentage of the aluminium price.",
+    context: "An alumina refinery outage can spike alumina prices and squeeze aluminium smelter margins worldwide.",
+    category: "Metals & Mining",
   },
   {
-    "term": "AIS",
-    "definition": "Automatic Identification System — the transponder signal ships broadcast with position, speed and draught. The raw feed behind vessel-tracking analytics.",
-    "context": "Reading AIS, an analyst can see crude loadings build at a terminal days before official export data confirms it.",
-    "category": "Market Intelligence & Analytics"
+    term: "AIS",
+    definition: "Automatic Identification System — the transponder signal ships broadcast with position, speed and draught. The raw feed behind vessel-tracking analytics.",
+    context: "Reading AIS, an analyst can see crude loadings build at a terminal days before official export data confirms it.",
+    category: "Market Intelligence & Analytics",
   },
   {
-    "term": "Satellite imagery",
-    "definition": "Overhead imaging used to estimate flows and stocks — floating-roof tank shadows reveal crude inventories; thermal and optical data track activity.",
-    "context": "Satellite tank-farm analysis flagged the 2020 Cushing inventory build in near real time, well ahead of the EIA data.",
-    "category": "Market Intelligence & Analytics"
+    term: "Satellite imagery",
+    definition: "Overhead imaging used to estimate flows and stocks — floating-roof tank shadows reveal crude inventories; thermal and optical data track activity.",
+    context: "Satellite tank-farm analysis flagged the 2020 Cushing inventory build in near real time, well ahead of the EIA data.",
+    category: "Market Intelligence & Analytics",
   },
   {
-    "term": "Kpler & Vortexa",
-    "definition": "Commercial data vendors that turn AIS, port and cargo data into trade-flow analytics — loadings, discharges, floating storage and ton-miles.",
-    "context": "Desks cross-check vendor flow estimates against their own positions to spot where the official statistics are lagging.",
-    "category": "Market Intelligence & Analytics"
+    term: "Kpler & Vortexa",
+    definition: "Commercial data vendors that turn AIS, port and cargo data into trade-flow analytics — loadings, discharges, floating storage and ton-miles.",
+    context: "Desks cross-check vendor flow estimates against their own positions to spot where the official statistics are lagging.",
+    category: "Market Intelligence & Analytics",
   },
   {
-    "term": "EIA Weekly Status",
-    "definition": "The US Energy Information Administration's weekly report on crude and product inventories, production and demand — the most-watched US oil data point.",
-    "context": "A surprise crude draw or build in the Wednesday EIA report routinely moves the whole oil complex within seconds.",
-    "category": "Market Intelligence & Analytics"
+    term: "EIA Weekly Status",
+    definition: "The US Energy Information Administration's weekly report on crude and product inventories, production and demand — the most-watched US oil data point.",
+    context: "A surprise crude draw or build in the Wednesday EIA report routinely moves the whole oil complex within seconds.",
+    category: "Market Intelligence & Analytics",
   },
   {
-    "term": "COT report",
-    "definition": "Commitments of Traders — the weekly CFTC breakdown of futures positioning by trader type (managed money, commercials). Used to read speculative positioning.",
-    "context": "Stretched managed-money longs in the COT can warn of a crowded position that is vulnerable to a sharp unwind.",
-    "category": "Market Intelligence & Analytics"
+    term: "COT report",
+    definition: "Commitments of Traders — the weekly CFTC breakdown of futures positioning by trader type (managed money, commercials). Used to read speculative positioning.",
+    context: "Stretched managed-money longs in the COT can warn of a crowded position that is vulnerable to a sharp unwind.",
+    category: "Market Intelligence & Analytics",
   },
   {
-    "term": "Days of cover",
-    "definition": "Inventory expressed as the number of days of demand it would satisfy. It normalises stock levels for changing consumption.",
-    "context": "Comparing days of cover to the five-year range tells you whether a build is genuinely bearish or just seasonal.",
-    "category": "Market Intelligence & Analytics"
+    term: "Days of cover",
+    definition: "Inventory expressed as the number of days of demand it would satisfy. It normalises stock levels for changing consumption.",
+    context: "Comparing days of cover to the five-year range tells you whether a build is genuinely bearish or just seasonal.",
+    category: "Market Intelligence & Analytics",
   },
   {
-    "term": "Supply & demand balance",
-    "definition": "A model totting up all supply against demand to project surplus or deficit — and therefore inventory and price direction.",
-    "context": "Every fundamental view ultimately rests on a balance — 'the market is 1 mb/d oversupplied in Q3' is a balance call.",
-    "category": "Market Intelligence & Analytics"
+    term: "Supply & demand balance",
+    definition: "A model totting up all supply against demand to project surplus or deficit — and therefore inventory and price direction.",
+    context: "Every fundamental view ultimately rests on a balance — 'the market is 1 mb/d oversupplied in Q3' is a balance call.",
+    category: "Market Intelligence & Analytics",
   },
   {
-    "term": "Open interest",
-    "definition": "The total number of outstanding futures or options contracts. Rising open interest with a rising price signals new money entering a trend.",
-    "context": "A price move on falling open interest is often just short-covering, not fresh conviction — open interest separates the two.",
-    "category": "Market Intelligence & Analytics"
+    term: "Open interest",
+    definition: "The total number of outstanding futures or options contracts. Rising open interest with a rising price signals new money entering a trend.",
+    context: "A price move on falling open interest is often just short-covering, not fresh conviction — open interest separates the two.",
+    category: "Market Intelligence & Analytics",
   },
   {
-    "term": "Positioning",
-    "definition": "How long or short the market as a whole is, inferred from COT, open interest and flows. Extreme positioning raises reversal risk.",
-    "context": "When everyone is already long, the marginal buyer is gone — positioning analysis flags when a move is running out of fuel.",
-    "category": "Market Intelligence & Analytics"
+    term: "Positioning",
+    definition: "How long or short the market as a whole is, inferred from COT, open interest and flows. Extreme positioning raises reversal risk.",
+    context: "When everyone is already long, the marginal buyer is gone — positioning analysis flags when a move is running out of fuel.",
+    category: "Market Intelligence & Analytics",
   },
   {
-    "term": "GIE AGSI",
-    "definition": "Gas Infrastructure Europe's Aggregated Gas Storage Inventory — daily data on European gas-storage fill levels. A core European gas and LNG signal.",
-    "context": "AGSI fill rates told the market Europe would clear the 2022–23 winter weeks before the TTF price fully relaxed.",
-    "category": "Market Intelligence & Analytics"
+    term: "GIE AGSI",
+    definition: "Gas Infrastructure Europe's Aggregated Gas Storage Inventory — daily data on European gas-storage fill levels. A core European gas and LNG signal.",
+    context: "AGSI fill rates told the market Europe would clear the 2022–23 winter weeks before the TTF price fully relaxed.",
+    category: "Market Intelligence & Analytics",
   },
   {
-    "term": "Platts MOC",
-    "definition": "The Platts Market-on-Close — the structured window in which bids, offers and trades are published and used to set daily benchmark assessments.",
-    "context": "Activity in the MOC window can move a physical differential that then flows into thousands of contracts priced off the assessment.",
-    "category": "Market Intelligence & Analytics"
+    term: "Platts MOC",
+    definition: "The Platts Market-on-Close — the structured window in which bids, offers and trades are published and used to set daily benchmark assessments.",
+    context: "Activity in the MOC window can move a physical differential that then flows into thousands of contracts priced off the assessment.",
+    category: "Market Intelligence & Analytics",
   },
   {
-    "term": "Refinery utilisation",
-    "definition": "The share of refining capacity actually running. Falling utilisation — turnarounds, outages — tightens product supply and lifts cracks.",
-    "context": "US refinery utilisation in the EIA report is a direct read on how much crude is being pulled into products that week.",
-    "category": "Market Intelligence & Analytics"
+    term: "Refinery utilisation",
+    definition: "The share of refining capacity actually running. Falling utilisation — turnarounds, outages — tightens product supply and lifts cracks.",
+    context: "US refinery utilisation in the EIA report is a direct read on how much crude is being pulled into products that week.",
+    category: "Market Intelligence & Analytics",
   },
   {
-    "term": "Pipeline nominations",
-    "definition": "The volumes shippers schedule to flow through a pipeline. Nomination data reveals real-time physical gas and crude flows.",
-    "context": "A drop in interconnector nominations can flag a developing regional gas shortage before prices react.",
-    "category": "Market Intelligence & Analytics"
+    term: "Pipeline nominations",
+    definition: "The volumes shippers schedule to flow through a pipeline. Nomination data reveals real-time physical gas and crude flows.",
+    context: "A drop in interconnector nominations can flag a developing regional gas shortage before prices react.",
+    category: "Market Intelligence & Analytics",
   },
   {
-    "term": "IEA & OPEC reports",
-    "definition": "Monthly outlooks from the IEA, OPEC and the EIA (STEO) giving supply, demand and balance projections — the benchmark consensus inputs.",
-    "context": "When the IEA and OPEC demand forecasts diverge sharply, the gap itself becomes a talking point that moves sentiment.",
-    "category": "Market Intelligence & Analytics"
+    term: "IEA & OPEC reports",
+    definition: "Monthly outlooks from the IEA, OPEC and the EIA (STEO) giving supply, demand and balance projections — the benchmark consensus inputs.",
+    context: "When the IEA and OPEC demand forecasts diverge sharply, the gap itself becomes a talking point that moves sentiment.",
+    category: "Market Intelligence & Analytics",
   },
   {
-    "term": "Alternative data",
-    "definition": "Non-traditional datasets — satellite, AIS, card spending, mobility, weather — used to nowcast supply and demand ahead of official statistics.",
-    "context": "The analytical edge has shifted to whoever reads alt data fastest, since official reports are always weeks behind reality.",
-    "category": "Market Intelligence & Analytics"
+    term: "Alternative data",
+    definition: "Non-traditional datasets — satellite, AIS, card spending, mobility, weather — used to nowcast supply and demand ahead of official statistics.",
+    context: "The analytical edge has shifted to whoever reads alt data fastest, since official reports are always weeks behind reality.",
+    category: "Market Intelligence & Analytics",
   },
   {
-    "term": "Freight analytics",
-    "definition": "Analysis of vessel availability, ton-miles and rates (Worldscale, Baltic indices) to gauge how freight is opening or closing arbitrage.",
-    "context": "An arb can look open on price but be shut once freight analytics show tonnage is scarce on that route.",
-    "category": "Market Intelligence & Analytics"
+    term: "Freight analytics",
+    definition: "Analysis of vessel availability, ton-miles and rates (Worldscale, Baltic indices) to gauge how freight is opening or closing arbitrage.",
+    context: "An arb can look open on price but be shut once freight analytics show tonnage is scarce on that route.",
+    category: "Market Intelligence & Analytics",
   },
   {
-    "term": "Incoterms",
-    "definition": "The standardised international trade terms (FOB, CIF, DES, FCA and others) that define where delivery happens and how cost, risk and insurance split between buyer and seller.",
-    "context": "Getting the Incoterm wrong by one letter can shift hundreds of thousands of dollars of freight and risk onto the wrong party.",
-    "category": "Physical markets"
+    term: "Incoterms",
+    definition: "The standardised international trade terms (FOB, CIF, DES, FCA and others) that define where delivery happens and how cost, risk and insurance split between buyer and seller.",
+    context: "Getting the Incoterm wrong by one letter can shift hundreds of thousands of dollars of freight and risk onto the wrong party.",
+    category: "Physical markets",
   },
   {
-    "term": "Cost of carry",
-    "definition": "The total cost of holding physical commodity over time — storage, financing and insurance. It sets the floor under a contango and the economics of storage trades.",
-    "context": "If contango is wider than the cost of carry, buying physical to store and selling forward locks in a near-riskless margin.",
-    "category": "Physical markets"
+    term: "Cost of carry",
+    definition: "The total cost of holding physical commodity over time — storage, financing and insurance. It sets the floor under a contango and the economics of storage trades.",
+    context: "If contango is wider than the cost of carry, buying physical to store and selling forward locks in a near-riskless margin.",
+    category: "Physical markets",
   },
   {
-    "term": "Cash-and-carry",
-    "definition": "The storage trade itself: buy the physical commodity now, store it, and sell it forward, capturing a contango wider than the cost of carry.",
-    "context": "The 2020 oil crash opened a huge cash-and-carry — traders who could secure tanks or tankers captured the carry on the curve.",
-    "category": "Physical markets"
+    term: "Cash-and-carry",
+    definition: "The storage trade itself: buy the physical commodity now, store it, and sell it forward, capturing a contango wider than the cost of carry.",
+    context: "The 2020 oil crash opened a huge cash-and-carry — traders who could secure tanks or tankers captured the carry on the curve.",
+    category: "Physical markets",
   },
   {
-    "term": "Stock build/draw",
-    "definition": "A rise (build) or fall (draw) in held inventory over a period. Builds and draws are among the most-watched signals of whether a market is loosening or tightening.",
-    "context": "A persistent draw against the five-year average is one of the clearest signs the physical market is tightening.",
-    "category": "Physical markets"
+    term: "Stock build/draw",
+    definition: "A rise (build) or fall (draw) in held inventory over a period. Builds and draws are among the most-watched signals of whether a market is loosening or tightening.",
+    context: "A persistent draw against the five-year average is one of the clearest signs the physical market is tightening.",
+    category: "Physical markets",
   },
   {
-    "term": "Storage",
-    "definition": "Tank, cavern or warehouse capacity used to hold physical commodity. When storage fills, prompt prices can collapse because there is nowhere to put the barrels.",
-    "context": "When Cushing storage neared capacity in April 2020, prompt WTI went negative — holders paid to offload barrels they could not store.",
-    "category": "Physical markets"
+    term: "Storage",
+    definition: "Tank, cavern or warehouse capacity used to hold physical commodity. When storage fills, prompt prices can collapse because there is nowhere to put the barrels.",
+    context: "When Cushing storage neared capacity in April 2020, prompt WTI went negative — holders paid to offload barrels they could not store.",
+    category: "Physical markets",
   },
   {
-    "term": "Quality spec",
-    "definition": "The contractual quality parameters a cargo must meet — sulphur, density, vapour pressure, contaminants. Off-spec cargo can be rejected or repriced.",
-    "context": "A cargo testing slightly off the agreed sulphur spec can trigger a price penalty or a full-blown commercial dispute on discharge.",
-    "category": "Physical markets"
+    term: "Quality spec",
+    definition: "The contractual quality parameters a cargo must meet — sulphur, density, vapour pressure, contaminants. Off-spec cargo can be rejected or repriced.",
+    context: "A cargo testing slightly off the agreed sulphur spec can trigger a price penalty or a full-blown commercial dispute on discharge.",
+    category: "Physical markets",
   },
   {
-    "term": "Trade flow",
-    "definition": "The movement of cargoes between producing and consuming regions. Shifts in trade flows reveal where arbitrage is opening and how the global balance is rebalancing.",
-    "context": "After 2022, European trade flows redrew the map — pulling in US LNG and Middle East crude that used to head to Asia.",
-    "category": "Physical markets"
+    term: "Trade flow",
+    definition: "The movement of cargoes between producing and consuming regions. Shifts in trade flows reveal where arbitrage is opening and how the global balance is rebalancing.",
+    context: "After 2022, European trade flows redrew the map — pulling in US LNG and Middle East crude that used to head to Asia.",
+    category: "Physical markets",
   },
   {
-    "term": "Demand destruction",
-    "definition": "The fall in consumption caused by prices rising high enough that buyers cut usage, switch fuels, or shut activity. It is the market's self-correcting mechanism.",
-    "context": "When diesel spiked in 2022, the question on every desk was at what price demand destruction would finally cap the move.",
-    "category": "Physical markets"
+    term: "Demand destruction",
+    definition: "The fall in consumption caused by prices rising high enough that buyers cut usage, switch fuels, or shut activity. It is the market's self-correcting mechanism.",
+    context: "When diesel spiked in 2022, the question on every desk was at what price demand destruction would finally cap the move.",
+    category: "Physical markets",
   },
   {
-    "term": "Force majeure",
-    "definition": "A contract clause that excuses a party from performance when an extraordinary event beyond its control — storm, war, outage — prevents delivery.",
-    "context": "A producer declaring force majeure on cargoes can instantly tighten a regional market and move differentials.",
-    "category": "Physical markets"
+    term: "Force majeure",
+    definition: "A contract clause that excuses a party from performance when an extraordinary event beyond its control — storm, war, outage — prevents delivery.",
+    context: "A producer declaring force majeure on cargoes can instantly tighten a regional market and move differentials.",
+    category: "Physical markets",
   },
   {
-    "term": "Despatch",
-    "definition": "The reverse of demurrage — a payment from the owner to the charterer for completing loading or discharge faster than the agreed laytime.",
-    "context": "An efficient terminal that beats laytime earns despatch, effectively a rebate for not tying up the vessel.",
-    "category": "Shipping"
+    term: "Despatch",
+    definition: "The reverse of demurrage — a payment from the owner to the charterer for completing loading or discharge faster than the agreed laytime.",
+    context: "An efficient terminal that beats laytime earns despatch, effectively a rebate for not tying up the vessel.",
+    category: "Shipping",
   },
   {
-    "term": "Suezmax",
-    "definition": "A crude tanker of roughly 1 million barrels, sized to transit the Suez Canal fully laden. It sits between Aframax and VLCC.",
-    "context": "When VLCC rates run high, traders sometimes split a cargo onto two Suezmaxes if the freight maths works out cheaper.",
-    "category": "Shipping"
+    term: "Suezmax",
+    definition: "A crude tanker of roughly 1 million barrels, sized to transit the Suez Canal fully laden. It sits between Aframax and VLCC.",
+    context: "When VLCC rates run high, traders sometimes split a cargo onto two Suezmaxes if the freight maths works out cheaper.",
+    category: "Shipping",
   },
   {
-    "term": "Capesize",
-    "definition": "The largest class of dry-bulk vessel, too big for the Suez or Panama canals, used mainly for iron ore and coal on long-haul routes.",
-    "context": "Capesize rates are a real-time read on iron ore and coal demand — when Chinese mills restock, Capes tighten.",
-    "category": "Shipping"
+    term: "Capesize",
+    definition: "The largest class of dry-bulk vessel, too big for the Suez or Panama canals, used mainly for iron ore and coal on long-haul routes.",
+    context: "Capesize rates are a real-time read on iron ore and coal demand — when Chinese mills restock, Capes tighten.",
+    category: "Shipping",
   },
   {
-    "term": "Baltic Dry Index",
-    "definition": "A benchmark index of dry-bulk freight rates (Capesize, Panamax, Supramax) from the Baltic Exchange, widely watched as a proxy for raw-material trade activity.",
-    "context": "A surging Baltic Dry Index often signals booming iron ore, coal and grain flows before the demand shows up in official data.",
-    "category": "Shipping"
+    term: "Baltic Dry Index",
+    definition: "A benchmark index of dry-bulk freight rates (Capesize, Panamax, Supramax) from the Baltic Exchange, widely watched as a proxy for raw-material trade activity.",
+    context: "A surging Baltic Dry Index often signals booming iron ore, coal and grain flows before the demand shows up in official data.",
+    category: "Shipping",
   },
   {
-    "term": "Contract of Affreightment",
-    "definition": "A freight contract under which an owner agrees to carry a series of cargoes over a period, rather than one voyage, without dedicating a specific vessel.",
-    "context": "A producer with regular monthly cargoes signs a CoA to lock in freight capacity without time-chartering a whole ship.",
-    "category": "Shipping"
+    term: "Contract of Affreightment",
+    definition: "A freight contract under which an owner agrees to carry a series of cargoes over a period, rather than one voyage, without dedicating a specific vessel.",
+    context: "A producer with regular monthly cargoes signs a CoA to lock in freight capacity without time-chartering a whole ship.",
+    category: "Shipping",
   },
   {
-    "term": "Ton-mile",
-    "definition": "Freight demand measured as tonnes of cargo multiplied by the distance carried. Longer voyages absorb more vessels even at flat cargo volumes.",
-    "context": "Rerouting around the Cape of Good Hope adds thousands of miles per voyage — ton-mile demand jumps and tonnage tightens worldwide.",
-    "category": "Shipping"
+    term: "Ton-mile",
+    definition: "Freight demand measured as tonnes of cargo multiplied by the distance carried. Longer voyages absorb more vessels even at flat cargo volumes.",
+    context: "Rerouting around the Cape of Good Hope adds thousands of miles per voyage — ton-mile demand jumps and tonnage tightens worldwide.",
+    category: "Shipping",
   },
   {
-    "term": "Off-hire",
-    "definition": "A period under a time charter when the vessel is unavailable to the charterer — breakdown, drydocking, detention — during which hire stops accruing.",
-    "context": "An engine fault that puts a chartered vessel off-hire shifts the cost back to the owner and can wreck a delivery schedule.",
-    "category": "Shipping"
+    term: "Off-hire",
+    definition: "A period under a time charter when the vessel is unavailable to the charterer — breakdown, drydocking, detention — during which hire stops accruing.",
+    context: "An engine fault that puts a chartered vessel off-hire shifts the cost back to the owner and can wreck a delivery schedule.",
+    category: "Shipping",
   },
   {
-    "term": "Scrubber",
-    "definition": "An exhaust gas-cleaning system that lets a vessel keep burning cheaper high-sulphur fuel while meeting the IMO 2020 sulphur cap.",
-    "context": "The payback on fitting a scrubber depends entirely on the spread between high- and low-sulphur bunker prices.",
-    "category": "Shipping"
+    term: "Scrubber",
+    definition: "An exhaust gas-cleaning system that lets a vessel keep burning cheaper high-sulphur fuel while meeting the IMO 2020 sulphur cap.",
+    context: "The payback on fitting a scrubber depends entirely on the spread between high- and low-sulphur bunker prices.",
+    category: "Shipping",
   },
   {
-    "term": "Base metals",
-    "definition": "The industrial non-precious metals traded on the LME — copper, aluminium, zinc, nickel, lead and tin. Demand tracks construction, manufacturing and the cycle.",
-    "context": "Copper is nicknamed Dr Copper because base-metal demand is so tied to industrial activity that it reads like a growth indicator.",
-    "category": "Metals & Mining"
+    term: "Base metals",
+    definition: "The industrial non-precious metals traded on the LME — copper, aluminium, zinc, nickel, lead and tin. Demand tracks construction, manufacturing and the cycle.",
+    context: "Copper is nicknamed Dr Copper because base-metal demand is so tied to industrial activity that it reads like a growth indicator.",
+    category: "Metals & Mining",
   },
   {
-    "term": "Precious metals",
-    "definition": "Gold, silver, platinum and palladium. Gold and silver trade partly as monetary safe havens; platinum and palladium are driven by industrial and auto-catalyst demand.",
-    "context": "Gold often rallies when real yields fall and risk rises, behaving more like a currency than an industrial commodity.",
-    "category": "Metals & Mining"
+    term: "Precious metals",
+    definition: "Gold, silver, platinum and palladium. Gold and silver trade partly as monetary safe havens; platinum and palladium are driven by industrial and auto-catalyst demand.",
+    context: "Gold often rallies when real yields fall and risk rises, behaving more like a currency than an industrial commodity.",
+    category: "Metals & Mining",
   },
   {
-    "term": "Smelter",
-    "definition": "A facility that processes ore or concentrate into refined metal. Smelter capacity versus concentrate supply sets treatment charges and regional metal premiums.",
-    "context": "When new smelter capacity outpaces mine supply, smelters compete for concentrate and treatment charges collapse.",
-    "category": "Metals & Mining"
+    term: "Smelter",
+    definition: "A facility that processes ore or concentrate into refined metal. Smelter capacity versus concentrate supply sets treatment charges and regional metal premiums.",
+    context: "When new smelter capacity outpaces mine supply, smelters compete for concentrate and treatment charges collapse.",
+    category: "Metals & Mining",
   },
   {
-    "term": "Scrap",
-    "definition": "Recycled secondary metal that supplements mined supply. Scrap availability is price-sensitive — high prices pull more scrap into the market, capping rallies.",
-    "context": "A copper rally draws scrap out of the woodwork; rising scrap flow is often an early sign a price spike is losing steam.",
-    "category": "Metals & Mining"
+    term: "Scrap",
+    definition: "Recycled secondary metal that supplements mined supply. Scrap availability is price-sensitive — high prices pull more scrap into the market, capping rallies.",
+    context: "A copper rally draws scrap out of the woodwork; rising scrap flow is often an early sign a price spike is losing steam.",
+    category: "Metals & Mining",
   },
   {
-    "term": "Coking coal",
-    "definition": "Metallurgical coal used to make coke for blast-furnace steelmaking — distinct from thermal coal burned for power. A key steel-input cost.",
-    "context": "A cyclone shutting Australian coking-coal exports can spike steel input costs and ripple into iron ore demand.",
-    "category": "Metals & Mining"
+    term: "Coking coal",
+    definition: "Metallurgical coal used to make coke for blast-furnace steelmaking — distinct from thermal coal burned for power. A key steel-input cost.",
+    context: "A cyclone shutting Australian coking-coal exports can spike steel input costs and ripple into iron ore demand.",
+    category: "Metals & Mining",
   },
   {
-    "term": "Warehouse queue",
-    "definition": "The backlog to physically withdraw metal from an LME-registered warehouse. Long load-out queues can inflate regional premiums even when headline stocks look ample.",
-    "context": "At times the queue to get aluminium out of certain warehouses ran months, lifting the physical premium far above the LME price.",
-    "category": "Metals & Mining"
+    term: "Warehouse queue",
+    definition: "The backlog to physically withdraw metal from an LME-registered warehouse. Long load-out queues can inflate regional premiums even when headline stocks look ample.",
+    context: "At times the queue to get aluminium out of certain warehouses ran months, lifting the physical premium far above the LME price.",
+    category: "Metals & Mining",
   },
   {
-    "term": "Spodumene",
-    "definition": "The hard-rock lithium ore processed into lithium chemicals for batteries. Its price is a leading input cost for the battery-metal chain.",
-    "context": "Spodumene prices swing violently with EV demand expectations, dragging lithium chemical prices with them.",
-    "category": "Metals & Mining"
+    term: "Spodumene",
+    definition: "The hard-rock lithium ore processed into lithium chemicals for batteries. Its price is a leading input cost for the battery-metal chain.",
+    context: "Spodumene prices swing violently with EV demand expectations, dragging lithium chemical prices with them.",
+    category: "Metals & Mining",
   },
   {
-    "term": "Royalty & streaming",
-    "definition": "Mine-finance structures where an investor pays upfront for a share of future revenue (royalty) or the right to buy metal at a fixed low price (stream).",
-    "context": "Streaming deals let a miner fund a project without debt or dilution, in exchange for handing over cheap metal for years.",
-    "category": "Metals & Mining"
+    term: "Royalty & streaming",
+    definition: "Mine-finance structures where an investor pays upfront for a share of future revenue (royalty) or the right to buy metal at a fixed low price (stream).",
+    context: "Streaming deals let a miner fund a project without debt or dilution, in exchange for handing over cheap metal for years.",
+    category: "Metals & Mining",
   },
   {
-    "term": "API inventory",
-    "definition": "The American Petroleum Institute's weekly US oil stock estimate, released the evening before the official EIA data — an early, less authoritative read.",
-    "context": "A big API draw can move prices overnight, then reverse if the EIA number the next morning disagrees.",
-    "category": "Market Intelligence & Analytics"
+    term: "API inventory",
+    definition: "The American Petroleum Institute's weekly US oil stock estimate, released the evening before the official EIA data — an early, less authoritative read.",
+    context: "A big API draw can move prices overnight, then reverse if the EIA number the next morning disagrees.",
+    category: "Market Intelligence & Analytics",
   },
   {
-    "term": "JODI data",
-    "definition": "The Joint Organisations Data Initiative — a global database of oil and gas production, demand and stocks reported by member countries. Used to fill gaps in non-OECD data.",
-    "context": "JODI is one of the few windows into Saudi and Gulf inventory and demand, despite its reporting lags.",
-    "category": "Market Intelligence & Analytics"
+    term: "JODI data",
+    definition: "The Joint Organisations Data Initiative — a global database of oil and gas production, demand and stocks reported by member countries. Used to fill gaps in non-OECD data.",
+    context: "JODI is one of the few windows into Saudi and Gulf inventory and demand, despite its reporting lags.",
+    category: "Market Intelligence & Analytics",
   },
   {
-    "term": "Degree days",
-    "definition": "Heating degree days (HDD) and cooling degree days (CDD) measure how far temperature deviates from a baseline, quantifying weather-driven energy demand.",
-    "context": "A forecast of well-above-normal HDDs in a cold snap is an immediate bullish signal for gas and heating-oil demand.",
-    "category": "Market Intelligence & Analytics"
+    term: "Degree days",
+    definition: "Heating degree days (HDD) and cooling degree days (CDD) measure how far temperature deviates from a baseline, quantifying weather-driven energy demand.",
+    context: "A forecast of well-above-normal HDDs in a cold snap is an immediate bullish signal for gas and heating-oil demand.",
+    category: "Market Intelligence & Analytics",
   },
   {
-    "term": "Rig count",
-    "definition": "The number of active drilling rigs — such as the weekly Baker Hughes count — used as a leading indicator of future oil and gas supply.",
-    "context": "A sustained fall in the US rig count points to softer shale output six to nine months out, a slow-burn bullish supply signal.",
-    "category": "Market Intelligence & Analytics"
+    term: "Rig count",
+    definition: "The number of active drilling rigs — such as the weekly Baker Hughes count — used as a leading indicator of future oil and gas supply.",
+    context: "A sustained fall in the US rig count points to softer shale output six to nine months out, a slow-burn bullish supply signal.",
+    category: "Market Intelligence & Analytics",
   },
   {
-    "term": "Five-year range",
-    "definition": "The band between the minimum and maximum of the prior five years' inventories for each week, used to judge whether current stocks are high or low for the season.",
-    "context": "Stocks dropping below the bottom of the five-year range is shorthand for a genuinely tight market, not just a seasonal draw.",
-    "category": "Market Intelligence & Analytics"
+    term: "Five-year range",
+    definition: "The band between the minimum and maximum of the prior five years' inventories for each week, used to judge whether current stocks are high or low for the season.",
+    context: "Stocks dropping below the bottom of the five-year range is shorthand for a genuinely tight market, not just a seasonal draw.",
+    category: "Market Intelligence & Analytics",
   },
   {
-    "term": "Implied volatility",
-    "definition": "The market's expectation of future price swings, derived from option prices. Rising implied vol signals growing uncertainty and a higher cost to hedge.",
-    "context": "Implied vol spikes ahead of OPEC meetings or geopolitical events as desks pay up for options protection.",
-    "category": "Market Intelligence & Analytics"
+    term: "Implied volatility",
+    definition: "The market's expectation of future price swings, derived from option prices. Rising implied vol signals growing uncertainty and a higher cost to hedge.",
+    context: "Implied vol spikes ahead of OPEC meetings or geopolitical events as desks pay up for options protection.",
+    category: "Market Intelligence & Analytics",
   },
   {
-    "term": "Nowcasting",
-    "definition": "Estimating the present or very-near-term state of supply, demand or flows using real-time data, ahead of lagging official statistics.",
-    "context": "Nowcasting Chinese crude imports from satellite and AIS gives a read weeks before customs data confirms it.",
-    "category": "Market Intelligence & Analytics"
+    term: "Nowcasting",
+    definition: "Estimating the present or very-near-term state of supply, demand or flows using real-time data, ahead of lagging official statistics.",
+    context: "Nowcasting Chinese crude imports from satellite and AIS gives a read weeks before customs data confirms it.",
+    category: "Market Intelligence & Analytics",
   },
   {
-    "term": "Port lineups",
-    "definition": "Schedules of vessels queued to load or discharge at a port, used to estimate near-term export and import volumes in real time.",
-    "context": "Tracking Brazilian and Australian iron ore port lineups gives an early read on seaborne supply to China.",
-    "category": "Market Intelligence & Analytics"
+    term: "Port lineups",
+    definition: "Schedules of vessels queued to load or discharge at a port, used to estimate near-term export and import volumes in real time.",
+    context: "Tracking Brazilian and Australian iron ore port lineups gives an early read on seaborne supply to China.",
+    category: "Market Intelligence & Analytics",
   }
 ];

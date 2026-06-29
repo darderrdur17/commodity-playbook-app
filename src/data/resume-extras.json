@@ -110,20 +110,20 @@
         },
         {
           "value": "thin",
-          "label": "I lack professional experience and need to show commercial curiosity instead",
+          "label": "Building a credible resume without much direct experience yet",
           "persona": "fresh_grad"
         },
         {
           "value": "sales",
-          "label": "Reframing vendor/sales achievements as market knowledge, not quota attainment",
+          "label": "Making a vendor/sales background read as market knowledge rather than sales activity",
           "persona": "vendor"
         }
       ]
     },
     {
       "id": "q5",
-      "question": "Which commodity market do you want to focus on?",
-      "sub": "Your template works across markets — but naming a focus helps positioning.",
+      "question": "Which commodity market are you most focused on?",
+      "sub": "This helps us tailor the template language and examples to your target market.",
       "options": [
         {
           "value": "lng",

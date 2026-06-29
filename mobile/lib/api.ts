@@ -125,7 +125,10 @@ export const playbookApi = {
 };
 
 export const glossaryApi = {
-  getAll: () => contentApi.get<{ terms: Array<{ term: string; definition: string; category: string }> }>("glossary"),
+  getAll: () =>
+    contentApi.get<{
+      terms: Array<{ term: string; definition: string; context?: string; category: string }>;
+    }>("glossary"),
 };
 
 export const mentorApi = {

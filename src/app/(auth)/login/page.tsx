@@ -98,7 +98,7 @@ function LoginForm() {
           </p>
         </div>
         <div className="relative z-10 flex gap-6">
-          {["2,400+ Members", "100 Terms", "25 Mentors"].map((s) => (
+          {["2,400+ Members", "196 Terms", "25 Mentors"].map((s) => (
             <div key={s} className="glass-card px-4 py-2.5">
               <p className="text-white text-xs font-semibold">{s}</p>
             </div>

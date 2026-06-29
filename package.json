@@ -12,7 +12,8 @@
     "db:studio": "prisma studio",
     "db:seed": "npx tsx prisma/seed.ts",
     "db:seed-assets": "npx tsx prisma/seed-assets.ts",
-    "build:content": "node scripts/build-case-studies-details.mjs"
+    "build:content": "node scripts/build-case-studies-details.mjs",
+    "build:glossary": "node scripts/extract-glossary.mjs"
   },
   "prisma": {
     "seed": "npx tsx prisma/seed.ts"
