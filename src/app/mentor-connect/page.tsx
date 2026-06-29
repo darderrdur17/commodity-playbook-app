@@ -1,6 +1,7 @@
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
+import { isMentorDemoUser } from "@/lib/mentor-demo";
 import { MentorConnectClient } from "./mentor-connect-client";
 
 export const metadata = { title: "Mentor Connect" };
@@ -17,6 +18,10 @@ export default async function MentorConnectPage() {
   });
 
   if (!user) redirect("/login");
+
+  if (isMentorDemoUser(user.email)) {
+    redirect("/mentor-connect/inbox");
+  }
 
   return (
     <MentorConnectClient

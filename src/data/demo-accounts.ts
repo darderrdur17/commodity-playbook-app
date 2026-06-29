@@ -17,7 +17,7 @@ export type DemoAccount = {
   resumeCredits: number;
   description: string;
   emoji: string;
-  redirectTo: "/dashboard" | "/admin" | "/mentor-connect";
+  redirectTo: "/dashboard" | "/admin" | "/mentor-connect" | "/mentor-connect/inbox";
 };
 
 export const DEMO_ACCOUNTS: DemoAccount[] = [
@@ -121,9 +121,9 @@ export const DEMO_ACCOUNTS: DemoAccount[] = [
     persona: "INSIDER",
     mentorCredits: 5,
     resumeCredits: 4,
-    description: "Elite Mentor Connect — browse the mentor grid, submit questions, and review answered Q&A.",
+    description: "Mentor practitioner inbox — review anonymous member requests, see persona/tier context, and respond to queries.",
     emoji: "🎯",
-    redirectTo: "/mentor-connect",
+    redirectTo: "/mentor-connect/inbox",
   },
 ];
 

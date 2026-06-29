@@ -162,67 +162,101 @@ async function main() {
     console.log(`  ✓ ${userData.email} (${userData.role} · ${userData.tier} · ${userData.persona})`);
   }
 
-  // Sample mentor questions for demo accounts
-  const mentorDemo = await prisma.user.findUnique({ where: { email: "elite.mentor@demo.com" } });
-  if (mentorDemo) {
-    const samples = [
-      {
-        segment: "physical-trading",
-        question:
-          "I'm moving from scheduling to a commercial analyst role — how do I demonstrate I understand flat price vs. time spread exposure in interviews?",
-        answer:
-          "Lead with one cargo example where your scheduling decision changed which month the desk was exposed. Interviewers want proof you know P&L sits in the book, not in the voyage plan.",
-        isAnswered: true,
-        isPublic: true,
-      },
-      {
-        segment: "analytics",
-        question:
-          "What's the best way to show market views on a resume when my current role is purely quantitative research?",
-        answer: null,
-        isAnswered: false,
-        isPublic: false,
-      },
-    ];
-    for (const sample of samples) {
-      const exists = await prisma.mentorQuestion.findFirst({
-        where: { userId: mentorDemo.id, question: sample.question },
-      });
-      if (!exists) {
-        await prisma.mentorQuestion.create({
-          data: {
-            userId: mentorDemo.id,
-            segment: sample.segment,
-            question: sample.question,
-            answer: sample.answer,
-            isAnswered: sample.isAnswered,
-            isPublic: sample.isPublic,
-            ...(sample.isAnswered && { answeredAt: new Date() }),
-          },
-        });
-      }
-    }
-    console.log("  ✓ Mentor demo questions seeded");
-  }
+  // Member requests for mentor inbox demo (from other accounts — not the mentor user)
+  const memberRequestSamples: {
+    memberEmail: string;
+    segment: string;
+    question: string;
+    answer: string | null;
+    isAnswered: boolean;
+    isPublic: boolean;
+  }[] = [
+    {
+      memberEmail: "elite.insider@demo.com",
+      segment: "physical-trading",
+      question:
+        "What's the most realistic path to break into physical crude trading from a mid-office role? What skills should I prioritize in the next 6 months?",
+      answer: null,
+      isAnswered: false,
+      isPublic: false,
+    },
+    {
+      memberEmail: "pro.switcher@demo.com",
+      segment: "finance",
+      question:
+        "I'm transitioning from banking into a commodity risk role. How do I talk about VaR limits and stress scenarios without sounding like I only know the textbook version?",
+      answer:
+        "Anchor every risk example to a real limit breach or near-miss you saw in banking — then map it to how a desk uses limits intraday. Hiring managers want judgment under constraint, not model recitation.",
+      isAnswered: true,
+      isPublic: true,
+    },
+    {
+      memberEmail: "pro.analyst@demo.com",
+      segment: "analytics",
+      question:
+        "What's the best way to show market views on a resume when my current role is purely quantitative research with no P&L ownership?",
+      answer: null,
+      isAnswered: false,
+      isPublic: false,
+    },
+    {
+      memberEmail: "elite.vendor@demo.com",
+      segment: "sales",
+      question:
+        "I sell market data into commodity desks. How do I ask discovery questions that prove I understand their workflow without over-selling on the first call?",
+      answer:
+        "Open with one workflow question tied to their book — e.g. how they reconcile AIS arrivals vs. nominations — and listen for the pain in handoffs. Credibility comes from naming the operational step, not the product feature.",
+      isAnswered: true,
+      isPublic: true,
+    },
+    {
+      memberEmail: "pro.switcher@demo.com",
+      segment: "operations",
+      question:
+        "Moving from logistics coordinator to scheduling analyst — what does 'good' look like in the first 90 days on a refined products desk?",
+      answer: null,
+      isAnswered: false,
+      isPublic: false,
+    },
+    {
+      memberEmail: "elite.insider@demo.com",
+      segment: "analytics",
+      question:
+        "How should an insider position themselves for a move from mid-office reporting into a commercial analyst seat on an LNG desk?",
+      answer:
+        "Own one recurring report the traders actually read — then propose one commercial insight per month tied to cargo optionality or netback. You're not asking for a seat; you're already doing 30% of the job.",
+      isAnswered: true,
+      isPublic: false,
+    },
+  ];
 
-  const eliteUser = await prisma.user.findUnique({ where: { email: "elite.insider@demo.com" } });
-  if (eliteUser) {
-    const existing = await prisma.mentorQuestion.findFirst({
-      where: { userId: eliteUser.id, question: { contains: "break into physical crude" } },
+  for (const sample of memberRequestSamples) {
+    const member = await prisma.user.findUnique({ where: { email: sample.memberEmail } });
+    if (!member) continue;
+
+    const exists = await prisma.mentorQuestion.findFirst({
+      where: { userId: member.id, question: sample.question },
     });
-    if (!existing) {
+    if (!exists) {
       await prisma.mentorQuestion.create({
         data: {
-          userId: eliteUser.id,
-          segment: "physical-trading",
-          question:
-            "What's the most realistic path to break into physical crude trading from a mid-office role? What skills should I prioritize in the next 6 months?",
-          isAnswered: false,
-          isPublic: false,
+          userId: member.id,
+          segment: sample.segment,
+          question: sample.question,
+          answer: sample.answer,
+          isAnswered: sample.isAnswered,
+          isPublic: sample.isPublic,
+          ...(sample.isAnswered && { answeredAt: new Date() }),
         },
       });
-      console.log("  ✓ Sample pending mentor question created");
     }
+  }
+  console.log("  ✓ Mentor inbox member requests seeded");
+
+  // Remove legacy samples where the mentor demo user was the asker
+  const mentorDemo = await prisma.user.findUnique({ where: { email: "elite.mentor@demo.com" } });
+  if (mentorDemo) {
+    await prisma.mentorQuestion.deleteMany({ where: { userId: mentorDemo.id } });
   }
 
   // Sample waitlist entry

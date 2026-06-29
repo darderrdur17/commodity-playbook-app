@@ -115,7 +115,7 @@ export default function DemoPage() {
               <span className="text-lg">{mentorAccount.emoji}</span> Mentor Connect demo
             </h2>
             <p className="text-sm text-muted-fg mb-4">
-              One-click into Elite Mentor Connect — browse the practitioner grid, submit a question (5 credits), and review sample answered Q&amp;A.
+              One-click into the practitioner inbox — review anonymous member requests, see persona and tier context, and respond to queries.
             </p>
             <DemoCard
               account={mentorAccount}
