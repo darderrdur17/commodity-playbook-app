@@ -28,6 +28,7 @@ export default async function InterviewQuestionsPage() {
       userTier={user.tier}
       questions={data.questions}
       categories={data.categories}
+      tabs={data.tabs}
       requiredTier={requiredTier as "PRO" | "ELITE"}
     />
   );

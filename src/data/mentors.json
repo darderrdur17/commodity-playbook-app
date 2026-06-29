@@ -1,0 +1,342 @@
+[
+  {
+    "id": "physical-paper",
+    "num": "01",
+    "title": "Physical & Paper Trading Markets",
+    "blurb": "Cargoes, futures, swaps, options and the desks that run them.",
+    "mentors": [
+      {
+        "id": "PT-01",
+        "years": 18,
+        "headline": "Crude Oil Trader — Ex-Supermajor",
+        "bio": "Eighteen years on a global crude desk. Spent half that time on the Med/West African arbitrage book, the rest on US Gulf exports.",
+        "tags": [
+          "Crude",
+          "Arbitrage",
+          "Physical"
+        ],
+        "sampleReply": "Most people overrate the price call and underrate the operational chain — the freight, the lay-can, the inspection. If you can speak fluently about how a cargo actually moves and gets paid for, you're already ahead of 80% of candidates. Build that vocabulary first; the curve view comes naturally after."
+      },
+      {
+        "id": "PT-02",
+        "years": 12,
+        "headline": "Base Metals Desk — Geneva & London",
+        "bio": "Twelve years across copper, aluminium and zinc. Worked both LME book and physical premiums into China and Europe.",
+        "tags": [
+          "Metals",
+          "LME",
+          "Premiums"
+        ],
+        "sampleReply": "Metals is a relationship business hidden inside a curve. The LME structure tells you positioning, but the regional premium tells you who actually needs the unit. If you can hold a conversation about both at the same time, you'll get noticed."
+      },
+      {
+        "id": "PT-03",
+        "years": 15,
+        "headline": "Grains Trader — S&D Modelling",
+        "bio": "Fifteen years trading wheat, corn and soy complex. Built S&D models used across origination and execution.",
+        "tags": [
+          "Ags",
+          "S&D",
+          "Origination"
+        ],
+        "sampleReply": "In ags, your edge usually comes from getting closer to the farmer or the crusher than the next desk does. Spreadsheets matter, but a good origination relationship beats a good model nine times out of ten."
+      },
+      {
+        "id": "PT-04",
+        "years": 10,
+        "headline": "LNG Paper & Structured Products",
+        "bio": "A decade trading JKM, TTF and structured LNG. Built optionality into long-term offtake contracts.",
+        "tags": [
+          "LNG",
+          "Structured",
+          "Optionality"
+        ],
+        "sampleReply": "LNG looks like a liquid market on screen and behaves like a bilateral one in reality. Learn to value the optionality embedded in physical contracts — destination flex, diversion clauses, cargo size — because that's where the real P&L sits."
+      },
+      {
+        "id": "PT-05",
+        "years": 20,
+        "headline": "Softs Origination — Cocoa, Coffee, Sugar",
+        "bio": "Twenty years across West Africa, Brazil and Vietnam. Owned origination relationships at scale.",
+        "tags": [
+          "Softs",
+          "Origination",
+          "Emerging Mkts"
+        ],
+        "sampleReply": "Softs reward patience and presence. The desks that win are the ones with people on the ground, not just on the screens. If you're early in your career and willing to spend a few years in origin, you'll learn things no graduate program can teach you."
+      }
+    ]
+  },
+  {
+    "id": "shipping-logistics",
+    "num": "02",
+    "title": "Shipping & Logistics",
+    "blurb": "Freight, vessels, ports, demurrage — the moving parts behind every cargo.",
+    "mentors": [
+      {
+        "id": "SL-01",
+        "years": 14,
+        "headline": "Dry Bulk Chartering — Capesize & Panamax",
+        "bio": "Fourteen years chartering iron ore and coal cargoes globally. Deep network with owners and brokers.",
+        "tags": [
+          "Dry Bulk",
+          "Capesize",
+          "Chartering"
+        ],
+        "sampleReply": "Freight is a derivatives market hiding inside steel and seafarers. Learn to read the BDI alongside the physical fixture list — the gap between them is usually where the trade is. And never underestimate how much one bad weather routing decision can cost."
+      },
+      {
+        "id": "SL-02",
+        "years": 16,
+        "headline": "Tanker Chartering & Demurrage",
+        "bio": "Sixteen years on VLCCs, Suezmaxes and clean products. Settled hundreds of demurrage claims.",
+        "tags": [
+          "Tankers",
+          "Demurrage",
+          "Worldscale"
+        ],
+        "sampleReply": "Demurrage is where good ops people quietly make the desk a fortune. Read every charter party clause as if you'll be the one defending it — because in five years you might be. Worldscale is intimidating for two weeks, then second nature."
+      },
+      {
+        "id": "SL-03",
+        "years": 11,
+        "headline": "LNG / LPG Fleet Operations",
+        "bio": "Eleven years running gas carrier fleets. Coordinated boil-off, voyage P&L and terminal slotting.",
+        "tags": [
+          "LNG",
+          "LPG",
+          "Fleet Ops"
+        ],
+        "sampleReply": "Gas shipping is unforgiving on small mistakes — boil-off, heel, terminal compatibility. The operators who get promoted are the ones who can model voyage P&L in their head before the fixture is even confirmed."
+      },
+      {
+        "id": "SL-04",
+        "years": 9,
+        "headline": "Containerized Commodity Logistics",
+        "bio": "Nine years moving non-bulk cargoes — metals, ags, specialties — through container networks.",
+        "tags": [
+          "Container",
+          "Multimodal",
+          "Customs"
+        ],
+        "sampleReply": "Container logistics for commodities is the unglamorous corner that nobody fights for, which is why it's a great place to build a career. You'll learn customs, finance, freight and risk all at once. Stay there three years and you'll be unusually well-rounded."
+      },
+      {
+        "id": "SL-05",
+        "years": 22,
+        "headline": "Terminal & Port Operations",
+        "bio": "Twenty-two years running storage terminals and port operations across three continents.",
+        "tags": [
+          "Terminals",
+          "Storage",
+          "Operations"
+        ],
+        "sampleReply": "Storage is the option the rest of the desk forgets they own. If you can value a tank lease the way a trader values a calendar spread, you'll be in demand everywhere — physical, paper, structured, all of it."
+      }
+    ]
+  },
+  {
+    "id": "risk-management",
+    "num": "03",
+    "title": "Risk Management",
+    "blurb": "VaR, exposure, credit, governance — what keeps the desk alive.",
+    "mentors": [
+      {
+        "id": "RM-01",
+        "years": 18,
+        "headline": "Market Risk — VaR & Stress Testing",
+        "bio": "Eighteen years building market risk frameworks for energy and metals trading houses.",
+        "tags": [
+          "Market Risk",
+          "VaR",
+          "Stress"
+        ],
+        "sampleReply": "VaR is a starting point, not an answer. The risk that hurts you is almost always the one your model didn't see — gap risk, basis blow-out, correlation break. Spend more time on stress scenarios than on tweaking the variance-covariance matrix."
+      },
+      {
+        "id": "RM-02",
+        "years": 13,
+        "headline": "Credit Risk — Trading Counterparties",
+        "bio": "Thirteen years assessing counterparty credit at a major trading house. Set limits across 400+ counterparties.",
+        "tags": [
+          "Credit",
+          "Counterparty",
+          "Limits"
+        ],
+        "sampleReply": "Credit in commodities is half quantitative, half about who picks up the phone when a margin call goes wrong. Learn the financials, but spend equal time learning the people and the structures — letters of credit, parent guarantees, prepayment."
+      },
+      {
+        "id": "RM-03",
+        "years": 10,
+        "headline": "Operational Risk & Controls",
+        "bio": "Ten years owning the op risk function — trade lifecycle, controls, reconciliation breaks.",
+        "tags": [
+          "Op Risk",
+          "Controls",
+          "Lifecycle"
+        ],
+        "sampleReply": "Operational risk is where careers quietly end. The trades that blow up rarely do so because of price — they blow up because someone booked the wrong leg, missed a confirmation, or didn't reconcile a position. Master the lifecycle and you become indispensable."
+      },
+      {
+        "id": "RM-04",
+        "years": 15,
+        "headline": "CRO / Risk Governance",
+        "bio": "Fifteen years in senior risk leadership. Built risk committees and limit frameworks from scratch.",
+        "tags": [
+          "Governance",
+          "CRO",
+          "Frameworks"
+        ],
+        "sampleReply": "Governance is the part of risk no one studies for and everyone needs. Learn how a risk committee actually decides — what gets escalated, what gets vetoed, who carries the political weight — because that's the layer above the numbers where decisions really happen."
+      },
+      {
+        "id": "RM-05",
+        "years": 12,
+        "headline": "Derivatives & Exotic Risk",
+        "bio": "Twelve years modelling vanillas, exotics and structured commodity derivatives.",
+        "tags": [
+          "Derivatives",
+          "Exotics",
+          "Quant"
+        ],
+        "sampleReply": "Exotic pricing is fun until you have to explain a P&L move to a non-quant trader. Build the intuition, not just the math — Greeks, smile dynamics, payoff diagrams drawn freehand. If you can teach it on a whiteboard, you understand it."
+      }
+    ]
+  },
+  {
+    "id": "market-intelligence",
+    "num": "04",
+    "title": "Market Intelligence",
+    "blurb": "Reading flows, fundamentals and the geopolitics that move the curve.",
+    "mentors": [
+      {
+        "id": "MI-01",
+        "years": 17,
+        "headline": "Oil Markets Analyst — OPEC & SPR",
+        "bio": "Seventeen years covering oil fundamentals. Briefed senior management ahead of every OPEC meeting.",
+        "tags": [
+          "Oil",
+          "OPEC",
+          "Fundamentals"
+        ],
+        "sampleReply": "Most analysts get caught reacting to headlines. The ones who add value have a framework — supply, demand, inventory, freight — that they can update in real time when news hits. Build the framework before you build the spreadsheet."
+      },
+      {
+        "id": "MI-02",
+        "years": 14,
+        "headline": "Ag Fundamentals — USDA & Weather",
+        "bio": "Fourteen years calling crop balance sheets across corn, soy and wheat. Lived inside the WASDE.",
+        "tags": [
+          "Ags",
+          "USDA",
+          "Weather"
+        ],
+        "sampleReply": "Ag is where weather, politics and biology collide. Learn to read a WASDE the way a trader reads it — for the surprise versus consensus, not just the headline number. And get comfortable being wrong; in ags the weather wins half the time."
+      },
+      {
+        "id": "MI-03",
+        "years": 11,
+        "headline": "Metals S&D — China Focus",
+        "bio": "Eleven years tracking Chinese metals demand, smelter activity and SHFE flows.",
+        "tags": [
+          "Metals",
+          "China",
+          "Smelters"
+        ],
+        "sampleReply": "China is the entire story in base metals and most of it in steel. Learn the language enough to read primary sources, build a network of on-the-ground contacts, and don't trust any number that isn't triangulated from at least two sources."
+      },
+      {
+        "id": "MI-04",
+        "years": 9,
+        "headline": "Power & Gas Curve Analysis",
+        "bio": "Nine years modelling European and US power curves, with gas and carbon as inputs.",
+        "tags": [
+          "Power",
+          "Gas",
+          "Curves"
+        ],
+        "sampleReply": "Power and gas curves look terrifying on day one and become readable on day thirty. The trick is to break the curve into its drivers — fuel, weather, capacity, policy — and then watch which driver is in control today. That discipline beats any single model."
+      },
+      {
+        "id": "MI-05",
+        "years": 13,
+        "headline": "Geopolitics & Sanctions Specialist",
+        "bio": "Thirteen years advising trading houses on sanctions, compliance and political risk.",
+        "tags": [
+          "Geopolitics",
+          "Sanctions",
+          "Compliance"
+        ],
+        "sampleReply": "Sanctions risk is now a daily input, not an annual review. The desks that handle it well have legal and trading talking constantly, not in formal escalations. If you can sit in both rooms and translate between them, you have a unique career path."
+      }
+    ]
+  },
+  {
+    "id": "tools",
+    "num": "05",
+    "title": "Tools",
+    "blurb": "Platforms, models and data — the stack that actually runs the desk.",
+    "mentors": [
+      {
+        "id": "TL-01",
+        "years": 16,
+        "headline": "Trading Systems Architecture",
+        "bio": "Sixteen years architecting front-to-back trading systems for commodity firms.",
+        "tags": [
+          "Architecture",
+          "Front-to-Back",
+          "Systems"
+        ],
+        "sampleReply": "Architecture decisions made in year one haunt the firm for a decade. Always design for the next product the desk will trade, not just the current one. And document everything — your future self and every successor will thank you."
+      },
+      {
+        "id": "TL-02",
+        "years": 12,
+        "headline": "Python & Quant Tooling",
+        "bio": "Twelve years building pricing libraries, P&L tools and curve infrastructure in Python.",
+        "tags": [
+          "Python",
+          "Quant",
+          "Pricing"
+        ],
+        "sampleReply": "The most valuable Python skill on a trading floor isn't fancy ML — it's writing a clean function a trader can call from Excel without breaking. Bridge the gap between research code and production tools and you become irreplaceable."
+      },
+      {
+        "id": "TL-03",
+        "years": 10,
+        "headline": "Bloomberg & Refinitiv Power User",
+        "bio": "Ten years building dashboards, screens and data pipelines on Bloomberg and Refinitiv.",
+        "tags": [
+          "Bloomberg",
+          "Refinitiv",
+          "Data"
+        ],
+        "sampleReply": "Most people use 5% of Bloomberg. Spend a week each on BLAW, CFTC, EXEC, COT and SHIP — you'll uncover entire workflows you didn't know existed. The terminal rewards depth, not breadth."
+      },
+      {
+        "id": "TL-04",
+        "years": 14,
+        "headline": "ETRM / CTRM Implementation",
+        "bio": "Fourteen years implementing and configuring ETRM/CTRM platforms across multiple commodity classes.",
+        "tags": [
+          "ETRM",
+          "CTRM",
+          "Implementation"
+        ],
+        "sampleReply": "ETRM projects fail because of process, not software. Learn the trade lifecycle inside out before you learn any specific platform — Allegro, OpenLink, Endur — because the platform is just the wrapper around the process."
+      },
+      {
+        "id": "TL-05",
+        "years": 9,
+        "headline": "Data Engineering for Trading",
+        "bio": "Nine years building data pipelines for fundamentals, prices, positions and risk.",
+        "tags": [
+          "Data",
+          "Pipelines",
+          "Infra"
+        ],
+        "sampleReply": "Data quality is the silent edge. The desks that make good decisions are the ones with clean, timely, reconciled data — not the ones with the fanciest models. If you can own a pipeline end-to-end, you'll always have a seat at the table."
+      }
+    ]
+  }
+]

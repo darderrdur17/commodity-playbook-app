@@ -1,0 +1,228 @@
+{
+  "quizSteps": [
+    {
+      "id": "q1",
+      "question": "Where is your career right now?",
+      "sub": "Choose the option that best describes your current professional situation.",
+      "options": [
+        {
+          "value": "switcher",
+          "label": "I work in a related field — finance, consulting, engineering, or O&G — and want to move into commodity trading"
+        },
+        {
+          "value": "insider",
+          "label": "I already work inside a commodity trading firm — in operations, scheduling, ETRM, or a support function"
+        },
+        {
+          "value": "analyst",
+          "label": "I work in analytics, quant, or data science and want to move toward a trading or commercial role"
+        },
+        {
+          "value": "vendor",
+          "label": "I work at a vendor firm selling data, intelligence, or services to the commodity trading community"
+        },
+        {
+          "value": "grad",
+          "label": "I am a student, fresh graduate, or early in my career with limited professional experience"
+        }
+      ],
+      "scores": {
+        "switcher": "switcher",
+        "insider": "insider",
+        "analyst": "analyst",
+        "vendor": "vendor",
+        "grad": "fresh_grad"
+      }
+    },
+    {
+      "id": "q2",
+      "question": "How many years of professional experience do you have?",
+      "sub": "Include all relevant work experience, including internships longer than 3 months.",
+      "options": [
+        {
+          "value": "0-1",
+          "label": "0 – 1 year",
+          "sub": "Student, fresh graduate, or very early career"
+        },
+        {
+          "value": "1-3",
+          "label": "1 – 3 years",
+          "sub": "Early career with some professional experience"
+        },
+        {
+          "value": "3-7",
+          "label": "3 – 7 years",
+          "sub": "Mid-career professional with a clear track record"
+        },
+        {
+          "value": "7+",
+          "label": "7+ years",
+          "sub": "Senior professional with deep domain expertise"
+        }
+      ]
+    },
+    {
+      "id": "q3",
+      "question": "What is your target role or function in commodity trading?",
+      "sub": "Pick the function that is closest to your goal.",
+      "options": [
+        {
+          "value": "front",
+          "label": "Front office — Trader, originator, or commercial manager"
+        },
+        {
+          "value": "analytics",
+          "label": "Analytics or quantitative research — market analysis, curve building, or modelling"
+        },
+        {
+          "value": "ops",
+          "label": "Scheduling, operations, or ETRM — physical cargo management and logistics"
+        },
+        {
+          "value": "risk",
+          "label": "Risk management, compliance, or trade finance"
+        },
+        {
+          "value": "open",
+          "label": "I am open to multiple functions — still exploring"
+        }
+      ]
+    },
+    {
+      "id": "q4",
+      "question": "Which best describes your biggest resume challenge right now?",
+      "sub": "Be honest — this is what the template is designed to solve.",
+      "options": [
+        {
+          "value": "translate",
+          "label": "Translating my experience from another industry into commodity trading language",
+          "persona": "switcher"
+        },
+        {
+          "value": "commercial",
+          "label": "Making my operational experience sound commercial, not just functional",
+          "persona": "insider"
+        },
+        {
+          "value": "technical",
+          "label": "Making my technical or analytical skills relevant to a commercial role",
+          "persona": "analyst"
+        },
+        {
+          "value": "thin",
+          "label": "I lack professional experience and need to show commercial curiosity instead",
+          "persona": "fresh_grad"
+        },
+        {
+          "value": "sales",
+          "label": "Reframing vendor/sales achievements as market knowledge, not quota attainment",
+          "persona": "vendor"
+        }
+      ]
+    },
+    {
+      "id": "q5",
+      "question": "Which commodity market do you want to focus on?",
+      "sub": "Your template works across markets — but naming a focus helps positioning.",
+      "options": [
+        {
+          "value": "lng",
+          "label": "LNG and natural gas"
+        },
+        {
+          "value": "crude",
+          "label": "Crude oil and refined products"
+        },
+        {
+          "value": "multi",
+          "label": "Multi-commodity / still deciding"
+        },
+        {
+          "value": "other",
+          "label": "Other / broad commodity focus"
+        }
+      ]
+    }
+  ],
+  "industryMap": [
+    {
+      "zone": "A",
+      "title": "Front Office",
+      "color": "#0830a0",
+      "roles": [
+        {
+          "name": "Commodity Trader",
+          "tag": "High competition"
+        },
+        {
+          "name": "Originator / Commercial Manager"
+        },
+        {
+          "name": "Structurer / Deal Origination"
+        },
+        {
+          "name": "LNG Portfolio Manager"
+        }
+      ]
+    },
+    {
+      "zone": "B",
+      "title": "Analytics & Quant",
+      "color": "#0040f5",
+      "roles": [
+        {
+          "name": "Commodity Analyst",
+          "tag": "Strong entry point"
+        },
+        {
+          "name": "Market Intelligence Analyst"
+        },
+        {
+          "name": "Forward Curve Analyst"
+        },
+        {
+          "name": "Quantitative Researcher"
+        }
+      ]
+    },
+    {
+      "zone": "C",
+      "title": "Operations & Scheduling",
+      "color": "#0F766E",
+      "roles": [
+        {
+          "name": "Scheduler / Cargo Coordinator",
+          "tag": "Best entry path"
+        },
+        {
+          "name": "ETRM / Systems Analyst"
+        },
+        {
+          "name": "Vessel Operations Manager"
+        },
+        {
+          "name": "Trade Operations Analyst"
+        }
+      ]
+    },
+    {
+      "zone": "D",
+      "title": "Risk & Finance",
+      "color": "#5B21B6",
+      "roles": [
+        {
+          "name": "Market Risk Analyst"
+        },
+        {
+          "name": "Credit Risk Manager"
+        },
+        {
+          "name": "Trade Finance Manager"
+        },
+        {
+          "name": "Compliance / REMIT Officer"
+        }
+      ]
+    }
+  ]
+}

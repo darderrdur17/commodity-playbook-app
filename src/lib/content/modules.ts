@@ -1,6 +1,7 @@
 import type { Tier } from "@prisma/client";
 
 export type ContentSlug =
+  | "landing"
   | "glossary"
   | "playbook"
   | "resume-templates"
@@ -9,7 +10,8 @@ export type ContentSlug =
   | "knowledge-test"
   | "case-studies"
   | "desk-channel"
-  | "job-openings";
+  | "job-openings"
+  | "starter-pack";
 
 export interface ContentModuleMeta {
   slug: ContentSlug;
@@ -19,6 +21,12 @@ export interface ContentModuleMeta {
 }
 
 export const CONTENT_MODULE_META: ContentModuleMeta[] = [
+  {
+    slug: "landing",
+    title: "Landing Pages",
+    description: "Career and sales landing page copy, stats, pricing, and feature cards",
+    requiredTier: "STARTER",
+  },
   {
     slug: "glossary",
     title: "Desk Glossary",
@@ -72,6 +80,12 @@ export const CONTENT_MODULE_META: ContentModuleMeta[] = [
     title: "Job Openings",
     description: "Curated commodity trading roles",
     requiredTier: "ELITE",
+  },
+  {
+    slug: "starter-pack",
+    title: "Starter Pack",
+    description: "Free infographics and starter downloads",
+    requiredTier: "STARTER",
   },
 ];
 

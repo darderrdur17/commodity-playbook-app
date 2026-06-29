@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { GradientOrbs, HeroParticles } from "@/components/animations";
+import { Logo } from "@/components/brand/logo";
 import { DEMO_ACCOUNTS, DEMO_PASSWORD } from "@/data/demo-accounts";
 
 const schema = z.object({
@@ -80,12 +81,7 @@ function LoginForm() {
         <GradientOrbs />
         <HeroParticles count={10} />
         <div className="relative z-10">
-          <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="w-5 h-5 bg-primary-400 transform rotate-45 group-hover:rotate-90 transition-transform duration-400" />
-            <span className="font-serif font-bold text-lg text-white tracking-tight">
-              Commodity<span className="text-primary-400">Playbook</span>
-            </span>
-          </Link>
+          <Logo variant="white" imageClassName="max-h-10" />
         </div>
         <div className="relative z-10">
           <div className="pill pill-dark mb-5 text-[10px]">
@@ -119,10 +115,7 @@ function LoginForm() {
           className="w-full max-w-md"
         >
           {/* Mobile logo */}
-          <Link href="/" className="flex items-center gap-2 mb-8 lg:hidden">
-            <div className="w-4 h-4 bg-primary-400 transform rotate-45" />
-            <span className="font-serif font-bold text-base text-gray-900">CommodityPlaybook</span>
-          </Link>
+          <Logo variant="horizontal" className="mb-8 lg:hidden" imageClassName="max-h-8" />
 
           <h1 className="font-serif text-3xl font-bold text-gray-900 mb-1.5">Sign in</h1>
           <p className="text-muted-fg text-sm mb-8">

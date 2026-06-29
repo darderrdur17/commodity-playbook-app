@@ -1,0 +1,164 @@
+{
+  "a": {
+    "a1": [
+      {
+        "type": "Infographic",
+        "title": "Physical vs. Paper Markets Map",
+        "description": "A visual map showing how physical cargoes, futures, swaps, and options relate — the full instrument landscape on one page.",
+        "fileKey": "playbook/a/a1/physical-vs-paper-markets-map.pdf"
+      },
+      {
+        "type": "Framework",
+        "title": "Physical Trade Checklist",
+        "description": "The 8 questions every physical trade must answer before execution — from cargo availability to counterparty credit.",
+        "fileKey": "playbook/a/a1/physical-trade-checklist.pdf"
+      },
+      {
+        "type": "Worked Example",
+        "title": "A Crude Cargo from Enquiry to Delivery",
+        "description": "Step-by-step walkthrough of a 500,000 barrel crude cargo — nomination, confirmation, operations, and settlement.",
+        "fileKey": "playbook/a/a1/a-crude-cargo-from-enquiry-to-delivery.pdf"
+      }
+    ],
+    "a2": [
+      {
+        "type": "Infographic",
+        "title": "Energy Markets Landscape Map",
+        "description": "The four commodity markets — crude, LNG, pipeline gas, power — shown on one diagram with their connections, benchmarks, and key players.",
+        "fileKey": "playbook/a/a2/energy-markets-landscape-map.pdf"
+      },
+      {
+        "type": "Framework",
+        "title": "Market Connection Tracing Template",
+        "description": "A fill-in framework for tracing how a news event in one commodity market ripples into connected markets.",
+        "fileKey": "playbook/a/a2/market-connection-tracing-template.pdf"
+      },
+      {
+        "type": "Worked Example",
+        "title": "A Cold Snap in Japan — Market Chain Reaction",
+        "description": "How a 5-day cold snap in Northeast Asia moved JKM, redirected Atlantic cargoes, tightened European TTF, and lifted coal demand.",
+        "fileKey": "playbook/a/a2/a-cold-snap-in-japan-market-chain-reaction.pdf"
+      }
+    ],
+    "a3": [
+      {
+        "type": "Infographic",
+        "title": "The Six Revenue Levers",
+        "description": "A visual breakdown of all six P&L sources — flat price, time spread, location, quality, freight, and optionality — with the typical contribution range of each.",
+        "fileKey": "playbook/a/a3/the-six-revenue-levers.pdf"
+      },
+      {
+        "type": "Framework",
+        "title": "Trade P&L Attribution Template",
+        "description": "A blank framework for mapping any commodity trade to its six revenue components — use this to analyse any trade or case study.",
+        "fileKey": "playbook/a/a3/trade-p-l-attribution-template.pdf"
+      },
+      {
+        "type": "Worked Example",
+        "title": "One LNG Cargo — Six Revenue Lines",
+        "description": "A complete P&L breakdown of a single LNG cargo showing contribution from each of the six levers from nomination to settlement.",
+        "fileKey": "playbook/a/a3/one-lng-cargo-six-revenue-lines.pdf"
+      }
+    ],
+    "a4": [
+      {
+        "type": "Infographic",
+        "title": "Crack Spread Guide",
+        "description": "The 3-2-1 formula, seasonal margin patterns, viability zones, and what widening vs. compressing cracks signal to the desk — the full crack spread visual reference.",
+        "fileKey": "playbook/a/a4/crack-spread-guide.pdf"
+      },
+      {
+        "type": "Framework",
+        "title": "Refinery Margin Calculator",
+        "description": "A fill-in template for calculating gross and net crack spread given any crude, gasoline, and distillate price — with product yield assumptions for 3-2-1 and 5-3-2.",
+        "fileKey": "playbook/a/a4/refinery-margin-calculator.pdf"
+      },
+      {
+        "type": "Worked Example",
+        "title": "Crack Spread Compression — A Desk Case Study",
+        "description": "How a sudden crude spike compressed the 3-2-1 crack, triggered a refinery run rate cut, and tightened product supply six weeks later.",
+        "fileKey": "playbook/a/a4/crack-spread-compression-a-desk-case-study.pdf"
+      }
+    ],
+    "a5": [
+      {
+        "type": "Infographic",
+        "title": "Vessel Classes & Freight Market Map",
+        "description": "The full vessel class hierarchy — VLCC, Suezmax, Aframax, LNG carrier — with capacity, typical routes, and which Baltic index tracks each.",
+        "fileKey": "playbook/a/a5/vessel-classes-freight-market-map.pdf"
+      },
+      {
+        "type": "Framework",
+        "title": "Laytime & Demurrage Calculation Template",
+        "description": "A step-by-step template for calculating laytime used, demurrage owed, and net freight cost for any voyage charter — with NOR and weather exception logic.",
+        "fileKey": "playbook/a/a5/laytime-demurrage-calculation-template.pdf"
+      },
+      {
+        "type": "Worked Example",
+        "title": "VLCC Freight Rate Spike — Impact on Crude Arb",
+        "description": "How a 40% VLCC rate spike on the Middle East Gulf–Far East route closed a viable crude arbitrage and redirected 4 cargoes in a single week.",
+        "fileKey": "playbook/a/a5/vlcc-freight-rate-spike-impact-on-crude-arb.pdf"
+      }
+    ],
+    "a6": [
+      {
+        "type": "Infographic",
+        "title": "EIA Report Decoder",
+        "description": "A visual guide to every data point in the EIA Weekly Petroleum Status Report — what it measures, what to compare it to, and what it signals for the market.",
+        "fileKey": "playbook/a/a6/eia-report-decoder.pdf"
+      },
+      {
+        "type": "Framework",
+        "title": "Inventory Signal Evaluation Framework",
+        "description": "A structured process for assessing any inventory release — actual vs. consensus, seasonal comparison, floating storage adjustment, and price implication.",
+        "fileKey": "playbook/a/a6/inventory-signal-evaluation-framework.pdf"
+      },
+      {
+        "type": "Worked Example",
+        "title": "Three Weeks of Divergent Signals",
+        "description": "How three consecutive bullish EIA draws failed to move Brent flat price — and what the floating storage data was showing that explained the disconnect.",
+        "fileKey": "playbook/a/a6/three-weeks-of-divergent-signals.pdf"
+      }
+    ],
+    "a7": [
+      {
+        "type": "Infographic",
+        "title": "Price Reporting Agency Methodology Map",
+        "description": "How Platts, Argus, and ICIS assess prices — the MOC process, assessment windows, submission criteria, and key benchmark differences.",
+        "fileKey": "playbook/a/a7/price-reporting-agency-methodology-map.pdf"
+      },
+      {
+        "type": "Framework",
+        "title": "Benchmark Selection Reference Guide",
+        "description": "A quick-reference table matching commodity, region, and counterparty type to the appropriate benchmark — Dated Brent, JKM, TTF, HSFO, gasoil, naphtha, and more.",
+        "fileKey": "playbook/a/a7/benchmark-selection-reference-guide.pdf"
+      },
+      {
+        "type": "Worked Example",
+        "title": "A Platts Window Trade — End to End",
+        "description": "A step-by-step account of how a crude cargo was priced using Dated Brent assessment — submission, assessment, final price, and contract settlement calculation.",
+        "fileKey": "playbook/a/a7/a-platts-window-trade-end-to-end.pdf"
+      }
+    ],
+    "a8": [
+      {
+        "type": "Infographic",
+        "title": "Desk Risk Framework Map",
+        "description": "A visual overview of the five risk types — market, basis, credit, operational, liquidity — with how each is measured, monitored, and managed on a commodity desk.",
+        "fileKey": "playbook/a/a8/desk-risk-framework-map.pdf"
+      },
+      {
+        "type": "Framework",
+        "title": "Position Risk Assessment Template",
+        "description": "A structured pre-trade risk checklist — VaR impact, basis exposure, counterparty credit check, operational risks, and exit liquidity assessment.",
+        "fileKey": "playbook/a/a8/position-risk-assessment-template.pdf"
+      },
+      {
+        "type": "Worked Example",
+        "title": "A Position Approaching the Limit",
+        "description": "How a crude desk managed a losing position approaching its VaR limit — the conversations between trader and risk manager, the options available, and the eventual outcome.",
+        "fileKey": "playbook/a/a8/a-position-approaching-the-limit.pdf"
+      }
+    ]
+  }
+}

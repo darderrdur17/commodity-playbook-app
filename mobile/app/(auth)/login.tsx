@@ -5,6 +5,7 @@ import {
 } from "react-native";
 import { router } from "expo-router";
 import { authApi, setToken } from "../../lib/api";
+import { Logo } from "../../components/Logo";
 
 const NAVY = "#0830a0";
 const PRIMARY = "#3280ff";
@@ -40,10 +41,7 @@ export default function LoginScreen() {
       <ScrollView style={styles.container} contentContainerStyle={{ flexGrow: 1 }}>
         {/* Header */}
         <View style={styles.header}>
-          <View style={styles.logoMark} />
-          <Text style={styles.logoText}>
-            Commodity<Text style={{ color: "#dff2ff" }}>Playbook</Text>
-          </Text>
+          <Logo variant="white" />
           <Text style={styles.headerSub}>Welcome back to the desk.</Text>
         </View>
 

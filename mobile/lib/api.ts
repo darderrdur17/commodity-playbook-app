@@ -101,6 +101,18 @@ export const authApi = {
     }),
 
   me: () => request<{ user: any }>("/api/mobile/auth/me", { bustCache: true }),
+
+  savePersona: (persona: string, track?: string) =>
+    request<{ success: boolean; persona: string; track: string }>("/api/mobile/user/persona", {
+      method: "POST",
+      body: JSON.stringify({ persona, track }),
+    }),
+
+  getPersona: () =>
+    request<{ persona: string | null; track: string | null; onboardingDone: boolean }>(
+      "/api/mobile/user/persona",
+      { bustCache: true }
+    ),
 };
 
 export const playbookApi = {

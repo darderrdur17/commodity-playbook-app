@@ -188,6 +188,12 @@ async function main() {
     console.log(`  ✓ Seeded ${contentResult.count} content modules`);
   }
 
+  const { seedContentAssetsIfMissing } = await import("./seed-assets");
+  const assetResult = await seedContentAssetsIfMissing();
+  console.log(
+    `  ✓ Content assets: ${assetResult.created} created, ${assetResult.skipped} existing (${assetResult.total} expected)`
+  );
+
   console.log(`\n✅ Done! All accounts use password: ${DEMO_PASSWORD}`);
   console.log("   Try them at http://localhost:3000/demo\n");
 }

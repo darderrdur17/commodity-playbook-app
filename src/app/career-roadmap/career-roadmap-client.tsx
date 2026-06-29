@@ -7,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { TierGate } from "@/components/tier-gate";
 import { Reveal } from "@/components/animations";
 import { CAREER_ROLES, type CareerRole } from "@/data/career-roadmap";
+import type { FunctionMatrixRow, TimelineQuarter } from "@/data/career-roadmap-extras";
 // roles prop overrides static default when loaded from CMS
 
 const CAT_COLORS: Record<string, string> = {
@@ -26,12 +27,16 @@ interface Props {
   userTier: string;
   persona: string | null;
   roles?: CareerRole[];
+  functionMatrix?: FunctionMatrixRow[];
+  timeline12Month?: TimelineQuarter[];
   requiredTier?: "PRO" | "ELITE";
 }
 
 export function CareerRoadmapClient({
   userTier,
   roles = CAREER_ROLES,
+  functionMatrix = [],
+  timeline12Month = [],
   requiredTier = "PRO",
 }: Props) {
   const [activeSlug, setActiveSlug] = useState(roles[0]?.slug ?? "");
@@ -48,16 +53,68 @@ export function CareerRoadmapClient({
         <div className="absolute -top-20 -right-20 w-64 h-64 rounded-full opacity-10" style={{ background: "radial-gradient(circle, #3280ff 0%, transparent 70%)" }} />
         <Reveal className="relative z-10">
           <div className="pill pill-dark mb-4">
-            <span className="w-1.5 h-1.5 rounded-full bg-accent" /> Pro · 10 Roles
+            <span className="w-1.5 h-1.5 rounded-full bg-accent" /> Pro Pack · Differentiated Roles
           </div>
-          <h1 className="font-serif text-3xl sm:text-4xl font-bold text-white mb-3">Career Roadmap</h1>
+          <h1 className="font-serif text-3xl sm:text-4xl font-bold text-white mb-3">
+            Career Roadmap. <span className="text-accent italic">Role by Role.</span>
+          </h1>
           <p className="text-white/65 text-base sm:text-lg max-w-xl">
-            Role blueprints from the Pro Pack — comp benchmarks, typical backgrounds, red flags, and upgrade paths across front office, operations, middle office, and adjacent functions.
+            Ten entry blueprints for downstream commodity trading. The paths that actually work, the filters that actually eliminate candidates, and the upgrade move for each role — built from 20+ years inside the industry.
           </p>
+          <div className="flex flex-wrap gap-3 mt-6">
+            {[
+              { num: "10", label: "Role blueprints" },
+              { num: "4", label: "Markets: SG · LN · ME · NA" },
+              { num: "Live", label: "Job board — coming soon" },
+              { num: "SGD", label: "Comp benchmarks" },
+            ].map((s) => (
+              <div key={s.label} className="glass-card px-4 py-2.5 text-white text-sm">
+                <span className="font-serif font-bold text-lg block">{s.num}</span>
+                <span className="text-white/60 text-xs">{s.label}</span>
+              </div>
+            ))}
+          </div>
         </Reveal>
       </section>
 
       <TierGate requiredTier={requiredTier} userTier={userTier}>
+        {/* Function matrix */}
+        {functionMatrix.length > 0 && (
+          <section className="mb-12">
+            <Reveal className="mb-6">
+              <p className="text-xs font-bold uppercase tracking-widest text-primary-800 mb-2">At a glance</p>
+              <h2 className="font-serif text-2xl font-bold text-gray-900 mb-2">The Function Matrix</h2>
+              <p className="text-muted-fg text-sm max-w-2xl">
+                Ten roles across five dimensions. Use this to identify your strongest entry angle before reading the full blueprints below.
+              </p>
+            </Reveal>
+            <div className="overflow-x-auto rounded-xl border border-border">
+              <table className="w-full text-sm min-w-[700px]">
+                <thead>
+                  <tr className="bg-primary-800 text-white/85">
+                    <th className="text-left px-4 py-3 font-semibold">Role</th>
+                    <th className="text-left px-4 py-3 font-semibold">Entry difficulty</th>
+                    <th className="text-left px-4 py-3 font-semibold">Category</th>
+                    <th className="text-left px-4 py-3 font-semibold">Path to desk</th>
+                    <th className="text-left px-4 py-3 font-semibold">Key skills</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {functionMatrix.map((row, i) => (
+                    <tr key={row.role} className={i % 2 === 0 ? "bg-white" : "bg-secondary/60"}>
+                      <td className="px-4 py-3 font-semibold text-primary-800">{row.role}</td>
+                      <td className="px-4 py-3 text-muted-fg">{row.difficulty}</td>
+                      <td className="px-4 py-3">{row.category}</td>
+                      <td className="px-4 py-3">{row.pathToDesk}</td>
+                      <td className="px-4 py-3 text-muted-fg">{row.keySkills}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </section>
+        )}
+
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-1">
             <h2 className="font-serif font-bold text-gray-900 mb-4">Roles</h2>
@@ -177,6 +234,43 @@ export function CareerRoadmapClient({
             </motion.div>
           </div>
         </div>
+
+        {/* 12-month timeline */}
+        {timeline12Month.length > 0 && (
+          <section className="mt-16">
+            <Reveal className="mb-8 text-center max-w-2xl mx-auto">
+              <p className="text-xs font-bold uppercase tracking-widest text-primary-800 mb-2">The plan</p>
+              <h2 className="font-serif text-2xl sm:text-3xl font-bold text-gray-900 mb-2">12-Month Action Plan</h2>
+              <p className="text-muted-fg text-sm">
+                Specific knowledge targets and actions calibrated to where a serious candidate actually is, quarter by quarter.
+              </p>
+            </Reveal>
+            <div className="max-w-3xl mx-auto space-y-8">
+              {timeline12Month.map((q) => (
+                <Reveal key={q.quarter}>
+                  <div className="flex gap-4">
+                    <div className="flex flex-col items-center flex-shrink-0">
+                      <div className="w-3 h-3 rounded-full bg-primary-400 mt-1.5" />
+                      <div className="w-px flex-1 bg-border min-h-[40px]" />
+                    </div>
+                    <div className="pb-2">
+                      <p className="text-[10px] font-bold uppercase tracking-widest text-primary-800 mb-1">{q.quarter}</p>
+                      <h3 className="font-serif font-semibold text-gray-900 mb-3">{q.title}</h3>
+                      <ul className="space-y-2">
+                        {q.items.map((item) => (
+                          <li key={item.slice(0, 40)} className="text-sm text-gray-700 flex gap-2">
+                            <span className="text-primary-400 flex-shrink-0">·</span>
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </section>
+        )}
       </TierGate>
     </div>
   );

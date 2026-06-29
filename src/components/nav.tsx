@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { cn, isAdmin } from "@/lib/utils";
 import { signOut, useSession } from "next-auth/react";
+import { Logo } from "@/components/brand/logo";
 
 const NAV_LINKS = [
   { label: "Home", href: "/" },
@@ -64,13 +65,7 @@ export function Nav() {
         )}
       >
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-2.5 group">
-            <div className="w-5 h-5 bg-primary-400 transform rotate-45 group-hover:rotate-90 transition-transform duration-400" />
-            <span className="font-serif font-bold text-[17px] text-gray-800 tracking-tight">
-              Commodity<span className="text-primary-400">Playbook</span>
-            </span>
-          </Link>
+          <Logo variant="horizontal" priority imageClassName="max-h-9 sm:max-h-10" />
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex items-center gap-7">

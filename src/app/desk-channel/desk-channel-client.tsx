@@ -3,7 +3,8 @@
 import React, { useState, useMemo } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Search, ChevronDown, ChevronUp, MessageSquare, ThumbsUp } from "lucide-react";
+import { ChevronDown, ChevronUp, MessageSquare, ThumbsUp, Check, ArrowRight } from "lucide-react";
+import { BrandedSearchInput } from "@/components/brand/logo";
 import { DESK_CATEGORIES, DESK_QA, type DeskCategory, type DeskQA } from "@/data/desk-channel";
 import { TierGate } from "@/components/tier-gate";
 import { Reveal } from "@/components/animations";
@@ -46,24 +47,21 @@ export function DeskChannelClient({
         <Reveal className="relative z-10">
           <div className="pill pill-dark mb-4">
             <span className="w-1.5 h-1.5 rounded-full bg-accent" />
-            Elite · 40 Q&amp;As
+            Elite · The Desk Channel
           </div>
           <h1 className="font-serif text-3xl sm:text-4xl font-bold text-white mb-3">
-            The Desk Channel
+            Questions Answered by{" "}
+            <span className="text-accent italic">People Who&apos;ve Been There.</span>
           </h1>
           <p className="text-white/65 text-base sm:text-lg max-w-xl mb-6">
-            Unfiltered practitioner Q&amp;As across five segments — the questions juniors are afraid to ask and seniors answer honestly.
+            40 questions across 5 categories — answered by vetted practitioners and the Commodity Playbook editorial team. Search the library. Can&apos;t find yours? Submit it below.
           </p>
-          <div className="relative max-w-lg">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
-            <input
-              type="text"
-              placeholder="Search questions, answers, tags..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 rounded-lg bg-white/10 border border-white/25 text-white placeholder:text-white/40 text-sm focus:outline-none focus:ring-2 focus:ring-accent"
-            />
-          </div>
+          <BrandedSearchInput
+            variant="dark"
+            placeholder="Search — e.g. 'crack spread', 'JKM', 'demurrage', 'career switch'"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
         </Reveal>
       </section>
 
@@ -91,11 +89,11 @@ export function DeskChannelClient({
             ))}
           </div>
           <div className="hidden lg:block mt-6 p-4 rounded-xl bg-primary-800 text-white">
-            <p className="font-serif font-bold text-sm mb-1">Have a question?</p>
-            <p className="text-xs text-white/60 mb-3">Ask a mentor through Mentor Connect.</p>
-            <Link href="/mentor-connect">
+            <p className="font-serif font-bold text-sm mb-1">Can&apos;t find your question?</p>
+            <p className="text-xs text-white/60 mb-3">Submit a question to vetted practitioners.</p>
+            <Link href="#ask-practitioner">
               <Button size="sm" variant="primary-dark" className="w-full">
-                <MessageSquare className="w-3.5 h-3.5" /> Mentor Connect
+                Ask a Question →
               </Button>
             </Link>
           </div>
@@ -141,7 +139,6 @@ export function DeskChannelClient({
                           >
                             {q.categoryLabel.split(" & ")[0]}
                           </span>
-                          <span className="text-[10px] text-green-600 font-semibold">Answered</span>
                         </div>
                         <p className="font-serif font-semibold text-gray-900 text-sm sm:text-base leading-snug">
                           {q.question}
@@ -163,20 +160,11 @@ export function DeskChannelClient({
                           className="overflow-hidden border-t border-border"
                         >
                           <div className="p-4 sm:p-5 sm:pl-14 space-y-4">
-                            <div
-                              className={`flex items-start gap-3 p-3 rounded-lg text-sm ${
-                                q.attribution === "editorial"
-                                  ? "bg-primary-soft border border-primary-line"
-                                  : "bg-secondary border border-border"
-                              }`}
-                            >
+                            <div className="flex items-start gap-3 p-3 rounded-lg text-sm bg-primary-soft border border-primary-line">
                               <div>
                                 <p className="font-semibold text-gray-800">{q.author}</p>
                                 <p className="text-xs text-muted-fg">{q.authorRole}</p>
                               </div>
-                              <span className="ml-auto text-[10px] font-bold uppercase tracking-wider text-muted-fg">
-                                {q.attribution === "editorial" ? "Editorial" : "Practitioner"}
-                              </span>
                             </div>
 
                             <div className="text-sm text-gray-700 leading-relaxed whitespace-pre-line">
@@ -184,11 +172,11 @@ export function DeskChannelClient({
                             </div>
 
                             {q.deskSignal && (
-                              <div className="bg-gray-900 rounded-lg p-4 text-sm">
-                                <p className="text-accent/80 text-[10px] font-mono font-bold uppercase tracking-widest mb-1.5">
+                              <div className="bg-primary-soft border border-primary-line rounded-lg p-4 text-sm">
+                                <p className="text-primary-800/80 text-[10px] font-mono font-bold uppercase tracking-widest mb-1.5">
                                   // The Desk Implication
                                 </p>
-                                <p className="text-white/85 leading-relaxed">{q.deskSignal}</p>
+                                <p className="text-primary-900 leading-relaxed">{q.deskSignal}</p>
                               </div>
                             )}
 
@@ -215,6 +203,34 @@ export function DeskChannelClient({
           )}
         </div>
       </div>
+
+      {/* Ask a Practitioner — bottom section */}
+      <section id="ask-practitioner" className="mt-12 rounded-2xl bg-primary-800 p-8 relative overflow-hidden">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 relative z-10">
+          <div>
+            <p className="text-[10px] font-bold uppercase tracking-widest text-accent mb-3">Submit a Question</p>
+            <h2 className="font-serif text-2xl font-bold text-white mb-3">
+              Can&apos;t find what you&apos;re <span className="text-accent italic">looking for?</span>
+            </h2>
+            <p className="text-white/65 text-sm leading-relaxed mb-4">
+              Submit your question and a vetted practitioner or our editorial team will respond within 5 business days.
+            </p>
+            <ul className="space-y-2 text-sm text-white/70">
+              <li className="flex items-start gap-2"><Check className="w-4 h-4 text-accent mt-0.5 flex-shrink-0" /> One question per submission — specific is better than broad</li>
+              <li className="flex items-start gap-2"><Check className="w-4 h-4 text-accent mt-0.5 flex-shrink-0" /> Elite members · answered within 5 business days</li>
+            </ul>
+          </div>
+          <div className="bg-white rounded-xl p-6">
+            <h3 className="font-serif font-bold text-gray-900 mb-1">Ask a Practitioner</h3>
+            <p className="text-xs text-muted-fg mb-4">Elite members · Answered within 5 business days</p>
+            <Link href="/mentor-connect">
+              <Button className="w-full" size="lg">
+                Go to Mentor Connect <ArrowRight className="w-4 h-4" />
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
     </div>
   );
 

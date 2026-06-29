@@ -19,7 +19,7 @@ export default async function CareerRoadmapPage() {
 
   if (!user) redirect("/login");
 
-  const [roles, requiredTier] = await Promise.all([
+  const [careerData, requiredTier] = await Promise.all([
     getCareerRoles(),
     getContentTierForSlug("career-roadmap"),
   ]);
@@ -27,7 +27,9 @@ export default async function CareerRoadmapPage() {
     <CareerRoadmapClient
       userTier={user.tier}
       persona={user.persona}
-      roles={roles}
+      roles={careerData.roles}
+      functionMatrix={careerData.functionMatrix}
+      timeline12Month={careerData.timeline12Month}
       requiredTier={requiredTier as "PRO" | "ELITE"}
     />
   );

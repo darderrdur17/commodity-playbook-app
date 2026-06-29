@@ -38,14 +38,22 @@ export function PlaybookHubClient({
         <Reveal className="relative z-10">
           <div className="pill pill-dark mb-5">
             <span className="w-1.5 h-1.5 rounded-full bg-accent" />
-            Pro Access
+            {isPro ? "Pro Access" : "Chapter A · Free Preview"}
           </div>
           <h1 className="font-serif text-4xl font-bold text-white mb-3">
-            The Full Playbook
+            {isPro ? "The Full Playbook" : "Industry Foundations"}
           </h1>
           <p className="text-white/65 text-lg max-w-xl mb-6">
-            5 chapters · 40 sections · Industry foundations through commercial decision-making — sourced from the Pro Pack playbook.
+            {isPro
+              ? "5 chapters · 40 sections · Industry foundations through commercial decision-making — sourced from the Pro Pack playbook."
+              : "The ground-level understanding every serious learner of commodity trading needs before anything else. Three sections free. Five unlocked with Pro."}
           </p>
+          {!isPro && (
+            <div className="glass-card inline-flex px-5 py-3 text-sm text-white/80">
+              <span className="font-semibold text-white">3 of 8 sections free.</span>
+              <span className="ml-2">Sections A.4 – A.8 unlock with a Pro subscription (SGD 99, one-time).</span>
+            </div>
+          )}
           {isPro && (
             <div className="flex items-center gap-4 flex-wrap">
               <div className="glass-card px-5 py-3">

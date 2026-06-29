@@ -1,0 +1,115 @@
+{
+  "functionMatrix": [
+    {
+      "role": "Trading Analyst",
+      "difficulty": "High",
+      "category": "Front office",
+      "pathToDesk": "Direct — feeds the book daily",
+      "keySkills": "Market knowledge, modelling, speed"
+    },
+    {
+      "role": "Trader",
+      "difficulty": "Very high",
+      "category": "Front office",
+      "pathToDesk": "You are the desk",
+      "keySkills": "P&amp;L conviction, physical market"
+    },
+    {
+      "role": "Scheduling / Operations",
+      "difficulty": "Lower",
+      "category": "Operations",
+      "pathToDesk": "Strong — ops → desk seen often",
+      "keySkills": "Physical logistics, ETRM, decisiveness"
+    },
+    {
+      "role": "Risk Analyst",
+      "difficulty": "Medium",
+      "category": "Middle office",
+      "pathToDesk": "Lateral — desk-adjacent authority",
+      "keySkills": "VaR, limits, derivatives"
+    },
+    {
+      "role": "Commercial / Origination",
+      "difficulty": "High",
+      "category": "Front office",
+      "pathToDesk": "Natural — originator → trader",
+      "keySkills": "Relationships, contract terms, margin logic"
+    },
+    {
+      "role": "Quant / Data Analyst",
+      "difficulty": "Medium",
+      "category": "Middle office",
+      "pathToDesk": "Strong — model → book path",
+      "keySkills": "Python, curve building, data"
+    },
+    {
+      "role": "Research Analyst",
+      "difficulty": "Medium",
+      "category": "Adjacent",
+      "pathToDesk": "Indirect — view → desk",
+      "keySkills": "Writing, supply/demand modelling"
+    },
+    {
+      "role": "ETRM Specialist",
+      "difficulty": "Lower",
+      "category": "Operations",
+      "pathToDesk": "Indirect — system expertise valued",
+      "keySkills": "Endur, RightAngle, SQL"
+    },
+    {
+      "role": "Vendor Solutions / PreSales",
+      "difficulty": "Medium",
+      "category": "Adjacent",
+      "pathToDesk": "Indirect — market knowledge valued",
+      "keySkills": "Commodity knowledge, enterprise sales"
+    },
+    {
+      "role": "Commodity Trade Finance",
+      "difficulty": "High",
+      "category": "Adjacent",
+      "pathToDesk": "Lateral — finance → commercial",
+      "keySkills": "Structured finance, cargo economics"
+    }
+  ],
+  "timeline12Month": [
+    {
+      "quarter": "Q1 · Months 1–3",
+      "title": "Foundation — build the knowledge base. No applications yet.",
+      "items": [
+        "Complete Chapters A–C of the Full Playbook. Be able to explain crack spreads, contango, and laytime unprompted before moving on.",
+        "Set up a daily reading habit: EIA Wednesday release plus one Platts or Argus headline per day. Calendar it.",
+        "Map the org structure of 3 target firms using LinkedIn and annual reports. Know who sits where.",
+        "Use the Function Matrix above to lock in your entry role. Don't hedge across three tracks — decide one and commit."
+      ]
+    },
+    {
+      "quarter": "Q2 · Months 4–6",
+      "title": "Positioning — build your story. Rewrite your resume. Start warm outreach.",
+      "items": [
+        "Rewrite your resume using your archetype template from the Resume Templates module. Every bullet must demonstrate commercial awareness, not just activity.",
+        "Draft your market view hook — one specific, current observation about your target commodity. Practice saying it out loud.",
+        "Identify 10 people in target roles on LinkedIn. Start with informational conversations, not job asks.",
+        "If on the quant or analytics track: build one public data project involving commodity price data (EIA, CME, or AIS)."
+      ]
+    },
+    {
+      "quarter": "Q3 · Months 7–9",
+      "title": "Active search — applications live. Interview pipeline building.",
+      "items": [
+        "Apply to 3–5 roles per week. Prioritise firms with known junior hiring, not just brand names.",
+        "Practice 10 technical questions per week from the Interview Question Bank — focus on your target commodity's supply/demand, a trade idea walkthrough, and one supply disruption scenario.",
+        "Track every application in a pipeline with notes on which firms respond and at what stage. The pattern tells you where the filter is.",
+        "When the job board launches, use the role-specific openings to find live positions across Singapore, London, Hong Kong, and Tokyo."
+      ]
+    },
+    {
+      "quarter": "Q4 · Months 10–12",
+      "title": "Close — final-round prep and offer navigation.",
+      "items": [
+        "For final rounds: prepare a 5-minute market view presentation on your target commodity. Show it unsolicited — it almost always lands.",
+        "Know your walk-away number before offer conversations begin. Understand total comp: base, discretionary bonus, and how the bonus is actually determined.",
+        "If no offer by month 12: diagnose systematically — resume stage, first interview, technical, or final. Each has a different fix. Don't apply more volume to a broken process."
+      ]
+    }
+  ]
+}

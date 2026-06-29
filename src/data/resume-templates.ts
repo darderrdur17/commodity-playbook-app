@@ -1,3 +1,5 @@
+import resumeExtras from "./resume-extras.json";
+
 export interface ResumeTemplate {
   id: string;
   persona: string;
@@ -75,3 +77,27 @@ export const PERSONA_QUIZ_QUESTIONS = [
     ],
   },
 ];
+
+export interface QuizStepOption {
+  value: string;
+  label: string;
+  sub?: string;
+  persona?: string;
+}
+
+export interface PersonaQuizStep {
+  id: string;
+  question: string;
+  sub: string;
+  options: QuizStepOption[];
+}
+
+export interface IndustryMapZone {
+  zone: string;
+  title: string;
+  color: string;
+  roles: { name: string; tag?: string }[];
+}
+
+export const PERSONA_QUIZ_STEPS: PersonaQuizStep[] = resumeExtras.quizSteps as PersonaQuizStep[];
+export const INDUSTRY_MAP: IndustryMapZone[] = resumeExtras.industryMap as IndustryMapZone[];

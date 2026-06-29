@@ -27,5 +27,20 @@ export async function POST(req: NextRequest) {
     data: { persona, track, onboardingDone: true },
   });
 
-  return NextResponse.json({ success: true });
+  return NextResponse.json({ success: true, persona, track });
+}
+
+export async function GET() {
+  const session = await auth();
+  if (!session?.user?.id) {
+    return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  }
+
+  const user = await prisma.user.findUnique({
+    where: { id: session.user.id },
+    select: { persona: true, track: true, onboardingDone: true },
+  });
+
+  if (!user) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+  return NextResponse.json(user);
 }

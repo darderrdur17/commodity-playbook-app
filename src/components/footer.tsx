@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import { Mail, Linkedin } from "lucide-react";
+import { Logo } from "@/components/brand/logo";
 
 const FOOTER_LINKS = {
   "Content": [
@@ -30,14 +31,9 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
           {/* Brand */}
           <div className="md:col-span-1">
-            <Link href="/" className="flex items-center gap-2.5 group mb-4">
-              <div className="w-5 h-5 bg-primary-400 transform rotate-45 group-hover:rotate-90 transition-transform duration-400" />
-              <span className="font-serif font-bold text-[17px] text-white tracking-tight">
-                Commodity<span className="text-primary-400">Playbook</span>
-              </span>
-            </Link>
+            <Logo variant="wordmark-tagline" className="mb-4" imageClassName="max-h-16 brightness-110" />
             <p className="text-sm leading-relaxed text-gray-500 mb-5">
-              The definitive career guide for commodity trading — from first desk to senior coverage.
+              The definitive Playbook guide to understanding commodity trading — how markets work, how revenue is made, and how to build a career or close a sale inside them. From first desk to senior coverage.
             </p>
             <div className="flex items-center gap-3">
               <a

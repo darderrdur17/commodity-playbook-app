@@ -52,6 +52,7 @@ export function AdminContentTab() {
   const [message, setMessage] = useState("");
   const [loadError, setLoadError] = useState("");
   const [uploading, setUploading] = useState(false);
+  const [assetKeyOverride, setAssetKeyOverride] = useState("");
   const uploadInputRef = useRef<HTMLInputElement>(null);
   const replaceInputRef = useRef<HTMLInputElement>(null);
   const [replaceAssetId, setReplaceAssetId] = useState<string | null>(null);
@@ -165,9 +166,10 @@ export function AdminContentTab() {
       form.append("file", file);
       if (selectedSlug) form.append("moduleSlug", selectedSlug);
       form.append("requiredTier", tier);
-      if (selectedSlug) {
-        form.append("assetKey", buildContentAssetKey(selectedSlug, file.name));
-      }
+      const key =
+        assetKeyOverride.trim() ||
+        (selectedSlug ? buildContentAssetKey(selectedSlug, file.name) : file.name);
+      form.append("assetKey", key);
 
       const url = replaceId
         ? `/api/admin/content/assets/${replaceId}`
@@ -323,9 +325,18 @@ export function AdminContentTab() {
           <p className="text-xs font-bold uppercase tracking-wider text-muted-fg mb-3">Upload New File</p>
           <p className="text-xs text-muted-fg mb-3">
             {selectedSlug
-              ? `New uploads attach to "${selectedSlug}". PDF, Word, images, etc. (max ${CONTENT_ASSET_MAX_BYTES / (1024 * 1024)}MB). Same filename replaces an existing file.`
+              ? `New uploads attach to "${selectedSlug}". PDF, Word, images, etc. (max ${CONTENT_ASSET_MAX_BYTES / (1024 * 1024)}MB). Use asset key e.g. playbook/a/a1/physical-vs-paper-markets-map.pdf or starter-pack/ecosystem-map.pdf to match download buttons.`
               : "Select a module on the left, then upload."}
           </p>
+          {selectedSlug && (selectedSlug === "playbook" || selectedSlug === "starter-pack") && (
+            <input
+              type="text"
+              value={assetKeyOverride}
+              onChange={(e) => setAssetKeyOverride(e.target.value)}
+              placeholder={`Optional asset key (default: ${selectedSlug}/filename.pdf)`}
+              className="w-full mb-3 h-9 px-3 rounded-lg border border-border text-xs focus:outline-none focus:ring-2 focus:ring-primary-400"
+            />
+          )}
           <button
             type="button"
             onClick={triggerUploadPicker}

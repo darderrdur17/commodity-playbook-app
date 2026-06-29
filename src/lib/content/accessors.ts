@@ -7,11 +7,12 @@ import { CHAPTERS } from "@/data/playbook";
 import { CASE_STUDIES, CASE_STUDY_DETAILS } from "@/data/case-studies";
 import { DESK_CATEGORIES, DESK_QA } from "@/data/desk-channel";
 import { GLOSSARY_TERMS } from "@/data/glossary";
-import { INTERVIEW_QUESTIONS, INTERVIEW_CATEGORIES } from "@/data/interview-questions";
+import { INTERVIEW_QUESTIONS, INTERVIEW_CATEGORIES, INTERVIEW_TABS } from "@/data/interview-questions";
 import { KNOWLEDGE_TEST } from "@/data/knowledge-test";
 import { CAREER_ROLES } from "@/data/career-roadmap";
 import { RESUME_TEMPLATES, PERSONA_QUIZ_QUESTIONS } from "@/data/resume-templates";
 import { JOB_OPENINGS, JOB_REGIONS, JOB_LEVELS, JOB_SEGMENTS } from "@/data/job-openings";
+import { DEFAULT_LANDING_CONTENT, type LandingContent } from "@/data/landing-content";
 import playbookSections from "@/data/playbook-sections.json";
 
 type PlaybookPayload = {
@@ -23,6 +24,11 @@ type CaseStudiesPayload = {
   studies: CaseStudyCard[];
   details: Record<string, CaseStudySection[]>;
 };
+
+export async function getLandingContent(): Promise<LandingContent> {
+  const data = await getPublishedPayload<LandingContent>("landing");
+  return { ...DEFAULT_LANDING_CONTENT, ...data };
+}
 
 export async function getPlaybookChapters() {
   const data = await getPublishedPayload<PlaybookPayload>("playbook");
@@ -70,10 +76,12 @@ export async function getInterviewQuestionsData() {
   const data = await getPublishedPayload<{
     questions: typeof INTERVIEW_QUESTIONS;
     categories: typeof INTERVIEW_CATEGORIES;
+    tabs?: typeof INTERVIEW_TABS;
   }>("interview-questions");
   return {
     questions: data.questions ?? INTERVIEW_QUESTIONS,
     categories: data.categories ?? INTERVIEW_CATEGORIES,
+    tabs: data.tabs ?? INTERVIEW_TABS,
   };
 }
 
@@ -83,18 +91,32 @@ export async function getKnowledgeTestQuestions() {
 }
 
 export async function getCareerRoles() {
-  const data = await getPublishedPayload<{ roles: typeof CAREER_ROLES }>("career-roadmap");
-  return data.roles ?? CAREER_ROLES;
+  const data = await getPublishedPayload<{
+    roles: typeof CAREER_ROLES;
+    functionMatrix?: typeof import("@/data/career-roadmap-extras").FUNCTION_MATRIX;
+    timeline12Month?: typeof import("@/data/career-roadmap-extras").TIMELINE_12_MONTH;
+  }>("career-roadmap");
+  const { FUNCTION_MATRIX, TIMELINE_12_MONTH } = await import("@/data/career-roadmap-extras");
+  return {
+    roles: data.roles ?? CAREER_ROLES,
+    functionMatrix: data.functionMatrix ?? FUNCTION_MATRIX,
+    timeline12Month: data.timeline12Month ?? TIMELINE_12_MONTH,
+  };
 }
 
 export async function getResumeTemplatesData() {
   const data = await getPublishedPayload<{
     templates: typeof RESUME_TEMPLATES;
     quiz: typeof PERSONA_QUIZ_QUESTIONS;
+    quizSteps?: typeof import("@/data/resume-templates").PERSONA_QUIZ_STEPS;
+    industryMap?: typeof import("@/data/resume-templates").INDUSTRY_MAP;
   }>("resume-templates");
+  const { PERSONA_QUIZ_STEPS, INDUSTRY_MAP } = await import("@/data/resume-templates");
   return {
     templates: data.templates ?? RESUME_TEMPLATES,
     quiz: data.quiz ?? PERSONA_QUIZ_QUESTIONS,
+    quizSteps: data.quizSteps ?? PERSONA_QUIZ_STEPS,
+    industryMap: data.industryMap ?? INDUSTRY_MAP,
   };
 }
 
@@ -146,4 +168,14 @@ export async function getResumeTemplateAssetUrls() {
     if (assetId) map[t.templateFile] = `/api/content/assets/${assetId}`;
   }
   return map;
+}
+
+export async function getPlaybookAssetUrls() {
+  const { getContentAssetUrlMap } = await import("./repository");
+  return getContentAssetUrlMap("playbook");
+}
+
+export async function getStarterPackAssetUrls() {
+  const { getContentAssetUrlMap } = await import("./repository");
+  return getContentAssetUrlMap("starter-pack");
 }

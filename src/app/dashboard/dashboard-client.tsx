@@ -211,6 +211,31 @@ export function DashboardClient({ contentTiers = {}, user, stats }: Props) {
         ))}
       </StaggerChildren>
 
+      {/* ── STARTER PACK DOWNLOADS ── */}
+      {user.tier === "STARTER" && (
+        <Reveal className="mb-10">
+          <div className="rounded-2xl border border-primary-line bg-primary-soft p-6 sm:p-8">
+            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+              <div>
+                <Badge variant="starter" className="mb-3">Starter Pack</Badge>
+                <h2 className="font-serif text-xl font-bold text-gray-900 mb-2">5 Free Downloads</h2>
+                <p className="text-sm text-muted-fg max-w-lg">
+                  Ecosystem map, crack spread guide, trade finance flow, LNG cargo flow, and price benchmarks — plus weekly market digest.
+                </p>
+              </div>
+              <Link href="/signup" className="flex-shrink-0">
+                <Button>
+                  Download Free Pack <ArrowRight className="w-4 h-4" />
+                </Button>
+              </Link>
+            </div>
+            <p className="text-xs text-muted-fg mt-4 pt-4 border-t border-primary-line">
+              Rest of downloadable assets unlock with Pro Pack.
+            </p>
+          </div>
+        </Reveal>
+      )}
+
       {/* ── PLAYBOOK PROGRESS (Pro+) ── */}
       {hasAccess(user.tier, "PRO") && (
         <Reveal className="mb-10">

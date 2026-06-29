@@ -1,67 +1,149 @@
 "use client";
 
-import React, { useMemo, useState } from "react";
-import { Search, ChevronDown, MessageSquare, Lightbulb } from "lucide-react";
+import React, { useMemo, useState, useEffect } from "react";
+import { ChevronDown, MessageSquare, Lightbulb, AlertTriangle } from "lucide-react";
+import { BrandedSearchInput } from "@/components/brand/logo";
 import { TierGate } from "@/components/tier-gate";
 import { Reveal } from "@/components/animations";
-import { INTERVIEW_QUESTIONS, INTERVIEW_CATEGORIES, type InterviewQuestion } from "@/data/interview-questions";
+import {
+  INTERVIEW_QUESTIONS,
+  INTERVIEW_CATEGORIES,
+  INTERVIEW_TABS,
+  INTERVIEW_DIFFICULTIES,
+  type InterviewQuestion,
+  type InterviewTab,
+  type InterviewTabMeta,
+  type InterviewDifficulty,
+} from "@/data/interview-questions";
 
 interface Props {
   userTier: string;
   questions?: InterviewQuestion[];
   categories?: string[];
+  tabs?: InterviewTabMeta[];
   requiredTier?: "PRO" | "ELITE";
 }
+
+const TAB_LABELS: Record<InterviewTab, string> = {
+  technical: "Technical",
+  commercial: "Commercial judgement",
+  behavioural: "Behavioural",
+  elimination: "Elimination questions",
+};
 
 export function InterviewQuestionsClient({
   userTier,
   questions = INTERVIEW_QUESTIONS,
   categories = INTERVIEW_CATEGORIES,
+  tabs = INTERVIEW_TABS,
   requiredTier = "PRO",
 }: Props) {
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("All");
+  const [activeTab, setActiveTab] = useState<InterviewTab>("technical");
+  const [difficulty, setDifficulty] = useState<InterviewDifficulty | "all">("all");
   const [openId, setOpenId] = useState<string | null>(null);
+  const [openedIds, setOpenedIds] = useState<Set<string>>(new Set());
+
+  const tabQuestions = useMemo(
+    () => questions.filter((q) => q.tab === activeTab),
+    [questions, activeTab]
+  );
 
   const filtered = useMemo(() => {
-    return questions.filter((q) => {
+    return tabQuestions.filter((q) => {
       const matchCat = category === "All" || q.category === category;
+      const matchDiff = difficulty === "all" || q.difficulty === difficulty || q.tab !== "technical";
       const matchSearch =
         !search ||
         q.question.toLowerCase().includes(search.toLowerCase()) ||
         q.modelAnswer.toLowerCase().includes(search.toLowerCase()) ||
-        q.tags.some((t) => t.toLowerCase().includes(search.toLowerCase()));
-      return matchCat && matchSearch;
+        (q.framework?.toLowerCase().includes(search.toLowerCase()) ?? false);
+      return matchCat && matchDiff && matchSearch;
     });
-  }, [search, category, questions]);
+  }, [search, category, difficulty, tabQuestions, activeTab]);
+
+  const tabOpened = useMemo(() => {
+    return tabQuestions.filter((q) => openedIds.has(q.id)).length;
+  }, [tabQuestions, openedIds]);
+
+  const progressPct = tabQuestions.length
+    ? Math.round((tabOpened / tabQuestions.length) * 100)
+    : 0;
+
+  useEffect(() => {
+    setCategory("All");
+    setDifficulty("all");
+    setOpenId(null);
+  }, [activeTab]);
+
+  function toggleQuestion(id: string) {
+    setOpenId((prev) => (prev === id ? null : id));
+    setOpenedIds((prev) => new Set(prev).add(id));
+  }
+
+  const tabCategories = useMemo(() => {
+    const cats = new Set(tabQuestions.map((q) => q.category));
+    return ["All", ...Array.from(cats)];
+  }, [tabQuestions]);
 
   return (
     <div className="page-container py-8 sm:py-10">
       <section className="rounded-2xl bg-primary-800 px-6 sm:px-8 py-10 mb-8 relative overflow-hidden">
         <Reveal className="relative z-10">
           <div className="pill pill-dark mb-4">
-            <span className="w-1.5 h-1.5 rounded-full bg-accent" /> Pro · 50 Q&amp;As
+            <span className="w-1.5 h-1.5 rounded-full bg-accent" /> Pro · {questions.length} Q&amp;As
           </div>
-          <h1 className="font-serif text-3xl sm:text-4xl font-bold text-white mb-3">Interview Questions</h1>
+          <h1 className="font-serif text-3xl sm:text-4xl font-bold text-white mb-3">Interview Question Bank</h1>
           <p className="text-white/65 text-base sm:text-lg max-w-xl mb-6">
-            Desk interview prep — 40 practitioner Q&amp;As from the Desk Channel plus 10 foundational questions from the Playbook.
+            {questions.length} commodity trading interview questions with model answers — technical, commercial judgement, behavioural, and elimination questions from major trading firms.
           </p>
-          <div className="relative max-w-lg">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-white/40" />
-            <input
-              type="text"
-              placeholder="Search questions, answers, tags..."
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-10 pr-4 py-3 rounded-lg bg-white/10 border border-white/25 text-white placeholder:text-white/40 text-sm focus:outline-none focus:ring-2 focus:ring-accent"
-            />
-          </div>
+          <BrandedSearchInput
+            variant="dark"
+            placeholder="Search questions, answers, frameworks..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+          />
         </Reveal>
       </section>
 
       <TierGate requiredTier={requiredTier} userTier={userTier}>
-        <div className="flex flex-wrap gap-2 mb-6">
-          {categories.map((cat) => (
+        {/* Tabs */}
+        <div className="flex flex-wrap gap-2 mb-6 border-b border-border pb-4">
+          {tabs.map((tab) => (
+            <button
+              key={tab.id}
+              type="button"
+              onClick={() => setActiveTab(tab.id)}
+              className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
+                activeTab === tab.id
+                  ? "bg-primary-800 text-white"
+                  : "bg-secondary text-muted-fg hover:bg-gray-200"
+              }`}
+            >
+              {TAB_LABELS[tab.id] || tab.label}{" "}
+              <span className="opacity-70">({tab.count})</span>
+            </button>
+          ))}
+        </div>
+
+        {/* Progress */}
+        <div className="mb-6 rounded-xl border border-border bg-white p-4">
+          <div className="flex items-center justify-between text-sm mb-2">
+            <span className="font-medium text-gray-900">{TAB_LABELS[activeTab]} progress</span>
+            <span className="text-muted-fg">{tabOpened} / {tabQuestions.length} reviewed</span>
+          </div>
+          <div className="h-2 bg-secondary rounded-full overflow-hidden">
+            <div
+              className="h-full bg-primary-400 transition-all duration-300"
+              style={{ width: `${progressPct}%` }}
+            />
+          </div>
+        </div>
+
+        {/* Filters */}
+        <div className="flex flex-wrap gap-2 mb-4">
+          {tabCategories.map((cat) => (
             <button
               key={cat}
               type="button"
@@ -77,7 +159,26 @@ export function InterviewQuestionsClient({
           ))}
         </div>
 
-        <p className="text-sm text-muted-fg mb-4">{filtered.length} of {questions.length} questions</p>
+        {activeTab === "technical" && (
+          <div className="flex flex-wrap gap-2 mb-6">
+            {INTERVIEW_DIFFICULTIES.map((d) => (
+              <button
+                key={d.id}
+                type="button"
+                onClick={() => setDifficulty(d.id)}
+                className={`px-3 py-1.5 rounded-full text-xs font-medium border transition-all ${
+                  difficulty === d.id
+                    ? "bg-primary-800 text-white border-primary-800"
+                    : "bg-white text-gray-700 border-border"
+                }`}
+              >
+                {d.label}
+              </button>
+            ))}
+          </div>
+        )}
+
+        <p className="text-sm text-muted-fg mb-4">{filtered.length} of {tabQuestions.length} in this tab</p>
 
         <div className="space-y-3">
           {filtered.map((q) => {
@@ -86,30 +187,67 @@ export function InterviewQuestionsClient({
               <div key={q.id} className="rounded-xl border border-border bg-white overflow-hidden">
                 <button
                   type="button"
-                  onClick={() => setOpenId(isOpen ? null : q.id)}
+                  onClick={() => toggleQuestion(q.id)}
                   className="w-full flex items-start gap-3 p-5 text-left hover:bg-secondary/40 transition-colors"
                 >
                   <MessageSquare className="w-5 h-5 text-primary-400 flex-shrink-0 mt-0.5" />
                   <div className="flex-1 min-w-0">
-                    <p className="text-xs text-muted-fg mb-1">{q.category}</p>
-                    <p className="font-medium text-gray-900">{q.question}</p>
-                    <div className="flex flex-wrap gap-1.5 mt-2">
-                      {q.tags.slice(0, 4).map((t) => (
-                        <span key={t} className="text-xs px-2 py-0.5 rounded-full bg-secondary text-muted-fg">{t}</span>
-                      ))}
+                    <div className="flex flex-wrap items-center gap-2 mb-1">
+                      <p className="text-xs text-muted-fg">{q.category}</p>
+                      {q.difficulty && (
+                        <span className={`text-[10px] font-bold uppercase px-2 py-0.5 rounded-full ${
+                          q.difficulty === "easy" ? "bg-green-50 text-green-700"
+                            : q.difficulty === "med" ? "bg-amber-50 text-amber-800"
+                              : "bg-red-50 text-red-700"
+                        }`}>
+                          {q.difficulty}
+                        </span>
+                      )}
+                      {openedIds.has(q.id) && (
+                        <span className="text-[10px] text-primary-400 font-semibold">Reviewed</span>
+                      )}
                     </div>
+                    <p className="font-medium text-gray-900">{q.question}</p>
                   </div>
                   <ChevronDown className={`w-5 h-5 text-muted-fg flex-shrink-0 transition-transform ${isOpen ? "rotate-180" : ""}`} />
                 </button>
                 {isOpen && (
-                  <div className="px-5 pb-5 border-t border-border pt-4 ml-8">
-                    <p className="text-xs font-bold uppercase tracking-widest text-muted-fg mb-2">Model answer</p>
-                    <p className="text-sm text-gray-700 leading-relaxed whitespace-pre-line">{q.modelAnswer}</p>
-                    {q.interviewTip && (
-                      <div className="mt-4 flex gap-2 text-sm bg-amber-50 text-amber-900 rounded-lg p-3">
-                        <Lightbulb className="w-4 h-4 flex-shrink-0 mt-0.5" />
-                        <span><strong>Desk signal:</strong> {q.interviewTip}</span>
-                      </div>
+                  <div className="px-5 pb-5 border-t border-border pt-4 ml-8 space-y-4">
+                    {q.tab === "elimination" ? (
+                      <>
+                        <div>
+                          <p className="text-xs font-bold uppercase tracking-widest text-red-600 mb-2">Weak answer</p>
+                          <p className="text-sm text-gray-600 italic">{q.weakAnswer}</p>
+                        </div>
+                        <div>
+                          <p className="text-xs font-bold uppercase tracking-widest text-green-700 mb-2">Strong answer</p>
+                          <p className="text-sm text-gray-700 leading-relaxed whitespace-pre-line">{q.modelAnswer}</p>
+                        </div>
+                        {q.why && (
+                          <div className="flex gap-2 text-sm bg-amber-50 text-amber-900 rounded-lg p-3">
+                            <AlertTriangle className="w-4 h-4 flex-shrink-0 mt-0.5" />
+                            <span><strong>Why this filters:</strong> {q.why}</span>
+                          </div>
+                        )}
+                      </>
+                    ) : (
+                      <>
+                        {q.framework && q.tab !== "behavioural" && (
+                          <div className="text-sm bg-primary-soft text-primary-900 rounded-lg p-3">
+                            <strong>Framework:</strong> {q.framework}
+                          </div>
+                        )}
+                        <div>
+                          <p className="text-xs font-bold uppercase tracking-widest text-muted-fg mb-2">Model answer</p>
+                          <p className="text-sm text-gray-700 leading-relaxed whitespace-pre-line">{q.modelAnswer}</p>
+                        </div>
+                        {q.interviewTip && q.tab === "technical" && (
+                          <div className="flex gap-2 text-sm bg-amber-50 text-amber-900 rounded-lg p-3">
+                            <Lightbulb className="w-4 h-4 flex-shrink-0 mt-0.5" />
+                            <span><strong>Desk signal:</strong> {q.interviewTip}</span>
+                          </div>
+                        )}
+                      </>
                     )}
                   </div>
                 )}

@@ -33,7 +33,8 @@ export default async function ResumeTemplatesPage() {
       userTier={user.tier}
       persona={user.persona}
       templates={data.templates}
-      quiz={data.quiz}
+      quizSteps={data.quizSteps}
+      industryMap={data.industryMap}
       assetUrls={assetUrls}
       requiredTier={requiredTier as "PRO" | "ELITE"}
     />

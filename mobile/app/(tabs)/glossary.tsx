@@ -4,6 +4,7 @@ import {
   StyleSheet, Modal, ScrollView, ActivityIndicator, RefreshControl,
 } from "react-native";
 import { glossaryApi } from "../../lib/api";
+import { BrandSearchPrefix } from "../../components/Logo";
 
 const NAVY = "#0830a0";
 const PRIMARY = "#3280ff";
@@ -86,6 +87,7 @@ export default function GlossaryTab() {
       ) : null}
 
       <View style={styles.searchContainer}>
+        <BrandSearchPrefix />
         <TextInput
           style={styles.searchInput}
           placeholder="Search terms..."
@@ -154,8 +156,19 @@ const styles = StyleSheet.create({
   errorBanner: { backgroundColor: "#fef2f2", padding: 12, flexDirection: "row", justifyContent: "space-between", alignItems: "center" },
   errorText: { color: "#dc2626", fontSize: 12, flex: 1 },
   retryText: { color: PRIMARY, fontWeight: "700", fontSize: 12 },
-  searchContainer: { backgroundColor: "#fff", padding: 12, borderBottomWidth: 1, borderBottomColor: "#e4e7ec" },
-  searchInput: { backgroundColor: "#f9fafb", borderRadius: 10, paddingHorizontal: 12, paddingVertical: 9, fontSize: 14, borderWidth: 1, borderColor: "#e4e7ec", color: "#1a1a1a" },
+  searchContainer: {
+    backgroundColor: "#fff",
+    marginHorizontal: 12,
+    marginTop: 12,
+    marginBottom: 4,
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: "#e4e7ec",
+    flexDirection: "row",
+    alignItems: "center",
+    overflow: "hidden",
+  },
+  searchInput: { flex: 1, paddingHorizontal: 8, paddingVertical: 10, fontSize: 14, color: "#1a1a1a" },
   categories: { paddingHorizontal: 12, paddingVertical: 10, gap: 8 },
   categoryBtn: { paddingHorizontal: 14, paddingVertical: 6, borderRadius: 20, backgroundColor: "#f2f4f7" },
   categoryBtnActive: { backgroundColor: PRIMARY },
