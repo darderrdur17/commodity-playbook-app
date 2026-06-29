@@ -130,3 +130,34 @@ export const DEMO_ACCOUNTS: DemoAccount[] = [
 export function getDemoAccountByEmail(email: string) {
   return DEMO_ACCOUNTS.find((a) => a.email === email);
 }
+
+/** Guided Mentor Connect + email notification demo */
+export const MENTOR_FLOW_DEMO = {
+  member: {
+    email: "elite.insider@demo.com",
+    name: "Priya Sharma (Member)",
+    emoji: "⚡",
+    redirectTo: "/mentor-connect" as const,
+    step: 1,
+    title: "Elite member",
+    description: "View submitted questions and see answers sync when a mentor responds.",
+  },
+  mentor: {
+    email: "elite.mentor@demo.com",
+    name: "Raj Patel (Mentor)",
+    emoji: "🎯",
+    redirectTo: "/mentor-connect/inbox" as const,
+    step: 2,
+    title: "Practitioner inbox",
+    description: "Review anonymous member requests and submit answers (triggers member email + page sync).",
+  },
+  admin: {
+    email: "admin@demo.com",
+    name: "Admin User",
+    emoji: "🛡️",
+    redirectTo: "/admin" as const,
+    step: 3,
+    title: "Admin oversight",
+    description: "View all Q&A, answer on behalf of mentors, or email a reminder for pending requests.",
+  },
+} as const;

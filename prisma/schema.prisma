@@ -141,6 +141,9 @@ model MentorQuestion {
   isPublic   Boolean  @default(false)
   createdAt  DateTime @default(now())
   answeredAt DateTime?
+  answeredByEmail      String?
+  mentorReminderSentAt DateTime?
+  menteeNotifiedAt     DateTime?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
@@ -225,4 +228,18 @@ model EmailSubscriber {
   source      String?  // "starter-signup" | "waitlist" | "manual"
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+}
+
+// ── Demo email log (Mentor Connect notifications preview) ───────────
+model DemoEmailLog {
+  id        String   @id @default(cuid())
+  kind      String   // mentee_answer | mentor_reminder | new_question
+  to        String
+  subject   String
+  bodyText  String   @db.Text
+  bodyHtml  String   @db.Text
+  delivered Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
 }

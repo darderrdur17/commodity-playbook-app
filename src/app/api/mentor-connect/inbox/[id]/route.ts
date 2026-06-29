@@ -3,6 +3,7 @@ import { z } from "zod";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { isMentorDemoUser } from "@/lib/mentor-demo";
+import { answerMentorQuestion } from "@/lib/mentor-questions";
 
 const schema = z.object({
   answer: z.string().min(10).max(2000),
@@ -37,25 +38,29 @@ export async function PATCH(
   if (!existing || existing.userId === mentorUser.id) {
     return NextResponse.json({ error: "Not found" }, { status: 404 });
   }
-  if (existing.isAnswered) {
-    return NextResponse.json({ error: "Already answered" }, { status: 409 });
-  }
 
-  const question = await prisma.mentorQuestion.update({
-    where: { id },
-    data: {
+  try {
+    const result = await answerMentorQuestion({
+      questionId: id,
       answer: parsed.data.answer,
-      isAnswered: true,
       isPublic: parsed.data.isPublic,
-      answeredAt: new Date(),
-    },
-  });
+      answeredByEmail: session.user.email!,
+    });
 
-  return NextResponse.json({
-    id: question.id,
-    answer: question.answer,
-    isAnswered: question.isAnswered,
-    isPublic: question.isPublic,
-    answeredAt: question.answeredAt?.toISOString() ?? null,
-  });
+    return NextResponse.json({
+      id: result.question.id,
+      answer: result.question.answer,
+      isAnswered: result.question.isAnswered,
+      isPublic: result.question.isPublic,
+      answeredAt: result.question.answeredAt?.toISOString() ?? null,
+      menteeNotifiedAt: result.question.menteeNotifiedAt?.toISOString() ?? null,
+      menteeEmail: result.email,
+    });
+  } catch (err) {
+    const code = err instanceof Error ? err.message : "";
+    if (code === "NOT_FOUND") return NextResponse.json({ error: "Not found" }, { status: 404 });
+    if (code === "ALREADY_ANSWERED") return NextResponse.json({ error: "Already answered" }, { status: 409 });
+    console.error("[mentor-inbox/answer]", err);
+    return NextResponse.json({ error: "Failed to save answer" }, { status: 500 });
+  }
 }

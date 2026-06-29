@@ -5,11 +5,11 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { signIn } from "next-auth/react";
-import { ArrowRight, Copy, Check, Shield, LogIn } from "lucide-react";
+import { ArrowRight, Copy, Check, Shield, LogIn, Mail, MessageSquare } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Reveal, StaggerChildren, StaggerItem } from "@/components/animations";
-import { DEMO_ACCOUNTS, DEMO_PASSWORD } from "@/data/demo-accounts";
+import { DEMO_ACCOUNTS, DEMO_PASSWORD, MENTOR_FLOW_DEMO } from "@/data/demo-accounts";
 import { PERSONA_LABELS } from "@/lib/utils";
 
 export default function DemoPage() {
@@ -112,11 +112,38 @@ export default function DemoPage() {
         {mentorAccount && (
           <Reveal className="mb-10">
             <h2 className="font-serif text-xl font-bold text-gray-900 mb-1 flex items-center gap-2">
-              <span className="text-lg">{mentorAccount.emoji}</span> Mentor Connect demo
+              <MessageSquare className="w-5 h-5 text-amber-600" /> Mentor Connect + notifications
             </h2>
             <p className="text-sm text-muted-fg mb-4">
-              One-click into the practitioner inbox — review anonymous member requests, see persona and tier context, and respond to queries.
+              Full walkthrough: member questions → mentor answers → email sync → admin reminders. Includes a{" "}
+              <Link href="/demo/emails" className="text-primary-400 hover:underline font-medium">
+                demo email inbox
+              </Link>{" "}
+              so you can preview notifications without Resend.
             </p>
+            <Link href="/demo/mentor-flow" className="block mb-4">
+              <Button variant="outline" className="w-full sm:w-auto">
+                <Mail className="w-4 h-4" /> Open guided mentor flow demo
+              </Button>
+            </Link>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
+              {[
+                { label: "1 · Member", account: MENTOR_FLOW_DEMO.member },
+                { label: "2 · Mentor", account: MENTOR_FLOW_DEMO.mentor },
+                { label: "3 · Admin", account: MENTOR_FLOW_DEMO.admin },
+              ].map(({ label, account }) => (
+                <button
+                  key={account.email}
+                  type="button"
+                  onClick={() => signInAs({ ...DEMO_ACCOUNTS.find((a) => a.email === account.email)!, redirectTo: account.redirectTo })}
+                  disabled={loadingEmail === account.email}
+                  className="text-left rounded-lg border border-border bg-white px-4 py-3 hover:border-primary-line hover:bg-primary-soft/30 transition-all disabled:opacity-60"
+                >
+                  <p className="text-[10px] font-bold uppercase tracking-wider text-muted-fg">{label}</p>
+                  <p className="text-sm font-semibold text-gray-900 mt-0.5">{account.emoji} {account.name.split(" (")[0]}</p>
+                </button>
+              ))}
+            </div>
             <DemoCard
               account={mentorAccount}
               loading={loadingEmail === mentorAccount.email}

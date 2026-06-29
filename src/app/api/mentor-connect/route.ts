@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
 import { z } from "zod";
+import { notifyMentorPoolNewQuestion } from "@/lib/mentor-questions";
 
 const schema = z.object({
   segment: z.enum(["physical-trading", "finance", "analytics", "operations", "sales"]),
@@ -50,8 +51,10 @@ export async function POST(req: NextRequest) {
     }),
   ]);
 
-  // TODO: Send email notification to mentor pool (Resend)
-  // await sendMentorNotification(question);
+  // Notify mentor pool (email) — non-blocking for member submit
+  notifyMentorPoolNewQuestion(question.id).catch((err) =>
+    console.error("[mentor-connect] mentor pool notify failed", err)
+  );
 
   return NextResponse.json({ id: question.id, success: true }, { status: 201 });
 }

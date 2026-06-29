@@ -6,6 +6,8 @@ import { MentorConnectClient } from "./mentor-connect-client";
 
 export const metadata = { title: "Mentor Connect" };
 
+export const dynamic = "force-dynamic";
+
 export default async function MentorConnectPage() {
   const session = await auth();
   if (!session?.user?.id) redirect("/login?callbackUrl=/mentor-connect");

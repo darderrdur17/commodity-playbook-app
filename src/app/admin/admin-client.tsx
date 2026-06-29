@@ -29,6 +29,10 @@ interface MentorQ {
   answer: string | null;
   isAnswered: boolean;
   createdAt: string;
+  answeredAt?: string | null;
+  answeredByEmail?: string | null;
+  mentorReminderSentAt?: string | null;
+  menteeNotifiedAt?: string | null;
   user: { name: string | null; email: string; tier: string };
 }
 
@@ -49,6 +53,8 @@ export function AdminClient({ adminName, adminId }: { adminName: string; adminId
   const [activeTab, setActiveTab] = useState<"users" | "content" | "mentor" | "waitlist">("users");
   const [answerDraft, setAnswerDraft] = useState<Record<string, string>>({});
   const [saving, setSaving] = useState<string | null>(null);
+  const [notifying, setNotifying] = useState<string | null>(null);
+  const [actionMsg, setActionMsg] = useState<string | null>(null);
   const [selectedUser, setSelectedUser] = useState<AdminUserDetail | null>(null);
 
   async function loadAll() {
@@ -77,14 +83,39 @@ export function AdminClient({ adminName, adminId }: { adminName: string; adminId
     const answer = answerDraft[id];
     if (!answer || answer.length < 10) return;
     setSaving(id);
-    await fetch(`/api/admin/mentor/${id}`, {
+    setActionMsg(null);
+    const res = await fetch(`/api/admin/mentor/${id}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ answer, isPublic: false }),
     });
+    const data = res.ok ? await res.json() : null;
     setAnswerDraft((d) => ({ ...d, [id]: "" }));
     await loadAll();
     setSaving(null);
+    if (data?.menteeEmail?.sent) {
+      setActionMsg("Answer saved and member notified by email.");
+    } else if (data?.menteeEmail?.skipped) {
+      setActionMsg("Answer saved. Email skipped — configure RESEND_API_KEY on server.");
+    } else if (!res.ok) {
+      setActionMsg("Could not save answer.");
+    }
+  }
+
+  async function notifyMentor(id: string) {
+    setNotifying(id);
+    setActionMsg(null);
+    const res = await fetch(`/api/admin/mentor/${id}/notify`, { method: "POST" });
+    const data = res.ok ? await res.json() : null;
+    await loadAll();
+    setNotifying(null);
+    if (data?.email?.sent) {
+      setActionMsg("Reminder email sent to mentor inbox.");
+    } else if (data?.email?.skipped) {
+      setActionMsg("Reminder logged. Email skipped — configure RESEND_API_KEY on server.");
+    } else if (!res.ok) {
+      setActionMsg("Could not send mentor reminder.");
+    }
   }
 
   const tierBadge = (tier: string) =>
@@ -228,6 +259,14 @@ export function AdminClient({ adminName, adminId }: { adminName: string; adminId
 
         {activeTab === "mentor" && (
           <div className="space-y-4">
+            {actionMsg && (
+              <div className="rounded-lg border border-primary-line bg-primary-soft px-4 py-3 text-sm text-primary-800 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                <span>{actionMsg}</span>
+                <Link href="/demo/emails" className="text-primary-400 hover:underline text-xs font-semibold whitespace-nowrap">
+                  View demo email inbox →
+                </Link>
+              </div>
+            )}
             {mentorQs.length === 0 ? (
               <div className="bg-white rounded-xl border border-border p-8 text-center text-muted-fg">
                 No mentor questions yet.
@@ -249,6 +288,18 @@ export function AdminClient({ adminName, adminId }: { adminName: string; adminId
                       <p className="text-xs text-muted-fg mt-1">
                         From {q.user.name || q.user.email} | {q.user.tier} | {formatDate(q.createdAt)}
                       </p>
+                      {q.isAnswered && (
+                        <p className="text-xs text-muted-fg mt-1">
+                          Answered {q.answeredAt ? formatDate(q.answeredAt) : ""}
+                          {q.answeredByEmail ? ` · by ${q.answeredByEmail}` : ""}
+                          {q.menteeNotifiedAt ? " · member emailed" : " · member email pending"}
+                        </p>
+                      )}
+                      {!q.isAnswered && q.mentorReminderSentAt && (
+                        <p className="text-xs text-amber-700 mt-1">
+                          Mentor reminded {formatDate(q.mentorReminderSentAt)}
+                        </p>
+                      )}
                     </div>
                   </div>
                   {q.isAnswered && q.answer ? (
@@ -256,21 +307,31 @@ export function AdminClient({ adminName, adminId }: { adminName: string; adminId
                       {q.answer}
                     </div>
                   ) : (
-                    <div className="flex gap-2 mt-2 flex-col sm:flex-row">
-                      <textarea
-                        className="flex-1 text-sm border border-border rounded-lg p-2.5 resize-none h-20 focus:outline-none focus:ring-2 focus:ring-primary-400"
-                        placeholder="Write mentor answer..."
-                        value={answerDraft[q.id] || ""}
-                        onChange={(e) => setAnswerDraft((d) => ({ ...d, [q.id]: e.target.value }))}
-                      />
+                    <div className="space-y-2 mt-2">
+                      <div className="flex gap-2 flex-col sm:flex-row">
+                        <textarea
+                          className="flex-1 text-sm border border-border rounded-lg p-2.5 resize-none h-20 focus:outline-none focus:ring-2 focus:ring-primary-400"
+                          placeholder="Write mentor answer..."
+                          value={answerDraft[q.id] || ""}
+                          onChange={(e) => setAnswerDraft((d) => ({ ...d, [q.id]: e.target.value }))}
+                        />
+                        <Button
+                          size="sm"
+                          className="sm:self-end"
+                          onClick={() => submitAnswer(q.id)}
+                          loading={saving === q.id}
+                          disabled={!answerDraft[q.id] || answerDraft[q.id].length < 10}
+                        >
+                          Send
+                        </Button>
+                      </div>
                       <Button
                         size="sm"
-                        className="sm:self-end"
-                        onClick={() => submitAnswer(q.id)}
-                        loading={saving === q.id}
-                        disabled={!answerDraft[q.id] || answerDraft[q.id].length < 10}
+                        variant="outline"
+                        onClick={() => notifyMentor(q.id)}
+                        loading={notifying === q.id}
                       >
-                        Send
+                        <Mail className="w-3.5 h-3.5" /> Notify mentor (email)
                       </Button>
                     </div>
                   )}

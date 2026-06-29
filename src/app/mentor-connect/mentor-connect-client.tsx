@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Users, MessageSquare, Clock, CheckCircle, Send, X,
@@ -45,6 +46,7 @@ interface Props {
 }
 
 export function MentorConnectClient({ userTier, mentorCredits, questions }: Props) {
+  const router = useRouter();
   const [segment, setSegment] = useState("");
   const [question, setQuestion] = useState("");
   const [isPublic, setIsPublic] = useState(false);
@@ -80,6 +82,7 @@ export function MentorConnectClient({ userTier, mentorCredits, questions }: Prop
         setQuestion("");
         setSegment("");
         setSelectedMentor(null);
+        router.refresh();
       }
     } catch {
       setError("Network error. Please try again.");
@@ -258,9 +261,12 @@ export function MentorConnectClient({ userTier, mentorCredits, questions }: Prop
           </div>
 
           <div>
-            <h2 className="font-serif text-lg font-bold text-gray-900 mb-4 flex items-center gap-2">
+            <h2 className="font-serif text-lg font-bold text-gray-900 mb-1 flex items-center gap-2">
               <Clock className="w-4 h-4 text-muted-fg" /> My Questions
             </h2>
+            <p className="text-xs text-muted-fg mb-4">
+              Answers sync here when a mentor responds — you&apos;ll also receive an email notification.
+            </p>
             {questions.length === 0 ? (
               <div className="bg-white rounded-xl border border-border p-6 text-center">
                 <Users className="w-8 h-8 text-muted-fg mx-auto mb-3" />

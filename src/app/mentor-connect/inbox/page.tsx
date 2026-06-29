@@ -6,6 +6,8 @@ import { MentorInboxClient } from "./mentor-inbox-client";
 
 export const metadata = { title: "Mentor Inbox" };
 
+export const dynamic = "force-dynamic";
+
 export default async function MentorInboxPage() {
   const session = await auth();
   if (!session?.user?.id) redirect("/login?callbackUrl=/mentor-connect/inbox");

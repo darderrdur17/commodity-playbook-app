@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { requireAdmin } from "@/lib/auth";
-import { prisma } from "@/lib/prisma";
 import { z } from "zod";
+import { answerMentorQuestion } from "@/lib/mentor-questions";
+import { prisma } from "@/lib/prisma";
 
 const schema = z.object({
   answer: z.string().min(10).max(2000),
@@ -13,7 +14,7 @@ export async function PATCH(
   { params }: { params: Promise<{ id: string }> }
 ) {
   const session = await requireAdmin();
-  if (!session) {
+  if (!session?.user?.email) {
     return NextResponse.json({ error: "Forbidden" }, { status: 403 });
   }
 
@@ -24,17 +25,27 @@ export async function PATCH(
     return NextResponse.json({ error: parsed.error.errors[0].message }, { status: 400 });
   }
 
-  const question = await prisma.mentorQuestion.update({
-    where: { id },
-    data: {
+  try {
+    const result = await answerMentorQuestion({
+      questionId: id,
       answer: parsed.data.answer,
-      isAnswered: true,
       isPublic: parsed.data.isPublic,
-      answeredAt: new Date(),
-    },
-  });
+      answeredByEmail: session.user.email,
+    });
 
-  return NextResponse.json(question);
+    const question = await prisma.mentorQuestion.findUnique({
+      where: { id },
+      include: { user: { select: { name: true, email: true, tier: true } } },
+    });
+
+    return NextResponse.json({ ...question, menteeEmail: result.email });
+  } catch (err) {
+    const code = err instanceof Error ? err.message : "";
+    if (code === "NOT_FOUND") return NextResponse.json({ error: "Not found" }, { status: 404 });
+    if (code === "ALREADY_ANSWERED") return NextResponse.json({ error: "Already answered" }, { status: 409 });
+    console.error("[admin/mentor/answer]", err);
+    return NextResponse.json({ error: "Failed to save answer" }, { status: 500 });
+  }
 }
 
 export async function GET(

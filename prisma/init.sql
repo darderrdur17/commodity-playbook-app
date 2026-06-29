@@ -96,6 +96,9 @@ CREATE TABLE "MentorQuestion" (
     "isPublic" BOOLEAN NOT NULL DEFAULT false,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "answeredAt" TIMESTAMP(3),
+    "answeredByEmail" TEXT,
+    "mentorReminderSentAt" TIMESTAMP(3),
+    "menteeNotifiedAt" TIMESTAMP(3),
 
     CONSTRAINT "MentorQuestion_pkey" PRIMARY KEY ("id")
 );

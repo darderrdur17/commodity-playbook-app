@@ -3,8 +3,7 @@
 import React, { useMemo, useState } from "react";
 import Link from "next/link";
 import {
-  Inbox, Clock, CheckCircle, MessageSquare, Send, User, Filter,
-  ArrowLeft, Eye, EyeOff,
+  Inbox, Clock, CheckCircle, MessageSquare, Send, User, Filter, Mail, Eye, EyeOff,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -56,6 +55,7 @@ export function MentorInboxClient({ mentorName, initialRequests, initialStats }:
   const [isPublic, setIsPublic] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
+  const [successMsg, setSuccessMsg] = useState("");
 
   const filtered = useMemo(() => {
     if (filter === "pending") return requests.filter((r) => !r.isAnswered);
@@ -70,6 +70,7 @@ export function MentorInboxClient({ mentorName, initialRequests, initialStats }:
     if (!selected || answer.length < 10) return;
     setSubmitting(true);
     setError("");
+    setSuccessMsg("");
 
     try {
       const res = await fetch(`/api/mentor-connect/inbox/${selected.id}`, {
@@ -103,6 +104,13 @@ export function MentorInboxClient({ mentorName, initialRequests, initialStats }:
       }));
       setAnswer("");
       setIsPublic(false);
+      if (data.menteeEmail?.sent) {
+        setSuccessMsg("Answer saved — member notified by email and synced to their Mentor Connect page.");
+      } else if (data.menteeEmail?.skipped) {
+        setSuccessMsg("Answer saved and synced. Email logged in demo inbox — open /demo/emails to preview.");
+      } else {
+        setSuccessMsg("Answer saved and synced to member page.");
+      }
     } catch {
       setError("Network error. Please try again.");
     } finally {
@@ -138,12 +146,20 @@ export function MentorInboxClient({ mentorName, initialRequests, initialStats }:
                 Signed in as {mentorName}. Review anonymous member queries, see persona and tier context, and respond from your practitioner perspective.
               </p>
             </div>
-            <Link
-              href="/mentor-connect"
-              className="inline-flex items-center gap-2 text-sm text-white/60 hover:text-white transition-colors shrink-0"
-            >
-              <ArrowLeft className="w-4 h-4" /> Member view
-            </Link>
+            <div className="flex flex-col items-end gap-2 shrink-0">
+              <Link
+                href="/demo/emails"
+                className="inline-flex items-center gap-2 text-sm text-white/60 hover:text-white transition-colors"
+              >
+                <Mail className="w-4 h-4" /> Demo email inbox
+              </Link>
+              <Link
+                href="/mentor-connect"
+                className="inline-flex items-center gap-2 text-sm text-white/60 hover:text-white transition-colors"
+              >
+                Member view →
+              </Link>
+            </div>
           </div>
           <div className="grid grid-cols-3 gap-3 sm:gap-4 max-w-lg">
             {[
@@ -348,6 +364,9 @@ export function MentorInboxClient({ mentorName, initialRequests, initialStats }:
                   </label>
                   {error && (
                     <p className="text-sm text-red-500 bg-red-50 border border-red-200 rounded-lg p-3 mb-3">{error}</p>
+                  )}
+                  {successMsg && (
+                    <p className="text-sm text-green-700 bg-green-50 border border-green-200 rounded-lg p-3 mb-3">{successMsg}</p>
                   )}
                   <Button type="submit" loading={submitting} disabled={answer.length < 10}>
                     <Send className="w-4 h-4" /> Send answer to member
