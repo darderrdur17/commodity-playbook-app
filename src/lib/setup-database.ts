@@ -78,7 +78,11 @@ export async function applyCmsSchemaSql(): Promise<void> {
 export async function setupProductionDatabase(): Promise<{ alreadySeeded: boolean }> {
   await applyCmsSchemaSql();
 
-  if (await isDatabaseSeeded()) {
+  const alreadySeeded = await isDatabaseSeeded();
+
+  if (alreadySeeded) {
+    // Upsert any new demo accounts added after initial seed (e.g. elite.mentor@demo.com)
+    await seedDatabase();
     return { alreadySeeded: true };
   }
 
