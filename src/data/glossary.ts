@@ -14,8 +14,21 @@ export const GLOSSARY_CATEGORIES = [
   "Gas & LNG",
   "Oil & Products",
   "Metals & Mining",
-  "Market Intelligence & Analytics"
+  "Market Intelligence & Analytics",
 ] as const;
+
+/** Short badge labels — matches desk-glossary_updated HTML */
+export const GLOSSARY_CATEGORY_BADGES: Record<string, string> = {
+  "Physical markets": "Physical",
+  "Pricing & Derivatives": "Pricing",
+  "Risk & P&L": "Risk",
+  "Operations & Scheduling": "Ops",
+  "Shipping": "Shipping",
+  "Gas & LNG": "Gas & LNG",
+  "Oil & Products": "Oil",
+  "Metals & Mining": "Metals",
+  "Market Intelligence & Analytics": "Intel",
+};
 
 export const GLOSSARY_TERMS: GlossaryTerm[] = [
   {

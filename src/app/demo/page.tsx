@@ -46,7 +46,10 @@ export default function DemoPage() {
   }
 
   const adminAccount = DEMO_ACCOUNTS.find((a) => a.role === "ADMIN");
-  const tierAccounts = DEMO_ACCOUNTS.filter((a) => a.role === "USER");
+  const mentorAccount = DEMO_ACCOUNTS.find((a) => a.email === "elite.mentor@demo.com");
+  const tierAccounts = DEMO_ACCOUNTS.filter(
+    (a) => a.role === "USER" && a.email !== mentorAccount?.email
+  );
 
   return (
     <div className="min-h-screen bg-secondary">
@@ -106,6 +109,26 @@ export default function DemoPage() {
           </Reveal>
         )}
 
+        {mentorAccount && (
+          <Reveal className="mb-10">
+            <h2 className="font-serif text-xl font-bold text-gray-900 mb-1 flex items-center gap-2">
+              <span className="text-lg">{mentorAccount.emoji}</span> Mentor Connect demo
+            </h2>
+            <p className="text-sm text-muted-fg mb-4">
+              One-click into Elite Mentor Connect — browse the practitioner grid, submit a question (5 credits), and review sample answered Q&amp;A.
+            </p>
+            <DemoCard
+              account={mentorAccount}
+              loading={loadingEmail === mentorAccount.email}
+              copied={copied === mentorAccount.email}
+              onSignIn={() => signInAs(mentorAccount)}
+              onCopy={() => copyCredentials(mentorAccount.email)}
+              highlight
+              highlightVariant="mentor"
+            />
+          </Reveal>
+        )}
+
         {/* Tier accounts */}
         <Reveal className="mb-4">
           <h2 className="font-serif text-xl font-bold text-gray-900 mb-4">
@@ -154,6 +177,7 @@ function DemoCard({
   onSignIn,
   onCopy,
   highlight,
+  highlightVariant = "admin",
 }: {
   account: (typeof DEMO_ACCOUNTS)[0];
   loading: boolean;
@@ -161,17 +185,20 @@ function DemoCard({
   onSignIn: () => void;
   onCopy: () => void;
   highlight?: boolean;
+  highlightVariant?: "admin" | "mentor";
 }) {
   const tierVariant =
     account.tier === "ELITE" ? "elite" : account.tier === "PRO" ? "pro" : "starter";
   const persona = PERSONA_LABELS[account.persona];
+  const highlightStyles =
+    highlightVariant === "mentor"
+      ? "border-amber-200 bg-amber-50/40"
+      : "border-red-200 bg-red-50/30";
 
   return (
     <div
       className={`rounded-xl border p-5 h-full flex flex-col ${
-        highlight
-          ? "border-red-200 bg-red-50/30"
-          : "border-border bg-white"
+        highlight ? highlightStyles : "border-border bg-white"
       }`}
     >
       <div className="flex items-start justify-between gap-3 mb-3">

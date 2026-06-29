@@ -51,7 +51,7 @@ function LogoLockupDark({
         </span>
       </span>
       {showTagline && (
-        <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-gray-500 pl-[44px] sm:pl-[46px]">
+        <span className="text-[10px] font-bold uppercase tracking-[0.22em] text-gray-500">
           Break in. Move up. Stay sharp.
         </span>
       )}

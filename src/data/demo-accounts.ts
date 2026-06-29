@@ -17,7 +17,7 @@ export type DemoAccount = {
   resumeCredits: number;
   description: string;
   emoji: string;
-  redirectTo: "/dashboard" | "/admin";
+  redirectTo: "/dashboard" | "/admin" | "/mentor-connect";
 };
 
 export const DEMO_ACCOUNTS: DemoAccount[] = [
@@ -111,6 +111,19 @@ export const DEMO_ACCOUNTS: DemoAccount[] = [
     description: "Elite sales track — full content plus job openings tracker.",
     emoji: "💼",
     redirectTo: "/dashboard",
+  },
+  {
+    email: "elite.mentor@demo.com",
+    name: "Raj Patel (Mentor)",
+    role: "USER",
+    tier: "ELITE",
+    track: "CAREER",
+    persona: "INSIDER",
+    mentorCredits: 5,
+    resumeCredits: 4,
+    description: "Elite Mentor Connect — browse the mentor grid, submit questions, and review answered Q&A.",
+    emoji: "🎯",
+    redirectTo: "/mentor-connect",
   },
 ];
 

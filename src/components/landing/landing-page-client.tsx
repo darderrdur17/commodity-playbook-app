@@ -64,7 +64,7 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
     <div className="overflow-hidden">
       {/* Audience toggle bar */}
       <div className="sticky top-16 z-40 bg-secondary border-b border-border">
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 flex items-center gap-0 overflow-x-auto">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 flex items-stretch gap-0 overflow-x-auto scrollbar-none">
           <button
             type="button"
             onClick={() => setActiveTrack("career")}
@@ -141,14 +141,14 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
                       </Button>
                     </Link>
                   </div>
-                  <div className="flex flex-wrap gap-8 sm:gap-12 mt-12 pt-10 border-t border-white/10">
+                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 mt-12 pt-10 border-t border-white/10">
                     {career.heroStats.map((stat, i) => (
                       <Reveal key={stat.label} delay={0.2 + i * 0.08}>
-                        <div>
+                        <div className="text-left sm:text-center">
                           <p className="font-serif text-2xl sm:text-3xl font-bold text-white">
                             <AnimatedCounter value={stat.value} suffix={stat.suffix} />
                           </p>
-                          <p className="text-white/50 text-xs font-medium mt-1 max-w-[140px]">{stat.label}</p>
+                          <p className="text-white/50 text-xs font-medium mt-1 max-w-[160px] sm:mx-auto">{stat.label}</p>
                         </div>
                       </Reveal>
                     ))}
@@ -185,9 +185,9 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
               </h2>
               <p className="text-muted-fg text-lg">{content.groundLevelView.description}</p>
             </Reveal>
-            <StaggerChildren staggerDelay={0.06} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+            <StaggerChildren staggerDelay={0.06} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
               {content.groundLevelView.features.map((f) => (
-                <StaggerItem key={f.title}>
+                <StaggerItem key={f.title} className="h-full">
                   <div className="card-hover h-full rounded-xl border border-border bg-white p-6">
                     <h3 className="font-serif font-semibold text-gray-900 mb-2">{f.title}</h3>
                     <p className="text-sm text-muted-fg leading-relaxed">{f.desc}</p>
@@ -209,10 +209,10 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
                 </h2>
                 <p className="text-muted-fg text-lg">{content.chapterCoverage.description}</p>
               </Reveal>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-stretch">
                 {content.chapterCoverage.chapters.map((ch, i) => (
-                  <Reveal key={ch.letter} delay={i * 0.08}>
-                    <div className="rounded-xl border border-border bg-white p-5 h-full hover:border-primary-line transition-colors">
+                  <Reveal key={ch.letter} delay={i * 0.08} className="h-full">
+                    <div className="rounded-xl border border-border bg-white p-5 h-full flex flex-col hover:border-primary-line transition-colors">
                       <div className="w-10 h-10 rounded-lg bg-primary-800 text-white font-serif font-bold text-lg flex items-center justify-center mb-3">
                         {ch.letter}
                       </div>
@@ -311,7 +311,7 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
               </Reveal>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
                 {content.pricing.tiers.map((tier, i) => (
-                  <Reveal key={tier.name} delay={i * 0.1}>
+                  <Reveal key={tier.name} delay={i * 0.1} className="h-full">
                     <div
                       className={`relative rounded-2xl h-full flex flex-col group/tier ${
                         tier.highlight
@@ -407,9 +407,9 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
                 Used by practitioners who mean it.
               </h2>
             </Reveal>
-            <StaggerChildren className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <StaggerChildren className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
               {TESTIMONIALS.map((t) => (
-                <StaggerItem key={t.name}>
+                <StaggerItem key={t.name} className="h-full">
                   <div className="card-hover rounded-xl border border-border bg-white p-6 h-full flex flex-col gap-4">
                     <p className="text-gray-700 text-sm leading-relaxed flex-1 italic">&ldquo;{t.quote}&rdquo;</p>
                     <div className="flex items-center gap-3 pt-2 border-t border-border">

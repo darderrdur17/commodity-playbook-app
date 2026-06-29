@@ -88,6 +88,20 @@ const DEMO_ACCOUNTS = [
       { chapterId: "a", progress: 100, completed: true },
     ],
   },
+  {
+    email: "elite.mentor@demo.com",
+    name: "Raj Patel (Mentor)",
+    role: "USER" as const,
+    tier: "ELITE" as const,
+    track: "CAREER" as const,
+    persona: "INSIDER" as const,
+    mentorCredits: 5,
+    resumeCredits: 4,
+    progress: [
+      { chapterId: "a", progress: 100, completed: true },
+      { chapterId: "b", progress: 80, completed: false },
+    ],
+  },
 ];
 
 async function main() {
@@ -148,7 +162,49 @@ async function main() {
     console.log(`  ✓ ${userData.email} (${userData.role} · ${userData.tier} · ${userData.persona})`);
   }
 
-  // Sample mentor question for admin to answer
+  // Sample mentor questions for demo accounts
+  const mentorDemo = await prisma.user.findUnique({ where: { email: "elite.mentor@demo.com" } });
+  if (mentorDemo) {
+    const samples = [
+      {
+        segment: "physical-trading",
+        question:
+          "I'm moving from scheduling to a commercial analyst role — how do I demonstrate I understand flat price vs. time spread exposure in interviews?",
+        answer:
+          "Lead with one cargo example where your scheduling decision changed which month the desk was exposed. Interviewers want proof you know P&L sits in the book, not in the voyage plan.",
+        isAnswered: true,
+        isPublic: true,
+      },
+      {
+        segment: "analytics",
+        question:
+          "What's the best way to show market views on a resume when my current role is purely quantitative research?",
+        answer: null,
+        isAnswered: false,
+        isPublic: false,
+      },
+    ];
+    for (const sample of samples) {
+      const exists = await prisma.mentorQuestion.findFirst({
+        where: { userId: mentorDemo.id, question: sample.question },
+      });
+      if (!exists) {
+        await prisma.mentorQuestion.create({
+          data: {
+            userId: mentorDemo.id,
+            segment: sample.segment,
+            question: sample.question,
+            answer: sample.answer,
+            isAnswered: sample.isAnswered,
+            isPublic: sample.isPublic,
+            ...(sample.isAnswered && { answeredAt: new Date() }),
+          },
+        });
+      }
+    }
+    console.log("  ✓ Mentor demo questions seeded");
+  }
+
   const eliteUser = await prisma.user.findUnique({ where: { email: "elite.insider@demo.com" } });
   if (eliteUser) {
     const existing = await prisma.mentorQuestion.findFirst({
