@@ -6,13 +6,14 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 
+import { readContentFile } from "./content-sources.mjs";
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
-const SHARED = path.join(ROOT, "..", "CommodityPlaybook - Shared Folder");
 const OUT = path.join(ROOT, "src", "data");
 
 function read(rel) {
-  return fs.readFileSync(path.join(SHARED, rel), "utf8");
+  return readContentFile(rel);
 }
 
 function stripHtml(html) {
@@ -31,34 +32,51 @@ function extractPlaybookChapter(ch) {
     `Pro Pack/1a.Full Playbook Access_all chapts content/pro pack-playbook-chapter-${ch}.html`
   );
   const sections = [];
-  const blockRe =
-    /id="section-([a-z]\d+)".*?sb-title">([^<]+)<\/div>\s*<div class="sb-desc">([^<]+)<\/div>[\s\S]*?read-hook">([^<]+)<\/div>([\s\S]*?)<div class="wtmfy">([\s\S]*?)<\/div>[\s\S]*?<div class="rh-text">([^<]+)<\/div>/g;
-  let m;
-  while ((m = blockRe.exec(html))) {
-    const bodyHtml = m[5];
-    const paras = [];
+
+  for (const block of html.split(/<div id="section-/).slice(1)) {
+    const idMatch = block.match(/^([a-z]\d+)"/);
+    if (!idMatch) continue;
+    const id = idMatch[1];
+
+    const title = block.match(/class="sb-title">([^<]+)/)?.[1]?.trim() ?? "";
+    const desc = block.match(/class="sb-desc">([^<]+)/)?.[1]?.trim() ?? "";
+    const hook = block.match(/class="read-hook">([^<]+)/)?.[1]?.trim() ?? "";
+    const handoff = block.match(/class="rh-text">([^<]+)/)?.[1]?.trim();
+
+    const readingMatch = block.match(
+      /<div class="reading-content">([\s\S]*?)<\/div>\s*<div class="asset-panel">/
+    );
+    const bodyHtml = readingMatch?.[1] ?? block;
+
+    const paragraphs = [];
     const pRe = /<p>([\s\S]*?)<\/p>/g;
     let pm;
     while ((pm = pRe.exec(bodyHtml))) {
       const t = stripHtml(pm[1]);
-      if (t.length > 20) paras.push(t);
+      if (t.length > 20) paragraphs.push(t);
     }
-    const pullRe = /<div class="pull-quote"><p>([\s\S]*?)<\/p><\/div>/;
-    const pull = bodyHtml.match(pullRe);
-    const wtmfyRe = /<p>([\s\S]*?)<\/p>/;
-    const wtmfy = m[6].match(wtmfyRe);
+
+    const pullQuote = block.match(/<div class="pull-quote"><p>([\s\S]*?)<\/p><\/div>/)?.[1];
+    const pullText = pullQuote ? stripHtml(pullQuote) : undefined;
+    if (pullText && !paragraphs.includes(pullText)) paragraphs.push(pullText);
+
+    const wtmfyBlock = block.match(/<div class="wtmfy">([\s\S]*?)<\/div>/);
+    const wtmfyText = wtmfyBlock?.[1]?.match(/<p>([\s\S]*?)<\/p>/)?.[1];
+    const wtmfy = wtmfyText ? stripHtml(wtmfyText) : undefined;
+
     sections.push({
-      id: m[1],
-      number: m[1].toUpperCase().replace(/(\w)(\d)/, "$1.$2"),
-      title: m[2],
-      description: m[3],
-      hook: m[4],
-      paragraphs: paras.slice(0, 4),
-      pullQuote: pull ? stripHtml(pull[1]) : undefined,
-      wtmfy: wtmfy ? stripHtml(wtmfy[1]) : undefined,
-      handoff: m[7],
+      id,
+      number: id.toUpperCase().replace(/([a-z])(\d)/, "$1.$2"),
+      title,
+      desc,
+      hook,
+      paragraphs: paragraphs.slice(0, 5),
+      ...(pullText && { pullQuote: pullText }),
+      ...(wtmfy && { wtmfy }),
+      ...(handoff && { handoff }),
     });
   }
+
   return sections;
 }
 
@@ -150,16 +168,8 @@ for (const ch of ["a", "b", "c", "d", "e"]) {
   playbook[ch] = extractPlaybookChapter(ch);
 }
 
-const hubTitles = {
-  a: { title: "Industry Foundations", subtitle: "Physical vs. paper markets, energy landscape, how trades make money" },
-  b: { title: "Physical & Paper Trading Markets", subtitle: "Trade lifecycle, futures, swaps, options, hedging mechanics" },
-  c: { title: "Shipping, Freight & Cargo Logistics", subtitle: "Vessel classes, freight rates, laytime, cargo nominations" },
-  d: { title: "Market Intelligence & Price Discovery", subtitle: "Market views, EIA, forward curve, price assessments" },
-  e: { title: "Commercial Decision-Making & Risk", subtitle: "Arbitrage, hedging timing, P&L attribution, VaR" },
-};
-
 fs.mkdirSync(OUT, { recursive: true });
-fs.writeFileSync(path.join(OUT, "playbook-sections.json"), JSON.stringify({ hubTitles, playbook }, null, 2));
+fs.writeFileSync(path.join(OUT, "playbook-sections.json"), JSON.stringify(playbook, null, 2));
 fs.writeFileSync(path.join(OUT, "case-studies-index.json"), JSON.stringify(extractCaseStudies(), null, 2));
 fs.writeFileSync(
   path.join(OUT, "case-study-04.json"),

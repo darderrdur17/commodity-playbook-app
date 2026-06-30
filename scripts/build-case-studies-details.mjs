@@ -6,9 +6,10 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 
+import { resolveContentPath } from "./content-sources.mjs";
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
-const SHARED = path.join(ROOT, "..", "CommodityPlaybook - Shared Folder");
 
 function strip(s) {
   return s
@@ -25,10 +26,9 @@ function strip(s) {
 }
 
 function extractCase04() {
-  const html = fs.readFileSync(
-    path.join(SHARED, "Elite Pack/case-study-07.html"),
-    "utf8"
-  );
+  const casePath = resolveContentPath("Elite Pack/case-study-07.html");
+  if (!casePath) throw new Error("Missing Elite Pack/case-study-07.html in content-sources/");
+  const html = fs.readFileSync(casePath, "utf8");
   const sections = [];
   for (const part of html.split(/<div class="cs-section[^"]*" id="/).slice(1)) {
     const id = part.match(/^([^"]+)/)?.[1];

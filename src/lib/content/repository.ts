@@ -87,6 +87,47 @@ export async function syncGlossaryFromDefaults() {
   return { updated: true, termCount: GLOSSARY_TERMS.length, created: false };
 }
 
+/** Push all src/data defaults into CMS — keeps production in sync with GitHub on every deploy. */
+export async function syncAllContentModulesFromDefaults() {
+  await ensureContentInfrastructure();
+  const defaults = getAllDefaultPayloads();
+  let updated = 0;
+  let created = 0;
+
+  for (const meta of CONTENT_MODULE_META) {
+    const slug = meta.slug as ContentSlug;
+    const payload = defaults[slug] as object;
+    const existing = await prisma.contentModule.findUnique({ where: { slug } });
+
+    if (!existing) {
+      await prisma.contentModule.create({
+        data: {
+          slug,
+          title: meta.title,
+          description: meta.description,
+          requiredTier: meta.requiredTier,
+          payload,
+          published: true,
+          version: 1,
+        },
+      });
+      created++;
+      continue;
+    }
+
+    await prisma.contentModule.update({
+      where: { slug },
+      data: {
+        payload,
+        version: existing.version + 1,
+      },
+    });
+    updated++;
+  }
+
+  return { updated, created, total: CONTENT_MODULE_META.length };
+}
+
 export async function listContentModules() {
   await ensureContentInfrastructure();
   await seedContentModulesIfEmpty();

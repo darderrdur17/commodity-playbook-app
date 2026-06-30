@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Chapter B — Physical & Paper Trading Markets · Commodity Trading Playbook</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--bg:#ffffff;--fg:#333333;--primary:#3280ff;--primary-fg:#ffffff;
+      --secondary:#f2f4f7;--sec-fg:#465468;--accent:#dff2ff;--acc-fg:#0830a0;
+      --muted:#f9fafb;--muted-fg:#677184;--border:#e4e7ec;
+      --chart2:#115cff;--chart3:#0040f5;--chart4:#0131cc;--chart5:#0830a0;
+      --primary-soft:rgba(50,128,255,0.08);--primary-line:rgba(50,128,255,0.25);}
+    *{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--fg);line-height:1.6;-webkit-font-smoothing:antialiased;}
+    a{color:inherit;text-decoration:none;}
+
+    .nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+    .nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px;}
+    .logo{display:flex;align-items:center;gap:10px;font-family:'Playfair Display',serif;font-weight:700;font-size:18px;color:var(--fg);letter-spacing:-0.01em;}
+    .logo-mark{width:22px;height:22px;background:var(--primary);transform:rotate(45deg);transition:transform 0.4s ease;}
+    .logo:hover .logo-mark{transform:rotate(90deg);}
+    .nav-links{display:flex;align-items:center;gap:28px;}
+    .nav-links a{font-size:14px;font-weight:500;color:var(--muted-fg);transition:color 0.2s;}
+    .nav-links a:hover{color:var(--primary);}
+    .btn-nav{background:var(--primary);color:#fff;padding:10px 18px;border-radius:6px;font-size:14px;font-weight:600;transition:background 0.2s;}
+    .btn-nav:hover{background:var(--chart2);}
+
+    .chapter-hero{padding:44px 0 52px;position:relative;overflow:hidden;}
+    .chapter-hero::before{content:"";position:absolute;top:-140px;right:-140px;width:440px;height:440px;background:var(--primary);opacity:0.16;filter:blur(90px);border-radius:50%;}
+    .chapter-hero::after{content:"";position:absolute;bottom:-80px;left:-60px;width:300px;height:300px;background:var(--chart3);opacity:0.1;filter:blur(70px);border-radius:50%;}
+    .hero-inner{max-width:1100px;margin:0 auto;padding:0 24px;position:relative;z-index:2;}
+    .back-link{display:inline-flex;align-items:center;gap:7px;font-size:13px;color:rgba(223,242,255,0.55);margin-bottom:22px;transition:color 0.2s;}
+    .back-link:hover{color:var(--accent);}
+    .back-link svg{width:13px;height:13px;}
+    .hero-top{display:flex;align-items:flex-start;justify-content:space-between;gap:28px;flex-wrap:wrap;}
+    .hero-left{flex:1;min-width:260px;}
+    .chapter-pill{display:inline-flex;align-items:center;gap:7px;padding:5px 13px;border:1px solid rgba(223,242,255,0.28);background:rgba(223,242,255,0.1);border-radius:999px;font-size:10px;font-weight:700;color:var(--accent);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:14px;}
+    .chapter-pill-dot{width:5px;height:5px;background:var(--accent);border-radius:50%;}
+    .chapter-title{font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(28px,4.5vw,46px);line-height:1.05;letter-spacing:-0.02em;color:#fff;margin-bottom:12px;}
+    .chapter-title .accent{color:var(--accent);font-style:italic;}
+    .chapter-sub{font-size:14.5px;font-weight:300;color:rgba(223,242,255,0.68);line-height:1.55;max-width:520px;}
+    .hero-right{flex-shrink:0;}
+    .progress-card{background:rgba(255,255,255,0.07);border:1px solid rgba(223,242,255,0.18);border-radius:12px;padding:16px 20px;min-width:200px;backdrop-filter:blur(8px);}
+    .pc-label{font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:rgba(223,242,255,0.5);margin-bottom:6px;}
+    .pc-stat{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#fff;line-height:1;}
+    .pc-stat span{font-size:12px;font-weight:400;color:rgba(223,242,255,0.45);margin-left:5px;}
+    .pc-bar{width:100%;height:4px;background:rgba(255,255,255,0.1);border-radius:999px;overflow:hidden;margin-top:8px;}
+    .pc-fill{height:100%;background:var(--primary);border-radius:999px;transition:width 0.8s ease;}
+    .pc-note{font-size:10.5px;color:rgba(223,242,255,0.4);margin-top:6px;line-height:1.4;}
+
+    .chapter-strip{background:var(--secondary);border-bottom:1px solid var(--border);}
+    .chapter-strip-inner{max-width:1100px;margin:0 auto;padding:0 24px;display:flex;gap:0;overflow-x:auto;}
+    .cs-tab{flex-shrink:0;padding:12px 18px;font-size:13px;font-weight:600;color:var(--muted-fg);border-bottom:2px solid transparent;transition:all 0.2s;white-space:nowrap;}
+    .cs-tab:hover{color:var(--primary);}
+    .cs-tab.active{color:var(--primary);border-bottom-color:var(--primary);}
+
+    .page-body{max-width:1100px;margin:0 auto;padding:36px 24px 96px;display:grid;grid-template-columns:220px 1fr;gap:32px;align-items:start;}
+    @media(max-width:860px){.page-body{grid-template-columns:1fr;}.sidebar{display:none;}}
+
+    .sidebar{position:sticky;top:76px;}
+    .sidebar-label{font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--primary);margin-bottom:8px;}
+    .sidebar-nav{list-style:none;}
+    .sidebar-nav li{margin-bottom:1px;}
+    .sidebar-nav a{display:flex;align-items:center;gap:7px;padding:6px 9px;border-radius:5px;font-size:12px;font-weight:500;color:var(--muted-fg);transition:all 0.2s;border:1px solid transparent;}
+    .sidebar-nav a:hover{background:var(--muted);color:var(--primary);}
+    .sidebar-nav a.active{background:var(--accent);color:var(--acc-fg);border-color:var(--primary-line);font-weight:600;}
+    .sn-num{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:var(--primary);flex-shrink:0;width:24px;}
+    .active .sn-num{color:var(--acc-fg);}
+    .sn-badge{margin-left:auto;flex-shrink:0;font-size:8px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:2px 5px;border-radius:3px;background:var(--accent);color:var(--acc-fg);}
+    .sidebar-next{margin-top:14px;background:var(--chart5);border-radius:8px;padding:12px 14px;}
+    .sn-next-label{font-size:9px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:rgba(223,242,255,0.5);margin-bottom:4px;}
+    .sn-next-title{font-size:12px;font-weight:700;color:#fff;margin-bottom:8px;line-height:1.3;}
+    .sn-next-btn{display:block;text-align:center;background:var(--primary);color:#fff;padding:7px 10px;border-radius:5px;font-size:11px;font-weight:700;transition:background 0.2s;}
+    .sn-next-btn:hover{background:var(--chart2);}
+
+    .chapter-map{background:var(--muted);border:1px solid var(--border);border-radius:8px;padding:14px 18px;margin-bottom:24px;}
+    .cm-label{font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--primary);margin-bottom:8px;}
+    .cm-sections{display:flex;gap:5px;flex-wrap:wrap;}
+    .cm-section{display:flex;align-items:center;gap:5px;padding:4px 9px;border-radius:4px;font-size:11px;font-weight:600;border:1px solid var(--accent);background:var(--accent);color:var(--acc-fg);cursor:pointer;transition:all 0.2s;}
+    .cm-section:hover{background:#c7e9ff;}
+    .cm-dot{width:5px;height:5px;border-radius:50%;background:var(--primary);flex-shrink:0;}
+
+    /* ── SECTION BLOCKS ── */
+    .section-block{border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+    .section-block+.section-block{margin-top:18px;}
+    .sb-header{background:var(--muted);padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;cursor:pointer;transition:background 0.2s;}
+    .sb-header:hover{background:var(--secondary);}
+    .sb-header.open{background:var(--accent);border-bottom-color:var(--primary-line);}
+    .sb-num{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:var(--primary);flex-shrink:0;width:28px;}
+    .sb-header.open .sb-num{color:var(--acc-fg);}
+    .sb-info{flex:1;}
+    .sb-title{font-family:'Playfair Display',serif;font-weight:700;font-size:15px;color:var(--fg);line-height:1.2;margin-bottom:2px;}
+    .sb-header.open .sb-title{color:var(--acc-fg);}
+    .sb-desc{font-size:11.5px;color:var(--muted-fg);}
+    .sb-header.open .sb-desc{color:var(--sec-fg);}
+    .sb-meta{font-size:10.5px;color:var(--muted-fg);flex-shrink:0;}
+    .sb-badge{font-size:9px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:3px 7px;border-radius:999px;flex-shrink:0;background:var(--accent);color:var(--acc-fg);border:1px solid var(--primary-line);}
+    .sb-toggle{width:20px;height:20px;flex-shrink:0;border-radius:50%;background:rgba(50,128,255,0.1);display:flex;align-items:center;justify-content:center;transition:transform 0.3s;}
+    .sb-header.open .sb-toggle{transform:rotate(180deg);background:rgba(8,48,160,0.12);}
+    .sb-toggle svg{width:10px;height:10px;color:var(--primary);}
+    .sb-header.open .sb-toggle svg{color:var(--acc-fg);}
+    .sb-body{display:none;background:var(--bg);}
+    .sb-body.open{display:block;}
+
+    /* ── READING CONTENT ── */
+    .reading-content{padding:26px 32px 0;max-width:680px;}
+    @media(max-width:640px){.reading-content{padding:18px 16px 0;}}
+    .read-byline{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--primary);display:flex;align-items:center;gap:7px;margin-bottom:18px;}
+    .read-byline::before{content:"";display:inline-block;width:16px;height:2px;background:var(--primary);}
+    .read-hook{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--fg);line-height:1.35;margin-bottom:16px;}
+    .reading-content p{font-size:14.5px;color:var(--sec-fg);line-height:1.78;margin-bottom:14px;}
+    .reading-content p:last-of-type{margin-bottom:0;}
+    .key-term{font-weight:700;color:var(--primary);}
+    .pull-quote{border-left:3px solid var(--primary);background:var(--accent);border-radius:0 5px 5px 0;padding:12px 16px;margin:18px 0;}
+    .pull-quote p{font-family:'Playfair Display',serif;font-style:italic;font-size:14.5px;color:var(--acc-fg);line-height:1.55;margin-bottom:0;}
+    .wtmfy{margin-top:18px;background:var(--muted);border:1px solid var(--border);border-radius:7px;padding:12px 16px;}
+    .wtmfy-label{font-size:9px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--primary);margin-bottom:5px;}
+    .wtmfy p{font-size:12.5px;color:var(--sec-fg);line-height:1.6;margin-bottom:0;}
+    .read-handoff{margin:18px 0 0;padding:14px 0 0;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+    .rh-text{font-size:12.5px;color:var(--muted-fg);font-style:italic;flex:1;}
+    .rh-btn{background:var(--primary);color:#fff;padding:8px 14px;border-radius:5px;font-size:12.5px;font-weight:600;border:none;cursor:pointer;transition:background 0.2s;flex-shrink:0;}
+    .rh-btn:hover{background:var(--chart2);}
+
+    /* ── ASSET PANEL ── */
+    .asset-panel{margin:0;padding:18px 32px 22px;border-top:1px solid var(--border);background:var(--muted);}
+    @media(max-width:640px){.asset-panel{padding:14px 16px;}}
+    .ap-label{font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--primary);margin-bottom:12px;display:flex;align-items:center;gap:7px;}
+    .ap-label::before{content:"";display:inline-block;width:14px;height:2px;background:var(--primary);}
+    .ap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+    @media(max-width:600px){.ap-grid{grid-template-columns:1fr;}}
+    .ap-card{background:#fff;border:1px solid var(--border);border-radius:7px;padding:12px 14px;display:flex;flex-direction:column;gap:8px;transition:border-color 0.2s,box-shadow 0.2s;cursor:pointer;}
+    .ap-card:hover{border-color:var(--primary-line);box-shadow:0 4px 14px -4px rgba(50,128,255,0.12);}
+    .ap-card-top{display:flex;align-items:flex-start;gap:10px;}
+    .ap-icon{width:32px;height:32px;border-radius:6px;background:var(--accent);border:1px solid var(--primary-line);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .ap-icon svg{width:14px;height:14px;color:var(--primary);}
+    .ap-type-label{font-size:8.5px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--primary);margin-bottom:2px;}
+    .ap-title{font-weight:700;font-size:12px;color:var(--fg);line-height:1.3;}
+    .ap-desc{font-size:11px;color:var(--muted-fg);line-height:1.45;}
+    .ap-dl-btn{display:flex;align-items:center;justify-content:center;gap:5px;background:var(--accent);color:var(--acc-fg);border:1px solid var(--primary-line);border-radius:5px;padding:6px 10px;font-size:11px;font-weight:700;transition:all 0.2s;margin-top:2px;}
+    .ap-dl-btn:hover{background:var(--primary);color:#fff;border-color:var(--primary);}
+    .ap-dl-btn svg{width:11px;height:11px;}
+
+    /* ── CHAPTER COMPLETE ── */
+    .chapter-complete{background:var(--chart5);border-radius:12px;padding:28px 32px;margin-top:22px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;position:relative;overflow:hidden;}
+    .chapter-complete::before{content:"";position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:var(--primary);opacity:0.2;filter:blur(60px);border-radius:50%;}
+    .cc-text{position:relative;z-index:1;}
+    .cc-text h3{font-family:'Playfair Display',serif;font-weight:700;font-size:20px;color:#fff;margin-bottom:5px;}
+    .cc-text p{font-size:13.5px;color:rgba(223,242,255,0.65);max-width:440px;line-height:1.5;}
+    .cc-actions{position:relative;z-index:1;display:flex;gap:10px;flex-shrink:0;flex-wrap:wrap;}
+    .btn-white{background:#fff;color:var(--chart5);padding:11px 20px;border-radius:6px;font-size:13px;font-weight:700;transition:all 0.2s;display:inline-block;}
+    .btn-white:hover{background:var(--accent);color:var(--acc-fg);}
+    .btn-ghost-w{background:rgba(223,242,255,0.1);color:rgba(223,242,255,0.8);border:1px solid rgba(223,242,255,0.25);padding:11px 20px;border-radius:6px;font-size:13px;font-weight:600;transition:all 0.2s;display:inline-block;}
+    .btn-ghost-w:hover{background:rgba(223,242,255,0.18);color:#fff;}
+
+    .footer{background:var(--chart5);border-top:1px solid rgba(255,255,255,0.08);padding:36px 0 20px;}
+    .footer-inner{max-width:1100px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;}
+    .footer .logo{color:#fff;}
+    .footer .logo-mark{background:var(--accent);}
+    .footer-right{font-size:12.5px;color:rgba(223,242,255,0.35);}
+
+    .reveal{opacity:0;transform:translateY(12px);transition:opacity 0.6s ease,transform 0.6s ease;}
+    .reveal.in{opacity:1;transform:none;}
+    .rd1{transition-delay:0.05s;}.rd2{transition-delay:0.1s;}
+</style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="commodity-playbook-zflow.html" class="logo"><span class="logo-mark"></span><span>Commodity Playbook</span></a>
+      <div class="nav-links">
+        <a href="commodity-playbook-zflow.html">Overview</a>
+        <a href="commodity-playbook-hub.html">What's Inside</a>
+        <a href="commodity-playbook-zflow.html#pricing" class="btn-nav">Get the Playbook</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="chapter-hero" style="background:#0131cc;">
+    <div class="hero-inner">
+      <a href="commodity-playbook-playbook-hub.html" class="back-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        Back to Playbook Hub
+      </a>
+      <div class="hero-top">
+        <div class="hero-left reveal">
+          <div class="chapter-pill"><span class="chapter-pill-dot"></span>Chapter B · Full Playbook · Starter</div>
+          <h1 class="chapter-title"><span class="accent">Physical</span> &&nbsp;Paper&nbsp;Trading&nbsp;Markets</h1>
+          <p class="chapter-sub">How physical cargoes, futures contracts, swaps, and options work — and how a desk uses all of them simultaneously to manage price exposure.</p>
+        </div>
+        <div class="hero-right reveal rd2">
+          <div class="progress-card">
+            <div class="pc-label">Chapter B</div>
+            <div class="pc-stat">8 <span>sections · 3 assets each</span></div>
+            <div class="pc-bar"><div class="pc-fill" style="width:0%" id="pc-fill"></div></div>
+            <div class="pc-note">24 downloadable assets in this chapter.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="chapter-strip">
+    <div class="chapter-strip-inner">
+      <a href="commodity-playbook-chapter-a.html" class="cs-tab">A · Foundations</a>
+      <a href="commodity-playbook-chapter-b.html" class="cs-tab active">B · Physical & Paper</a>
+      <a href="commodity-playbook-chapter-c.html" class="cs-tab">C · Shipping</a>
+      <a href="commodity-playbook-chapter-d.html" class="cs-tab">D · Intelligence</a>
+      <a href="commodity-playbook-chapter-e.html" class="cs-tab">E · Decision-Making</a>
+    </div>
+  </div>
+
+  <div class="page-body">
+    <aside class="sidebar reveal rd1">
+      <div class="sidebar-label">Chapter B — 8 Sections</div>
+      <ul class="sidebar-nav">
+        <li>
+          <a href="#section-b1">
+            <span class="sn-num">B.1</span>
+            The Physical Trade Lifecycle
+            <span class="sn-badge">✓</span>
+          </a>
+        </li>
+        <li>
+          <a href="#section-b2">
+            <span class="sn-num">B.2</span>
+            Futures, Swaps & Options
+            <span class="sn-badge">✓</span>
+          </a>
+        </li>
+        <li>
+          <a href="#section-b3">
+            <span class="sn-num">B.3</span>
+            Hedging a Physical Position
+            <span class="sn-badge">✓</span>
+          </a>
+        </li>
+        <li>
+          <a href="#section-b4">
+            <span class="sn-num">B.4</span>
+            Basis & the Differential
+            <span class="sn-badge">✓</span>
+          </a>
+        </li>
+        <li>
+          <a href="#section-b5">
+            <span class="sn-num">B.5</span>
+            The Exchange of Futures for …
+            <span class="sn-badge">✓</span>
+          </a>
+        </li>
+        <li>
+          <a href="#section-b6">
+            <span class="sn-num">B.6</span>
+            Options in Commodity Markets
+            <span class="sn-badge">✓</span>
+          </a>
+        </li>
+        <li>
+          <a href="#section-b7">
+            <span class="sn-num">B.7</span>
+            Term Contracts vs. Spot Trad…
+            <span class="sn-badge">✓</span>
+          </a>
+        </li>
+        <li>
+          <a href="#section-b8">
+            <span class="sn-num">B.8</span>
+            The Trading Book — How Posit…
+            <span class="sn-badge">✓</span>
+          </a>
+        </li>
+      </ul>
+      <div class="sidebar-next"><div class="sn-next-label">Up Next</div><div class="sn-next-title">Chapter C — Shipping, Freight & Cargo Logistics</div><a href="commodity-playbook-chapter-c.html" class="sn-next-btn">Start Chapter C →</a></div>
+    </aside>
+
+    <main>
+      <div class="chapter-map reveal">
+        <div class="cm-label">Chapter B — 8 Sections · 24 Assets</div>
+        <div class="cm-sections"><div class="cm-section" onclick="openSection('b1')"><span class="cm-dot"></span>B.1</div>  <div class="cm-section" onclick="openSection('b2')"><span class="cm-dot"></span>B.2</div>  <div class="cm-section" onclick="openSection('b3')"><span class="cm-dot"></span>B.3</div>  <div class="cm-section" onclick="openSection('b4')"><span class="cm-dot"></span>B.4</div>  <div class="cm-section" onclick="openSection('b5')"><span class="cm-dot"></span>B.5</div>  <div class="cm-section" onclick="openSection('b6')"><span class="cm-dot"></span>B.6</div>  <div class="cm-section" onclick="openSection('b7')"><span class="cm-dot"></span>B.7</div>  <div class="cm-section" onclick="openSection('b8')"><span class="cm-dot"></span>B.8</div></div>
+      </div>
+
+      <div id="section-b1" class="section-block reveal">
+        <div class="sb-header" onclick="toggleSection('b1',this)">
+          <div class="sb-num">B.1</div>
+          <div class="sb-info">
+            <div class="sb-title">The Physical Trade Lifecycle</div>
+            <div class="sb-desc">From cargo enquiry to final settlement — every step a physical deal goes through.</div>
+          </div>
+          <div class="sb-meta">12 min</div>
+          <span class="sb-badge">Starter</span>
+          <div class="sb-toggle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="sb-body" id="body-b1">
+      <div class="reading-content">
+            <div class="read-byline">Section B.1 · Chapter B</div>
+            <div class="read-hook">A physical commodity trade is not a single transaction. It is a chain of at least a dozen separate steps — each of which can go wrong, each of which has commercial and legal implications, and each of which requires a different function of the desk to execute correctly.</div>
+            <p>The lifecycle of a physical commodity deal begins with an <span class='key-term'>enquiry</span> — a buyer or seller reaches out to the market to test appetite. This is followed by negotiation of the commercial terms: volume, quality specification, price formula, loading port, delivery window, and payment terms. Once terms are agreed, a <span class='key-term'>confirmation</span> is exchanged — a legally binding document that records every agreed term. For large LNG deals this confirmation may be 20–30 pages; for spot crude trades it may be a one-page recap.</p>
+            <p>Once confirmed, the deal enters the <span class='key-term'>operations</span> phase. The scheduling team manages the vessel nomination, coordinates with the terminal for a loading slot, arranges the bill of lading and other shipping documents, and monitors the cargo in transit. For a DES trade, the seller owns and manages the vessel through to delivery; for an FOB trade, the buyer takes responsibility from the loading port. The operations team tracks the vessel via AIS and manages any changes to the delivery window.</p>
+            <p>Settlement occurs after delivery — the <span class='key-term'>final invoice</span> is calculated using the pricing formula in the confirmation, the cargo quantity is confirmed via an independent surveyor's report, and payment is made within the agreed credit terms (typically 30 days). The deal then flows into the back office for <span class='key-term'>P&L booking</span> in the ETRM system — connecting the physical trade to the hedge positions that were placed alongside it.</p>
+            <div class="pull-quote"><p>Every step of the trade lifecycle is a potential failure point. The front office closes the deal in an hour. Operations manages it for three weeks. The desk that ignores the operational layer will eventually have a very expensive surprise.</p></div>
+            <div class="wtmfy">
+              <div class="wtmfy-label">What this means for you</div>
+              <p>If you are targeting a scheduling, operations, or ETRM role, map every step of this lifecycle to the function that executes it — front office, middle office, back office, legal, and credit. Understanding where handoffs occur and what can go wrong at each one is what separates an effective operations professional from one who just processes paperwork.</p>
+            </div>
+            <div class="read-handoff">
+              <div class="rh-text">Section B.2 covers the paper instruments that run alongside every physical deal — futures, swaps, and options that manage the price risk while the physical cargo is in transit.</div>
+              <button class="rh-btn" onclick="openSection('b2');document.getElementById('section-b2').scrollIntoView({behavior:'smooth'})">Continue →</button>
+            </div>
+          </div>
+      <div class="asset-panel">
+        <div class="ap-label">Section Assets — Download</div>
+        <div class="ap-grid">
+        <div class="ap-card" onclick="triggerDownload('B1-trade-lifecycle-flowchart.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Infographic</div>
+              <div class="ap-title">Physical Trade Lifecycle Flowchart</div>
+            </div>
+          </div>
+          <div class="ap-desc">Every step from enquiry to P&L booking — who is responsible, what documents are involved, and where the key risk handoffs occur.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('B1-trade-confirmation-checklist.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 0-2-2V9m0 0h18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Framework</div>
+              <div class="ap-title">Trade Confirmation Checklist</div>
+            </div>
+          </div>
+          <div class="ap-desc">The 15 terms that must be agreed and confirmed before a physical commodity deal is legally binding — with common negotiation points for each.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('B1-spot-crude-lifecycle.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Worked Example</div>
+              <div class="ap-title">A Spot Crude Deal from Enquiry to Settlement</div>
+            </div>
+          </div>
+          <div class="ap-desc">Complete walkthrough of a West Africa crude cargo — from the first enquiry call through to final invoice and ETRM booking.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        </div>
+      </div>
+        </div>
+      </div>
+      <div id="section-b2" class="section-block reveal">
+        <div class="sb-header" onclick="toggleSection('b2',this)">
+          <div class="sb-num">B.2</div>
+          <div class="sb-info">
+            <div class="sb-title">Futures, Swaps & Options</div>
+            <div class="sb-desc">The paper instruments a desk uses alongside physical positions.</div>
+          </div>
+          <div class="sb-meta">13 min</div>
+          <span class="sb-badge">Starter</span>
+          <div class="sb-toggle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="sb-body" id="body-b2">
+      <div class="reading-content">
+            <div class="read-byline">Section B.2 · Chapter B</div>
+            <div class="read-hook">Physical commodity traders are not just buying and selling cargoes. Every cargo they own carries a price risk that has to be managed — and the tools they use to manage it are futures, swaps, and options.</div>
+            <p>A <span class='key-term'>futures contract</span> is a standardised, exchange-traded agreement to buy or sell a specific commodity at a specific price on a specific date. WTI crude futures on NYMEX and Brent futures on ICE are the most actively traded commodity futures contracts in the world. Futures are used by physical traders to hedge price exposure — if you own a cargo of crude, you sell futures to lock in the current price and remove the risk that the price falls before you sell the cargo.</p>
+            <p>A <span class='key-term'>swap</span> is an over-the-counter (OTC) contract where two parties exchange cash flows based on the difference between a floating price and a fixed price. Unlike futures, swaps are customised — they can reference any benchmark, any volume, any time period. For LNG traders, a JKM swap allows them to fix the price of a cargo that will be priced against the JKM assessment at delivery. Swaps are bilateral and carry counterparty credit risk; futures are exchange-cleared and carry no credit risk to the counterparty.</p>
+            <p><span class='key-term'>Options</span> give the buyer the right — but not the obligation — to buy or sell a commodity at a specific price. A <span class='key-term'>cap</span> protects against price rising above a level; a <span class='key-term'>floor</span> protects against it falling below. Options cost a premium upfront but preserve upside. Physical traders use options when they want asymmetric protection — hedging downside risk while keeping the ability to benefit if the market moves in their favour.</p>
+            <div class="pull-quote"><p>The physical cargo is the position. The futures or swap is the hedge. The P&L lives in the difference between what you locked in on the paper and what you actually sell the physical for. Understanding that relationship is the entire job.</p></div>
+            <div class="wtmfy">
+              <div class="wtmfy-label">What this means for you</div>
+              <p>Even if you are not targeting a trading role, understanding these instruments is essential. Schedulers manage positions that are partially hedged. Risk managers monitor the hedge ratio. Analysts build the curve that prices the swaps. Every function on a commodity desk touches these instruments in some way.</p>
+            </div>
+            <div class="read-handoff">
+              <div class="rh-text">Section B.3 goes one level deeper — showing exactly how a physical position is hedged using paper instruments, and where the hedge can fail.</div>
+              <button class="rh-btn" onclick="openSection('b3');document.getElementById('section-b3').scrollIntoView({behavior:'smooth'})">Continue →</button>
+            </div>
+          </div>
+      <div class="asset-panel">
+        <div class="ap-label">Section Assets — Download</div>
+        <div class="ap-grid">
+        <div class="ap-card" onclick="triggerDownload('B2-paper-instruments-comparison.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Infographic</div>
+              <div class="ap-title">Futures, Swaps & Options Comparison</div>
+            </div>
+          </div>
+          <div class="ap-desc">Side-by-side comparison of all three paper instruments — how they work, what they protect against, when they are used, and their key differences.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('B2-hedge-instrument-guide.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 0-2-2V9m0 0h18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Framework</div>
+              <div class="ap-title">Hedge Instrument Selection Guide</div>
+            </div>
+          </div>
+          <div class="ap-desc">A decision framework for choosing between futures, swaps, and options given the physical position, benchmark, timeline, and credit situation.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('B2-brent-cargo-hedge-example.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Worked Example</div>
+              <div class="ap-title">Hedging a Brent Cargo with ICE Futures</div>
+            </div>
+          </div>
+          <div class="ap-desc">Step-by-step walkthrough of hedging a 500,000 barrel Brent cargo with ICE futures — entry, timing, settlement, and final P&L comparison.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        </div>
+      </div>
+        </div>
+      </div>
+      <div id="section-b3" class="section-block reveal">
+        <div class="sb-header" onclick="toggleSection('b3',this)">
+          <div class="sb-num">B.3</div>
+          <div class="sb-info">
+            <div class="sb-title">Hedging a Physical Position</div>
+            <div class="sb-desc">How a desk removes price risk from a cargo using paper markets.</div>
+          </div>
+          <div class="sb-meta">11 min</div>
+          <span class="sb-badge">Starter</span>
+          <div class="sb-toggle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="sb-body" id="body-b3">
+      <div class="reading-content">
+            <div class="read-byline">Section B.3 · Chapter B</div>
+            <div class="read-hook">A hedge is not a bet in the opposite direction. It is a deliberate decision to remove price risk from a position — and the discipline of when to hedge, how much to hedge, and when not to hedge is one of the most important commercial skills on the desk.</div>
+            <p>When a physical trader buys a cargo of crude at $78/bbl, they immediately face the risk that the price will fall before they sell it. To remove that risk, they sell futures or swaps at the same price — creating a <span class='key-term'>hedge</span>. If crude falls to $74/bbl, the physical cargo loses $4/bbl, but the short futures position gains $4/bbl. The losses and gains offset — the desk is flat the market. If crude rises to $82/bbl, the physical cargo gains $4/bbl but the futures position loses $4/bbl. Again, flat the market.</p>
+            <p>In practice, hedges are rarely perfect. <span class='key-term'>Basis risk</span> is the risk that the physical price and the futures price do not move together exactly. A cargo of West African crude priced against Dated Brent may be hedged with ICE Brent futures — but if the Brent-WA differential widens, the hedge loses effectiveness. The desk is still exposed to the differential move even though it thought it was hedged. Managing basis risk is a significant part of day-to-day risk management.</p>
+            <p>The decision of <span class='key-term'>how much to hedge</span> — the hedge ratio — is both commercial and strategic. A 100% hedge removes all price risk but also all upside. A 50% hedge retains some exposure to the market's direction. Some desks have mandatory hedge ratios enforced by risk policy; others allow trader discretion. The choice depends on the firm's risk appetite, the desk's P&L mandate, and the trader's confidence in their market view.</p>
+            <div class="pull-quote"><p>Being perfectly hedged means being perfectly wrong — you gave away all your upside to remove your downside. The art is knowing how much risk you actually need to carry to generate the return the business requires.</p></div>
+            <div class="wtmfy">
+              <div class="wtmfy-label">What this means for you</div>
+              <p>Every time you see a commodity firm report a trading loss, the question to ask is not 'why did the price go against them?' but 'why wasn't the position hedged?' The answer usually involves one of three things: deliberate directional exposure, basis risk that wasn't accounted for, or a hedge that worked in theory but couldn't be executed in the market at the assumed rate.</p>
+            </div>
+            <div class="read-handoff">
+              <div class="rh-text">Section B.4 unpacks basis risk in more detail — why the same commodity trades at different prices in different places, and how that differential affects every hedged position on the desk.</div>
+              <button class="rh-btn" onclick="openSection('b4');document.getElementById('section-b4').scrollIntoView({behavior:'smooth'})">Continue →</button>
+            </div>
+          </div>
+      <div class="asset-panel">
+        <div class="ap-label">Section Assets — Download</div>
+        <div class="ap-grid">
+        <div class="ap-card" onclick="triggerDownload('B3-hedge-mechanics-diagram.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Infographic</div>
+              <div class="ap-title">Hedge Mechanics Diagram</div>
+            </div>
+          </div>
+          <div class="ap-desc">A visual showing how a physical long position is offset by a paper short — with P&L outcomes across three price scenarios: down, flat, and up.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('B3-hedge-ratio-framework.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 0-2-2V9m0 0h18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Framework</div>
+              <div class="ap-title">Hedge Ratio Decision Framework</div>
+            </div>
+          </div>
+          <div class="ap-desc">A structured approach to setting the hedge ratio — risk policy constraints, P&L target, market confidence level, and basis risk adjustment.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('B3-hedge-basis-worked-example.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Worked Example</div>
+              <div class="ap-title">A Crude Cargo — Hedge, Basis Move, Final P&L</div>
+            </div>
+          </div>
+          <div class="ap-desc">How a well-constructed crude hedge still produced a loss because of an unexpected move in the physical-futures basis — with the full P&L attribution.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        </div>
+      </div>
+        </div>
+      </div>
+      <div id="section-b4" class="section-block reveal">
+        <div class="sb-header" onclick="toggleSection('b4',this)">
+          <div class="sb-num">B.4</div>
+          <div class="sb-info">
+            <div class="sb-title">Basis & the Differential</div>
+            <div class="sb-desc">Why the same commodity trades at different prices in different places.</div>
+          </div>
+          <div class="sb-meta">10 min</div>
+          <span class="sb-badge">Starter</span>
+          <div class="sb-toggle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="sb-body" id="body-b4">
+      <div class="reading-content">
+            <div class="read-byline">Section B.4 · Chapter B</div>
+            <div class="read-hook">Dubai crude is not Brent crude. Dated Brent is not ICE Brent futures. HSFO in Singapore is not HSFO in Rotterdam. Every commodity trades at a spread to every benchmark — and understanding that spread is what separates a physical trader from a paper one.</div>
+            <p><span class='key-term'>Basis</span> is the difference between the physical commodity price and the benchmark futures price. For a US Gulf Coast refiner buying domestic crude, the basis is the difference between the wellhead price of a specific crude grade and WTI futures. Basis reflects the cost of transportation to the delivery point of the futures contract, quality differences between the physical grade and the benchmark grade, and any supply/demand imbalances specific to that location.</p>
+            <p>In practice, traders talk about <span class='key-term'>differentials</span> — the premium or discount at which a physical commodity trades relative to a benchmark. Dubai crude trades at a differential to Brent. West African Bonny Light trades at a premium to Dated Brent because of its lower sulphur content and higher gasoline yield. Russian Urals trades at a discount because it is heavier and higher in sulphur. These differentials move constantly based on refinery demand, freight rates, and regional supply dynamics.</p>
+            <p>Basis risk arises when a hedge is placed using a benchmark that does not perfectly track the physical commodity being hedged. A Singapore gasoil trader who hedges a physical gasoil cargo with ICE gasoil futures is exposed to the Singapore-Rotterdam gasoil differential — the basis. If Singapore gasoil weakens relative to Rotterdam, the physical cargo loses value even though the futures hedge holds. Basis risk is real, difficult to eliminate entirely, and the source of many trading losses that are mistakenly attributed to 'being wrong on the market'.</p>
+            <div class="pull-quote"><p>Traders lose money on basis all the time while being right on flat price. You can nail the direction of Brent perfectly and still lose money on a West African cargo if you didn't account for the differential move.</p></div>
+            <div class="wtmfy">
+              <div class="wtmfy-label">What this means for you</div>
+              <p>When you are reading about commodity price differentials in the news — Urals at a discount to Brent, JKM premium to TTF narrowing — you are reading about basis. Understanding what drives those differentials (quality, freight, regional supply, sanctions) is what connects the financial market to the physical one.</p>
+            </div>
+            <div class="read-handoff">
+              <div class="rh-text">Section B.5 covers the EFS — the mechanism that physically connects the paper and physical markets and allows a desk to move exposure from one to the other.</div>
+              <button class="rh-btn" onclick="openSection('b5');document.getElementById('section-b5').scrollIntoView({behavior:'smooth'})">Continue →</button>
+            </div>
+          </div>
+      <div class="asset-panel">
+        <div class="ap-label">Section Assets — Download</div>
+        <div class="ap-grid">
+        <div class="ap-card" onclick="triggerDownload('B4-differential-basis-map.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Infographic</div>
+              <div class="ap-title">Differential & Basis Map</div>
+            </div>
+          </div>
+          <div class="ap-desc">Key commodity differentials — Urals to Dated Brent, Dubai to Brent, JKM to TTF, Singapore HSFO to Rotterdam — with typical ranges and what drives each.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('B4-basis-risk-checklist.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 0-2-2V9m0 0h18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Framework</div>
+              <div class="ap-title">Basis Risk Assessment Checklist</div>
+            </div>
+          </div>
+          <div class="ap-desc">A structured evaluation of the basis risk in any hedged physical position — benchmark mismatch, quality differential, location differential, and timing mismatch.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('B4-hidden-basis-loss.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Worked Example</div>
+              <div class="ap-title">The Hidden Basis Loss</div>
+            </div>
+          </div>
+          <div class="ap-desc">How a well-hedged West African crude cargo produced a $1.2M loss because the Bonny Light/Dated Brent differential collapsed during the voyage.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        </div>
+      </div>
+        </div>
+      </div>
+      <div id="section-b5" class="section-block reveal">
+        <div class="sb-header" onclick="toggleSection('b5',this)">
+          <div class="sb-num">B.5</div>
+          <div class="sb-info">
+            <div class="sb-title">The Exchange of Futures for Swaps (EFS)</div>
+            <div class="sb-desc">How traders move between physical and paper positions.</div>
+          </div>
+          <div class="sb-meta">9 min</div>
+          <span class="sb-badge">Starter</span>
+          <div class="sb-toggle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="sb-body" id="body-b5">
+      <div class="reading-content">
+            <div class="read-byline">Section B.5 · Chapter B</div>
+            <div class="read-hook">The EFS is one of the least-discussed mechanisms in commodity markets — and one of the most important for understanding how physical and paper markets stay connected to each other.</div>
+            <p>An <span class='key-term'>Exchange of Futures for Swaps (EFS)</span> is a privately negotiated transaction in which one party exchanges a futures position for an OTC swap position. The exchange takes place at an agreed price and is then registered with the exchange. The result is that one party ends up with a futures contract and the other ends up with a swap — each has moved from one instrument to the other without entering the open market.</p>
+            <p>EFS transactions are used when a trader wants to move from a standardised exchange-traded position to a customised OTC position — or vice versa. For example, a physical LNG trader who has hedged a cargo with JKM futures may want to convert that hedge into a JKM swap with a different settlement date to better match the physical cargo's pricing period. The EFS allows this conversion without the market impact of unwinding the futures position and placing a new swap separately.</p>
+            <p>EFS activity is a useful market intelligence signal. High EFS volume in a specific commodity and tenor suggests that physical market participants are actively adjusting their hedge positions — often because physical market conditions are changing. When a large volume of crude futures is exchanged into longer-dated swaps, it may signal that desks are repositioning for a change in the forward curve structure.</p>
+            <div class="pull-quote"><p>Every time the physical and paper markets seem to be telling different stories, look at the EFS volume. It's often where traders are quietly moving their positions from one world to the other.</p></div>
+            <div class="wtmfy">
+              <div class="wtmfy-label">What this means for you</div>
+              <p>For most students and career switchers, the EFS is a concept to understand rather than a mechanism to operate. Knowing what it is and why it exists helps you understand how the physical and paper markets remain connected — and how large desks manage their positions across both simultaneously.</p>
+            </div>
+            <div class="read-handoff">
+              <div class="rh-text">Section B.6 covers options — the instruments that give a desk asymmetric exposure: protection on the downside with the ability to benefit from upside.</div>
+              <button class="rh-btn" onclick="openSection('b6');document.getElementById('section-b6').scrollIntoView({behavior:'smooth'})">Continue →</button>
+            </div>
+          </div>
+      <div class="asset-panel">
+        <div class="ap-label">Section Assets — Download</div>
+        <div class="ap-grid">
+        <div class="ap-card" onclick="triggerDownload('B5-efs-mechanism-diagram.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Infographic</div>
+              <div class="ap-title">EFS Mechanism Diagram</div>
+            </div>
+          </div>
+          <div class="ap-desc">How an EFS transaction works — the two parties, the exchange, the instruments exchanged, and the resulting position change for each side.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('B5-efs-decision-guide.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 0-2-2V9m0 0h18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Framework</div>
+              <div class="ap-title">EFS vs. Open Market — When to Use Each</div>
+            </div>
+          </div>
+          <div class="ap-desc">A decision guide for choosing between executing an EFS and unwinding/re-executing in the open market — factors include market impact, timing, and counterparty.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('B5-efs-worked-example.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Worked Example</div>
+              <div class="ap-title">Converting a Futures Hedge to a Swap via EFS</div>
+            </div>
+          </div>
+          <div class="ap-desc">How an LNG trader converted a JKM futures hedge into a customised JKM swap via EFS to match a cargo's specific pricing period.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        </div>
+      </div>
+        </div>
+      </div>
+      <div id="section-b6" class="section-block reveal">
+        <div class="sb-header" onclick="toggleSection('b6',this)">
+          <div class="sb-num">B.6</div>
+          <div class="sb-info">
+            <div class="sb-title">Options in Commodity Markets</div>
+            <div class="sb-desc">Caps, floors, collars — how optionality is priced and used.</div>
+          </div>
+          <div class="sb-meta">12 min</div>
+          <span class="sb-badge">Starter</span>
+          <div class="sb-toggle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="sb-body" id="body-b6">
+      <div class="reading-content">
+            <div class="read-byline">Section B.6 · Chapter B</div>
+            <div class="read-hook">Options give you the right to act without the obligation. In commodity markets, that asymmetry — protecting against the bad outcome while keeping the good one — has real and measurable value.</div>
+            <p>A commodity <span class='key-term'>call option</span> gives the buyer the right to purchase a commodity at a fixed price (the <span class='key-term'>strike price</span>) before a specific date. A <span class='key-term'>put option</span> gives the right to sell at the strike price. The buyer pays a <span class='key-term'>premium</span> upfront for this right. If the market moves in the buyer's favour, they exercise the option and benefit. If the market moves against them, they let the option expire and only lose the premium — unlike a futures contract, where losses are uncapped.</p>
+            <p>In commodity markets, options are used in several common structures. A <span class='key-term'>cap</span> is a call option that protects a buyer against prices rising above a level — used by utilities and airlines to fix their maximum fuel cost. A <span class='key-term'>floor</span> is a put option that protects a seller against prices falling below a level — used by producers to guarantee a minimum revenue. A <span class='key-term'>collar</span> combines a cap and a floor — the buyer gives up some upside in exchange for paying a lower premium, or no premium at all if the collar is costless.</p>
+            <p>Option pricing is driven primarily by <span class='key-term'>implied volatility</span> — the market's expectation of how much the underlying commodity price will move. High volatility means options are expensive because the probability of the option being in-the-money is higher. Physical commodity traders watch implied volatility as a market signal: a sudden spike in crude option volatility often precedes or accompanies a significant physical market event — a supply disruption, an OPEC announcement, or a demand shock.</p>
+            <div class="pull-quote"><p>The premium you pay for an option is the price of sleeping well at night. The question is whether the cost of that peace of mind is justified by the risk you're actually carrying.</p></div>
+            <div class="wtmfy">
+              <div class="wtmfy-label">What this means for you</div>
+              <p>Options are used extensively in trade finance and hedging structures for commodity deals — particularly long-term LNG offtake agreements and producer hedging programmes. Understanding the basic mechanics — what a cap and floor do, what affects the premium, how optionality in a physical contract has measurable value — gives you a significant edge in analytical and structuring roles.</p>
+            </div>
+            <div class="read-handoff">
+              <div class="rh-text">Section B.7 steps back from the instruments and looks at the commercial strategy behind how desks structure their book — the choice between term contracts and spot market exposure.</div>
+              <button class="rh-btn" onclick="openSection('b7');document.getElementById('section-b7').scrollIntoView({behavior:'smooth'})">Continue →</button>
+            </div>
+          </div>
+      <div class="asset-panel">
+        <div class="ap-label">Section Assets — Download</div>
+        <div class="ap-grid">
+        <div class="ap-card" onclick="triggerDownload('B6-options-structures.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Infographic</div>
+              <div class="ap-title">Options Structures in Commodity Markets</div>
+            </div>
+          </div>
+          <div class="ap-desc">Caps, floors, collars, and vanilla calls/puts — how each works, the payoff profile, and when each is used in physical commodity hedging.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('B6-option-vs-futures-guide.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 0-2-2V9m0 0h18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Framework</div>
+              <div class="ap-title">Option vs. Futures Hedge Decision Guide</div>
+            </div>
+          </div>
+          <div class="ap-desc">When to use an option instead of a futures or swap hedge — based on risk profile, premium budget, and market view directional confidence.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('B6-airline-jet-cap-example.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Worked Example</div>
+              <div class="ap-title">An Airline Hedges Jet Fuel with a Cap</div>
+            </div>
+          </div>
+          <div class="ap-desc">How an Asian airline used a jet fuel cap to fix its maximum fuel cost for Q3 — premium paid, breakeven analysis, and final P&L vs. unhedged outcome.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        </div>
+      </div>
+        </div>
+      </div>
+      <div id="section-b7" class="section-block reveal">
+        <div class="sb-header" onclick="toggleSection('b7',this)">
+          <div class="sb-num">B.7</div>
+          <div class="sb-info">
+            <div class="sb-title">Term Contracts vs. Spot Trading</div>
+            <div class="sb-desc">The commercial logic behind long-term offtake and spot market exposure.</div>
+          </div>
+          <div class="sb-meta">10 min</div>
+          <span class="sb-badge">Starter</span>
+          <div class="sb-toggle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="sb-body" id="body-b7">
+      <div class="reading-content">
+            <div class="read-byline">Section B.7 · Chapter B</div>
+            <div class="read-hook">A commodity desk that trades only spot is taking maximum market exposure. One that trades only on long-term contracts is leaving significant upside on the table. The mix between term and spot is one of the most consequential strategic decisions a commodity firm makes.</div>
+            <p>A <span class='key-term'>term contract</span> is a multi-year supply agreement between a producer and a buyer — typically at a price linked to a benchmark with an agreed formula. LNG term contracts are the clearest example: a Japanese utility might sign a 20-year contract with an Australian LNG producer, with volume and price formula agreed upfront. Term contracts provide certainty for both parties — the producer finances the investment, the buyer secures supply. But they also remove the ability to benefit from spot market moves.</p>
+            <p>The <span class='key-term'>spot market</span> is where uncontracted volumes trade — cargo by cargo, at the current market price. Trading firms active in the spot market can capture arbitrage opportunities, respond to supply disruptions, and earn from volatility in ways that term-contract buyers cannot. But they also face the risk that spot prices move sharply against them, and they must continuously source supply and place cargoes without the certainty of contracted volumes.</p>
+            <p>Most large commodity traders and energy companies run a <span class='key-term'>portfolio approach</span> — anchoring their book with enough term contracts to guarantee base supply and revenue, then trading the margin on the spot market. The optimal ratio between term and spot exposure depends on the firm's risk tolerance, the volatility of the underlying commodity, and the desk's ability to manage spot market positions actively. A common structure for LNG is 70–80% term, 20–30% spot — but this shifts significantly during periods of high market volatility.</p>
+            <div class="pull-quote"><p>A term contract is certainty. A spot position is optionality. Most commodity firms need both — and the firms that manage the balance best are the ones that consistently outperform their peers.</p></div>
+            <div class="wtmfy">
+              <div class="wtmfy-label">What this means for you</div>
+              <p>If you are targeting an origination or commercial role, understanding the term vs. spot trade-off is central to how you will structure deals and advise clients. If you are targeting an analytics or scheduling role, understanding this distinction explains why some cargo programmes are fixed and others are dynamic — and why your scheduling flexibility changes depending on the contract type.</p>
+            </div>
+            <div class="read-handoff">
+              <div class="rh-text">Section B.8 shows how all of these positions — physical cargoes, futures hedges, swap exposures, term contracts, and spot trades — stack up together in a trading book.</div>
+              <button class="rh-btn" onclick="openSection('b8');document.getElementById('section-b8').scrollIntoView({behavior:'smooth'})">Continue →</button>
+            </div>
+          </div>
+      <div class="asset-panel">
+        <div class="ap-label">Section Assets — Download</div>
+        <div class="ap-grid">
+        <div class="ap-card" onclick="triggerDownload('B7-term-vs-spot-structure.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Infographic</div>
+              <div class="ap-title">Term vs. Spot Portfolio Structure</div>
+            </div>
+          </div>
+          <div class="ap-desc">How a commodity desk balances term contract volume against spot market exposure — with typical ratios across oil, LNG, and refined products.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('B7-term-contract-checklist.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 0-2-2V9m0 0h18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Framework</div>
+              <div class="ap-title">Term Contract Evaluation Checklist</div>
+            </div>
+          </div>
+          <div class="ap-desc">The key commercial terms to evaluate in any long-term commodity supply agreement — volume, pricing formula, flexibility provisions, force majeure, and credit terms.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('B7-lng-portfolio-structure.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Worked Example</div>
+              <div class="ap-title">An LNG Portfolio — Term and Spot Combined</div>
+            </div>
+          </div>
+          <div class="ap-desc">How a mid-sized LNG trading desk structured its Q4 book — 75% term contract volume, 25% spot — and how it managed the spot positions during a price spike.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        </div>
+      </div>
+        </div>
+      </div>
+      <div id="section-b8" class="section-block reveal">
+        <div class="sb-header" onclick="toggleSection('b8',this)">
+          <div class="sb-num">B.8</div>
+          <div class="sb-info">
+            <div class="sb-title">The Trading Book — How Positions Stack Up</div>
+            <div class="sb-desc">How a desk tracks its combined physical, paper, and freight exposure.</div>
+          </div>
+          <div class="sb-meta">11 min</div>
+          <span class="sb-badge">Starter</span>
+          <div class="sb-toggle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="sb-body" id="body-b8">
+      <div class="reading-content">
+            <div class="read-byline">Section B.8 · Chapter B</div>
+            <div class="read-hook">At any given moment, a commodity trading desk has dozens of positions simultaneously — physical cargoes on the water, futures hedges on the exchange, OTC swaps with counterparties, freight fixtures, and term contract obligations. The trading book is how the desk sees all of them at once.</div>
+            <p>The <span class='key-term'>trading book</span> is the consolidated view of all open positions on the desk — physical and paper, long and short, hedged and unhedged. It is maintained in an <span class='key-term'>ETRM system</span> (Energy Trading and Risk Management platform) — typically Endur, RightAngle, or Allegro — which books every trade, marks positions to market daily, calculates P&L, and feeds risk metrics to the risk management function.</p>
+            <p>A well-structured trading book shows, for every commodity and time period: the net physical long or short position (how many barrels or MMBtu the desk owns or owes), the hedge position (the offsetting paper contracts), the net unhedged exposure (the <span class='key-term'>open position</span>), and the current mark-to-market P&L on each leg. Traders review their book every morning before markets open — checking overnight price moves, assessing whether any positions need to be adjusted, and planning the day's trading activity.</p>
+            <p>The interaction between physical and paper positions in the book creates a number of important metrics that risk managers monitor daily. <span class='key-term'>Hedge effectiveness</span> — what percentage of the physical exposure is covered by paper hedges. <span class='key-term'>Greeks</span> — for options positions, the sensitivity of the position value to price changes (delta), volatility changes (vega), and time decay (theta). And <span class='key-term'>roll risk</span> — the risk that a paper position approaching expiry cannot be rolled forward at an acceptable price.</p>
+            <div class="pull-quote"><p>The trading book is the desk's truth. A trader's P&L is not what they think they've made — it's what the book says, marked to today's market prices, with every position they actually have, not the ones they wish they had.</p></div>
+            <div class="wtmfy">
+              <div class="wtmfy-label">What this means for you</div>
+              <p>ETRM system knowledge is explicitly valued in almost every commodity trading job description outside the front office. Understanding what a trading book is, what goes into it, and how positions are marked to market gives you the context to add value in scheduling, analytics, risk, finance, or technology roles — not just trading.</p>
+            </div>
+            <div class="read-handoff">
+              <div class="rh-text">Chapter B is complete. Chapter C takes everything off the desk and into the physical world — vessels, ports, nominations, and the logistics layer that every commercial decision ultimately depends on.</div>
+              <a href="commodity-playbook-playbook-hub.html" class="rh-btn">Back to Hub →</a>
+            </div>
+          </div>
+      <div class="asset-panel">
+        <div class="ap-label">Section Assets — Download</div>
+        <div class="ap-grid">
+        <div class="ap-card" onclick="triggerDownload('B8-trading-book-structure.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Infographic</div>
+              <div class="ap-title">The Trading Book Structure</div>
+            </div>
+          </div>
+          <div class="ap-desc">A visual of how a commodity trading book is organised — physical positions, paper hedges, open exposure, and mark-to-market P&L across time periods.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('B8-morning-book-review.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 0-2-2V9m0 0h18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Framework</div>
+              <div class="ap-title">Morning Book Review Checklist</div>
+            </div>
+          </div>
+          <div class="ap-desc">The questions a trader runs through every morning before markets open — overnight moves, position changes needed, hedge ratios, and key risk metrics.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('B8-crude-desk-book-snapshot.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Worked Example</div>
+              <div class="ap-title">A Crude Desk Book — End of Week Snapshot</div>
+            </div>
+          </div>
+          <div class="ap-desc">A snapshot of a crude oil trading book at Friday close — physical positions, futures hedges, open exposure, P&L by position, and risk metrics.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        </div>
+      </div>
+        </div>
+      </div>
+
+      <div class="chapter-complete reveal">
+        <div class="cc-text">
+          <h3>Chapter B complete.</h3>
+          <p>Chapter C covers Shipping, Freight & Cargo Logistics — 8 sections, all in your Starter pack.</p>
+        </div>
+        <div class="cc-actions"><a href="commodity-playbook-chapter-a.html" class="btn-ghost-w">← Chapter A</a><a href="commodity-playbook-chapter-c.html" class="btn-white">Chapter C →</a></div>
+      </div>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <a href="commodity-playbook-zflow.html" class="logo">
+        <span class="logo-mark"></span>
+        <span style="font-family:'Playfair Display',serif;font-weight:700;font-size:16px;">Commodity Playbook</span>
+      </a>
+      <div class="footer-right">Chapter B · Physical & Paper Trading Markets · 24 downloadable assets</div>
+    </div>
+  </footer>
+
+  <script>
+    const reveals=document.querySelectorAll('.reveal');
+    const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}})},{threshold:0.06});
+    reveals.forEach(el=>io.observe(el));
+    document.querySelectorAll('.chapter-hero .reveal').forEach((el,i)=>setTimeout(()=>el.classList.add('in'),80+i*120));
+
+    function toggleSection(id,h){
+      const b=document.getElementById('body-'+id);
+      const open=b.classList.contains('open');
+      if(open){b.classList.remove('open');h.classList.remove('open');}
+      else{b.classList.add('open');h.classList.add('open');}
+    }
+    function openSection(id){
+      const b=document.getElementById('body-'+id);
+      if(b){const h=b.previousElementSibling;b.classList.add('open');if(h)h.classList.add('open');}
+    }
+
+    // Progress bar
+    window.addEventListener('load',()=>{
+      setTimeout(()=>{const f=document.getElementById('pc-fill');if(f)f.style.width='0%';},400);
+    });
+
+    // Sidebar tracking
+    const secIds=["b1","b2","b3","b4","b5","b6","b7","b8"];
+    const sideLinks=document.querySelectorAll('.sidebar-nav a');
+    window.addEventListener('scroll',()=>{
+      let cur='';
+      secIds.forEach(id=>{const el=document.getElementById('section-'+id);if(el&&el.getBoundingClientRect().top<120)cur=id;});
+      sideLinks.forEach(lk=>{lk.classList.remove('active');if(lk.getAttribute('href')&&lk.getAttribute('href').includes(cur))lk.classList.add('active');});
+    });
+
+    // Download handler — connect to your file delivery system
+    function triggerDownload(filename){
+      alert('Download: '+filename+'\n\nConnect this to your file delivery system (AWS S3, Gumroad, or a direct CDN link).');
+    }
+  </script>
+</body>
+</html>

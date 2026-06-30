@@ -1,0 +1,1385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Resume Templates — Starter Pack · Commodity Trading Playbook</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    /* ── ZFlow tokens ── */
+    :root{
+      --bg:#ffffff;--fg:#333333;--primary:#3280ff;--primary-fg:#ffffff;
+      --secondary:#f2f4f7;--sec-fg:#465468;--accent:#dff2ff;--acc-fg:#0830a0;
+      --muted:#f9fafb;--muted-fg:#677184;--border:#e4e7ec;
+      --chart2:#115cff;--chart3:#0040f5;--chart4:#0131cc;--chart5:#0830a0;
+      --primary-soft:rgba(50,128,255,0.08);--primary-line:rgba(50,128,255,0.25);
+
+      /* Archetype accent colours */
+      --amber:#B45309;--amber-bg:#FEF3C7;--amber-line:rgba(180,83,9,0.25);
+      --teal:#0F766E;--teal-bg:#CCFBF1;--teal-line:rgba(15,118,110,0.25);
+      --purple:#5B21B6;--purple-bg:#EDE9FE;--purple-line:rgba(91,33,182,0.25);
+      --navy-arc:#1E3A5F;--navy-bg:#DBEAFE;--navy-line:rgba(30,58,95,0.25);
+      --rust:#9A3412;--rust-bg:#FEF0E7;--rust-line:rgba(154,52,18,0.25);
+    }
+    *{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--fg);
+      line-height:1.6;-webkit-font-smoothing:antialiased;}
+    a{color:inherit;text-decoration:none;}
+
+    /* ── NAV ── */
+    .nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.92);
+      backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+    .nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;
+      display:flex;align-items:center;justify-content:space-between;height:64px;}
+    .logo{display:flex;align-items:center;gap:10px;font-family:'Playfair Display',serif;
+      font-weight:700;font-size:18px;color:var(--fg);letter-spacing:-0.01em;}
+    .logo-mark{width:22px;height:22px;background:var(--primary);
+      transform:rotate(45deg);transition:transform 0.4s ease;}
+    .logo:hover .logo-mark{transform:rotate(90deg);}
+    .nav-links{display:flex;align-items:center;gap:28px;}
+    .nav-links a{font-size:14px;font-weight:500;color:var(--muted-fg);transition:color 0.2s;}
+    .nav-links a:hover{color:var(--primary);}
+    .btn-nav{background:var(--primary);color:#fff;padding:10px 18px;border-radius:6px;
+      font-size:14px;font-weight:600;transition:background 0.2s;}
+    .btn-nav:hover{background:var(--chart2);}
+    @media(max-width:720px){.nav-links a:not(.btn-nav){display:none;}}
+
+    /* ── HERO ── */
+    .hero{background:var(--chart5);padding:52px 0 64px;position:relative;overflow:hidden;}
+    .hero::before{content:"";position:absolute;top:-160px;right:-160px;
+      width:480px;height:480px;background:var(--primary);opacity:0.16;
+      filter:blur(100px);border-radius:50%;}
+    .hero::after{content:"";position:absolute;bottom:-90px;left:-60px;
+      width:320px;height:320px;background:var(--chart3);opacity:0.1;
+      filter:blur(80px);border-radius:50%;}
+    .hero .container{position:relative;z-index:2;}
+    .container{max-width:1100px;margin:0 auto;padding:0 24px;}
+    .back-link{display:inline-flex;align-items:center;gap:7px;font-size:13px;
+      color:rgba(223,242,255,0.55);margin-bottom:24px;transition:color 0.2s;}
+    .back-link:hover{color:var(--accent);}
+    .back-link svg{width:13px;height:13px;}
+    .hero-eyebrow{display:inline-flex;align-items:center;gap:7px;padding:5px 13px;
+      border:1px solid rgba(223,242,255,0.28);background:rgba(223,242,255,0.1);
+      border-radius:999px;font-size:10px;font-weight:700;color:var(--accent);
+      letter-spacing:0.2em;text-transform:uppercase;margin-bottom:16px;}
+    .hero-eyebrow-dot{width:5px;height:5px;background:var(--accent);border-radius:50%;}
+    h1.hero-title{font-family:'Playfair Display',serif;font-weight:700;
+      font-size:clamp(32px,5vw,52px);line-height:1.05;letter-spacing:-0.02em;
+      color:#fff;margin-bottom:14px;}
+    h1.hero-title .accent{color:var(--accent);font-style:italic;}
+    .hero-sub{font-size:16px;font-weight:300;color:rgba(223,242,255,0.7);
+      line-height:1.55;max-width:580px;margin-bottom:32px;}
+    .hero-stats{display:flex;gap:28px;flex-wrap:wrap;}
+    .hero-stat{background:rgba(255,255,255,0.07);border:1px solid rgba(223,242,255,0.18);
+      border-radius:8px;padding:12px 18px;backdrop-filter:blur(8px);}
+    .hs-num{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;
+      color:#fff;line-height:1;}
+    .hs-label{font-size:11px;color:rgba(223,242,255,0.5);margin-top:2px;}
+
+    /* ── PERSONA QUIZ ── */
+    .quiz-section{padding:56px 0;background:var(--muted);
+      border-bottom:1px solid var(--border);}
+    .quiz-card{background:var(--bg);border:1px solid var(--border);border-radius:14px;
+      overflow:hidden;max-width:780px;margin:0 auto;}
+    .quiz-header{background:var(--chart5);padding:22px 28px;
+      display:flex;align-items:center;gap:14px;}
+    .quiz-header-icon{width:38px;height:38px;border-radius:50%;
+      background:rgba(223,242,255,0.15);border:1px solid rgba(223,242,255,0.25);
+      display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .quiz-header-icon svg{width:18px;height:18px;color:var(--accent);}
+    .quiz-header-title{font-family:'Playfair Display',serif;font-weight:700;
+      font-size:17px;color:#fff;}
+    .quiz-header-sub{font-size:12px;color:rgba(223,242,255,0.55);margin-top:2px;}
+
+    /* progress bar */
+    .quiz-progress{height:4px;background:var(--border);}
+    .quiz-progress-fill{height:100%;background:var(--primary);
+      width:20%;transition:width 0.4s ease;border-radius:0 2px 2px 0;}
+
+    .quiz-body{padding:28px;}
+    .quiz-step{display:none;}
+    .quiz-step.active{display:block;}
+    .quiz-q-num{font-size:10px;font-weight:700;letter-spacing:0.2em;
+      text-transform:uppercase;color:var(--primary);margin-bottom:8px;}
+    .quiz-q{font-family:'Playfair Display',serif;font-weight:700;font-size:19px;
+      color:var(--fg);line-height:1.3;margin-bottom:6px;}
+    .quiz-q-sub{font-size:13px;color:var(--muted-fg);margin-bottom:22px;}
+    .quiz-options{display:flex;flex-direction:column;gap:10px;}
+    .quiz-opt{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;
+      border:1px solid var(--border);border-radius:8px;cursor:pointer;
+      transition:all 0.2s;background:var(--bg);}
+    .quiz-opt:hover{border-color:var(--primary-line);background:var(--accent);}
+    .quiz-opt.selected{border-color:var(--primary);background:var(--accent);}
+    .quiz-opt-radio{width:18px;height:18px;border-radius:50%;border:2px solid var(--border);
+      flex-shrink:0;margin-top:2px;transition:all 0.2s;
+      display:flex;align-items:center;justify-content:center;}
+    .quiz-opt.selected .quiz-opt-radio{border-color:var(--primary);background:var(--primary);}
+    .quiz-opt.selected .quiz-opt-radio::after{content:"";width:7px;height:7px;
+      border-radius:50%;background:#fff;}
+    .quiz-opt-text{font-size:14px;color:var(--fg);font-weight:500;line-height:1.4;}
+    .quiz-opt-sub{font-size:12px;color:var(--muted-fg);margin-top:2px;}
+    .quiz-nav{display:flex;justify-content:space-between;align-items:center;
+      margin-top:24px;padding-top:20px;border-top:1px solid var(--border);}
+    .quiz-nav-left{font-size:12px;color:var(--muted-fg);}
+    .quiz-nav-btns{display:flex;gap:10px;}
+    .btn-quiz-back{background:var(--secondary);color:var(--sec-fg);border:none;
+      padding:9px 18px;border-radius:6px;font-size:13px;font-weight:600;
+      cursor:pointer;transition:background 0.2s;font-family:inherit;}
+    .btn-quiz-back:hover{background:var(--border);}
+    .btn-quiz-next{background:var(--primary);color:#fff;border:none;
+      padding:9px 18px;border-radius:6px;font-size:13px;font-weight:600;
+      cursor:pointer;transition:background 0.2s;font-family:inherit;}
+    .btn-quiz-next:hover{background:var(--chart2);}
+    .btn-quiz-next:disabled{opacity:0.45;cursor:not-allowed;}
+
+    /* ── RESULT CARD ── */
+    .result-card{display:none;padding:28px;}
+    .result-card.show{display:block;}
+    .rc-top{display:flex;align-items:flex-start;gap:16px;margin-bottom:20px;}
+    .rc-badge{width:52px;height:52px;border-radius:50%;
+      display:flex;align-items:center;justify-content:center;flex-shrink:0;
+      font-size:22px;}
+    .rc-label{font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;
+      margin-bottom:4px;}
+    .rc-name{font-family:'Playfair Display',serif;font-weight:700;font-size:22px;
+      line-height:1.2;color:var(--fg);}
+    .rc-desc{font-size:14px;color:var(--sec-fg);line-height:1.6;margin-bottom:16px;}
+    .rc-positioning{background:var(--muted);border:1px solid var(--border);
+      border-radius:8px;padding:16px 18px;margin-bottom:16px;}
+    .rc-pos-label{font-size:10px;font-weight:700;letter-spacing:0.16em;
+      text-transform:uppercase;color:var(--primary);margin-bottom:8px;}
+    .rc-pos-text{font-size:13.5px;color:var(--sec-fg);line-height:1.6;}
+    .rc-key-move{background:var(--accent);border-left:3px solid var(--primary);
+      border-radius:0 6px 6px 0;padding:12px 16px;margin-bottom:20px;}
+    .rc-key-label{font-size:9px;font-weight:700;letter-spacing:0.16em;
+      text-transform:uppercase;color:var(--acc-fg);margin-bottom:4px;}
+    .rc-key-text{font-size:13.5px;color:var(--acc-fg);line-height:1.5;font-weight:500;}
+    .rc-actions{display:flex;gap:10px;flex-wrap:wrap;}
+    .btn-dl{background:var(--primary);color:#fff;padding:11px 20px;border-radius:6px;
+      font-size:13.5px;font-weight:700;border:none;cursor:pointer;
+      transition:all 0.2s;display:inline-flex;align-items:center;gap:7px;
+      font-family:inherit;}
+    .btn-dl:hover{background:var(--chart2);transform:translateY(-1px);}
+    .btn-dl svg{width:14px;height:14px;}
+    .btn-retake{background:var(--secondary);color:var(--sec-fg);padding:11px 18px;
+      border-radius:6px;font-size:13.5px;font-weight:600;border:none;cursor:pointer;
+      transition:background 0.2s;font-family:inherit;}
+    .btn-retake:hover{background:var(--border);}
+
+    /* ── INDUSTRY MAP ── */
+    .map-section{padding:64px 0;background:var(--bg);}
+    .sec-eyebrow{font-size:10px;font-weight:700;letter-spacing:0.2em;
+      text-transform:uppercase;color:var(--primary);margin-bottom:8px;}
+    .sec-title{font-family:'Playfair Display',serif;font-weight:700;
+      font-size:clamp(24px,3.5vw,36px);line-height:1.1;letter-spacing:-0.015em;
+      color:var(--fg);margin-bottom:10px;}
+    .sec-sub{font-size:15px;color:var(--muted-fg);line-height:1.6;
+      max-width:580px;margin-bottom:36px;}
+
+    /* Industry landscape grid */
+    .industry-map{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;
+      margin-bottom:28px;}
+    @media(max-width:720px){.industry-map{grid-template-columns:1fr 1fr;}}
+    @media(max-width:480px){.industry-map{grid-template-columns:1fr;}}
+
+    .im-zone{border-radius:10px;overflow:hidden;}
+    .im-zone-head{padding:11px 14px;}
+    .im-zone-label{font-size:8px;font-weight:700;letter-spacing:0.18em;
+      text-transform:uppercase;margin-bottom:2px;}
+    .im-zone-title{font-size:13px;font-weight:700;}
+    .im-zone-body{padding:10px 14px 12px;background:var(--bg);
+      border:1px solid var(--border);border-top:none;
+      border-radius:0 0 10px 10px;}
+    .im-roles{list-style:none;}
+    .im-roles li{font-size:12px;color:var(--sec-fg);padding:4px 0;
+      border-bottom:1px solid var(--border);display:flex;
+      align-items:center;gap:7px;}
+    .im-roles li:last-child{border-bottom:none;}
+    .im-dot{width:6px;height:6px;border-radius:50%;flex-shrink:0;}
+    .im-tag{margin-left:auto;font-size:9.5px;font-weight:600;padding:1px 6px;
+      border-radius:999px;}
+
+    /* ── TEMPLATE LIBRARY ── */
+    .templates-section{padding:64px 0;background:var(--muted);
+      border-top:1px solid var(--border);}
+    .template-grid{display:grid;grid-template-columns:1fr;gap:20px;}
+
+    .template-card{background:var(--bg);border:1px solid var(--border);
+      border-radius:12px;overflow:hidden;
+      transition:border-color 0.2s,box-shadow 0.2s;}
+    .template-card:hover{border-color:var(--primary-line);
+      box-shadow:0 8px 24px -8px rgba(50,128,255,0.12);}
+
+    .tc-header{padding:20px 24px;display:flex;align-items:center;
+      gap:16px;position:relative;}
+    .tc-accent-bar{position:absolute;left:0;top:0;bottom:0;width:4px;}
+    .tc-badge-wrap{flex-shrink:0;}
+    .tc-archetype-badge{display:inline-flex;align-items:center;gap:6px;
+      padding:5px 12px;border-radius:999px;font-size:10px;font-weight:700;
+      letter-spacing:0.12em;text-transform:uppercase;}
+    .tc-info{flex:1;}
+    .tc-name{font-family:'Playfair Display',serif;font-weight:700;font-size:18px;
+      color:var(--fg);margin-bottom:3px;}
+    .tc-role-band{font-size:12px;color:var(--muted-fg);}
+    .tc-dl-wrap{flex-shrink:0;}
+    .tc-dl-btn{display:inline-flex;align-items:center;gap:7px;
+      padding:9px 16px;border-radius:6px;font-size:12.5px;font-weight:700;
+      border:none;cursor:pointer;transition:all 0.2s;font-family:inherit;
+      color:#fff;}
+    .tc-dl-btn:hover{transform:translateY(-1px);}
+    .tc-dl-btn svg{width:13px;height:13px;}
+
+    .tc-body{padding:0 24px 22px;display:grid;
+      grid-template-columns:1fr 1fr 1fr;gap:20px;}
+    @media(max-width:720px){.tc-body{grid-template-columns:1fr;}}
+
+    .tc-col-label{font-size:9px;font-weight:700;letter-spacing:0.18em;
+      text-transform:uppercase;color:var(--primary);margin-bottom:8px;}
+    .tc-col p{font-size:13px;color:var(--sec-fg);line-height:1.55;}
+
+    /* Positioning challenge pill */
+    .tc-challenge{background:var(--muted);border:1px solid var(--border);
+      border-radius:6px;padding:10px 14px;margin-top:10px;}
+    .tc-challenge-label{font-size:9px;font-weight:700;letter-spacing:0.14em;
+      text-transform:uppercase;color:var(--muted-fg);margin-bottom:3px;}
+    .tc-challenge-text{font-size:12.5px;color:var(--sec-fg);line-height:1.45;
+      font-style:italic;}
+
+    /* Section sections list */
+    .tc-sections{list-style:none;}
+    .tc-sections li{font-size:12.5px;color:var(--sec-fg);padding:4px 0;
+      border-bottom:1px solid var(--border);display:flex;gap:7px;
+      align-items:flex-start;}
+    .tc-sections li:last-child{border-bottom:none;}
+    .tc-check{color:var(--primary);font-size:11px;flex-shrink:0;margin-top:2px;}
+
+    /* Preview thumbnail */
+    .tc-preview{border:1px solid var(--border);border-radius:6px;
+      overflow:hidden;background:var(--muted);}
+    .tc-preview-header{padding:8px 10px;border-bottom:1px solid var(--border);}
+    .tc-preview-name{font-size:18px;font-weight:900;color:var(--fg);
+      letter-spacing:-0.02em;margin-bottom:2px;}
+    .tc-preview-sub{font-size:8px;color:var(--muted-fg);}
+    .tc-preview-body{padding:8px 10px;}
+    .tc-preview-section{margin-bottom:7px;}
+    .tc-preview-sec-label{font-size:7px;font-weight:700;letter-spacing:0.14em;
+      text-transform:uppercase;margin-bottom:3px;}
+    .tc-preview-bar{height:5px;border-radius:2px;margin-bottom:2px;background:var(--border);}
+    .tc-preview-bar.accent{background:var(--primary);opacity:0.5;}
+    .tc-preview-bar.w80{width:80%;}
+    .tc-preview-bar.w60{width:60%;}
+    .tc-preview-bar.w90{width:90%;}
+    .tc-preview-bar.w50{width:50%;}
+    .tc-preview-bar.w70{width:70%;}
+    .tc-preview-bar.w40{width:40%;}
+
+    /* ── VETTING SECTION ── */
+    .vetting-section{padding:64px 0;background:var(--bg);}
+    .vetting-card{background:var(--chart5);border-radius:16px;
+      padding:44px 48px;position:relative;overflow:hidden;
+      display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;}
+    @media(max-width:820px){.vetting-card{grid-template-columns:1fr;padding:32px 28px;}}
+    .vetting-card::before{content:"";position:absolute;top:-80px;right:-80px;
+      width:280px;height:280px;background:var(--primary);opacity:0.2;
+      filter:blur(80px);border-radius:50%;}
+    .vc-left{position:relative;z-index:1;}
+    .vc-eyebrow{font-size:10px;font-weight:700;letter-spacing:0.2em;
+      text-transform:uppercase;color:var(--primary);margin-bottom:10px;
+      display:flex;align-items:center;gap:6px;}
+    .vc-eyebrow-dot{width:5px;height:5px;background:var(--primary);
+      border-radius:50%;animation:pulse 2s infinite;}
+    @keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:0.5;transform:scale(0.7);}}
+    .vc-title{font-family:'Playfair Display',serif;font-weight:700;
+      font-size:clamp(22px,3vw,30px);color:#fff;margin-bottom:12px;line-height:1.2;}
+    .vc-title .accent{color:var(--accent);font-style:italic;}
+    .vc-desc{font-size:14.5px;color:rgba(223,242,255,0.7);line-height:1.6;
+      margin-bottom:22px;}
+    .vc-what{list-style:none;margin-bottom:24px;}
+    .vc-what li{display:flex;align-items:flex-start;gap:10px;
+      font-size:13.5px;color:rgba(223,242,255,0.75);padding:7px 0;
+      border-bottom:1px solid rgba(223,242,255,0.08);}
+    .vc-what li:last-child{border-bottom:none;}
+    .vc-check{color:var(--primary);flex-shrink:0;margin-top:2px;font-size:11px;}
+
+    /* Vetting form */
+    .vc-right{position:relative;z-index:1;}
+    .vetting-form{background:rgba(255,255,255,0.06);
+      border:1px solid rgba(223,242,255,0.18);border-radius:12px;padding:24px;
+      backdrop-filter:blur(8px);}
+    .vf-title{font-family:'Playfair Display',serif;font-weight:700;font-size:16px;
+      color:#fff;margin-bottom:4px;}
+    .vf-sub{font-size:12px;color:rgba(223,242,255,0.5);margin-bottom:18px;}
+    .vf-field{margin-bottom:12px;}
+    .vf-label{font-size:11px;font-weight:600;color:rgba(223,242,255,0.65);
+      margin-bottom:5px;display:block;letter-spacing:0.04em;}
+    .vf-input{width:100%;padding:10px 13px;
+      background:rgba(255,255,255,0.08);
+      border:1px solid rgba(223,242,255,0.2);border-radius:6px;
+      font-size:13.5px;color:#fff;font-family:inherit;outline:none;
+      transition:border-color 0.2s;}
+    .vf-input::placeholder{color:rgba(223,242,255,0.3);}
+    .vf-input:focus{border-color:rgba(50,128,255,0.6);}
+    .vf-select{width:100%;padding:10px 13px;
+      background:rgba(255,255,255,0.08);
+      border:1px solid rgba(223,242,255,0.2);border-radius:6px;
+      font-size:13.5px;color:#fff;font-family:inherit;outline:none;
+      cursor:pointer;-webkit-appearance:none;}
+    .vf-select option{background:var(--chart5);color:#fff;}
+    .vf-upload{border:1px dashed rgba(223,242,255,0.25);border-radius:6px;
+      padding:16px;text-align:center;cursor:pointer;transition:border-color 0.2s;}
+    .vf-upload:hover{border-color:rgba(50,128,255,0.5);}
+    .vf-upload-icon{color:rgba(223,242,255,0.4);margin-bottom:6px;}
+    .vf-upload-icon svg{width:22px;height:22px;}
+    .vf-upload-text{font-size:12px;color:rgba(223,242,255,0.5);}
+    .vf-upload-text strong{color:var(--primary);}
+    .vf-note{font-size:11px;color:rgba(223,242,255,0.35);
+      text-align:center;margin-top:6px;line-height:1.4;}
+    .btn-submit{width:100%;background:var(--primary);color:#fff;
+      padding:13px;border-radius:6px;font-size:14px;font-weight:700;
+      border:none;cursor:pointer;transition:all 0.2s;font-family:inherit;
+      margin-top:14px;display:flex;align-items:center;justify-content:center;gap:7px;}
+    .btn-submit:hover{background:var(--chart2);transform:translateY(-1px);}
+    .btn-submit svg{width:15px;height:15px;}
+
+    /* Success state */
+    .vf-success{display:none;text-align:center;padding:24px 0;}
+    .vf-success.show{display:block;}
+    .vf-success-icon{width:52px;height:52px;border-radius:50%;
+      background:rgba(50,128,255,0.2);border:1px solid rgba(50,128,255,0.4);
+      display:flex;align-items:center;justify-content:center;
+      margin:0 auto 14px;}
+    .vf-success-icon svg{width:24px;height:24px;color:var(--primary);}
+    .vf-success-title{font-family:'Playfair Display',serif;font-weight:700;
+      font-size:18px;color:#fff;margin-bottom:6px;}
+    .vf-success-sub{font-size:13px;color:rgba(223,242,255,0.6);line-height:1.5;}
+
+    /* ── FOOTER ── */
+    .footer{background:var(--chart5);border-top:1px solid rgba(255,255,255,0.08);
+      padding:44px 0 24px;}
+    .footer-inner{max-width:1100px;margin:0 auto;padding:0 24px;
+      display:flex;justify-content:space-between;align-items:center;
+      gap:16px;flex-wrap:wrap;}
+    .footer .logo{color:#fff;}
+    .footer .logo-mark{background:var(--accent);}
+    .footer-right{font-size:13px;color:rgba(223,242,255,0.35);}
+
+    /* ── REVEAL ── */
+    .reveal{opacity:0;transform:translateY(14px);
+      transition:opacity 0.6s ease,transform 0.6s ease;}
+    .reveal.in{opacity:1;transform:none;}
+    .rd1{transition-delay:0.05s;}.rd2{transition-delay:0.1s;}
+    .rd3{transition-delay:0.15s;}.rd4{transition-delay:0.2s;}
+    .rd5{transition-delay:0.25s;}
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="commodity-playbook-zflow.html" class="logo">
+        <span class="logo-mark"></span>
+        <span>Commodity Playbook</span>
+      </a>
+      <div class="nav-links">
+        <a href="commodity-playbook-zflow.html">Overview</a>
+        <a href="commodity-playbook-hub.html">What's Inside</a>
+        <a href="commodity-playbook-zflow.html#pricing" class="btn-nav">Get the Playbook</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <a href="commodity-playbook-hub.html" class="back-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        Back to Hub
+      </a>
+      <div class="hero-eyebrow reveal">
+        <span class="hero-eyebrow-dot"></span>
+        Resume Templates · Starter Pack
+      </div>
+      <h1 class="hero-title reveal">Your Resume, <span class="accent">Positioned Right.</span></h1>
+      <p class="hero-sub reveal">Five archetype-specific templates built for how the commodity trading industry actually reads a CV. Take the quiz to find your archetype — then download the template built for your exact positioning challenge.</p>
+      <div class="hero-stats reveal rd2">
+        <div class="hero-stat">
+          <div class="hs-num">5</div>
+          <div class="hs-label">Archetypes covered</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hs-num">Word</div>
+          <div class="hs-label">Download-ready .docx</div>
+        </div>
+        <div class="hero-stat">
+          <div class="hs-num">Free</div>
+          <div class="hs-label">Resume vetting with Pro</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PERSONA QUIZ -->
+  <section class="quiz-section" id="quiz">
+    <div class="container">
+      <div style="text-align:center;margin-bottom:28px;" class="reveal">
+        <div class="sec-eyebrow">Step 1</div>
+        <div class="sec-title">Find Your Archetype</div>
+        <p style="font-size:15px;color:var(--muted-fg);max-width:480px;margin:8px auto 0;">
+          Five questions. Tells you exactly which template fits your background — and what your specific positioning challenge is.
+        </p>
+      </div>
+
+      <div class="quiz-card reveal rd1">
+        <div class="quiz-header">
+          <div class="quiz-header-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+          </div>
+          <div>
+            <div class="quiz-header-title">Archetype Finder</div>
+            <div class="quiz-header-sub">5 questions · 2 minutes · Instant result</div>
+          </div>
+        </div>
+        <div class="quiz-progress"><div class="quiz-progress-fill" id="quizProgress"></div></div>
+
+        <div class="quiz-body">
+
+          <!-- Step 1 -->
+          <div class="quiz-step active" id="step1">
+            <div class="quiz-q-num">Question 1 of 5</div>
+            <div class="quiz-q">Where is your career right now?</div>
+            <div class="quiz-q-sub">Choose the option that best describes your current professional situation.</div>
+            <div class="quiz-options">
+              <label class="quiz-opt" onclick="selectOpt(this,'q1','switcher')">
+                <div class="quiz-opt-radio"></div>
+                <div><div class="quiz-opt-text">I work in a related field — finance, consulting, engineering, or O&G — and want to move into commodity trading</div></div>
+              </label>
+              <label class="quiz-opt" onclick="selectOpt(this,'q1','insider')">
+                <div class="quiz-opt-radio"></div>
+                <div><div class="quiz-opt-text">I already work inside a commodity trading firm — in operations, scheduling, ETRM, or a support function</div></div>
+              </label>
+              <label class="quiz-opt" onclick="selectOpt(this,'q1','analyst')">
+                <div class="quiz-opt-radio"></div>
+                <div><div class="quiz-opt-text">I work in analytics, quant, or data science and want to move toward a trading or commercial role</div></div>
+              </label>
+              <label class="quiz-opt" onclick="selectOpt(this,'q1','vendor')">
+                <div class="quiz-opt-radio"></div>
+                <div><div class="quiz-opt-text">I work at a vendor firm selling data, intelligence, or services to the commodity trading community</div></div>
+              </label>
+              <label class="quiz-opt" onclick="selectOpt(this,'q1','grad')">
+                <div class="quiz-opt-radio"></div>
+                <div><div class="quiz-opt-text">I am a student, fresh graduate, or early in my career with limited professional experience</div></div>
+              </label>
+            </div>
+            <div class="quiz-nav">
+              <div class="quiz-nav-left">Select one to continue</div>
+              <div class="quiz-nav-btns">
+                <button class="btn-quiz-next" id="next1" disabled onclick="nextStep(1)">Next →</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="quiz-step" id="step2">
+            <div class="quiz-q-num">Question 2 of 5</div>
+            <div class="quiz-q">How many years of professional experience do you have?</div>
+            <div class="quiz-q-sub">Include all relevant work experience, including internships longer than 3 months.</div>
+            <div class="quiz-options">
+              <label class="quiz-opt" onclick="selectOpt(this,'q2','0-1')">
+                <div class="quiz-opt-radio"></div>
+                <div><div class="quiz-opt-text">0 – 1 year</div><div class="quiz-opt-sub">Student, fresh graduate, or very early career</div></div>
+              </label>
+              <label class="quiz-opt" onclick="selectOpt(this,'q2','1-3')">
+                <div class="quiz-opt-radio"></div>
+                <div><div class="quiz-opt-text">1 – 3 years</div><div class="quiz-opt-sub">Early career with some professional experience</div></div>
+              </label>
+              <label class="quiz-opt" onclick="selectOpt(this,'q2','3-7')">
+                <div class="quiz-opt-radio"></div>
+                <div><div class="quiz-opt-text">3 – 7 years</div><div class="quiz-opt-sub">Mid-career professional with a clear track record</div></div>
+              </label>
+              <label class="quiz-opt" onclick="selectOpt(this,'q2','7+')">
+                <div class="quiz-opt-radio"></div>
+                <div><div class="quiz-opt-text">7+ years</div><div class="quiz-opt-sub">Senior professional with deep domain expertise</div></div>
+              </label>
+            </div>
+            <div class="quiz-nav">
+              <div class="quiz-nav-left"></div>
+              <div class="quiz-nav-btns">
+                <button class="btn-quiz-back" onclick="prevStep(2)">← Back</button>
+                <button class="btn-quiz-next" id="next2" disabled onclick="nextStep(2)">Next →</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="quiz-step" id="step3">
+            <div class="quiz-q-num">Question 3 of 5</div>
+            <div class="quiz-q">What is your target role or function in commodity trading?</div>
+            <div class="quiz-q-sub">Pick the function that is closest to your goal.</div>
+            <div class="quiz-options">
+              <label class="quiz-opt" onclick="selectOpt(this,'q3','front')">
+                <div class="quiz-opt-radio"></div>
+                <div><div class="quiz-opt-text">Front office — Trader, originator, or commercial manager</div></div>
+              </label>
+              <label class="quiz-opt" onclick="selectOpt(this,'q3','analytics')">
+                <div class="quiz-opt-radio"></div>
+                <div><div class="quiz-opt-text">Analytics or quantitative research — market analysis, curve building, or modelling</div></div>
+              </label>
+              <label class="quiz-opt" onclick="selectOpt(this,'q3','ops')">
+                <div class="quiz-opt-radio"></div>
+                <div><div class="quiz-opt-text">Scheduling, operations, or ETRM — physical cargo management and logistics</div></div>
+              </label>
+              <label class="quiz-opt" onclick="selectOpt(this,'q3','risk')">
+                <div class="quiz-opt-radio"></div>
+                <div><div class="quiz-opt-text">Risk management, compliance, or trade finance</div></div>
+              </label>
+              <label class="quiz-opt" onclick="selectOpt(this,'q3','open')">
+                <div class="quiz-opt-radio"></div>
+                <div><div class="quiz-opt-text">I am open to multiple functions — still exploring</div></div>
+              </label>
+            </div>
+            <div class="quiz-nav">
+              <div class="quiz-nav-left"></div>
+              <div class="quiz-nav-btns">
+                <button class="btn-quiz-back" onclick="prevStep(3)">← Back</button>
+                <button class="btn-quiz-next" id="next3" disabled onclick="nextStep(3)">Next →</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="quiz-step" id="step4">
+            <div class="quiz-q-num">Question 4 of 5</div>
+            <div class="quiz-q">Which best describes your biggest resume challenge right now?</div>
+            <div class="quiz-q-sub">Be honest — this is what the template is designed to solve.</div>
+            <div class="quiz-options">
+              <label class="quiz-opt" onclick="selectOpt(this,'q4','translate')">
+                <div class="quiz-opt-radio"></div>
+                <div><div class="quiz-opt-text">Translating my experience from another industry into commodity trading language</div></div>
+              </label>
+              <label class="quiz-opt" onclick="selectOpt(this,'q4','commercial')">
+                <div class="quiz-opt-radio"></div>
+                <div><div class="quiz-opt-text">Making my operational experience sound commercial, not just functional</div></div>
+              </label>
+              <label class="quiz-opt" onclick="selectOpt(this,'q4','technical')">
+                <div class="quiz-opt-radio"></div>
+                <div><div class="quiz-opt-text">Making my technical or analytical skills relevant to a commercial role</div></div>
+              </label>
+              <label class="quiz-opt" onclick="selectOpt(this,'q4','thin')">
+                <div class="quiz-opt-radio"></div>
+                <div><div class="quiz-opt-text">Building a credible resume without much direct experience yet</div></div>
+              </label>
+              <label class="quiz-opt" onclick="selectOpt(this,'q4','sales')">
+                <div class="quiz-opt-radio"></div>
+                <div><div class="quiz-opt-text">Making a vendor/sales background read as market knowledge rather than sales activity</div></div>
+              </label>
+            </div>
+            <div class="quiz-nav">
+              <div class="quiz-nav-left"></div>
+              <div class="quiz-nav-btns">
+                <button class="btn-quiz-back" onclick="prevStep(4)">← Back</button>
+                <button class="btn-quiz-next" id="next4" disabled onclick="nextStep(4)">Next →</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 5 -->
+          <div class="quiz-step" id="step5">
+            <div class="quiz-q-num">Question 5 of 5</div>
+            <div class="quiz-q">Which commodity market are you most focused on?</div>
+            <div class="quiz-q-sub">This helps us tailor the template language and examples to your target market.</div>
+            <div class="quiz-options">
+              <label class="quiz-opt" onclick="selectOpt(this,'q5','lng')">
+                <div class="quiz-opt-radio"></div>
+                <div><div class="quiz-opt-text">LNG and natural gas</div></div>
+              </label>
+              <label class="quiz-opt" onclick="selectOpt(this,'q5','crude')">
+                <div class="quiz-opt-radio"></div>
+                <div><div class="quiz-opt-text">Crude oil and refined products</div></div>
+              </label>
+              <label class="quiz-opt" onclick="selectOpt(this,'q5','multi')">
+                <div class="quiz-opt-radio"></div>
+                <div><div class="quiz-opt-text">Multiple commodities / broad downstream</div></div>
+              </label>
+              <label class="quiz-opt" onclick="selectOpt(this,'q5','other')">
+                <div class="quiz-opt-radio"></div>
+                <div><div class="quiz-opt-text">Other / not yet sure</div></div>
+              </label>
+            </div>
+            <div class="quiz-nav">
+              <div class="quiz-nav-left"></div>
+              <div class="quiz-nav-btns">
+                <button class="btn-quiz-back" onclick="prevStep(5)">← Back</button>
+                <button class="btn-quiz-next" id="next5" disabled onclick="showResult()">See My Archetype →</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Result -->
+          <div class="result-card" id="quizResult">
+            <!-- populated by JS -->
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INDUSTRY MAP -->
+  <section class="map-section">
+    <div class="container">
+      <div class="reveal">
+        <div class="sec-eyebrow">Step 2 — Understand the Landscape</div>
+        <div class="sec-title">Where Does Your Role Sit?</div>
+        <p class="sec-sub">Commodity trading is not one function — it is a set of closely connected roles across four zones. Understanding where you sit shapes how your resume must be written.</p>
+      </div>
+      <div class="industry-map reveal rd1">
+
+        <div class="im-zone">
+          <div class="im-zone-head" style="background:var(--chart5);">
+            <div class="im-zone-label" style="color:rgba(223,242,255,0.55);">Zone A</div>
+            <div class="im-zone-title" style="color:#fff;">Front Office</div>
+          </div>
+          <div class="im-zone-body">
+            <ul class="im-roles">
+              <li><span class="im-dot" style="background:var(--primary);"></span>Commodity Trader<span class="im-tag" style="background:var(--accent);color:var(--acc-fg);">High competition</span></li>
+              <li><span class="im-dot" style="background:var(--primary);"></span>Originator / Commercial Manager</li>
+              <li><span class="im-dot" style="background:var(--primary);"></span>Structurer / Deal Origination</li>
+              <li><span class="im-dot" style="background:var(--primary);"></span>LNG Portfolio Manager</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="im-zone">
+          <div class="im-zone-head" style="background:var(--chart3);">
+            <div class="im-zone-label" style="color:rgba(223,242,255,0.55);">Zone B</div>
+            <div class="im-zone-title" style="color:#fff;">Analytics & Quant</div>
+          </div>
+          <div class="im-zone-body">
+            <ul class="im-roles">
+              <li><span class="im-dot" style="background:var(--chart3);"></span>Commodity Analyst<span class="im-tag" style="background:var(--accent);color:var(--acc-fg);">Strong entry point</span></li>
+              <li><span class="im-dot" style="background:var(--chart3);"></span>Market Intelligence Analyst</li>
+              <li><span class="im-dot" style="background:var(--chart3);"></span>Forward Curve Analyst</li>
+              <li><span class="im-dot" style="background:var(--chart3);"></span>Quantitative Researcher</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="im-zone">
+          <div class="im-zone-head" style="background:var(--teal);">
+            <div class="im-zone-label" style="color:rgba(255,255,255,0.6);">Zone C</div>
+            <div class="im-zone-title" style="color:#fff;">Operations & Scheduling</div>
+          </div>
+          <div class="im-zone-body">
+            <ul class="im-roles">
+              <li><span class="im-dot" style="background:var(--teal);"></span>Scheduler / Cargo Coordinator<span class="im-tag" style="background:#CCFBF1;color:var(--teal);">Best entry path</span></li>
+              <li><span class="im-dot" style="background:var(--teal);"></span>ETRM / Systems Analyst</li>
+              <li><span class="im-dot" style="background:var(--teal);"></span>Vessel Operations Manager</li>
+              <li><span class="im-dot" style="background:var(--teal);"></span>Trade Operations Analyst</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="im-zone">
+          <div class="im-zone-head" style="background:var(--purple);">
+            <div class="im-zone-label" style="color:rgba(255,255,255,0.6);">Zone D</div>
+            <div class="im-zone-title" style="color:#fff;">Risk & Finance</div>
+          </div>
+          <div class="im-zone-body">
+            <ul class="im-roles">
+              <li><span class="im-dot" style="background:var(--purple);"></span>Market Risk Analyst</li>
+              <li><span class="im-dot" style="background:var(--purple);"></span>Credit Risk Manager</li>
+              <li><span class="im-dot" style="background:var(--purple);"></span>Trade Finance Manager</li>
+              <li><span class="im-dot" style="background:var(--purple);"></span>Compliance / REMIT Officer</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="im-zone">
+          <div class="im-zone-head" style="background:var(--amber);">
+            <div class="im-zone-label" style="color:rgba(255,255,255,0.6);">Zone E</div>
+            <div class="im-zone-title" style="color:#fff;">Market Intelligence Vendors</div>
+          </div>
+          <div class="im-zone-body">
+            <ul class="im-roles">
+              <li><span class="im-dot" style="background:var(--amber);"></span>Price Reporter (Platts / Argus)</li>
+              <li><span class="im-dot" style="background:var(--amber);"></span>Intelligence Analyst (Kpler / Vortexa)</li>
+              <li><span class="im-dot" style="background:var(--amber);"></span>Research Analyst (Wood Mac)</li>
+              <li><span class="im-dot" style="background:var(--amber);"></span>Client Solutions (vendor-side)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="im-zone">
+          <div class="im-zone-head" style="background:var(--muted);border:1px solid var(--border);">
+            <div class="im-zone-label" style="color:var(--muted-fg);">Entry Path</div>
+            <div class="im-zone-title" style="color:var(--fg);">Which Zone First?</div>
+          </div>
+          <div class="im-zone-body">
+            <ul class="im-roles">
+              <li><span class="im-dot" style="background:var(--teal);"></span><span>Scheduling / Ops → best entry for most</span></li>
+              <li><span class="im-dot" style="background:var(--chart3);"></span><span>Analytics → best for quant backgrounds</span></li>
+              <li><span class="im-dot" style="background:var(--purple);"></span><span>Risk → best for finance graduates</span></li>
+              <li><span class="im-dot" style="background:var(--primary);"></span><span>Front office → rare direct entry</span></li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Positioning principle -->
+      <div style="background:var(--accent);border:1px solid var(--primary-line);border-radius:10px;padding:20px 24px;display:flex;align-items:flex-start;gap:14px;" class="reveal rd2">
+        <div style="width:32px;height:32px;border-radius:50%;background:var(--primary);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <div>
+          <div style="font-weight:700;font-size:14px;color:var(--acc-fg);margin-bottom:4px;">The positioning principle that every template is built on</div>
+          <div style="font-size:13.5px;color:var(--sec-fg);line-height:1.6;">Hiring managers in commodity trading do not read resumes looking for impressive job titles. They read them looking for evidence that you understand how physical markets work and that you can contribute commercially from day one. Every template in this pack is built around that single insight — commercial awareness over career narrative.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEMPLATE LIBRARY -->
+  <section class="templates-section" id="templates">
+    <div class="container">
+      <div class="reveal">
+        <div class="sec-eyebrow">Step 3 — Download Your Template</div>
+        <div class="sec-title">The 5 Archetype Templates</div>
+        <p class="sec-sub">Each template is built for a specific positioning challenge — not a generic CV layout. Download the one that matches your archetype.</p>
+      </div>
+
+      <div class="template-grid">
+
+        <!-- THE SWITCHER -->
+        <div class="template-card reveal rd1" id="template-switcher">
+          <div class="tc-header">
+            <div class="tc-accent-bar" style="background:var(--amber);"></div>
+            <div class="tc-badge-wrap">
+              <div class="tc-archetype-badge" style="background:var(--amber-bg);color:var(--amber);border:1px solid var(--amber-line);">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+                The Switcher
+              </div>
+            </div>
+            <div class="tc-info">
+              <div class="tc-name">Coming From Finance, Consulting, or Engineering</div>
+              <div class="tc-role-band">Banking · Management Consulting · Engineering · O&G Technical</div>
+            </div>
+            <div class="tc-dl-wrap">
+              <button class="tc-dl-btn" style="background:var(--amber);" onclick="downloadTemplate('switcher_resume_template.docx','The Switcher')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Download .docx
+              </button>
+            </div>
+          </div>
+          <div class="tc-body">
+            <div class="tc-col">
+              <div class="tc-col-label">Who This Is For</div>
+              <p>Professionals with 2–8 years of experience in banking, consulting, engineering, or O&G technical roles who are targeting a transition into commodity trading or a commercial role at an energy firm.</p>
+              <div class="tc-challenge">
+                <div class="tc-challenge-label">Positioning Challenge</div>
+                <div class="tc-challenge-text">You have relevant skills but they are buried under the wrong language. Your financial modelling reads as banking, your project management reads as consulting. The template reframes everything using commodity trading vocabulary.</div>
+              </div>
+            </div>
+            <div class="tc-col">
+              <div class="tc-col-label">What's Different About This Template</div>
+              <ul class="tc-sections">
+                <li><span class="tc-check">▸</span>Market Knowledge section placed above work experience — your commercial awareness leads, not your job history</li>
+                <li><span class="tc-check">▸</span>Pre-built bullet formula prompts: [what you analysed] + [market signal] + [commercial action]</li>
+                <li><span class="tc-check">▸</span>Amber accent colour signals cross-industry credibility without screaming "outsider"</li>
+                <li><span class="tc-check">▸</span>Guidance notes throughout explain the positioning logic behind each section</li>
+                <li><span class="tc-check">▸</span>Skills section uses commodity-specific terms (Platts, crack spreads, EFS, JKM) not generic finance jargon</li>
+              </ul>
+            </div>
+            <div class="tc-col">
+              <div class="tc-col-label">Template Preview</div>
+              <div class="tc-preview" style="border-color:var(--amber-line);">
+                <div class="tc-preview-header" style="background:var(--amber-bg);border-bottom-color:var(--amber-line);">
+                  <div class="tc-preview-name">YOUR NAME</div>
+                  <div class="tc-preview-sub" style="color:var(--amber);">THE SWITCHER — Cross-Industry Commercial Positioning</div>
+                </div>
+                <div class="tc-preview-body">
+                  <div class="tc-preview-section">
+                    <div class="tc-preview-sec-label" style="color:var(--amber);">Market Knowledge</div>
+                    <div class="tc-preview-bar accent w90"></div>
+                    <div class="tc-preview-bar w70"></div>
+                    <div class="tc-preview-bar w80"></div>
+                  </div>
+                  <div class="tc-preview-section">
+                    <div class="tc-preview-sec-label" style="color:var(--muted-fg);">Professional Experience</div>
+                    <div class="tc-preview-bar w90"></div>
+                    <div class="tc-preview-bar w60"></div>
+                    <div class="tc-preview-bar w80"></div>
+                    <div class="tc-preview-bar w50"></div>
+                  </div>
+                  <div class="tc-preview-section">
+                    <div class="tc-preview-sec-label" style="color:var(--muted-fg);">Education · Skills</div>
+                    <div class="tc-preview-bar w70"></div>
+                    <div class="tc-preview-bar w50"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- THE INSIDER -->
+        <div class="template-card reveal rd2" id="template-insider">
+          <div class="tc-header">
+            <div class="tc-accent-bar" style="background:var(--teal);"></div>
+            <div class="tc-badge-wrap">
+              <div class="tc-archetype-badge" style="background:var(--teal-bg);color:var(--teal);border:1px solid var(--teal-line);">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                The Insider
+              </div>
+            </div>
+            <div class="tc-info">
+              <div class="tc-name">Already Inside the Industry, Moving Toward the Desk</div>
+              <div class="tc-role-band">Scheduling · Operations · ETRM · Logistics · Trade Support</div>
+            </div>
+            <div class="tc-dl-wrap">
+              <button class="tc-dl-btn" style="background:var(--teal);" onclick="downloadTemplate('insider_resume_template.docx','The Insider')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Download .docx
+              </button>
+            </div>
+          </div>
+          <div class="tc-body">
+            <div class="tc-col">
+              <div class="tc-col-label">Who This Is For</div>
+              <p>Professionals already working inside a commodity trading firm in a non-desk function who want to move into a commercial, trading, or analytics role within the same firm or at a competitor.</p>
+              <div class="tc-challenge">
+                <div class="tc-challenge-label">Positioning Challenge</div>
+                <div class="tc-challenge-text">Your operational experience is genuinely valuable — but it reads as execution, not commercial. The template reframes operational knowledge as the execution-to-commercial bridge that desk candidates can't offer.</div>
+              </div>
+            </div>
+            <div class="tc-col">
+              <div class="tc-col-label">What's Different About This Template</div>
+              <ul class="tc-sections">
+                <li><span class="tc-check">▸</span>Commercial & Desk Interaction section — places evidence of front-office exposure above operational detail</li>
+                <li><span class="tc-check">▸</span>Bullet prompts use "supported trading desk in…" and "flagged arbitrage opportunity that resulted in…" language</li>
+                <li><span class="tc-check">▸</span>Teal accent positions the profile as credible industry insider, not a lateral transfer</li>
+                <li><span class="tc-check">▸</span>ETRM systems prominently featured — signals operational depth that analytical candidates lack</li>
+                <li><span class="tc-check">▸</span>Framing guidance: "execution-to-commercial bridge" — you know how deals land, not just how they're structured</li>
+              </ul>
+            </div>
+            <div class="tc-col">
+              <div class="tc-col-label">Template Preview</div>
+              <div class="tc-preview" style="border-color:var(--teal-line);">
+                <div class="tc-preview-header" style="background:var(--teal-bg);border-bottom-color:var(--teal-line);">
+                  <div class="tc-preview-name">YOUR NAME</div>
+                  <div class="tc-preview-sub" style="color:var(--teal);">THE INSIDER — Ops-to-Commercial Positioning</div>
+                </div>
+                <div class="tc-preview-body">
+                  <div class="tc-preview-section">
+                    <div class="tc-preview-sec-label" style="color:var(--teal);">Commercial & Desk Interaction</div>
+                    <div class="tc-preview-bar" style="background:var(--teal);opacity:0.5;width:90%;"></div>
+                    <div class="tc-preview-bar w70"></div>
+                    <div class="tc-preview-bar w80"></div>
+                  </div>
+                  <div class="tc-preview-section">
+                    <div class="tc-preview-sec-label" style="color:var(--muted-fg);">Professional Experience</div>
+                    <div class="tc-preview-bar w90"></div>
+                    <div class="tc-preview-bar w60"></div>
+                    <div class="tc-preview-bar w80"></div>
+                    <div class="tc-preview-bar w50"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ANALYST TO TRADER -->
+        <div class="template-card reveal rd3" id="template-analyst">
+          <div class="tc-header">
+            <div class="tc-accent-bar" style="background:var(--purple);"></div>
+            <div class="tc-badge-wrap">
+              <div class="tc-archetype-badge" style="background:var(--purple-bg);color:var(--purple);border:1px solid var(--purple-line);">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+                Analyst-to-Trader
+              </div>
+            </div>
+            <div class="tc-info">
+              <div class="tc-name">Quant / Analytics Background Moving Toward the Desk</div>
+              <div class="tc-role-band">Analytics · Quantitative Research · Data Science · Risk Modelling</div>
+            </div>
+            <div class="tc-dl-wrap">
+              <button class="tc-dl-btn" style="background:var(--purple);" onclick="downloadTemplate('analyst_trader_resume_template.docx','Analyst-to-Trader')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Download .docx
+              </button>
+            </div>
+          </div>
+          <div class="tc-body">
+            <div class="tc-col">
+              <div class="tc-col-label">Who This Is For</div>
+              <p>Analytics professionals, quantitative researchers, or data scientists with commodity market exposure who want to move into a front-office trading or senior analytics role with direct commercial impact.</p>
+              <div class="tc-challenge">
+                <div class="tc-challenge-label">Positioning Challenge</div>
+                <div class="tc-challenge-text">Strongest technical profile, weakest commercial narrative. Models need P&L implications. The template shows you as "quantitative commercial" — someone who builds models to take positions, not just to report on them.</div>
+              </div>
+            </div>
+            <div class="tc-col">
+              <div class="tc-col-label">What's Different About This Template</div>
+              <ul class="tc-sections">
+                <li><span class="tc-check">▸</span>Market Views section — 2–3 dated, specific calls you made and what happened (the key differentiator)</li>
+                <li><span class="tc-check">▸</span>Independent Project block for a GitHub data project — proves market engagement outside work</li>
+                <li><span class="tc-check">▸</span>Every model bullet ends with a commercial implication — not just what was built but what decision it enabled</li>
+                <li><span class="tc-check">▸</span>Technical tools woven into achievements, not listed in a skills block</li>
+                <li><span class="tc-check">▸</span>Purple signals analytical depth and commercial ambition simultaneously</li>
+              </ul>
+            </div>
+            <div class="tc-col">
+              <div class="tc-col-label">Template Preview</div>
+              <div class="tc-preview" style="border-color:var(--purple-line);">
+                <div class="tc-preview-header" style="background:var(--purple-bg);border-bottom-color:var(--purple-line);">
+                  <div class="tc-preview-name">YOUR NAME</div>
+                  <div class="tc-preview-sub" style="color:var(--purple);">ANALYST-TO-TRADER — Quantitative Commercial</div>
+                </div>
+                <div class="tc-preview-body">
+                  <div class="tc-preview-section">
+                    <div class="tc-preview-sec-label" style="color:var(--purple);">Market Views</div>
+                    <div class="tc-preview-bar" style="background:var(--purple);opacity:0.5;width:90%;"></div>
+                    <div class="tc-preview-bar w70"></div>
+                  </div>
+                  <div class="tc-preview-section">
+                    <div class="tc-preview-sec-label" style="color:var(--muted-fg);">Experience · Independent Project</div>
+                    <div class="tc-preview-bar w90"></div>
+                    <div class="tc-preview-bar w60"></div>
+                    <div class="tc-preview-bar w80"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- VENDOR -->
+        <div class="template-card reveal rd4" id="template-vendor">
+          <div class="tc-header">
+            <div class="tc-accent-bar" style="background:var(--navy-arc);"></div>
+            <div class="tc-badge-wrap">
+              <div class="tc-archetype-badge" style="background:var(--navy-bg);color:var(--navy-arc);border:1px solid var(--navy-line);">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+                The Vendor
+              </div>
+            </div>
+            <div class="tc-info">
+              <div class="tc-name">Market Intelligence Vendor Moving Into the Industry</div>
+              <div class="tc-role-band">Platts · Argus · ICIS · Kpler · Vortexa · Wood Mackenzie · ICIS</div>
+            </div>
+            <div class="tc-dl-wrap">
+              <button class="tc-dl-btn" style="background:var(--navy-arc);" onclick="downloadTemplate('vendor_resume_template.docx','The Vendor')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Download .docx
+              </button>
+            </div>
+          </div>
+          <div class="tc-body">
+            <div class="tc-col">
+              <div class="tc-col-label">Who This Is For</div>
+              <p>Professionals at Platts, Argus, ICIS, Kpler, Vortexa, Wood Mac, or similar firms who have spent years advising trading desks and now want to join one — in an analytics, commercial, or intelligence role.</p>
+              <div class="tc-challenge">
+                <div class="tc-challenge-label">Positioning Challenge</div>
+                <div class="tc-challenge-text">Vendor candidates almost always write a sales resume for a market knowledge role. Remove revenue targets. Replace with: what market you covered, what analysis you produced, and what decision it enabled inside a trading firm.</div>
+              </div>
+            </div>
+            <div class="tc-col">
+              <div class="tc-col-label">What's Different About This Template</div>
+              <ul class="tc-sections">
+                <li><span class="tc-check">▸</span>"Your Hidden Edge" advisory panel — explicitly unlocks the commercial value most vendor candidates undersell</li>
+                <li><span class="tc-check">▸</span>Market Knowledge & Commercial Insight section replaces a generic "account management" section</li>
+                <li><span class="tc-check">▸</span>Desk-Level Client Engagement section — shows the depth of relationship, not a headcount</li>
+                <li><span class="tc-check">▸</span>All revenue metrics removed and replaced with market intelligence outputs</li>
+                <li><span class="tc-check">▸</span>Cover letter hook guidance: open with a specific market observation from your coverage beat</li>
+              </ul>
+            </div>
+            <div class="tc-col">
+              <div class="tc-col-label">Template Preview</div>
+              <div class="tc-preview" style="border-color:var(--navy-line);">
+                <div class="tc-preview-header" style="background:var(--navy-bg);border-bottom-color:var(--navy-line);">
+                  <div class="tc-preview-name">YOUR NAME</div>
+                  <div class="tc-preview-sub" style="color:var(--navy-arc);">THE VENDOR — Market Intelligence to Desk</div>
+                </div>
+                <div class="tc-preview-body">
+                  <div class="tc-preview-section">
+                    <div class="tc-preview-sec-label" style="color:var(--navy-arc);">Market Knowledge & Insight</div>
+                    <div class="tc-preview-bar" style="background:var(--navy-arc);opacity:0.5;width:90%;"></div>
+                    <div class="tc-preview-bar w70"></div>
+                    <div class="tc-preview-bar w80"></div>
+                  </div>
+                  <div class="tc-preview-section">
+                    <div class="tc-preview-sec-label" style="color:var(--muted-fg);">Experience · Desk Engagement</div>
+                    <div class="tc-preview-bar w90"></div>
+                    <div class="tc-preview-bar w60"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- FRESH GRADUATE -->
+        <div class="template-card reveal rd5" id="template-grad">
+          <div class="tc-header">
+            <div class="tc-accent-bar" style="background:var(--rust);"></div>
+            <div class="tc-badge-wrap">
+              <div class="tc-archetype-badge" style="background:var(--rust-bg);color:var(--rust);border:1px solid var(--rust-line);">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+                Fresh Graduate
+              </div>
+            </div>
+            <div class="tc-info">
+              <div class="tc-name">Student or Early-Career — Building the Foundation</div>
+              <div class="tc-role-band">Undergraduate · Postgraduate · 0–2 Years Experience</div>
+            </div>
+            <div class="tc-dl-wrap">
+              <button class="tc-dl-btn" style="background:var(--rust);" onclick="downloadTemplate('fresh_grad_resume_template.docx','Fresh Graduate')">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                Download .docx
+              </button>
+            </div>
+          </div>
+          <div class="tc-body">
+            <div class="tc-col">
+              <div class="tc-col-label">Who This Is For</div>
+              <p>Undergraduates, recent graduates, and professionals with 0–2 years of experience who want to enter the commodity trading industry — in any function — and need to demonstrate commercial curiosity without direct experience.</p>
+              <div class="tc-challenge">
+                <div class="tc-challenge-label">Positioning Challenge</div>
+                <div class="tc-challenge-text">No trading experience is expected — but commercial curiosity is required. The template shows you understand the market and have already started engaging with it, even before your first role.</div>
+              </div>
+            </div>
+            <div class="tc-col">
+              <div class="tc-col-label">What's Different About This Template</div>
+              <ul class="tc-sections">
+                <li><span class="tc-check">▸</span>"What Skills Do You Need?" guidance panel — a gold callout box that maps graduates to their entry track before they fill in a single bullet</li>
+                <li><span class="tc-check">▸</span>Market Knowledge section prominently placed — your weekly EIA tracking or LNG price study goes here</li>
+                <li><span class="tc-check">▸</span>Independent Projects section — even a basic Excel crack spread model demonstrates real engagement</li>
+                <li><span class="tc-check">▸</span>Education elevated as primary section — coursework commercially reframed</li>
+                <li><span class="tc-check">▸</span>Entry track selector: Analytics, Scheduling/Ops, or Risk — choose one before applying</li>
+              </ul>
+            </div>
+            <div class="tc-col">
+              <div class="tc-col-label">Template Preview</div>
+              <div class="tc-preview" style="border-color:var(--rust-line);">
+                <div class="tc-preview-header" style="background:var(--rust-bg);border-bottom-color:var(--rust-line);">
+                  <div class="tc-preview-name">YOUR NAME</div>
+                  <div class="tc-preview-sub" style="color:var(--rust);">FRESH GRADUATE — Entry-Level Positioning</div>
+                </div>
+                <div class="tc-preview-body">
+                  <div class="tc-preview-section">
+                    <div class="tc-preview-sec-label" style="color:var(--rust);">Market Knowledge · Skills Guide</div>
+                    <div class="tc-preview-bar" style="background:var(--rust);opacity:0.5;width:90%;"></div>
+                    <div class="tc-preview-bar w60"></div>
+                  </div>
+                  <div class="tc-preview-section">
+                    <div class="tc-preview-sec-label" style="color:var(--muted-fg);">Education · Projects · Activities</div>
+                    <div class="tc-preview-bar w90"></div>
+                    <div class="tc-preview-bar w70"></div>
+                    <div class="tc-preview-bar w50"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /template-grid -->
+    </div>
+  </section>
+
+  <!-- RESUME VETTING -->
+  <section class="vetting-section" id="vetting">
+    <div class="container">
+      <div class="vetting-card reveal">
+        <div class="vc-left">
+          <div class="vc-eyebrow">
+            <span class="vc-eyebrow-dot"></span>
+            Online Resume Vetting · Pro Feature
+          </div>
+          <div class="vc-title">Get Your Resume <span class="accent">Reviewed by a Practitioner.</span></div>
+          <div class="vc-desc">Submit your completed resume — using any of the five templates — and a commodity trading practitioner from our network will review it and provide written feedback within 5 business days.</div>
+          <ul class="vc-what">
+            <li><span class="vc-check">✓</span>Line-by-line commercial language assessment — does every bullet demonstrate market awareness?</li>
+            <li><span class="vc-check">✓</span>Archetype positioning check — is the resume consistent with the archetype strategy?</li>
+            <li><span class="vc-check">✓</span>Top 3 improvements — specific, actionable rewrites to the weakest sections</li>
+            <li><span class="vc-check">✓</span>Recruiter readability score — how fast does the key message land?</li>
+            <li><span class="vc-check">✓</span>Written feedback delivered as annotated PDF within 5 business days</li>
+          </ul>
+          <div style="background:rgba(223,242,255,0.1);border:1px solid rgba(223,242,255,0.2);border-radius:8px;padding:12px 16px;">
+            <div style="font-size:10px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:rgba(223,242,255,0.5);margin-bottom:4px;">Included in</div>
+            <div style="font-size:13.5px;color:rgba(223,242,255,0.8);">Pro Pack subscribers get <strong style="color:#fff;">2 resume vetting reviews per year</strong> — included in your SGD 299/yr subscription. Starter members can purchase additional reviews at SGD 49 per review.</div>
+          </div>
+        </div>
+
+        <div class="vc-right">
+          <div class="vetting-form" id="vettingFormWrap">
+            <div class="vf-title">Submit for Review</div>
+            <div class="vf-sub">Pro members · 2 reviews included · 5 business day turnaround</div>
+
+            <div class="vf-field">
+              <label class="vf-label">Full Name</label>
+              <input type="text" class="vf-input" id="vf-name" placeholder="Wei Ming Tan"/>
+            </div>
+            <div class="vf-field">
+              <label class="vf-label">Email Address</label>
+              <input type="email" class="vf-input" id="vf-email" placeholder="you@company.com"/>
+            </div>
+            <div class="vf-field">
+              <label class="vf-label">Your Archetype</label>
+              <select class="vf-select" id="vf-archetype">
+                <option value="" disabled selected>Select your archetype</option>
+                <option>The Switcher — Coming from finance / consulting / engineering</option>
+                <option>The Insider — Already in industry, moving toward the desk</option>
+                <option>Analyst-to-Trader — Quant / analytics background</option>
+                <option>The Vendor — Market intelligence firm background</option>
+                <option>Fresh Graduate — Student or early career</option>
+              </select>
+            </div>
+            <div class="vf-field">
+              <label class="vf-label">Target Role</label>
+              <input type="text" class="vf-input" id="vf-role" placeholder="e.g. LNG Analyst, Crude Scheduler, Risk Analyst"/>
+            </div>
+            <div class="vf-field">
+              <label class="vf-label">Upload Your Resume</label>
+              <div class="vf-upload" onclick="document.getElementById('vf-file').click()">
+                <div class="vf-upload-icon">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+                </div>
+                <div class="vf-upload-text"><strong>Click to upload</strong> your resume · .docx or .pdf</div>
+                <div id="vf-file-name" style="font-size:11px;color:rgba(223,242,255,0.5);margin-top:4px;"></div>
+              </div>
+              <input type="file" id="vf-file" accept=".docx,.pdf" style="display:none;" onchange="updateFileName(this)"/>
+              <div class="vf-note">Maximum 5MB · .docx or PDF · One file only</div>
+            </div>
+
+            <button class="btn-submit" onclick="submitVetting()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+              Submit for Review
+            </button>
+          </div>
+
+          <div class="vf-success" id="vettingSuccess">
+            <div class="vf-success-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+            </div>
+            <div class="vf-success-title">Resume submitted.</div>
+            <div class="vf-success-sub">You'll receive your annotated feedback within 5 business days at the email address provided. Check your inbox — including spam — for confirmation.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <a href="commodity-playbook-zflow.html" class="logo">
+        <span class="logo-mark"></span>
+        <span style="font-family:'Playfair Display',serif;font-weight:700;font-size:17px;">Commodity Playbook</span>
+      </a>
+      <div class="footer-right">Resume Templates · Starter Pack · 5 Archetypes · Online Vetting</div>
+    </div>
+  </footer>
+
+  <script>
+  // ── QUIZ LOGIC ──────────────────────────────────────────────────────────
+  const answers = {};
+  let currentStep = 1;
+  const totalSteps = 5;
+
+  function selectOpt(el, q, val) {
+    // Deselect siblings
+    el.closest('.quiz-options').querySelectorAll('.quiz-opt').forEach(o => o.classList.remove('selected'));
+    el.classList.add('selected');
+    answers[q] = val;
+    const btn = document.getElementById('next' + currentStep);
+    if (btn) btn.disabled = false;
+  }
+
+  function nextStep(from) {
+    document.getElementById('step' + from).classList.remove('active');
+    currentStep = from + 1;
+    document.getElementById('step' + currentStep).classList.add('active');
+    updateProgress();
+  }
+
+  function prevStep(from) {
+    document.getElementById('step' + from).classList.remove('active');
+    currentStep = from - 1;
+    document.getElementById('step' + currentStep).classList.add('active');
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const pct = (currentStep / (totalSteps + 1)) * 100;
+    document.getElementById('quizProgress').style.width = pct + '%';
+  }
+
+  // ── ARCHETYPE DATA ──────────────────────────────────────────────────────
+  const archetypes = {
+    switcher: {
+      emoji: '🔄', color: 'var(--amber)', bg: 'var(--amber-bg)',
+      name: 'The Switcher',
+      label: 'Cross-Industry Commercial Pivot',
+      desc: 'You are coming from finance, consulting, engineering, or a technical O&G role. Your skills are genuinely relevant — but they are buried under the wrong language. Hiring managers need to see commodity trading vocabulary, commercial awareness, and market knowledge before they will look at your job titles.',
+      industry_position: 'You sit outside the industry right now, targeting entry through the Switcher path. This is the most common profile for Singapore-based finance and consulting professionals targeting LNG and crude trading firms. The Switcher path works best for front-office analyst, commercial analyst, or origination roles — where cross-functional experience adds genuine value.',
+      key_move: 'Lead with a Market Knowledge section above your work experience. Use the commercial awareness bullet formula: [what you tracked or modelled] + [the market signal it revealed] + [the action or decision it enabled]. The desk does not care where you worked — they care that you understand how physical markets work.',
+      template: 'switcher_resume_template.docx',
+      template_id: 'template-switcher'
+    },
+    insider: {
+      emoji: '🏠', color: 'var(--teal)', bg: 'var(--teal-bg)',
+      name: 'The Insider',
+      label: 'Execution-to-Commercial Bridge',
+      desc: 'You already work inside a commodity trading firm — in scheduling, operations, ETRM, or a support function. You understand the physical market better than most external candidates. The challenge is that your resume reads as execution, not commercial. The Insider template reframes your operational knowledge as the bridge between execution and commercial decision-making.',
+      industry_position: 'You are inside the industry — and that is your single biggest advantage over external candidates. The desk trusts operational people who understand how deals actually land. Your positioning challenge is not market knowledge; it is demonstrating that you have been close enough to the commercial decisions to understand them — not just implement them.',
+      key_move: 'Add a "Commercial & Desk Interaction" section. Document every instance where your operational work directly touched a trading desk decision — "flagged a vessel position that created a cargo diversion opportunity," "identified a scheduling window that reduced freight cost by X." These are commercial contributions, not operational reports.',
+      template: 'insider_resume_template.docx',
+      template_id: 'template-insider'
+    },
+    analyst: {
+      emoji: '📊', color: 'var(--purple)', bg: 'var(--purple-bg)',
+      name: 'The Analyst-to-Trader',
+      label: 'Quantitative Commercial Profile',
+      desc: 'You have the strongest technical profile of any archetype — but the weakest commercial narrative. Your models are good; your ability to explain what commercial decision they enabled is not yet developed. The Analyst-to-Trader template shows you as a "quantitative commercial" professional — someone who builds models to support positions, not just to produce reports.',
+      industry_position: 'Analytics professionals occupy a high-value role in commodity trading — but only when they can connect their outputs to commercial decisions. The firms that pay the most for analysts want people who can tell them what a model implies for the desk\'s position — not just report the output. Your path to a desk role runs through demonstrating market views, not just modelling skill.',
+      key_move: 'Add a "Market Views" section with 2–3 dated, specific calls you made and what happened. "Q2 2024 — identified JKM/TTF spread compression thesis; spread narrowed from $4.20 to $1.80 MMBtu over Q1." A call that was wrong but well-reasoned is still worth including. Show that you think commercially, not just technically.',
+      template: 'analyst_trader_resume_template.docx',
+      template_id: 'template-analyst'
+    },
+    vendor: {
+      emoji: '📡', color: 'var(--navy-arc)', bg: 'var(--navy-bg)',
+      name: 'The Market Intelligence Vendor',
+      label: 'Intelligence-to-Desk Transition',
+      desc: 'You work at Platts, Argus, ICIS, Kpler, Vortexa, Wood Mac, or a similar firm. You have spent years advising trading desks — which means you understand the market AND how traders consume intelligence. Most vendor-side candidates completely undersell this edge because they write a sales resume instead of a market knowledge resume.',
+      industry_position: 'The Vendor archetype has the most unusual and undervalued profile in commodity trading. You have been inside the room with more desks, seen more market scenarios, and understood more commodity dynamics than any analyst who came up through a single firm. The challenge is that your job title says "sales" or "client solutions" — and hiring managers read that as sales, not market knowledge.',
+      key_move: 'Remove all revenue metrics — account counts, renewal rates, pipeline values. Replace with: what market you covered, what analysis you produced, and what commercial decision it enabled inside a trading firm. Your cover letter hook should open with a specific market observation from your coverage beat. You have more material for this than any other archetype.',
+      template: 'vendor_resume_template.docx',
+      template_id: 'template-vendor'
+    },
+    grad: {
+      emoji: '🎓', color: 'var(--rust)', bg: 'var(--rust-bg)',
+      name: 'The Fresh Graduate',
+      label: 'Entry-Level Commercial Positioning',
+      desc: 'You are a student, fresh graduate, or early-career professional. No trading experience is expected — but commercial curiosity is non-negotiable. The Fresh Graduate template shows you understand the market and have already started engaging with it before your first role. It also maps you to the right entry track — analytics, scheduling/ops, or risk — because applying to all three simultaneously signals indecision.',
+      industry_position: 'Fresh graduates compete for a small number of junior analyst and scheduler roles — typically in analytics, trade support, or scheduling rather than the front office. Your competitive advantage comes not from experience but from demonstrated market engagement: a crack spread tracker you built in Excel, an EIA report analysis you conducted, a market view you formed and documented. These signal intellectual seriousness.',
+      key_move: 'Decide on one entry track — analytics, scheduling/ops, or risk — before you apply. Then build one piece of market evidence: an Excel EIA tracker, a Python market analysis script, or a written market view on a commodity you follow. That single piece of evidence differentiates you from every other graduate who submitted a generic finance CV.',
+      template: 'fresh_grad_resume_template.docx',
+      template_id: 'template-grad'
+    },
+  };
+
+  // ── RESULT LOGIC ─────────────────────────────────────────────────────────
+  function determineArchetype() {
+    // Primary signal is Q1 answer
+    const q1 = answers['q1'] || 'grad';
+    const q4 = answers['q4'] || '';
+
+    // Refine by challenge (q4) if needed
+    if (q1 === 'switcher') return 'switcher';
+    if (q1 === 'insider')  return 'insider';
+    if (q1 === 'analyst')  return 'analyst';
+    if (q1 === 'vendor')   return 'vendor';
+    if (q1 === 'grad')     return 'grad';
+    return 'grad';
+  }
+
+  function showResult() {
+    // Hide all steps
+    document.querySelectorAll('.quiz-step').forEach(s => s.classList.remove('active'));
+
+    const arch = determineArchetype();
+    const a = archetypes[arch];
+    const rc = document.getElementById('quizResult');
+
+    rc.innerHTML = `
+      <div class="rc-top">
+        <div class="rc-badge" style="background:${a.bg};">${a.emoji}</div>
+        <div>
+          <div class="rc-label" style="color:${a.color};">${a.label}</div>
+          <div class="rc-name">${a.name}</div>
+        </div>
+      </div>
+      <div class="rc-desc">${a.desc}</div>
+      <div class="rc-positioning">
+        <div class="rc-pos-label">Where you sit in the industry</div>
+        <div class="rc-pos-text">${a.industry_position}</div>
+      </div>
+      <div class="rc-key-move">
+        <div class="rc-key-label">Your #1 positioning move</div>
+        <div class="rc-key-text">${a.key_move}</div>
+      </div>
+      <div class="rc-actions">
+        <button class="btn-dl" style="background:${a.color};" onclick="downloadTemplate('${a.template}','${a.name}')">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Download ${a.name} Template
+        </button>
+        <button class="btn-retake" onclick="retakeQuiz()">Retake Quiz</button>
+        <a href="#${a.template_id}" class="btn-retake" style="padding:11px 18px;display:inline-block;">See Full Template →</a>
+      </div>
+    `;
+    rc.classList.add('show');
+
+    // Update progress to 100%
+    document.getElementById('quizProgress').style.width = '100%';
+
+    // Scroll result into view
+    setTimeout(() => rc.scrollIntoView({behavior:'smooth',block:'center'}), 100);
+  }
+
+  function retakeQuiz() {
+    Object.keys(answers).forEach(k => delete answers[k]);
+    currentStep = 1;
+    document.getElementById('quizResult').classList.remove('show');
+    document.getElementById('quizResult').innerHTML = '';
+    document.querySelectorAll('.quiz-step').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.quiz-opt').forEach(o => o.classList.remove('selected'));
+    document.querySelectorAll('.btn-quiz-next').forEach(b => b.disabled = true);
+    document.getElementById('step1').classList.add('active');
+    updateProgress();
+  }
+
+  // ── TEMPLATE DOWNLOAD ────────────────────────────────────────────────────
+  function downloadTemplate(filename, archName) {
+    // Placeholder — connect to actual file hosting
+    alert('Downloading: ' + archName + ' Resume Template\nFile: ' + filename + '\n\nConnect this to your file delivery system (AWS S3, Gumroad, or CDN).');
+  }
+
+  // ── VETTING FORM ─────────────────────────────────────────────────────────
+  function updateFileName(input) {
+    const fn = document.getElementById('vf-file-name');
+    if (input.files[0]) fn.textContent = '✓ ' + input.files[0].name;
+  }
+
+  function submitVetting() {
+    const name  = document.getElementById('vf-name').value.trim();
+    const email = document.getElementById('vf-email').value.trim();
+    const arch  = document.getElementById('vf-archetype').value;
+    if (!name || !email || !email.includes('@') || !arch) {
+      alert('Please fill in your name, email, and archetype before submitting.');
+      return;
+    }
+    document.getElementById('vettingFormWrap').style.display = 'none';
+    document.getElementById('vettingSuccess').classList.add('show');
+  }
+
+  // ── REVEAL ────────────────────────────────────────────────────────────────
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, {threshold: 0.07});
+  reveals.forEach(el => io.observe(el));
+  document.querySelectorAll('.hero .reveal').forEach((el,i) => {
+    setTimeout(() => el.classList.add('in'), 80 + i * 120);
+  });
+
+  // Initial progress
+  updateProgress();
+  </script>
+</body>
+</html>

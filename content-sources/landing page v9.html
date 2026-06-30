@@ -1,0 +1,1495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Commodity Trading Playbook — For Careers &amp; Commercial Sales</title>
+  <meta name="description" content="The insider's guide to commodity trading — built for career professionals entering the industry and salespeople selling into it. 20+ years on the desk."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    /* ============================================================
+       COMMODITY PLAYBOOK — DUAL AUDIENCE LANDING PAGE
+       ZFlow theme: tweakcn.com/themes/cmn5czngq000204l4hydwhlao
+       ============================================================ */
+    :root {
+      --bg:#ffffff; --fg:#333333;
+      --primary:#3280ff; --primary-fg:#ffffff;
+      --secondary:#f2f4f7; --sec-fg:#465468;
+      --accent:#dff2ff; --acc-fg:#0830a0;
+      --muted:#f9fafb; --muted-fg:#677184;
+      --border:#e4e7ec; --ring:#3280ff;
+      --chart1:#3280ff; --chart2:#115cff;
+      --chart3:#0040f5; --chart4:#0131cc; --chart5:#0830a0;
+      --primary-soft:rgba(50,128,255,0.08);
+      --primary-line:rgba(50,128,255,0.25);
+      /* Sales audience accent */
+      --sales:#0F766E; --sales-bg:#CCFBF1;
+      --sales-line:rgba(15,118,110,0.3);
+      --sales-dark:#065F46;
+      --container:1200px; --radius:8px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);
+      color:var(--fg);line-height:1.6;
+      -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}
+    a{color:inherit;text-decoration:none;}
+    .container{max-width:var(--container);margin:0 auto;padding:0 24px;}
+
+    /* ── NAV ── */
+    .nav{position:sticky;top:0;z-index:100;
+      background:rgba(255,255,255,0.92);
+      backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+      border-bottom:1px solid var(--border);
+      transition:border-color 0.3s;}
+    .nav-inner{display:flex;align-items:center;
+      justify-content:space-between;height:64px;}
+    .logo{display:flex;align-items:center;gap:10px;
+      font-family:'Playfair Display',serif;font-weight:700;
+      font-size:18px;letter-spacing:-0.01em;color:var(--fg);}
+    .logo-mark{width:22px;height:22px;background:var(--primary);
+      transform:rotate(45deg);transition:transform 0.4s ease;}
+    .logo:hover .logo-mark{transform:rotate(90deg);}
+    .nav-links{display:flex;align-items:center;gap:28px;}
+    .nav-links a{font-size:14px;font-weight:500;
+      color:var(--muted-fg);transition:color 0.2s;}
+    .nav-links a:hover{color:var(--primary);}
+    .nav-cta{background:var(--primary);color:#fff;
+      padding:10px 18px;border-radius:6px;font-size:14px;
+      font-weight:600;transition:background 0.2s;}
+    .nav-cta:hover{background:var(--chart2) !important;color:#fff !important;}
+    @media(max-width:720px){
+      .nav-links a:not(.nav-cta){display:none;}}
+
+    /* ── AUDIENCE TOGGLE — sits below nav ── */
+    .audience-bar{
+      background:var(--secondary);
+      border-bottom:1px solid var(--border);
+      padding:0;
+      position:sticky;top:64px;z-index:90;
+    }
+    .audience-bar-inner{
+      max-width:var(--container);margin:0 auto;padding:0 24px;
+      display:flex;align-items:center;gap:0;
+    }
+    .aud-tab{
+      display:flex;align-items:center;gap:9px;
+      padding:14px 24px;font-size:13.5px;font-weight:600;
+      color:var(--muted-fg);cursor:pointer;
+      border-bottom:2px solid transparent;
+      transition:all 0.2s;white-space:nowrap;
+      background:none;border-top:none;border-left:none;border-right:none;
+      font-family:'Inter',sans-serif;
+    }
+    .aud-tab svg{width:15px;height:15px;flex-shrink:0;}
+    .aud-tab:hover{color:var(--fg);}
+    .aud-tab.active-career{
+      color:var(--primary);
+      border-bottom-color:var(--primary);
+    }
+    .aud-tab.active-sales{
+      color:var(--sales);
+      border-bottom-color:var(--sales);
+    }
+    .aud-divider{width:1px;height:20px;background:var(--border);margin:0 4px;flex-shrink:0;}
+    .aud-hint{margin-left:auto;font-size:12px;color:var(--muted-fg);
+      display:flex;align-items:center;gap:6px;}
+    .aud-hint svg{width:13px;height:13px;}
+    @media(max-width:600px){.aud-hint{display:none;}}
+
+    /* ── CONTENT PANELS ── */
+    .panel{display:none;}
+    .panel.active{display:block;}
+
+    /* ─────────────────────────────────────────
+       CAREER PANEL
+    ───────────────────────────────────────── */
+
+    /* Hero */
+    .hero-career{
+      position:relative;overflow:hidden;
+      padding:96px 0 120px;
+      background:var(--chart5);
+    }
+    .hero-career::before{
+      content:"";position:absolute;top:-200px;right:-200px;
+      width:640px;height:640px;background:var(--primary);
+      opacity:0.18;filter:blur(120px);border-radius:50%;pointer-events:none;
+    }
+    .hero-career::after{
+      content:"";position:absolute;bottom:-120px;left:-120px;
+      width:400px;height:400px;background:var(--chart3);
+      opacity:0.12;filter:blur(100px);border-radius:50%;pointer-events:none;
+    }
+    .hero-inner{position:relative;z-index:2;max-width:900px;}
+    .pill{display:inline-flex;align-items:center;gap:8px;
+      padding:6px 14px;border:1px solid rgba(223,242,255,0.35);
+      background:rgba(223,242,255,0.12);color:#dff2ff;
+      border-radius:999px;font-size:13px;font-weight:500;margin-bottom:28px;}
+    .pill-dot{width:6px;height:6px;border-radius:50%;background:#dff2ff;
+      animation:blink 2s infinite;}
+    @keyframes blink{0%,100%{opacity:1;}50%{opacity:0.4;}}
+    h1.hero-title{font-family:'Playfair Display',serif;font-weight:700;
+      font-size:clamp(38px,5.5vw,72px);line-height:1.05;
+      letter-spacing:-0.02em;margin-bottom:28px;color:#fff;}
+    h1.hero-title .accent{color:var(--accent);font-style:italic;}
+    .hero-sub{font-size:clamp(16px,1.5vw,20px);color:rgba(223,242,255,0.75);
+      max-width:620px;margin-bottom:40px;font-weight:300;line-height:1.6;}
+    .hero-cta{display:flex;gap:14px;flex-wrap:wrap;}
+    .btn-hero-primary{display:inline-flex;align-items:center;justify-content:center;
+      padding:15px 28px;background:var(--primary);color:#fff;border-radius:6px;
+      font-weight:700;font-size:15px;transition:all 0.2s;gap:7px;border:none;cursor:pointer;}
+    .btn-hero-primary:hover{background:var(--chart2);transform:translateY(-1px);}
+    .btn-hero-outline{display:inline-flex;align-items:center;justify-content:center;
+      padding:15px 28px;color:#fff;border:1px solid rgba(255,255,255,0.3);
+      border-radius:6px;font-weight:600;font-size:15px;transition:all 0.2s;gap:7px;}
+    .btn-hero-outline:hover{background:rgba(255,255,255,0.1);
+      border-color:rgba(255,255,255,0.5);}
+
+    /* Stat strip */
+    .hero-stats{display:flex;gap:36px;flex-wrap:wrap;margin-top:52px;
+      padding-top:40px;border-top:1px solid rgba(255,255,255,0.1);}
+    .hs{display:flex;flex-direction:column;gap:2px;}
+    .hs-num{font-family:'Playfair Display',serif;font-weight:700;
+      font-size:28px;color:#fff;letter-spacing:-0.02em;}
+    .hs-label{font-size:12px;color:rgba(223,242,255,0.55);font-weight:500;}
+
+    /* Social proof */
+    .strip{padding:36px 0;background:var(--secondary);
+      border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+    .strip-label{text-align:center;font-size:11px;letter-spacing:0.2em;
+      text-transform:uppercase;color:var(--muted-fg);margin-bottom:20px;font-weight:600;}
+    .strip-logos{display:flex;flex-wrap:wrap;justify-content:center;
+      gap:48px;opacity:0.5;}
+    .strip-logos span{font-family:'Playfair Display',serif;font-weight:700;
+      font-size:18px;color:var(--fg);}
+
+    /* Sections */
+    .section{padding:88px 0;background:var(--bg);}
+    .section-tinted{background:var(--muted);
+      border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+    .section-head{max-width:700px;margin:0 auto 56px;text-align:center;}
+    .section-head.left{text-align:left;margin-left:0;}
+    .section-eyebrow{font-size:10px;font-weight:700;letter-spacing:0.22em;
+      text-transform:uppercase;color:var(--primary);margin-bottom:10px;
+      display:flex;align-items:center;justify-content:center;gap:8px;}
+    .section-eyebrow::before,.section-eyebrow::after{
+      content:"";display:inline-block;height:1px;width:24px;
+      background:var(--primary);opacity:0.5;}
+    h2.section-title{font-family:'Playfair Display',serif;font-weight:700;
+      font-size:clamp(28px,3.5vw,48px);line-height:1.1;
+      letter-spacing:-0.015em;margin-bottom:18px;color:var(--fg);}
+    .section-sub{font-size:17px;color:var(--muted-fg);line-height:1.65;}
+
+    /* Feature cards */
+    .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+    @media(max-width:900px){.grid-3{grid-template-columns:1fr;}}
+    .feature{background:var(--bg);border:1px solid var(--border);
+      border-radius:10px;padding:32px 28px;
+      transition:border-color 0.3s,transform 0.3s,box-shadow 0.3s;
+      position:relative;overflow:hidden;}
+    .feature:hover{border-color:var(--primary-line);transform:translateY(-4px);
+      box-shadow:0 12px 32px -8px rgba(50,128,255,0.12);}
+    .feature::before{content:"";position:absolute;top:0;left:0;
+      width:100%;height:3px;background:var(--primary);
+      opacity:0;transition:opacity 0.3s;}
+    .feature:hover::before{opacity:1;}
+    .feature-icon{width:44px;height:44px;border-radius:10px;
+      background:var(--accent);border:1px solid var(--primary-line);
+      display:flex;align-items:center;justify-content:center;
+      margin-bottom:20px;color:var(--acc-fg);}
+    .feature-icon svg{width:20px;height:20px;}
+    .feature-title{font-family:'Playfair Display',serif;font-weight:700;
+      font-size:20px;margin-bottom:10px;color:var(--fg);}
+    .feature-desc{color:var(--muted-fg);font-size:14.5px;line-height:1.65;}
+
+    /* Chapter coverage */
+    .coverage-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;}
+    @media(max-width:1100px){.coverage-grid{grid-template-columns:repeat(2,1fr);}}
+    @media(max-width:540px){.coverage-grid{grid-template-columns:1fr;}}
+    .coverage-card{background:var(--bg);border:1px solid var(--border);
+      border-radius:10px;padding:22px 20px;
+      transition:border-color 0.3s,transform 0.3s;}
+    .coverage-card:hover{border-color:var(--primary-line);transform:translateY(-3px);}
+    .coverage-num{font-family:'JetBrains Mono',monospace;font-size:10px;
+      font-weight:600;letter-spacing:0.18em;color:var(--primary);margin-bottom:12px;}
+    .coverage-title{font-family:'Playfair Display',serif;font-weight:700;
+      font-size:15px;line-height:1.3;margin-bottom:8px;color:var(--fg);}
+    .coverage-desc{font-size:13px;color:var(--muted-fg);line-height:1.5;}
+
+    /* Pricing */
+    .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+      max-width:1020px;margin:0 auto;align-items:start;}
+    @media(max-width:900px){.pricing-grid{grid-template-columns:1fr;}}
+    .price-card{background:var(--bg);border:1px solid var(--border);
+      border-radius:12px;padding:32px 28px;position:relative;
+      transition:box-shadow 0.3s;}
+    .price-card:hover{box-shadow:0 8px 32px -8px rgba(50,128,255,0.1);}
+    .price-card.featured{border:2px solid var(--primary);
+      box-shadow:0 20px 52px -12px rgba(50,128,255,0.2);}
+    .price-badge{position:absolute;top:-13px;left:50%;transform:translateX(-50%);
+      background:var(--primary);color:#fff;padding:5px 16px;border-radius:999px;
+      font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;}
+    .price-tier-badge{display:inline-block;font-size:10px;font-weight:700;
+      letter-spacing:0.14em;text-transform:uppercase;padding:4px 10px;
+      border-radius:999px;margin-bottom:14px;}
+    .price-name{font-family:'Playfair Display',serif;font-weight:700;
+      font-size:24px;margin-bottom:8px;color:var(--fg);}
+    .price-amount-row{display:flex;align-items:baseline;gap:6px;margin-bottom:4px;}
+    .price-amount{font-size:38px;font-weight:700;letter-spacing:-0.02em;color:var(--fg);}
+    .price-amount.featured-price{color:var(--primary);font-size:44px;}
+    .price-old{font-size:16px;color:#aaa;text-decoration:line-through;}
+    .price-period{font-size:14px;color:var(--muted-fg);}
+    .price-tag{font-size:13.5px;color:var(--muted-fg);margin-bottom:20px;}
+    .price-value{background:#f0fdf4;border:1px solid rgba(22,163,74,0.2);
+      border-radius:6px;padding:8px 12px;margin-bottom:16px;
+      font-size:12px;color:#15803d;display:flex;align-items:flex-start;gap:6px;}
+    .price-value svg{flex-shrink:0;margin-top:1px;}
+    .price-fit{font-size:12.5px;color:var(--sec-fg);font-style:italic;
+      line-height:1.55;border-left:2px solid var(--primary-line);
+      padding:6px 0 6px 12px;margin-bottom:22px;
+      background:var(--accent);border-radius:0 4px 4px 0;}
+    .price-fit-label{display:block;font-style:normal;font-size:9.5px;
+      font-weight:700;letter-spacing:0.2em;color:var(--acc-fg);
+      text-transform:uppercase;margin-bottom:3px;}
+    .price-list{list-style:none;margin-bottom:28px;}
+    .price-list li{display:flex;align-items:flex-start;gap:10px;
+      font-size:14px;padding:7px 0;color:var(--fg);
+      border-bottom:1px solid var(--border);}
+    .price-list li:last-child{border-bottom:none;}
+    .new-badge{display:inline-block;background:#dcfce7;color:#16a34a;
+      font-size:9px;font-weight:700;padding:1px 5px;border-radius:3px;
+      letter-spacing:0.1em;text-transform:uppercase;margin-left:4px;
+      vertical-align:middle;flex-shrink:0;}
+    .check{flex:none;width:16px;height:16px;margin-top:3px;color:var(--primary);}
+    .btn-primary{display:block;width:100%;padding:13px;
+      background:var(--primary);color:#fff;border:none;border-radius:6px;
+      font-size:14px;font-weight:700;text-align:center;cursor:pointer;
+      transition:all 0.2s;font-family:'Inter',sans-serif;}
+    .btn-primary:hover{background:var(--chart2);}
+    .btn-ghost{display:block;width:100%;padding:12px;
+      background:var(--secondary);color:var(--sec-fg);border:1px solid var(--border);
+      border-radius:6px;font-size:14px;font-weight:600;text-align:center;
+      cursor:pointer;transition:all 0.2s;font-family:'Inter',sans-serif;}
+    .btn-ghost:hover{background:var(--border);}
+    .btn-accent{display:block;width:100%;padding:12px;
+      background:var(--accent);color:var(--acc-fg);
+      border:1px solid var(--primary-line);border-radius:6px;
+      font-size:14px;font-weight:600;text-align:center;
+      cursor:pointer;transition:all 0.2s;font-family:'Inter',sans-serif;}
+    .btn-accent:hover{background:#bfdbff;}
+    .price-note{font-size:11.5px;color:var(--muted-fg);
+      text-align:center;margin-top:10px;}
+
+    /* Trust strip */
+    .trust-row{display:flex;flex-wrap:wrap;align-items:center;
+      justify-content:center;gap:28px;margin-top:44px;
+      padding-top:32px;border-top:1px solid var(--border);}
+    .trust-item{display:flex;align-items:center;gap:7px;
+      color:var(--muted-fg);font-size:13px;}
+    .trust-item svg{color:var(--primary);}
+
+    /* Comparison table */
+    .comp-table{width:100%;border-collapse:collapse;font-size:14px;
+      min-width:520px;max-width:880px;margin:0 auto;}
+    .comp-table thead tr{background:var(--muted);border-bottom:2px solid var(--border);}
+    .comp-table thead th{padding:14px 16px;font-weight:600;color:var(--fg);}
+    .comp-table thead th:first-child{text-align:left;width:40%;}
+    .comp-table thead th:not(:first-child){text-align:center;}
+    .comp-table tbody tr{border-bottom:1px solid var(--border);}
+    .comp-table tbody tr:nth-child(even){background:var(--muted);}
+    .comp-table tbody td{padding:12px 16px;color:var(--sec-fg);}
+    .comp-table tbody td:first-child{color:var(--fg);}
+    .comp-table tbody td:not(:first-child){text-align:center;}
+    .comp-table tbody td.pro-col{background:#f0f6ff;}
+    .tick{color:var(--primary);font-weight:700;}
+    .cross{color:#aaa;}
+    .comp-table tfoot td{padding:10px 16px;font-size:12px;color:var(--muted-fg);}
+
+    /* Locked teaser */
+    .locked-wrap{max-width:860px;margin:0 auto;background:var(--secondary);
+      border:1px solid var(--border);border-radius:14px;padding:36px;
+      position:relative;overflow:hidden;}
+    .locked-overlay{position:absolute;inset:0;backdrop-filter:blur(6px);
+      -webkit-backdrop-filter:blur(6px);background:rgba(255,255,255,0.72);
+      display:flex;flex-direction:column;align-items:center;
+      justify-content:center;text-align:center;padding:24px;z-index:2;}
+    .locked-overlay h3{font-family:'Playfair Display',serif;font-weight:700;
+      font-size:24px;margin-bottom:10px;color:var(--fg);}
+    .locked-overlay p{color:var(--muted-fg);max-width:400px;
+      margin-bottom:22px;font-size:15px;}
+    .lock-icon{width:40px;height:40px;color:var(--primary);margin-bottom:14px;}
+    .locked-bg{opacity:0.25;filter:blur(3px);pointer-events:none;user-select:none;}
+    .skel-line{background:var(--border);border-radius:4px;}
+    .skel-h{height:20px;width:35%;margin-bottom:22px;}
+    .skel-block{background:var(--bg);border:1px solid var(--border);
+      border-radius:6px;padding:16px;margin-bottom:10px;}
+    .skel-row{background:var(--secondary);height:13px;border-radius:3px;margin:5px 0;}
+
+    /* ── Global & Asia case study — redesigned sample ── */
+    .cs-sample{max-width:860px;margin:0 auto;background:var(--bg);
+      border:1px solid var(--border);border-radius:14px;overflow:hidden;
+      box-shadow:0 14px 44px -18px rgba(8,48,160,0.14);}
+    .cs-sample-head{display:flex;align-items:center;gap:16px;
+      padding:22px 28px;border-bottom:1px solid var(--border);
+      border-left:4px solid var(--primary);background:var(--muted);}
+    .cs-tag{flex-shrink:0;font-family:'JetBrains Mono',monospace;font-size:10px;
+      font-weight:600;letter-spacing:0.12em;text-transform:uppercase;
+      color:#fff;background:var(--primary);padding:6px 11px;border-radius:999px;}
+    .cs-sample-title{font-family:'Playfair Display',serif;font-weight:700;
+      font-size:20px;color:var(--fg);line-height:1.2;margin-bottom:3px;}
+    .cs-sample-meta{font-size:12px;color:var(--muted-fg);font-weight:500;}
+    .cs-sample-intro{padding:20px 28px 2px;font-size:14px;color:var(--sec-fg);line-height:1.65;}
+    .cs-steps{padding:10px 28px 26px;}
+    .cs-step{padding:14px 0;}
+    .cs-step + .cs-step{border-top:1px dashed var(--border);}
+    .cs-step-label{font-size:10px;font-weight:700;letter-spacing:0.16em;
+      text-transform:uppercase;color:var(--primary);margin-bottom:6px;}
+    .cs-step-text{font-size:14px;color:var(--sec-fg);line-height:1.65;}
+    .cs-step-text .key-term{font-weight:700;color:var(--primary);}
+    .cs-step-text strong{color:var(--fg);}
+    .cs-callout{background:var(--accent);border:1px solid var(--primary-line);
+      border-radius:10px;padding:16px 18px;margin:16px 0 4px;}
+    .cs-callout-label{font-size:10px;font-weight:700;letter-spacing:0.16em;
+      text-transform:uppercase;color:var(--acc-fg);margin-bottom:10px;}
+    .cs-callout-row{display:flex;justify-content:space-between;align-items:center;
+      gap:14px;font-size:12.5px;color:var(--sec-fg);padding:4px 0;
+      font-family:'JetBrains Mono',monospace;}
+    .cs-callout-total{font-weight:700;color:var(--fg);font-size:13px;}
+    .cs-pos{color:#15803d;font-weight:600;white-space:nowrap;}
+    .cs-neg{color:#b91c1c;font-weight:600;white-space:nowrap;}
+    .cs-callout-divider{height:1px;background:var(--primary-line);margin:8px 0;}
+    .cs-callout-note{font-size:11px;color:var(--muted-fg);margin-top:8px;font-style:italic;}
+    /* slim unlock bar */
+    .cs-unlock{max-width:860px;margin:18px auto 0;display:flex;align-items:center;
+      gap:16px;background:var(--chart5);border-radius:12px;padding:16px 22px;}
+    .cs-unlock-icon{flex-shrink:0;width:38px;height:38px;border-radius:50%;
+      background:rgba(223,242,255,0.14);border:1px solid rgba(223,242,255,0.25);
+      display:flex;align-items:center;justify-content:center;}
+    .cs-unlock-icon svg{width:17px;height:17px;color:var(--accent);}
+    .cs-unlock-text{flex:1;font-size:13.5px;color:rgba(223,242,255,0.82);line-height:1.5;}
+    .cs-unlock-text strong{color:#fff;}
+    .cs-unlock-btn{flex-shrink:0;background:var(--primary);color:#fff;
+      padding:11px 20px;border-radius:6px;font-weight:600;font-size:13.5px;
+      white-space:nowrap;transition:all 0.2s;}
+    .cs-unlock-btn:hover{background:var(--chart2);transform:translateY(-1px);}
+    @media(max-width:620px){.cs-unlock{flex-direction:column;text-align:center;align-items:stretch;}
+      .cs-unlock-icon{margin:0 auto;}}
+    /* more-in-library mini tiles */
+    .cs-more{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;
+      max-width:900px;margin:26px auto 0;}
+    @media(max-width:760px){.cs-more{grid-template-columns:1fr;}}
+    .cs-mini{background:var(--bg);border:1px solid var(--border);border-radius:10px;
+      padding:18px 20px;transition:border-color 0.2s,transform 0.2s;}
+    .cs-mini:hover{border-color:var(--primary-line);transform:translateY(-2px);}
+    .cs-mini-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;}
+    .cs-mini-num{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;
+      letter-spacing:0.12em;color:var(--primary);}
+    .cs-mini-lock{width:13px;height:13px;color:var(--muted-fg);flex-shrink:0;}
+    .cs-mini-title{font-family:'Playfair Display',serif;font-weight:700;font-size:15px;
+      line-height:1.3;color:var(--fg);margin-bottom:7px;}
+    .cs-mini-desc{font-size:12.5px;color:var(--muted-fg);line-height:1.55;}
+    .cs-more-tile{display:flex;flex-direction:column;align-items:center;
+      justify-content:center;text-align:center;background:var(--muted);
+      border:1px dashed var(--border);}
+    .cs-more-tile-num{font-family:'Playfair Display',serif;font-weight:700;
+      font-size:26px;color:var(--primary);line-height:1;}
+    .cs-more-tile-label{font-size:12.5px;color:var(--muted-fg);margin-top:6px;line-height:1.45;}
+
+    /* ─────────────────────────────────────────
+       SALES PANEL
+    ───────────────────────────────────────── */
+
+    /* Sales hero */
+    .hero-sales{position:relative;overflow:hidden;
+      padding:96px 0 120px;
+      background:linear-gradient(135deg,#065F46 0%,#0F766E 50%,#0830a0 100%);}
+    .hero-sales::before{content:"";position:absolute;top:-160px;right:-160px;
+      width:560px;height:560px;background:#0F766E;
+      opacity:0.25;filter:blur(100px);border-radius:50%;}
+    .hero-sales::after{content:"";position:absolute;bottom:-100px;left:-80px;
+      width:360px;height:360px;background:var(--primary);
+      opacity:0.15;filter:blur(90px);border-radius:50%;}
+    .pill-sales{display:inline-flex;align-items:center;gap:8px;
+      padding:6px 14px;border:1px solid rgba(204,251,241,0.35);
+      background:rgba(204,251,241,0.12);color:#CCFBF1;
+      border-radius:999px;font-size:13px;font-weight:500;margin-bottom:28px;}
+    .pill-sales-dot{width:6px;height:6px;border-radius:50%;
+      background:#CCFBF1;animation:blink 2s infinite;}
+
+    .hero-sales h1{font-family:'Playfair Display',serif;font-weight:700;
+      font-size:clamp(38px,5.5vw,72px);line-height:1.05;
+      letter-spacing:-0.02em;margin-bottom:28px;color:#fff;}
+    .hero-sales h1 .accent-sales{color:#CCFBF1;font-style:italic;}
+    .hero-sales .hero-sub-sales{font-size:clamp(16px,1.5vw,20px);
+      color:rgba(204,251,241,0.75);max-width:640px;
+      margin-bottom:40px;font-weight:300;line-height:1.6;}
+    .btn-hero-sales{display:inline-flex;align-items:center;justify-content:center;
+      padding:15px 28px;background:var(--sales);color:#fff;border-radius:6px;
+      font-weight:700;font-size:15px;transition:all 0.2s;gap:7px;border:none;cursor:pointer;}
+    .btn-hero-sales:hover{background:var(--sales-dark);transform:translateY(-1px);}
+    .btn-hero-sales-outline{display:inline-flex;align-items:center;justify-content:center;
+      padding:15px 28px;color:#CCFBF1;border:1px solid rgba(204,251,241,0.35);
+      border-radius:6px;font-weight:600;font-size:15px;transition:all 0.2s;gap:7px;}
+    .btn-hero-sales-outline:hover{background:rgba(204,251,241,0.1);}
+
+    /* Sales hero stats */
+    .hero-sales-stats{display:flex;gap:36px;flex-wrap:wrap;margin-top:52px;
+      padding-top:40px;border-top:1px solid rgba(204,251,241,0.15);}
+    .hss-num{font-family:'Playfair Display',serif;font-weight:700;
+      font-size:28px;color:#CCFBF1;letter-spacing:-0.02em;}
+    .hss-label{font-size:12px;color:rgba(204,251,241,0.5);font-weight:500;}
+
+    /* Pain points */
+    .pain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+    @media(max-width:900px){.pain-grid{grid-template-columns:1fr;}}
+    .pain-card{background:var(--bg);border:1px solid var(--border);
+      border-radius:10px;padding:28px 24px;
+      transition:border-color 0.3s,transform 0.3s;}
+    .pain-card:hover{border-color:var(--sales-line);transform:translateY(-3px);}
+    .pain-icon{width:40px;height:40px;border-radius:8px;
+      background:var(--sales-bg);display:flex;align-items:center;
+      justify-content:center;margin-bottom:16px;color:var(--sales);}
+    .pain-icon svg{width:18px;height:18px;}
+    .pain-title{font-family:'Playfair Display',serif;font-weight:700;
+      font-size:17px;margin-bottom:8px;color:var(--fg);}
+    .pain-desc{font-size:13.5px;color:var(--muted-fg);line-height:1.6;}
+
+    /* What you learn */
+    .learn-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
+    @media(max-width:720px){.learn-grid{grid-template-columns:1fr;}}
+    .learn-card{background:var(--bg);border:1px solid var(--border);
+      border-radius:10px;padding:24px;display:flex;gap:16px;
+      transition:border-color 0.3s;}
+    .learn-card:hover{border-color:var(--sales-line);}
+    .learn-num{font-family:'JetBrains Mono',monospace;font-size:11px;
+      font-weight:700;color:var(--sales);flex-shrink:0;
+      width:28px;height:28px;border-radius:50%;
+      background:var(--sales-bg);display:flex;align-items:center;justify-content:center;}
+    .learn-body{}
+    .learn-title{font-weight:700;font-size:14.5px;color:var(--fg);margin-bottom:5px;}
+    .learn-desc{font-size:13px;color:var(--muted-fg);line-height:1.55;}
+
+    /* Who this is for */
+    .who-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;}
+    @media(max-width:900px){.who-grid{grid-template-columns:1fr;}}
+    .who-card{background:var(--bg);border:1px solid var(--border);
+      border-radius:10px;padding:24px;
+      transition:border-color 0.3s,transform 0.3s;}
+    .who-card:hover{border-color:var(--sales-line);transform:translateY(-3px);}
+    .who-role{font-size:9.5px;font-weight:700;letter-spacing:0.16em;
+      text-transform:uppercase;color:var(--sales);margin-bottom:10px;}
+    .who-title{font-family:'Playfair Display',serif;font-weight:700;
+      font-size:17px;margin-bottom:8px;color:var(--fg);}
+    .who-desc{font-size:13px;color:var(--muted-fg);line-height:1.55;
+      margin-bottom:14px;}
+    .who-outcome{background:var(--sales-bg);border-radius:6px;
+      padding:9px 12px;font-size:12.5px;color:var(--sales-dark);
+      font-style:italic;line-height:1.45;}
+
+    /* Sales pricing */
+    .sales-pricing-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;
+      max-width:760px;margin:0 auto;}
+    @media(max-width:720px){.sales-pricing-grid{grid-template-columns:1fr;}}
+    .sales-price-card{background:var(--bg);border:1px solid var(--border);
+      border-radius:12px;padding:32px 28px;position:relative;
+      transition:box-shadow 0.3s;}
+    .sales-price-card.featured{
+      border:2px solid var(--sales);
+      box-shadow:0 20px 52px -12px rgba(15,118,110,0.2);}
+    .sales-price-badge{position:absolute;top:-13px;left:50%;
+      transform:translateX(-50%);background:var(--sales);color:#fff;
+      padding:5px 16px;border-radius:999px;font-size:11px;
+      font-weight:700;text-transform:uppercase;letter-spacing:0.1em;}
+    .sales-tier-badge{display:inline-block;font-size:10px;font-weight:700;
+      letter-spacing:0.14em;text-transform:uppercase;padding:4px 10px;
+      border-radius:999px;margin-bottom:14px;
+      background:var(--sales-bg);color:var(--sales);}
+    .sales-price-name{font-family:'Playfair Display',serif;font-weight:700;
+      font-size:24px;margin-bottom:8px;color:var(--fg);}
+    .sales-price-amount{font-size:38px;font-weight:700;
+      letter-spacing:-0.02em;color:var(--sales);margin-bottom:4px;}
+    .sales-price-tag{font-size:13px;color:var(--muted-fg);margin-bottom:20px;}
+    .sales-price-fit{font-size:12.5px;color:var(--sec-fg);font-style:italic;
+      line-height:1.55;border-left:2px solid var(--sales-line);
+      padding:6px 0 6px 12px;margin-bottom:22px;
+      background:var(--sales-bg);border-radius:0 4px 4px 0;}
+    .sales-price-fit-label{display:block;font-style:normal;font-size:9.5px;
+      font-weight:700;letter-spacing:0.2em;color:var(--sales);
+      text-transform:uppercase;margin-bottom:3px;}
+    .sales-list{list-style:none;margin-bottom:28px;}
+    .sales-list li{display:flex;align-items:flex-start;gap:10px;
+      font-size:14px;padding:7px 0;color:var(--fg);
+      border-bottom:1px solid var(--border);}
+    .sales-list li:last-child{border-bottom:none;}
+    .sales-check{flex:none;width:16px;height:16px;margin-top:3px;color:var(--sales);}
+    .btn-sales{display:block;width:100%;padding:13px;
+      background:var(--sales);color:#fff;border:none;border-radius:6px;
+      font-size:14px;font-weight:700;text-align:center;cursor:pointer;
+      transition:all 0.2s;font-family:'Inter',sans-serif;}
+    .btn-sales:hover{background:var(--sales-dark);}
+
+    /* Sales ROI callout */
+    .roi-box{background:var(--chart5);border-radius:14px;
+      padding:44px 48px;display:grid;
+      grid-template-columns:1fr 1fr;gap:44px;align-items:center;
+      position:relative;overflow:hidden;}
+    @media(max-width:760px){.roi-box{grid-template-columns:1fr;padding:28px 24px;}}
+    .roi-box::before{content:"";position:absolute;top:-80px;right:-80px;
+      width:280px;height:280px;background:var(--sales);opacity:0.15;
+      filter:blur(70px);border-radius:50%;}
+    .roi-left{position:relative;z-index:1;}
+    .roi-eyebrow{font-size:9.5px;font-weight:700;letter-spacing:0.22em;
+      text-transform:uppercase;color:var(--sales-bg);margin-bottom:10px;}
+    .roi-title{font-family:'Playfair Display',serif;font-weight:700;
+      font-size:clamp(22px,3vw,30px);color:#fff;margin-bottom:14px;
+      line-height:1.2;}
+    .roi-title .accent-sales{color:#CCFBF1;font-style:italic;}
+    .roi-desc{font-size:14px;color:rgba(204,251,241,0.65);
+      line-height:1.65;margin-bottom:22px;}
+    .roi-stats{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
+    .roi-stat{background:rgba(255,255,255,0.07);border:1px solid rgba(204,251,241,0.15);
+      border-radius:8px;padding:14px 16px;}
+    .roi-stat-num{font-family:'Playfair Display',serif;font-weight:700;
+      font-size:22px;color:#CCFBF1;margin-bottom:3px;}
+    .roi-stat-label{font-size:11px;color:rgba(204,251,241,0.5);}
+    .roi-right{position:relative;z-index:1;}
+    .roi-testimonial{background:rgba(255,255,255,0.06);
+      border:1px solid rgba(204,251,241,0.15);border-radius:10px;
+      padding:24px;backdrop-filter:blur(8px);}
+    .roi-quote{font-family:'Playfair Display',serif;font-style:italic;
+      font-size:15px;color:rgba(204,251,241,0.85);line-height:1.65;
+      margin-bottom:16px;}
+    .roi-attribution{font-size:12px;color:rgba(204,251,241,0.45);}
+    .roi-attribution strong{color:rgba(204,251,241,0.7);
+      display:block;font-style:normal;font-family:'Inter',sans-serif;}
+
+    /* ── MODAL ── */
+    .modal-overlay{position:fixed;inset:0;background:rgba(8,48,160,0.5);
+      backdrop-filter:blur(6px);z-index:200;
+      display:flex;align-items:center;justify-content:center;padding:20px;
+      opacity:0;pointer-events:none;transition:opacity 0.3s;}
+    .modal-overlay.open{opacity:1;pointer-events:auto;}
+    .modal-box{background:var(--bg);border-radius:14px;padding:36px;
+      width:100%;max-width:460px;position:relative;
+      transform:translateY(20px);transition:transform 0.3s;
+      box-shadow:0 32px 80px -16px rgba(8,48,160,0.3);}
+    .modal-overlay.open .modal-box{transform:translateY(0);}
+    .modal-close{position:absolute;top:16px;right:16px;background:none;
+      border:none;cursor:pointer;color:var(--muted-fg);
+      width:32px;height:32px;border-radius:50%;
+      display:flex;align-items:center;justify-content:center;
+      transition:background 0.2s;}
+    .modal-close:hover{background:var(--secondary);}
+    .modal-eyebrow{font-size:9.5px;font-weight:700;letter-spacing:0.2em;
+      text-transform:uppercase;color:var(--primary);margin-bottom:8px;}
+    .modal-title{font-family:'Playfair Display',serif;font-weight:700;
+      font-size:22px;color:var(--fg);margin-bottom:6px;}
+    .modal-sub{font-size:13.5px;color:var(--muted-fg);margin-bottom:20px;}
+    .modal-what{list-style:none;display:grid;
+      grid-template-columns:1fr 1fr;gap:6px;margin-bottom:20px;}
+    .modal-what li{display:flex;align-items:center;gap:6px;
+      font-size:12.5px;color:var(--sec-fg);}
+    .modal-what li svg{color:var(--primary);flex-shrink:0;width:12px;height:12px;}
+    .modal-field{margin-bottom:11px;}
+    .modal-label{display:block;font-size:11.5px;font-weight:600;
+      color:var(--sec-fg);margin-bottom:4px;}
+    .modal-input{width:100%;padding:10px 12px;border:1px solid var(--border);
+      border-radius:6px;font-size:14px;color:var(--fg);outline:none;
+      font-family:'Inter',sans-serif;transition:border-color 0.2s;}
+    .modal-input:focus{border-color:var(--primary);}
+    .modal-name-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+    .modal-btn{width:100%;padding:13px;background:var(--primary);color:#fff;
+      border:none;border-radius:6px;font-size:15px;font-weight:700;
+      cursor:pointer;transition:background 0.2s;font-family:'Inter',sans-serif;
+      margin-top:4px;}
+    .modal-btn:hover{background:var(--chart2);}
+    .modal-fine{font-size:11px;color:var(--muted-fg);
+      text-align:center;margin-top:8px;}
+    .modal-success{display:none;text-align:center;padding:16px 0;}
+    .modal-success.show{display:block;}
+    .modal-success-icon{width:52px;height:52px;background:var(--accent);
+      border-radius:50%;display:flex;align-items:center;justify-content:center;
+      margin:0 auto 14px;}
+
+    /* ── FOOTER ── */
+    .footer{background:var(--chart5);border-top:1px solid rgba(255,255,255,0.08);
+      padding:52px 0 28px;}
+    .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;
+      gap:36px;margin-bottom:36px;}
+    @media(max-width:720px){.footer-grid{grid-template-columns:1fr;}}
+    .footer-blurb{color:rgba(223,242,255,0.6);font-size:14px;
+      max-width:300px;margin-top:12px;line-height:1.6;}
+    .footer h4{font-family:'Playfair Display',serif;font-size:16px;
+      font-weight:600;margin-bottom:14px;color:#fff;}
+    .footer ul{list-style:none;}
+    .footer ul li{margin-bottom:8px;}
+    .footer ul li a{color:rgba(223,242,255,0.55);font-size:14px;transition:color 0.2s;}
+    .footer ul li a:hover{color:#dff2ff;}
+    .footer .logo{color:#fff;}
+    .footer .logo-mark{background:#dff2ff;}
+    .footer-bottom{padding-top:22px;border-top:1px solid rgba(255,255,255,0.08);
+      display:flex;justify-content:space-between;flex-wrap:wrap;
+      gap:12px;color:rgba(223,242,255,0.4);font-size:13px;}
+
+    /* ── ANIMATIONS ── */
+    @keyframes pulse{0%,100%{opacity:1;}50%{opacity:0.4;}}
+    .reveal{opacity:0;transform:translateY(18px);
+      transition:opacity 0.7s ease,transform 0.7s ease;}
+    .reveal.in{opacity:1;transform:translateY(0);}
+    .rd1{transition-delay:0.06s}.rd2{transition-delay:0.12s}
+    .rd3{transition-delay:0.18s}.rd4{transition-delay:0.24s}
+  </style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav class="nav">
+  <div class="container nav-inner">
+    <a href="#top" class="logo" aria-label="Commodity Playbook">
+      <img src="data:image/png;base64,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" alt="Commodity Playbook — Break In. Move Up. Stay Sharp." style="height:40px;width:auto;display:block;"/>
+    </a>
+    <div class="nav-links">
+      <a href="#" class="nav-link-text" onclick="switchAudience('career');document.getElementById('features-career').scrollIntoView({behavior:'smooth'});return false;">What's Inside</a>
+      <a href="#" class="nav-link-text" onclick="switchAudience('career');document.getElementById('pricing-career').scrollIntoView({behavior:'smooth'});return false;">Pricing</a>
+      <a href="commodity-playbook-full.html" class="nav-cta" id="nav-cta-btn">Get Playbook</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ══ AUDIENCE TOGGLE BAR ══ -->
+<div class="audience-bar" id="top">
+  <div class="audience-bar-inner">
+    <button class="aud-tab active-career" id="tab-career" onclick="switchAudience('career')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+      I'm building a career in commodity trading
+    </button>
+    <div class="aud-divider"></div>
+    <button class="aud-tab" id="tab-sales" onclick="switchAudience('sales')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+      I sell solutions into commodity trading firms
+    </button>
+    <div class="aud-hint">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      Select your track to see the right content
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     CAREER PANEL
+══════════════════════════════════════════ -->
+<div class="panel active" id="panel-career">
+
+  <!-- Hero -->
+  <section class="hero-career">
+    <div class="container hero-inner">
+      <div class="pill reveal">
+        <span class="pill-dot"></span>
+        The Insider's Guide to Commodity Trading
+      </div>
+      <h1 class="hero-title reveal">
+        Understand Commodity Trading<br/>the Way
+        <span class="accent">the Desk</span> Actually Works.
+      </h1>
+      <p class="hero-sub reveal">
+        Built from 20+ years inside trading, analytics, and market intelligence.
+        Whether you're entering the industry, switching roles, or moving from operations to the front office — this is the ground-level view most people never get.
+      </p>
+      <div class="hero-cta reveal">
+        <button class="btn-hero-primary" onclick="openModal()">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          Get Free Starter Pack
+        </button>
+        <a href="#features-career" class="btn-hero-outline">
+          Preview Content
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><polyline points="6 9 12 15 18 9"/></svg>
+        </a>
+      </div>
+      <div class="hero-stats reveal rd3">
+        <div class="hs">
+          <div class="hs-num">20+</div>
+          <div class="hs-label">Years desk experience</div>
+        </div>
+        <div class="hs">
+          <div class="hs-num">5</div>
+          <div class="hs-label">Full playbook chapters</div>
+        </div>
+        <div class="hs">
+          <div class="hs-num">120</div>
+          <div class="hs-label">Downloadable assets</div>
+        </div>
+        <div class="hs">
+          <div class="hs-num">15</div>
+          <div class="hs-label">Asia case studies</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Social proof -->
+  <section class="strip">
+    <div class="container">
+      <p class="strip-label">Members now working at</p>
+      <div class="strip-logos">
+        <span>Trafigura</span>
+        <span>Vitol</span>
+        <span>Glencore</span>
+        <span>BP</span>
+        <span>Shell</span>
+        <span>Gunvor</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- What you get -->
+  <section class="section" id="features-career">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="section-eyebrow">What's Inside</div>
+        <h2 class="section-title">The Ground-Level View.</h2>
+        <p class="section-sub">Most people learn commodity markets from textbooks and headlines. This Playbook starts where the desk starts — cargoes, freight, arbitrage windows, and the commercial decisions that determine whether a trade makes money.</p>
+      </div>
+      <div class="grid-3">
+        <div class="feature reveal rd1">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          </div>
+          <h3 class="feature-title">Industry Foundations</h3>
+          <p class="feature-desc">Master the mechanics of oil, LNG, and gas. Physical vs paper, refining economics, pricing benchmarks, and exactly what drives margins on the desk.</p>
+        </div>
+        <div class="feature reveal rd2">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+          <h3 class="feature-title">Resume &amp; Positioning</h3>
+          <p class="feature-desc">Five archetype-specific resume templates with a quiz to find yours. The exact language that commodity trading hiring managers look for — and what immediately disqualifies most candidates.</p>
+        </div>
+        <div class="feature reveal rd3">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          </div>
+          <h3 class="feature-title">Market Thinking</h3>
+          <p class="feature-desc">How to read the EIA report, the COT data, the forward curve, and AIS vessel positioning — and what commercial decision each signal supports.</p>
+        </div>
+        <div class="feature reveal rd1">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+          </div>
+          <h3 class="feature-title">Shipping &amp; Freight</h3>
+          <p class="feature-desc">Voyage charters, time charters, demurrage, laytime, and AIS vessel tracking — the logistics layer that most career resources skip entirely but every desk depends on.</p>
+        </div>
+        <div class="feature reveal rd2">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <h3 class="feature-title">Interview Preparation</h3>
+          <p class="feature-desc">50 commodity trading interview questions with model answers by archetype. The Market Knowledge Test scores your gaps and builds a personalised study plan around them.</p>
+        </div>
+        <div class="feature reveal rd3">
+          <div class="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+          </div>
+          <h3 class="feature-title">Practitioner Access</h3>
+          <p class="feature-desc">The Desk Channel Q&amp;A library — 40 real questions answered by vetted practitioners. Plus Anonymous Mentor Connect for live questions to 25 industry professionals.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Chapter coverage -->
+  <section class="section section-tinted">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="section-eyebrow">The Full Playbook</div>
+        <h2 class="section-title">What We Cover. Everything You Need.</h2>
+        <p class="section-sub">Each chapter has 8 sections, a worked example, a framework, and a downloadable asset. 40 sections and 120 assets in total.</p>
+      </div>
+      <div class="coverage-grid">
+        <div class="coverage-card reveal rd1">
+          <div class="coverage-num">CHAPTER A</div>
+          <h3 class="coverage-title">Industry Foundations</h3>
+          <p class="coverage-desc">Physical vs paper, the six revenue levers, pricing benchmarks, and how an oil trade actually makes money.</p>
+        </div>
+        <div class="coverage-card reveal rd2">
+          <div class="coverage-num">CHAPTER B</div>
+          <h3 class="coverage-title">Physical &amp; Paper Markets</h3>
+          <p class="coverage-desc">MOC price assessment, spreads, the carry trade, OPEC signals, DES vs FOB, and managed money positioning.</p>
+        </div>
+        <div class="coverage-card reveal rd3">
+          <div class="coverage-num">CHAPTER C</div>
+          <h3 class="coverage-title">Shipping, Freight &amp; Cargo</h3>
+          <p class="coverage-desc">Vessel types, charter party mechanics, demurrage, AIS tracking, laytime, and the full cargo lifecycle.</p>
+        </div>
+        <div class="coverage-card reveal rd4">
+          <div class="coverage-num">CHAPTER D</div>
+          <h3 class="coverage-title">Market Intelligence</h3>
+          <p class="coverage-desc">Kpler, Platts, Argus, EIA, COT, Baltic Exchange, GIE AGSI — what each tells you and how to read it commercially.</p>
+        </div>
+        <div class="coverage-card reveal rd4">
+          <div class="coverage-num">CHAPTER E</div>
+          <h3 class="coverage-title">Commercial Risk &amp; Decisions</h3>
+          <p class="coverage-desc">VaR, basis risk, stop-loss discipline, sanctions, credit risk, and how a desk manages positions in real time.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing -->
+  <section class="section" id="pricing-career">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="section-eyebrow">Pricing</div>
+        <h2 class="section-title">Choose Your Level of Access</h2>
+        <p class="section-sub">Download 5 free infographics with just your email. Pro is the complete career toolkit. Elite adds live market intelligence and practitioner access.</p>
+      </div>
+
+      <!-- Student strip -->
+      <div style="max-width:640px;margin:0 auto 44px;background:var(--accent);border:1px solid var(--primary-line);border-radius:10px;padding:13px 20px;display:flex;align-items:center;justify-content:center;gap:10px;flex-wrap:wrap;" class="reveal">
+        <span style="display:inline-block;width:7px;height:7px;background:var(--primary);border-radius:50%;animation:pulse 1.8s infinite;flex-shrink:0;"></span>
+        <span style="font-size:13.5px;font-weight:600;color:var(--acc-fg);">Student Discount</span>
+        <span style="font-size:13.5px;color:var(--sec-fg);">— 20% off Pro and Elite with your institution email at checkout.</span>
+      </div>
+
+      <div class="pricing-grid">
+
+        <!-- EXPLORER -->
+        <div class="price-card reveal rd1" style="border-top:3px solid var(--border);">
+          <div class="price-tier-badge" style="background:var(--secondary);color:var(--muted-fg);">Free</div>
+          <div class="price-name">Starter</div>
+          <div class="price-amount-row">
+            <span class="price-amount">SGD 0</span>
+          </div>
+          <div style="font-size:12.5px;color:var(--muted-fg);margin:2px 0 10px;">No credit card. Just your email.</div>
+          <div class="price-tag">The foundation for anyone entering downstream.</div>
+          <div class="price-fit">
+            <span class="price-fit-label">Best For</span>
+            Fresh graduates, career switchers, and curious professionals who want to understand how commodity trading actually works — across commercial, operations, analytics, risk, scheduling, or finance.
+          </div>
+          <ul class="price-list">
+            <li><svg class="check" viewBox="0 0 20 20" fill="currentColor"><path d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0z"/></svg><span><strong>5 Infographic Downloads</strong> — ecosystem map, LNG flow, crack spreads, price benchmarks, trade finance</span></li>
+            <li><svg class="check" viewBox="0 0 20 20" fill="currentColor"><path d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0z"/></svg><span>Weekly market digest to your inbox</span></li>
+            <li><svg class="check" viewBox="0 0 20 20" fill="currentColor"><path d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0z"/></svg><span>Chapter A preview — Industry Foundations</span></li>
+          </ul>
+          <button onclick="openModal()" class="btn-ghost">Get Free Pack →</button>
+          <p class="price-note">Instant download after signup</p>
+        </div>
+
+        <!-- STARTER -->
+        <div class="price-card featured reveal rd2" style="border-top:3px solid var(--primary);">
+          <div class="price-badge">Most Popular</div>
+          <div class="price-tier-badge" style="display:flex;gap:6px;align-items:center;background:var(--accent);color:var(--acc-fg);">
+            <span>One-time</span>
+            <span style="background:var(--green-bg,#dcfce7);color:#16a34a;font-size:8.5px;padding:1px 5px;border-radius:3px;">Career Toolkit</span>
+          </div>
+          <div class="price-name" style="color:var(--primary);">Pro</div>
+          <div class="price-amount-row">
+            <span class="price-amount featured-price">SGD 99</span>
+            <span class="price-old">SGD 149</span>
+          </div>
+          <div class="price-tag" style="margin-bottom:6px;">One-time purchase · Lifetime access.</div>
+          <div style="font-size:13px;color:var(--sec-fg);line-height:1.5;margin-bottom:18px;">For professionals and learners going deeper into how commodity trading works.</div>
+          <div class="price-fit">
+            <span class="price-fit-label">Best For</span>
+            Industry professionals, analysts, and dedicated learners who want to understand the commercial logic behind real trading decisions — not just theory, but how revenue is actually made and lost.
+          </div>
+          <ul class="price-list">
+            <li><svg class="check" viewBox="0 0 20 20" fill="currentColor"><path d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0z"/></svg><span>Everything in Starter</span></li>
+            <li><svg class="check" viewBox="0 0 20 20" fill="currentColor"><path d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0z"/></svg><span><strong>Full Playbook</strong> — all 5 chapters, over 100 downloadable assets</span></li>
+            <li><svg class="check" viewBox="0 0 20 20" fill="currentColor"><path d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0z"/></svg><span><strong>5+ Resume Templates</strong> + archetype personalized quiz, 1 Resume Review — practitioner feedback (5 days)<span class="new-badge">New · Worth SGD 49</span></span></li>
+            <li><svg class="check" viewBox="0 0 20 20" fill="currentColor"><path d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0z"/></svg><span><strong>Market Knowledge Test</strong> — 20 Qs + gap analysis<span class="new-badge">New</span></span></li>
+            <li><svg class="check" viewBox="0 0 20 20" fill="currentColor"><path d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0z"/></svg><span><strong>50 Interview Questions</strong> with model answers<span class="new-badge">New</span></span></li>
+            <li><svg class="check" viewBox="0 0 20 20" fill="currentColor"><path d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0z"/></svg><span><strong>Free Data Resources Guide</strong></span></li>
+          </ul>
+          <button class="btn-primary">Get Pro — SGD 99 →</button>
+          <p class="price-note">One-time · No subscription · Additional reviews SGD 49</p>
+        </div>
+
+        <!-- PRO -->
+        <div class="price-card reveal rd3" style="border-top:3px solid var(--primary);">
+          <div class="price-tier-badge" style="background:var(--primary);color:#fff;">Monthly</div>
+          <div class="price-name">Elite</div>
+          <div class="price-amount-row">
+            <span class="price-amount" style="color:var(--primary);">SGD 299</span>
+            <span class="price-period">/month</span>
+          </div>
+          <div class="price-tag" style="margin-bottom:6px;">The complete commercial education. Cancel anytime.</div>
+          <div style="font-size:13px;color:var(--sec-fg);line-height:1.5;margin-bottom:18px;">For long-term downstream careers.</div>
+          <div class="price-fit">
+            <span class="price-fit-label">Best For</span>
+            Industry professionals and serious learners who want live market intelligence, real case studies, and direct practitioner access on an ongoing basis.
+          </div>
+          <ul class="price-list">
+            <li><svg class="check" viewBox="0 0 20 20" fill="currentColor"><path d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0z"/></svg><span>Everything in Pro</span></li>
+            <li><svg class="check" viewBox="0 0 20 20" fill="currentColor"><path d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0z"/></svg><span><strong>Over 10 Global &amp; Asian Market Case Studies</strong> — real timelines, commercial impact update continuously</span></li>
+            <li><svg class="check" viewBox="0 0 20 20" fill="currentColor"><path d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0z"/></svg><span><strong>The Desk Channel</strong> — 40 questions across 5 categories — answered by vetted practitioners &amp; in-house editorial team</span></li>
+            <li><svg class="check" viewBox="0 0 20 20" fill="currentColor"><path d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0z"/></svg><span><strong>Anonymous Mentor Connect</strong> — 1 question to 25 practitioners/month. Credit reset every month</span></li>
+            <li><svg class="check" viewBox="0 0 20 20" fill="currentColor"><path d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0z"/></svg><span>2 resume vetting reviews per year included</span></li>
+          </ul>
+          <button class="btn-primary">Upgrade to Elite →</button>
+          <p class="price-note">Cancel anytime · 14-day refund on first payment</p>
+        </div>
+
+      </div><!-- /pricing-grid -->
+
+      <!-- Trust signals -->
+      <div class="trust-row reveal">
+        <div class="trust-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Secure checkout via Stripe</div>
+        <div class="trust-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Instant access on all devices</div>
+        <div class="trust-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Built by 20+ year practitioners</div>
+      </div>
+
+      <!-- Compare tiers — link out to dedicated static page -->
+      <div style="text-align:center;margin-top:52px;" class="reveal">
+        <a href="commodity-playbook-compare-tiers.html" style="display:inline-flex;align-items:center;gap:9px;background:var(--bg);border:1px solid var(--primary-line);color:var(--primary);padding:14px 28px;border-radius:8px;font-weight:600;font-size:14.5px;transition:all 0.2s;" onmouseover="this.style.background='var(--accent)';this.style.borderColor='var(--primary)';" onmouseout="this.style.background='var(--bg)';this.style.borderColor='var(--primary-line)';">
+          See the full tier-by-tier breakdown
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        </a>
+        <p style="font-size:12.5px;color:var(--muted-fg);margin-top:12px;">A complete feature-by-feature comparison across Starter, Pro &amp; Elite — opens on its own page.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Locked teaser -->
+  <section class="section section-tinted">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="section-eyebrow">Global and Asia Case Studies</div>
+        <h2 class="section-title">Real Scenarios. Real Commercial Logic.</h2>
+        <p class="section-sub">Each case study reconstructs a real market event the way a desk lived it — starting from the signal that appeared first, through the read, the supporting evidence, and the commercial decision it forced. The goal isn't to tell you what happened; it's to teach you the method to recognise the next one.</p>
+      </div>
+
+      <!-- Worked sample (free) -->
+      <div class="cs-sample reveal">
+        <div class="cs-sample-head">
+          <span class="cs-tag">Free Sample · Case C</span>
+          <div>
+            <div class="cs-sample-title">COVID Contango — Singapore's Anchorage Fills</div>
+            <div class="cs-sample-meta">April–June 2020 · Crude oil · Trading &amp; shipping</div>
+          </div>
+        </div>
+        <div class="cs-sample-intro">Here's the full shape of one case study, free — so you can see exactly how the library is built before you unlock the rest.</div>
+        <div class="cs-steps">
+          <div class="cs-step">
+            <div class="cs-step-label">1 · The Signal</div>
+            <div class="cs-step-text">On 20 April 2020, WTI front-month settled at <strong>−$37.63/bbl</strong> — negative for the first time in history. Brent's prompt-versus-six-month spread (M1/M6) gapped out to roughly <strong>$18/bbl</strong>: a textbook <span class="key-term">contango</span>, where a barrel for later delivery is worth far more than one today.</div>
+          </div>
+          <div class="cs-step">
+            <div class="cs-step-label">2 · The Read</div>
+            <div class="cs-step-text">A contango that steep <em>pays you to wait</em>. If the gap between buying now and selling forward beats the cost of storing the barrels, storage itself becomes the trade. With onshore tanks brimming, the next option was <span class="key-term">floating storage</span> — chartering tankers simply to sit and hold crude.</div>
+          </div>
+          <div class="cs-step">
+            <div class="cs-step-label">3 · The Evidence</div>
+            <div class="cs-step-text">AIS vessel-tracking showed VLCCs slowing and anchoring off Singapore and the Strait of Malacca <strong>before</strong> any official inventory report confirmed the build. The ships were the signal; the data caught up weeks later.</div>
+          </div>
+          <div class="cs-callout">
+            <div class="cs-callout-label">The carry, simplified</div>
+            <div class="cs-callout-row"><span>Contango captured (M1 → M6)</span><span class="cs-pos">≈ +$18.00 /bbl</span></div>
+            <div class="cs-callout-row"><span>Storage + freight (VLCC hire)</span><span class="cs-neg">– est. $7–9 /bbl</span></div>
+            <div class="cs-callout-row"><span>Financing + insurance</span><span class="cs-neg">– est. $2–3 /bbl</span></div>
+            <div class="cs-callout-divider"></div>
+            <div class="cs-callout-row cs-callout-total"><span>Indicative net carry</span><span class="cs-pos">≈ +$6–9 /bbl</span></div>
+            <div class="cs-callout-note">Illustrative figures — desks repriced this daily against live charter rates.</div>
+          </div>
+          <div class="cs-step">
+            <div class="cs-step-label">4 · The Decision</div>
+            <div class="cs-step-text">Desks that locked storage <em>early</em> — before charter rates spiked on the very same demand — captured the carry. As tanks and tankers filled and OPEC+ cuts took hold, the spread normalised over the following weeks and the window closed. <strong>Timing, not direction, made the money.</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Slim unlock bar -->
+      <div class="cs-unlock reveal">
+        <div class="cs-unlock-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+        </div>
+        <div class="cs-unlock-text"><strong>That's one of 10+ worked case studies.</strong> The full library spans global and Asian crude, LNG, freight and power markets — and grows every month. Unlocks with Elite.</div>
+        <a href="#pricing-career" class="cs-unlock-btn">Unlock with Elite →</a>
+      </div>
+
+      <!-- More in the library -->
+      <div class="cs-more">
+        <div class="cs-mini reveal rd1" style="border-left:3px solid var(--sales);">
+          <div class="cs-mini-top">
+            <span class="cs-mini-num">CASE F · SHIPPING</span>
+            <svg class="cs-mini-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <div class="cs-mini-title">Red Sea Reroute — AIS Saw Asia's Supply Shock First</div>
+          <div class="cs-mini-desc">Attacks diverted ~90% of tankers and halved Suez transits. Tracing the AIS signal chain from rerouting to widening Singapore product margins.</div>
+        </div>
+        <div class="cs-mini reveal rd2" style="border-left:3px solid #B45309;">
+          <div class="cs-mini-top">
+            <span class="cs-mini-num">CASE K · INTELLIGENCE</span>
+            <svg class="cs-mini-lock" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <div class="cs-mini-title">TTF Above JKM — Europe's Storage Signal, 6 Weeks Early</div>
+          <div class="cs-mini-desc">European gas inverted against Asian LNG. How the GIE AGSI storage fill-rate flagged the move roughly six weeks before the curve did.</div>
+        </div>
+        <div class="cs-mini cs-more-tile reveal rd3">
+          <div class="cs-more-tile-num">10+</div>
+          <div class="cs-more-tile-label">more worked case studies across crude, LNG, freight &amp; power — added monthly</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /panel-career -->
+
+<!-- ══════════════════════════════════════════
+     SALES PANEL
+══════════════════════════════════════════ -->
+<div class="panel" id="panel-sales">
+
+  <!-- Sales Hero -->
+  <section class="hero-sales">
+    <div class="container hero-inner">
+      <div class="pill-sales reveal">
+        <span class="pill-sales-dot"></span>
+        For Sales Professionals Selling Into Commodity Trading
+      </div>
+      <h1 class="reveal">
+        Sell Into Commodity Trading<br/>with
+        <span class="accent-sales">Desk-Level Credibility.</span>
+      </h1>
+      <p class="hero-sub-sales reveal">
+        Your buyers are traders, risk managers, schedulers, and analysts who can tell within two minutes whether you understand their world. The Playbook gives you the inside knowledge to have conversations at their level — not presentations at yours.
+      </p>
+      <div class="hero-cta reveal">
+        <button class="btn-hero-sales" onclick="document.getElementById('pricing-sales').scrollIntoView({behavior:'smooth'})">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="16" height="16"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          See Sales Pricing
+        </button>
+        <button class="btn-hero-sales-outline" onclick="document.getElementById('sales-learn').scrollIntoView({behavior:'smooth'})">
+          What You'll Learn
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="15" height="15"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+      </div>
+      <div class="hero-sales-stats reveal rd3">
+        <div class="hs">
+          <div class="hss-num">2 min</div>
+          <div class="hss-label">How fast traders judge your credibility</div>
+        </div>
+        <div class="hs">
+          <div class="hss-num">5</div>
+          <div class="hss-label">Buyer functions covered</div>
+        </div>
+        <div class="hs">
+          <div class="hss-num">40+</div>
+          <div class="hss-label">Practitioner Q&amp;As to learn from</div>
+        </div>
+        <div class="hs">
+          <div class="hss-num">20+</div>
+          <div class="hss-label">Years desk experience behind the content</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pain points -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="section-eyebrow" style="color:var(--sales);">The Problem</div>
+        <h2 class="section-title">Your Buyers Know When You Don't Get It.</h2>
+        <p class="section-sub">Commodity trading firms — oil majors, independent trading houses, LNG portfolios, market intelligence providers — buy from people who understand their business. Most vendors don't. That's why deals stall, champions go quiet, and pilots never convert.</p>
+      </div>
+      <div class="pain-grid">
+        <div class="pain-card reveal rd1">
+          <div class="pain-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+          <h3 class="pain-title">You're Pitching to People Who Think in Barrels</h3>
+          <p class="pain-desc">Traders don't think in annual recurring revenue, user seats, or implementation timelines. They think in cargo positions, freight rates, and margin at risk. If your discovery call sounds like a software demo instead of a market conversation, you've already lost them.</p>
+        </div>
+        <div class="pain-card reveal rd2">
+          <div class="pain-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+          <h3 class="pain-title">Your Champion Can't Sell You Internally</h3>
+          <p class="pain-desc">Even when your champion sees the value, they struggle to articulate it to a trading desk in commercial terms. They need to explain how your solution maps to their P&L, their risk exposure, or their operational workflow — and most vendors don't give them the language to do it.</p>
+        </div>
+        <div class="pain-card reveal rd3">
+          <div class="pain-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+          <h3 class="pain-title">You Can't Differentiate on Product Alone</h3>
+          <p class="pain-desc">Your competitors have similar feature sets. The vendor who wins is the one who understands the buyer's commercial context deeply enough to position their solution as the answer to a specific, felt problem — not just another capability on a slide.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- What you learn -->
+  <section class="section section-tinted" id="sales-learn">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="section-eyebrow" style="color:var(--sales);">What You'll Learn</div>
+        <h2 class="section-title">The Commercial Context Your Buyers Live In.</h2>
+        <p class="section-sub">Not a glossary of terms. A working understanding of how commodity trading desks make money, manage risk, and evaluate vendors — so you can have conversations that resonate.</p>
+      </div>
+      <div class="learn-grid">
+        <div class="learn-card reveal rd1">
+          <div class="learn-num">01</div>
+          <div class="learn-body">
+            <div class="learn-title">How the desk actually makes money</div>
+            <div class="learn-desc">The six revenue levers — flat price, spread, freight, timing, quality, and optionality. Where each function in a trading firm contributes to P&L, and where they lose it. The vocabulary traders use to describe commercial performance.</div>
+          </div>
+        </div>
+        <div class="learn-card reveal rd2">
+          <div class="learn-num">02</div>
+          <div class="learn-body">
+            <div class="learn-title">How trading desks use data and intelligence</div>
+            <div class="learn-desc">How desks consume Platts, Argus, Kpler, Vortexa, and the Baltic Exchange. What signals matter, how frequently they're checked, and what decisions they support. If you sell data or intelligence tools, this is your discovery framework.</div>
+          </div>
+        </div>
+        <div class="learn-card reveal rd1">
+          <div class="learn-num">03</div>
+          <div class="learn-body">
+            <div class="learn-title">How operations and scheduling work</div>
+            <div class="learn-desc">The cargo lifecycle — nomination, NOR, laytime, demurrage, B/L, and vessel scheduling. What an ETRM system does and why it matters. The language of operations teams who control implementation and adoption of your product.</div>
+          </div>
+        </div>
+        <div class="learn-card reveal rd2">
+          <div class="learn-num">04</div>
+          <div class="learn-body">
+            <div class="learn-title">How risk and compliance think</div>
+            <div class="learn-desc">VaR, position limits, basis risk, counterparty credit, sanctions — the constraints that shape every commercial decision. If your product touches risk or compliance functions, you need to understand these frameworks before your first meeting.</div>
+          </div>
+        </div>
+        <div class="learn-card reveal rd1">
+          <div class="learn-num">05</div>
+          <div class="learn-body">
+            <div class="learn-title">How to map your solution to their P&L</div>
+            <div class="learn-desc">The 15 Asia case studies in the Pro tier are real market events with commercial impact analysis. Reading them teaches you how traders think about market signals and decisions — and how to connect your solution to that exact thinking.</div>
+          </div>
+        </div>
+        <div class="learn-card reveal rd2">
+          <div class="learn-num">06</div>
+          <div class="learn-body">
+            <div class="learn-title">The language that builds immediate credibility</div>
+            <div class="learn-desc">The Desk Channel's 40 Q&amp;As are real questions from real practitioners with real answers. Reading them tells you what trading professionals care about, how they frame problems, and which vocabulary signals that you understand their world.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Who is this for -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="section-eyebrow" style="color:var(--sales);">Who This Is For</div>
+        <h2 class="section-title">Six Sales Roles. One Shared Problem.</h2>
+        <p class="section-sub">If you sell anything into commodity trading firms — software, data, services, or technology — understanding how the desk thinks is the single highest-leverage investment you can make in your sales capability.</p>
+      </div>
+      <div class="who-grid">
+        <div class="who-card reveal rd1">
+          <div class="who-role">ETRM &amp; Trading Software</div>
+          <h3 class="who-title">Enterprise Software Sales</h3>
+          <p class="who-desc">You sell Endur, RightAngle, Allegro, or a competing ETRM. Your buyers are heads of trade operations, risk managers, and IT — but the real decision is made by the trading desk.</p>
+          <div class="who-outcome">"After the Playbook, I stopped presenting to operations and started having commercial conversations with the desk. First call conversion improved immediately."</div>
+        </div>
+        <div class="who-card reveal rd2">
+          <div class="who-role">Market Data &amp; Intelligence</div>
+          <h3 class="who-title">Data Platform Sales</h3>
+          <p class="who-desc">You sell Kpler, Vortexa, Platts, Argus, Wood Mac, or a competing data service. Your buyers already know the market — they're testing whether you do too.</p>
+          <div class="who-outcome">"Understanding how desks actually use AIS data changed how I demo. I show the workflow, not the features. Win rate on enterprise accounts up 35%."</div>
+        </div>
+        <div class="who-card reveal rd3">
+          <div class="who-role">Risk &amp; Compliance Technology</div>
+          <h3 class="who-title">Risk Technology Sales</h3>
+          <p class="who-desc">You sell VaR systems, surveillance tools, sanctions screening, or credit risk platforms. The buying committee includes risk managers who will probe your market understanding in detail.</p>
+          <div class="who-outcome">"The Playbook's risk chapter gave me the vocabulary to have real conversations with the CRO — not just the compliance team. Accelerated our deal cycle by 6 weeks."</div>
+        </div>
+        <div class="who-card reveal rd1">
+          <div class="who-role">Shipping &amp; Freight Technology</div>
+          <h3 class="who-title">Maritime &amp; Logistics Sales</h3>
+          <p class="who-desc">You sell vessel tracking, port operations, freight analytics, or chartering technology. Your buyers think in laytime, demurrage, and NOR — and expect you to as well.</p>
+          <div class="who-outcome">"I finally understood what demurrage costs a trading desk per day. That one number reframed every conversation I had about our product's ROI."</div>
+        </div>
+        <div class="who-card reveal rd2">
+          <div class="who-role">Trade Finance &amp; Banking</div>
+          <h3 class="who-title">Commodity Finance Sales</h3>
+          <p class="who-desc">You sell letters of credit, commodity finance structures, or payment solutions to commodity trading firms. Understanding how trades are documented and settled gives you genuine advisory value.</p>
+          <div class="who-outcome">"Understanding the B/L and LOI process meant I could map our solution to an actual operational pain point — not just a generic 'trade finance' category."</div>
+        </div>
+        <div class="who-card reveal rd3">
+          <div class="who-role">Consulting &amp; Advisory</div>
+          <h3 class="who-title">Strategy &amp; Management Consulting</h3>
+          <p class="who-desc">You sell advisory services to commodity trading firms on strategy, operations, digital transformation, or market entry. Commercial credibility starts before the proposal.</p>
+          <div class="who-outcome">"Our team used the Playbook as pre-engagement preparation for an LNG client. The trading desk noticed we understood physical markets — that distinction won the work."</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROI callout -->
+  <section class="section section-tinted">
+    <div class="container">
+      <div class="roi-box reveal">
+        <div class="roi-left">
+          <div class="roi-eyebrow">The Commercial Case</div>
+          <div class="roi-title">One Deal Pays for<br/><span class="accent-sales">a Year of Pro.</span></div>
+          <div class="roi-desc">Pro is SGD 299/month. If understanding the commodity trading desk helps you close one additional deal per year — at even a fraction of typical contract values in this sector — the return is not close. The question is whether you can afford not to know this.</div>
+          <div class="roi-stats">
+            <div class="roi-stat">
+              <div class="roi-stat-num">$250K–$2M+</div>
+              <div class="roi-stat-label">Typical ETRM / data platform ACV</div>
+            </div>
+            <div class="roi-stat">
+              <div class="roi-stat-num">SGD 3,588</div>
+              <div class="roi-stat-label">Full year of Pro access</div>
+            </div>
+            <div class="roi-stat">
+              <div class="roi-stat-num">2 min</div>
+              <div class="roi-stat-label">How fast traders assess your credibility</div>
+            </div>
+            <div class="roi-stat">
+              <div class="roi-stat-num">6 wks</div>
+              <div class="roi-stat-label">Reported reduction in deal cycle (user data)</div>
+            </div>
+          </div>
+        </div>
+        <div class="roi-right">
+          <div class="roi-testimonial">
+            <div class="roi-quote">"I used to walk into commodity trading firms and talk about our platform's capabilities. Now I walk in and talk about their market — what Brent is doing, what the crack spread is signalling, what their freight book looks like. The conversation is completely different. So is our pipeline."</div>
+            <div class="roi-attribution">
+              <strong>Head of Enterprise Sales, APAC</strong>
+              Market intelligence platform, Singapore
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Sales pricing -->
+  <section class="section" id="pricing-sales">
+    <div class="container">
+      <div class="section-head reveal">
+        <div class="section-eyebrow" style="color:var(--sales);">Pricing for Sales Professionals</div>
+        <h2 class="section-title">The Same Content. A Different Purpose.</h2>
+        <p class="section-sub">The Playbook content is identical across career and sales audiences. Starter gives you the commercial foundation. Pro gives you the live market context and practitioner access that keeps your knowledge current.</p>
+      </div>
+
+      <div class="sales-pricing-grid">
+
+        <!-- STARTER for sales -->
+        <div class="sales-price-card reveal rd1">
+          <div class="sales-tier-badge">One-time · SGD 149</div>
+          <div class="sales-price-name">Starter</div>
+          <div class="sales-price-amount">SGD 149</div>
+          <div class="sales-price-tag">One-time purchase. Everything you need to start selling smarter.</div>
+          <div class="sales-price-fit">
+            <span class="sales-price-fit-label">Best For Sales Professionals Who</span>
+            Are just entering commodity trading accounts or who sell to operational and analytics functions. Get the commercial foundation before your next important meeting.
+          </div>
+          <ul class="sales-list">
+            <li><svg class="sales-check" viewBox="0 0 20 20" fill="currentColor"><path d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0z"/></svg><span><strong>Full Playbook</strong> — all 5 chapters, 120 assets covering every desk function</span></li>
+            <li><svg class="sales-check" viewBox="0 0 20 20" fill="currentColor"><path d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0z"/></svg><span><strong>Market Knowledge Test</strong> — identify exactly which areas to study before key accounts</span></li>
+            <li><svg class="sales-check" viewBox="0 0 20 20" fill="currentColor"><path d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0z"/></svg><span><strong>50 Practitioner Q&amp;As</strong> — how traders actually think about problems</span></li>
+            <li><svg class="sales-check" viewBox="0 0 20 20" fill="currentColor"><path d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0z"/></svg><span><strong>Free Data Sources Guide</strong> — know which signals your buyers check every morning</span></li>
+            <li><svg class="sales-check" viewBox="0 0 20 20" fill="currentColor"><path d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0z"/></svg><span>20+ infographics · glossary · desk vocabulary reference</span></li>
+          </ul>
+          <button class="btn-ghost" style="border-color:var(--sales-line);color:var(--sales);">Get Starter — SGD 149</button>
+          <p class="price-note">One-time · Lifetime access · No subscription</p>
+        </div>
+
+        <!-- PRO for sales -->
+        <div class="sales-price-card featured reveal rd2">
+          <div class="sales-price-badge">Recommended for Sales</div>
+          <div class="sales-tier-badge">SGD 299/month</div>
+          <div class="sales-price-name" style="color:var(--sales);">Pro</div>
+          <div class="sales-price-amount">SGD 299</div>
+          <div class="sales-price-tag">Per month · cancel anytime · keeps your market knowledge current.</div>
+          <div class="sales-price-fit" style="border-left-color:var(--sales-line);background:var(--sales-bg);">
+            <span class="sales-price-fit-label" style="color:var(--sales);">Best For Sales Professionals Who</span>
+            Sell into trading desks, risk functions, or senior commercial roles at major commodity firms. The case studies and Desk Channel are your competitive intelligence.
+          </div>
+          <ul class="sales-list">
+            <li><svg class="sales-check" viewBox="0 0 20 20" fill="currentColor"><path d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0z"/></svg><span>Everything in Starter</span></li>
+            <li><svg class="sales-check" viewBox="0 0 20 20" fill="currentColor"><path d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0z"/></svg><span><strong>15 Asia Case Studies</strong> — real market events showing how desks think through commercial decisions</span></li>
+            <li><svg class="sales-check" viewBox="0 0 20 20" fill="currentColor"><path d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0z"/></svg><span><strong>The Desk Channel</strong> — 40 practitioner Q&amp;As that reveal how traders frame every type of problem</span></li>
+            <li><svg class="sales-check" viewBox="0 0 20 20" fill="currentColor"><path d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0z"/></svg><span><strong>Anonymous Mentor Connect</strong> — ask your real sales preparation questions to practitioners directly</span></li>
+            <li><svg class="sales-check" viewBox="0 0 20 20" fill="currentColor"><path d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0z"/></svg><span><strong>Market Job Openings</strong> — track which firms are growing and hiring (your next target accounts)</span></li>
+            <li><svg class="sales-check" viewBox="0 0 20 20" fill="currentColor"><path d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0z"/></svg><span>New content monthly — case studies, Q&amp;As, and market context updated continuously</span></li>
+          </ul>
+          <button class="btn-sales">Upgrade to Pro — SGD 299/month →</button>
+          <p class="price-note">Cancel anytime · 14-day refund on first payment</p>
+        </div>
+
+      </div><!-- /sales-pricing-grid -->
+
+      <!-- Sales trust row -->
+      <div class="trust-row reveal" style="margin-top:36px;">
+        <div class="trust-item" style="color:var(--sales);"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Secure checkout via Stripe</div>
+        <div class="trust-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>14-day refund on first payment</div>
+        <div class="trust-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Instant access on all devices</div>
+        <div class="trust-item"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>Content built by 20+ year practitioners</div>
+      </div>
+
+      <!-- Team note -->
+      <div style="max-width:640px;margin:32px auto 0;background:var(--sales-bg);border:1px solid var(--sales-line);border-radius:10px;padding:18px 22px;display:flex;align-items:flex-start;gap:14px;" class="reveal">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--sales)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:2px;"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        <div>
+          <div style="font-size:12px;font-weight:700;color:var(--sales);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:4px;">Team Licences</div>
+          <div style="font-size:13.5px;color:var(--sales-dark);line-height:1.55;">If you want to upskill your entire sales team on commodity trading before a major campaign or account push, contact us for team pricing. Available for 5+ seats with a custom onboarding session.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div><!-- /panel-sales -->
+
+<!-- ══ MODAL ══ -->
+<div class="modal-overlay" id="modal">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <div id="modal-form-wrap">
+      <div class="modal-eyebrow">Free Starter Pack</div>
+      <div class="modal-title">Get 5 Infographics Free</div>
+      <div class="modal-sub">Download instantly. No credit card. Plus the weekly market digest to your inbox.</div>
+      <ul class="modal-what">
+        <li><svg viewBox="0 0 20 20" fill="currentColor"><path d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0z"/></svg>Ecosystem Map</li>
+        <li><svg viewBox="0 0 20 20" fill="currentColor"><path d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0z"/></svg>LNG Cargo Flow</li>
+        <li><svg viewBox="0 0 20 20" fill="currentColor"><path d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0z"/></svg>Crack Spread Guide</li>
+        <li><svg viewBox="0 0 20 20" fill="currentColor"><path d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0z"/></svg>Price Benchmarks 101</li>
+        <li><svg viewBox="0 0 20 20" fill="currentColor"><path d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0z"/></svg>Trade Finance Flow</li>
+        <li><svg viewBox="0 0 20 20" fill="currentColor"><path d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0z"/></svg>Weekly market note</li>
+      </ul>
+      <div class="modal-name-row">
+        <div class="modal-field">
+          <label class="modal-label">First Name</label>
+          <input class="modal-input" type="text" id="m-fname" placeholder="Wei Ming"/>
+        </div>
+        <div class="modal-field">
+          <label class="modal-label">Last Name</label>
+          <input class="modal-input" type="text" id="m-lname" placeholder="Tan"/>
+        </div>
+      </div>
+      <div class="modal-field">
+        <label class="modal-label">Work Email</label>
+        <input class="modal-input" type="email" id="m-email" placeholder="you@company.com"/>
+      </div>
+      <button class="modal-btn" onclick="submitModal()">Send Me the Free Pack →</button>
+      <p class="modal-fine">No spam. Unsubscribe anytime.</p>
+    </div>
+    <div class="modal-success" id="modal-success">
+      <div class="modal-success-icon">
+        <svg width="26" height="26" viewBox="0 0 20 20" fill="var(--primary)"><path d="M16.7 5.3a1 1 0 0 1 0 1.4l-8 8a1 1 0 0 1-1.4 0l-4-4a1 1 0 0 1 1.4-1.4L8 12.6l7.3-7.3a1 1 0 0 1 1.4 0z"/></svg>
+      </div>
+      <h4 style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--fg);margin-bottom:8px;">Check your inbox.</h4>
+      <p style="font-size:13.5px;color:var(--muted-fg);max-width:280px;margin:0 auto;">Your free infographic pack is on its way. While you wait — explore the Playbook below.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FOOTER ══ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="#top" class="logo" aria-label="Commodity Playbook">
+          <img src="data:image/png;base64,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" alt="Commodity Playbook — Break In. Move Up. Stay Sharp." style="height:56px;width:auto;display:block;"/>
+        </a>
+        <p class="footer-blurb">The definitive guide to understanding commodity trading — how markets work, how revenue is made, and how to build a career or close a sale inside them.</p>
+      </div>
+      <div>
+        <h4>Content</h4>
+        <ul>
+          <li><a href="#">Career Roadmap</a></li>
+          <li><a href="#">Industry Foundations</a></li>
+          <li><a href="#">Resume &amp; Positioning</a></li>
+          <li><a href="#">Asia Case Studies</a></li>
+          <li><a href="#">The Desk Channel</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Access</h4>
+        <ul>
+          <li><a href="#pricing-career" onclick="switchAudience('career');return true;">Career Pricing</a></li>
+          <li><a href="#pricing-sales" onclick="switchAudience('sales');return true;">Sales Pricing</a></li>
+          <li><a href="#">Anonymous Mentor Connect</a></li>
+          <li><a href="#">Team Licences</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <span id="yr"></span> Commodity Playbook. All rights reserved.</p>
+      <p style="opacity:0.6;">Strictly confidential · Singapore</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ── Year
+  document.getElementById('yr').textContent = new Date().getFullYear();
+
+  // ── Audience toggle
+  function switchAudience(aud) {
+    const panels = document.querySelectorAll('.panel');
+    const tabs   = document.querySelectorAll('.aud-tab');
+    panels.forEach(p => p.classList.remove('active'));
+    tabs.forEach(t => { t.classList.remove('active-career','active-sales'); });
+
+    document.getElementById('panel-' + aud).classList.add('active');
+    document.getElementById('tab-' + aud).classList.add('active-' + aud);
+
+    // Update nav CTA
+    const cta = document.getElementById('nav-cta-btn');
+    if (aud === 'sales') {
+      cta.textContent = 'See Sales Pricing';
+      cta.onclick = function() {
+        document.getElementById('pricing-sales').scrollIntoView({behavior:'smooth'});
+        return false;
+      };
+    } else {
+      cta.textContent = 'Get Playbook';
+      cta.onclick = null;
+      cta.setAttribute('href', 'commodity-playbook-full.html');
+    }
+
+    window.scrollTo({top: 0, behavior: 'smooth'});
+  }
+
+  // ── Modal
+  function openModal() {
+    document.getElementById('modal').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    document.getElementById('modal').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function submitModal() {
+    const email = document.getElementById('m-email').value.trim();
+    const fname = document.getElementById('m-fname').value.trim();
+    if (!fname || !email || !email.includes('@')) {
+      alert('Please enter your name and a valid email address.');
+      return;
+    }
+    document.getElementById('modal-form-wrap').style.display = 'none';
+    document.getElementById('modal-success').classList.add('show');
+  }
+  document.getElementById('modal').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeModal();
+  });
+
+  // ── Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    });
+  }, {threshold: 0.1});
+  reveals.forEach(el => io.observe(el));
+
+  // Hero reveals immediate
+  document.querySelectorAll('.hero-career .reveal, .hero-sales .reveal').forEach((el,i) => {
+    setTimeout(() => el.classList.add('in'), 80 + i * 100);
+  });
+</script>
+</body>
+</html>
+HTMLEOF

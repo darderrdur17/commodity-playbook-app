@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Chapter A — Industry Foundations · Commodity Trading Playbook</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--bg:#ffffff;--fg:#333333;--primary:#3280ff;--primary-fg:#ffffff;
+      --secondary:#f2f4f7;--sec-fg:#465468;--accent:#dff2ff;--acc-fg:#0830a0;
+      --muted:#f9fafb;--muted-fg:#677184;--border:#e4e7ec;
+      --chart2:#115cff;--chart3:#0040f5;--chart4:#0131cc;--chart5:#0830a0;
+      --primary-soft:rgba(50,128,255,0.08);--primary-line:rgba(50,128,255,0.25);}
+    *{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--fg);line-height:1.6;-webkit-font-smoothing:antialiased;}
+    a{color:inherit;text-decoration:none;}
+
+    .nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+    .nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px;}
+    .logo{display:flex;align-items:center;gap:10px;font-family:'Playfair Display',serif;font-weight:700;font-size:18px;color:var(--fg);letter-spacing:-0.01em;}
+    .logo-mark{width:22px;height:22px;background:var(--primary);transform:rotate(45deg);transition:transform 0.4s ease;}
+    .logo:hover .logo-mark{transform:rotate(90deg);}
+    .nav-links{display:flex;align-items:center;gap:28px;}
+    .nav-links a{font-size:14px;font-weight:500;color:var(--muted-fg);transition:color 0.2s;}
+    .nav-links a:hover{color:var(--primary);}
+    .btn-nav{background:var(--primary);color:#fff;padding:10px 18px;border-radius:6px;font-size:14px;font-weight:600;transition:background 0.2s;}
+    .btn-nav:hover{background:var(--chart2);}
+
+    .chapter-hero{padding:44px 0 52px;position:relative;overflow:hidden;}
+    .chapter-hero::before{content:"";position:absolute;top:-140px;right:-140px;width:440px;height:440px;background:var(--primary);opacity:0.16;filter:blur(90px);border-radius:50%;}
+    .chapter-hero::after{content:"";position:absolute;bottom:-80px;left:-60px;width:300px;height:300px;background:var(--chart3);opacity:0.1;filter:blur(70px);border-radius:50%;}
+    .hero-inner{max-width:1100px;margin:0 auto;padding:0 24px;position:relative;z-index:2;}
+    .back-link{display:inline-flex;align-items:center;gap:7px;font-size:13px;color:rgba(223,242,255,0.55);margin-bottom:22px;transition:color 0.2s;}
+    .back-link:hover{color:var(--accent);}
+    .back-link svg{width:13px;height:13px;}
+    .hero-top{display:flex;align-items:flex-start;justify-content:space-between;gap:28px;flex-wrap:wrap;}
+    .hero-left{flex:1;min-width:260px;}
+    .chapter-pill{display:inline-flex;align-items:center;gap:7px;padding:5px 13px;border:1px solid rgba(223,242,255,0.28);background:rgba(223,242,255,0.1);border-radius:999px;font-size:10px;font-weight:700;color:var(--accent);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:14px;}
+    .chapter-pill-dot{width:5px;height:5px;background:var(--accent);border-radius:50%;}
+    .chapter-title{font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(28px,4.5vw,46px);line-height:1.05;letter-spacing:-0.02em;color:#fff;margin-bottom:12px;}
+    .chapter-title .accent{color:var(--accent);font-style:italic;}
+    .chapter-sub{font-size:14.5px;font-weight:300;color:rgba(223,242,255,0.68);line-height:1.55;max-width:520px;}
+    .hero-right{flex-shrink:0;}
+    .progress-card{background:rgba(255,255,255,0.07);border:1px solid rgba(223,242,255,0.18);border-radius:12px;padding:16px 20px;min-width:200px;backdrop-filter:blur(8px);}
+    .pc-label{font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:rgba(223,242,255,0.5);margin-bottom:6px;}
+    .pc-stat{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#fff;line-height:1;}
+    .pc-stat span{font-size:12px;font-weight:400;color:rgba(223,242,255,0.45);margin-left:5px;}
+    .pc-bar{width:100%;height:4px;background:rgba(255,255,255,0.1);border-radius:999px;overflow:hidden;margin-top:8px;}
+    .pc-fill{height:100%;background:var(--primary);border-radius:999px;transition:width 0.8s ease;}
+    .pc-note{font-size:10.5px;color:rgba(223,242,255,0.4);margin-top:6px;line-height:1.4;}
+
+    .chapter-strip{background:var(--secondary);border-bottom:1px solid var(--border);}
+    .chapter-strip-inner{max-width:1100px;margin:0 auto;padding:0 24px;display:flex;gap:0;overflow-x:auto;}
+    .cs-tab{flex-shrink:0;padding:12px 18px;font-size:13px;font-weight:600;color:var(--muted-fg);border-bottom:2px solid transparent;transition:all 0.2s;white-space:nowrap;}
+    .cs-tab:hover{color:var(--primary);}
+    .cs-tab.active{color:var(--primary);border-bottom-color:var(--primary);}
+
+    .page-body{max-width:1100px;margin:0 auto;padding:36px 24px 96px;display:grid;grid-template-columns:220px 1fr;gap:32px;align-items:start;}
+    @media(max-width:860px){.page-body{grid-template-columns:1fr;}.sidebar{display:none;}}
+
+    .sidebar{position:sticky;top:76px;}
+    .sidebar-label{font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--primary);margin-bottom:8px;}
+    .sidebar-nav{list-style:none;}
+    .sidebar-nav li{margin-bottom:1px;}
+    .sidebar-nav a{display:flex;align-items:center;gap:7px;padding:6px 9px;border-radius:5px;font-size:12px;font-weight:500;color:var(--muted-fg);transition:all 0.2s;border:1px solid transparent;}
+    .sidebar-nav a:hover{background:var(--muted);color:var(--primary);}
+    .sidebar-nav a.active{background:var(--accent);color:var(--acc-fg);border-color:var(--primary-line);font-weight:600;}
+    .sn-num{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:var(--primary);flex-shrink:0;width:24px;}
+    .active .sn-num{color:var(--acc-fg);}
+    .sn-badge{margin-left:auto;flex-shrink:0;font-size:8px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:2px 5px;border-radius:3px;background:var(--accent);color:var(--acc-fg);}
+    .sidebar-next{margin-top:14px;background:var(--chart5);border-radius:8px;padding:12px 14px;}
+    .sn-next-label{font-size:9px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:rgba(223,242,255,0.5);margin-bottom:4px;}
+    .sn-next-title{font-size:12px;font-weight:700;color:#fff;margin-bottom:8px;line-height:1.3;}
+    .sn-next-btn{display:block;text-align:center;background:var(--primary);color:#fff;padding:7px 10px;border-radius:5px;font-size:11px;font-weight:700;transition:background 0.2s;}
+    .sn-next-btn:hover{background:var(--chart2);}
+
+    .chapter-map{background:var(--muted);border:1px solid var(--border);border-radius:8px;padding:14px 18px;margin-bottom:24px;}
+    .cm-label{font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--primary);margin-bottom:8px;}
+    .cm-sections{display:flex;gap:5px;flex-wrap:wrap;}
+    .cm-section{display:flex;align-items:center;gap:5px;padding:4px 9px;border-radius:4px;font-size:11px;font-weight:600;border:1px solid var(--accent);background:var(--accent);color:var(--acc-fg);cursor:pointer;transition:all 0.2s;}
+    .cm-section:hover{background:#c7e9ff;}
+    .cm-dot{width:5px;height:5px;border-radius:50%;background:var(--primary);flex-shrink:0;}
+
+    /* ── SECTION BLOCKS ── */
+    .section-block{border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+    .section-block+.section-block{margin-top:18px;}
+    .sb-header{background:var(--muted);padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;cursor:pointer;transition:background 0.2s;}
+    .sb-header:hover{background:var(--secondary);}
+    .sb-header.open{background:var(--accent);border-bottom-color:var(--primary-line);}
+    .sb-num{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:var(--primary);flex-shrink:0;width:28px;}
+    .sb-header.open .sb-num{color:var(--acc-fg);}
+    .sb-info{flex:1;}
+    .sb-title{font-family:'Playfair Display',serif;font-weight:700;font-size:15px;color:var(--fg);line-height:1.2;margin-bottom:2px;}
+    .sb-header.open .sb-title{color:var(--acc-fg);}
+    .sb-desc{font-size:11.5px;color:var(--muted-fg);}
+    .sb-header.open .sb-desc{color:var(--sec-fg);}
+    .sb-meta{font-size:10.5px;color:var(--muted-fg);flex-shrink:0;}
+    .sb-badge{font-size:9px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:3px 7px;border-radius:999px;flex-shrink:0;background:var(--accent);color:var(--acc-fg);border:1px solid var(--primary-line);}
+    .sb-toggle{width:20px;height:20px;flex-shrink:0;border-radius:50%;background:rgba(50,128,255,0.1);display:flex;align-items:center;justify-content:center;transition:transform 0.3s;}
+    .sb-header.open .sb-toggle{transform:rotate(180deg);background:rgba(8,48,160,0.12);}
+    .sb-toggle svg{width:10px;height:10px;color:var(--primary);}
+    .sb-header.open .sb-toggle svg{color:var(--acc-fg);}
+    .sb-body{display:none;background:var(--bg);}
+    .sb-body.open{display:block;}
+
+    /* ── READING CONTENT ── */
+    .reading-content{padding:26px 32px 0;max-width:680px;}
+    @media(max-width:640px){.reading-content{padding:18px 16px 0;}}
+    .read-byline{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--primary);display:flex;align-items:center;gap:7px;margin-bottom:18px;}
+    .read-byline::before{content:"";display:inline-block;width:16px;height:2px;background:var(--primary);}
+    .read-hook{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--fg);line-height:1.35;margin-bottom:16px;}
+    .reading-content p{font-size:14.5px;color:var(--sec-fg);line-height:1.78;margin-bottom:14px;}
+    .reading-content p:last-of-type{margin-bottom:0;}
+    .key-term{font-weight:700;color:var(--primary);}
+    .pull-quote{border-left:3px solid var(--primary);background:var(--accent);border-radius:0 5px 5px 0;padding:12px 16px;margin:18px 0;}
+    .pull-quote p{font-family:'Playfair Display',serif;font-style:italic;font-size:14.5px;color:var(--acc-fg);line-height:1.55;margin-bottom:0;}
+    .wtmfy{margin-top:18px;background:var(--muted);border:1px solid var(--border);border-radius:7px;padding:12px 16px;}
+    .wtmfy-label{font-size:9px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--primary);margin-bottom:5px;}
+    .wtmfy p{font-size:12.5px;color:var(--sec-fg);line-height:1.6;margin-bottom:0;}
+    .read-handoff{margin:18px 0 0;padding:14px 0 0;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+    .rh-text{font-size:12.5px;color:var(--muted-fg);font-style:italic;flex:1;}
+    .rh-btn{background:var(--primary);color:#fff;padding:8px 14px;border-radius:5px;font-size:12.5px;font-weight:600;border:none;cursor:pointer;transition:background 0.2s;flex-shrink:0;}
+    .rh-btn:hover{background:var(--chart2);}
+
+    /* ── ASSET PANEL ── */
+    .asset-panel{margin:0;padding:18px 32px 22px;border-top:1px solid var(--border);background:var(--muted);}
+    @media(max-width:640px){.asset-panel{padding:14px 16px;}}
+    .ap-label{font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--primary);margin-bottom:12px;display:flex;align-items:center;gap:7px;}
+    .ap-label::before{content:"";display:inline-block;width:14px;height:2px;background:var(--primary);}
+    .ap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+    @media(max-width:600px){.ap-grid{grid-template-columns:1fr;}}
+    .ap-card{background:#fff;border:1px solid var(--border);border-radius:7px;padding:12px 14px;display:flex;flex-direction:column;gap:8px;transition:border-color 0.2s,box-shadow 0.2s;cursor:pointer;}
+    .ap-card:hover{border-color:var(--primary-line);box-shadow:0 4px 14px -4px rgba(50,128,255,0.12);}
+    .ap-card-top{display:flex;align-items:flex-start;gap:10px;}
+    .ap-icon{width:32px;height:32px;border-radius:6px;background:var(--accent);border:1px solid var(--primary-line);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .ap-icon svg{width:14px;height:14px;color:var(--primary);}
+    .ap-type-label{font-size:8.5px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--primary);margin-bottom:2px;}
+    .ap-title{font-weight:700;font-size:12px;color:var(--fg);line-height:1.3;}
+    .ap-desc{font-size:11px;color:var(--muted-fg);line-height:1.45;}
+    .ap-dl-btn{display:flex;align-items:center;justify-content:center;gap:5px;background:var(--accent);color:var(--acc-fg);border:1px solid var(--primary-line);border-radius:5px;padding:6px 10px;font-size:11px;font-weight:700;transition:all 0.2s;margin-top:2px;}
+    .ap-dl-btn:hover{background:var(--primary);color:#fff;border-color:var(--primary);}
+    .ap-dl-btn svg{width:11px;height:11px;}
+
+    /* ── CHAPTER COMPLETE ── */
+    .chapter-complete{background:var(--chart5);border-radius:12px;padding:28px 32px;margin-top:22px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;position:relative;overflow:hidden;}
+    .chapter-complete::before{content:"";position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:var(--primary);opacity:0.2;filter:blur(60px);border-radius:50%;}
+    .cc-text{position:relative;z-index:1;}
+    .cc-text h3{font-family:'Playfair Display',serif;font-weight:700;font-size:20px;color:#fff;margin-bottom:5px;}
+    .cc-text p{font-size:13.5px;color:rgba(223,242,255,0.65);max-width:440px;line-height:1.5;}
+    .cc-actions{position:relative;z-index:1;display:flex;gap:10px;flex-shrink:0;flex-wrap:wrap;}
+    .btn-white{background:#fff;color:var(--chart5);padding:11px 20px;border-radius:6px;font-size:13px;font-weight:700;transition:all 0.2s;display:inline-block;}
+    .btn-white:hover{background:var(--accent);color:var(--acc-fg);}
+    .btn-ghost-w{background:rgba(223,242,255,0.1);color:rgba(223,242,255,0.8);border:1px solid rgba(223,242,255,0.25);padding:11px 20px;border-radius:6px;font-size:13px;font-weight:600;transition:all 0.2s;display:inline-block;}
+    .btn-ghost-w:hover{background:rgba(223,242,255,0.18);color:#fff;}
+
+    .footer{background:var(--chart5);border-top:1px solid rgba(255,255,255,0.08);padding:36px 0 20px;}
+    .footer-inner{max-width:1100px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;}
+    .footer .logo{color:#fff;}
+    .footer .logo-mark{background:var(--accent);}
+    .footer-right{font-size:12.5px;color:rgba(223,242,255,0.35);}
+
+    .reveal{opacity:0;transform:translateY(12px);transition:opacity 0.6s ease,transform 0.6s ease;}
+    .reveal.in{opacity:1;transform:none;}
+    .rd1{transition-delay:0.05s;}.rd2{transition-delay:0.1s;}
+</style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="commodity-playbook-zflow.html" class="logo"><span class="logo-mark"></span><span>Commodity Playbook</span></a>
+      <div class="nav-links">
+        <a href="commodity-playbook-zflow.html">Overview</a>
+        <a href="commodity-playbook-hub.html">What's Inside</a>
+        <a href="commodity-playbook-zflow.html#pricing" class="btn-nav">Get the Playbook</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="chapter-hero" style="background:#0830a0;">
+    <div class="hero-inner">
+      <a href="commodity-playbook-playbook-hub.html" class="back-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        Back to Playbook Hub
+      </a>
+      <div class="hero-top">
+        <div class="hero-left reveal">
+          <div class="chapter-pill"><span class="chapter-pill-dot"></span>Chapter A · Full Playbook · Starter</div>
+          <h1 class="chapter-title"><span class="accent">Industry</span> Foundations</h1>
+          <p class="chapter-sub">The physical commodity world — how markets are structured, how trades make money, and the infrastructure that connects everything.</p>
+        </div>
+        <div class="hero-right reveal rd2">
+          <div class="progress-card">
+            <div class="pc-label">Chapter A</div>
+            <div class="pc-stat">8 <span>sections · 3 assets each</span></div>
+            <div class="pc-bar"><div class="pc-fill" style="width:0%" id="pc-fill"></div></div>
+            <div class="pc-note">24 downloadable assets in this chapter.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="chapter-strip">
+    <div class="chapter-strip-inner">
+      <a href="commodity-playbook-chapter-a.html" class="cs-tab active">A · Foundations</a>
+      <a href="commodity-playbook-chapter-b.html" class="cs-tab">B · Physical & Paper</a>
+      <a href="commodity-playbook-chapter-c.html" class="cs-tab">C · Shipping</a>
+      <a href="commodity-playbook-chapter-d.html" class="cs-tab">D · Intelligence</a>
+      <a href="commodity-playbook-chapter-e.html" class="cs-tab">E · Decision-Making</a>
+    </div>
+  </div>
+
+  <div class="page-body">
+    <aside class="sidebar reveal rd1">
+      <div class="sidebar-label">Chapter A — 8 Sections</div>
+      <ul class="sidebar-nav">
+        <li>
+          <a href="#section-a1">
+            <span class="sn-num">A.1</span>
+            What Is Physical Commodity T…
+            <span class="sn-badge">✓</span>
+          </a>
+        </li>
+        <li>
+          <a href="#section-a2">
+            <span class="sn-num">A.2</span>
+            The Energy Markets Landscape
+            <span class="sn-badge">✓</span>
+          </a>
+        </li>
+        <li>
+          <a href="#section-a3">
+            <span class="sn-num">A.3</span>
+            How a Trade Makes Money
+            <span class="sn-badge">✓</span>
+          </a>
+        </li>
+        <li>
+          <a href="#section-a4">
+            <span class="sn-num">A.4</span>
+            Refinery Economics & Crack S…
+            <span class="sn-badge">✓</span>
+          </a>
+        </li>
+        <li>
+          <a href="#section-a5">
+            <span class="sn-num">A.5</span>
+            Shipping, Freight & Cargo Ec…
+            <span class="sn-badge">✓</span>
+          </a>
+        </li>
+        <li>
+          <a href="#section-a6">
+            <span class="sn-num">A.6</span>
+            Storage, Terminals & the Inv…
+            <span class="sn-badge">✓</span>
+          </a>
+        </li>
+        <li>
+          <a href="#section-a7">
+            <span class="sn-num">A.7</span>
+            The Role of Price Reporting …
+            <span class="sn-badge">✓</span>
+          </a>
+        </li>
+        <li>
+          <a href="#section-a8">
+            <span class="sn-num">A.8</span>
+            Risk Management on the Desk
+            <span class="sn-badge">✓</span>
+          </a>
+        </li>
+      </ul>
+      <div class="sidebar-next"><div class="sn-next-label">Up Next</div><div class="sn-next-title">Chapter B — Physical & Paper Trading Markets</div><a href="commodity-playbook-chapter-b.html" class="sn-next-btn">Start Chapter B →</a></div>
+    </aside>
+
+    <main>
+      <div class="chapter-map reveal">
+        <div class="cm-label">Chapter A — 8 Sections · 24 Assets</div>
+        <div class="cm-sections"><div class="cm-section" onclick="openSection('a1')"><span class="cm-dot"></span>A.1</div>  <div class="cm-section" onclick="openSection('a2')"><span class="cm-dot"></span>A.2</div>  <div class="cm-section" onclick="openSection('a3')"><span class="cm-dot"></span>A.3</div>  <div class="cm-section" onclick="openSection('a4')"><span class="cm-dot"></span>A.4</div>  <div class="cm-section" onclick="openSection('a5')"><span class="cm-dot"></span>A.5</div>  <div class="cm-section" onclick="openSection('a6')"><span class="cm-dot"></span>A.6</div>  <div class="cm-section" onclick="openSection('a7')"><span class="cm-dot"></span>A.7</div>  <div class="cm-section" onclick="openSection('a8')"><span class="cm-dot"></span>A.8</div></div>
+      </div>
+
+      <div id="section-a1" class="section-block reveal">
+        <div class="sb-header" onclick="toggleSection('a1',this)">
+          <div class="sb-num">A.1</div>
+          <div class="sb-info">
+            <div class="sb-title">What Is Physical Commodity Trading?</div>
+            <div class="sb-desc">The difference between physical and paper markets — why a cargo is not a futures contract.</div>
+          </div>
+          <div class="sb-meta">10 min</div>
+          <span class="sb-badge">Starter</span>
+          <div class="sb-toggle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="sb-body" id="body-a1">
+      <div class="reading-content">
+            <div class="read-byline">Section A.1 · Chapter A</div>
+            <div class="read-hook">Most people think commodity trading is about predicting where prices go. The traders who actually make money know it's about something else entirely.</div>
+            <p>When a commodity trader executes a deal, they are not placing a bet on a price chart. They are arranging the physical movement of a real substance — a cargo of LNG on a vessel 400 nautical miles off Singapore, a parcel of crude already loaded at Ras Tanura, a batch of gasoil sitting in a tank farm in Rotterdam — from where it is to where it needs to be, at a price that makes the journey worthwhile.</p>
+            <p>This is <span class='key-term'>physical trading</span>. It involves a vessel, a loading port, a delivery window, a cargo specification, a counterparty who actually needs the molecules, and an operations team making sure the whole chain executes on time. The <span class='key-term'>paper market</span> — futures on ICE or NYMEX, swaps, options — exists alongside the physical market but is not the same thing. A paper position can be opened and closed in seconds. A physical cargo cannot.</p>
+            <p>The two markets are deeply connected — physical traders use paper instruments to hedge price exposure, and paper markets are anchored to physical price assessments — but the disciplines are different. A physical trader needs to understand freight, cargo specs, laytime, demurrage, and credit. Most major commodity firms do both, but the commercial logic of the desk starts with the physical.</p>
+            <div class="pull-quote"><p>Physical trading is logistics with a P&L attached. Every barrel has to be somewhere, on something, going somewhere else — and the gap between what it costs to move it and what someone will pay for it when it arrives is where the money is made.</p></div>
+            <div class="wtmfy">
+              <div class="wtmfy-label">What this means for you</div>
+              <p>Whether you are entering a trading role, an analytics function, or a scheduling position, understanding the physical market is the baseline. The desk measures everything against physical reality — cargo availability, vessel positions, terminal throughput. Speak that language and you can follow the commercial logic behind every desk decision.</p>
+            </div>
+            <div class="read-handoff">
+              <div class="rh-text">Which markets make up the physical commodity landscape — and how do oil, LNG, gas, and power connect to each other?</div>
+              <button class="rh-btn" onclick="openSection('a2');document.getElementById('section-a2').scrollIntoView({behavior:'smooth'})">Continue →</button>
+            </div>
+          </div>
+      <div class="asset-panel">
+        <div class="ap-label">Section Assets — Download</div>
+        <div class="ap-grid">
+        <div class="ap-card" onclick="triggerDownload('A1-physical-vs-paper-map.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Infographic</div>
+              <div class="ap-title">Physical vs. Paper Markets Map</div>
+            </div>
+          </div>
+          <div class="ap-desc">A visual map showing how physical cargoes, futures, swaps, and options relate — the full instrument landscape on one page.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('A1-physical-trade-checklist.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 0-2-2V9m0 0h18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Framework</div>
+              <div class="ap-title">Physical Trade Checklist</div>
+            </div>
+          </div>
+          <div class="ap-desc">The 8 questions every physical trade must answer before execution — from cargo availability to counterparty credit.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('A1-crude-cargo-worked-example.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Worked Example</div>
+              <div class="ap-title">A Crude Cargo from Enquiry to Delivery</div>
+            </div>
+          </div>
+          <div class="ap-desc">Step-by-step walkthrough of a 500,000 barrel crude cargo — nomination, confirmation, operations, and settlement.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        </div>
+      </div>
+        </div>
+      </div>
+      <div id="section-a2" class="section-block reveal">
+        <div class="sb-header" onclick="toggleSection('a2',this)">
+          <div class="sb-num">A.2</div>
+          <div class="sb-info">
+            <div class="sb-title">The Energy Markets Landscape</div>
+            <div class="sb-desc">Oil, LNG, natural gas, and power — how each market is structured and how they connect.</div>
+          </div>
+          <div class="sb-meta">12 min</div>
+          <span class="sb-badge">Starter</span>
+          <div class="sb-toggle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="sb-body" id="body-a2">
+      <div class="reading-content">
+            <div class="read-byline">Section A.2 · Chapter A</div>
+            <div class="read-hook">Commodity trading is not one industry. It is four overlapping industries that share infrastructure, pricing signals, and often the same desk.</div>
+            <p>The energy commodity market is commonly discussed as if it were a single entity — but in practice it is four distinct markets, each with its own pricing structure, physical infrastructure, and commercial logic. <span class='key-term'>Crude oil and refined products</span> form the largest and most liquid market. Crude is extracted, shipped to refineries, and converted into gasoline, gasoil, jet fuel, fuel oil, and naphtha. Each product has its own market, benchmark, and demand drivers.</p>
+            <p><span class='key-term'>LNG</span> — liquefied natural gas — is the fastest-growing segment. Natural gas is supercooled to liquid at -162°C, loaded onto specialised carriers, and shipped globally. Key benchmarks are JKM (Japan Korea Marker) for Asian spot prices and TTF for European gas. The JKM/TTF spread determines whether Atlantic Basin cargoes flow east or stay in Europe — one of the most important arbitrage signals in commodity markets today.</p>
+            <p><span class='key-term'>Pipeline gas</span> is geographically constrained — it cannot be rerouted the way a ship can. <span class='key-term'>Power markets</span> sit at the end of the chain, converting primary energy into electricity. Each commodity feeds into the next: an Australian LNG export drop affects European TTF, which affects coal-to-gas switching, which affects CO2 prices. Learning to trace these connections is the commercial analyst's core skill.</p>
+            <div class="pull-quote"><p>Energy markets are not separate silos. When Australian LNG exports drop, it affects European TTF prices, which affects coal-to-gas switching in power, which affects carbon prices. Tracing these connections is what separates a market reader from a news reader.</p></div>
+            <div class="wtmfy">
+              <div class="wtmfy-label">What this means for you</div>
+              <p>When you read about a refinery outage, trace it to product supply, then crude demand, then freight for vessels heading there. When you read about a cold snap in Northeast Asia, trace it to LNG demand, JKM prices, then Atlantic cargo flows. The market is always a chain of connected reactions.</p>
+            </div>
+            <div class="read-handoff">
+              <div class="rh-text">Now that you can see the markets — how does a trading desk actually make money across all of them?</div>
+              <button class="rh-btn" onclick="openSection('a3');document.getElementById('section-a3').scrollIntoView({behavior:'smooth'})">Continue →</button>
+            </div>
+          </div>
+      <div class="asset-panel">
+        <div class="ap-label">Section Assets — Download</div>
+        <div class="ap-grid">
+        <div class="ap-card" onclick="triggerDownload('A2-energy-markets-landscape.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Infographic</div>
+              <div class="ap-title">Energy Markets Landscape Map</div>
+            </div>
+          </div>
+          <div class="ap-desc">The four commodity markets — crude, LNG, pipeline gas, power — shown on one diagram with their connections, benchmarks, and key players.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('A2-market-connection-framework.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 0-2-2V9m0 0h18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Framework</div>
+              <div class="ap-title">Market Connection Tracing Template</div>
+            </div>
+          </div>
+          <div class="ap-desc">A fill-in framework for tracing how a news event in one commodity market ripples into connected markets.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('A2-cold-snap-chain-reaction.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Worked Example</div>
+              <div class="ap-title">A Cold Snap in Japan — Market Chain Reaction</div>
+            </div>
+          </div>
+          <div class="ap-desc">How a 5-day cold snap in Northeast Asia moved JKM, redirected Atlantic cargoes, tightened European TTF, and lifted coal demand.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        </div>
+      </div>
+        </div>
+      </div>
+      <div id="section-a3" class="section-block reveal">
+        <div class="sb-header" onclick="toggleSection('a3',this)">
+          <div class="sb-num">A.3</div>
+          <div class="sb-info">
+            <div class="sb-title">How a Trade Makes Money</div>
+            <div class="sb-desc">The six revenue levers a commodity trader pulls — flat price, time spread, location, quality, freight, optionality.</div>
+          </div>
+          <div class="sb-meta">11 min</div>
+          <span class="sb-badge">Starter</span>
+          <div class="sb-toggle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="sb-body" id="body-a3">
+      <div class="reading-content">
+            <div class="read-byline">Section A.3 · Chapter A</div>
+            <div class="read-hook">Most people assume commodity trading profit comes from buying low and selling high on flat price. Most commodity trading profit does not come from that at all.</div>
+            <p>Flat price — the outright price of crude or a product — is one source of revenue. But for most physical commodity desks, it is not the primary one. The reason is simple: flat price is the most competed, most watched signal in the market. Everyone has a view on where Brent is going. The real commercial edge comes from signals that are harder to read, faster to act on, and less efficiently priced.</p>
+            <p>There are six distinct levers a physical desk pulls. <span class='key-term'>Flat price</span>: buying low, selling high — the simplest but most competed. <span class='key-term'>Time spread</span>: exploiting price differences between delivery dates. A contango market rewards storage; backwardation rewards selling promptly. <span class='key-term'>Location differential</span>: the price gap between two regions. Moving a cargo from where it is cheap to where it is expensive, if freight allows.</p>
+            <p><span class='key-term'>Quality differential</span>: different crude grades and product specs trade at different prices. Sourcing the right grade at the right differential for a specific refinery is a skill in itself. <span class='key-term'>Freight</span>: locking in cheap shipping before the market tightens generates P&L from the differential between what you pay and what the market moves to. <span class='key-term'>Optionality</span>: a cargo with flexible loading window or destination flexibility is worth more. Desks that structure optionality into positions earn when conditions change.</p>
+            <div class="pull-quote"><p>The best trades are the ones where you are right on three levers at once — the location arb is open, the time spread is working in your favour, and you have the freight locked before anyone else. That is when you make real money.</p></div>
+            <div class="wtmfy">
+              <div class="wtmfy-label">What this means for you</div>
+              <p>When you review a commodity trade or a market scenario, identify which of the six levers it is using — and which it is not. Most trades combine two or three levers simultaneously. Understanding which levers a desk is long or short on any given day is the foundation of commercial awareness that hiring managers test for.</p>
+            </div>
+            <div class="read-handoff">
+              <div class="rh-text">Section A.4 goes deeper into one specific lever — refinery economics and the crack spread — showing how crude input cost connects to product revenue in real time.</div>
+              <button class="rh-btn" onclick="openSection('a4');document.getElementById('section-a4').scrollIntoView({behavior:'smooth'})">Continue →</button>
+            </div>
+          </div>
+      <div class="asset-panel">
+        <div class="ap-label">Section Assets — Download</div>
+        <div class="ap-grid">
+        <div class="ap-card" onclick="triggerDownload('A3-six-revenue-levers.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Infographic</div>
+              <div class="ap-title">The Six Revenue Levers</div>
+            </div>
+          </div>
+          <div class="ap-desc">A visual breakdown of all six P&L sources — flat price, time spread, location, quality, freight, and optionality — with the typical contribution range of each.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('A3-pl-attribution-template.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 0-2-2V9m0 0h18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Framework</div>
+              <div class="ap-title">Trade P&L Attribution Template</div>
+            </div>
+          </div>
+          <div class="ap-desc">A blank framework for mapping any commodity trade to its six revenue components — use this to analyse any trade or case study.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('A3-lng-cargo-pl-breakdown.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Worked Example</div>
+              <div class="ap-title">One LNG Cargo — Six Revenue Lines</div>
+            </div>
+          </div>
+          <div class="ap-desc">A complete P&L breakdown of a single LNG cargo showing contribution from each of the six levers from nomination to settlement.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        </div>
+      </div>
+        </div>
+      </div>
+      <div id="section-a4" class="section-block reveal">
+        <div class="sb-header" onclick="toggleSection('a4',this)">
+          <div class="sb-num">A.4</div>
+          <div class="sb-info">
+            <div class="sb-title">Refinery Economics & Crack Spreads</div>
+            <div class="sb-desc">Crude slate, product yields, and what the crack spread signals to the desk.</div>
+          </div>
+          <div class="sb-meta">12 min</div>
+          <span class="sb-badge">Starter</span>
+          <div class="sb-toggle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="sb-body" id="body-a4">
+      <div class="reading-content">
+            <div class="read-byline">Section A.4 · Chapter A</div>
+            <div class="read-hook">A refinery does not just convert crude oil into products. It converts the price difference between crude and products into margin — and that margin tells the market something important every single day.</div>
+            <p>The refinery sits at the centre of the oil value chain. It buys crude at one price, processes it through distillation, cracking, and treating units, and sells the resulting products — gasoline, gasoil, jet fuel, fuel oil, naphtha — at a higher price. The difference between the revenue from products and the cost of crude input is the <span class='key-term'>crack spread</span> — the refinery's gross margin.</p>
+            <p>The standard benchmark is the <span class='key-term'>3-2-1 crack spread</span>: three barrels of crude yield two barrels of gasoline and one barrel of distillate. The formula is (2 × gasoline price + 1 × distillate price − 3 × crude price) ÷ 3. At $95/bbl gasoline, $90/bbl distillate, and $75/bbl crude, the 3-2-1 crack is $18.33/bbl. After operating costs of roughly $5–8/bbl, the net refinery margin is around $10–13/bbl.</p>
+            <p>What makes crack spreads commercially important is what they signal. A <span class='key-term'>widening crack</span> signals strong product demand or tight crude supply — refiners are earning well and running hard. A <span class='key-term'>compressing crack</span> signals oversupply in products or a crude price spike that hasn't passed through to consumers yet. Refiners respond by adjusting run rates — which directly affects how much crude they buy and how much product hits the market.</p>
+            <div class="pull-quote"><p>The crack spread doesn't just tell you if refining is profitable — it tells you which direction the physical market is about to move. A refiner cutting runs today is tightening product supply in three weeks.</p></div>
+            <div class="wtmfy">
+              <div class="wtmfy-label">What this means for you</div>
+              <p>Check crack spreads before reading headline crude prices. If cracks are compressing while crude rallies, the rally may not hold — refiners will pull back demand. If cracks are widening while crude is flat, watch for product-led price action. The crack is the leading indicator; flat price often follows.</p>
+            </div>
+            <div class="read-handoff">
+              <div class="rh-text">Section A.5 addresses the logistics layer that determines whether a refinery can actually access the crude it needs — shipping, freight, and cargo economics.</div>
+              <button class="rh-btn" onclick="openSection('a5');document.getElementById('section-a5').scrollIntoView({behavior:'smooth'})">Continue →</button>
+            </div>
+          </div>
+      <div class="asset-panel">
+        <div class="ap-label">Section Assets — Download</div>
+        <div class="ap-grid">
+        <div class="ap-card" onclick="triggerDownload('A4-crack-spread-guide.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Infographic</div>
+              <div class="ap-title">Crack Spread Guide</div>
+            </div>
+          </div>
+          <div class="ap-desc">The 3-2-1 formula, seasonal margin patterns, viability zones, and what widening vs. compressing cracks signal to the desk — the full crack spread visual reference.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('A4-refinery-margin-calculator.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 0-2-2V9m0 0h18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Framework</div>
+              <div class="ap-title">Refinery Margin Calculator</div>
+            </div>
+          </div>
+          <div class="ap-desc">A fill-in template for calculating gross and net crack spread given any crude, gasoline, and distillate price — with product yield assumptions for 3-2-1 and 5-3-2.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('A4-crack-compression-case-study.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Worked Example</div>
+              <div class="ap-title">Crack Spread Compression — A Desk Case Study</div>
+            </div>
+          </div>
+          <div class="ap-desc">How a sudden crude spike compressed the 3-2-1 crack, triggered a refinery run rate cut, and tightened product supply six weeks later.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        </div>
+      </div>
+        </div>
+      </div>
+      <div id="section-a5" class="section-block reveal">
+        <div class="sb-header" onclick="toggleSection('a5',this)">
+          <div class="sb-num">A.5</div>
+          <div class="sb-info">
+            <div class="sb-title">Shipping, Freight & Cargo Economics</div>
+            <div class="sb-desc">Vessel classes, freight rate mechanics, laytime, and how freight changes the arbitrage calculus.</div>
+          </div>
+          <div class="sb-meta">14 min</div>
+          <span class="sb-badge">Starter</span>
+          <div class="sb-toggle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="sb-body" id="body-a5">
+      <div class="reading-content">
+            <div class="read-byline">Section A.5 · Chapter A</div>
+            <div class="read-hook">Freight is not just a cost in commodity trading. It is a variable that can open or close an arbitrage window overnight — and a source of P&L in its own right.</div>
+            <p>Every physical commodity trade involves transportation. The economics of that transportation — vessel class, freight rate, route, speed, port costs — directly determine whether a trade is viable. A <span class='key-term'>VLCC</span> (Very Large Crude Carrier) carries 2 million barrels of crude and is used on long-haul routes like Middle East Gulf to Asia or the Americas. A <span class='key-term'>Suezmax</span> carries around 1 million barrels and is sized to transit the Suez Canal. An <span class='key-term'>Aframax</span> carries 500,000–750,000 barrels on shorter regional routes. LNG carriers are entirely different — purpose-built, insulated, and carrying between 125,000 and 210,000 cubic metres of liquefied gas.</p>
+            <p>Freight rates are quoted in <span class='key-term'>Worldscale</span> points for tankers — a percentage of a standard rate that accounts for vessel size and route — or in $/day for time charters. The Baltic Exchange publishes the key indices: the BDTI (Baltic Dirty Tanker Index) for crude tankers, the BCTI (Baltic Clean Tanker Index) for product tankers, and the BLNG for LNG carriers. When freight rates rise, the cost of moving a cargo increases — which narrows any arbitrage spread and may make a previously viable trade uneconomic.</p>
+            <p><span class='key-term'>Laytime</span> is the time allowed for loading or discharging a cargo under the charter party. If the vessel exceeds this time, the charterer pays <span class='key-term'>demurrage</span> — typically $20,000–$60,000 per day for a VLCC. If loading completes early, the owner may pay <span class='key-term'>dispatch</span>. Laytime calculations depend on NOR (Notice of Readiness) tendering, port congestion, weather exceptions, and the specific charter party terms — and disputes over demurrage are extremely common.</p>
+            <div class="pull-quote"><p>The arbitrage calc is the easy part. The hard part is knowing whether the freight you need is actually available at the rate you assumed — and whether it will still be open by the time your cargo arrives.</p></div>
+            <div class="wtmfy">
+              <div class="wtmfy-label">What this means for you</div>
+              <p>Always run your freight assumption before committing to a physical trade. A 10% freight rate move on a VLCC changes the economics of a long-haul crude arbitrage by $0.30–$0.50/bbl. On a 2 million barrel cargo, that is $600,000–$1 million of P&L difference. Freight is never just a cost line.</p>
+            </div>
+            <div class="read-handoff">
+              <div class="rh-text">Section A.6 looks at the storage layer — how tank farms, floating storage, and inventory levels signal what the physical market is actually doing beneath the surface of price movements.</div>
+              <button class="rh-btn" onclick="openSection('a6');document.getElementById('section-a6').scrollIntoView({behavior:'smooth'})">Continue →</button>
+            </div>
+          </div>
+      <div class="asset-panel">
+        <div class="ap-label">Section Assets — Download</div>
+        <div class="ap-grid">
+        <div class="ap-card" onclick="triggerDownload('A5-vessel-classes-freight-map.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Infographic</div>
+              <div class="ap-title">Vessel Classes & Freight Market Map</div>
+            </div>
+          </div>
+          <div class="ap-desc">The full vessel class hierarchy — VLCC, Suezmax, Aframax, LNG carrier — with capacity, typical routes, and which Baltic index tracks each.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('A5-laytime-demurrage-template.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 0-2-2V9m0 0h18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Framework</div>
+              <div class="ap-title">Laytime & Demurrage Calculation Template</div>
+            </div>
+          </div>
+          <div class="ap-desc">A step-by-step template for calculating laytime used, demurrage owed, and net freight cost for any voyage charter — with NOR and weather exception logic.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('A5-vlcc-freight-arb-impact.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Worked Example</div>
+              <div class="ap-title">VLCC Freight Rate Spike — Impact on Crude Arb</div>
+            </div>
+          </div>
+          <div class="ap-desc">How a 40% VLCC rate spike on the Middle East Gulf–Far East route closed a viable crude arbitrage and redirected 4 cargoes in a single week.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        </div>
+      </div>
+        </div>
+      </div>
+      <div id="section-a6" class="section-block reveal">
+        <div class="sb-header" onclick="toggleSection('a6',this)">
+          <div class="sb-num">A.6</div>
+          <div class="sb-info">
+            <div class="sb-title">Storage, Terminals & the Inventory Signal</div>
+            <div class="sb-desc">What tank levels and floating storage tell a trader about supply balance.</div>
+          </div>
+          <div class="sb-meta">11 min</div>
+          <span class="sb-badge">Starter</span>
+          <div class="sb-toggle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="sb-body" id="body-a6">
+      <div class="reading-content">
+            <div class="read-byline">Section A.6 · Chapter A</div>
+            <div class="read-hook">The EIA inventory report comes out every Wednesday at 10:30am New York time. What the desk looks for in those 90 seconds tells you everything about how physical traders actually read the market.</div>
+            <p>Physical commodity storage is the buffer between supply and demand. When supply exceeds demand, inventory builds — in tank farms, pipelines, and increasingly in vessels used as floating storage. When demand exceeds supply, inventories draw. The level and direction of inventory change is one of the most reliable signals of physical market balance available to a trader.</p>
+            <p>The <span class='key-term'>EIA Weekly Petroleum Status Report</span> is released every Wednesday and covers US crude and product inventories — crude stocks, gasoline, distillates, and refinery inputs. The market watches the crude draw or build against analyst consensus. A draw that beats expectations — say, a 4.2 million barrel draw against a consensus estimate of 1.8 million barrels — is a bullish signal. But the desk also watches <span class='key-term'>days of forward cover</span> (how many days of consumption current stocks represent), refinery utilisation rates, and the split between commercial stocks and the Strategic Petroleum Reserve.</p>
+            <p><span class='key-term'>Floating storage</span> — vessels anchored and used as storage rather than in transit — appears when the contango in the forward curve is large enough to cover vessel hire costs plus insurance and financing. During COVID in 2020, floating storage reached record levels as onshore tanks filled and the curve went into extreme contango. Tracking floating storage via AIS data gives traders a real-time read on supply balance that is not captured in any official inventory report.</p>
+            <div class="pull-quote"><p>The inventory signal is not the number — it is the number relative to the expectation, relative to the seasonal norm, and relative to what the price already moved in anticipation. All three together tell you whether the signal is real.</p></div>
+            <div class="wtmfy">
+              <div class="wtmfy-label">What this means for you</div>
+              <p>When reading an EIA report, never focus only on the headline crude number. Check the product split, the refinery utilisation rate, and the import/export flows. And always compare to the 5-year seasonal average — a 3 million barrel build in March is very different from the same build in August when seasonal patterns diverge sharply.</p>
+            </div>
+            <div class="read-handoff">
+              <div class="rh-text">Section A.7 explains how the prices in that inventory data — and every other commodity price — actually get set by price reporting agencies.</div>
+              <button class="rh-btn" onclick="openSection('a7');document.getElementById('section-a7').scrollIntoView({behavior:'smooth'})">Continue →</button>
+            </div>
+          </div>
+      <div class="asset-panel">
+        <div class="ap-label">Section Assets — Download</div>
+        <div class="ap-grid">
+        <div class="ap-card" onclick="triggerDownload('A6-eia-report-decoder.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Infographic</div>
+              <div class="ap-title">EIA Report Decoder</div>
+            </div>
+          </div>
+          <div class="ap-desc">A visual guide to every data point in the EIA Weekly Petroleum Status Report — what it measures, what to compare it to, and what it signals for the market.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('A6-inventory-signal-framework.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 0-2-2V9m0 0h18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Framework</div>
+              <div class="ap-title">Inventory Signal Evaluation Framework</div>
+            </div>
+          </div>
+          <div class="ap-desc">A structured process for assessing any inventory release — actual vs. consensus, seasonal comparison, floating storage adjustment, and price implication.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('A6-divergent-inventory-signals.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Worked Example</div>
+              <div class="ap-title">Three Weeks of Divergent Signals</div>
+            </div>
+          </div>
+          <div class="ap-desc">How three consecutive bullish EIA draws failed to move Brent flat price — and what the floating storage data was showing that explained the disconnect.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        </div>
+      </div>
+        </div>
+      </div>
+      <div id="section-a7" class="section-block reveal">
+        <div class="sb-header" onclick="toggleSection('a7',this)">
+          <div class="sb-num">A.7</div>
+          <div class="sb-info">
+            <div class="sb-title">The Role of Price Reporting Agencies</div>
+            <div class="sb-desc">How Platts and Argus assess prices — and why the last 30 minutes of the window moves markets.</div>
+          </div>
+          <div class="sb-meta">10 min</div>
+          <span class="sb-badge">Starter</span>
+          <div class="sb-toggle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="sb-body" id="body-a7">
+      <div class="reading-content">
+            <div class="read-byline">Section A.7 · Chapter A</div>
+            <div class="read-hook">Every day at a specific time, a small team of price reporters at Platts and Argus publish benchmark prices that govern trillions of dollars of commodity contracts globally. Understanding how they do it explains something important about how physical commodity markets actually work.</div>
+            <p>Physical commodity prices are not set by an exchange. Unlike crude futures on ICE or NYMEX, which are traded continuously in an open market, physical prices for crude grades, refined products, and LNG are assessed by <span class='key-term'>Price Reporting Agencies</span> (PRAs) — primarily Platts (now S&P Global Commodity Insights), Argus Media, and ICIS. These assessments are then used as reference prices in billions of dollars of physical supply contracts and financial derivatives.</p>
+            <p>The dominant methodology is the <span class='key-term'>Market on Close (MOC)</span> process, used by Platts for crude and products. During a defined assessment window — typically the last 30 minutes of the trading day — reporters gather bids, offers, and transactions from market participants. They assess the price at which a cargo could be bought or sold at the close of that window, applying a set of published criteria to determine which submissions are credible. The result is a single assessed price — the benchmark.</p>
+            <p>This structure has significant commercial implications. Because the benchmark is set in the last 30 minutes, large market participants can and do influence assessments by placing strategic bids or offers during the window. This is not illegal — it is how the market works — but it means a trader who understands the MOC process can read assessment-day positioning as a market signal in itself. Understanding <span class='key-term'>assessment timing</span>, the methodology differences between Platts and Argus, and how benchmarks like Dated Brent or JKM are constructed is essential for anyone working near the front office.</p>
+            <div class="pull-quote"><p>Price reporters don't just record what the market does — they assess what they believe a fair transaction would look like, based on available evidence. That distinction matters enormously when the market is thin and a small number of participants are setting the reference price for millions of barrels.</p></div>
+            <div class="wtmfy">
+              <div class="wtmfy-label">What this means for you</div>
+              <p>If you work in scheduling, analytics, risk, or trade finance, you will encounter Platts and Argus assessments constantly — in contract pricing, hedge references, and settlement calculations. Understanding how those prices are constructed helps you identify when an assessment may not reflect true market conditions — and when that discrepancy is a commercial risk or opportunity.</p>
+            </div>
+            <div class="read-handoff">
+              <div class="rh-text">The final section of Chapter A brings the commercial infrastructure together — how the desk manages its risk across all of these markets simultaneously.</div>
+              <button class="rh-btn" onclick="openSection('a8');document.getElementById('section-a8').scrollIntoView({behavior:'smooth'})">Continue →</button>
+            </div>
+          </div>
+      <div class="asset-panel">
+        <div class="ap-label">Section Assets — Download</div>
+        <div class="ap-grid">
+        <div class="ap-card" onclick="triggerDownload('A7-pra-methodology-map.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Infographic</div>
+              <div class="ap-title">Price Reporting Agency Methodology Map</div>
+            </div>
+          </div>
+          <div class="ap-desc">How Platts, Argus, and ICIS assess prices — the MOC process, assessment windows, submission criteria, and key benchmark differences.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('A7-benchmark-selection-guide.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 0-2-2V9m0 0h18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Framework</div>
+              <div class="ap-title">Benchmark Selection Reference Guide</div>
+            </div>
+          </div>
+          <div class="ap-desc">A quick-reference table matching commodity, region, and counterparty type to the appropriate benchmark — Dated Brent, JKM, TTF, HSFO, gasoil, naphtha, and more.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('A7-platts-window-worked-example.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Worked Example</div>
+              <div class="ap-title">A Platts Window Trade — End to End</div>
+            </div>
+          </div>
+          <div class="ap-desc">A step-by-step account of how a crude cargo was priced using Dated Brent assessment — submission, assessment, final price, and contract settlement calculation.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        </div>
+      </div>
+        </div>
+      </div>
+      <div id="section-a8" class="section-block reveal">
+        <div class="sb-header" onclick="toggleSection('a8',this)">
+          <div class="sb-num">A.8</div>
+          <div class="sb-info">
+            <div class="sb-title">Risk Management on the Desk</div>
+            <div class="sb-desc">VaR, position limits, and how the desk manages market and credit exposure.</div>
+          </div>
+          <div class="sb-meta">13 min</div>
+          <span class="sb-badge">Starter</span>
+          <div class="sb-toggle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="sb-body" id="body-a8">
+      <div class="reading-content">
+            <div class="read-byline">Section A.8 · Chapter A</div>
+            <div class="read-hook">Every trading desk operates inside a set of risk constraints it cannot breach. Understanding those constraints — how they are set, how they are monitored, and what happens when a position approaches a limit — is as important as understanding the trades themselves.</div>
+            <p><span class='key-term'>Value at Risk (VaR)</span> is the most commonly used measure of market risk on a commodity trading desk. It estimates the maximum loss a portfolio of positions could suffer over a given time horizon at a given confidence level — typically 95% or 99% over a one-day or ten-day period. A VaR of $5 million at 95% confidence over one day means the desk should not expect to lose more than $5 million on more than 5% of trading days. VaR is used to set <span class='key-term'>position limits</span> — the maximum market exposure a trader or desk can carry — and is recalculated daily using current market data and the desk's live position.</p>
+            <p>Beyond VaR, desks manage several distinct risk types simultaneously. <span class='key-term'>Price risk</span> — the risk that flat price moves against the position — is the most obvious. <span class='key-term'>Basis risk</span> is the risk that the hedge and the physical position don't move together perfectly. <span class='key-term'>Credit risk</span> is the risk that a counterparty defaults before a trade settles. <span class='key-term'>Operational risk</span> covers vessel delays, cargo rejections, and documentation failures. <span class='key-term'>Liquidity risk</span> is the risk that a position cannot be exited at a reasonable price when needed.</p>
+            <p>Risk managers and traders interact daily on a commodity desk — and the relationship is not always comfortable. A risk manager's job is to enforce the limits and ask the questions a trader under P&L pressure might not want to answer. A trader's job is to take positions within those limits and explain their thesis clearly. When a position approaches a VaR limit, the risk manager can require the trader to reduce exposure — regardless of whether the trader believes the position is right. This separation of authority is what prevents single positions from becoming existential threats to the firm.</p>
+            <div class="pull-quote"><p>Risk management is not about preventing losses. It is about ensuring that no single loss, however bad, can threaten the desk's ability to keep trading. The limit exists so that being wrong once doesn't mean being out of business.</p></div>
+            <div class="wtmfy">
+              <div class="wtmfy-label">What this means for you</div>
+              <p>If you are targeting a risk, analytics, or middle-office role, this section is your starting point — but also read it if you are targeting a front-office role. Traders who understand the risk framework their desk operates within make better commercial decisions, because they know exactly how much latitude they have before the risk manager intervenes.</p>
+            </div>
+            <div class="read-handoff">
+              <div class="rh-text">Chapter A is complete. Chapter B builds on these foundations — moving from what commodity markets are to how the physical and paper instruments that trade within them actually work.</div>
+              <a href="commodity-playbook-playbook-hub.html" class="rh-btn">Back to Hub →</a>
+            </div>
+          </div>
+      <div class="asset-panel">
+        <div class="ap-label">Section Assets — Download</div>
+        <div class="ap-grid">
+        <div class="ap-card" onclick="triggerDownload('A8-desk-risk-framework-map.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Infographic</div>
+              <div class="ap-title">Desk Risk Framework Map</div>
+            </div>
+          </div>
+          <div class="ap-desc">A visual overview of the five risk types — market, basis, credit, operational, liquidity — with how each is measured, monitored, and managed on a commodity desk.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('A8-position-risk-template.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 0-2-2V9m0 0h18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Framework</div>
+              <div class="ap-title">Position Risk Assessment Template</div>
+            </div>
+          </div>
+          <div class="ap-desc">A structured pre-trade risk checklist — VaR impact, basis exposure, counterparty credit check, operational risks, and exit liquidity assessment.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('A8-position-limit-case-study.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Worked Example</div>
+              <div class="ap-title">A Position Approaching the Limit</div>
+            </div>
+          </div>
+          <div class="ap-desc">How a crude desk managed a losing position approaching its VaR limit — the conversations between trader and risk manager, the options available, and the eventual outcome.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        </div>
+      </div>
+        </div>
+      </div>
+
+      <div class="chapter-complete reveal">
+        <div class="cc-text">
+          <h3>Chapter A complete.</h3>
+          <p>Chapter B covers Physical & Paper Trading Markets — 8 sections, all in your Starter pack.</p>
+        </div>
+        <div class="cc-actions"><a href="commodity-playbook-chapter-b.html" class="btn-white">Chapter B →</a></div>
+      </div>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <a href="commodity-playbook-zflow.html" class="logo">
+        <span class="logo-mark"></span>
+        <span style="font-family:'Playfair Display',serif;font-weight:700;font-size:16px;">Commodity Playbook</span>
+      </a>
+      <div class="footer-right">Chapter A · Industry Foundations · 24 downloadable assets</div>
+    </div>
+  </footer>
+
+  <script>
+    const reveals=document.querySelectorAll('.reveal');
+    const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}})},{threshold:0.06});
+    reveals.forEach(el=>io.observe(el));
+    document.querySelectorAll('.chapter-hero .reveal').forEach((el,i)=>setTimeout(()=>el.classList.add('in'),80+i*120));
+
+    function toggleSection(id,h){
+      const b=document.getElementById('body-'+id);
+      const open=b.classList.contains('open');
+      if(open){b.classList.remove('open');h.classList.remove('open');}
+      else{b.classList.add('open');h.classList.add('open');}
+    }
+    function openSection(id){
+      const b=document.getElementById('body-'+id);
+      if(b){const h=b.previousElementSibling;b.classList.add('open');if(h)h.classList.add('open');}
+    }
+
+    // Progress bar
+    window.addEventListener('load',()=>{
+      setTimeout(()=>{const f=document.getElementById('pc-fill');if(f)f.style.width='0%';},400);
+    });
+
+    // Sidebar tracking
+    const secIds=["a1","a2","a3","a4","a5","a6","a7","a8"];
+    const sideLinks=document.querySelectorAll('.sidebar-nav a');
+    window.addEventListener('scroll',()=>{
+      let cur='';
+      secIds.forEach(id=>{const el=document.getElementById('section-'+id);if(el&&el.getBoundingClientRect().top<120)cur=id;});
+      sideLinks.forEach(lk=>{lk.classList.remove('active');if(lk.getAttribute('href')&&lk.getAttribute('href').includes(cur))lk.classList.add('active');});
+    });
+
+    // Download handler — connect to your file delivery system
+    function triggerDownload(filename){
+      alert('Download: '+filename+'\n\nConnect this to your file delivery system (AWS S3, Gumroad, or a direct CDN link).');
+    }
+  </script>
+</body>
+</html>

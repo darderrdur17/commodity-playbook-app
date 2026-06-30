@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Chapter C — Shipping, Freight & Cargo Logistics · Commodity Trading Playbook</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--bg:#ffffff;--fg:#333333;--primary:#3280ff;--primary-fg:#ffffff;
+      --secondary:#f2f4f7;--sec-fg:#465468;--accent:#dff2ff;--acc-fg:#0830a0;
+      --muted:#f9fafb;--muted-fg:#677184;--border:#e4e7ec;
+      --chart2:#115cff;--chart3:#0040f5;--chart4:#0131cc;--chart5:#0830a0;
+      --primary-soft:rgba(50,128,255,0.08);--primary-line:rgba(50,128,255,0.25);}
+    *{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--fg);line-height:1.6;-webkit-font-smoothing:antialiased;}
+    a{color:inherit;text-decoration:none;}
+
+    .nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+    .nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px;}
+    .logo{display:flex;align-items:center;gap:10px;font-family:'Playfair Display',serif;font-weight:700;font-size:18px;color:var(--fg);letter-spacing:-0.01em;}
+    .logo-mark{width:22px;height:22px;background:var(--primary);transform:rotate(45deg);transition:transform 0.4s ease;}
+    .logo:hover .logo-mark{transform:rotate(90deg);}
+    .nav-links{display:flex;align-items:center;gap:28px;}
+    .nav-links a{font-size:14px;font-weight:500;color:var(--muted-fg);transition:color 0.2s;}
+    .nav-links a:hover{color:var(--primary);}
+    .btn-nav{background:var(--primary);color:#fff;padding:10px 18px;border-radius:6px;font-size:14px;font-weight:600;transition:background 0.2s;}
+    .btn-nav:hover{background:var(--chart2);}
+
+    .chapter-hero{padding:44px 0 52px;position:relative;overflow:hidden;}
+    .chapter-hero::before{content:"";position:absolute;top:-140px;right:-140px;width:440px;height:440px;background:var(--primary);opacity:0.16;filter:blur(90px);border-radius:50%;}
+    .chapter-hero::after{content:"";position:absolute;bottom:-80px;left:-60px;width:300px;height:300px;background:var(--chart3);opacity:0.1;filter:blur(70px);border-radius:50%;}
+    .hero-inner{max-width:1100px;margin:0 auto;padding:0 24px;position:relative;z-index:2;}
+    .back-link{display:inline-flex;align-items:center;gap:7px;font-size:13px;color:rgba(223,242,255,0.55);margin-bottom:22px;transition:color 0.2s;}
+    .back-link:hover{color:var(--accent);}
+    .back-link svg{width:13px;height:13px;}
+    .hero-top{display:flex;align-items:flex-start;justify-content:space-between;gap:28px;flex-wrap:wrap;}
+    .hero-left{flex:1;min-width:260px;}
+    .chapter-pill{display:inline-flex;align-items:center;gap:7px;padding:5px 13px;border:1px solid rgba(223,242,255,0.28);background:rgba(223,242,255,0.1);border-radius:999px;font-size:10px;font-weight:700;color:var(--accent);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:14px;}
+    .chapter-pill-dot{width:5px;height:5px;background:var(--accent);border-radius:50%;}
+    .chapter-title{font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(28px,4.5vw,46px);line-height:1.05;letter-spacing:-0.02em;color:#fff;margin-bottom:12px;}
+    .chapter-title .accent{color:var(--accent);font-style:italic;}
+    .chapter-sub{font-size:14.5px;font-weight:300;color:rgba(223,242,255,0.68);line-height:1.55;max-width:520px;}
+    .hero-right{flex-shrink:0;}
+    .progress-card{background:rgba(255,255,255,0.07);border:1px solid rgba(223,242,255,0.18);border-radius:12px;padding:16px 20px;min-width:200px;backdrop-filter:blur(8px);}
+    .pc-label{font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:rgba(223,242,255,0.5);margin-bottom:6px;}
+    .pc-stat{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#fff;line-height:1;}
+    .pc-stat span{font-size:12px;font-weight:400;color:rgba(223,242,255,0.45);margin-left:5px;}
+    .pc-bar{width:100%;height:4px;background:rgba(255,255,255,0.1);border-radius:999px;overflow:hidden;margin-top:8px;}
+    .pc-fill{height:100%;background:var(--primary);border-radius:999px;transition:width 0.8s ease;}
+    .pc-note{font-size:10.5px;color:rgba(223,242,255,0.4);margin-top:6px;line-height:1.4;}
+
+    .chapter-strip{background:var(--secondary);border-bottom:1px solid var(--border);}
+    .chapter-strip-inner{max-width:1100px;margin:0 auto;padding:0 24px;display:flex;gap:0;overflow-x:auto;}
+    .cs-tab{flex-shrink:0;padding:12px 18px;font-size:13px;font-weight:600;color:var(--muted-fg);border-bottom:2px solid transparent;transition:all 0.2s;white-space:nowrap;}
+    .cs-tab:hover{color:var(--primary);}
+    .cs-tab.active{color:var(--primary);border-bottom-color:var(--primary);}
+
+    .page-body{max-width:1100px;margin:0 auto;padding:36px 24px 96px;display:grid;grid-template-columns:220px 1fr;gap:32px;align-items:start;}
+    @media(max-width:860px){.page-body{grid-template-columns:1fr;}.sidebar{display:none;}}
+
+    .sidebar{position:sticky;top:76px;}
+    .sidebar-label{font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--primary);margin-bottom:8px;}
+    .sidebar-nav{list-style:none;}
+    .sidebar-nav li{margin-bottom:1px;}
+    .sidebar-nav a{display:flex;align-items:center;gap:7px;padding:6px 9px;border-radius:5px;font-size:12px;font-weight:500;color:var(--muted-fg);transition:all 0.2s;border:1px solid transparent;}
+    .sidebar-nav a:hover{background:var(--muted);color:var(--primary);}
+    .sidebar-nav a.active{background:var(--accent);color:var(--acc-fg);border-color:var(--primary-line);font-weight:600;}
+    .sn-num{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:var(--primary);flex-shrink:0;width:24px;}
+    .active .sn-num{color:var(--acc-fg);}
+    .sn-badge{margin-left:auto;flex-shrink:0;font-size:8px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:2px 5px;border-radius:3px;background:var(--accent);color:var(--acc-fg);}
+    .sidebar-next{margin-top:14px;background:var(--chart5);border-radius:8px;padding:12px 14px;}
+    .sn-next-label{font-size:9px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:rgba(223,242,255,0.5);margin-bottom:4px;}
+    .sn-next-title{font-size:12px;font-weight:700;color:#fff;margin-bottom:8px;line-height:1.3;}
+    .sn-next-btn{display:block;text-align:center;background:var(--primary);color:#fff;padding:7px 10px;border-radius:5px;font-size:11px;font-weight:700;transition:background 0.2s;}
+    .sn-next-btn:hover{background:var(--chart2);}
+
+    .chapter-map{background:var(--muted);border:1px solid var(--border);border-radius:8px;padding:14px 18px;margin-bottom:24px;}
+    .cm-label{font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--primary);margin-bottom:8px;}
+    .cm-sections{display:flex;gap:5px;flex-wrap:wrap;}
+    .cm-section{display:flex;align-items:center;gap:5px;padding:4px 9px;border-radius:4px;font-size:11px;font-weight:600;border:1px solid var(--accent);background:var(--accent);color:var(--acc-fg);cursor:pointer;transition:all 0.2s;}
+    .cm-section:hover{background:#c7e9ff;}
+    .cm-dot{width:5px;height:5px;border-radius:50%;background:var(--primary);flex-shrink:0;}
+
+    /* ── SECTION BLOCKS ── */
+    .section-block{border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+    .section-block+.section-block{margin-top:18px;}
+    .sb-header{background:var(--muted);padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;cursor:pointer;transition:background 0.2s;}
+    .sb-header:hover{background:var(--secondary);}
+    .sb-header.open{background:var(--accent);border-bottom-color:var(--primary-line);}
+    .sb-num{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:var(--primary);flex-shrink:0;width:28px;}
+    .sb-header.open .sb-num{color:var(--acc-fg);}
+    .sb-info{flex:1;}
+    .sb-title{font-family:'Playfair Display',serif;font-weight:700;font-size:15px;color:var(--fg);line-height:1.2;margin-bottom:2px;}
+    .sb-header.open .sb-title{color:var(--acc-fg);}
+    .sb-desc{font-size:11.5px;color:var(--muted-fg);}
+    .sb-header.open .sb-desc{color:var(--sec-fg);}
+    .sb-meta{font-size:10.5px;color:var(--muted-fg);flex-shrink:0;}
+    .sb-badge{font-size:9px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:3px 7px;border-radius:999px;flex-shrink:0;background:var(--accent);color:var(--acc-fg);border:1px solid var(--primary-line);}
+    .sb-toggle{width:20px;height:20px;flex-shrink:0;border-radius:50%;background:rgba(50,128,255,0.1);display:flex;align-items:center;justify-content:center;transition:transform 0.3s;}
+    .sb-header.open .sb-toggle{transform:rotate(180deg);background:rgba(8,48,160,0.12);}
+    .sb-toggle svg{width:10px;height:10px;color:var(--primary);}
+    .sb-header.open .sb-toggle svg{color:var(--acc-fg);}
+    .sb-body{display:none;background:var(--bg);}
+    .sb-body.open{display:block;}
+
+    /* ── READING CONTENT ── */
+    .reading-content{padding:26px 32px 0;max-width:680px;}
+    @media(max-width:640px){.reading-content{padding:18px 16px 0;}}
+    .read-byline{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--primary);display:flex;align-items:center;gap:7px;margin-bottom:18px;}
+    .read-byline::before{content:"";display:inline-block;width:16px;height:2px;background:var(--primary);}
+    .read-hook{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--fg);line-height:1.35;margin-bottom:16px;}
+    .reading-content p{font-size:14.5px;color:var(--sec-fg);line-height:1.78;margin-bottom:14px;}
+    .reading-content p:last-of-type{margin-bottom:0;}
+    .key-term{font-weight:700;color:var(--primary);}
+    .pull-quote{border-left:3px solid var(--primary);background:var(--accent);border-radius:0 5px 5px 0;padding:12px 16px;margin:18px 0;}
+    .pull-quote p{font-family:'Playfair Display',serif;font-style:italic;font-size:14.5px;color:var(--acc-fg);line-height:1.55;margin-bottom:0;}
+    .wtmfy{margin-top:18px;background:var(--muted);border:1px solid var(--border);border-radius:7px;padding:12px 16px;}
+    .wtmfy-label{font-size:9px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--primary);margin-bottom:5px;}
+    .wtmfy p{font-size:12.5px;color:var(--sec-fg);line-height:1.6;margin-bottom:0;}
+    .read-handoff{margin:18px 0 0;padding:14px 0 0;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+    .rh-text{font-size:12.5px;color:var(--muted-fg);font-style:italic;flex:1;}
+    .rh-btn{background:var(--primary);color:#fff;padding:8px 14px;border-radius:5px;font-size:12.5px;font-weight:600;border:none;cursor:pointer;transition:background 0.2s;flex-shrink:0;}
+    .rh-btn:hover{background:var(--chart2);}
+
+    /* ── ASSET PANEL ── */
+    .asset-panel{margin:0;padding:18px 32px 22px;border-top:1px solid var(--border);background:var(--muted);}
+    @media(max-width:640px){.asset-panel{padding:14px 16px;}}
+    .ap-label{font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--primary);margin-bottom:12px;display:flex;align-items:center;gap:7px;}
+    .ap-label::before{content:"";display:inline-block;width:14px;height:2px;background:var(--primary);}
+    .ap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+    @media(max-width:600px){.ap-grid{grid-template-columns:1fr;}}
+    .ap-card{background:#fff;border:1px solid var(--border);border-radius:7px;padding:12px 14px;display:flex;flex-direction:column;gap:8px;transition:border-color 0.2s,box-shadow 0.2s;cursor:pointer;}
+    .ap-card:hover{border-color:var(--primary-line);box-shadow:0 4px 14px -4px rgba(50,128,255,0.12);}
+    .ap-card-top{display:flex;align-items:flex-start;gap:10px;}
+    .ap-icon{width:32px;height:32px;border-radius:6px;background:var(--accent);border:1px solid var(--primary-line);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .ap-icon svg{width:14px;height:14px;color:var(--primary);}
+    .ap-type-label{font-size:8.5px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--primary);margin-bottom:2px;}
+    .ap-title{font-weight:700;font-size:12px;color:var(--fg);line-height:1.3;}
+    .ap-desc{font-size:11px;color:var(--muted-fg);line-height:1.45;}
+    .ap-dl-btn{display:flex;align-items:center;justify-content:center;gap:5px;background:var(--accent);color:var(--acc-fg);border:1px solid var(--primary-line);border-radius:5px;padding:6px 10px;font-size:11px;font-weight:700;transition:all 0.2s;margin-top:2px;}
+    .ap-dl-btn:hover{background:var(--primary);color:#fff;border-color:var(--primary);}
+    .ap-dl-btn svg{width:11px;height:11px;}
+
+    /* ── CHAPTER COMPLETE ── */
+    .chapter-complete{background:var(--chart5);border-radius:12px;padding:28px 32px;margin-top:22px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;position:relative;overflow:hidden;}
+    .chapter-complete::before{content:"";position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:var(--primary);opacity:0.2;filter:blur(60px);border-radius:50%;}
+    .cc-text{position:relative;z-index:1;}
+    .cc-text h3{font-family:'Playfair Display',serif;font-weight:700;font-size:20px;color:#fff;margin-bottom:5px;}
+    .cc-text p{font-size:13.5px;color:rgba(223,242,255,0.65);max-width:440px;line-height:1.5;}
+    .cc-actions{position:relative;z-index:1;display:flex;gap:10px;flex-shrink:0;flex-wrap:wrap;}
+    .btn-white{background:#fff;color:var(--chart5);padding:11px 20px;border-radius:6px;font-size:13px;font-weight:700;transition:all 0.2s;display:inline-block;}
+    .btn-white:hover{background:var(--accent);color:var(--acc-fg);}
+    .btn-ghost-w{background:rgba(223,242,255,0.1);color:rgba(223,242,255,0.8);border:1px solid rgba(223,242,255,0.25);padding:11px 20px;border-radius:6px;font-size:13px;font-weight:600;transition:all 0.2s;display:inline-block;}
+    .btn-ghost-w:hover{background:rgba(223,242,255,0.18);color:#fff;}
+
+    .footer{background:var(--chart5);border-top:1px solid rgba(255,255,255,0.08);padding:36px 0 20px;}
+    .footer-inner{max-width:1100px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;}
+    .footer .logo{color:#fff;}
+    .footer .logo-mark{background:var(--accent);}
+    .footer-right{font-size:12.5px;color:rgba(223,242,255,0.35);}
+
+    .reveal{opacity:0;transform:translateY(12px);transition:opacity 0.6s ease,transform 0.6s ease;}
+    .reveal.in{opacity:1;transform:none;}
+    .rd1{transition-delay:0.05s;}.rd2{transition-delay:0.1s;}
+</style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="commodity-playbook-zflow.html" class="logo"><span class="logo-mark"></span><span>Commodity Playbook</span></a>
+      <div class="nav-links">
+        <a href="commodity-playbook-zflow.html">Overview</a>
+        <a href="commodity-playbook-hub.html">What's Inside</a>
+        <a href="commodity-playbook-zflow.html#pricing" class="btn-nav">Get the Playbook</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="chapter-hero" style="background:#0040f5;">
+    <div class="hero-inner">
+      <a href="commodity-playbook-playbook-hub.html" class="back-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        Back to Playbook Hub
+      </a>
+      <div class="hero-top">
+        <div class="hero-left reveal">
+          <div class="chapter-pill"><span class="chapter-pill-dot"></span>Chapter C · Full Playbook · Starter</div>
+          <h1 class="chapter-title"><span class="accent">Shipping,</span> Freight&nbsp;&&nbsp;Cargo&nbsp;Logistics</h1>
+          <p class="chapter-sub">The physical infrastructure that connects supply to demand — vessels, ports, freight markets, and the operational layer every commercial decision depends on.</p>
+        </div>
+        <div class="hero-right reveal rd2">
+          <div class="progress-card">
+            <div class="pc-label">Chapter C</div>
+            <div class="pc-stat">8 <span>sections · 3 assets each</span></div>
+            <div class="pc-bar"><div class="pc-fill" style="width:0%" id="pc-fill"></div></div>
+            <div class="pc-note">24 downloadable assets in this chapter.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="chapter-strip">
+    <div class="chapter-strip-inner">
+      <a href="commodity-playbook-chapter-a.html" class="cs-tab">A · Foundations</a>
+      <a href="commodity-playbook-chapter-b.html" class="cs-tab">B · Physical & Paper</a>
+      <a href="commodity-playbook-chapter-c.html" class="cs-tab active">C · Shipping</a>
+      <a href="commodity-playbook-chapter-d.html" class="cs-tab">D · Intelligence</a>
+      <a href="commodity-playbook-chapter-e.html" class="cs-tab">E · Decision-Making</a>
+    </div>
+  </div>
+
+  <div class="page-body">
+    <aside class="sidebar reveal rd1">
+      <div class="sidebar-label">Chapter C — 8 Sections</div>
+      <ul class="sidebar-nav">
+        <li>
+          <a href="#section-c1">
+            <span class="sn-num">C.1</span>
+            Vessel Classes & What They C…
+            <span class="sn-badge">✓</span>
+          </a>
+        </li>
+        <li>
+          <a href="#section-c2">
+            <span class="sn-num">C.2</span>
+            How Freight Rates Are Set
+            <span class="sn-badge">✓</span>
+          </a>
+        </li>
+        <li>
+          <a href="#section-c3">
+            <span class="sn-num">C.3</span>
+            Laytime, Demurrage & Port Ec…
+            <span class="sn-badge">✓</span>
+          </a>
+        </li>
+        <li>
+          <a href="#section-c4">
+            <span class="sn-num">C.4</span>
+            Cargo Nominations & Scheduli…
+            <span class="sn-badge">✓</span>
+          </a>
+        </li>
+        <li>
+          <a href="#section-c5">
+            <span class="sn-num">C.5</span>
+            AIS Tracking & Real-Time Flo…
+            <span class="sn-badge">✓</span>
+          </a>
+        </li>
+        <li>
+          <a href="#section-c6">
+            <span class="sn-num">C.6</span>
+            The Cargo Diversion Decision
+            <span class="sn-badge">✓</span>
+          </a>
+        </li>
+        <li>
+          <a href="#section-c7">
+            <span class="sn-num">C.7</span>
+            Trade Documentation & Operat…
+            <span class="sn-badge">✓</span>
+          </a>
+        </li>
+        <li>
+          <a href="#section-c8">
+            <span class="sn-num">C.8</span>
+            Freight as a Revenue Source
+            <span class="sn-badge">✓</span>
+          </a>
+        </li>
+      </ul>
+      <div class="sidebar-next"><div class="sn-next-label">Up Next</div><div class="sn-next-title">Chapter D — Market Intelligence & Price Discovery</div><a href="commodity-playbook-chapter-d.html" class="sn-next-btn">Start Chapter D →</a></div>
+    </aside>
+
+    <main>
+      <div class="chapter-map reveal">
+        <div class="cm-label">Chapter C — 8 Sections · 24 Assets</div>
+        <div class="cm-sections"><div class="cm-section" onclick="openSection('c1')"><span class="cm-dot"></span>C.1</div>  <div class="cm-section" onclick="openSection('c2')"><span class="cm-dot"></span>C.2</div>  <div class="cm-section" onclick="openSection('c3')"><span class="cm-dot"></span>C.3</div>  <div class="cm-section" onclick="openSection('c4')"><span class="cm-dot"></span>C.4</div>  <div class="cm-section" onclick="openSection('c5')"><span class="cm-dot"></span>C.5</div>  <div class="cm-section" onclick="openSection('c6')"><span class="cm-dot"></span>C.6</div>  <div class="cm-section" onclick="openSection('c7')"><span class="cm-dot"></span>C.7</div>  <div class="cm-section" onclick="openSection('c8')"><span class="cm-dot"></span>C.8</div></div>
+      </div>
+
+      <div id="section-c1" class="section-block reveal">
+        <div class="sb-header" onclick="toggleSection('c1',this)">
+          <div class="sb-num">C.1</div>
+          <div class="sb-info">
+            <div class="sb-title">Vessel Classes & What They Carry</div>
+            <div class="sb-desc">VLCCs, Suezmax, Aframax, LNG carriers — what each class moves and why it matters.</div>
+          </div>
+          <div class="sb-meta">10 min</div>
+          <span class="sb-badge">Starter</span>
+          <div class="sb-toggle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="sb-body" id="body-c1">
+      <div class="reading-content">
+            <div class="read-byline">Section C.1 · Chapter C</div>
+            <div class="read-hook">The vessel class determines what trade is even possible. A VLCC cannot enter most Asian import terminals. An Aframax cannot make the Middle East Gulf–Far East route economical. Before any arbitrage calc, the desk asks: what vessel can actually do this voyage?</div>
+            <p>The tanker market is segmented by vessel size, each class defined by its carrying capacity and the routes and terminals it can access. A <span class='key-term'>VLCC</span> (Very Large Crude Carrier) carries 1.8–2.2 million barrels of crude and is the workhouse of long-haul crude trades — Middle East Gulf to Asia, West Africa to the US, and North Sea to Asia. Its scale makes it the most cost-effective vessel for high-volume, long-distance routes, but its draft restricts access to many ports.</p>
+            <p>A <span class='key-term'>Suezmax</span> carries around 1 million barrels — sized to transit the Suez Canal loaded. It is used on routes where a VLCC cannot access the port or where cargo sizes are smaller. An <span class='key-term'>Aframax</span> carries 500,000–750,000 barrels and is the dominant vessel in the Baltic, the Mediterranean, and cross-Caribbean trades. A <span class='key-term'>Panamax</span> is sized to transit the Panama Canal — important for US Gulf to Asia routes.</p>
+            <p>LNG carriers are a completely different category — purpose-built, double-hulled, and insulated to maintain cargo at -162°C. They range from 125,000 m³ to 210,000 m³ (Q-Flex and Q-Max classes for Qatar). The specialised nature of LNG carriers means the fleet is much smaller than the crude tanker fleet, and vessel availability is a genuine constraint on LNG trade volumes. LNG carrier hire rates are quoted in $/day and tracked via the Baltic Exchange LNG Carrier Index.</p>
+            <div class="pull-quote"><p>The vessel class is not just a logistics detail. It determines which routes are viable, which terminals can receive the cargo, and ultimately which arbitrages are executable. The desk that doesn't know its vessel classes doesn't know its market.</p></div>
+            <div class="wtmfy">
+              <div class="wtmfy-label">What this means for you</div>
+              <p>In a scheduling or operations role, vessel class knowledge is non-negotiable. In a trading or analytics role, understanding which vessel type is needed for a specific route tells you immediately which freight index to track and what the realistic freight cost assumption is for any trade you are evaluating.</p>
+            </div>
+            <div class="read-handoff">
+              <div class="rh-text">Section C.2 covers how the freight rates for those vessels are set — the Baltic Exchange, spot fixtures, and the market mechanics that drive the cost of every cargo movement.</div>
+              <button class="rh-btn" onclick="openSection('c2');document.getElementById('section-c2').scrollIntoView({behavior:'smooth'})">Continue →</button>
+            </div>
+          </div>
+      <div class="asset-panel">
+        <div class="ap-label">Section Assets — Download</div>
+        <div class="ap-grid">
+        <div class="ap-card" onclick="triggerDownload('C1-vessel-classes-guide.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Infographic</div>
+              <div class="ap-title">Vessel Classes Reference Guide</div>
+            </div>
+          </div>
+          <div class="ap-desc">All major tanker and LNG carrier classes — capacity, draft, typical routes, terminal access restrictions, and which Baltic index tracks each.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('C1-vessel-selection-framework.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 0-2-2V9m0 0h18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Framework</div>
+              <div class="ap-title">Vessel Selection Framework</div>
+            </div>
+          </div>
+          <div class="ap-desc">A decision guide for choosing the right vessel class for a given cargo, route, and terminal — with typical cost and availability considerations.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('C1-vlcc-terminal-constraint.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Worked Example</div>
+              <div class="ap-title">Why the VLCC Couldn't Enter the Terminal</div>
+            </div>
+          </div>
+          <div class="ap-desc">How a cargo diversion decision was constrained by vessel draft restrictions — and why the desk had to re-fixture to an Aframax at a higher $/bbl cost.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        </div>
+      </div>
+        </div>
+      </div>
+      <div id="section-c2" class="section-block reveal">
+        <div class="sb-header" onclick="toggleSection('c2',this)">
+          <div class="sb-num">C.2</div>
+          <div class="sb-info">
+            <div class="sb-title">How Freight Rates Are Set</div>
+            <div class="sb-desc">The Baltic Exchange indices, spot fixtures, and time charter markets.</div>
+          </div>
+          <div class="sb-meta">11 min</div>
+          <span class="sb-badge">Starter</span>
+          <div class="sb-toggle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="sb-body" id="body-c2">
+      <div class="reading-content">
+            <div class="read-byline">Section C.2 · Chapter C</div>
+            <div class="read-hook">Freight rates can double in a week or halve in a month. Understanding what drives that volatility — and being positioned to act on it before the rest of the market — is a genuine commercial edge on any commodity desk.</div>
+            <p>Freight rates for crude tankers are quoted in <span class='key-term'>Worldscale</span> points — a percentage of a published standard rate that accounts for vessel size, route distance, and standard costs. WS100 is the flat rate; WS120 means 20% above flat, WS80 means 20% below. The Baltic Exchange publishes indices for each vessel class: the <span class='key-term'>BDTI</span> (Baltic Dirty Tanker Index) aggregates routes for crude tankers, the BCTI for clean product tankers, and the BLNG for LNG carriers. These indices are reported daily and are the standard reference for freight market activity.</p>
+            <p>The spot freight market is where voyage charters are fixed — a specific vessel hired for a specific voyage at an agreed rate. The rate is set by negotiation between the shipowner or broker and the charterer, reflecting current vessel availability on the relevant route, cargo size, port conditions, and overall market sentiment. When many cargoes are seeking vessels simultaneously — for example, at the start of a new OPEC production cycle — rates spike. When vessel supply exceeds cargo demand, rates collapse.</p>
+            <p>The <span class='key-term'>time charter market</span> is where vessels are hired for a period — 6 months, 1 year, 3 years — at a fixed daily rate. A charterer paying $35,000/day for a VLCC on a 12-month time charter is betting that spot freight rates will average above that level during the period. Time charters provide certainty of vessel access and protection against freight rate spikes — but at a cost premium over spot if rates remain low.</p>
+            <div class="pull-quote"><p>Freight is a commodity in its own right — it has its own supply and demand balance, its own seasonal patterns, and its own arbitrage signals. The desk that treats freight as just a cost has already given away part of its edge.</p></div>
+            <div class="wtmfy">
+              <div class="wtmfy-label">What this means for you</div>
+              <p>Freight rate literacy is useful in every function near the commodity desk. For schedulers, it informs vessel selection and charter decisions. For analysts, it is a key input to any arbitrage or P&L model. For traders, it is a variable that can be traded — not just assumed.</p>
+            </div>
+            <div class="read-handoff">
+              <div class="rh-text">Section C.3 covers what happens once the vessel is fixed — the port operations, laytime mechanics, and demurrage costs that determine whether the voyage stays within budget.</div>
+              <button class="rh-btn" onclick="openSection('c3');document.getElementById('section-c3').scrollIntoView({behavior:'smooth'})">Continue →</button>
+            </div>
+          </div>
+      <div class="asset-panel">
+        <div class="ap-label">Section Assets — Download</div>
+        <div class="ap-grid">
+        <div class="ap-card" onclick="triggerDownload('C2-freight-market-structure.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Infographic</div>
+              <div class="ap-title">Freight Market Structure</div>
+            </div>
+          </div>
+          <div class="ap-desc">How spot and time charter markets work, what drives rate volatility, and which Baltic Exchange indices track each vessel class and route.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('C2-freight-rate-checklist.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 0-2-2V9m0 0h18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Framework</div>
+              <div class="ap-title">Freight Rate Assumption Checklist</div>
+            </div>
+          </div>
+          <div class="ap-desc">The key inputs to any freight rate assumption in a trade model — current market, seasonal adjustment, vessel availability, and sensitivity range.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('C2-vlcc-rate-spike-example.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Worked Example</div>
+              <div class="ap-title">VLCC Rate Spike — How the Market Moved</div>
+            </div>
+          </div>
+          <div class="ap-desc">A week-by-week account of a Middle East Gulf VLCC rate spike — what triggered it, how long it lasted, and how two desks responded differently.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        </div>
+      </div>
+        </div>
+      </div>
+      <div id="section-c3" class="section-block reveal">
+        <div class="sb-header" onclick="toggleSection('c3',this)">
+          <div class="sb-num">C.3</div>
+          <div class="sb-info">
+            <div class="sb-title">Laytime, Demurrage & Port Economics</div>
+            <div class="sb-desc">Why every hour in port costs money — and how it's calculated.</div>
+          </div>
+          <div class="sb-meta">12 min</div>
+          <span class="sb-badge">Starter</span>
+          <div class="sb-toggle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="sb-body" id="body-c3">
+      <div class="reading-content">
+            <div class="read-byline">Section C.3 · Chapter C</div>
+            <div class="read-hook">Demurrage is one of the most contested financial items in commodity trading — and one of the most avoidable. A 2-day delay at a terminal on a VLCC can cost $80,000 or more. Most of it is preventable with better operations.</div>
+            <p><span class='key-term'>Laytime</span> is the number of hours agreed in the charter party within which the charterer must complete loading or discharging the cargo. It begins once the vessel has arrived at the port, tendered its <span class='key-term'>Notice of Readiness (NOR)</span>, and is cleared to proceed to berth. If loading is completed within the allowed laytime, no additional payment is required. If it takes longer, the charterer pays <span class='key-term'>demurrage</span> — the daily rate specified in the charter party — for every hour of delay.</p>
+            <p>Demurrage rates for VLCCs typically run $25,000–$60,000 per day. Aframax rates are lower, typically $15,000–$30,000 per day. LNG carrier demurrage is higher — often $60,000–$100,000 per day for a modern Q-Flex. Demurrage claims are a regular feature of physical commodity trading — when multiple vessels arrive at the same terminal at the same time, berth queues form and laytime runs. Terminal operators, loading masters, and port agents all play roles in managing the clock. If loading completes early, <span class='key-term'>dispatch</span> — the reverse of demurrage — may be owed to the charterer by the shipowner.</p>
+            <p><span class='key-term'>Laytime calculations</span> are governed by specific clause language in the charter party — which events start and stop the clock, how weather delays are treated, how weekend and holiday time is counted. Even seemingly small differences in clause language — 'SHEX' (Sundays and Holidays Excepted) vs. 'SHINC' (Sundays and Holidays Included) — can have significant financial implications on a slow-loading cargo. Demurrage disputes are common and are often resolved through negotiation or arbitration.</p>
+            <div class="pull-quote"><p>Demurrage is the penalty for poor coordination. It is almost always preventable — but it requires the terminal, the vessel, the loader, and the receiver to all be in sync. When they're not, someone pays for it. In most charter parties, that someone is the charterer.</p></div>
+            <div class="wtmfy">
+              <div class="wtmfy-label">What this means for you</div>
+              <p>If you are targeting a scheduling or operations role, laytime and demurrage are non-negotiable knowledge. If you are in an analytical or commercial role, understanding demurrage helps you evaluate the true operational cost of a trade beyond the freight rate — and identify where poorly managed operations are eating into trading P&L.</p>
+            </div>
+            <div class="read-handoff">
+              <div class="rh-text">Section C.4 looks at the nomination process — how physical liftings are coordinated between buyer, seller, vessel, and terminal before a single barrel moves.</div>
+              <button class="rh-btn" onclick="openSection('c4');document.getElementById('section-c4').scrollIntoView({behavior:'smooth'})">Continue →</button>
+            </div>
+          </div>
+      <div class="asset-panel">
+        <div class="ap-label">Section Assets — Download</div>
+        <div class="ap-grid">
+        <div class="ap-card" onclick="triggerDownload('C3-laytime-demurrage-flowchart.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Infographic</div>
+              <div class="ap-title">Laytime & Demurrage Flowchart</div>
+            </div>
+          </div>
+          <div class="ap-desc">The full laytime clock sequence — NOR tendering, berth arrival, loading commencement, laytime expiry, and demurrage accrual — with common time-saving and time-stopping events.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('C3-demurrage-calculation-template.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 0-2-2V9m0 0h18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Framework</div>
+              <div class="ap-title">Demurrage Calculation Template</div>
+            </div>
+          </div>
+          <div class="ap-desc">A step-by-step template for calculating laytime used and demurrage owed — with NOR tender time, allowed laytime, time on demurrage, and rate applied.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('C3-demurrage-claim-example.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Worked Example</div>
+              <div class="ap-title">$240,000 in Demurrage — What Went Wrong</div>
+            </div>
+          </div>
+          <div class="ap-desc">A real-format account of a berth queue at a West African terminal — 4 days of demurrage on a VLCC, what caused it, and how it was partially recovered through a claim against the terminal.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        </div>
+      </div>
+        </div>
+      </div>
+      <div id="section-c4" class="section-block reveal">
+        <div class="sb-header" onclick="toggleSection('c4',this)">
+          <div class="sb-num">C.4</div>
+          <div class="sb-info">
+            <div class="sb-title">Cargo Nominations & Scheduling</div>
+            <div class="sb-desc">How physical liftings are coordinated between buyer, seller, and vessel.</div>
+          </div>
+          <div class="sb-meta">10 min</div>
+          <span class="sb-badge">Starter</span>
+          <div class="sb-toggle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="sb-body" id="body-c4">
+      <div class="reading-content">
+            <div class="read-byline">Section C.4 · Chapter C</div>
+            <div class="read-hook">A cargo nomination is where the commercial deal and the physical world meet. Get it wrong — miss a window, nominate the wrong vessel, submit late — and you are in breach of contract. Get it right, consistently, at scale, and you are running an elite operations function.</div>
+            <p>Once a physical commodity deal is confirmed, the operations process begins with a <span class='key-term'>nomination</span>. The buyer nominates a vessel by submitting the vessel's details — name, flag, deadweight, age, class — to the seller within the timeframe specified in the contract. The seller has the right to reject a vessel that does not meet the contractual specifications — too old, wrong flag, unacceptable insurer. Once the vessel is accepted, the <span class='key-term'>loading window</span> (or laycan) is agreed — typically a range of dates within which the vessel must arrive at the loading port.</p>
+            <p>A <span class='key-term'>cargo programme</span> is the schedule of all liftings for a given production facility or terminal over a month or quarter. For an LNG liquefaction plant exporting 20+ cargoes per month, the cargo programme must balance vessel availability, terminal constraints, buyer obligations, and maintenance windows simultaneously. Scheduling teams manage this programme continuously — adjusting for vessel delays, terminal downtime, and changes in buyer demand. A well-run cargo programme maximises throughput and minimises demurrage; a poorly-run one generates losses, disputes, and damaged counterparty relationships.</p>
+            <p>When a cargo must be adjusted — loading date shifted, volume changed, vessel substituted — both parties must agree to the variation. These variations are negotiated between the operations and scheduling teams, often under time pressure, and require documenting formally to avoid disputes at settlement. For term contracts with complex flexibility provisions, the scheduling process can involve dozens of communication touches per cargo.</p>
+            <div class="pull-quote"><p>Scheduling is where commercial decisions become physical reality. A trader can close a deal in an hour. The scheduling team lives with it for 30 days — managing every variation, every delay, every dispute until the cargo is delivered and the invoice is settled.</p></div>
+            <div class="wtmfy">
+              <div class="wtmfy-label">What this means for you</div>
+              <p>Scheduling and operations roles are consistently undervalued as entry points into commodity trading — but they offer the fastest route to deep operational knowledge of how physical markets actually work. Every trader who came up through operations understands the commercial implications of execution risk in a way that desk-only analysts often don't.</p>
+            </div>
+            <div class="read-handoff">
+              <div class="rh-text">Section C.5 covers AIS tracking — the technology layer that gives desks real-time visibility into where every vessel is, what it is carrying, and what that movement means for market supply and demand.</div>
+              <button class="rh-btn" onclick="openSection('c5');document.getElementById('section-c5').scrollIntoView({behavior:'smooth'})">Continue →</button>
+            </div>
+          </div>
+      <div class="asset-panel">
+        <div class="ap-label">Section Assets — Download</div>
+        <div class="ap-grid">
+        <div class="ap-card" onclick="triggerDownload('C4-nomination-process-flowchart.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Infographic</div>
+              <div class="ap-title">Cargo Nomination Process Flowchart</div>
+            </div>
+          </div>
+          <div class="ap-desc">The full nomination sequence — from buyer nomination submission through seller acceptance, vessel vetting, laycan agreement, and loading confirmation.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('C4-scheduling-risk-checklist.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 0-2-2V9m0 0h18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Framework</div>
+              <div class="ap-title">Scheduling Risk Checklist</div>
+            </div>
+          </div>
+          <div class="ap-desc">The key risks in managing a cargo programme — vessel delay, terminal downtime, nomination rejection, laycan expiry, and variation protocol — with mitigation actions for each.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('C4-vessel-substitution-example.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Worked Example</div>
+              <div class="ap-title">Managing a Vessel Substitution Under Time Pressure</div>
+            </div>
+          </div>
+          <div class="ap-desc">How a scheduling team managed a vessel rejection and substitution with 48 hours to laycan — the communications, the commercial implications, and the outcome.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        </div>
+      </div>
+        </div>
+      </div>
+      <div id="section-c5" class="section-block reveal">
+        <div class="sb-header" onclick="toggleSection('c5',this)">
+          <div class="sb-num">C.5</div>
+          <div class="sb-info">
+            <div class="sb-title">AIS Tracking & Real-Time Flow Data</div>
+            <div class="sb-desc">Using vessel position data as a market intelligence signal.</div>
+          </div>
+          <div class="sb-meta">11 min</div>
+          <span class="sb-badge">Starter</span>
+          <div class="sb-toggle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="sb-body" id="body-c5">
+      <div class="reading-content">
+            <div class="read-byline">Section C.5 · Chapter C</div>
+            <div class="read-hook">Every commercial vessel on the ocean broadcasts its position, speed, and destination every few seconds. That data is available to anyone. The traders who know how to read it see supply disruptions, cargo diversions, and market shifts before they show up in any price report.</div>
+            <p><span class='key-term'>AIS</span> (Automatic Identification System) is a maritime tracking system required on all commercial vessels over 300 gross tonnes. Each vessel broadcasts its position, speed, heading, destination, and cargo status continuously via radio signal and satellite relay. Platforms like Kpler, Vortexa, MarineTraffic, and Bloomberg's vessel tracking tools aggregate this data and present it in real time — showing where every LNG carrier, VLCC, and Aframax is, where it is heading, and what it is carrying.</p>
+            <p>Commodity trading desks use AIS data as a real-time market intelligence tool. If an LNG carrier deviates significantly from its filed route — turning north toward Europe when its destination was logged as Japan — that is a cargo diversion signal. The desk can see it via AIS before any market report covers it, giving a window to act on the supply implication before the price adjusts. Similarly, a cluster of loaded VLCCs anchoring off Singapore signals floating storage is building — a bearish indicator for crude that shows up in AIS data days before it appears in official inventory statistics.</p>
+            <p>Platforms like <span class='key-term'>Kpler</span> and <span class='key-term'>Vortexa</span> go beyond raw AIS tracking — they use machine learning to infer cargo grades, volumes, and trade flows from vessel movements and port call patterns. This allows desks to estimate LNG exports from a specific liquefaction plant, track crude flows from a sanctioned country, or monitor the build-up of product supply in a regional hub — all from vessel movement data, without relying on official reporting.</p>
+            <div class="pull-quote"><p>By the time the EIA report comes out, the smart money already knows what's in it — because they've been watching the vessels for two weeks. AIS data is the physical market's live signal. Price is the lagging indicator.</p></div>
+            <div class="wtmfy">
+              <div class="wtmfy-label">What this means for you</div>
+              <p>AIS platform literacy — knowing how to use Kpler or Vortexa to answer a specific market question — is an increasingly valued skill in commodity analytics and intelligence roles. Even a basic ability to interpret vessel tracking data puts you ahead of the vast majority of candidates entering the industry.</p>
+            </div>
+            <div class="read-handoff">
+              <div class="rh-text">Section C.6 brings AIS intelligence and freight economics together in the cargo diversion decision — the moment when all of this information must be synthesised into a real-time commercial call.</div>
+              <button class="rh-btn" onclick="openSection('c6');document.getElementById('section-c6').scrollIntoView({behavior:'smooth'})">Continue →</button>
+            </div>
+          </div>
+      <div class="asset-panel">
+        <div class="ap-label">Section Assets — Download</div>
+        <div class="ap-grid">
+        <div class="ap-card" onclick="triggerDownload('C5-ais-intelligence-map.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Infographic</div>
+              <div class="ap-title">AIS Data Intelligence Map</div>
+            </div>
+          </div>
+          <div class="ap-desc">How AIS vessel tracking is used as a commodity market intelligence tool — cargo diversion signals, floating storage detection, port congestion, and trade flow estimation.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('C5-ais-signal-guide.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 0-2-2V9m0 0h18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Framework</div>
+              <div class="ap-title">AIS Signal Interpretation Guide</div>
+            </div>
+          </div>
+          <div class="ap-desc">A structured approach to extracting commercial intelligence from vessel movement data — key signals to watch, how to verify them, and how to act on them.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('C5-cargo-diversion-ais-example.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Worked Example</div>
+              <div class="ap-title">Spotting a Cargo Diversion Before the Market</div>
+            </div>
+          </div>
+          <div class="ap-desc">How a desk identified an LNG cargo diversion from Asia to Europe via AIS data 4 days before the market priced in the supply implication.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        </div>
+      </div>
+        </div>
+      </div>
+      <div id="section-c6" class="section-block reveal">
+        <div class="sb-header" onclick="toggleSection('c6',this)">
+          <div class="sb-num">C.6</div>
+          <div class="sb-info">
+            <div class="sb-title">The Cargo Diversion Decision</div>
+            <div class="sb-desc">When and why a vessel changes destination mid-voyage — and the economics behind it.</div>
+          </div>
+          <div class="sb-meta">13 min</div>
+          <span class="sb-badge">Starter</span>
+          <div class="sb-toggle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="sb-body" id="body-c6">
+      <div class="reading-content">
+            <div class="read-byline">Section C.6 · Chapter C</div>
+            <div class="read-hook">A cargo diversion is the physical commodity market's fastest response mechanism to a price signal. When a spread opens wide enough to cover freight and risk, a vessel mid-voyage can change destination in hours. The desk that moves first captures the margin; the desk that moves second finds the window has already closed.</div>
+            <p>A <span class='key-term'>cargo diversion</span> occurs when a vessel changes its destination mid-voyage — typically because a price differential between the original destination and an alternative has widened enough to make rerouting profitable after accounting for all additional costs. The decision involves the cargo owner, the vessel operator, and often the original cargo buyer — who must agree to release the cargo or accept a price adjustment.</p>
+            <p>The economics of a diversion are calculated in real time. The desk must quantify: the gross price differential between the two destinations, the additional freight cost of the longer or different route, any canal or port cost changes, the additional voyage time and its carrying cost, the contractual flexibility provisions that allow diversion, and the counterparty credit of the new buyer. All of this must be resolved — often in hours — before another desk spots the same opportunity and the spread begins to close.</p>
+            <p>The <span class='key-term'>DES vs. FOB distinction</span> is critical for diversions. Under a DES (Delivered Ex-Ship) contract, the seller controls the vessel and can make the diversion decision unilaterally — subject to the terms of the original sale contract. Under an FOB contract, the buyer owns the vessel from the loading port and makes the diversion decision. Understanding which party controls the vessel determines who captures the diversion P&L and who needs to negotiate a release.</p>
+            <div class="pull-quote"><p>The cargo diversion window is measured in hours, not days. By the time a market report confirms the arbitrage is open, the fastest desks have already fixed the vessels. Speed and preparation are more valuable than analysis after the fact.</p></div>
+            <div class="wtmfy">
+              <div class="wtmfy-label">What this means for you</div>
+              <p>The cargo diversion is the most commercially intensive moment in physical commodity trading — requiring real-time integration of freight, pricing, operations, legal, and credit inputs. For students and career changers, understanding the decision logic end-to-end is one of the clearest signals of commercial awareness you can demonstrate in an interview.</p>
+            </div>
+            <div class="read-handoff">
+              <div class="rh-text">Section C.7 moves to the documentation layer — the bills of lading, letters of indemnity, and certificates that make a physical commodity trade legally real.</div>
+              <button class="rh-btn" onclick="openSection('c7');document.getElementById('section-c7').scrollIntoView({behavior:'smooth'})">Continue →</button>
+            </div>
+          </div>
+      <div class="asset-panel">
+        <div class="ap-label">Section Assets — Download</div>
+        <div class="ap-grid">
+        <div class="ap-card" onclick="triggerDownload('C6-cargo-diversion-decision-tree.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Infographic</div>
+              <div class="ap-title">Cargo Diversion Decision Tree</div>
+            </div>
+          </div>
+          <div class="ap-desc">The full decision logic for a cargo diversion — from spread identification through freight re-calc, contractual review, counterparty negotiation, and execution timeline.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('C6-diversion-economics-calculator.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 0-2-2V9m0 0h18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Framework</div>
+              <div class="ap-title">Diversion Economics Calculator</div>
+            </div>
+          </div>
+          <div class="ap-desc">A fill-in framework for calculating the net P&L of a cargo diversion — gross spread, additional freight, canal costs, carrying cost, and contractual adjustment.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('C6-lng-diversion-6-hours.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Worked Example</div>
+              <div class="ap-title">Atlantic LNG to Asia — A Diversion in 6 Hours</div>
+            </div>
+          </div>
+          <div class="ap-desc">How a trading desk identified, calculated, approved, and executed an LNG cargo diversion from Europe to Japan in under 6 hours — with the full economics and outcome.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        </div>
+      </div>
+        </div>
+      </div>
+      <div id="section-c7" class="section-block reveal">
+        <div class="sb-header" onclick="toggleSection('c7',this)">
+          <div class="sb-num">C.7</div>
+          <div class="sb-info">
+            <div class="sb-title">Trade Documentation & Operations</div>
+            <div class="sb-desc">Bills of lading, LOIs, and the paperwork that makes a physical trade real.</div>
+          </div>
+          <div class="sb-meta">9 min</div>
+          <span class="sb-badge">Starter</span>
+          <div class="sb-toggle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="sb-body" id="body-c7">
+      <div class="reading-content">
+            <div class="read-byline">Section C.7 · Chapter C</div>
+            <div class="read-hook">A commodity trade is not complete until the documentation is right. The cargo on the vessel is worth nothing until the bill of lading is issued. And a bill of lading issued with incorrect information can create a commercial and legal crisis that takes months to resolve.</div>
+            <p>The <span class='key-term'>bill of lading (BL)</span> is the central document in every physical commodity trade. It serves three functions simultaneously: it is evidence of the contract of carriage between shipper and carrier; it is a receipt for the cargo showing quantity and condition at loading; and it is a document of title — whoever holds the original bill of lading has legal title to the cargo. BLs are issued in three originals; to take delivery of the cargo, the receiver must surrender an original BL at the discharge port.</p>
+            <p>When a cargo is traded before the BL can be physically transferred to the new buyer — which is common in rapidly-moving spot markets — the parties use a <span class='key-term'>Letter of Indemnity (LOI)</span>. The LOI allows the receiver to take delivery without presenting the original BL, in exchange for the seller's indemnity against any loss that results. LOIs are common but carry risk — if the underlying trade goes wrong, the indemnity can be called upon. Many banks and sophisticated counterparties limit their LOI exposure carefully.</p>
+            <p>Additional key documents include the <span class='key-term'>Certificate of Quality (CoQ)</span> — the independent inspector's analysis of the cargo's physical properties (API gravity, sulphur content, water content, etc.) — and the <span class='key-term'>Certificate of Quantity (CQ)</span> — the volume delivered, measured by an independent surveyor. Both certificates are used to calculate the final invoice and are the basis for any quality or quantity claims.</p>
+            <div class="pull-quote"><p>The paperwork is not admin. It is the legal and financial infrastructure of the trade. A BL issued with the wrong quantity, a missing CoQ, or an LOI from an uncredited counterparty can cost more to resolve than the cargo was worth.</p></div>
+            <div class="wtmfy">
+              <div class="wtmfy-label">What this means for you</div>
+              <p>Document management is handled by the back office in most large firms, but understanding what each document represents — and what can go wrong when documentation is incomplete or incorrect — is essential for anyone working in scheduling, operations, trade finance, or legal roles in commodity trading.</p>
+            </div>
+            <div class="read-handoff">
+              <div class="rh-text">Section C.8 completes the Shipping chapter by showing how freight exposure is not just managed as a cost but actively traded as a source of P&L.</div>
+              <button class="rh-btn" onclick="openSection('c8');document.getElementById('section-c8').scrollIntoView({behavior:'smooth'})">Continue →</button>
+            </div>
+          </div>
+      <div class="asset-panel">
+        <div class="ap-label">Section Assets — Download</div>
+        <div class="ap-grid">
+        <div class="ap-card" onclick="triggerDownload('C7-trade-documentation-map.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Infographic</div>
+              <div class="ap-title">Physical Trade Documentation Map</div>
+            </div>
+          </div>
+          <div class="ap-desc">Every key document in a physical commodity trade — bill of lading, LOI, CoQ, CQ, NOR, and invoice — with what each certifies and when it is used.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('C7-documentation-checklist.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 0-2-2V9m0 0h18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Framework</div>
+              <div class="ap-title">Documentation Checklist by Trade Type</div>
+            </div>
+          </div>
+          <div class="ap-desc">The required documents for FOB trades, DES trades, and back-to-back structures — with timing requirements and common failure points.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('C7-bl-error-resolution.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Worked Example</div>
+              <div class="ap-title">A Bill of Lading Error — Resolution and Cost</div>
+            </div>
+          </div>
+          <div class="ap-desc">How an incorrect volume on a bill of lading triggered a quantity claim, required a surveyor reassessment, and delayed settlement by 3 weeks.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        </div>
+      </div>
+        </div>
+      </div>
+      <div id="section-c8" class="section-block reveal">
+        <div class="sb-header" onclick="toggleSection('c8',this)">
+          <div class="sb-num">C.8</div>
+          <div class="sb-info">
+            <div class="sb-title">Freight as a Revenue Source</div>
+            <div class="sb-desc">How desks generate P&L from freight positions, not just from commodity price.</div>
+          </div>
+          <div class="sb-meta">10 min</div>
+          <span class="sb-badge">Starter</span>
+          <div class="sb-toggle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="sb-body" id="body-c8">
+      <div class="reading-content">
+            <div class="read-byline">Section C.8 · Chapter C</div>
+            <div class="read-hook">The most sophisticated commodity trading desks do not just manage freight as a cost. They take freight positions — locking in vessel economics before the market moves — and earn from the differential between what they pay and what the market moves to.</div>
+            <p>A commodity desk that secures freight at a rate below the market level earns a <span class='key-term'>freight premium</span> — the difference between the cheap fixture and the current market rate. This can be achieved by fixing vessels early, before a seasonal demand surge, or by locking in time charters at rates that prove below the subsequent spot market. The desk that locks in a VLCC at $35,000/day in January and watches spot rates move to $55,000/day by March has effectively earned $20,000/day on that vessel — even before the commodity cargo is loaded.</p>
+            <p><span class='key-term'>Forward Freight Agreements (FFAs)</span> are financial derivatives that allow a desk to take a position on future freight rates without owning or hiring a vessel. An FFA is a contract to pay or receive the difference between a fixed rate and the actual Baltic Exchange route rate on a future date. A desk that sells FFAs at $45,000/day and watches spot rates fall to $35,000/day earns $10,000/day on the paper position. FFAs are used both to hedge existing freight exposure and to take directional views on freight rates as a standalone trade.</p>
+            <p>The interaction between commodity price and freight creates complex P&L dynamics. Rising commodity prices increase the value of cargoes already on the water; rising freight rates increase the cost of moving them. A desk that is long physical cargo and short freight (via FFAs) profits from the commodity rise but hedges the freight cost increase. The ability to manage both legs simultaneously — commodity and freight — is one of the distinguishing capabilities of the largest commodity trading firms.</p>
+            <div class="pull-quote"><p>Freight is not a tax on trade. It is a market with its own supply and demand balance, its own seasonality, and its own arbitrage signals. The desk that figures this out generates revenue from two markets simultaneously instead of one.</p></div>
+            <div class="wtmfy">
+              <div class="wtmfy-label">What this means for you</div>
+              <p>For analysts and structurers, freight as a P&L source means that any commodity trade model that treats freight as a fixed cost input is incomplete. The sensitivity of the overall trade P&L to freight rate movements — and the options available to hedge or monetise that sensitivity — should be part of every trade analysis.</p>
+            </div>
+            <div class="read-handoff">
+              <div class="rh-text">Chapter C is complete. Chapter D shifts from the physical to the informational — how desks build market intelligence, form views, and use data to anticipate price moves before the rest of the market.</div>
+              <a href="commodity-playbook-playbook-hub.html" class="rh-btn">Back to Hub →</a>
+            </div>
+          </div>
+      <div class="asset-panel">
+        <div class="ap-label">Section Assets — Download</div>
+        <div class="ap-grid">
+        <div class="ap-card" onclick="triggerDownload('C8-freight-revenue-source.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Infographic</div>
+              <div class="ap-title">Freight as a Revenue Source</div>
+            </div>
+          </div>
+          <div class="ap-desc">How commodity desks generate P&L from freight positions — time charter economics, FFA mechanics, and the interaction between commodity and freight P&L.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('C8-freight-position-template.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 0-2-2V9m0 0h18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Framework</div>
+              <div class="ap-title">Freight Position Evaluation Template</div>
+            </div>
+          </div>
+          <div class="ap-desc">A framework for assessing a freight position — current market rate vs. fixture rate, FFA hedge ratio, cargo volume sensitivity, and net freight P&L.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('C8-freight-position-example.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Worked Example</div>
+              <div class="ap-title">Locking Freight Before the Rate Spike</div>
+            </div>
+          </div>
+          <div class="ap-desc">How a desk secured 3 VLCCs at $38,000/day in February and earned $16,000/day per vessel when spot rates spiked to $54,000/day in April.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        </div>
+      </div>
+        </div>
+      </div>
+
+      <div class="chapter-complete reveal">
+        <div class="cc-text">
+          <h3>Chapter C complete.</h3>
+          <p>Chapter D covers Market Intelligence & Price Discovery — 8 sections, all in your Starter pack.</p>
+        </div>
+        <div class="cc-actions"><a href="commodity-playbook-chapter-b.html" class="btn-ghost-w">← Chapter B</a><a href="commodity-playbook-chapter-d.html" class="btn-white">Chapter D →</a></div>
+      </div>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <a href="commodity-playbook-zflow.html" class="logo">
+        <span class="logo-mark"></span>
+        <span style="font-family:'Playfair Display',serif;font-weight:700;font-size:16px;">Commodity Playbook</span>
+      </a>
+      <div class="footer-right">Chapter C · Shipping, Freight & Cargo Logistics · 24 downloadable assets</div>
+    </div>
+  </footer>
+
+  <script>
+    const reveals=document.querySelectorAll('.reveal');
+    const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}})},{threshold:0.06});
+    reveals.forEach(el=>io.observe(el));
+    document.querySelectorAll('.chapter-hero .reveal').forEach((el,i)=>setTimeout(()=>el.classList.add('in'),80+i*120));
+
+    function toggleSection(id,h){
+      const b=document.getElementById('body-'+id);
+      const open=b.classList.contains('open');
+      if(open){b.classList.remove('open');h.classList.remove('open');}
+      else{b.classList.add('open');h.classList.add('open');}
+    }
+    function openSection(id){
+      const b=document.getElementById('body-'+id);
+      if(b){const h=b.previousElementSibling;b.classList.add('open');if(h)h.classList.add('open');}
+    }
+
+    // Progress bar
+    window.addEventListener('load',()=>{
+      setTimeout(()=>{const f=document.getElementById('pc-fill');if(f)f.style.width='0%';},400);
+    });
+
+    // Sidebar tracking
+    const secIds=["c1","c2","c3","c4","c5","c6","c7","c8"];
+    const sideLinks=document.querySelectorAll('.sidebar-nav a');
+    window.addEventListener('scroll',()=>{
+      let cur='';
+      secIds.forEach(id=>{const el=document.getElementById('section-'+id);if(el&&el.getBoundingClientRect().top<120)cur=id;});
+      sideLinks.forEach(lk=>{lk.classList.remove('active');if(lk.getAttribute('href')&&lk.getAttribute('href').includes(cur))lk.classList.add('active');});
+    });
+
+    // Download handler — connect to your file delivery system
+    function triggerDownload(filename){
+      alert('Download: '+filename+'\n\nConnect this to your file delivery system (AWS S3, Gumroad, or a direct CDN link).');
+    }
+  </script>
+</body>
+</html>

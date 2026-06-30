@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Case Study 07 — When the Dollar Spoke First · Commodity Trading Playbook</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg:#ffffff; --fg:#333333; --primary:#3280ff; --primary-fg:#ffffff;
+      --secondary:#f2f4f7; --sec-fg:#465468; --accent:#dff2ff; --acc-fg:#0830a0;
+      --muted:#f9fafb; --muted-fg:#677184; --border:#e4e7ec;
+      --chart2:#115cff; --chart3:#0040f5; --chart4:#0131cc; --chart5:#0830a0;
+      --primary-line:rgba(50,128,255,0.25);
+      --cross:#1e3a5f; --cross-bg:#dbeafe; --cross-line:rgba(30,58,95,0.25);
+    }
+    *{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);
+      color:var(--fg);line-height:1.6;-webkit-font-smoothing:antialiased;}
+    a{color:inherit;text-decoration:none;}
+
+    /* NAV */
+    .nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.92);
+      backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+    .nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;
+      display:flex;align-items:center;justify-content:space-between;height:64px;}
+    .logo{display:flex;align-items:center;gap:10px;font-family:'Playfair Display',serif;
+      font-weight:700;font-size:18px;color:var(--fg);letter-spacing:-0.01em;}
+    .logo-mark{width:22px;height:22px;background:var(--primary);transform:rotate(45deg);transition:transform 0.4s;}
+    .logo:hover .logo-mark{transform:rotate(90deg);}
+    .nav-links{display:flex;align-items:center;gap:28px;}
+    .nav-links a{font-size:14px;font-weight:500;color:var(--muted-fg);transition:color 0.2s;}
+    .nav-links a:hover{color:var(--primary);}
+    .btn-nav{background:var(--primary);color:#fff;padding:10px 18px;border-radius:6px;
+      font-size:14px;font-weight:600;transition:background 0.2s;}
+    .btn-nav:hover{background:var(--chart2);}
+
+    /* CASE HERO */
+    .case-hero{background:var(--chart5);padding:48px 0 56px;position:relative;overflow:hidden;}
+    .case-hero::before{content:"";position:absolute;top:-140px;right:-140px;
+      width:440px;height:440px;background:var(--chart3);opacity:0.18;
+      filter:blur(90px);border-radius:50%;}
+    .container{max-width:900px;margin:0 auto;padding:0 24px;}
+    .wide{max-width:1100px;margin:0 auto;padding:0 24px;}
+    .hero-inner{position:relative;z-index:2;}
+    .back-link{display:inline-flex;align-items:center;gap:7px;font-size:13px;
+      color:rgba(223,242,255,0.55);margin-bottom:24px;transition:color 0.2s;}
+    .back-link:hover{color:var(--accent);}
+    .back-link svg{width:13px;height:13px;}
+
+    .case-meta-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:18px;}
+    .meta-badge{font-size:9.5px;font-weight:700;letter-spacing:0.14em;
+      text-transform:uppercase;padding:4px 10px;border-radius:999px;}
+    .meta-cat{background:var(--cross-bg);color:var(--cross);border:1px solid var(--cross-line);}
+    .meta-case{background:rgba(223,242,255,0.1);color:var(--accent);
+      border:1px solid rgba(223,242,255,0.25);}
+    .meta-level{background:rgba(50,128,255,0.2);color:#a5c8ff;
+      border:1px solid rgba(50,128,255,0.3);}
+    .meta-time{background:rgba(223,242,255,0.08);color:rgba(223,242,255,0.55);
+      border:1px solid rgba(223,242,255,0.15);}
+
+    .case-title{font-family:'Playfair Display',serif;font-weight:700;
+      font-size:clamp(28px,4.5vw,46px);line-height:1.08;letter-spacing:-0.02em;
+      color:#fff;margin-bottom:12px;}
+    .case-catch{font-family:'Playfair Display',serif;font-size:17px;font-style:italic;
+      color:rgba(223,242,255,0.65);line-height:1.5;margin-bottom:28px;max-width:680px;}
+
+    .case-pl-strip{display:flex;gap:14px;flex-wrap:wrap;}
+    .pl-stat{background:rgba(255,255,255,0.07);border:1px solid rgba(223,242,255,0.18);
+      border-radius:8px;padding:12px 18px;backdrop-filter:blur(8px);}
+    .pl-num{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;
+      color:#fff;line-height:1;}
+    .pl-label{font-size:10.5px;color:rgba(223,242,255,0.5);margin-top:3px;}
+
+    /* LAYOUT */
+    .case-body{padding:48px 0 96px;}
+    .case-layout{display:grid;grid-template-columns:1fr 280px;gap:48px;
+      max-width:1100px;margin:0 auto;padding:0 24px;align-items:start;}
+    @media(max-width:860px){.case-layout{grid-template-columns:1fr;}.case-sidebar{display:none;}}
+
+    /* SIDEBAR */
+    .case-sidebar{position:sticky;top:80px;}
+    .sidebar-card{background:var(--muted);border:1px solid var(--border);
+      border-radius:10px;padding:18px 20px;margin-bottom:16px;}
+    .sc-label{font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;
+      color:var(--primary);margin-bottom:12px;}
+    .sc-toc{list-style:none;}
+    .sc-toc li{margin-bottom:4px;}
+    .sc-toc a{display:block;padding:6px 8px;border-radius:5px;font-size:12.5px;
+      color:var(--muted-fg);transition:all 0.2s;border:1px solid transparent;}
+    .sc-toc a:hover{background:var(--accent);color:var(--acc-fg);border-color:var(--primary-line);}
+    .sc-toc a.active{background:var(--accent);color:var(--acc-fg);
+      border-color:var(--primary-line);font-weight:600;}
+    .sc-pl-card{background:var(--chart5);border-radius:10px;padding:18px 20px;}
+    .sc-pl-label{font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;
+      color:rgba(223,242,255,0.5);margin-bottom:14px;}
+    .sc-pl-row{display:flex;justify-content:space-between;align-items:baseline;
+      padding:7px 0;border-bottom:1px solid rgba(255,255,255,0.07);font-size:12px;}
+    .sc-pl-row:last-child{border-bottom:none;}
+    .sc-pl-item{color:rgba(223,242,255,0.65);}
+    .sc-pl-val{font-weight:700;font-family:'JetBrains Mono',monospace;font-size:11.5px;}
+    .sc-pl-pos{color:#4ade80;}.sc-pl-neg{color:#f87171;}.sc-pl-net{color:var(--accent);}
+    .sc-nav{display:flex;gap:8px;}
+    .sc-nav a{flex:1;text-align:center;padding:9px;border-radius:6px;font-size:12px;
+      font-weight:700;transition:all 0.2s;}
+    .sc-prev{background:var(--secondary);color:var(--sec-fg);}
+    .sc-prev:hover{background:var(--border);}
+    .sc-next{background:var(--primary);color:#fff;}
+    .sc-next:hover{background:var(--chart2);}
+
+    /* CONTENT */
+    .case-content{}
+
+    /* Section headings */
+    .cs-section{margin-bottom:48px;scroll-margin-top:90px;}
+    .cs-section-label{font-size:9px;font-weight:700;letter-spacing:0.2em;
+      text-transform:uppercase;color:var(--primary);margin-bottom:8px;
+      display:flex;align-items:center;gap:7px;}
+    .cs-section-label::before{content:"";display:inline-block;
+      width:14px;height:2px;background:var(--primary);}
+    .cs-h2{font-family:'Playfair Display',serif;font-weight:700;
+      font-size:clamp(20px,2.5vw,26px);color:var(--fg);margin-bottom:16px;
+      line-height:1.2;}
+    .cs-p{font-size:15.5px;color:var(--sec-fg);line-height:1.78;margin-bottom:16px;}
+    .cs-p:last-child{margin-bottom:0;}
+    .key-term{font-weight:700;color:var(--primary);}
+
+    /* Signal table */
+    .signal-table-wrap{overflow-x:auto;margin:20px 0;}
+    .signal-table{width:100%;border-collapse:collapse;font-size:13.5px;}
+    .signal-table thead tr{background:var(--chart5);}
+    .signal-table thead th{padding:11px 14px;text-align:left;font-size:9px;
+      font-weight:700;letter-spacing:0.16em;text-transform:uppercase;
+      color:rgba(223,242,255,0.65);border-right:1px solid rgba(255,255,255,0.08);}
+    .signal-table thead th:last-child{border-right:none;}
+    .signal-table tbody tr{border-bottom:1px solid var(--border);}
+    .signal-table tbody tr:nth-child(even){background:var(--muted);}
+    .signal-table tbody tr:hover{background:var(--accent);}
+    .signal-table tbody td{padding:10px 14px;vertical-align:middle;color:var(--sec-fg);
+      border-right:1px solid var(--border);}
+    .signal-table tbody td:last-child{border-right:none;}
+    .signal-table tbody td:first-child{font-weight:600;color:var(--fg);}
+    .arrow-up{color:#16a34a;font-weight:700;}
+    .arrow-down{color:#dc2626;font-weight:700;}
+    .signal-bear{color:#dc2626;font-size:12px;font-weight:600;}
+    .signal-bull{color:#16a34a;font-size:12px;font-weight:600;}
+    .signal-neutral{color:var(--muted-fg);font-size:12px;}
+
+    /* Pull quote */
+    .pull-quote{border-left:3px solid var(--primary);background:var(--accent);
+      border-radius:0 8px 8px 0;padding:16px 22px;margin:24px 0;}
+    .pull-quote p{font-family:'Playfair Display',serif;font-style:italic;
+      font-size:16px;color:var(--acc-fg);line-height:1.6;margin:0;}
+
+    /* Decision box */
+    .decision-box{background:var(--chart5);border-radius:10px;padding:24px 26px;margin:24px 0;}
+    .db-label{font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;
+      color:rgba(223,242,255,0.5);margin-bottom:10px;}
+    .db-thesis{font-family:'Playfair Display',serif;font-size:15px;font-style:italic;
+      color:#fff;line-height:1.6;margin-bottom:16px;padding:12px 16px;
+      background:rgba(255,255,255,0.06);border-radius:6px;
+      border-left:2px solid var(--primary);}
+    .db-actions{list-style:none;}
+    .db-actions li{display:flex;gap:10px;align-items:flex-start;padding:7px 0;
+      border-bottom:1px solid rgba(255,255,255,0.07);font-size:13.5px;
+      color:rgba(223,242,255,0.75);}
+    .db-actions li:last-child{border-bottom:none;}
+    .db-bullet{color:var(--primary);flex-shrink:0;margin-top:2px;font-weight:700;font-size:10px;}
+
+    /* Outcome timeline */
+    .outcome-strip{background:var(--muted);border:1px solid var(--border);
+      border-radius:10px;padding:20px 24px;margin:24px 0;}
+    .os-label{font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;
+      color:var(--primary);margin-bottom:14px;}
+    .os-events{display:flex;flex-direction:column;gap:10px;}
+    .os-event{display:flex;gap:14px;align-items:flex-start;}
+    .os-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:4px;}
+    .os-dot-bear{background:#dc2626;}
+    .os-dot-bull{background:#16a34a;}
+    .os-dot-neutral{background:var(--primary);}
+    .os-day{font-family:'JetBrains Mono',monospace;font-size:10.5px;font-weight:700;
+      color:var(--primary);flex-shrink:0;width:100px;}
+    .os-text{font-size:13.5px;color:var(--sec-fg);line-height:1.45;}
+
+    /* P&L table */
+    .pl-table-wrap{overflow-x:auto;margin:20px 0;}
+    .pl-table{width:100%;border-collapse:collapse;font-size:13.5px;}
+    .pl-table thead tr{background:var(--chart5);}
+    .pl-table thead th{padding:11px 14px;text-align:left;font-size:9px;font-weight:700;
+      letter-spacing:0.16em;text-transform:uppercase;color:rgba(223,242,255,0.65);}
+    .pl-table tbody tr{border-bottom:1px solid var(--border);}
+    .pl-table tbody tr:last-child{background:var(--accent);border-bottom:none;}
+    .pl-table tbody td{padding:10px 14px;color:var(--sec-fg);}
+    .pl-table tbody td:first-child{font-weight:600;color:var(--fg);}
+    .pl-pos{color:#16a34a;font-weight:700;font-family:'JetBrains Mono',monospace;}
+    .pl-neg{color:#dc2626;font-weight:700;font-family:'JetBrains Mono',monospace;}
+    .pl-net{color:var(--primary);font-weight:700;font-family:'JetBrains Mono',monospace;}
+
+    /* Desk line */
+    .desk-line{background:var(--chart5);border-radius:10px;padding:24px 26px;margin:24px 0;
+      position:relative;overflow:hidden;}
+    .desk-line::before{content:"\201C";position:absolute;top:-10px;left:10px;
+      font-size:80px;font-family:'Playfair Display',serif;
+      color:rgba(255,255,255,0.05);line-height:1;}
+    .dl-label{font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;
+      color:var(--primary);margin-bottom:10px;}
+    .dl-quote{font-family:'Playfair Display',serif;font-size:16px;font-style:italic;
+      color:#fff;line-height:1.65;position:relative;z-index:1;}
+
+    /* Key lessons */
+    .lessons-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:20px 0;}
+    @media(max-width:640px){.lessons-grid{grid-template-columns:1fr;}}
+    .lesson-card{background:var(--bg);border:1px solid var(--border);border-radius:8px;
+      padding:16px 18px;transition:border-color 0.2s,box-shadow 0.2s;}
+    .lesson-card:hover{border-color:var(--primary-line);
+      box-shadow:0 4px 16px -4px rgba(50,128,255,0.1);}
+    .lc-num{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;
+      color:var(--primary);margin-bottom:6px;}
+    .lc-title{font-weight:700;font-size:13.5px;color:var(--fg);margin-bottom:4px;}
+    .lc-text{font-size:12.5px;color:var(--muted-fg);line-height:1.5;}
+
+    /* Self-test */
+    .self-test{background:var(--muted);border:1px solid var(--border);
+      border-radius:10px;padding:24px 26px;margin:24px 0;}
+    .st-label{font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;
+      color:var(--primary);margin-bottom:14px;}
+    .st-questions{list-style:none;counter-reset:q;}
+    .st-questions li{counter-increment:q;display:flex;gap:12px;padding:10px 0;
+      border-bottom:1px solid var(--border);font-size:14px;color:var(--sec-fg);line-height:1.55;}
+    .st-questions li:last-child{border-bottom:none;}
+    .st-num{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;
+      color:var(--primary);flex-shrink:0;width:22px;margin-top:2px;}
+    .st-reveal{margin-top:14px;text-align:center;}
+    .btn-reveal{background:var(--secondary);color:var(--sec-fg);border:1px solid var(--border);
+      padding:10px 20px;border-radius:6px;font-size:13px;font-weight:600;
+      cursor:pointer;font-family:inherit;transition:all 0.2s;}
+    .btn-reveal:hover{background:var(--accent);color:var(--acc-fg);border-color:var(--primary-line);}
+    .st-answers{display:none;margin-top:16px;padding-top:16px;border-top:1px solid var(--border);}
+    .st-answers.show{display:block;}
+    .st-answer{margin-bottom:12px;padding:12px 14px;background:#fff;
+      border:1px solid var(--border);border-radius:6px;font-size:13px;
+      color:var(--sec-fg);line-height:1.55;}
+    .st-answer strong{color:var(--primary);display:block;margin-bottom:3px;font-size:11px;
+      letter-spacing:0.1em;text-transform:uppercase;}
+
+    /* Next/Prev nav -->*/
+    .case-nav{background:var(--secondary);border-top:1px solid var(--border);
+      padding:24px 0;}
+    .case-nav-inner{max-width:1100px;margin:0 auto;padding:0 24px;
+      display:flex;justify-content:space-between;align-items:center;gap:16px;}
+    .cn-link{display:flex;align-items:center;gap:10px;padding:12px 16px;
+      border-radius:8px;border:1px solid var(--border);background:var(--bg);
+      transition:all 0.2s;max-width:240px;}
+    .cn-link:hover{border-color:var(--primary-line);background:var(--accent);}
+    .cn-dir{font-size:9px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;
+      color:var(--muted-fg);margin-bottom:3px;}
+    .cn-title{font-size:13px;font-weight:600;color:var(--fg);line-height:1.3;}
+    .cn-icon{color:var(--primary);flex-shrink:0;}
+    .cn-icon svg{width:16px;height:16px;}
+
+    /* FOOTER */
+    .footer{background:var(--chart5);border-top:1px solid rgba(255,255,255,0.08);padding:40px 0 24px;}
+    .footer-inner{max-width:1100px;margin:0 auto;padding:0 24px;
+      display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;}
+    .footer .logo{color:#fff;}
+    .footer .logo-mark{background:var(--accent);}
+    .footer-right{font-size:13px;color:rgba(223,242,255,0.35);}
+
+    /* REVEAL */
+    .reveal{opacity:0;transform:translateY(12px);transition:opacity 0.6s ease,transform 0.6s ease;}
+    .reveal.in{opacity:1;transform:none;}
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="commodity-playbook-zflow.html" class="logo">
+        <span class="logo-mark"></span>
+        <span>Commodity Playbook</span>
+      </a>
+      <div class="nav-links">
+        <a href="commodity-playbook-zflow.html">Overview</a>
+        <a href="commodity-playbook-hub.html">What's Inside</a>
+        <a href="commodity-playbook-zflow.html#pricing" class="btn-nav">Get the Playbook</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- CASE HERO -->
+  <section class="case-hero">
+    <div class="container hero-inner">
+      <a href="commodity-playbook-case-studies.html" class="back-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        Back to Case Studies
+      </a>
+      <div class="case-meta-row">
+        <span class="meta-badge meta-case">Case Study 07</span>
+        <span class="meta-badge meta-cat">Cross-Market Intelligence</span>
+        <span class="meta-badge meta-level">Intermediate</span>
+        <span class="meta-badge meta-time">18 min read</span>
+      </div>
+      <h1 class="case-title">When the Dollar Spoke First</h1>
+      <p class="case-catch">"The EIA was printing bullish draws for three consecutive weeks. The price wasn't moving. The dollar was the reason — and the COT data confirmed it."</p>
+      <div class="case-pl-strip">
+        <div class="pl-stat">
+          <div class="pl-num" style="color:#4ade80;">+$5.0M</div>
+          <div class="pl-label">Saved vs. unhedged</div>
+        </div>
+        <div class="pl-stat">
+          <div class="pl-num">DXY +3.3%</div>
+          <div class="pl-label">The trigger signal</div>
+        </div>
+        <div class="pl-stat">
+          <div class="pl-num">$82.80 → $79.10</div>
+          <div class="pl-label">Brent flat price move</div>
+        </div>
+        <div class="pl-stat">
+          <div class="pl-num">11 sessions</div>
+          <div class="pl-label">Dollar strengthening period</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BODY -->
+  <div class="case-body">
+    <div class="case-layout">
+
+      <!-- SIDEBAR -->
+      <aside class="case-sidebar">
+        <div class="sidebar-card">
+          <div class="sc-label">In This Case Study</div>
+          <ul class="sc-toc">
+            <li><a href="#setup" class="active">The Setup</a></li>
+            <li><a href="#framework">The Cross-Market Framework</a></li>
+            <li><a href="#signals">Financial Market Signals</a></li>
+            <li><a href="#physical">Physical Market Signals</a></li>
+            <li><a href="#decision">The Decision</a></li>
+            <li><a href="#outcome">What Happened Next</a></li>
+            <li><a href="#pl">P&amp;L Attribution</a></li>
+            <li><a href="#lessons">Key Lessons</a></li>
+            <li><a href="#selftest">Self-Test</a></li>
+          </ul>
+        </div>
+        <div class="sc-pl-card">
+          <div class="sc-pl-label">P&amp;L Summary</div>
+          <div class="sc-pl-row">
+            <span class="sc-pl-item">Hedge gain (1.26mb)</span>
+            <span class="sc-pl-val sc-pl-pos">+$4.66M</span>
+          </div>
+          <div class="sc-pl-row">
+            <span class="sc-pl-item">Unhedged loss (170k)</span>
+            <span class="sc-pl-val sc-pl-neg">−$0.63M</span>
+          </div>
+          <div class="sc-pl-row">
+            <span class="sc-pl-item">Added hedge gain</span>
+            <span class="sc-pl-val sc-pl-pos">+$1.61M</span>
+          </div>
+          <div class="sc-pl-row">
+            <span class="sc-pl-item">FX hedge</span>
+            <span class="sc-pl-val sc-pl-neg">−$0.04M</span>
+          </div>
+          <div class="sc-pl-row" style="border-top:1px solid rgba(223,242,255,0.15);padding-top:10px;margin-top:4px;">
+            <span class="sc-pl-item" style="color:#fff;font-weight:700;">Net saved</span>
+            <span class="sc-pl-val sc-pl-net">+$5.0M</span>
+          </div>
+        </div>
+        <div class="sc-nav" style="margin-top:12px;">
+          <a href="commodity-playbook-case-studies.html" class="sc-prev">← All Cases</a>
+          <a href="#" class="sc-next">Next →</a>
+        </div>
+      </aside>
+
+      <!-- MAIN CONTENT -->
+      <main class="case-content">
+
+        <!-- 1. SETUP -->
+        <div class="cs-section reveal" id="setup">
+          <div class="cs-section-label">01 · The Setup</div>
+          <h2 class="cs-h2">Three Bullish Draws. Price Goes Nowhere.</h2>
+          <p class="cs-p">It is the first week of March. Brent crude has been trading in a tight $2 range for three weeks — $81.20 to $83.40 — despite two consecutive bullish EIA draws and OPEC maintaining its voluntary cut commitments. The physical market is telling a bullish story. The price is not moving.</p>
+          <p class="cs-p">On the desk, the crude analyst flags something: the US Dollar Index (<span class="key-term">DXY</span>) has been strengthening quietly for 11 consecutive trading sessions. It has moved from 102.4 to 105.8 — a 3.3% appreciation. No single session was dramatic enough to generate a headline. The move accumulated in the background while every market participant was focused on the EIA numbers.</p>
+          <p class="cs-p">The analyst pulls up the 18-month rolling correlation between DXY and Brent. It sits at <span class="key-term">−0.71</span> — a strong negative relationship. When the dollar strengthens, Brent denominated in USD becomes more expensive for non-dollar buyers, compressing demand at the margin and typically putting downward pressure on price.</p>
+          <div class="pull-quote">
+            <p>"The physical market is saying one thing. The dollar is saying another. When these two signals diverge, the desk has to decide which one to trust — and how to position before the resolution."</p>
+          </div>
+        </div>
+
+        <!-- 2. FRAMEWORK -->
+        <div class="cs-section reveal" id="framework">
+          <div class="cs-section-label">02 · The Framework</div>
+          <h2 class="cs-h2">Why Does DXY Correlate With Crude?</h2>
+          <p class="cs-p">Crude oil is priced globally in US dollars. When the dollar strengthens, three things happen simultaneously — none immediately, but all accumulating over days to weeks:</p>
+          <p class="cs-p"><span class="key-term">1. Purchasing power compression for non-dollar buyers.</span> A Japanese utility buying a VLCC cargo priced at $83/bbl faces a higher effective cost in yen when USD/JPY rises. At the margin, this reduces their willingness to pay spot premiums and slows discretionary buying.</p>
+          <p class="cs-p"><span class="key-term">2. Speculative positioning rotation.</span> Commodity futures are denominated in dollars. When the dollar strengthens, managed money funds running long commodity / short dollar carry trades begin to unwind — selling commodity futures, which creates paper market selling pressure even when the physical market is tight.</p>
+          <p class="cs-p"><span class="key-term">3. Macro demand signal.</span> Dollar strength often reflects risk-off sentiment or expectations of higher-for-longer US interest rates. Both environments are associated with slower global growth and lower oil demand growth expectations. These forces are not immediate — but they are directionally consistent and self-reinforcing.</p>
+        </div>
+
+        <!-- 3. FINANCIAL SIGNALS -->
+        <div class="cs-section reveal" id="signals">
+          <div class="cs-section-label">03 · Financial Market Signals</div>
+          <h2 class="cs-h2">What the Desk Was Watching Beyond the EIA</h2>
+          <div class="signal-table-wrap">
+            <table class="signal-table">
+              <thead>
+                <tr>
+                  <th>Signal</th>
+                  <th>Level</th>
+                  <th>Direction</th>
+                  <th>Crude Implication</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>DXY (US Dollar Index)</td>
+                  <td>105.8</td>
+                  <td><span class="arrow-up">↑ +3.3%</span> over 11 sessions</td>
+                  <td><span class="signal-bear">Bearish</span> — pressures USD-priced commodities</td>
+                </tr>
+                <tr>
+                  <td>US 10Y Treasury yield</td>
+                  <td>4.42%</td>
+                  <td><span class="arrow-up">↑ Rising</span></td>
+                  <td><span class="signal-bear">Bearish</span> — higher-for-longer rates, stronger USD ahead</td>
+                </tr>
+                <tr>
+                  <td>S&amp;P 500</td>
+                  <td>−2.1% WoW</td>
+                  <td><span class="arrow-down">↓ Falling</span></td>
+                  <td><span class="signal-bear">Bearish</span> — risk-off reduces speculative commodity appetite</td>
+                </tr>
+                <tr>
+                  <td>CFTC Managed Money (Brent)</td>
+                  <td>187,000 contracts</td>
+                  <td>Near record long</td>
+                  <td><span class="signal-bear">Bearish</span> — crowded long, vulnerable to unwind</td>
+                </tr>
+                <tr>
+                  <td>EUR/USD</td>
+                  <td>1.0720</td>
+                  <td><span class="arrow-down">↓ Falling</span></td>
+                  <td><span class="signal-bear">Bearish</span> — confirms dollar strength is broad-based</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="cs-p">No single signal is decisive in isolation. Together, they tell a consistent story: the financial environment has shifted bearish for commodity prices — even while the physical market looks constructive.</p>
+        </div>
+
+        <!-- 4. PHYSICAL SIGNALS -->
+        <div class="cs-section reveal" id="physical">
+          <div class="cs-section-label">04 · Physical Market Signals</div>
+          <h2 class="cs-h2">The Conflicting View — Physical Is Unambiguously Bullish</h2>
+          <div class="signal-table-wrap">
+            <table class="signal-table">
+              <thead>
+                <tr>
+                  <th>Signal</th>
+                  <th>Reading</th>
+                  <th>Implication</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>EIA crude draw (week 1)</td>
+                  <td>−3.2mb vs. consensus −1.1mb</td>
+                  <td><span class="signal-bull">Bullish</span></td>
+                </tr>
+                <tr>
+                  <td>EIA crude draw (week 2)</td>
+                  <td>−2.8mb vs. consensus −0.9mb</td>
+                  <td><span class="signal-bull">Bullish</span></td>
+                </tr>
+                <tr>
+                  <td>OPEC voluntary cuts</td>
+                  <td>Maintained</td>
+                  <td><span class="signal-bull">Bullish</span></td>
+                </tr>
+                <tr>
+                  <td>Refinery utilisation</td>
+                  <td>88.4% — rising</td>
+                  <td><span class="signal-bull">Bullish</span> demand pull</td>
+                </tr>
+                <tr>
+                  <td>Floating storage (AIS)</td>
+                  <td>No build — vessels in transit</td>
+                  <td><span class="signal-bull">Bullish</span> — no supply overhang</td>
+                </tr>
+                <tr>
+                  <td>VLCC MEG–Far East rate</td>
+                  <td>WS85 — steady</td>
+                  <td><span class="signal-neutral">Neutral</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="cs-p">When bullish physical data fails to lift price, the market is telling you something: the sellers are absorbing the buying. The question is who is selling and why. The answer, when the desk digs into the COT data, is <span class="key-term">managed money</span>. Despite the bullish EIA prints, speculative longs have been quietly reducing their position — not building. The record net long built over the prior 6 weeks is being distributed into the physical bullishness. The funds are using EIA-driven buying to exit.</p>
+        </div>
+
+        <!-- 5. DECISION -->
+        <div class="cs-section reveal" id="decision">
+          <div class="cs-section-label">05 · The Decision</div>
+          <h2 class="cs-h2">Increasing the Hedge Ratio Is a Market View</h2>
+          <p class="cs-p">The desk holds a net long position of 2.1 million barrels — 70% hedged with ICE Brent futures, leaving 630,000 barrels of open flat price exposure. The trader's thesis going into this week: physical tightness resolves the flat price divergence, Brent breaks $85. The hedge ratio was set to retain upside.</p>
+          <p class="cs-p">After reviewing the cross-market signals, the trader revises the assessment:</p>
+          <div class="decision-box">
+            <div class="db-label">Revised Thesis</div>
+            <div class="db-thesis">"The physical market is right about the direction eventually — draws of this magnitude do matter. But the timing is wrong. The dollar strength and the speculative unwind will suppress flat price for another 2–3 weeks. The break to $85 is a Q2 event, not a March event. We need to increase the hedge ratio and wait."</div>
+            <div class="db-label" style="margin-top:14px;">Actions Taken</div>
+            <ul class="db-actions">
+              <li><span class="db-bullet">▸</span>Hedge ratio increased from 70% to 92% — selling 460,000 barrels of additional ICE futures at $82.60</li>
+              <li><span class="db-bullet">▸</span>Open exposure reduced from 630,000 to 170,000 barrels</li>
+              <li><span class="db-bullet">▸</span>Small short position placed on DXY via FX desk to hedge the dollar exposure embedded in the remaining long</li>
+              <li><span class="db-bullet">▸</span>No change to physical cargo position — still long the cargoes, still planning to sell into the eventual recovery</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- 6. OUTCOME -->
+        <div class="cs-section reveal" id="outcome">
+          <div class="cs-section-label">06 · What Happened Next</div>
+          <h2 class="cs-h2">The Dollar Won — Then Reversed</h2>
+          <div class="outcome-strip">
+            <div class="os-label">11-Session Price Action Following the Decision</div>
+            <div class="os-events">
+              <div class="os-event">
+                <div class="os-dot os-dot-neutral"></div>
+                <div class="os-day">Session 1–3</div>
+                <div class="os-text">DXY continues to 106.4. Brent trades flat around $82. Managed money continues reducing longs per broker flow data.</div>
+              </div>
+              <div class="os-event">
+                <div class="os-dot os-dot-bear"></div>
+                <div class="os-day">Session 4–6</div>
+                <div class="os-text">Weaker-than-expected Chinese PMI print triggers broader risk-off. Brent falls to $80.20. Speculative long unwind accelerates.</div>
+              </div>
+              <div class="os-event">
+                <div class="os-dot os-dot-bear"></div>
+                <div class="os-day">Session 7–8</div>
+                <div class="os-text">EIA prints a <em>fourth</em> consecutive bullish draw — and Brent still doesn't rally. Falls further to $79.10. Financial forces completely overwhelming physical bulls.</div>
+              </div>
+              <div class="os-event">
+                <div class="os-dot os-dot-bull"></div>
+                <div class="os-day">Session 9–11</div>
+                <div class="os-text">US jobs data comes in below consensus. Dollar begins to weaken. DXY reverses from 106.4. Brent recovers sharply — $79.10 to $84.20 over 8 sessions as physical thesis finally plays out.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7. P&L -->
+        <div class="cs-section reveal" id="pl">
+          <div class="cs-section-label">07 · P&amp;L Attribution</div>
+          <h2 class="cs-h2">Where the Money Came From — and Where It Was Lost</h2>
+          <div class="pl-table-wrap">
+            <table class="pl-table">
+              <thead>
+                <tr>
+                  <th>Component</th>
+                  <th>Position</th>
+                  <th>Price Move</th>
+                  <th>P&amp;L</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Physical long — hedged (1.26mb)</td>
+                  <td>Long physical, short futures</td>
+                  <td>−$3.70/bbl · hedge protected</td>
+                  <td><span class="pl-pos">+$4.66M</span></td>
+                </tr>
+                <tr>
+                  <td>Physical long — unhedged (170k bbls)</td>
+                  <td>Long physical, no hedge</td>
+                  <td>−$3.70/bbl</td>
+                  <td><span class="pl-neg">−$0.63M</span></td>
+                </tr>
+                <tr>
+                  <td>Additional ICE hedge (460k bbls @ $82.60)</td>
+                  <td>Short futures, entered this week</td>
+                  <td>Price fell to $79.10 (+$3.50/bbl gain)</td>
+                  <td><span class="pl-pos">+$1.61M</span></td>
+                </tr>
+                <tr>
+                  <td>DXY short (FX desk hedge)</td>
+                  <td>Short USD index</td>
+                  <td>DXY +0.6 then reversal · near flat</td>
+                  <td><span class="pl-neg">−$0.04M</span></td>
+                </tr>
+                <tr>
+                  <td><strong>Net outcome vs. original 70% hedge</strong></td>
+                  <td></td>
+                  <td></td>
+                  <td><span class="pl-net">+$5.0M saved</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="cs-p">Without the cross-market read and the hedge ratio increase, the open 630,000 barrel exposure would have lost <strong>$2.33M</strong> instead of $0.63M — a difference of <strong>$1.70M</strong> from a single decision, made because the desk was watching the dollar, not just the EIA.</p>
+
+          <div class="desk-line">
+            <div class="dl-label">// The Desk Line</div>
+            <div class="dl-quote">"The EIA is a trailing indicator of physical balance. The dollar is a leading indicator of financial appetite. When they disagree, the dollar usually wins in the short term — because speculative money moves faster than physical cargoes. The physical bulls were right. They were just early. And early is expensive."</div>
+          </div>
+        </div>
+
+        <!-- 8. KEY LESSONS -->
+        <div class="cs-section reveal" id="lessons">
+          <div class="cs-section-label">08 · Key Lessons</div>
+          <h2 class="cs-h2">Five Things This Case Teaches</h2>
+          <div class="lessons-grid">
+            <div class="lesson-card">
+              <div class="lc-num">Lesson 01</div>
+              <div class="lc-title">Correlation is timing, not causation</div>
+              <div class="lc-text">The dollar-crude relationship doesn't mean the dollar causes crude to fall — they share common drivers. Understanding the mechanism tells you how long the pressure lasts and what resolves it.</div>
+            </div>
+            <div class="lesson-card">
+              <div class="lc-num">Lesson 02</div>
+              <div class="lc-title">Price failing to respond is itself a signal</div>
+              <div class="lc-text">When three consecutive bullish EIA draws don't move the market, ask who is absorbing the buying. The COT data answered this — funds were distributing into physical strength.</div>
+            </div>
+            <div class="lesson-card">
+              <div class="lc-num">Lesson 03</div>
+              <div class="lc-title">The hedge ratio is a market view</div>
+              <div class="lc-text">Increasing from 70% to 92% was not a risk-management decision — it was a commercial decision expressing a view that near-term timing was wrong even though the medium-term thesis was right.</div>
+            </div>
+            <div class="lesson-card">
+              <div class="lc-num">Lesson 04</div>
+              <div class="lc-title">Cross-market signals compress reaction time</div>
+              <div class="lc-text">By the time Brent fell to $79, the EIA was still printing bullish draws. A trader watching only the physical market would have been confused. The dollar and COT data gave a 10-day head start.</div>
+            </div>
+            <div class="lesson-card" style="grid-column:1/-1;">
+              <div class="lc-num">Lesson 05</div>
+              <div class="lc-title">The thesis and the timing are two separate calls</div>
+              <div class="lc-text">The desk was right on direction (Brent went to $84+) and wrong on timing (not a March event). Separating those two judgements — and hedging accordingly — is the difference between a profitable position and a painful one that eventually recovers but costs you three weeks of unnecessary loss.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 9. SELF-TEST -->
+        <div class="cs-section reveal" id="selftest">
+          <div class="cs-section-label">09 · Self-Test</div>
+          <h2 class="cs-h2">Work Through These Before Reading the Answers</h2>
+          <div class="self-test">
+            <div class="st-label">Five Questions — Answer Before Revealing</div>
+            <ol class="st-questions">
+              <li>
+                <span class="st-num">Q1</span>
+                At what DXY level would you have started to reduce your crude long — and why that level specifically?
+              </li>
+              <li>
+                <span class="st-num">Q2</span>
+                If the COT data had shown managed money <em>adding</em> to longs despite the dollar strengthening, how would you have reweighted the two signals?
+              </li>
+              <li>
+                <span class="st-num">Q3</span>
+                The desk placed a small DXY short as a hedge. What risk does this introduce — and is it worth it given the position size?
+              </li>
+              <li>
+                <span class="st-num">Q4</span>
+                If the EIA the following week had shown a <em>build</em> instead of a draw, how does that change the thesis?
+              </li>
+              <li>
+                <span class="st-num">Q5</span>
+                What would you look for as the specific signal that the dollar suppression is ending and the physical thesis is ready to play out?
+              </li>
+            </ol>
+            <div class="st-reveal">
+              <button class="btn-reveal" onclick="toggleAnswers()">Reveal Answers ↓</button>
+            </div>
+            <div class="st-answers" id="st-answers">
+              <div class="st-answer">
+                <strong>Q1 Answer</strong>
+                DXY 104.5 — representing a 2% appreciation from the prior 12-month average. Below 2%, the move could be noise or a short-term dollar bid. Above 2%, a sustained trend becomes more likely. At 3.3%, the trend was already well-established — ideally you would have begun reducing at 104.5 and completed the reduction by 105.5.
+              </div>
+              <div class="st-answer">
+                <strong>Q2 Answer</strong>
+                Managed money adding to longs during dollar strengthening would be a significant counter-signal — it suggests the funds believe the physical thesis will override the dollar pressure. In that scenario, you would maintain the original 70% hedge ratio and monitor for evidence the funds are right. But you would also set a tighter stop on the remaining open exposure.
+              </div>
+              <div class="st-answer">
+                <strong>Q3 Answer</strong>
+                The DXY short introduces FX risk — if the dollar strengthens further before reversing, the FX short generates a loss that isn't offset by the commodity position. On a 170k barrel open exposure worth approximately $14M, a $50k FX hedge is almost immaterial — it's more a signalling discipline than a meaningful financial hedge. The cost is low; the benefit is marginal. Worth doing for the portfolio discipline, not the financial impact.
+              </div>
+              <div class="st-answer">
+                <strong>Q4 Answer</strong>
+                A build would materially change the thesis — it would suggest the physical market is weakening faster than expected, which removes the bullish foundation entirely. The appropriate response would be to cut the remaining open exposure immediately and potentially take a short position ahead of what could become a larger correction as both physical and financial signals align bearish.
+              </div>
+              <div class="st-answer">
+                <strong>Q5 Answer</strong>
+                Three signals in combination: (1) DXY reversing below 104.5 on a weekly close; (2) CFTC COT data showing managed money net longs at a 12-month low — indicating the speculative unwind is complete; (3) EIA showing a fifth consecutive draw that finally produces a price response of more than $1. When all three align, the financial suppression has exhausted itself and the physical thesis is free to drive price.
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </main>
+    </div><!-- /case-layout -->
+  </div><!-- /case-body -->
+
+  <!-- NEXT/PREV NAVIGATION -->
+  <div class="case-nav">
+    <div class="case-nav-inner">
+      <a href="commodity-playbook-case-studies.html" class="cn-link">
+        <div class="cn-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </div>
+        <div>
+          <div class="cn-dir">All Case Studies</div>
+          <div class="cn-title">Back to the full library</div>
+        </div>
+      </a>
+      <a href="#" class="cn-link" style="text-align:right;">
+        <div style="flex:1;">
+          <div class="cn-dir">Next Case Study</div>
+          <div class="cn-title">Asian Utility Stocks Led JKM by Three Weeks</div>
+        </div>
+        <div class="cn-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <a href="commodity-playbook-zflow.html" class="logo">
+        <span class="logo-mark"></span>
+        <span style="font-family:'Playfair Display',serif;font-weight:700;font-size:17px;">Commodity Playbook</span>
+      </a>
+      <div class="footer-right">Case Study 07 · Cross-Market Intelligence · Pro Pack</div>
+    </div>
+  </footer>
+
+  <script>
+    // Reveal
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, {threshold:0.08});
+    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+    document.querySelectorAll('.case-hero .reveal, .hero-inner .reveal').forEach((el,i) => {
+      setTimeout(() => el.classList.add('in'), 60 + i*100);
+    });
+
+    // Sidebar active on scroll
+    const sections = ['setup','framework','signals','physical','decision','outcome','pl','lessons','selftest'];
+    const links = document.querySelectorAll('.sc-toc a');
+    window.addEventListener('scroll', () => {
+      let cur = '';
+      sections.forEach(id => {
+        const el = document.getElementById(id);
+        if(el && el.getBoundingClientRect().top < 120) cur = id;
+      });
+      links.forEach(l => {
+        l.classList.remove('active');
+        if(l.getAttribute('href') === '#'+cur) l.classList.add('active');
+      });
+    });
+
+    // Self-test toggle
+    function toggleAnswers() {
+      const a = document.getElementById('st-answers');
+      const btn = document.querySelector('.btn-reveal');
+      if(a.classList.contains('show')) {
+        a.classList.remove('show');
+        btn.textContent = 'Reveal Answers ↓';
+      } else {
+        a.classList.add('show');
+        btn.textContent = 'Hide Answers ↑';
+        a.scrollIntoView({behavior:'smooth',block:'start'});
+      }
+    }
+  </script>
+</body>
+</html>

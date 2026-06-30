@@ -1,8 +1,9 @@
 /**
- * Push latest glossary + resume templates from repo into Neon CMS during Vercel build.
+ * Push latest content from repo into Neon CMS during Vercel build.
  * Skips silently when DATABASE_URL is unset (local builds without DB).
  */
-import { syncGlossaryFromDefaults } from "../src/lib/content/repository";
+import { syncAllContentModulesFromDefaults } from "../src/lib/content/repository";
+import { syncContentAssetsFromRepo } from "../src/lib/content/content-asset-seed";
 import { syncResumeTemplateAssets } from "../src/lib/content/resume-template-seed";
 
 async function main() {
@@ -11,8 +12,15 @@ async function main() {
     return;
   }
 
-  const glossary = await syncGlossaryFromDefaults();
-  console.log(`[sync-cms] Glossary synced: ${glossary.termCount} terms`);
+  const modules = await syncAllContentModulesFromDefaults();
+  console.log(
+    `[sync-cms] Content modules synced: ${modules.total} (${modules.created} created, ${modules.updated} updated)`
+  );
+
+  const assets = await syncContentAssetsFromRepo();
+  console.log(
+    `[sync-cms] Download assets: ${assets.total} expected, ${assets.syncedFromRepo} from repo, ${assets.placeholders} placeholders, ${assets.skipped} unchanged`
+  );
 
   const resumes = await syncResumeTemplateAssets();
   console.log(

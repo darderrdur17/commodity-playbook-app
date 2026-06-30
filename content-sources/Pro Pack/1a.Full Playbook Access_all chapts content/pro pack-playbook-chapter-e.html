@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Chapter E — Commercial Decision-Making & Risk · Commodity Trading Playbook</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root{--bg:#ffffff;--fg:#333333;--primary:#3280ff;--primary-fg:#ffffff;
+      --secondary:#f2f4f7;--sec-fg:#465468;--accent:#dff2ff;--acc-fg:#0830a0;
+      --muted:#f9fafb;--muted-fg:#677184;--border:#e4e7ec;
+      --chart2:#115cff;--chart3:#0040f5;--chart4:#0131cc;--chart5:#0830a0;
+      --primary-soft:rgba(50,128,255,0.08);--primary-line:rgba(50,128,255,0.25);}
+    *{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--fg);line-height:1.6;-webkit-font-smoothing:antialiased;}
+    a{color:inherit;text-decoration:none;}
+
+    .nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+    .nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px;}
+    .logo{display:flex;align-items:center;gap:10px;font-family:'Playfair Display',serif;font-weight:700;font-size:18px;color:var(--fg);letter-spacing:-0.01em;}
+    .logo-mark{width:22px;height:22px;background:var(--primary);transform:rotate(45deg);transition:transform 0.4s ease;}
+    .logo:hover .logo-mark{transform:rotate(90deg);}
+    .nav-links{display:flex;align-items:center;gap:28px;}
+    .nav-links a{font-size:14px;font-weight:500;color:var(--muted-fg);transition:color 0.2s;}
+    .nav-links a:hover{color:var(--primary);}
+    .btn-nav{background:var(--primary);color:#fff;padding:10px 18px;border-radius:6px;font-size:14px;font-weight:600;transition:background 0.2s;}
+    .btn-nav:hover{background:var(--chart2);}
+
+    .chapter-hero{padding:44px 0 52px;position:relative;overflow:hidden;}
+    .chapter-hero::before{content:"";position:absolute;top:-140px;right:-140px;width:440px;height:440px;background:var(--primary);opacity:0.16;filter:blur(90px);border-radius:50%;}
+    .chapter-hero::after{content:"";position:absolute;bottom:-80px;left:-60px;width:300px;height:300px;background:var(--chart3);opacity:0.1;filter:blur(70px);border-radius:50%;}
+    .hero-inner{max-width:1100px;margin:0 auto;padding:0 24px;position:relative;z-index:2;}
+    .back-link{display:inline-flex;align-items:center;gap:7px;font-size:13px;color:rgba(223,242,255,0.55);margin-bottom:22px;transition:color 0.2s;}
+    .back-link:hover{color:var(--accent);}
+    .back-link svg{width:13px;height:13px;}
+    .hero-top{display:flex;align-items:flex-start;justify-content:space-between;gap:28px;flex-wrap:wrap;}
+    .hero-left{flex:1;min-width:260px;}
+    .chapter-pill{display:inline-flex;align-items:center;gap:7px;padding:5px 13px;border:1px solid rgba(223,242,255,0.28);background:rgba(223,242,255,0.1);border-radius:999px;font-size:10px;font-weight:700;color:var(--accent);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:14px;}
+    .chapter-pill-dot{width:5px;height:5px;background:var(--accent);border-radius:50%;}
+    .chapter-title{font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(28px,4.5vw,46px);line-height:1.05;letter-spacing:-0.02em;color:#fff;margin-bottom:12px;}
+    .chapter-title .accent{color:var(--accent);font-style:italic;}
+    .chapter-sub{font-size:14.5px;font-weight:300;color:rgba(223,242,255,0.68);line-height:1.55;max-width:520px;}
+    .hero-right{flex-shrink:0;}
+    .progress-card{background:rgba(255,255,255,0.07);border:1px solid rgba(223,242,255,0.18);border-radius:12px;padding:16px 20px;min-width:200px;backdrop-filter:blur(8px);}
+    .pc-label{font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:rgba(223,242,255,0.5);margin-bottom:6px;}
+    .pc-stat{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:#fff;line-height:1;}
+    .pc-stat span{font-size:12px;font-weight:400;color:rgba(223,242,255,0.45);margin-left:5px;}
+    .pc-bar{width:100%;height:4px;background:rgba(255,255,255,0.1);border-radius:999px;overflow:hidden;margin-top:8px;}
+    .pc-fill{height:100%;background:var(--primary);border-radius:999px;transition:width 0.8s ease;}
+    .pc-note{font-size:10.5px;color:rgba(223,242,255,0.4);margin-top:6px;line-height:1.4;}
+
+    .chapter-strip{background:var(--secondary);border-bottom:1px solid var(--border);}
+    .chapter-strip-inner{max-width:1100px;margin:0 auto;padding:0 24px;display:flex;gap:0;overflow-x:auto;}
+    .cs-tab{flex-shrink:0;padding:12px 18px;font-size:13px;font-weight:600;color:var(--muted-fg);border-bottom:2px solid transparent;transition:all 0.2s;white-space:nowrap;}
+    .cs-tab:hover{color:var(--primary);}
+    .cs-tab.active{color:var(--primary);border-bottom-color:var(--primary);}
+
+    .page-body{max-width:1100px;margin:0 auto;padding:36px 24px 96px;display:grid;grid-template-columns:220px 1fr;gap:32px;align-items:start;}
+    @media(max-width:860px){.page-body{grid-template-columns:1fr;}.sidebar{display:none;}}
+
+    .sidebar{position:sticky;top:76px;}
+    .sidebar-label{font-size:10px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--primary);margin-bottom:8px;}
+    .sidebar-nav{list-style:none;}
+    .sidebar-nav li{margin-bottom:1px;}
+    .sidebar-nav a{display:flex;align-items:center;gap:7px;padding:6px 9px;border-radius:5px;font-size:12px;font-weight:500;color:var(--muted-fg);transition:all 0.2s;border:1px solid transparent;}
+    .sidebar-nav a:hover{background:var(--muted);color:var(--primary);}
+    .sidebar-nav a.active{background:var(--accent);color:var(--acc-fg);border-color:var(--primary-line);font-weight:600;}
+    .sn-num{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:var(--primary);flex-shrink:0;width:24px;}
+    .active .sn-num{color:var(--acc-fg);}
+    .sn-badge{margin-left:auto;flex-shrink:0;font-size:8px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:2px 5px;border-radius:3px;background:var(--accent);color:var(--acc-fg);}
+    .sidebar-next{margin-top:14px;background:var(--chart5);border-radius:8px;padding:12px 14px;}
+    .sn-next-label{font-size:9px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:rgba(223,242,255,0.5);margin-bottom:4px;}
+    .sn-next-title{font-size:12px;font-weight:700;color:#fff;margin-bottom:8px;line-height:1.3;}
+    .sn-next-btn{display:block;text-align:center;background:var(--primary);color:#fff;padding:7px 10px;border-radius:5px;font-size:11px;font-weight:700;transition:background 0.2s;}
+    .sn-next-btn:hover{background:var(--chart2);}
+
+    .chapter-map{background:var(--muted);border:1px solid var(--border);border-radius:8px;padding:14px 18px;margin-bottom:24px;}
+    .cm-label{font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--primary);margin-bottom:8px;}
+    .cm-sections{display:flex;gap:5px;flex-wrap:wrap;}
+    .cm-section{display:flex;align-items:center;gap:5px;padding:4px 9px;border-radius:4px;font-size:11px;font-weight:600;border:1px solid var(--accent);background:var(--accent);color:var(--acc-fg);cursor:pointer;transition:all 0.2s;}
+    .cm-section:hover{background:#c7e9ff;}
+    .cm-dot{width:5px;height:5px;border-radius:50%;background:var(--primary);flex-shrink:0;}
+
+    /* ── SECTION BLOCKS ── */
+    .section-block{border:1px solid var(--border);border-radius:10px;overflow:hidden;}
+    .section-block+.section-block{margin-top:18px;}
+    .sb-header{background:var(--muted);padding:14px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px;cursor:pointer;transition:background 0.2s;}
+    .sb-header:hover{background:var(--secondary);}
+    .sb-header.open{background:var(--accent);border-bottom-color:var(--primary-line);}
+    .sb-num{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:var(--primary);flex-shrink:0;width:28px;}
+    .sb-header.open .sb-num{color:var(--acc-fg);}
+    .sb-info{flex:1;}
+    .sb-title{font-family:'Playfair Display',serif;font-weight:700;font-size:15px;color:var(--fg);line-height:1.2;margin-bottom:2px;}
+    .sb-header.open .sb-title{color:var(--acc-fg);}
+    .sb-desc{font-size:11.5px;color:var(--muted-fg);}
+    .sb-header.open .sb-desc{color:var(--sec-fg);}
+    .sb-meta{font-size:10.5px;color:var(--muted-fg);flex-shrink:0;}
+    .sb-badge{font-size:9px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;padding:3px 7px;border-radius:999px;flex-shrink:0;background:var(--accent);color:var(--acc-fg);border:1px solid var(--primary-line);}
+    .sb-toggle{width:20px;height:20px;flex-shrink:0;border-radius:50%;background:rgba(50,128,255,0.1);display:flex;align-items:center;justify-content:center;transition:transform 0.3s;}
+    .sb-header.open .sb-toggle{transform:rotate(180deg);background:rgba(8,48,160,0.12);}
+    .sb-toggle svg{width:10px;height:10px;color:var(--primary);}
+    .sb-header.open .sb-toggle svg{color:var(--acc-fg);}
+    .sb-body{display:none;background:var(--bg);}
+    .sb-body.open{display:block;}
+
+    /* ── READING CONTENT ── */
+    .reading-content{padding:26px 32px 0;max-width:680px;}
+    @media(max-width:640px){.reading-content{padding:18px 16px 0;}}
+    .read-byline{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--primary);display:flex;align-items:center;gap:7px;margin-bottom:18px;}
+    .read-byline::before{content:"";display:inline-block;width:16px;height:2px;background:var(--primary);}
+    .read-hook{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:var(--fg);line-height:1.35;margin-bottom:16px;}
+    .reading-content p{font-size:14.5px;color:var(--sec-fg);line-height:1.78;margin-bottom:14px;}
+    .reading-content p:last-of-type{margin-bottom:0;}
+    .key-term{font-weight:700;color:var(--primary);}
+    .pull-quote{border-left:3px solid var(--primary);background:var(--accent);border-radius:0 5px 5px 0;padding:12px 16px;margin:18px 0;}
+    .pull-quote p{font-family:'Playfair Display',serif;font-style:italic;font-size:14.5px;color:var(--acc-fg);line-height:1.55;margin-bottom:0;}
+    .wtmfy{margin-top:18px;background:var(--muted);border:1px solid var(--border);border-radius:7px;padding:12px 16px;}
+    .wtmfy-label{font-size:9px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--primary);margin-bottom:5px;}
+    .wtmfy p{font-size:12.5px;color:var(--sec-fg);line-height:1.6;margin-bottom:0;}
+    .read-handoff{margin:18px 0 0;padding:14px 0 0;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;}
+    .rh-text{font-size:12.5px;color:var(--muted-fg);font-style:italic;flex:1;}
+    .rh-btn{background:var(--primary);color:#fff;padding:8px 14px;border-radius:5px;font-size:12.5px;font-weight:600;border:none;cursor:pointer;transition:background 0.2s;flex-shrink:0;}
+    .rh-btn:hover{background:var(--chart2);}
+
+    /* ── ASSET PANEL ── */
+    .asset-panel{margin:0;padding:18px 32px 22px;border-top:1px solid var(--border);background:var(--muted);}
+    @media(max-width:640px){.asset-panel{padding:14px 16px;}}
+    .ap-label{font-size:9px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--primary);margin-bottom:12px;display:flex;align-items:center;gap:7px;}
+    .ap-label::before{content:"";display:inline-block;width:14px;height:2px;background:var(--primary);}
+    .ap-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+    @media(max-width:600px){.ap-grid{grid-template-columns:1fr;}}
+    .ap-card{background:#fff;border:1px solid var(--border);border-radius:7px;padding:12px 14px;display:flex;flex-direction:column;gap:8px;transition:border-color 0.2s,box-shadow 0.2s;cursor:pointer;}
+    .ap-card:hover{border-color:var(--primary-line);box-shadow:0 4px 14px -4px rgba(50,128,255,0.12);}
+    .ap-card-top{display:flex;align-items:flex-start;gap:10px;}
+    .ap-icon{width:32px;height:32px;border-radius:6px;background:var(--accent);border:1px solid var(--primary-line);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+    .ap-icon svg{width:14px;height:14px;color:var(--primary);}
+    .ap-type-label{font-size:8.5px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--primary);margin-bottom:2px;}
+    .ap-title{font-weight:700;font-size:12px;color:var(--fg);line-height:1.3;}
+    .ap-desc{font-size:11px;color:var(--muted-fg);line-height:1.45;}
+    .ap-dl-btn{display:flex;align-items:center;justify-content:center;gap:5px;background:var(--accent);color:var(--acc-fg);border:1px solid var(--primary-line);border-radius:5px;padding:6px 10px;font-size:11px;font-weight:700;transition:all 0.2s;margin-top:2px;}
+    .ap-dl-btn:hover{background:var(--primary);color:#fff;border-color:var(--primary);}
+    .ap-dl-btn svg{width:11px;height:11px;}
+
+    /* ── CHAPTER COMPLETE ── */
+    .chapter-complete{background:var(--chart5);border-radius:12px;padding:28px 32px;margin-top:22px;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;position:relative;overflow:hidden;}
+    .chapter-complete::before{content:"";position:absolute;top:-60px;right:-60px;width:200px;height:200px;background:var(--primary);opacity:0.2;filter:blur(60px);border-radius:50%;}
+    .cc-text{position:relative;z-index:1;}
+    .cc-text h3{font-family:'Playfair Display',serif;font-weight:700;font-size:20px;color:#fff;margin-bottom:5px;}
+    .cc-text p{font-size:13.5px;color:rgba(223,242,255,0.65);max-width:440px;line-height:1.5;}
+    .cc-actions{position:relative;z-index:1;display:flex;gap:10px;flex-shrink:0;flex-wrap:wrap;}
+    .btn-white{background:#fff;color:var(--chart5);padding:11px 20px;border-radius:6px;font-size:13px;font-weight:700;transition:all 0.2s;display:inline-block;}
+    .btn-white:hover{background:var(--accent);color:var(--acc-fg);}
+    .btn-ghost-w{background:rgba(223,242,255,0.1);color:rgba(223,242,255,0.8);border:1px solid rgba(223,242,255,0.25);padding:11px 20px;border-radius:6px;font-size:13px;font-weight:600;transition:all 0.2s;display:inline-block;}
+    .btn-ghost-w:hover{background:rgba(223,242,255,0.18);color:#fff;}
+
+    .footer{background:var(--chart5);border-top:1px solid rgba(255,255,255,0.08);padding:36px 0 20px;}
+    .footer-inner{max-width:1100px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;}
+    .footer .logo{color:#fff;}
+    .footer .logo-mark{background:var(--accent);}
+    .footer-right{font-size:12.5px;color:rgba(223,242,255,0.35);}
+
+    .reveal{opacity:0;transform:translateY(12px);transition:opacity 0.6s ease,transform 0.6s ease;}
+    .reveal.in{opacity:1;transform:none;}
+    .rd1{transition-delay:0.05s;}.rd2{transition-delay:0.1s;}
+</style>
+</head>
+<body>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="commodity-playbook-zflow.html" class="logo"><span class="logo-mark"></span><span>Commodity Playbook</span></a>
+      <div class="nav-links">
+        <a href="commodity-playbook-zflow.html">Overview</a>
+        <a href="commodity-playbook-hub.html">What's Inside</a>
+        <a href="commodity-playbook-zflow.html#pricing" class="btn-nav">Get the Playbook</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="chapter-hero" style="background:#3280ff;">
+    <div class="hero-inner">
+      <a href="commodity-playbook-playbook-hub.html" class="back-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        Back to Playbook Hub
+      </a>
+      <div class="hero-top">
+        <div class="hero-left reveal">
+          <div class="chapter-pill"><span class="chapter-pill-dot"></span>Chapter E · Full Playbook · Starter</div>
+          <h1 class="chapter-title"><span class="accent">Commercial</span> Decision-Making&nbsp;&&nbsp;Risk</h1>
+          <p class="chapter-sub">The commercial logic behind how trading desks make decisions, manage positions, and protect margin — from spotting an arbitrage to cutting a losing trade.</p>
+        </div>
+        <div class="hero-right reveal rd2">
+          <div class="progress-card">
+            <div class="pc-label">Chapter E</div>
+            <div class="pc-stat">8 <span>sections · 3 assets each</span></div>
+            <div class="pc-bar"><div class="pc-fill" style="width:0%" id="pc-fill"></div></div>
+            <div class="pc-note">24 downloadable assets in this chapter.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="chapter-strip">
+    <div class="chapter-strip-inner">
+      <a href="commodity-playbook-chapter-a.html" class="cs-tab">A · Foundations</a>
+      <a href="commodity-playbook-chapter-b.html" class="cs-tab">B · Physical & Paper</a>
+      <a href="commodity-playbook-chapter-c.html" class="cs-tab">C · Shipping</a>
+      <a href="commodity-playbook-chapter-d.html" class="cs-tab">D · Intelligence</a>
+      <a href="commodity-playbook-chapter-e.html" class="cs-tab active">E · Decision-Making</a>
+    </div>
+  </div>
+
+  <div class="page-body">
+    <aside class="sidebar reveal rd1">
+      <div class="sidebar-label">Chapter E — 8 Sections</div>
+      <ul class="sidebar-nav">
+        <li>
+          <a href="#section-e1">
+            <span class="sn-num">E.1</span>
+            How a Trader Thinks
+            <span class="sn-badge">✓</span>
+          </a>
+        </li>
+        <li>
+          <a href="#section-e2">
+            <span class="sn-num">E.2</span>
+            The Arbitrage Window
+            <span class="sn-badge">✓</span>
+          </a>
+        </li>
+        <li>
+          <a href="#section-e3">
+            <span class="sn-num">E.3</span>
+            The Cargo Diversion Decision…
+            <span class="sn-badge">✓</span>
+          </a>
+        </li>
+        <li>
+          <a href="#section-e4">
+            <span class="sn-num">E.4</span>
+            Timing a Hedge
+            <span class="sn-badge">✓</span>
+          </a>
+        </li>
+        <li>
+          <a href="#section-e5">
+            <span class="sn-num">E.5</span>
+            The P&L Attribution Map
+            <span class="sn-badge">✓</span>
+          </a>
+        </li>
+        <li>
+          <a href="#section-e6">
+            <span class="sn-num">E.6</span>
+            VaR, Limits & Risk Managemen…
+            <span class="sn-badge">✓</span>
+          </a>
+        </li>
+        <li>
+          <a href="#section-e7">
+            <span class="sn-num">E.7</span>
+            When the Trade Goes Wrong
+            <span class="sn-badge">✓</span>
+          </a>
+        </li>
+        <li>
+          <a href="#section-e8">
+            <span class="sn-num">E.8</span>
+            A Week on the Desk — Putting…
+            <span class="sn-badge">✓</span>
+          </a>
+        </li>
+      </ul>
+      
+    </aside>
+
+    <main>
+      <div class="chapter-map reveal">
+        <div class="cm-label">Chapter E — 8 Sections · 24 Assets</div>
+        <div class="cm-sections"><div class="cm-section" onclick="openSection('e1')"><span class="cm-dot"></span>E.1</div>  <div class="cm-section" onclick="openSection('e2')"><span class="cm-dot"></span>E.2</div>  <div class="cm-section" onclick="openSection('e3')"><span class="cm-dot"></span>E.3</div>  <div class="cm-section" onclick="openSection('e4')"><span class="cm-dot"></span>E.4</div>  <div class="cm-section" onclick="openSection('e5')"><span class="cm-dot"></span>E.5</div>  <div class="cm-section" onclick="openSection('e6')"><span class="cm-dot"></span>E.6</div>  <div class="cm-section" onclick="openSection('e7')"><span class="cm-dot"></span>E.7</div>  <div class="cm-section" onclick="openSection('e8')"><span class="cm-dot"></span>E.8</div></div>
+      </div>
+
+      <div id="section-e1" class="section-block reveal">
+        <div class="sb-header" onclick="toggleSection('e1',this)">
+          <div class="sb-num">E.1</div>
+          <div class="sb-info">
+            <div class="sb-title">How a Trader Thinks</div>
+            <div class="sb-desc">The mental model behind every commercial decision — thesis, exit, downside.</div>
+          </div>
+          <div class="sb-meta">10 min</div>
+          <span class="sb-badge">Starter</span>
+          <div class="sb-toggle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="sb-body" id="body-e1">
+      <div class="reading-content">
+            <div class="read-byline">Section E.1 · Chapter E</div>
+            <div class="read-hook">A trade idea and a trade are two very different things. Most people in and around commodity markets have plenty of trade ideas. The discipline is in knowing which ones to act on — and how.</div>
+            <p>Before entering any position, an experienced commodity trader asks three questions. First: <span class='key-term'>What is my thesis?</span> Not 'I think crude will go up' — that is not a thesis. A thesis is a specific causal argument: EIA data will show three consecutive bullish draws next month because refinery utilisation is rising faster than import volumes are replacing the Libyan production shortfall. A good thesis names the cause, the mechanism, and the expected market response.</p>
+            <p>Second: <span class='key-term'>What is my exit?</span> Every position should have a defined exit point before it is entered — both the target (the price level at which the thesis is proven and profits are taken) and the stop (the price level at which the thesis is disproven and losses are cut). A position without an exit plan will inevitably be held too long on the losing side and exited too early on the winning side, because human psychology pushes in both directions simultaneously.</p>
+            <p>Third: <span class='key-term'>What is my downside?</span> The trader calculates the maximum loss they would accept if the thesis is wrong — and sizes the position so that this loss is within their risk limits and their own tolerance for being wrong. A high-conviction trade in a liquid market with a clear stop might justify a full position. A speculative view in a thin market without a clear catalyst might justify 20% of that position.</p>
+            <div class="pull-quote"><p>The three questions are not bureaucratic. They are the difference between trading and gambling. Gambling is taking a position because you feel like it might work. Trading is taking a position because you have a thesis, an exit, and a clearly defined maximum loss.</p></div>
+            <div class="wtmfy">
+              <div class="wtmfy-label">What this means for you</div>
+              <p>These three questions apply to any commercial decision — not just futures trades. Before presenting a market view, a deal structure, or an operational recommendation, ask yourself: what is my thesis, what would disprove it, and what is the maximum cost if I am wrong? Structuring your thinking this way makes you significantly more persuasive and more rigorous simultaneously.</p>
+            </div>
+            <div class="read-handoff">
+              <div class="rh-text">Section E.2 applies this framework to the most visible commercial opportunity in physical commodity markets — the arbitrage window.</div>
+              <button class="rh-btn" onclick="openSection('e2');document.getElementById('section-e2').scrollIntoView({behavior:'smooth'})">Continue →</button>
+            </div>
+          </div>
+      <div class="asset-panel">
+        <div class="ap-label">Section Assets — Download</div>
+        <div class="ap-grid">
+        <div class="ap-card" onclick="triggerDownload('E1-trader-decision-framework.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Infographic</div>
+              <div class="ap-title">The Trader's Decision Framework</div>
+            </div>
+          </div>
+          <div class="ap-desc">The three-question framework — thesis, exit, downside — applied visually to three different trade types: flat price, basis, and freight.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('E1-trade-idea-checklist.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 0-2-2V9m0 0h18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Framework</div>
+              <div class="ap-title">Trade Idea Evaluation Checklist</div>
+            </div>
+          </div>
+          <div class="ap-desc">A structured pre-trade checklist using the three-question framework — with supporting questions for each to stress-test the thesis, exit, and downside assessment.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('E1-trade-idea-vs-trade.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Worked Example</div>
+              <div class="ap-title">A Trade Idea That Became a Trade — and One That Didn't</div>
+            </div>
+          </div>
+          <div class="ap-desc">Two crude market views that seemed similar in conviction level — why one became a position and the other didn't, and how both ultimately resolved.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        </div>
+      </div>
+        </div>
+      </div>
+      <div id="section-e2" class="section-block reveal">
+        <div class="sb-header" onclick="toggleSection('e2',this)">
+          <div class="sb-num">E.2</div>
+          <div class="sb-info">
+            <div class="sb-title">The Arbitrage Window</div>
+            <div class="sb-desc">How regional price gaps open, close, and get exploited in physical commodity markets.</div>
+          </div>
+          <div class="sb-meta">12 min</div>
+          <span class="sb-badge">Starter</span>
+          <div class="sb-toggle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="sb-body" id="body-e2">
+      <div class="reading-content">
+            <div class="read-byline">Section E.2 · Chapter E</div>
+            <div class="read-hook">The arbitrage window is the physical commodity market's most time-sensitive opportunity. When a price gap between two markets exceeds the cost of bridging them, money flows toward the higher-priced market until the gap closes. The desk that moves first captures the margin. The desk that moves second finds the window already closed.</div>
+            <p>An <span class='key-term'>arbitrage window</span> opens when the price differential between two regional markets for the same commodity exceeds the total cost of moving a cargo from the lower-priced market to the higher-priced one. The calculation is straightforward in principle: Gross spread − freight − port costs − boil-off − credit margin = net arb margin. A positive net arb margin means the window is open; a negative margin means it is not viable.</p>
+            <p>The forces that open a window are the same forces that close it — because exploiting the arb is what closes it. When Atlantic Basin LNG desks divert cargoes toward Asia to capture a wide JKM/TTF spread, those additional cargoes increase supply in Asia (pushing JKM down) and reduce supply in Europe (pushing TTF up). Simultaneously, the increased demand for LNG carriers on the long Asia route pushes freight rates higher — further compressing the net arb margin. The window closes not because the fundamental imbalance resolves, but because the act of exploiting it resolves the imbalance.</p>
+            <p>Speed of execution is the primary determinant of whether a desk captures an arb or watches it close. The four capabilities that determine execution speed are: freight access (vessel availability and pre-fixed rates), counterparty network (a buyer at the destination who can commit quickly), contractual flexibility (DES contracts with destination flexibility or spot cargoes with no destination restriction), and internal approval speed (the ability to get commercial approval without bureaucratic delay).</p>
+            <div class="pull-quote"><p>The arb window is not a gift. It is a race. By the time most of the market knows it's open, the fastest desks are already fixing vessels. Speed and preparation — not analysis after the fact — determine who captures the margin.</p></div>
+            <div class="wtmfy">
+              <div class="wtmfy-label">What this means for you</div>
+              <p>Understanding the arbitrage mechanism is the single most direct answer to the interview question 'how do commodity trading desks make money?' Being able to explain — with a specific example and worked numbers — how a regional price gap opens, how it is calculated, and why it closes naturally demonstrates commercial intelligence in a way that generic answers about supply and demand do not.</p>
+            </div>
+            <div class="read-handoff">
+              <div class="rh-text">Section E.3 provides the decision framework for the most consequential and time-pressured version of the arb decision — the mid-voyage cargo diversion.</div>
+              <button class="rh-btn" onclick="openSection('e3');document.getElementById('section-e3').scrollIntoView({behavior:'smooth'})">Continue →</button>
+            </div>
+          </div>
+      <div class="asset-panel">
+        <div class="ap-label">Section Assets — Download</div>
+        <div class="ap-grid">
+        <div class="ap-card" onclick="triggerDownload('E2-arbitrage-window-infographic.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Infographic</div>
+              <div class="ap-title">The Arbitrage Window</div>
+            </div>
+          </div>
+          <div class="ap-desc">How a regional price gap opens, widens, and closes — with a worked LNG example showing gross spread, freight deduction, net margin, and the forces that close the window.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('E2-arb-viability-calculator.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 0-2-2V9m0 0h18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Framework</div>
+              <div class="ap-title">Arb Viability Calculator</div>
+            </div>
+          </div>
+          <div class="ap-desc">A fill-in template for calculating net arb margin on any cross-regional commodity trade — gross spread, freight, port costs, boil-off, credit margin, and viability assessment.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('E2-atlantic-asia-arb-example.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Worked Example</div>
+              <div class="ap-title">Atlantic LNG to Asia — Full Arb Calculation</div>
+            </div>
+          </div>
+          <div class="ap-desc">Complete step-by-step calculation of a JKM/TTF arbitrage — gross spread at the time, all cost deductions, net margin, execution decision, and final P&L outcome.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        </div>
+      </div>
+        </div>
+      </div>
+      <div id="section-e3" class="section-block reveal">
+        <div class="sb-header" onclick="toggleSection('e3',this)">
+          <div class="sb-num">E.3</div>
+          <div class="sb-info">
+            <div class="sb-title">The Cargo Diversion Decision Tree</div>
+            <div class="sb-desc">The full commercial logic for rerouting a vessel mid-voyage — with a downloadable decision framework.</div>
+          </div>
+          <div class="sb-meta">11 min</div>
+          <span class="sb-badge">Starter</span>
+          <div class="sb-toggle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="sb-body" id="body-e3">
+      <div class="reading-content">
+            <div class="read-byline">Section E.3 · Chapter E</div>
+            <div class="read-hook">A cargo diversion is the most compressed commercial decision in physical commodity trading. In the time it takes to make the call — hours, sometimes less — the spread may have already narrowed, the freight rates may have moved, and the best counterparty may have already committed to another desk.</div>
+            <p>The cargo diversion decision begins with a spread calculation — but the spread alone is not sufficient to make the call. The desk must work through a sequence of questions simultaneously: Is the spread wide enough after all costs? Is a suitable vessel available at the assumed freight rate? Does the contractual structure of the cargo allow diversion — is it DES with destination flexibility, or FOB where the original buyer controls the vessel? If the original buyer must release the cargo, what is their compensation demand?</p>
+            <p>The second layer of the decision covers operational feasibility. Can the vessel reach the new destination within the available loading or delivery window? Is the receiving terminal at the new destination available and capable of accepting the cargo — correct draft, regasification capacity, product specification compatibility? Is the counterparty at the new destination creditworthy and able to commit immediately? Each question must be answered before committing to the diversion — because reversing a diversion decision mid-execution is extremely costly.</p>
+            <p>The third layer covers risk management. What is the P&L sensitivity to the spread narrowing by 20% after the decision is made? What happens to the position if freight rates move further against the desk after the vessel is re-fixed? Is the diversion approved within the desk's position limits and VaR framework? A diversion that looks compelling on a base-case calculation may be unacceptable once stress scenarios are applied — and the risk manager's involvement in this assessment is not optional.</p>
+            <div class="pull-quote"><p>The diversion decision is not one question — it's twelve questions, asked in parallel, with a clock running. The desks that answer them fastest and most completely are the ones that capture the margin. Preparation — mapping the answers to each question before the market moves — is the only way to be fast enough.</p></div>
+            <div class="wtmfy">
+              <div class="wtmfy-label">What this means for you</div>
+              <p>The cargo diversion decision tree is one of the most comprehensive commercial decision frameworks in commodity trading — and demonstrating that you understand every question in it is one of the strongest signals of commercial intelligence you can send in any interview for a trading, origination, or analytics role.</p>
+            </div>
+            <div class="read-handoff">
+              <div class="rh-text">Section E.4 covers timing — specifically the hedge timing decision that determines whether the desk removes price risk before or after price moves against it.</div>
+              <button class="rh-btn" onclick="openSection('e4');document.getElementById('section-e4').scrollIntoView({behavior:'smooth'})">Continue →</button>
+            </div>
+          </div>
+      <div class="asset-panel">
+        <div class="ap-label">Section Assets — Download</div>
+        <div class="ap-grid">
+        <div class="ap-card" onclick="triggerDownload('E3-cargo-diversion-decision-tree.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Infographic</div>
+              <div class="ap-title">Cargo Diversion Decision Tree</div>
+            </div>
+          </div>
+          <div class="ap-desc">The complete decision logic flowchart — spread check, freight availability, contractual flexibility, counterparty, operational feasibility, and risk management — in one visual.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('E3-diversion-decision-worksheet.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 0-2-2V9m0 0h18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Framework</div>
+              <div class="ap-title">Diversion Decision Worksheet</div>
+            </div>
+          </div>
+          <div class="ap-desc">A fill-in template covering all 12 questions in the cargo diversion decision — commercial, operational, contractual, and risk-management layers.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('E3-diversion-decision-real-time.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Worked Example</div>
+              <div class="ap-title">A Diversion Decision in Real Time</div>
+            </div>
+          </div>
+          <div class="ap-desc">Step-by-step account of a cargo diversion decision made in 4 hours — the questions asked, the answers obtained, the call made, and the final P&L outcome.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        </div>
+      </div>
+        </div>
+      </div>
+      <div id="section-e4" class="section-block reveal">
+        <div class="sb-header" onclick="toggleSection('e4',this)">
+          <div class="sb-num">E.4</div>
+          <div class="sb-info">
+            <div class="sb-title">Timing a Hedge</div>
+            <div class="sb-desc">How desks manage price risk between when a cargo is booked and when it is delivered.</div>
+          </div>
+          <div class="sb-meta">11 min</div>
+          <span class="sb-badge">Starter</span>
+          <div class="sb-toggle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="sb-body" id="body-e4">
+      <div class="reading-content">
+            <div class="read-byline">Section E.4 · Chapter E</div>
+            <div class="read-hook">The hedge decision is not binary — it is continuous. The question is not whether to hedge but when, how much, and at what price. Getting all three right is the edge that separates the best risk managers from the rest.</div>
+            <p>When a physical trader buys a cargo, they immediately carry price risk — the risk that the commodity price falls before they sell it. They can hedge that risk by selling futures or swaps. But the decision of <span class='key-term'>when to hedge</span> is commercially significant. A trader who hedges immediately locks in the current price and removes all subsequent risk — but also removes all subsequent upside. A trader who delays hedging retains price exposure, hoping to sell the hedge at a better level — but risks the price moving further against them.</p>
+            <p>The <span class='key-term'>hedge ratio</span> — what percentage of the physical position is hedged with paper — is equally important. A 100% hedge is fully protected but captures no upside. A 50% hedge retains significant exposure. Mandatory hedge ratios enforced by risk policy remove trader discretion; desks with more flexible risk mandates allow traders to choose their hedge ratio based on their market view and risk appetite. Some desks hedge in tranches — placing 40% of the hedge immediately, then adding to it as the market evolves.</p>
+            <p><span class='key-term'>Basis risk</span> affects the effectiveness of every hedge. If a West African crude cargo is hedged with ICE Brent futures, the hedge is effective only to the extent that the WA differential to Dated Brent remains stable. If the differential widens — WA crude weakens relative to Brent — the physical cargo loses value more than the futures hedge gains. The trader is exposed to the differential move despite being 'hedged' on flat price. Managing basis risk requires either hedging the differential separately or accepting that a proportion of the position will always be unhedged.</p>
+            <div class="pull-quote"><p>Being perfectly hedged means giving up all your upside to remove your downside. Most desks don't want that — they want to be selectively hedged, protecting against the bad scenario while retaining some ability to benefit if the view is right.</p></div>
+            <div class="wtmfy">
+              <div class="wtmfy-label">What this means for you</div>
+              <p>Hedge timing and hedge ratio decisions are made by traders — but they are evaluated by risk managers, implemented by the back office, and their effectiveness is assessed by finance. Understanding the full cycle of a hedging decision — from commercial logic through to ETRM booking and P&L attribution — makes you more effective in any function around the desk.</p>
+            </div>
+            <div class="read-handoff">
+              <div class="rh-text">Section E.5 shows what the P&L of a hedged physical position actually looks like — mapping every dollar of profit or loss to one of the six commercial levers.</div>
+              <button class="rh-btn" onclick="openSection('e5');document.getElementById('section-e5').scrollIntoView({behavior:'smooth'})">Continue →</button>
+            </div>
+          </div>
+      <div class="asset-panel">
+        <div class="ap-label">Section Assets — Download</div>
+        <div class="ap-grid">
+        <div class="ap-card" onclick="triggerDownload('E4-hedge-timing-framework.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Infographic</div>
+              <div class="ap-title">Hedge Timing Decision Framework</div>
+            </div>
+          </div>
+          <div class="ap-desc">When to hedge, how much to hedge, and how basis risk affects hedge effectiveness — shown visually across three market scenarios.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('E4-hedge-decision-checklist.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 0-2-2V9m0 0h18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Framework</div>
+              <div class="ap-title">Hedge Decision Checklist</div>
+            </div>
+          </div>
+          <div class="ap-desc">A structured pre-hedge checklist — market view assessment, risk policy constraints, hedge instrument selection, ratio decision, and basis risk evaluation.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('E4-delayed-hedge-example.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Worked Example</div>
+              <div class="ap-title">A Delayed Hedge — What It Cost</div>
+            </div>
+          </div>
+          <div class="ap-desc">How a crude desk delayed its hedge by 3 days waiting for a better entry price — and how the market moved against it in the meantime, with full P&L attribution.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        </div>
+      </div>
+        </div>
+      </div>
+      <div id="section-e5" class="section-block reveal">
+        <div class="sb-header" onclick="toggleSection('e5',this)">
+          <div class="sb-num">E.5</div>
+          <div class="sb-info">
+            <div class="sb-title">The P&L Attribution Map</div>
+            <div class="sb-desc">Where trading profit actually comes from — all six levers mapped to a real cargo.</div>
+          </div>
+          <div class="sb-meta">12 min</div>
+          <span class="sb-badge">Starter</span>
+          <div class="sb-toggle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="sb-body" id="body-e5">
+      <div class="reading-content">
+            <div class="read-byline">Section E.5 · Chapter E</div>
+            <div class="read-hook">Most trading P&L reports say 'crude trading made $X million this month.' What they don't say is how much of that came from flat price calls, how much came from basis, how much came from freight, and how much came from optionality. The attribution is where the real commercial intelligence lives.</div>
+            <p>P&L attribution is the process of decomposing a trading desk's profit or loss into its component sources. For a physical commodity desk running multiple concurrent positions, the total P&L in any period is the sum of contributions from: <span class='key-term'>flat price moves</span> (the change in value due to the overall price level moving), <span class='key-term'>time spread</span> (value earned or lost from holding positions across different delivery dates), <span class='key-term'>location differential</span> (value from moving commodity between markets), <span class='key-term'>quality differential</span> (value from the grade premium or discount), <span class='key-term'>freight</span> (P&L from freight positions relative to market), and <span class='key-term'>optionality</span> (value from flexibility provisions in contracts or vessel charters).</p>
+            <p>On any given trade, some levers contribute positively and others negatively. A cargo that made money overall might have lost $500,000 on flat price (the market moved against the trader), gained $800,000 on location differential (the destination market was stronger than expected), and gained $300,000 on freight (rates were fixed below market). The net $600,000 profit came not from being right on the flat price — where the desk was wrong — but from being right on the basis and the freight.</p>
+            <p>Understanding P&L attribution matters for multiple reasons. Risk managers use it to assess which positions are generating alpha and which are just lucky flat price bets. Traders use it to evaluate their own edge — are they consistently making money on basis, or consistently losing on freight? Analysts use it to build better models — if freight is consistently misforecast, the model needs improvement. Attribution transforms a P&L number into a learning tool.</p>
+            <div class="pull-quote"><p>The P&L number tells you whether you made money. The attribution tells you why — and why matters enormously, because a desk that makes money for the wrong reasons will eventually make money for none.</p></div>
+            <div class="wtmfy">
+              <div class="wtmfy-label">What this means for you</div>
+              <p>P&L attribution is a back-office and risk function in most firms, but the commercial logic behind it is essential for analysts, traders, and anyone evaluating the performance of a trading strategy. Being able to look at a P&L report and ask 'which lever generated this?' demonstrates a level of commercial sophistication that most candidates cannot match.</p>
+            </div>
+            <div class="read-handoff">
+              <div class="rh-text">Section E.6 covers the risk management framework that surrounds all of these positions — VaR, limits, and how risk managers and traders interact when positions approach the boundary.</div>
+              <button class="rh-btn" onclick="openSection('e6');document.getElementById('section-e6').scrollIntoView({behavior:'smooth'})">Continue →</button>
+            </div>
+          </div>
+      <div class="asset-panel">
+        <div class="ap-label">Section Assets — Download</div>
+        <div class="ap-grid">
+        <div class="ap-card" onclick="triggerDownload('E5-pl-attribution-map.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Infographic</div>
+              <div class="ap-title">P&L Attribution Map</div>
+            </div>
+          </div>
+          <div class="ap-desc">A waterfall chart showing how total cargo P&L is decomposed into six revenue levers — with typical contribution ranges and how each is calculated.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('E5-pl-attribution-template.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 0-2-2V9m0 0h18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Framework</div>
+              <div class="ap-title">P&L Attribution Template</div>
+            </div>
+          </div>
+          <div class="ap-desc">A blank attribution template for decomposing any commodity trade P&L into its six component levers — with calculation methodology for each.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('E5-lng-cargo-pl-attribution.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Worked Example</div>
+              <div class="ap-title">One LNG Cargo — Six Lines of P&L</div>
+            </div>
+          </div>
+          <div class="ap-desc">Complete P&L attribution for a single LNG cargo from nomination to settlement — every dollar of profit mapped to its source, with explanation of what drove each component.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        </div>
+      </div>
+        </div>
+      </div>
+      <div id="section-e6" class="section-block reveal">
+        <div class="sb-header" onclick="toggleSection('e6',this)">
+          <div class="sb-num">E.6</div>
+          <div class="sb-info">
+            <div class="sb-title">VaR, Limits & Risk Management</div>
+            <div class="sb-desc">How the desk measures and controls its combined market exposure in real time.</div>
+          </div>
+          <div class="sb-meta">12 min</div>
+          <span class="sb-badge">Starter</span>
+          <div class="sb-toggle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="sb-body" id="body-e6">
+      <div class="reading-content">
+            <div class="read-byline">Section E.6 · Chapter E</div>
+            <div class="read-hook">A trading desk without risk limits is not a trading desk — it is a fund. The limits are not constraints on ambition. They are the infrastructure that allows ambition to persist through the inevitable periods when the market is wrong about what you're right about.</div>
+            <p><span class='key-term'>Value at Risk (VaR)</span> is the industry-standard metric for measuring commodity trading desk market risk. It estimates the maximum loss a portfolio of positions could suffer over a defined time horizon (typically 1 day or 10 days) at a defined confidence level (typically 95% or 99%). A VaR of $8 million at 95% confidence over one day means the desk should not expect to lose more than $8 million on 95% of trading days — or roughly 19 out of every 20 trading days.</p>
+            <p>VaR is calculated daily using historical price data and the current position. As positions change and market volatility changes, VaR changes — a large position in a highly volatile market may generate the same VaR as a larger position in a less volatile one. Risk managers set <span class='key-term'>VaR limits</span> for the desk, individual traders, and specific commodities or strategies. When a position approaches a limit, the risk manager flags it and may require the trader to reduce exposure — regardless of whether the trader believes the position is correct.</p>
+            <p>Beyond VaR, desks manage <span class='key-term'>position limits</span> (maximum notional exposure in a commodity), <span class='key-term'>stop-loss limits</span> (the maximum daily or monthly loss before the desk must reduce positions), and <span class='key-term'>stress test results</span> (how the portfolio performs under severe but plausible scenarios — e.g., a $30/bbl crude price move over 5 days). Each of these limits serves a different purpose: VaR manages routine risk, stop-losses prevent loss escalation, and stress tests protect against tail events that VaR underestimates.</p>
+            <div class="pull-quote"><p>Risk management is not about preventing the desk from losing money. It is about ensuring that no single loss — however bad — can threaten the firm's ability to continue operating. The limit protects the institution, not the trader.</p></div>
+            <div class="wtmfy">
+              <div class="wtmfy-label">What this means for you</div>
+              <p>Risk management is a discipline in its own right — and a growing function in every commodity trading firm as regulatory requirements increase. Even if you are targeting a front-office role, understanding VaR, limits, and the risk manager's role demonstrates the commercial maturity that senior hiring managers value. And if you are targeting a risk or middle-office role, this section is your starting point for a much deeper specialisation.</p>
+            </div>
+            <div class="read-handoff">
+              <div class="rh-text">Section E.7 addresses the hardest skill in commodity trading — knowing when a position is wrong and cutting it cleanly, without the emotional distortions that turn small losses into large ones.</div>
+              <button class="rh-btn" onclick="openSection('e7');document.getElementById('section-e7').scrollIntoView({behavior:'smooth'})">Continue →</button>
+            </div>
+          </div>
+      <div class="asset-panel">
+        <div class="ap-label">Section Assets — Download</div>
+        <div class="ap-grid">
+        <div class="ap-card" onclick="triggerDownload('E6-risk-limit-structure.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Infographic</div>
+              <div class="ap-title">Desk Risk Limit Structure</div>
+            </div>
+          </div>
+          <div class="ap-desc">How VaR, position limits, stop-losses, and stress tests work together as a layered risk management framework — with the role of each in different market scenarios.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('E6-daily-risk-dashboard.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 0-2-2V9m0 0h18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Framework</div>
+              <div class="ap-title">Daily Risk Dashboard Template</div>
+            </div>
+          </div>
+          <div class="ap-desc">A risk monitoring template showing VaR usage, position limit utilisation, stop-loss buffer, and stress test results — structured for a daily risk manager review.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('E6-var-limit-case-study.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Worked Example</div>
+              <div class="ap-title">A Position Approaching the VaR Limit</div>
+            </div>
+          </div>
+          <div class="ap-desc">How a crude desk managed a losing position as it approached the VaR limit — the conversations between trader and risk manager, the options assessed, and the outcome.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        </div>
+      </div>
+        </div>
+      </div>
+      <div id="section-e7" class="section-block reveal">
+        <div class="sb-header" onclick="toggleSection('e7',this)">
+          <div class="sb-num">E.7</div>
+          <div class="sb-info">
+            <div class="sb-title">When the Trade Goes Wrong</div>
+            <div class="sb-desc">Stop-loss discipline, loss management, and how desks cut positions without emotional bias.</div>
+          </div>
+          <div class="sb-meta">11 min</div>
+          <span class="sb-badge">Starter</span>
+          <div class="sb-toggle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="sb-body" id="body-e7">
+      <div class="reading-content">
+            <div class="read-byline">Section E.7 · Chapter E</div>
+            <div class="read-hook">Losing money is not the failure. Failing to cut a losing position when the thesis is disproven is the failure. The distinction between those two things is the most important discipline in commodity trading — and the one that most people, at every level of experience, consistently struggle with.</div>
+            <p>When a position moves against the desk, there are two possibilities: the thesis is wrong, or the thesis is early. A position that is <span class='key-term'>wrong</span> should be cut — the evidence has changed, the market is telling you something you didn't know, and holding on increases the loss without improving the odds of recovery. A position that is <span class='key-term'>early</span> may be worth holding — the thesis is still intact, the fundamental picture supports the view, and the market will eventually confirm it. The challenge is that under loss pressure, these two states feel identical — and human psychology consistently misclassifies wrong positions as early ones.</p>
+            <p><span class='key-term'>Stop-loss discipline</span> is the practice of committing to a maximum loss on a position before entering it and cutting the position automatically when that loss is reached — without re-evaluating the thesis under the influence of the current loss. The stop-loss is not a prediction about what the market will do at that level; it is a commitment about how much of the thesis you are willing to fund before accepting that it is disproven. A trader who consistently moves their stop-loss further away from entry is not showing flexibility — they are demonstrating the inability to accept being wrong.</p>
+            <p>The <span class='key-term'>communication of losses</span> up the management chain is a distinct skill from loss management itself. A position that has moved significantly against the desk must be reported promptly, with a clear account of the current thesis status (wrong or early), the remaining exposure, and the plan for managing it. Traders who delay reporting losses — hoping the position will recover before they have to explain it — universally make the situation worse. Risk managers who discover losses that were not reported promptly lose trust in the trader permanently.</p>
+            <div class="pull-quote"><p>The stop-loss is not there to tell you when the market is wrong. It is there to tell you when you are. The willingness to act on that information, without flinching, is the single most important risk management discipline on any desk.</p></div>
+            <div class="wtmfy">
+              <div class="wtmfy-label">What this means for you</div>
+              <p>The psychology of loss and the discipline of cutting positions are relevant to every function that makes recommendations — not just traders. An analyst who does not revisit a view when the evidence changes, an originator who does not walk away from a deal when the economics deteriorate, a scheduler who does not flag an operational problem early enough — all exhibit the same failure mode as a trader who won't cut a losing position. The discipline is universal.</p>
+            </div>
+            <div class="read-handoff">
+              <div class="rh-text">Section E.8 is the final section of the Playbook — a complete week on the desk, where every skill from all five chapters is applied to a realistic commercial scenario in real time.</div>
+              <button class="rh-btn" onclick="openSection('e8');document.getElementById('section-e8').scrollIntoView({behavior:'smooth'})">Continue →</button>
+            </div>
+          </div>
+      <div class="asset-panel">
+        <div class="ap-label">Section Assets — Download</div>
+        <div class="ap-grid">
+        <div class="ap-card" onclick="triggerDownload('E7-loss-management-decision-tree.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Infographic</div>
+              <div class="ap-title">The Loss Management Decision Tree</div>
+            </div>
+          </div>
+          <div class="ap-desc">When to hold, when to cut — the decision logic for managing a position that has moved against the desk, from initial loss through stop-loss trigger and reporting.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('E7-position-review-under-loss.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 0-2-2V9m0 0h18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Framework</div>
+              <div class="ap-title">Position Review Under Loss Template</div>
+            </div>
+          </div>
+          <div class="ap-desc">A structured framework for reviewing a losing position — thesis status check, evidence assessment, hold vs. cut decision, and management communication plan.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('E7-position-held-too-long.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Worked Example</div>
+              <div class="ap-title">The Position That Should Have Been Cut</div>
+            </div>
+          </div>
+          <div class="ap-desc">A detailed account of a crude desk position that was held 6 weeks past the logical cut point — the psychology, the additional loss, and what the desk learned from it.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        </div>
+      </div>
+        </div>
+      </div>
+      <div id="section-e8" class="section-block reveal">
+        <div class="sb-header" onclick="toggleSection('e8',this)">
+          <div class="sb-num">E.8</div>
+          <div class="sb-info">
+            <div class="sb-title">A Week on the Desk — Putting It All Together</div>
+            <div class="sb-desc">A narrative case study of a complete trading week — connecting every skill from the Playbook to a live commercial scenario.</div>
+          </div>
+          <div class="sb-meta">15 min</div>
+          <span class="sb-badge">Starter</span>
+          <div class="sb-toggle">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+        </div>
+        <div class="sb-body" id="body-e8">
+      <div class="reading-content">
+            <div class="read-byline">Section E.8 · Chapter E</div>
+            <div class="read-hook">Everything in the Playbook has been building to this. One week, one desk, one set of markets — and every commercial decision made in real time, with the information available at the time, not the benefit of hindsight.</div>
+            <p>The scenario is a crude oil trading desk at a mid-sized commodity trading firm. It is Monday morning. The desk carries a net long position of 3 million barrels of North Sea Brent crude against ICE futures hedges. The hedge ratio is 80% — 20% of the position is open to flat price. The prior week's EIA report showed a 2.1 million barrel crude draw against a consensus estimate of 0.9 million — a bullish surprise. Brent is trading at $81.50, up $1.20 from Friday's close. The forward curve is in modest backwardation — M1 at $81.50, M3 at $80.20. The desk also has a VLCC fixed at WS95 on the Middle East Gulf–Rotterdam route, loading next Thursday.</p>
+            <p><span class='key-term'>Monday:</span> The desk reviews overnight developments — news of an unplanned shutdown at a North Sea production platform has reduced expected loadings by approximately 500,000 barrels over the next two weeks. The fundamental case for the long position strengthens. The trader increases the open position from 20% to 35% by buying back some of the ICE hedge. Risk management flags the increased VaR. The trader provides the thesis: supply disruption tightens the near-term physical balance; the backwardation should steepen. The risk manager approves within limits. <span class='key-term'>Wednesday:</span> EIA report. The desk's expectation was a 1.5 million barrel draw based on the production platform news and the prior week's trend. Actual: a 3.8 million barrel draw. Brent rallies $2.40 in 15 minutes. The trader increases the hedge from 65% to 85% — locking in the majority of the week's gain. The forward curve moves into stronger backwardation.</p>
+            <p><span class='key-term'>Thursday:</span> The VLCC loads at Ras Tanura. During loading, the independent surveyor finds a quality issue — sulphur content marginally above specification. The scheduling team negotiates a small price adjustment with the Rotterdam receiver. The cargo is accepted; demurrage of 14 hours is accrued during the inspection delay. <span class='key-term'>Friday:</span> The position is reviewed. The open position is reduced to 15% ahead of the weekend. Net P&L for the week: $4.2 million. Attribution: $2.8M from flat price (backwardation trade worked); $0.9M from time spread (front of curve strengthened relative to back); -$0.3M from basis (North Sea physical/ICE differential widened); $0.8M from freight (WS95 fixture below current WS110 market); -$0.1M from demurrage (operationally avoidable).</p>
+            <div class="pull-quote"><p>A good week on the desk is not one where everything goes perfectly. It is one where the thesis was sound, the risk was controlled, the losses were small and understood, and the gains reflected genuine commercial skill — not luck.</p></div>
+            <div class="wtmfy">
+              <div class="wtmfy-label">What this means for you</div>
+              <p>The skills that determined the outcomes in each day of this week — view formation, hedge timing, supply disruption analysis, scheduling coordination, freight positioning, and P&L attribution — are the skills covered in all five chapters of this Playbook. If you can follow the commercial logic of each decision in this case study and articulate why each choice was made, you have achieved the core learning objective of the Full Playbook.</p>
+            </div>
+            <div class="read-handoff">
+              <div class="rh-text">Chapter E — and the Full Playbook — is complete. Return to the Hub to access your resume templates, infographic library, career roadmap, and glossary.</div>
+              <a href="commodity-playbook-playbook-hub.html" class="rh-btn">Back to Hub →</a>
+            </div>
+          </div>
+      <div class="asset-panel">
+        <div class="ap-label">Section Assets — Download</div>
+        <div class="ap-grid">
+        <div class="ap-card" onclick="triggerDownload('E8-week-on-desk-timeline.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3h18v18H3zM3 9h18M3 15h18M9 3v18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Infographic</div>
+              <div class="ap-title">A Week on the Desk — Visual Timeline</div>
+            </div>
+          </div>
+          <div class="ap-desc">The full week laid out as a visual timeline — Monday market open through Friday close, with every key decision, market event, and P&L impact mapped chronologically.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('E8-weekly-desk-review.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 0 0-2 2v4m6-6h10a2 2 0 0 1 2 2v4M9 3v18m0 0h10a2 2 0 0 0 2-2V9M9 21H5a2 2 0 0 0-2-2V9m0 0h18"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Framework</div>
+              <div class="ap-title">Weekly Desk Review Template</div>
+            </div>
+          </div>
+          <div class="ap-desc">A structured end-of-week review framework — position review, P&L attribution, thesis evaluation, lessons learned, and next-week positioning plan.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        <div class="ap-card" onclick="triggerDownload('E8-week-pl-attribution.pdf')">
+          <div class="ap-card-top">
+            <div class="ap-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+            </div>
+            <div>
+              <div class="ap-type-label">Worked Example</div>
+              <div class="ap-title">Full Week P&L Attribution</div>
+            </div>
+          </div>
+          <div class="ap-desc">The complete P&L attribution for the case study week — every revenue line mapped to its source, with the six-lever breakdown and the operational demurrage cost.</div>
+          <div class="ap-dl-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+            Download PDF
+          </div>
+        </div>
+        </div>
+      </div>
+        </div>
+      </div>
+
+      <div class="chapter-complete reveal">
+        <div class="cc-text">
+          <h3>Chapter E complete.</h3>
+          <p>You've completed the Full Playbook. Return to your hub to access your resume templates, infographic library, and career roadmap.</p>
+        </div>
+        <div class="cc-actions"><a href="commodity-playbook-chapter-d.html" class="btn-ghost-w">← Chapter D</a><a href="commodity-playbook-playbook-hub.html" class="btn-white">Back to Hub →</a></div>
+      </div>
+    </main>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <a href="commodity-playbook-zflow.html" class="logo">
+        <span class="logo-mark"></span>
+        <span style="font-family:'Playfair Display',serif;font-weight:700;font-size:16px;">Commodity Playbook</span>
+      </a>
+      <div class="footer-right">Chapter E · Commercial Decision-Making & Risk · 24 downloadable assets</div>
+    </div>
+  </footer>
+
+  <script>
+    const reveals=document.querySelectorAll('.reveal');
+    const io=new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target);}})},{threshold:0.06});
+    reveals.forEach(el=>io.observe(el));
+    document.querySelectorAll('.chapter-hero .reveal').forEach((el,i)=>setTimeout(()=>el.classList.add('in'),80+i*120));
+
+    function toggleSection(id,h){
+      const b=document.getElementById('body-'+id);
+      const open=b.classList.contains('open');
+      if(open){b.classList.remove('open');h.classList.remove('open');}
+      else{b.classList.add('open');h.classList.add('open');}
+    }
+    function openSection(id){
+      const b=document.getElementById('body-'+id);
+      if(b){const h=b.previousElementSibling;b.classList.add('open');if(h)h.classList.add('open');}
+    }
+
+    // Progress bar
+    window.addEventListener('load',()=>{
+      setTimeout(()=>{const f=document.getElementById('pc-fill');if(f)f.style.width='0%';},400);
+    });
+
+    // Sidebar tracking
+    const secIds=["e1","e2","e3","e4","e5","e6","e7","e8"];
+    const sideLinks=document.querySelectorAll('.sidebar-nav a');
+    window.addEventListener('scroll',()=>{
+      let cur='';
+      secIds.forEach(id=>{const el=document.getElementById('section-'+id);if(el&&el.getBoundingClientRect().top<120)cur=id;});
+      sideLinks.forEach(lk=>{lk.classList.remove('active');if(lk.getAttribute('href')&&lk.getAttribute('href').includes(cur))lk.classList.add('active');});
+    });
+
+    // Download handler — connect to your file delivery system
+    function triggerDownload(filename){
+      alert('Download: '+filename+'\n\nConnect this to your file delivery system (AWS S3, Gumroad, or a direct CDN link).');
+    }
+  </script>
+</body>
+</html>

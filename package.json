@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --turbopack",
-    "build": "npm run build:glossary && prisma generate && npm run sync:cms && next build",
+    "build": "npm run build:content && prisma generate && npm run sync:cms && next build",
     "postinstall": "prisma generate",
     "start": "next start",
     "lint": "next lint",
@@ -12,7 +12,7 @@
     "db:studio": "prisma studio",
     "db:seed": "npx tsx prisma/seed.ts",
     "db:seed-assets": "npx tsx prisma/seed-assets.ts",
-    "build:content": "node scripts/build-case-studies-details.mjs",
+    "build:content": "node scripts/build-all-content.mjs",
     "build:glossary": "node scripts/extract-glossary.mjs",
     "sync:cms": "npx tsx scripts/sync-cms-build.ts"
   },

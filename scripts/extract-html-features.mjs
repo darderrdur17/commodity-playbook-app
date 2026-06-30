@@ -6,13 +6,14 @@ import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
 
+import { readContentFile } from "./content-sources.mjs";
+
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(__dirname, "..");
-const SHARED = path.join(ROOT, "..", "CommodityPlaybook - Shared Folder");
 const OUT = path.join(ROOT, "src", "data");
 
 function read(rel) {
-  return fs.readFileSync(path.join(SHARED, rel), "utf8");
+  return readContentFile(rel);
 }
 
 function slugify(s) {

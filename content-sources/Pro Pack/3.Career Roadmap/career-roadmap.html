@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Career Roadmap — Starter Pack · Commodity Trading Playbook</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    /* ── ZFlow tokens ── */
+    :root{
+      --bg:#ffffff;--fg:#333333;--primary:#3280ff;--primary-fg:#ffffff;
+      --secondary:#f2f4f7;--sec-fg:#465468;--accent:#dff2ff;--acc-fg:#0830a0;
+      --muted:#f9fafb;--muted-fg:#677184;--border:#e4e7ec;
+      --chart2:#115cff;--chart3:#0040f5;--chart4:#0131cc;--chart5:#0830a0;
+      --primary-soft:rgba(50,128,255,0.08);--primary-line:rgba(50,128,255,0.25);
+      --radius:8px;
+    }
+    *{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--fg);
+      line-height:1.6;-webkit-font-smoothing:antialiased;}
+    a{color:inherit;text-decoration:none;}
+
+    /* ── NAV ── */
+    .nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.92);
+      backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+    .nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;
+      display:flex;align-items:center;justify-content:space-between;height:64px;}
+    .logo{display:flex;align-items:center;gap:10px;font-family:'Playfair Display',serif;
+      font-weight:700;font-size:18px;color:var(--fg);letter-spacing:-0.01em;}
+    .logo-mark{width:22px;height:22px;background:var(--primary);
+      transform:rotate(45deg);transition:transform 0.4s ease;flex-shrink:0;}
+    .logo:hover .logo-mark{transform:rotate(90deg);}
+    .nav-links{display:flex;align-items:center;gap:28px;}
+    .nav-links a{font-size:14px;font-weight:500;color:var(--muted-fg);transition:color 0.2s;}
+    .nav-links a:hover{color:var(--primary);}
+    .btn-nav{background:var(--primary);color:#fff !important;padding:10px 18px;border-radius:6px;
+      font-size:14px;font-weight:600 !important;transition:background 0.2s;}
+    .btn-nav:hover{background:var(--chart2) !important;}
+    @media(max-width:720px){.nav-links a:not(.btn-nav){display:none;}}
+
+    /* ── HERO ── */
+    .hero{background:var(--chart5);padding:52px 0 64px;position:relative;overflow:hidden;}
+    .hero::before{content:"";position:absolute;top:-160px;right:-160px;
+      width:480px;height:480px;background:var(--primary);opacity:0.16;
+      filter:blur(100px);border-radius:50%;}
+    .hero::after{content:"";position:absolute;bottom:-90px;left:-60px;
+      width:320px;height:320px;background:var(--chart3);opacity:0.1;
+      filter:blur(80px);border-radius:50%;}
+    .hero .container{position:relative;z-index:2;}
+    .container{max-width:1100px;margin:0 auto;padding:0 24px;}
+    .back-link{display:inline-flex;align-items:center;gap:7px;font-size:13px;
+      color:rgba(223,242,255,0.55);margin-bottom:24px;transition:color 0.2s;}
+    .back-link:hover{color:var(--accent);}
+    .back-link svg{width:13px;height:13px;}
+    .hero-eyebrow{display:inline-flex;align-items:center;gap:7px;padding:5px 13px;
+      border:1px solid rgba(223,242,255,0.28);background:rgba(223,242,255,0.1);
+      border-radius:999px;font-size:10px;font-weight:700;color:var(--accent);
+      letter-spacing:0.2em;text-transform:uppercase;margin-bottom:16px;}
+    .hero-eyebrow-dot{width:5px;height:5px;background:var(--accent);border-radius:50%;}
+    h1.hero-title{font-family:'Playfair Display',serif;font-weight:700;
+      font-size:clamp(32px,5vw,52px);line-height:1.05;letter-spacing:-0.02em;
+      color:#fff;margin-bottom:14px;}
+    h1.hero-title .accent{color:var(--accent);font-style:italic;}
+    .hero-sub{font-size:16px;font-weight:300;color:rgba(223,242,255,0.7);
+      line-height:1.55;max-width:580px;margin-bottom:32px;}
+    .hero-stats{display:flex;gap:20px;flex-wrap:wrap;}
+    .hero-stat{background:rgba(255,255,255,0.07);border:1px solid rgba(223,242,255,0.18);
+      border-radius:8px;padding:12px 18px;backdrop-filter:blur(8px);}
+    .hs-num{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:#fff;line-height:1;}
+    .hs-label{font-size:11px;color:rgba(223,242,255,0.5);margin-top:2px;}
+
+    /* ── REVEAL ── */
+    .reveal{opacity:0;transform:translateY(18px);transition:opacity 0.5s ease,transform 0.5s ease;}
+    .reveal.in{opacity:1;transform:translateY(0);}
+
+    /* ── SECTIONS ── */
+    .section{padding:64px 0;}
+    .section-alt{background:var(--muted);border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+    .section-head{text-align:center;max-width:640px;margin:0 auto 48px;}
+    .section-eyebrow{font-size:11px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;
+      color:var(--primary);margin-bottom:10px;}
+    .section-title{font-family:'Playfair Display',serif;font-weight:700;
+      font-size:clamp(26px,4vw,38px);line-height:1.1;letter-spacing:-0.02em;
+      color:var(--fg);margin-bottom:12px;}
+    .section-sub{font-size:15px;color:var(--muted-fg);line-height:1.6;}
+
+    /* ── MATRIX ── */
+    .matrix-wrap{overflow-x:auto;border-radius:12px;border:1px solid var(--border);}
+    table.matrix{width:100%;border-collapse:collapse;font-size:13px;min-width:700px;}
+    table.matrix thead th{background:var(--chart5);color:rgba(223,242,255,0.85);
+      font-size:11px;font-weight:600;letter-spacing:0.07em;text-transform:uppercase;
+      padding:13px 16px;text-align:left;white-space:nowrap;}
+    table.matrix tbody tr{transition:background 0.15s;}
+    table.matrix tbody tr:nth-child(even){background:var(--muted);}
+    table.matrix tbody tr:hover{background:var(--accent);}
+    table.matrix tbody td{padding:12px 16px;border-bottom:1px solid var(--border);
+      color:var(--fg);vertical-align:middle;line-height:1.4;font-size:13px;}
+    table.matrix tbody tr:last-child td{border-bottom:none;}
+    table.matrix tbody td:first-child{font-weight:600;color:var(--primary);}
+    .dpill{display:inline-block;font-size:10px;font-weight:600;padding:3px 9px;border-radius:999px;}
+    .dp-low{background:#dcfce7;color:#14532d;}
+    .dp-med{background:#fef9c3;color:#713f12;}
+    .dp-high{background:#fee2e2;color:#7f1d1d;}
+    .dp-vh{background:#fce7f3;color:#701a40;}
+
+    /* ── FILTER BAR ── */
+    .filter-bar{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:28px;align-items:center;}
+    .filter-label{font-size:13px;font-weight:500;color:var(--muted-fg);}
+    .fbtn{font-size:13px;font-weight:500;padding:7px 16px;border:1px solid var(--border);
+      border-radius:999px;background:var(--bg);color:var(--muted-fg);cursor:pointer;
+      transition:all 0.2s;white-space:nowrap;font-family:inherit;}
+    .fbtn:hover{border-color:var(--primary-line);color:var(--primary);background:var(--primary-soft);}
+    .fbtn.on{background:var(--primary);color:#fff;border-color:var(--primary);}
+
+    /* ── ROLE CARDS ── */
+    .roles-grid{display:flex;flex-direction:column;gap:14px;}
+    .role-card{background:var(--bg);border:1px solid var(--border);border-radius:12px;
+      overflow:hidden;transition:box-shadow 0.2s,border-color 0.2s;}
+    .role-card:hover{border-color:var(--primary-line);box-shadow:0 2px 16px rgba(50,128,255,0.07);}
+    .role-overview{display:flex;align-items:flex-start;gap:16px;padding:20px 24px;
+      cursor:pointer;user-select:none;}
+    .role-num{font-family:'Playfair Display',serif;font-size:22px;font-weight:700;
+      color:var(--primary);min-width:36px;flex-shrink:0;line-height:1;margin-top:3px;}
+    .role-main{flex:1;min-width:0;}
+    .role-title{font-size:17px;font-weight:700;color:var(--fg);margin-bottom:7px;
+      font-family:'Playfair Display',serif;line-height:1.2;}
+    .role-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:8px;}
+    .rtag{font-size:11px;font-weight:600;padding:3px 10px;border-radius:999px;}
+    .rt-blue{background:var(--accent);color:var(--acc-fg);}
+    .rt-amber{background:#FEF3C7;color:#92400E;}
+    .rt-teal{background:#CCFBF1;color:#134E4A;}
+    .rt-purple{background:#EDE9FE;color:#4C1D95;}
+    .rt-green{background:#DCFCE7;color:#14532D;}
+    .rt-gray{background:var(--secondary);color:var(--sec-fg);}
+    .rt-red{background:#FEE2E2;color:#7F1D1D;}
+    .role-summary{font-size:14px;color:var(--muted-fg);line-height:1.6;margin-bottom:10px;}
+    .role-meta{display:flex;gap:16px;flex-wrap:wrap;}
+    .rmeta{display:flex;align-items:center;gap:5px;font-size:12px;color:var(--muted-fg);}
+    .rmdot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+    .rmd-low{background:#22c55e;}.rmd-med{background:#f59e0b;}.rmd-high{background:#ef4444;}
+    .role-toggle{flex-shrink:0;width:32px;height:32px;border-radius:50%;
+      background:var(--secondary);display:flex;align-items:center;justify-content:center;
+      font-size:14px;color:var(--muted-fg);transition:all 0.2s;margin-top:2px;
+      border:none;cursor:pointer;font-family:inherit;}
+    .role-overview:hover .role-toggle{background:var(--primary-soft);color:var(--primary);}
+    .role-toggle.open{background:var(--primary);color:#fff;}
+
+    /* ── DEEP DIVE ── */
+    .role-deep{display:none;border-top:1px solid var(--border);}
+    .role-deep.open{display:block;}
+    .deep-inner{padding:24px 24px 28px 76px;}
+    @media(max-width:720px){.deep-inner{padding:20px;}}
+    .ds-label{font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;
+      color:var(--primary);margin-bottom:8px;margin-top:22px;}
+    .ds-label:first-child{margin-top:0;}
+    .ds-text{font-size:14px;color:var(--muted-fg);line-height:1.7;}
+    .ds-text p{margin-bottom:7px;}
+    .ds-text p:last-child{margin-bottom:0;}
+    .deep-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:0;}
+    @media(max-width:640px){.deep-grid{grid-template-columns:1fr;}}
+    .ds-list{list-style:none;display:flex;flex-direction:column;gap:8px;}
+    .ds-list li{font-size:14px;color:var(--muted-fg);line-height:1.55;
+      padding-left:16px;position:relative;}
+    .ds-list li::before{content:"→";position:absolute;left:0;color:var(--primary);font-size:12px;top:2px;}
+    .ds-list li strong{color:var(--fg);font-weight:600;}
+    .flag-list{display:flex;flex-direction:column;gap:8px;}
+    .flag-item{display:flex;align-items:flex-start;gap:10px;padding:10px 14px;
+      background:#fff5f5;border:1px solid #fecaca;border-radius:8px;}
+    .flag-x{font-size:13px;color:#dc2626;font-weight:700;flex-shrink:0;margin-top:1px;}
+    .flag-text{font-size:13px;color:#7f1d1d;line-height:1.5;}
+
+    /* ── COMP TABLE ── */
+    table.comp-tbl{width:100%;border-collapse:collapse;font-size:13px;}
+    table.comp-tbl td{padding:8px 0;border-bottom:1px solid var(--border);}
+    table.comp-tbl tr:last-child td{border-bottom:none;}
+    table.comp-tbl td:first-child{color:var(--fg);font-weight:500;}
+    table.comp-tbl td:last-child{text-align:right;color:var(--primary);font-weight:600;}
+
+    /* ── UPGRADE BOX ── */
+    .upgrade-box{background:linear-gradient(135deg,var(--primary-soft),var(--accent));
+      border:1px solid var(--primary-line);border-radius:10px;padding:16px 20px;margin-top:22px;}
+    .upgrade-label{font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;
+      color:var(--primary);margin-bottom:6px;}
+    .upgrade-text{font-size:13px;color:var(--acc-fg);line-height:1.65;}
+
+    /* ── JOB OPENINGS PLACEHOLDER ── */
+    .jobs-label{font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;
+      color:var(--primary);margin-bottom:10px;margin-top:22px;display:flex;align-items:center;gap:7px;}
+    .coming-wrap{border:1.5px dashed var(--border);border-radius:12px;
+      padding:28px 24px;text-align:center;background:var(--muted);}
+    .coming-icon{width:44px;height:44px;border-radius:10px;background:var(--bg);
+      border:1px solid var(--border);display:flex;align-items:center;justify-content:center;
+      margin:0 auto 14px;font-size:20px;}
+    .coming-title{font-size:15px;font-weight:700;color:var(--fg);margin-bottom:6px;
+      font-family:'Playfair Display',serif;}
+    .coming-sub{font-size:13px;color:var(--muted-fg);line-height:1.6;
+      max-width:420px;margin:0 auto 16px;}
+    .coming-badge{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:600;
+      padding:5px 14px;border-radius:999px;background:var(--bg);
+      border:1px solid var(--border);color:var(--muted-fg);}
+    .coming-dot{width:7px;height:7px;border-radius:50%;background:#f59e0b;flex-shrink:0;}
+    .notify-row{display:flex;gap:8px;justify-content:center;margin-top:16px;flex-wrap:wrap;}
+    .notify-input{font-size:13px;padding:9px 14px;border:1px solid var(--border);
+      border-radius:7px;background:var(--bg);color:var(--fg);width:220px;
+      font-family:inherit;outline:none;transition:border-color 0.2s;}
+    .notify-input:focus{border-color:var(--primary);}
+    .notify-btn{font-size:13px;font-weight:600;padding:9px 18px;border-radius:7px;
+      background:var(--primary);color:#fff;border:none;cursor:pointer;
+      font-family:inherit;transition:background 0.2s;}
+    .notify-btn:hover{background:var(--chart2);}
+    .notify-success{display:none;font-size:13px;color:#14532d;background:#dcfce7;
+      border:1px solid #bbf7d0;border-radius:7px;padding:8px 16px;margin-top:10px;}
+    .preview-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;
+      margin-top:16px;opacity:0.3;pointer-events:none;filter:blur(3px);}
+    .preview-card{border:1px solid var(--border);border-radius:8px;
+      padding:12px;background:var(--bg);}
+    .pline{height:10px;border-radius:3px;background:var(--border);margin-bottom:7px;}
+    .pline.s{width:55%;}
+    .ppill{height:19px;width:72px;border-radius:999px;background:var(--border);margin-top:10px;}
+    .preview-label{font-size:11px;font-weight:500;color:var(--muted-fg);
+      background:var(--bg);border:1px solid var(--border);border-radius:999px;
+      padding:4px 14px;position:absolute;top:50%;left:50%;
+      transform:translate(-50%,-50%);white-space:nowrap;}
+    .preview-wrap{position:relative;margin-top:0;}
+
+    /* ── TIMELINE ── */
+    .timeline-wrap{max-width:760px;margin:0 auto;}
+    .tl-item{display:flex;gap:20px;}
+    .tl-left{display:flex;flex-direction:column;align-items:center;flex-shrink:0;}
+    .tl-dot{width:14px;height:14px;border-radius:50%;background:var(--primary);
+      border:3px solid var(--primary-soft);flex-shrink:0;margin-top:4px;}
+    .tl-line{width:2px;flex:1;background:var(--border);min-height:24px;}
+    .tl-content{padding-bottom:32px;flex:1;}
+    .tl-quarter{font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;
+      color:var(--primary);margin-bottom:4px;}
+    .tl-title{font-size:16px;font-weight:700;color:var(--fg);margin-bottom:8px;
+      font-family:'Playfair Display',serif;}
+    .tl-list{list-style:none;display:flex;flex-direction:column;gap:6px;}
+    .tl-list li{font-size:14px;color:var(--muted-fg);padding-left:16px;
+      position:relative;line-height:1.55;}
+    .tl-list li::before{content:"·";position:absolute;left:0;
+      color:var(--primary);font-weight:700;font-size:16px;line-height:1.3;}
+
+    /* ── COMP OVERVIEW ── */
+    .comp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;}
+    .comp-card{background:var(--bg);border:1px solid var(--border);border-radius:12px;
+      padding:20px;text-align:center;transition:border-color 0.2s,box-shadow 0.2s;}
+    .comp-card:hover{border-color:var(--primary-line);box-shadow:0 2px 12px rgba(50,128,255,0.07);}
+    .cc-role{font-size:11px;font-weight:600;color:var(--muted-fg);margin-bottom:7px;
+      text-transform:uppercase;letter-spacing:0.07em;}
+    .cc-range{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;
+      color:var(--primary);line-height:1.1;margin-bottom:4px;}
+    .cc-note{font-size:11px;color:var(--muted-fg);}
+    .comp-note{font-size:12px;color:var(--muted-fg);text-align:center;margin-top:18px;}
+
+    /* ── FOOTER ── */
+    .footer{background:var(--chart5);padding:48px 0 28px;}
+    .footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;margin-bottom:40px;}
+    @media(max-width:640px){.footer-grid{grid-template-columns:1fr;}}
+    .footer .logo{color:#fff;}
+    .footer-blurb{font-size:13px;color:rgba(223,242,255,0.45);margin-top:10px;
+      line-height:1.6;max-width:280px;}
+    .footer h4{font-size:11px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;
+      color:rgba(223,242,255,0.35);margin-bottom:14px;}
+    .footer ul{list-style:none;display:flex;flex-direction:column;gap:9px;}
+    .footer ul li a{font-size:13px;color:rgba(223,242,255,0.6);transition:color 0.2s;}
+    .footer ul li a:hover{color:var(--accent);}
+    .footer-bottom{display:flex;justify-content:space-between;align-items:center;
+      padding-top:24px;border-top:1px solid rgba(223,242,255,0.1);
+      font-size:12px;color:rgba(223,242,255,0.3);flex-wrap:wrap;gap:8px;}
+  </style>
+</head>
+<body>
+
+<!-- ── NAV ── -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo">
+      <span class="logo-mark"></span>
+      <span>Commodity Playbook</span>
+    </a>
+    <div class="nav-links">
+      <a href="index.html#features">Content</a>
+      <a href="index.html#pricing">Pricing</a>
+      <a href="mentors.html">Mentors</a>
+      <a href="index.html#pricing" class="btn-nav">Get Access</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="container">
+    <a href="index.html" class="back-link reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      Back to Playbook
+    </a>
+    <div class="hero-eyebrow reveal">
+      <span class="hero-eyebrow-dot"></span>
+      Starter Pack · Module 2
+    </div>
+    <h1 class="hero-title reveal">
+      Career Roadmap.<br><span class="accent">Role by Role.</span>
+    </h1>
+    <p class="hero-sub reveal">Ten entry blueprints for downstream commodity trading. The paths that actually work, the filters that actually eliminate candidates, and the upgrade move for each role — built from 20+ years inside the industry.</p>
+    <div class="hero-stats reveal">
+      <div class="hero-stat"><div class="hs-num">10</div><div class="hs-label">Role blueprints</div></div>
+      <div class="hero-stat"><div class="hs-num">4</div><div class="hs-label">Markets: SG · LN · HK · JP</div></div>
+      <div class="hero-stat"><div class="hs-num">Live</div><div class="hs-label">Job board — coming soon</div></div>
+      <div class="hero-stat"><div class="hs-num">SGD</div><div class="hs-label">Comp benchmarks</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FUNCTION MATRIX ── -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">At a glance</div>
+      <h2 class="section-title">The Function Matrix</h2>
+      <p class="section-sub">Ten roles across five dimensions. Use this to identify your strongest entry angle before reading the full blueprints below.</p>
+    </div>
+    <div class="matrix-wrap reveal">
+      <table class="matrix">
+        <thead>
+          <tr>
+            <th>Role</th>
+            <th>Entry difficulty</th>
+            <th>Category</th>
+            <th>Path to desk</th>
+            <th>Key skills</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Trading Analyst</td><td><span class="dpill dp-high">High</span></td><td>Front office</td><td>Direct — feeds the book daily</td><td>Market knowledge, modelling, speed</td></tr>
+          <tr><td>Trader</td><td><span class="dpill dp-vh">Very high</span></td><td>Front office</td><td>You are the desk</td><td>P&amp;L conviction, physical market</td></tr>
+          <tr><td>Scheduling / Operations</td><td><span class="dpill dp-low">Lower</span></td><td>Operations</td><td>Strong — ops → desk seen often</td><td>Physical logistics, ETRM, decisiveness</td></tr>
+          <tr><td>Risk Analyst</td><td><span class="dpill dp-med">Medium</span></td><td>Middle office</td><td>Lateral — desk-adjacent authority</td><td>VaR, limits, derivatives</td></tr>
+          <tr><td>Commercial / Origination</td><td><span class="dpill dp-high">High</span></td><td>Front office</td><td>Natural — originator → trader</td><td>Relationships, contract terms, margin logic</td></tr>
+          <tr><td>Quant / Data Analyst</td><td><span class="dpill dp-med">Medium</span></td><td>Middle office</td><td>Strong — model → book path</td><td>Python, curve building, data</td></tr>
+          <tr><td>Research Analyst</td><td><span class="dpill dp-med">Medium</span></td><td>Adjacent</td><td>Indirect — view → desk</td><td>Writing, supply/demand modelling</td></tr>
+          <tr><td>ETRM Specialist</td><td><span class="dpill dp-low">Lower</span></td><td>Operations</td><td>Indirect — system expertise valued</td><td>Endur, RightAngle, SQL</td></tr>
+          <tr><td>Vendor Solutions / PreSales</td><td><span class="dpill dp-med">Medium</span></td><td>Adjacent</td><td>Indirect — market knowledge valued</td><td>Commodity knowledge, enterprise sales</td></tr>
+          <tr><td>Commodity Trade Finance</td><td><span class="dpill dp-high">High</span></td><td>Adjacent</td><td>Lateral — finance → commercial</td><td>Structured finance, cargo economics</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ── ROLE BLUEPRINTS ── -->
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">Ten blueprints</div>
+      <h2 class="section-title">Role-by-Role Entry Guide</h2>
+      <p class="section-sub">Click any role to expand the full blueprint — what it actually does, who gets hired, the red flags that filter candidates out, comp benchmarks, and the upgrade move.</p>
+    </div>
+
+    <div class="filter-bar reveal">
+      <span class="filter-label">Filter by:</span>
+      <button class="fbtn on" onclick="filterRoles('all',this)">All roles</button>
+      <button class="fbtn" onclick="filterRoles('front',this)">Front office</button>
+      <button class="fbtn" onclick="filterRoles('middle',this)">Middle office</button>
+      <button class="fbtn" onclick="filterRoles('ops',this)">Operations</button>
+      <button class="fbtn" onclick="filterRoles('adjacent',this)">Adjacent</button>
+    </div>
+
+    <div class="roles-grid reveal" id="roles-list"></div>
+  </div>
+</section>
+
+<!-- ── 12-MONTH TIMELINE ── -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">The plan</div>
+      <h2 class="section-title">12-Month Action Plan</h2>
+      <p class="section-sub">Not vague milestones — specific knowledge targets and actions calibrated to where a serious candidate actually is, quarter by quarter.</p>
+    </div>
+    <div class="timeline-wrap">
+      <div class="tl-item reveal">
+        <div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div></div>
+        <div class="tl-content">
+          <div class="tl-quarter">Q1 · Months 1–3</div>
+          <div class="tl-title">Foundation — build the knowledge base. No applications yet.</div>
+          <ul class="tl-list">
+            <li>Complete Chapters A–C of the Full Playbook. Be able to explain crack spreads, contango, and laytime unprompted before moving on.</li>
+            <li>Set up a daily reading habit: EIA Wednesday release plus one Platts or Argus headline per day. Calendar it.</li>
+            <li>Map the org structure of 3 target firms using LinkedIn and annual reports. Know who sits where.</li>
+            <li>Use the Function Matrix above to lock in your entry role. Don't hedge across three tracks — decide one and commit.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div></div>
+        <div class="tl-content">
+          <div class="tl-quarter">Q2 · Months 4–6</div>
+          <div class="tl-title">Positioning — build your story. Rewrite your resume. Start warm outreach.</div>
+          <ul class="tl-list">
+            <li>Rewrite your resume using your archetype template from the Resume Templates module. Every bullet must demonstrate commercial awareness, not just activity.</li>
+            <li>Draft your market view hook — one specific, current observation about your target commodity. Practice saying it out loud.</li>
+            <li>Identify 10 people in target roles on LinkedIn. Start with informational conversations, not job asks.</li>
+            <li>If on the quant or analytics track: build one public data project involving commodity price data (EIA, CME, or AIS).</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-left"><div class="tl-dot"></div><div class="tl-line"></div></div>
+        <div class="tl-content">
+          <div class="tl-quarter">Q3 · Months 7–9</div>
+          <div class="tl-title">Active search — applications live. Interview pipeline building.</div>
+          <ul class="tl-list">
+            <li>Apply to 3–5 roles per week. Prioritise firms with known junior hiring, not just brand names.</li>
+            <li>Practice 10 technical questions per week from the Interview Question Bank — focus on your target commodity's supply/demand, a trade idea walkthrough, and one supply disruption scenario.</li>
+            <li>Track every application in a pipeline with notes on which firms respond and at what stage. The pattern tells you where the filter is.</li>
+            <li>When the job board launches, use the role-specific openings to find live positions across Singapore, London, Hong Kong, and Tokyo.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="tl-item reveal">
+        <div class="tl-left"><div class="tl-dot"></div></div>
+        <div class="tl-content">
+          <div class="tl-quarter">Q4 · Months 10–12</div>
+          <div class="tl-title">Close — final-round prep and offer navigation.</div>
+          <ul class="tl-list">
+            <li>For final rounds: prepare a 5-minute market view presentation on your target commodity. Show it unsolicited — it almost always lands.</li>
+            <li>Know your walk-away number before offer conversations begin. Understand total comp: base, discretionary bonus, and how the bonus is actually determined.</li>
+            <li>If no offer by month 12: diagnose systematically — resume stage, first interview, technical, or final. Each has a different fix. Don't apply more volume to a broken process.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── COMP BENCHMARKS ── -->
+<section class="section">
+  <div class="container">
+    <div class="section-head reveal">
+      <div class="section-eyebrow">Singapore market · 2025</div>
+      <h2 class="section-title">Comp Benchmarks</h2>
+      <p class="section-sub">What the desk actually pays — not what HR advertises. Ranges based on market intelligence across Singapore-based roles.</p>
+    </div>
+    <div class="comp-grid reveal">
+      <div class="comp-card">
+        <div class="cc-role">Junior Analyst / Scheduler</div>
+        <div class="cc-range">SGD 60–90k</div>
+        <div class="cc-note">Base · 0–3 years</div>
+      </div>
+      <div class="comp-card">
+        <div class="cc-role">Mid Analyst / Risk</div>
+        <div class="cc-range">SGD 90–140k</div>
+        <div class="cc-note">Base · 3–6 years</div>
+      </div>
+      <div class="comp-card">
+        <div class="cc-role">Senior Analyst / Lead Scheduler</div>
+        <div class="cc-range">SGD 140–200k</div>
+        <div class="cc-note">Base · 6–10 years</div>
+      </div>
+      <div class="comp-card">
+        <div class="cc-role">Junior Trader / Commercial</div>
+        <div class="cc-range">SGD 120–180k</div>
+        <div class="cc-note">Base + discretionary bonus</div>
+      </div>
+      <div class="comp-card">
+        <div class="cc-role">Mid-level Trader</div>
+        <div class="cc-range">SGD 200–400k+</div>
+        <div class="cc-note">Total comp · 5–10 years</div>
+      </div>
+      <div class="comp-card">
+        <div class="cc-role">Senior Trader / Book Runner</div>
+        <div class="cc-range">SGD 600k–2M+</div>
+        <div class="cc-note">P&amp;L-linked · 10+ years</div>
+      </div>
+    </div>
+    <p class="comp-note">Bonus at major traders (Vitol, Trafigura, Glencore) can be 50–200%+ of base. NOC and refiner comp skews base-heavy with lower bonus variance.</p>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <a href="index.html" class="logo">
+          <span class="logo-mark" style="width:18px;height:18px;"></span>
+          <span style="font-size:16px;">Commodity Playbook</span>
+        </a>
+        <p class="footer-blurb">The definitive guide to understanding commodity trading — how markets work, how revenue is made, and how to build a career inside them.</p>
+      </div>
+      <div>
+        <h4>Content</h4>
+        <ul>
+          <li><a href="career-roadmap.html">Career Roadmap</a></li>
+          <li><a href="playbook.html">Full Playbook</a></li>
+          <li><a href="resume.html">Resume Templates</a></li>
+          <li><a href="interview-bank.html">Interview Question Bank</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Access</h4>
+        <ul>
+          <li><a href="index.html#pricing">Pricing</a></li>
+          <li><a href="mentors.html">Mentor Connect</a></li>
+          <li><a href="index.html#pricing">The Desk Channel</a></li>
+          <li><a href="index.html#pricing">Elite Waitlist</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; <span id="yr"></span> Commodity Playbook. All rights reserved.</p>
+      <p>Strictly confidential.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('yr').textContent = new Date().getFullYear();
+
+// ── ROLE DATA ──────────────────────────────────────────────────────────────
+const ROLES = [
+  {
+    id:1, cat:"front",
+    title:"Trading Analyst",
+    tags:[{l:"Front office",c:"rt-blue"},{l:"High entry",c:"rt-red"},{l:"Crude · LNG · Products",c:"rt-gray"}],
+    summary:"The most aspirational junior entry point on a commodity desk. Trading analysts sit directly behind the trader, building models, maintaining position sheets, and translating market data into actionable intelligence. The feedback loop is fast and the learning curve is steep.",
+    diff:"high", timeline:"6–18 months from adjacent role",
+    firms:"Trafigura, Vitol, Glencore, BP, Shell, Gunvor",
+    what:"A trading analyst's core job is to make the trader faster and smarter — maintaining live P&amp;L and position sheets, building forward curve models, writing daily market commentary the trader actually reads, and flagging data signals before the trader asks. The thing that determines whether you thrive is not intelligence: it is speed of iteration under market pressure. The ability to produce clean, reliable output quickly is the non-negotiable skill.",
+    backgrounds:[
+      "<strong>Finance or economics graduates</strong> with strong Excel and Python fundamentals who can explain a crack spread in plain English",
+      "<strong>Engineering graduates</strong> who have developed commercial instinct alongside technical ability and can translate physical market logic into quantitative models",
+      "<strong>Former commodity researchers or price reporters</strong> who have built deep market knowledge and want to move closer to capital"
+    ],
+    redflags:[
+      "Cannot explain the physical market behind the commodity they want to trade — quoting flat price without understanding the supply chain underneath it",
+      "Models are technically correct but commercially illiterate — outputs that look right but don't reflect how the market actually prices",
+      "Slow under pressure — if you need 30 minutes to update a position sheet, you will not survive a volatile trading session"
+    ],
+    comp:[{l:"Junior (0–2 yrs)",r:"SGD 70–100k"},{l:"Mid (2–4 yrs)",r:"SGD 100–150k"},{l:"Senior (4+ yrs)",r:"SGD 150–220k + bonus"}],
+    upgrade:"The natural move is to junior book runner — taking responsibility for a small geographic or product sub-book with its own P&amp;L. Typical timeline at a major trader is 2–4 years as an analyst. The skill to develop inside the role: the ability to hold and defend a market view, not just model one. Analysts who start showing commercial conviction early get a book faster."
+  },
+  {
+    id:2, cat:"front",
+    title:"Trader",
+    tags:[{l:"Front office",c:"rt-blue"},{l:"Very high entry",c:"rt-red"},{l:"P&L owner",c:"rt-gray"}],
+    summary:"The trader owns the P&L. They manage a book of physical and financial positions across a commodity or geography, taking and managing risk on behalf of the firm. Direct junior trader hiring is rare — most traders entered through analyst, scheduling, or lateral routes.",
+    diff:"high", timeline:"3–8 years from entry-level adjacent role",
+    firms:"Vitol, Trafigura, Glencore, Gunvor, Mercuria, BP, Shell, TotalEnergies",
+    what:"A trader manages a book of physical and financial positions, taking and managing risk on behalf of the firm. The day starts before the market opens — reviewing overnight moves, physical cargo nominations, and supply disruptions affecting open positions. The thing that separates a good trader from a great one is not the ability to predict price: it is the ability to size positions correctly relative to conviction, and to cut losses without ego when the thesis is wrong.",
+    backgrounds:[
+      "<strong>Internal promotion from trading analyst</strong> — by far the most common route at major commodity houses",
+      "<strong>Lateral hire from another commodity desk</strong> or asset class, bringing a live book and existing counterparty relationships",
+      "<strong>Scheduling or operations professionals</strong> who developed exceptional commercial instinct and were given a small book to prove it"
+    ],
+    redflags:[
+      "Applying directly for trader roles without a track record of commercial decision-making — the desk needs evidence you can manage risk, not just analyse it",
+      "No demonstrated ability to hold and defend a market view under pressure — analysis without conviction is not trading",
+      "Traders from financial markets who cannot explain physical commodity mechanics — paper trading skills do not transfer directly to physical books"
+    ],
+    comp:[{l:"Junior trader (2–4 yrs exp)",r:"SGD 150–250k base + discretionary"},{l:"Mid-level (4–8 yrs)",r:"SGD 250–500k total comp"},{l:"Senior / book runner (8+ yrs)",r:"SGD 600k–2M+ P&amp;L-linked"}],
+    upgrade:"Senior traders run larger books with greater capital allocation. The best become book heads or manage junior traders. The other trajectory — common at major trading houses — is into origination or commercial leadership, leveraging the market relationships built while trading."
+  },
+  {
+    id:3, cat:"ops",
+    title:"Scheduling / Operations",
+    tags:[{l:"Operations",c:"rt-teal"},{l:"Medium entry",c:"rt-amber"},{l:"Crude · LNG · Gas",c:"rt-gray"}],
+    summary:"Schedulers are the operational backbone of physical commodity trading. The most accessible entry point into downstream trading and one of the most credible paths to a commercial role.",
+    diff:"low", timeline:"3–9 months from adjacent role",
+    firms:"Shell, BP, TotalEnergies, ExxonMobil, Pavilion Energy, NOCs, mid-size traders",
+    what:"A scheduler's day is a constant negotiation between what the trader did and what the real world will allow. You manage cargo nominations, track vessels on AIS, coordinate with load and discharge terminals, resolve demurrage disputes, and confirm deliveries. The single determining factor for success: can you make fast, good-enough decisions with incomplete information, or do you need certainty before you act?",
+    backgrounds:[
+      "<strong>Supply chain, logistics, or operations professionals</strong> who understand physical movement coordination and want to move into commodity-specific scheduling",
+      "<strong>Engineering graduates</strong> — particularly chemical, process, or mechanical — who have worked in refinery or terminal operations",
+      "<strong>Maritime professionals</strong> with vessel operations or port logistics backgrounds who want to move from shipping into commodity trading operations"
+    ],
+    redflags:[
+      "Cannot think operationally under time pressure — scheduling decisions often have a 2-hour window before the consequence is locked in",
+      "No understanding of the financial implications of operational decisions — a scheduler who doesn't know what demurrage costs the desk is not yet commercially aware",
+      "Over-reliance on having perfect information before acting — ambiguity is constant in physical operations"
+    ],
+    comp:[{l:"Junior scheduler (0–2 yrs)",r:"SGD 55–80k"},{l:"Mid (2–5 yrs)",r:"SGD 80–130k"},{l:"Senior / lead (5+ yrs)",r:"SGD 130–200k"}],
+    upgrade:"The scheduling-to-commercial pathway is the most established internal promotion route in physical commodity trading. The transition typically happens in year 3–5 when a scheduler has deep cargo flow knowledge and counterparty relationships to add commercial value. The skill to develop: quantify the commercial impact of your operational decisions explicitly."
+  },
+  {
+    id:4, cat:"middle",
+    title:"Risk Analyst",
+    tags:[{l:"Middle office",c:"rt-purple"},{l:"Medium entry",c:"rt-amber"},{l:"Risk · Derivatives",c:"rt-gray"}],
+    summary:"Risk analysts set and monitor the guardrails that govern how much risk the trading desk can take. The best challenge traders on their commercial assumptions — not just run the VaR calculation.",
+    diff:"med", timeline:"6–12 months from banking or finance",
+    firms:"Vitol, Mercuria, Shell, BP, BNP Paribas, Macquarie, Société Générale",
+    what:"A commodity risk analyst maintains position limits, monitors VaR and exposure across the desk's books, reviews new trade approvals for complex structures, and produces the daily risk report senior management reviews before the market opens. The relationship with traders is one of constructive tension — too deferential and you allow excessive risk-taking; too restrictive and you prevent legitimate commercial activity.",
+    backgrounds:[
+      "<strong>Market risk professionals from investment banking</strong> with derivatives pricing and VaR methodology experience who want to move into commodity-specific risk",
+      "<strong>Treasury or ALM professionals</strong> with interest rate or FX risk backgrounds who are willing to build commodity market knowledge",
+      "<strong>Commodity trading analysts</strong> who have developed strong quantitative skills and want to specialise in risk methodology"
+    ],
+    redflags:[
+      "Only understands the mathematics but not the market — a VaR limit breach means nothing if you can't explain why the position was taken",
+      "Cannot challenge a trader's assumptions credibly — if traders don't respect your market understanding, your limits become a formality",
+      "No experience with commodity-specific risk concepts — basis risk, physical delivery risk, and curve risk versus generic financial risk metrics"
+    ],
+    comp:[{l:"Junior (0–3 yrs)",r:"SGD 65–95k"},{l:"Mid (3–6 yrs)",r:"SGD 95–160k"},{l:"Senior / manager (6+ yrs)",r:"SGD 160–280k"}],
+    upgrade:"Senior risk managers move into chief risk officer roles or risk infrastructure leadership. A parallel path is into structuring, where risk framework expertise is used to design complex hedging solutions for clients. The skill to develop inside the role: the ability to write a one-page risk summary that a senior trader finds genuinely useful, not just technically correct."
+  },
+  {
+    id:5, cat:"front",
+    title:"Commercial / Origination",
+    tags:[{l:"Front office",c:"rt-blue"},{l:"High entry",c:"rt-red"},{l:"Deal-driven",c:"rt-gray"}],
+    summary:"Originators source the deal flow that gives the trading desk a natural book to trade around. One of the highest-value functions in the firm — and the least understood from the outside.",
+    diff:"high", timeline:"12–24 months from banking or consulting",
+    firms:"Shell, TotalEnergies, BP, Gunvor, Trafigura, Pavilion Energy, commodity banks",
+    what:"A commercial professional's day is split between external relationship management and internal commercial structuring. Externally: meetings with producers, refinery procurement teams, and NOC counterparts. Internally: working with the trading desk to define terms the firm can price and risk-manage, and with legal to structure contracts. Originating a meaningful LNG SPA or crude term deal can take 12–24 months. The skill that separates the best: understanding what the counterparty needs commercially, not just their price, and structuring a deal that creates value for both sides.",
+    backgrounds:[
+      "<strong>Investment banking coverage professionals</strong> who have worked with energy sector clients and have strong financial structuring and client relationship skills",
+      "<strong>Management consultants</strong> who have done substantial commodity or energy sector project work and have developed commercial credibility with industry clients",
+      "<strong>Upstream commercial professionals</strong> — landmen, commercial analysts at E&amp;P companies — who want to move downstream"
+    ],
+    redflags:[
+      "Cannot discuss deal economics credibly — originators who only talk relationships without understanding the margin logic of the deal they're trying to close",
+      "No understanding of how the trading desk prices and risk-manages the deal being originated — if the structure isn't tradeable, the desk won't support it",
+      "Weak on contract fundamentals — misunderstanding force majeure, destination flexibility, or pricing mechanisms creates commercial and legal exposure"
+    ],
+    comp:[{l:"Junior commercial (0–3 yrs)",r:"SGD 80–130k"},{l:"Mid (3–7 yrs)",r:"SGD 130–220k + deal bonus"},{l:"Senior originator (7+ yrs)",r:"SGD 220–500k+ total"}],
+    upgrade:"Senior originators move into head of origination or commercial director roles, or transition to trading if they've developed a strong enough market view alongside their relationship network. The most valuable transition: when an originator develops a commodity-specific market view good enough to position the deals they originate against the forward curve."
+  },
+  {
+    id:6, cat:"middle",
+    title:"Quantitative / Data Analyst",
+    tags:[{l:"Middle office",c:"rt-purple"},{l:"Medium entry",c:"rt-amber"},{l:"Python · Modelling",c:"rt-gray"}],
+    summary:"Quant and data analysts build the quantitative infrastructure of the trading desk. The fastest-growing function in commodity trading and the most natural entry point for engineering, data science, and economics backgrounds.",
+    diff:"med", timeline:"3–12 months from adjacent technical role",
+    firms:"Trafigura, Vitol, Shell, BP, Gunvor, commodity hedge funds",
+    what:"A quant analyst's output is the model or tool that makes a trader faster or more rigorous — a forward curve calibration model, a supply/demand dashboard pulling EIA and Platts data, or a scenario analysis tool that stress-tests the desk's portfolio against supply disruption events. The thing that determines career trajectory: whether your models produce outputs traders actually use to make decisions, or outputs that sit in a shared folder.",
+    backgrounds:[
+      "<strong>Engineering graduates</strong> — chemical, petroleum, mechanical — with strong quantitative skills and commodity market domain knowledge",
+      "<strong>Economists with Python or R skills</strong> who have worked on energy or commodity research and want to move closer to trading decision-making",
+      "<strong>Data scientists from adjacent industries</strong> — utilities, energy trading platforms, price reporting agencies — with commodity-specific datasets and models"
+    ],
+    redflags:[
+      "Technical output with no commercial framing — models that answer the wrong question, however precisely they answer it",
+      "Cannot explain their model's output in plain English to a non-technical trader — if the desk can't use it, the model has no value",
+      "No knowledge of the physical commodity underlying the data being modelled — a freight rate model without understanding charterparty mechanics will have the wrong variables"
+    ],
+    comp:[{l:"Junior (0–2 yrs)",r:"SGD 70–110k"},{l:"Mid (2–5 yrs)",r:"SGD 110–180k"},{l:"Senior quant (5+ yrs)",r:"SGD 180–300k"}],
+    upgrade:"The quant-to-trading transition is well-established at major commodity houses. The typical path: quant analyst builds a model the desk relies on, develops market views through the model, and is eventually given a small book to test those views with capital. The alternative: move into a quantitative research role at a commodity hedge fund."
+  },
+  {
+    id:7, cat:"adjacent",
+    title:"Research Analyst",
+    tags:[{l:"Adjacent",c:"rt-green"},{l:"Medium entry",c:"rt-amber"},{l:"Publishing-focused",c:"rt-gray"}],
+    summary:"Commodity research analysts publish market views — supply/demand forecasts, price outlooks, scenario analysis — that inform trading decisions, client strategies, and corporate planning. The path from research to the desk is real but specific.",
+    diff:"med", timeline:"6–18 months from economics, journalism, or policy",
+    firms:"S&amp;P Global Platts, Argus Media, Kpler, Vortexa, Wood Mackenzie, Rystad Energy, commodity banks",
+    what:"A research analyst spends most of their time building supply/demand models, tracking physical market data, and writing. The output is a report, price forecast, or market commentary published to clients or internal stakeholders. The quality of the work is judged by whether people read it and change their decisions as a result. The thing that determines career trajectory: whether your views are commercially useful.",
+    backgrounds:[
+      "<strong>Economics or energy policy graduates</strong> with strong analytical writing and quantitative modelling skills",
+      "<strong>Journalists or editors at commodity price reporting agencies</strong> who have developed deep market knowledge through price assessment",
+      "<strong>Graduate researchers in energy or environmental science</strong> with commodity-specific datasets and comfort communicating technical findings to commercial audiences"
+    ],
+    redflags:[
+      "Research that is thorough but not actionable — the market doesn't need another 80-page supply/demand model, it needs a clear view on what happens next and why",
+      "No market-specific knowledge of how physical commodities trade — understanding macro energy transitions but not cargo pricing or physical differentials is limiting",
+      "Cannot communicate findings concisely — the ability to deliver a market view in three sentences before expanding is a core skill"
+    ],
+    comp:[{l:"Junior (0–2 yrs)",r:"SGD 55–85k"},{l:"Mid (2–5 yrs)",r:"SGD 85–140k"},{l:"Senior / lead (5+ yrs)",r:"SGD 140–220k"}],
+    upgrade:"Research analysts who develop strong commercial credibility often move into commodity trading firms as senior analysts or strategy roles. An increasingly common alternative path is into ESG or energy transition advisory, where commodity market knowledge combined with analytical rigour is in high demand."
+  },
+  {
+    id:8, cat:"ops",
+    title:"ETRM Specialist",
+    tags:[{l:"Operations",c:"rt-teal"},{l:"Lower entry",c:"rt-green"},{l:"Endur · RightAngle",c:"rt-gray"}],
+    summary:"ETRM specialists implement, configure, and maintain the software systems that every commodity trading desk runs on. A specialist track that commands a genuine premium where deep expertise is scarce.",
+    diff:"low", timeline:"3–9 months from IT, consulting, or finance systems",
+    firms:"All major commodity trading firms, energy majors, utilities — typically via Sapient, Accenture, or direct",
+    what:"An ETRM specialist's work is invisible when done correctly and catastrophic when done incorrectly. You configure the system of record that every trade, position, risk metric, and physical delivery depends on. The hardest part is not the technical configuration — it is translating what a trader or scheduler needs into system logic, which requires enough market understanding to know whether a workaround will create problems downstream at settlement.",
+    backgrounds:[
+      "<strong>IT professionals or business analysts from financial services</strong> who have exposure to trading systems and want to specialise in commodity-specific ETRM platforms",
+      "<strong>Implementation consultants from Sapient, Accenture, or Infosys</strong> who have worked on ETRM implementations and want to move in-house",
+      "<strong>Finance or operations professionals</strong> who have been heavy ETRM users (schedulers, back-office) and have developed enough system knowledge to move into a specialist role"
+    ],
+    redflags:[
+      "No hands-on experience with at least one major ETRM platform — the market pays for specific system expertise, not generic IT skills",
+      "Cannot bridge business and technical requirements — ETRM specialists who only understand the technology and not the trading business create systems that are technically functional but commercially useless",
+      "Underestimates the complexity of commodity trade representation — physical delivery, Platts pricing, laytime calculations, and multi-leg structured deals all require non-trivial configuration"
+    ],
+    comp:[{l:"Junior ETRM analyst (0–2 yrs)",r:"SGD 60–90k"},{l:"Mid specialist (2–5 yrs)",r:"SGD 90–160k"},{l:"Senior architect (5+ yrs)",r:"SGD 160–280k"}],
+    upgrade:"Senior ETRM specialists become architects of the firm's trading technology stack. The alternative path is into ETRM product roles at the vendors themselves (ION/Openlink, Brady), where market expertise combined with system knowledge commands a premium."
+  },
+  {
+    id:9, cat:"adjacent",
+    title:"Vendor Solutions / PreSales",
+    tags:[{l:"Adjacent",c:"rt-green"},{l:"Medium entry",c:"rt-amber"},{l:"SaaS · ETRM · Data",c:"rt-gray"}],
+    summary:"Vendor solutions and presales professionals represent commodity technology and data companies to trading firms, energy companies, and utilities. One of the most underappreciated routes into the commodity ecosystem for candidates from consulting or tech backgrounds.",
+    diff:"med", timeline:"6–18 months from consulting, tech sales, or commodity operations",
+    firms:"S&amp;P Global Platts, Argus Media, Kpler, Vortexa, ION/Openlink, Brady Technologies, Sapient",
+    what:"A presales professional's job is to understand a client's business problem deeply enough to demonstrate — credibly and specifically — how the vendor's product solves it. In commodity technology, that means understanding how trading desks actually work: how positions are booked, how risk is calculated, how physical deliveries are scheduled. The best presales professionals in this space are former practitioners who moved vendor-side, or deeply curious individuals who have built genuine market knowledge alongside their commercial skills.",
+    backgrounds:[
+      "<strong>Commodity operations or ETRM professionals</strong> who have moved vendor-side, bringing real practitioner credibility to client conversations",
+      "<strong>Management consultants or implementation specialists</strong> who have worked on commodity trading projects and want to leverage that project experience commercially",
+      "<strong>Technology sales professionals from adjacent industries</strong> — financial services software, energy management platforms — who are willing to invest seriously in commodity market knowledge"
+    ],
+    redflags:[
+      "Cannot speak credibly about commodity market mechanics — presales professionals who only know the product and not the market lose credibility immediately with experienced trading desk counterparts",
+      "Confuses features with solutions — the strongest presales professionals lead with the client's problem, not the product's capabilities",
+      "No experience with enterprise sales cycles in commodity trading — deals can take 12–24 months and involve multiple stakeholders across IT, trading, risk, and finance"
+    ],
+    comp:[{l:"Solutions consultant (0–3 yrs)",r:"SGD 80–130k base + commission"},{l:"Senior solutions / sales (3–7 yrs)",r:"SGD 130–220k + commission"},{l:"Commercial lead / director (7+ yrs)",r:"SGD 220–400k+ total"}],
+    upgrade:"Senior presales professionals move into commercial leadership — VP Sales, Regional Director — at vendors, or transition into product management roles where commodity market expertise defines what the platform builds next. The alternative: return to industry in a commercial or strategy role, where vendor-side experience of seeing how many different trading desks operate is genuinely differentiating."
+  },
+  {
+    id:10, cat:"adjacent",
+    title:"Commodity Trade Finance",
+    tags:[{l:"Adjacent",c:"rt-green"},{l:"High entry",c:"rt-red"},{l:"Banking · Structured finance",c:"rt-gray"}],
+    summary:"Commodity trade finance professionals structure the financing arrangements that enable physical commodity trades — borrowing base facilities, repo structures, inventory finance, and letters of credit. One of the most intellectually demanding adjacent functions to the trading desk.",
+    diff:"high", timeline:"12–24 months from banking or commodity finance",
+    firms:"BNP Paribas, Société Générale, ING, ABN AMRO, Natixis, Macquarie, DBS, OCBC commodity finance desks",
+    what:"A commodity trade finance professional assesses the credit and commercial quality of commodity transactions, structures financing facilities that match the physical trade's cash flow profile, and monitors exposure against collateral. The job requires understanding both the financial engineering of the facility and the physical commodity trade it is financing. The thing that determines career trajectory: whether you develop genuine commodity market knowledge alongside your financial structuring skills.",
+    backgrounds:[
+      "<strong>Structured finance or trade finance professionals from commercial banks</strong> who have commodity sector exposure and want to deepen their market knowledge",
+      "<strong>Credit analysts at commodity trading firms</strong> who have been exposed to counterparty credit assessment and want to move into the financing side",
+      "<strong>Treasury professionals at energy companies</strong> who have managed working capital facilities and want to move into origination of those structures on the bank side"
+    ],
+    redflags:[
+      "No understanding of commodity-specific collateral risks — crude oil cargo value is not just spot price times volume. Quality, market liquidity, freight costs, and storage feasibility all affect realisation value",
+      "Cannot structure a borrowing base or repo agreement from first principles — professionals who only process existing facilities without understanding the structural logic are limited in career progression",
+      "Underestimates counterparty risk in commodity trading — assessing a major trader's credit is not the same as assessing a corporate borrower"
+    ],
+    comp:[{l:"Junior analyst (0–3 yrs)",r:"SGD 75–120k base"},{l:"Associate / AVP (3–6 yrs)",r:"SGD 120–200k base + bonus"},{l:"VP / Director (6+ yrs)",r:"SGD 200–400k+ total"}],
+    upgrade:"Senior commodity trade finance professionals move into commodity banking leadership — head of commodity trade finance, regional coverage head — or transition to commodity trading firms' treasury functions. The most valuable transition: into commodity-specific structured products where physical market knowledge combined with financial engineering creates genuinely complex and high-margin work."
+  }
+];
+
+const DIFF_CFG = {
+  low:  {cls:"rmd-low",  label:"Lower entry"},
+  med:  {cls:"rmd-med",  label:"Medium entry"},
+  high: {cls:"rmd-high", label:"High entry"}
+};
+
+let activeCat = "all";
+
+// ── JOB OPENINGS PLACEHOLDER HTML ──────────────────────────────────────────
+function jobsPlaceholderHTML(roleId) {
+  return `
+    <div class="coming-wrap">
+      <div class="coming-icon">🔧</div>
+      <div class="coming-title">Job board coming soon</div>
+      <div class="coming-sub">We are building a curated job board for downstream commodity trading roles across Singapore, London, Hong Kong, and Tokyo — refreshed weekly and filtered by function. This section will show live openings mapped directly to the role you are reading about.</div>
+      <div class="coming-badge"><span class="coming-dot"></span>In development</div>
+      <div class="notify-row">
+        <input class="notify-input" type="email" placeholder="your@email.com" id="notify-${roleId}"/>
+        <button class="notify-btn" onclick="notifyMe(${roleId})">Notify me when live</button>
+      </div>
+      <div class="notify-success" id="notify-success-${roleId}">✓ You're on the list — we'll email you when the job board goes live.</div>
+    </div>
+    <div class="preview-wrap">
+      <div class="preview-row">
+        <div class="preview-card"><div class="pline"></div><div class="pline s"></div><div class="ppill"></div></div>
+        <div class="preview-card"><div class="pline"></div><div class="pline s"></div><div class="ppill"></div></div>
+        <div class="preview-card"><div class="pline"></div><div class="pline s"></div><div class="ppill"></div></div>
+      </div>
+      <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;">
+        <span style="font-size:11px;font-weight:500;color:var(--muted-fg);background:var(--bg);border:1px solid var(--border);border-radius:999px;padding:4px 14px;">Preview of upcoming job cards</span>
+      </div>
+    </div>`;
+}
+
+function notifyMe(roleId) {
+  const input = document.getElementById('notify-' + roleId);
+  const success = document.getElementById('notify-success-' + roleId);
+  if (!input.value || !input.value.includes('@')) {
+    input.style.borderColor = '#ef4444';
+    return;
+  }
+  input.style.borderColor = '';
+  // In production: send email to your backend / Mailchimp / ConvertKit
+  input.parentElement.style.display = 'none';
+  success.style.display = 'block';
+}
+
+// ── RENDER ROLES ────────────────────────────────────────────────────────────
+function renderRoles() {
+  const list = document.getElementById('roles-list');
+  const visible = activeCat === 'all' ? ROLES : ROLES.filter(r => r.cat === activeCat);
+  const dc = DIFF_CFG;
+
+  list.innerHTML = visible.map(r => `
+    <div class="role-card" id="card-${r.id}" data-cat="${r.cat}">
+      <div class="role-overview" onclick="toggleRole(${r.id})">
+        <span class="role-num">${String(r.id).padStart(2,'0')}</span>
+        <div class="role-main">
+          <div class="role-title">${r.title}</div>
+          <div class="role-tags">${r.tags.map(t => `<span class="rtag ${t.c}">${t.l}</span>`).join('')}</div>
+          <div class="role-summary">${r.summary}</div>
+          <div class="role-meta">
+            <span class="rmeta"><span class="rmdot ${dc[r.diff].cls}"></span>${dc[r.diff].label}</span>
+            <span class="rmeta">⏱&nbsp;${r.timeline}</span>
+            <span class="rmeta">🏢&nbsp;${r.firms.split(',').slice(0,3).join(', ')}…</span>
+          </div>
+        </div>
+        <button class="role-toggle" id="tog-${r.id}" aria-label="Expand ${r.title}">▾</button>
+      </div>
+      <div class="role-deep" id="deep-${r.id}">
+        <div class="deep-inner">
+
+          <div class="ds-label">What the role actually does</div>
+          <div class="ds-text"><p>${r.what}</p></div>
+
+          <div class="deep-grid" style="margin-top:20px;">
+            <div>
+              <div class="ds-label">Who gets hired</div>
+              <ul class="ds-list">${r.backgrounds.map(b => `<li>${b}</li>`).join('')}</ul>
+            </div>
+            <div>
+              <div class="ds-label">Singapore comp benchmarks</div>
+              <table class="comp-tbl">${r.comp.map(c => `<tr><td>${c.l}</td><td>${c.r}</td></tr>`).join('')}</table>
+            </div>
+          </div>
+
+          <div class="ds-label" style="margin-top:22px;">Red flags that filter you out</div>
+          <div class="flag-list">${r.redflags.map(f => `
+            <div class="flag-item">
+              <span class="flag-x">✕</span>
+              <span class="flag-text">${f}</span>
+            </div>`).join('')}
+          </div>
+
+          <div class="jobs-label">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/></svg>
+            Job openings — Singapore · London · Hong Kong · Tokyo
+          </div>
+          ${jobsPlaceholderHTML(r.id)}
+
+          <div class="upgrade-box">
+            <div class="upgrade-label">The upgrade move</div>
+            <div class="upgrade-text">${r.upgrade}</div>
+          </div>
+
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+function toggleRole(id) {
+  const deep = document.getElementById('deep-' + id);
+  const tog  = document.getElementById('tog-' + id);
+  const open = deep.classList.toggle('open');
+  tog.classList.toggle('open', open);
+  tog.textContent = open ? '▴' : '▾';
+}
+
+function filterRoles(cat, btn) {
+  activeCat = cat;
+  document.querySelectorAll('.fbtn').forEach(b => b.classList.remove('on'));
+  btn.classList.add('on');
+  renderRoles();
+  // Re-observe newly rendered cards
+  document.querySelectorAll('.roles-grid .role-card').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(14px)';
+    setTimeout(() => {
+      el.style.transition = 'opacity 0.35s ease, transform 0.35s ease';
+      el.style.opacity = '1';
+      el.style.transform = 'translateY(0)';
+    }, 20);
+  });
+}
+
+// ── SCROLL REVEAL ───────────────────────────────────────────────────────────
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+  });
+}, { threshold: 0.07 });
+document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+document.querySelectorAll('.hero .reveal').forEach((el, i) => {
+  setTimeout(() => el.classList.add('in'), 80 + i * 120);
+});
+
+// Init
+renderRoles();
+</script>
+</body>
+</html>

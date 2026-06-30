@@ -22,7 +22,7 @@
           "label": "I work at a vendor firm selling data, intelligence, or services to the commodity trading community"
         },
         {
-          "value": "grad",
+          "value": "fresh_grad",
           "label": "I am a student, fresh graduate, or early in my career with limited professional experience"
         }
       ],
@@ -31,7 +31,7 @@
         "insider": "insider",
         "analyst": "analyst",
         "vendor": "vendor",
-        "grad": "fresh_grad"
+        "fresh_grad": "fresh_grad"
       }
     },
     {
@@ -109,37 +109,41 @@
           "persona": "analyst"
         },
         {
-          "value": "thin",
-          "label": "Building a credible resume without much direct experience yet",
-          "persona": "fresh_grad"
+          "value": "vendor",
+          "label": "Reframing vendor/sales achievements as market knowledge, not quota attainment",
+          "persona": "vendor"
         },
         {
-          "value": "sales",
-          "label": "Making a vendor/sales background read as market knowledge rather than sales activity",
-          "persona": "vendor"
+          "value": "evidence",
+          "label": "I lack professional experience and need to show commercial curiosity instead",
+          "persona": "fresh_grad"
         }
       ]
     },
     {
       "id": "q5",
-      "question": "Which commodity market are you most focused on?",
-      "sub": "This helps us tailor the template language and examples to your target market.",
+      "question": "Which commodity market do you want to focus on?",
+      "sub": "Your template works across markets — but naming a focus helps positioning.",
       "options": [
         {
-          "value": "lng",
-          "label": "LNG and natural gas"
+          "value": "oil",
+          "label": "Crude oil and refined products"
         },
         {
-          "value": "crude",
-          "label": "Crude oil and refined products"
+          "value": "gas",
+          "label": "Natural gas, LNG, or power"
+        },
+        {
+          "value": "metals",
+          "label": "Base or precious metals"
+        },
+        {
+          "value": "ags",
+          "label": "Agriculture or soft commodities"
         },
         {
           "value": "multi",
           "label": "Multi-commodity / still deciding"
-        },
-        {
-          "value": "other",
-          "label": "Other / broad commodity focus"
         }
       ]
     }

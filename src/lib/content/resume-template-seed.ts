@@ -4,6 +4,10 @@ import { prisma } from "@/lib/prisma";
 import { buildContentAssetKey } from "@/lib/content/asset-files";
 import { RESUME_TEMPLATES } from "@/data/resume-templates";
 
+const REPO_RESUME_DIR = path.resolve(
+  process.cwd(),
+  "content-sources/Pro Pack/2.Persona Analysis Quiz_Resume Templates"
+);
 const SHARED_RESUME_DIR = path.resolve(
   process.cwd(),
   "../CommodityPlaybook - Shared Folder/Pro Pack/2.Persona Analysis Quiz_Resume Templates"
@@ -12,6 +16,7 @@ const PUBLIC_TEMPLATES_DIR = path.resolve(process.cwd(), "public/templates");
 
 function resolveTemplatePath(fileName: string): string | null {
   const candidates = [
+    path.join(REPO_RESUME_DIR, fileName),
     path.join(SHARED_RESUME_DIR, fileName),
     path.join(PUBLIC_TEMPLATES_DIR, fileName),
   ];

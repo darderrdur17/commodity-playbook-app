@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <title>Full Playbook — Starter Pack · Commodity Trading Playbook</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,800;1,700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg:#ffffff;--fg:#333333;--primary:#3280ff;--primary-fg:#ffffff;
+      --secondary:#f2f4f7;--sec-fg:#465468;--accent:#dff2ff;--acc-fg:#0830a0;
+      --muted:#f9fafb;--muted-fg:#677184;--border:#e4e7ec;
+      --chart2:#115cff;--chart3:#0040f5;--chart4:#0131cc;--chart5:#0830a0;
+      --primary-soft:rgba(50,128,255,0.08);--primary-line:rgba(50,128,255,0.25);
+    }
+    *{box-sizing:border-box;margin:0;padding:0;}
+    html{scroll-behavior:smooth;}
+    body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--fg);line-height:1.6;-webkit-font-smoothing:antialiased;}
+    a{color:inherit;text-decoration:none;}
+    .container{max-width:1100px;margin:0 auto;padding:0 24px;}
+
+    /* NAV */
+    .nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+    .nav-inner{max-width:1200px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;height:64px;}
+    .logo{display:flex;align-items:center;gap:10px;font-family:'Playfair Display',serif;font-weight:700;font-size:18px;color:var(--fg);letter-spacing:-0.01em;}
+    .logo-mark{width:22px;height:22px;background:var(--primary);transform:rotate(45deg);transition:transform 0.4s ease;}
+    .logo:hover .logo-mark{transform:rotate(90deg);}
+    .nav-links{display:flex;align-items:center;gap:28px;}
+    .nav-links a{font-size:14px;font-weight:500;color:var(--muted-fg);transition:color 0.2s;}
+    .nav-links a:hover{color:var(--primary);}
+    .btn-nav{background:var(--primary);color:#fff;padding:10px 18px;border-radius:6px;font-size:14px;font-weight:600;transition:background 0.2s;}
+    .btn-nav:hover{background:var(--chart2);}
+
+    /* HERO */
+    .hero{background:var(--chart5);padding:52px 0 60px;position:relative;overflow:hidden;}
+    .hero::before{content:"";position:absolute;top:-160px;right:-160px;width:480px;height:480px;background:var(--primary);opacity:0.16;filter:blur(100px);border-radius:50%;}
+    .hero::after{content:"";position:absolute;bottom:-90px;left:-60px;width:320px;height:320px;background:var(--chart3);opacity:0.1;filter:blur(80px);border-radius:50%;}
+    .hero .container{position:relative;z-index:2;}
+    .back-link{display:inline-flex;align-items:center;gap:7px;font-size:13px;color:rgba(223,242,255,0.55);margin-bottom:26px;transition:color 0.2s;}
+    .back-link:hover{color:var(--accent);}
+    .back-link svg{width:13px;height:13px;}
+    .hero-pill{display:inline-flex;align-items:center;gap:7px;padding:5px 13px;border:1px solid rgba(223,242,255,0.28);background:rgba(223,242,255,0.1);border-radius:999px;font-size:10px;font-weight:700;color:var(--accent);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:16px;}
+    .hero-pill-dot{width:5px;height:5px;background:var(--accent);border-radius:50%;}
+    h1.hero-title{font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(34px,5vw,54px);line-height:1.05;letter-spacing:-0.02em;color:#fff;margin-bottom:14px;}
+    h1.hero-title .accent{color:var(--accent);font-style:italic;}
+    .hero-sub{font-size:16px;font-weight:300;color:rgba(223,242,255,0.7);line-height:1.55;max-width:600px;margin-bottom:36px;}
+
+    /* OVERALL PROGRESS CARD */
+    .overall-progress{display:flex;align-items:center;gap:24px;flex-wrap:wrap;}
+    .op-card{background:rgba(255,255,255,0.07);border:1px solid rgba(223,242,255,0.18);border-radius:12px;padding:18px 24px;backdrop-filter:blur(8px);}
+    .op-label{font-size:10px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:rgba(223,242,255,0.5);margin-bottom:6px;}
+    .op-stat{font-family:'Playfair Display',serif;font-size:28px;font-weight:700;color:#fff;line-height:1;}
+    .op-stat span{font-size:14px;font-weight:400;color:rgba(223,242,255,0.45);margin-left:6px;}
+    .op-bar{width:220px;height:5px;background:rgba(255,255,255,0.1);border-radius:999px;overflow:hidden;margin-top:10px;}
+    .op-fill{height:100%;background:var(--primary);border-radius:999px;width:0%;transition:width 0.8s ease;}
+
+    /* MAIN */
+    .main{padding:48px 0 96px;}
+
+    /* CHAPTER GRID */
+    .chapter-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:18px;margin-bottom:48px;}
+    @media(max-width:900px){.chapter-grid{grid-template-columns:repeat(3,1fr);}}
+    @media(max-width:580px){.chapter-grid{grid-template-columns:1fr 1fr;}}
+
+    .chapter-card{
+      display:flex;flex-direction:column;
+      border:1px solid var(--border);border-radius:12px;
+      overflow:hidden;
+      transition:border-color 0.2s,transform 0.2s,box-shadow 0.2s;
+      position:relative;
+    }
+    .chapter-card:hover{border-color:var(--primary-line);transform:translateY(-4px);box-shadow:0 12px 32px -8px rgba(50,128,255,0.14);}
+    .chapter-card::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--primary);opacity:0;transition:opacity 0.2s;}
+    .chapter-card:hover::before{opacity:1;}
+
+    .cc-hero{padding:20px 18px 16px;min-height:100px;position:relative;overflow:hidden;}
+    .cc-hero-a{background:var(--chart5);}
+    .cc-hero-b{background:var(--chart4);}
+    .cc-hero-c{background:var(--chart3);}
+    .cc-hero-d{background:var(--chart2);}
+    .cc-hero-e{background:var(--primary);}
+
+    .cc-letter{
+      font-family:'Playfair Display',serif;
+      font-size:56px;font-weight:900;
+      color:rgba(255,255,255,0.1);
+      line-height:1;letter-spacing:-0.04em;
+      position:absolute;bottom:-8px;right:8px;
+    }
+    .cc-chapter-label{font-size:8px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:rgba(223,242,255,0.55);margin-bottom:6px;}
+    .cc-title{font-family:'Playfair Display',serif;font-weight:700;font-size:14px;color:#fff;line-height:1.25;position:relative;z-index:1;}
+
+    .cc-body{padding:14px 16px;flex:1;background:var(--bg);}
+    .cc-sections-count{font-size:11px;font-weight:600;color:var(--primary);margin-bottom:5px;letter-spacing:0.04em;}
+    .cc-desc{font-size:12px;color:var(--muted-fg);line-height:1.5;margin-bottom:12px;}
+    .cc-progress-bar{height:4px;background:var(--border);border-radius:999px;overflow:hidden;margin-bottom:10px;}
+    .cc-progress-fill{height:100%;background:var(--primary);border-radius:999px;transition:width 0.6s ease;}
+
+    .cc-footer{padding:10px 16px;border-top:1px solid var(--border);background:var(--muted);display:flex;align-items:center;justify-content:space-between;}
+    .cc-status{font-size:10.5px;font-weight:600;color:var(--muted-fg);}
+    .cc-btn{font-size:11px;font-weight:700;color:var(--primary);display:flex;align-items:center;gap:4px;transition:gap 0.2s;}
+    .chapter-card:hover .cc-btn{gap:7px;}
+    .cc-btn svg{width:11px;height:11px;}
+
+    /* WHAT'S IN THE PACK section */
+    .pack-overview{background:var(--muted);border:1px solid var(--border);border-radius:12px;padding:32px 36px;margin-bottom:48px;}
+    @media(max-width:640px){.pack-overview{padding:22px 20px;}}
+    .po-title{font-family:'Playfair Display',serif;font-weight:700;font-size:24px;color:var(--fg);margin-bottom:8px;}
+    .po-sub{font-size:14px;color:var(--muted-fg);margin-bottom:28px;line-height:1.55;}
+    .po-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;}
+    @media(max-width:720px){.po-grid{grid-template-columns:1fr 1fr;}}
+    @media(max-width:480px){.po-grid{grid-template-columns:1fr;}}
+    .po-item{display:flex;align-items:flex-start;gap:12px;}
+    .po-icon{width:36px;height:36px;border-radius:8px;background:var(--accent);border:1px solid var(--primary-line);display:flex;align-items:center;justify-content:center;color:var(--primary);flex-shrink:0;}
+    .po-icon svg{width:16px;height:16px;}
+    .po-item-title{font-weight:700;font-size:13px;color:var(--fg);margin-bottom:2px;}
+    .po-item-desc{font-size:12px;color:var(--muted-fg);line-height:1.45;}
+
+    /* READING GUIDE */
+    .reading-guide{margin-bottom:48px;}
+    .rg-title{font-family:'Playfair Display',serif;font-weight:700;font-size:22px;color:var(--fg);margin-bottom:6px;}
+    .rg-sub{font-size:14px;color:var(--muted-fg);margin-bottom:20px;}
+    .rg-steps{display:flex;gap:0;position:relative;}
+    .rg-steps::before{content:"";position:absolute;top:16px;left:16px;right:16px;height:2px;background:var(--border);z-index:0;}
+    .rg-step{flex:1;display:flex;flex-direction:column;align-items:center;text-align:center;position:relative;z-index:1;padding:0 8px;}
+    .rg-dot{width:32px;height:32px;border-radius:50%;background:var(--primary);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;margin:0 auto 10px;flex-shrink:0;}
+    .rg-step-title{font-weight:700;font-size:12.5px;color:var(--fg);margin-bottom:3px;}
+    .rg-step-desc{font-size:11px;color:var(--muted-fg);line-height:1.4;}
+
+    /* UPGRADE BANNER (for Explorer users who landed here) */
+    .upgrade-banner{background:var(--chart5);border-radius:16px;padding:40px 44px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;}
+    .upgrade-banner::before{content:"";position:absolute;top:-70px;right:-70px;width:240px;height:240px;background:var(--primary);opacity:0.2;filter:blur(70px);border-radius:50%;}
+    .ub-text{position:relative;z-index:1;}
+    .ub-text h2{font-family:'Playfair Display',serif;font-weight:700;font-size:clamp(20px,2.8vw,28px);color:#fff;margin-bottom:8px;}
+    .ub-text h2 .accent{color:var(--accent);font-style:italic;}
+    .ub-text p{font-size:14.5px;color:rgba(223,242,255,0.7);line-height:1.6;max-width:480px;}
+    .ub-actions{position:relative;z-index:1;display:flex;gap:12px;flex-wrap:wrap;flex-shrink:0;}
+    .btn-white{background:#fff;color:var(--chart5);padding:14px 24px;border-radius:6px;font-size:14px;font-weight:700;transition:all 0.2s;display:inline-block;}
+    .btn-white:hover{background:var(--accent);color:var(--acc-fg);}
+    .btn-ghost-w{background:rgba(223,242,255,0.1);color:rgba(223,242,255,0.8);border:1px solid rgba(223,242,255,0.25);padding:14px 24px;border-radius:6px;font-size:14px;font-weight:600;transition:all 0.2s;display:inline-block;}
+    .btn-ghost-w:hover{background:rgba(223,242,255,0.18);color:#fff;}
+
+    /* FOOTER */
+    .footer{background:var(--chart5);border-top:1px solid rgba(255,255,255,0.08);padding:44px 0 24px;}
+    .footer-inner{max-width:1100px;margin:0 auto;padding:0 24px;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;}
+    .footer .logo{color:#fff;}
+    .footer .logo-mark{background:var(--accent);}
+    .footer-right{font-size:13px;color:rgba(223,242,255,0.35);}
+
+    /* REVEAL */
+    .reveal{opacity:0;transform:translateY(12px);transition:opacity 0.6s ease,transform 0.6s ease;}
+    .reveal.in{opacity:1;transform:none;}
+    .rd1{transition-delay:0.05s;}.rd2{transition-delay:0.1s;}.rd3{transition-delay:0.15s;}.rd4{transition-delay:0.2s;}.rd5{transition-delay:0.25s;}
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="commodity-playbook-zflow.html" class="logo">
+        <span class="logo-mark"></span>
+        <span>Commodity Playbook</span>
+      </a>
+      <div class="nav-links">
+        <a href="commodity-playbook-zflow.html">Overview</a>
+        <a href="commodity-playbook-hub.html">What's Inside</a>
+        <a href="commodity-playbook-zflow.html#pricing" class="btn-nav">Get the Playbook</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container">
+      <a href="commodity-playbook-hub.html" class="back-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        Back to Hub
+      </a>
+      <div class="hero-pill reveal">
+        <span class="hero-pill-dot"></span>
+        Full Playbook · Starter Pack
+      </div>
+      <h1 class="hero-title reveal">
+        The Complete <span class="accent">Playbook.</span>
+      </h1>
+      <p class="hero-sub reveal">
+        Five chapters. Forty sections. The full commercial education — from industry foundations to how a desk actually makes money. Work through it in order, or jump to what you need.
+      </p>
+      <div class="overall-progress reveal rd2">
+        <div class="op-card">
+          <div class="op-label">Full Playbook</div>
+          <div class="op-stat">5 <span>chapters · 40 sections</span></div>
+          <div class="op-bar"><div class="op-fill" id="op-fill"></div></div>
+        </div>
+        <div style="font-size:13px;color:rgba(223,242,255,0.5);max-width:280px;line-height:1.5;">
+          All 40 sections are included in your Starter pack. Read at your own pace — everything is yours permanently.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAIN -->
+  <main class="main">
+    <div class="container">
+
+      <!-- CHAPTER GRID -->
+      <div style="margin-bottom:14px;" class="reveal">
+        <div style="font-size:11px;font-weight:700;letter-spacing:0.2em;text-transform:uppercase;color:var(--primary);margin-bottom:6px;">Five Chapters</div>
+        <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700;color:var(--fg);">Start anywhere. Read everything.</div>
+      </div>
+
+      <div class="chapter-grid">
+
+        <!-- CHAPTER A -->
+        <a href="commodity-playbook-chapter-a.html" class="chapter-card reveal rd1">
+          <div class="cc-hero cc-hero-a">
+            <div class="cc-chapter-label">Chapter A</div>
+            <div class="cc-title">Industry Foundations</div>
+            <div class="cc-letter">A</div>
+          </div>
+          <div class="cc-body">
+            <div class="cc-sections-count">8 sections</div>
+            <div class="cc-desc">Physical vs. paper markets, energy landscape, how trades make money, refinery economics, shipping basics, storage signals, price reporting, risk management.</div>
+            <div class="cc-progress-bar"><div class="cc-progress-fill" style="width:0%" data-target="100"></div></div>
+          </div>
+          <div class="cc-footer">
+            <span class="cc-status">Start here</span>
+            <span class="cc-btn">Read <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+        </a>
+
+        <!-- CHAPTER B -->
+        <a href="commodity-playbook-chapter-b.html" class="chapter-card reveal rd2">
+          <div class="cc-hero cc-hero-b">
+            <div class="cc-chapter-label">Chapter B</div>
+            <div class="cc-title">Physical &amp; Paper Trading Markets</div>
+            <div class="cc-letter">B</div>
+          </div>
+          <div class="cc-body">
+            <div class="cc-sections-count">8 sections</div>
+            <div class="cc-desc">Trade lifecycle, futures, swaps, options, hedging mechanics, basis and differentials, EFS, term vs. spot, and how the trading book stacks up.</div>
+            <div class="cc-progress-bar"><div class="cc-progress-fill" style="width:0%" data-target="100"></div></div>
+          </div>
+          <div class="cc-footer">
+            <span class="cc-status">Starter Pack</span>
+            <span class="cc-btn">Read <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+        </a>
+
+        <!-- CHAPTER C -->
+        <a href="commodity-playbook-chapter-c.html" class="chapter-card reveal rd3">
+          <div class="cc-hero cc-hero-c">
+            <div class="cc-chapter-label">Chapter C</div>
+            <div class="cc-title">Shipping, Freight &amp; Cargo Logistics</div>
+            <div class="cc-letter">C</div>
+          </div>
+          <div class="cc-body">
+            <div class="cc-sections-count">8 sections</div>
+            <div class="cc-desc">Vessel classes, freight rate mechanics, laytime, demurrage, cargo nominations, AIS tracking, cargo diversion decisions, and freight as a P&L source.</div>
+            <div class="cc-progress-bar"><div class="cc-progress-fill" style="width:0%" data-target="100"></div></div>
+          </div>
+          <div class="cc-footer">
+            <span class="cc-status">Starter Pack</span>
+            <span class="cc-btn">Read <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+        </a>
+
+        <!-- CHAPTER D -->
+        <a href="commodity-playbook-chapter-d.html" class="chapter-card reveal rd4">
+          <div class="cc-hero cc-hero-d">
+            <div class="cc-chapter-label">Chapter D</div>
+            <div class="cc-title">Market Intelligence &amp; Price Discovery</div>
+            <div class="cc-letter">D</div>
+          </div>
+          <div class="cc-body">
+            <div class="cc-sections-count">8 sections</div>
+            <div class="cc-desc">Forming a market view, reading the EIA report, the forward curve, price assessment methodology, supply disruption analysis, COT data, and seasonal patterns.</div>
+            <div class="cc-progress-bar"><div class="cc-progress-fill" style="width:0%" data-target="100"></div></div>
+          </div>
+          <div class="cc-footer">
+            <span class="cc-status">Starter Pack</span>
+            <span class="cc-btn">Read <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+        </a>
+
+        <!-- CHAPTER E -->
+        <a href="commodity-playbook-chapter-e.html" class="chapter-card reveal rd5">
+          <div class="cc-hero cc-hero-e">
+            <div class="cc-chapter-label">Chapter E</div>
+            <div class="cc-title">Commercial Decision-Making &amp; Risk</div>
+            <div class="cc-letter">E</div>
+          </div>
+          <div class="cc-body">
+            <div class="cc-sections-count">8 sections</div>
+            <div class="cc-desc">How a trader thinks, the arbitrage window, cargo diversion decision tree, timing a hedge, P&L attribution, VaR, cutting losing positions, and a full week on the desk.</div>
+            <div class="cc-progress-bar"><div class="cc-progress-fill" style="width:0%" data-target="100"></div></div>
+          </div>
+          <div class="cc-footer">
+            <span class="cc-status">Starter Pack</span>
+            <span class="cc-btn">Read <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+        </a>
+
+      </div>
+
+      <!-- WHAT'S IN THE PACK -->
+      <div class="pack-overview reveal">
+        <div class="po-title">What else is in your Starter pack?</div>
+        <div class="po-sub">The Playbook is the core — but Starter includes everything below too.</div>
+        <div class="po-grid">
+          <div class="po-item">
+            <div class="po-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg></div>
+            <div>
+              <div class="po-item-title">5 Resume Templates</div>
+              <div class="po-item-desc">Archetype-specific Word documents — The Switcher, Insider, Analyst-to-Trader, Vendor, Fresh Graduate.</div>
+            </div>
+          </div>
+          <div class="po-item">
+            <div class="po-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+            <div>
+              <div class="po-item-title">20+ Infographics</div>
+              <div class="po-item-desc">The full Starter infographic library — ecosystem map, crack spreads, forward curve, freight, trade finance, and more.</div>
+            </div>
+          </div>
+          <div class="po-item">
+            <div class="po-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+            <div>
+              <div class="po-item-title">Career Roadmap</div>
+              <div class="po-item-desc">A role-by-role entry guide showing realistic career paths into and through commodity trading.</div>
+            </div>
+          </div>
+          <div class="po-item">
+            <div class="po-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg></div>
+            <div>
+              <div class="po-item-title">The Desk Glossary</div>
+              <div class="po-item-desc">500+ commodity trading terms defined commercially — not academically. The reference you'll return to regularly.</div>
+            </div>
+          </div>
+          <div class="po-item">
+            <div class="po-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 20V10"/><path d="M12 20V4"/><path d="M6 20v-6"/></svg></div>
+            <div>
+              <div class="po-item-title">Weekly Market Note</div>
+              <div class="po-item-desc">A digest version of the weekly market note — EIA signal, LNG move, freight indicator — delivered every Monday.</div>
+            </div>
+          </div>
+          <div class="po-item">
+            <div class="po-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+            <div>
+              <div class="po-item-title">Explorer Resources</div>
+              <div class="po-item-desc">All Explorer pack resources remain — 5 sample infographics and the Chapter A free preview are still accessible.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- READING GUIDE -->
+      <div class="reading-guide reveal">
+        <div class="rg-title">Suggested reading order</div>
+        <div class="rg-sub">If you're new to the industry, follow the sequence. If you have a specific gap to fill, go straight to the chapter that addresses it.</div>
+        <div class="rg-steps">
+          <div class="rg-step">
+            <div class="rg-dot">A</div>
+            <div class="rg-step-title">Start with Foundations</div>
+            <div class="rg-step-desc">Chapter A builds the conceptual base everything else depends on</div>
+          </div>
+          <div class="rg-step">
+            <div class="rg-dot">B</div>
+            <div class="rg-step-title">Learn the Instruments</div>
+            <div class="rg-step-desc">Chapter B adds the mechanical layer — how deals are structured and hedged</div>
+          </div>
+          <div class="rg-step">
+            <div class="rg-dot">C</div>
+            <div class="rg-step-title">Understand Logistics</div>
+            <div class="rg-step-desc">Chapter C grounds the commercial theory in physical execution reality</div>
+          </div>
+          <div class="rg-step">
+            <div class="rg-dot">D</div>
+            <div class="rg-step-title">Read the Market</div>
+            <div class="rg-step-desc">Chapter D shows how desks build intelligence and form views</div>
+          </div>
+          <div class="rg-step">
+            <div class="rg-dot">E</div>
+            <div class="rg-step-title">Make Decisions</div>
+            <div class="rg-step-desc">Chapter E ties everything together in commercial decision-making scenarios</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- UPGRADE BANNER (for Explorer users) -->
+      <div class="upgrade-banner reveal">
+        <div class="ub-text">
+          <h2>Want the full commercial picture? <span class="accent">Upgrade to Pro.</span></h2>
+          <p>Starter gives you the full Playbook and library. Pro adds weekly live market updates with real signals, 15+ trading case studies with P&L logic, and direct access to the mentor network.</p>
+        </div>
+        <div class="ub-actions">
+          <a href="commodity-playbook-zflow.html#pricing" class="btn-white">See Pro Features →</a>
+          <a href="commodity-playbook-zflow.html#pricing" class="btn-ghost-w">Compare tiers</a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <a href="commodity-playbook-zflow.html" class="logo">
+        <span class="logo-mark"></span>
+        <span style="font-family:'Playfair Display',serif;font-weight:700;font-size:17px;">Commodity Playbook</span>
+      </a>
+      <div class="footer-right">Full Playbook · Starter Pack · 5 Chapters · 40 Sections</div>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll reveal
+    const reveals = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => { if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, {threshold:0.08});
+    reveals.forEach(el => io.observe(el));
+    document.querySelectorAll('.hero .reveal').forEach((el,i) => {
+      setTimeout(() => el.classList.add('in'), 80 + i*120);
+    });
+
+    // Animate progress fills on load
+    window.addEventListener('load', () => {
+      // Overall bar — placeholder 0% (real implementation tracks localStorage progress)
+      setTimeout(() => {
+        const op = document.getElementById('op-fill');
+        if(op) op.style.width = '0%';
+      }, 500);
+    });
+  </script>
+</body>
+</html>
