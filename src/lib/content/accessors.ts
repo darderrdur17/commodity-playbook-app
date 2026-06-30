@@ -67,9 +67,21 @@ export async function getDeskChannelData() {
   };
 }
 
+function isCompleteGlossary(terms: GlossaryTerm[] | undefined): terms is GlossaryTerm[] {
+  if (!terms?.length) return false;
+  if (terms.length !== GLOSSARY_TERMS.length) return false;
+  return terms.every((t) => Boolean(t.term?.trim() && t.definition?.trim() && t.context?.trim() && t.category));
+}
+
+/** Returns glossary terms — source of truth: desk-glossary_updated_24.06.html via GLOSSARY_TERMS */
 export async function getGlossaryTerms() {
-  const data = await getPublishedPayload<{ terms: GlossaryTerm[] }>("glossary");
-  return data.terms ?? GLOSSARY_TERMS;
+  try {
+    const data = await getPublishedPayload<{ terms: GlossaryTerm[] }>("glossary");
+    if (isCompleteGlossary(data.terms)) return data.terms;
+  } catch {
+    // CMS unavailable — use static extract
+  }
+  return GLOSSARY_TERMS;
 }
 
 export async function getInterviewQuestionsData() {

@@ -8,6 +8,18 @@ const SHARED_RESUME_DIR = path.resolve(
   process.cwd(),
   "../CommodityPlaybook - Shared Folder/Pro Pack/2.Persona Analysis Quiz_Resume Templates"
 );
+const PUBLIC_TEMPLATES_DIR = path.resolve(process.cwd(), "public/templates");
+
+function resolveTemplatePath(fileName: string): string | null {
+  const candidates = [
+    path.join(SHARED_RESUME_DIR, fileName),
+    path.join(PUBLIC_TEMPLATES_DIR, fileName),
+  ];
+  for (const p of candidates) {
+    if (fs.existsSync(p)) return p;
+  }
+  return null;
+}
 
 const DOCX_MIME = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
 
@@ -22,10 +34,10 @@ export async function syncResumeTemplateAssets() {
   let missing = 0;
 
   for (const template of RESUME_TEMPLATES) {
-    const filePath = path.join(SHARED_RESUME_DIR, template.templateFile);
+    const filePath = resolveTemplatePath(template.templateFile);
     const assetKey = buildContentAssetKey("resume-templates", template.templateFile);
 
-    if (!fs.existsSync(filePath)) {
+    if (!filePath) {
       missing++;
       continue;
     }
