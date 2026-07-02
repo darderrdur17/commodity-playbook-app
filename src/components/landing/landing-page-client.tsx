@@ -15,7 +15,6 @@ import {
 } from "@/components/animations";
 import { StarterPackModal } from "@/components/landing/starter-pack-modal";
 import { SalesLandingPanel } from "@/components/landing/sales-landing-panel";
-import { Logo } from "@/components/brand/logo";
 import {
   DEFAULT_LANDING_CONTENT,
   type LandingContent,
@@ -61,14 +60,14 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
   const tierColors: Record<string, string> = { Pro: "#3280ff", Elite: "#B45309" };
 
   return (
-    <div className="overflow-hidden">
-      {/* Audience toggle bar */}
-      <div className="sticky top-16 z-40 bg-secondary border-b border-border">
+    <div className="overflow-hidden -mt-[calc(4rem+env(safe-area-inset-top,0px))]">
+      {/* Audience toggle — flush under nav */}
+      <div className="sticky top-[calc(4rem+env(safe-area-inset-top,0px))] z-40 bg-white border-b border-border shadow-sm">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 flex items-stretch gap-0 overflow-x-auto scrollbar-none">
           <button
             type="button"
             onClick={() => setActiveTrack("career")}
-            className={`flex items-center gap-2 px-4 sm:px-6 py-3.5 text-xs sm:text-sm font-semibold whitespace-nowrap border-b-2 transition-all ${
+            className={`flex items-center gap-2 px-4 sm:px-6 py-3 text-xs sm:text-sm font-semibold whitespace-nowrap border-b-2 transition-all ${
               activeTrack === "career"
                 ? "border-primary-400 text-primary-400"
                 : "border-transparent text-muted-fg hover:text-gray-900"
@@ -76,11 +75,11 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
           >
             I invest my career in commodity markets
           </button>
-          <div className="w-px h-5 bg-border flex-shrink-0 mx-1" />
+          <div className="w-px h-5 bg-border flex-shrink-0 mx-1 self-center" />
           <button
             type="button"
             onClick={() => setActiveTrack("sales")}
-            className={`flex items-center gap-2 px-4 sm:px-6 py-3.5 text-xs sm:text-sm font-semibold whitespace-nowrap border-b-2 transition-all ${
+            className={`flex items-center gap-2 px-4 sm:px-6 py-3 text-xs sm:text-sm font-semibold whitespace-nowrap border-b-2 transition-all ${
               activeTrack === "sales"
                 ? "border-teal-600 text-teal-700"
                 : "border-transparent text-muted-fg hover:text-gray-900"
@@ -88,7 +87,7 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
           >
             I sell solutions into commodity trading firms
           </button>
-          <p className="hidden lg:flex items-center gap-1.5 ml-auto text-xs text-muted-fg whitespace-nowrap">
+          <p className="hidden lg:flex items-center gap-1.5 ml-auto text-xs text-muted-fg whitespace-nowrap py-3">
             <Info className="w-3.5 h-3.5" />
             Select your track to see the right content
           </p>
@@ -113,7 +112,6 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
             <div className="relative z-10 w-full max-w-[1200px] mx-auto px-4 sm:px-6 py-16 sm:py-24">
               <div className="max-w-3xl">
                 <Reveal>
-                  <Logo variant="lockup-dark" showTagline className="mb-8" priority />
                   <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-accent/30 bg-accent/10 text-accent text-[10px] font-bold uppercase tracking-[0.2em] mb-5">
                     <span className="w-1.5 h-1.5 rounded-full bg-accent" />
                     {career.eyebrow}
@@ -154,22 +152,6 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
                     ))}
                   </div>
                 </Reveal>
-              </div>
-            </div>
-          </section>
-
-          {/* Stats strip */}
-          <section className="border-y border-border bg-secondary py-6 sm:py-8">
-            <div className="max-w-[1200px] mx-auto px-4 sm:px-6">
-              <div className="grid grid-cols-2 gap-4 sm:gap-6">
-                {content.stats.map((stat, i) => (
-                  <Reveal key={stat.label} delay={i * 0.1} className="text-center px-2 sm:px-4">
-                    <p className="font-serif text-2xl sm:text-3xl font-bold text-primary-800 uppercase tracking-wide">
-                      <AnimatedCounter value={stat.value} suffix={stat.suffix} />
-                    </p>
-                    <p className="text-xs text-muted-fg uppercase tracking-wider mt-1">{stat.label}</p>
-                  </Reveal>
-                ))}
               </div>
             </div>
           </section>
