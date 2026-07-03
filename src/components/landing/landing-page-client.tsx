@@ -156,29 +156,6 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
             </div>
           </section>
 
-          {/* Ground-Level View */}
-          <section className="py-16 sm:py-24 page-container">
-            <Reveal className="text-center mb-14 max-w-2xl mx-auto">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-soft text-primary-800 text-xs font-bold uppercase tracking-widest mb-4">
-                {content.groundLevelView.eyebrow}
-              </div>
-              <h2 className="font-serif text-[clamp(28px,4vw,44px)] font-bold tracking-tight text-gray-900 mb-4 leading-[1.1]">
-                {content.groundLevelView.title}
-              </h2>
-              <p className="text-muted-fg text-lg">{content.groundLevelView.description}</p>
-            </Reveal>
-            <StaggerChildren staggerDelay={0.06} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 items-stretch">
-              {content.groundLevelView.features.map((f) => (
-                <StaggerItem key={f.title} className="h-full">
-                  <div className="card-hover h-full rounded-xl border border-border bg-white p-6">
-                    <h3 className="font-serif font-semibold text-gray-900 mb-2">{f.title}</h3>
-                    <p className="text-sm text-muted-fg leading-relaxed">{f.desc}</p>
-                  </div>
-                </StaggerItem>
-              ))}
-            </StaggerChildren>
-          </section>
-
           {/* Chapter Coverage */}
           <section className="py-16 sm:py-24 bg-secondary border-y border-border">
             <div className="page-container">
