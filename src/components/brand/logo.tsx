@@ -2,10 +2,21 @@ import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
-type LogoVariant = "horizontal" | "mark" | "white" | "wordmark-tagline" | "lockup-dark";
+type LogoVariant =
+  | "horizontal"
+  | "header"
+  | "footer"
+  | "login"
+  | "mark"
+  | "white"
+  | "wordmark-tagline"
+  | "lockup-dark";
 
 const SOURCES: Record<Exclude<LogoVariant, "lockup-dark">, { src: string; width: number; height: number }> = {
   horizontal: { src: "/brand/logo-horizontal.png", width: 220, height: 40 },
+  header: { src: "/brand/header_logo1.png", width: 220, height: 44 },
+  footer: { src: "/brand/footer_logo1.png", width: 340, height: 80 },
+  login: { src: "/brand/login_page_logo1.png", width: 220, height: 44 },
   mark: { src: "/brand/logo-mark.png", width: 40, height: 40 },
   white: { src: "/brand/logo-white.png", width: 220, height: 40 },
   "wordmark-tagline": { src: "/brand/logo-wordmark-tagline.png", width: 280, height: 72 },
@@ -13,7 +24,7 @@ const SOURCES: Record<Exclude<LogoVariant, "lockup-dark">, { src: string; width:
 
 interface LogoProps {
   variant?: LogoVariant;
-  href?: string;
+  href?: string | false;
   className?: string;
   imageClassName?: string;
   priority?: boolean;
@@ -101,8 +112,6 @@ export function Logo({
     </Link>
   );
 }
-
-/** Brand mark for search inputs and compact UI */
 export function BrandSearchPrefix({
   className,
   size = 22,

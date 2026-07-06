@@ -81,7 +81,7 @@ function LoginForm() {
         <GradientOrbs />
         <HeroParticles count={10} />
         <div className="relative z-10">
-          <Logo variant="white" imageClassName="max-h-10" />
+          <Logo variant="login" href={false} imageClassName="h-10 sm:h-11 w-auto max-h-none" />
         </div>
         <div className="relative z-10">
           <div className="pill pill-dark mb-5 text-[10px]">
@@ -115,7 +115,7 @@ function LoginForm() {
           className="w-full max-w-md"
         >
           {/* Mobile logo */}
-          <Logo variant="horizontal" className="mb-8 lg:hidden" imageClassName="max-h-8" />
+          <Logo variant="header" className="mb-8 lg:hidden" imageClassName="h-8 w-auto max-h-none" />
 
           <h1 className="font-serif text-3xl font-bold text-gray-900 mb-1.5">Sign in</h1>
           <p className="text-muted-fg text-sm mb-8">

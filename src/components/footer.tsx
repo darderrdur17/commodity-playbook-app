@@ -1,72 +1,59 @@
 import React from "react";
 import Link from "next/link";
-import { Mail, Linkedin } from "lucide-react";
 import { Logo } from "@/components/brand/logo";
+import { FooterNewsletter } from "@/components/footer-newsletter";
 
 const FOOTER_LINKS = {
-  "Content": [
-    { label: "Desk Glossary", href: "/glossary" },
+  Contents: [
+    { label: "Overview", href: "/" },
     { label: "Full Playbook", href: "/playbook" },
-    { label: "Career Roadmap", href: "/career-roadmap" },
-    { label: "Case Studies", href: "/case-studies" },
+    { label: "Career Guide", href: "/career-roadmap" },
+    { label: "Sales Guide", href: "/?track=sales" },
   ],
-  "Community": [
+  Community: [
+    { label: "Desk Glossary", href: "/glossary" },
     { label: "Desk Channel", href: "/desk-channel" },
     { label: "Mentor Connect", href: "/mentor-connect" },
-    { label: "Job Openings", href: "/job-openings" },
+    { label: "Weekly Note", href: "/starter-pack" },
     { label: "Job Board Waitlist", href: "/waitlist" },
   ],
-  "Account": [
+  Access: [
     { label: "Pricing", href: "/pricing" },
     { label: "Dashboard", href: "/dashboard" },
     { label: "Sign Up", href: "/signup" },
     { label: "Login", href: "/login" },
   ],
-};
+} as const;
 
 export function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-400">
-      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 py-12 sm:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
-          {/* Brand */}
-          <div className="md:col-span-1">
-            <Logo variant="lockup-dark" showTagline className="mb-4" />
-            <p className="text-sm leading-relaxed text-gray-500 mb-5">
-              The definitive Playbook guide to understanding commodity trading — how markets work, how revenue is made, and how to build a career or close a sale inside them. From first desk to senior coverage.
+    <footer className="bg-black text-white border-t border-white/[0.07] pt-16">
+      <div className="max-w-[1100px] mx-auto px-6 sm:px-11">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-[2.2fr_1fr_1fr_1fr] gap-9 lg:gap-[52px] pb-14 border-b border-white/[0.07]">
+          <div>
+            <Logo
+              variant="footer"
+              href="/"
+              className="mb-[22px]"
+              imageClassName="h-16 sm:h-20 w-auto max-h-none"
+            />
+            <p className="text-[14.5px] text-white/[0.55] leading-[1.8] max-w-[300px]">
+              The definitive guide on commodity trading — for professionals breaking in, and for
+              vendors selling into the industry.
             </p>
-            <div className="flex items-center gap-3">
-              <a
-                href="mailto:hello@commodityplaybook.com"
-                className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary-400 transition-colors"
-                aria-label="Email"
-              >
-                <Mail className="w-4 h-4" />
-              </a>
-              <a
-                href="https://linkedin.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary-400 transition-colors"
-                aria-label="LinkedIn"
-              >
-                <Linkedin className="w-4 h-4" />
-              </a>
-            </div>
           </div>
 
-          {/* Links */}
           {Object.entries(FOOTER_LINKS).map(([section, links]) => (
             <div key={section}>
-              <h4 className="text-xs font-bold uppercase tracking-widest text-gray-600 mb-4">
+              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#bfdbff] mb-5 mt-1.5">
                 {section}
-              </h4>
-              <ul className="space-y-2.5">
+              </p>
+              <ul>
                 {links.map((link) => (
-                  <li key={link.href}>
+                  <li key={link.href} className="border-b border-white/[0.055] last:border-b-0">
                     <Link
                       href={link.href}
-                      className="text-sm text-gray-500 hover:text-white transition-colors"
+                      className="block py-2.5 text-sm font-medium text-white/60 hover:text-white transition-colors"
                     >
                       {link.label}
                     </Link>
@@ -77,13 +64,26 @@ export function Footer() {
           ))}
         </div>
 
-        <div className="h-px bg-gray-800 mb-6" />
+        <FooterNewsletter />
 
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-gray-600">
-          <p>© {new Date().getFullYear()} Commodity Playbook. All rights reserved.</p>
-          <div className="flex items-center gap-4">
-            <Link href="/privacy" className="hover:text-gray-400 transition-colors">Privacy Policy</Link>
-            <Link href="/terms" className="hover:text-gray-400 transition-colors">Terms of Service</Link>
+        <div className="py-5 pb-[26px] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <p className="text-[13px] text-white">
+            © 2026. CommodityPlaybook. All rights reserved.
+          </p>
+          <div className="flex items-center gap-[18px] text-[13px]">
+            <Link
+              href="/privacy"
+              className="text-white underline decoration-white/30 underline-offset-[3px] hover:decoration-white/70 transition-colors"
+            >
+              Privacy
+            </Link>
+            <span className="text-white/20">·</span>
+            <Link
+              href="/terms"
+              className="text-white underline decoration-white/30 underline-offset-[3px] hover:decoration-white/70 transition-colors"
+            >
+              Terms
+            </Link>
           </div>
         </div>
       </div>
