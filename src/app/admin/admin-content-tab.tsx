@@ -11,6 +11,9 @@ import {
   formatAssetTypeLabel,
   validateContentAssetFile,
 } from "@/lib/content/asset-files";
+import { DEFAULT_LANDING_CONTENT, type LandingContent } from "@/data/landing-content";
+import { parseLandingContentPayload, formatLandingValidationErrors } from "@/lib/content/landing-schema";
+import { AdminLandingEditor } from "./admin-landing-editor";
 
 interface ModuleRow {
   slug: string;
@@ -56,6 +59,8 @@ export function AdminContentTab() {
   const uploadInputRef = useRef<HTMLInputElement>(null);
   const replaceInputRef = useRef<HTMLInputElement>(null);
   const [replaceAssetId, setReplaceAssetId] = useState<string | null>(null);
+  const [landingContent, setLandingContent] = useState<LandingContent | null>(null);
+  const [landingEditMode, setLandingEditMode] = useState<"form" | "json">("form");
 
   async function loadModules() {
     setLoading(true);
@@ -90,6 +95,8 @@ export function AdminContentTab() {
   async function selectModule(slug: string) {
     setSelectedSlug(slug);
     setMessage("");
+    setLandingContent(null);
+    setLandingEditMode("form");
     const res = await fetch(`/api/admin/content/${slug}`, { cache: "no-store" });
     if (!res.ok) {
       setMessage("Could not load module content.");
@@ -97,6 +104,10 @@ export function AdminContentTab() {
     }
     const data = await res.json();
     setEditor(JSON.stringify(data.payload, null, 2));
+    if (slug === "landing") {
+      const parsed = parseLandingContentPayload(data.payload);
+      setLandingContent(parsed.success ? parsed.data : DEFAULT_LANDING_CONTENT);
+    }
     setTier(data.requiredTier);
     setPublished(data.published);
   }
@@ -104,12 +115,32 @@ export function AdminContentTab() {
   async function saveModule() {
     if (!selectedSlug) return;
     let payload: unknown;
-    try {
-      payload = JSON.parse(editor);
-    } catch {
-      setMessage("Invalid JSON — fix syntax before saving.");
-      return;
+
+    if (selectedSlug === "landing" && landingEditMode === "form" && landingContent) {
+      const validation = parseLandingContentPayload(landingContent);
+      if (!validation.success) {
+        setMessage(`Validation failed: ${formatLandingValidationErrors(validation)}`);
+        return;
+      }
+      payload = validation.data;
+      setEditor(JSON.stringify(payload, null, 2));
+    } else {
+      try {
+        payload = JSON.parse(editor);
+      } catch {
+        setMessage("Invalid JSON — fix syntax before saving.");
+        return;
+      }
+      if (selectedSlug === "landing") {
+        const validation = parseLandingContentPayload(payload);
+        if (!validation.success) {
+          setMessage(`Validation failed: ${formatLandingValidationErrors(validation)}`);
+          return;
+        }
+        payload = validation.data;
+      }
     }
+
     setSaving(true);
     setMessage("");
     try {
@@ -120,7 +151,7 @@ export function AdminContentTab() {
       });
       if (!res.ok) {
         const err = await res.json();
-        setMessage(err.error || "Save failed");
+        setMessage(err.error || err.details || "Save failed");
         return;
       }
       const data = await res.json();
@@ -129,6 +160,11 @@ export function AdminContentTab() {
     } finally {
       setSaving(false);
     }
+  }
+
+  function handleLandingContentChange(next: LandingContent) {
+    setLandingContent(next);
+    setEditor(JSON.stringify(next, null, 2));
   }
 
   async function resetModule() {
@@ -416,9 +452,34 @@ export function AdminContentTab() {
             <div className="px-4 py-3 border-b border-border flex flex-wrap items-center gap-3 justify-between">
               <div>
                 <p className="font-semibold text-gray-900">{selectedSlug}</p>
-                <p className="text-xs text-muted-fg">Update JSON content and click Save — or upload files to attach</p>
+                <p className="text-xs text-muted-fg">
+                  {selectedSlug === "landing"
+                    ? "Edit landing page wording in the form below, or switch to JSON for advanced edits"
+                    : "Update JSON content and click Save — or upload files to attach"}
+                </p>
               </div>
               <div className="flex flex-wrap items-center gap-2">
+                {selectedSlug === "landing" && (
+                  <div className="flex rounded-lg border border-border overflow-hidden text-xs">
+                    <button
+                      type="button"
+                      onClick={() => setLandingEditMode("form")}
+                      className={`px-3 py-1.5 font-medium ${landingEditMode === "form" ? "bg-primary-soft text-primary-400" : "bg-white text-muted-fg"}`}
+                    >
+                      Wording
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setLandingEditMode("json");
+                        if (landingContent) setEditor(JSON.stringify(landingContent, null, 2));
+                      }}
+                      className={`px-3 py-1.5 font-medium ${landingEditMode === "json" ? "bg-primary-soft text-primary-400" : "bg-white text-muted-fg"}`}
+                    >
+                      JSON
+                    </button>
+                  </div>
+                )}
                 <select
                   value={tier}
                   onChange={(e) => setTier(e.target.value)}
@@ -449,7 +510,10 @@ export function AdminContentTab() {
             {message && (
               <div
                 className={`mx-4 mt-3 text-sm px-3 py-2 rounded-lg ${
-                  message.includes("Invalid") || message.includes("failed") || message.includes("Could not")
+                  message.includes("Invalid") ||
+                  message.includes("failed") ||
+                  message.includes("Could not") ||
+                  message.includes("Validation")
                     ? "bg-red-50 text-red-700"
                     : "bg-green-50 text-green-800"
                 }`}
@@ -457,12 +521,16 @@ export function AdminContentTab() {
                 {message}
               </div>
             )}
-            <textarea
-              value={editor}
-              onChange={(e) => setEditor(e.target.value)}
-              className="w-full min-h-[520px] p-4 font-mono text-xs leading-relaxed border-0 focus:outline-none focus:ring-0 resize-y"
-              spellCheck={false}
-            />
+            {selectedSlug === "landing" && landingEditMode === "form" && landingContent ? (
+              <AdminLandingEditor content={landingContent} onChange={handleLandingContentChange} />
+            ) : (
+              <textarea
+                value={editor}
+                onChange={(e) => setEditor(e.target.value)}
+                className="w-full min-h-[520px] p-4 font-mono text-xs leading-relaxed border-0 focus:outline-none focus:ring-0 resize-y"
+                spellCheck={false}
+              />
+            )}
           </div>
         )}
       </div>

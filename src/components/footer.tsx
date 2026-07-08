@@ -11,17 +11,17 @@ const FOOTER_LINKS = {
     { label: "Sales Guide", href: "/?track=sales" },
   ],
   Community: [
-    { label: "Desk Glossary", href: "/glossary" },
-    { label: "Desk Channel", href: "/desk-channel" },
     { label: "Mentor Connect", href: "/mentor-connect" },
+    { label: "Desk Channel", href: "/desk-channel" },
     { label: "Weekly Note", href: "/starter-pack" },
     { label: "Job Board Waitlist", href: "/waitlist" },
   ],
   Access: [
     { label: "Pricing", href: "/pricing" },
-    { label: "Dashboard", href: "/dashboard" },
+    { label: "Team Licenses", href: "mailto:hello@commodityplaybook.com" },
     { label: "Sign Up", href: "/signup" },
     { label: "Login", href: "/login" },
+    { label: "Contact Us", href: "mailto:hello@commodityplaybook.com" },
   ],
 } as const;
 
@@ -35,7 +35,7 @@ export function Footer() {
               variant="footer"
               href="/"
               className="mb-[22px]"
-              imageClassName="h-16 sm:h-20 w-auto max-h-none"
+              imageClassName="h-20 sm:h-24 w-auto max-h-none"
             />
             <p className="text-[14.5px] text-white/[0.55] leading-[1.8] max-w-[300px]">
               The definitive guide on commodity trading — for professionals breaking in, and for
@@ -50,13 +50,22 @@ export function Footer() {
               </p>
               <ul>
                 {links.map((link) => (
-                  <li key={link.href} className="border-b border-white/[0.055] last:border-b-0">
-                    <Link
-                      href={link.href}
-                      className="block py-2.5 text-sm font-medium text-white/60 hover:text-white transition-colors"
-                    >
-                      {link.label}
-                    </Link>
+                  <li key={link.label} className="border-b border-white/[0.055] last:border-b-0">
+                    {link.href.startsWith("mailto:") ? (
+                      <a
+                        href={link.href}
+                        className="block py-2.5 text-sm font-medium text-white/60 hover:text-white transition-colors"
+                      >
+                        {link.label}
+                      </a>
+                    ) : (
+                      <Link
+                        href={link.href}
+                        className="block py-2.5 text-sm font-medium text-white/60 hover:text-white transition-colors"
+                      >
+                        {link.label}
+                      </Link>
+                    )}
                   </li>
                 ))}
               </ul>

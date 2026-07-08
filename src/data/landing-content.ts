@@ -121,11 +121,11 @@ export interface LandingContent {
 
 export const DEFAULT_LANDING_CONTENT: LandingContent = {
   career: {
-    eyebrow: "The Insider's Guide for Professional Career Builders",
+    eyebrow: "The insider's guide for career builders",
     headline: "Understand Commodity Trading the Way",
     headlineAccent: "the Desk Actually Works.",
     description:
-      "The playbook that many practitioners used to break in, move up, and build careers that last. Whether you're entering the industry, switching roles, or moving from operations to the front office; from fresh grad to senior coverage - every step mapped.",
+      "The playbook most people never see. From fresh grad to senior coverage — whether you're entering the industry, switching roles, or moving from operations to the front office.",
     ctaPrimary: "Start Free — Starter Pack",
     ctaSecondary: "Preview Content",
     heroStats: [
@@ -161,19 +161,51 @@ export const DEFAULT_LANDING_CONTENT: LandingContent = {
       eyebrow: "The Commercial Case",
       title: "One Deal Pays for",
       titleAccent: "a Year of Pro.",
-      description: "Pro is SGD 299/month. If understanding the commodity trading desk helps you close one additional deal per year, the return is not close.",
+      description:
+        "Pro is SGD 99 one-time. If understanding the commodity trading desk helps you close one additional deal per year, the return is not close.",
       stats: [
         { value: "$250K–$2M+", label: "Typical ETRM / data platform ACV" },
-        { value: "SGD 3,588", label: "Full year of Pro access" },
+        { value: "SGD 99", label: "Full Pro access — one-time" },
         { value: "2 min", label: "How fast traders assess your credibility" },
         { value: "6 wks", label: "Reported reduction in deal cycle" },
       ],
-      quote: "I used to lose deals in the first five minutes. After the Playbook, I could hold a commercial conversation with a head of trading for forty-five.",
-      quoteAuthor: "James K., Enterprise Sales, London",
+      quote:
+        "I used to lose deals in the first five minutes. After the Playbook, I could hold a commercial conversation with a head of trading for forty-five.",
+      quoteAuthor: "Head of Enterprise Sales, APAC",
     },
     pricing: [
-      { name: "Starter", price: "SGD 149", billing: "one-time", description: "The foundation for anyone selling into commodity trading firms.", features: ["5 infographics + weekly digest", "Chapter A preview (3 sections)", "Desk Glossary (196 terms)", "Sales-specific onboarding guide"], cta: "Get Starter — SGD 149", href: "/signup" },
-      { name: "Pro", price: "SGD 299", billing: "per month", description: "For sales professionals who need ongoing desk intelligence.", features: ["Everything in Starter", "Full Playbook — all 5 chapters", "10+ case studies with commercial impact", "Desk Channel — 40 Q&As", "Anonymous Mentor Connect"], cta: "Get Pro — SGD 299/mo", href: "/signup?plan=pro", featured: true },
+      {
+        name: "Pro",
+        price: "SGD 99",
+        billing: "one-time",
+        description: "One-time purchase. Everything you need to start selling smarter.",
+        features: [
+          "Full Playbook — 5 chapters, 120+ assets",
+          "Market Knowledge Test",
+          "50 Practitioner Q&As",
+          "Free Data Sources Guide",
+          "20+ Infographics + glossary",
+        ],
+        cta: "Get Pro",
+        href: "/signup?plan=pro",
+        featured: true,
+      },
+      {
+        name: "Elite",
+        price: "SGD 199",
+        billing: "per month",
+        description: "Live intelligence updates, and the full practitioner network.",
+        features: [
+          "Everything in Pro",
+          "15 Asia Case Studies",
+          "The Desk Channel — 40 Q&As",
+          "Anonymous Mentor Connect",
+          "Market Job Openings",
+          "New monthly content",
+        ],
+        cta: "Get Elite",
+        href: "/signup?plan=elite",
+      },
     ],
   },
   stats: [
@@ -195,14 +227,19 @@ export const DEFAULT_LANDING_CONTENT: LandingContent = {
   },
   chapterCoverage: {
     eyebrow: "The Full Playbook",
-    title: "What We Cover. Everything You Need.",
-    description: "Each chapter has 8 sections, a worked example, a framework, and downloadable assets. 40 sections and 120 assets in total.",
+    title: "What We Cover.",
+    description:
+      "The full surface area of commodity trading — from cargoes on the water to the desk's risk book.",
     chapters: [
       { letter: "A", title: "Industry Foundations", desc: "Physical vs paper, the six revenue levers, pricing benchmarks, and how an oil trade actually makes money." },
       { letter: "B", title: "Physical & Paper Markets", desc: "MOC price assessment, spreads, the carry trade, OPEC signals, DES vs FOB, and managed money positioning." },
       { letter: "C", title: "Shipping, Freight & Cargo", desc: "Vessel types, charter party mechanics, demurrage, AIS tracking, laytime, and the full cargo lifecycle." },
       { letter: "D", title: "Market Intelligence", desc: "Kpler, Platts, Argus, EIA, COT, Baltic Exchange — what each tells you and how to read it commercially." },
       { letter: "E", title: "Commercial Risk & Decisions", desc: "VaR, basis risk, stop-loss discipline, sanctions, credit risk, and how a desk manages positions in real time." },
+      { letter: "F", title: "Trade Finance & Credit", desc: "A physical commodity trade does not settle on a handshake. Letters of credit, pre-export finance, working capital structures, and counterparty credit are the plumbing that makes the trade possible — and the chapter that most market participants wish they had read before their first deal went sideways." },
+      { letter: "G", title: "Crude Oil & Refined Products", desc: "Crude oil is the benchmark all others are priced against — but the real commercial action happens in the differentials. Why a West African grade trades at a premium to Dated Brent one month and a discount the next, what a refinery's configuration tells you about what it will pay, and how the spread between gasoline, diesel, and jet fuel shifts with the season and the economy. This chapter covers the crude quality matrix, Atlantic Basin and Asian arbitrage, refinery margins, product specifications, and the flows that connect a wellhead in West Texas to a filling station in Singapore." },
+      { letter: "H", title: "LNG & Natural Gas", desc: "LNG is the most geopolitically sensitive commodity market on the planet, and also the least well understood by most professionals entering the space. This chapter covers the JKM–TTF spread, the full cargo chain from liquefaction to regasification, diversion logic, boil-off economics, and how a single winter in Europe reprices a global market." },
+      { letter: "I", title: "Metals & Mining", desc: "Copper tells you where the global economy is going before economists publish their forecasts. Iron ore tells you what China is building. This chapter covers LME mechanics, the concentrate-to-refined chain, how mining supply disruptions travel through the curve, and why metals belong in every commodity professional's reading list." },
     ],
   },
   caseStudySample: {
@@ -221,8 +258,8 @@ export const DEFAULT_LANDING_CONTENT: LandingContent = {
     unlockText: "That's one of 10+ worked case studies. Unlocks with Elite.",
   },
   whatsInside: {
-    titleLine1: "Every resource you need,",
-    titleLine2: "nothing you don't.",
+    titleLine1: "Every Resource You Need,",
+    titleLine2: "Nothing You Don't.",
     description:
       "Built from 20+ years inside trading, analytics, and market intelligence by practitioners, validated by desk veterans. Structured for how commodity professionals actually learn and work.",
     features: [
@@ -265,8 +302,9 @@ export const DEFAULT_LANDING_CONTENT: LandingContent = {
     ],
   },
   pricing: {
-    title: "Simple, transparent pricing to access your level",
-    subtitle: "Start free. Upgrade when you're ready. No hidden fees, no subscriptions until Elite.",
+    title: "Invest in Your Downstream Career",
+    subtitle:
+      "Whether you're breaking in, switching functions, or planning longevity in oil, gas & LNG, metals & mining downstream trading — pick the level of access that fits your stage.",
     tiers: [
       {
         name: "Starter",
@@ -274,7 +312,7 @@ export const DEFAULT_LANDING_CONTENT: LandingContent = {
         billing: "forever",
         badge: "starter",
         highlight: false,
-        tooltip: "The foundation for anyone entering commodity markets.",
+        tooltip: "Only an email required",
         description: "Explore the playbook and get your first desk-ready resources.",
         features: [
           "5 desk infographics",
@@ -293,7 +331,7 @@ export const DEFAULT_LANDING_CONTENT: LandingContent = {
         billing: "one-time",
         badge: "pro",
         highlight: true,
-        tooltip: "For professionals and learners going deeper into how commodity trading works.",
+        tooltip: "One-time purchase",
         description: "Everything you need to position yourself and land the role.",
         features: [
           "Full Playbook — all 5 chapters",
@@ -312,7 +350,7 @@ export const DEFAULT_LANDING_CONTENT: LandingContent = {
         billing: "per month",
         badge: "elite",
         highlight: false,
-        tooltip: "For long-term serious learners with long-term downstream careers.",
+        tooltip: "Live intelligence updates, and the full practitioner network",
         description: "Full commercial education plus live intelligence and mentor access.",
         features: [
           "Everything in Pro",
@@ -327,8 +365,8 @@ export const DEFAULT_LANDING_CONTENT: LandingContent = {
     ],
   },
   membersStrip: {
-    label: "Members now working at",
-    companies: ["Vitol", "Glencore", "S&P Global", "Kpler", "Mitsui Corp"],
+    label: "Trusted by professionals moving to",
+    companies: ["Vitol", "Glencore", "S&P Global", "Bloomberg", "Shell"],
   },
   footerTagline:
     "The definitive Playbook guide to understanding commodity trading — how markets work, how revenue is made, and how to build a career or close a sale inside them. From first desk to senior coverage.",

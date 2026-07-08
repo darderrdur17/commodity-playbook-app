@@ -3,6 +3,8 @@ import type { Tier } from "@prisma/client";
 import { CONTENT_MODULE_META, getModuleMeta, type ContentSlug } from "./modules";
 import { GLOSSARY_TERMS } from "@/data/glossary";
 import { getDefaultPayload, getAllDefaultPayloads } from "./defaults";
+import { mergeLandingContent } from "./merge";
+import type { LandingContent } from "@/data/landing-content";
 import { applyCmsSchemaSql } from "@/lib/setup-database";
 
 let cmsTablesReady: boolean | null = null;
@@ -87,7 +89,10 @@ export async function syncGlossaryFromDefaults() {
   return { updated: true, termCount: GLOSSARY_TERMS.length, created: false };
 }
 
-/** Push all src/data defaults into CMS — keeps production in sync with GitHub on every deploy. */
+/** Modules where CMS wording edits must survive deploys (merged, not replaced). */
+const CMS_WORDING_MODULES: ContentSlug[] = ["landing"];
+
+/** Push repo defaults into CMS — wording modules merge; data modules replace. */
 export async function syncAllContentModulesFromDefaults() {
   await ensureContentInfrastructure();
   const defaults = getAllDefaultPayloads();
@@ -96,7 +101,7 @@ export async function syncAllContentModulesFromDefaults() {
 
   for (const meta of CONTENT_MODULE_META) {
     const slug = meta.slug as ContentSlug;
-    const payload = defaults[slug] as object;
+    const defaultPayload = defaults[slug] as object;
     const existing = await prisma.contentModule.findUnique({ where: { slug } });
 
     if (!existing) {
@@ -106,7 +111,7 @@ export async function syncAllContentModulesFromDefaults() {
           title: meta.title,
           description: meta.description,
           requiredTier: meta.requiredTier,
-          payload,
+          payload: defaultPayload,
           published: true,
           version: 1,
         },
@@ -114,6 +119,15 @@ export async function syncAllContentModulesFromDefaults() {
       created++;
       continue;
     }
+
+    const payload: object = CMS_WORDING_MODULES.includes(slug)
+      ? slug === "landing"
+        ? (mergeLandingContent(
+            defaultPayload as LandingContent,
+            existing.payload as Partial<LandingContent>
+          ) as object)
+        : (existing.payload as object)
+      : defaultPayload;
 
     await prisma.contentModule.update({
       where: { slug },

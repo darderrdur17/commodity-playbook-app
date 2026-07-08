@@ -13,6 +13,7 @@ import { CAREER_ROLES } from "@/data/career-roadmap";
 import { RESUME_TEMPLATES, PERSONA_QUIZ_QUESTIONS } from "@/data/resume-templates";
 import { JOB_OPENINGS, JOB_REGIONS, JOB_LEVELS, JOB_SEGMENTS } from "@/data/job-openings";
 import { DEFAULT_LANDING_CONTENT, type LandingContent } from "@/data/landing-content";
+import { mergeLandingContent } from "./merge";
 import playbookSections from "@/data/playbook-sections.json";
 
 type PlaybookPayload = {
@@ -26,8 +27,8 @@ type CaseStudiesPayload = {
 };
 
 export async function getLandingContent(): Promise<LandingContent> {
-  const data = await getPublishedPayload<LandingContent>("landing");
-  return { ...DEFAULT_LANDING_CONTENT, ...data };
+  const data = await getPublishedPayload<Partial<LandingContent>>("landing");
+  return mergeLandingContent(DEFAULT_LANDING_CONTENT, data ?? {});
 }
 
 export async function getPlaybookChapters() {

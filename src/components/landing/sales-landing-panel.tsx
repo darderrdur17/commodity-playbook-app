@@ -6,7 +6,9 @@ import {
   ArrowRight, AlertCircle, Users, TrendingUp, Check,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Reveal, AnimatedCounter } from "@/components/animations";
+import { Reveal } from "@/components/animations";
+import { SectionCategoryLabel } from "@/components/landing/section-category-label";
+import { MembersStrip } from "@/components/landing/members-strip";
 import type { LandingContent } from "@/data/landing-content";
 
 const SALES_COLOR = "#0F766E";
@@ -40,39 +42,40 @@ const LEARN_ITEMS = [
 
 interface Props {
   content: LandingContent["sales"];
+  membersStrip: LandingContent["membersStrip"];
   onOpenModal: () => void;
 }
 
-export function SalesLandingPanel({ content, onOpenModal }: Props) {
+export function SalesLandingPanel({ content, membersStrip, onOpenModal }: Props) {
   const learnRef = useRef<HTMLElement>(null);
 
   return (
     <div className="sales-panel">
       {/* Hero */}
-      <section className="relative overflow-hidden py-20 sm:py-28" style={{ background: "#065F46" }}>
+      <section className="relative overflow-hidden flex flex-col" style={{ background: "#065F46" }}>
         <div className="absolute top-0 right-0 w-96 h-96 rounded-full opacity-20 blur-3xl" style={{ background: SALES_COLOR }} />
-        <div className="relative z-10 max-w-[1200px] mx-auto px-4 sm:px-6">
+        <div className="relative z-10 max-w-[1200px] mx-auto px-4 sm:px-6 py-16 sm:py-24 w-full">
           <Reveal>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-teal-200/30 bg-teal-200/10 text-teal-100 text-[10px] font-bold uppercase tracking-[0.2em] mb-6">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-teal-200/30 bg-teal-200/10 text-teal-100 text-xs font-medium tracking-wide mb-6">
               <span className="w-1.5 h-1.5 rounded-full bg-teal-200 animate-pulse" />
               {content.eyebrow}
             </div>
-            <h1 className="font-serif text-[clamp(36px,6vw,64px)] font-bold leading-[1.05] text-white mb-6 max-w-3xl">
+            <h1 className="font-serif text-[clamp(32px,6vw,64px)] font-bold leading-[1.05] text-white mb-6 max-w-3xl">
               {content.headline}{" "}
               <span className="text-teal-100 italic">{content.headlineAccent}</span>
             </h1>
-            <p className="text-teal-100/75 text-lg font-light leading-relaxed max-w-2xl mb-8">
+            <p className="text-teal-100/75 text-base sm:text-lg font-light leading-relaxed max-w-2xl mb-8">
               {content.description}
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
-              <Button size="xl" className="bg-teal-600 hover:bg-teal-700 text-white border-0" onClick={onOpenModal}>
+              <Button size="xl" className="bg-teal-600 hover:bg-teal-700 text-white border-0 w-full sm:w-auto" onClick={onOpenModal}>
                 {content.ctaPrimary}
                 <ArrowRight className="w-5 h-5" />
               </Button>
               <Button
                 size="xl"
                 variant="outline-dark"
-                className="border-teal-200/40 text-white hover:bg-teal-200/10"
+                className="border-teal-200/40 text-white hover:bg-teal-200/10 w-full sm:w-auto"
                 onClick={() => learnRef.current?.scrollIntoView({ behavior: "smooth" })}
               >
                 {content.ctaSecondary}
@@ -80,15 +83,15 @@ export function SalesLandingPanel({ content, onOpenModal }: Props) {
             </div>
           </Reveal>
 
-          <div className="flex flex-wrap gap-8 sm:gap-12 mt-14 pt-10 border-t border-white/10">
+          <div className="flex flex-wrap gap-6 sm:gap-10 mt-12 sm:mt-14 pt-8 sm:pt-10 border-t border-white/10">
             {content.stats.map((stat, i) => (
               <Reveal key={stat.label} delay={i * 0.1}>
                 <div>
-                  <p className="font-serif text-3xl font-bold text-white">
+                  <p className="font-serif text-2xl sm:text-3xl font-bold text-white">
                     {stat.animate === false ? (
                       <>{stat.value}{stat.suffix}</>
                     ) : (
-                      <AnimatedCounter value={stat.value} suffix={stat.suffix} />
+                      <>{stat.value}{stat.suffix}</>
                     )}
                   </p>
                   <p className="text-teal-100/55 text-xs font-medium mt-1 max-w-[160px]">{stat.label}</p>
@@ -97,16 +100,18 @@ export function SalesLandingPanel({ content, onOpenModal }: Props) {
             ))}
           </div>
         </div>
+
+        <MembersStrip label={membersStrip.label} companies={membersStrip.companies} variant="dark" />
       </section>
 
       {/* Pain points */}
       <section className="py-16 sm:py-24 page-container">
-        <Reveal className="text-center mb-12 max-w-2xl mx-auto">
-          <p className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: SALES_COLOR }}>The Problem</p>
+        <Reveal className="text-center mb-12 max-w-3xl mx-auto">
+          <SectionCategoryLabel colorClass="text-teal-700">The Problem</SectionCategoryLabel>
           <h2 className="font-serif text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
             Your Buyers Know When You Don&apos;t Get It.
           </h2>
-          <p className="text-muted-fg text-lg">
+          <p className="text-muted-fg text-base sm:text-lg leading-relaxed">
             Commodity trading firms buy from people who understand their business. Most vendors don&apos;t.
           </p>
         </Reveal>
@@ -128,12 +133,12 @@ export function SalesLandingPanel({ content, onOpenModal }: Props) {
       {/* What you'll learn */}
       <section ref={learnRef} id="sales-learn" className="py-16 sm:py-24 bg-secondary border-y border-border">
         <div className="page-container">
-          <Reveal className="text-center mb-12 max-w-2xl mx-auto">
-            <p className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: SALES_COLOR }}>What You&apos;ll Learn</p>
+          <Reveal className="text-center mb-12 max-w-3xl mx-auto">
+            <SectionCategoryLabel colorClass="text-teal-700">What You&apos;ll Learn</SectionCategoryLabel>
             <h2 className="font-serif text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
               The Commercial Context Your Buyers Live In.
             </h2>
-            <p className="text-muted-fg text-lg">
+            <p className="text-muted-fg text-base sm:text-lg leading-relaxed">
               A working understanding of how commodity trading desks make money, manage risk, and evaluate vendors.
             </p>
           </Reveal>
@@ -155,10 +160,10 @@ export function SalesLandingPanel({ content, onOpenModal }: Props) {
         </div>
       </section>
 
-      {/* Who this is for — 6 cards with outcomes */}
+      {/* Who this is for */}
       <section className="py-16 sm:py-24 page-container">
-        <Reveal className="text-center mb-12 max-w-2xl mx-auto">
-          <p className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: SALES_COLOR }}>Who This Is For</p>
+        <Reveal className="text-center mb-12 max-w-3xl mx-auto">
+          <SectionCategoryLabel colorClass="text-teal-700">Who This Is For</SectionCategoryLabel>
           <h2 className="font-serif text-3xl sm:text-4xl font-bold text-gray-900">
             Six Sales Roles. One Shared Problem.
           </h2>
@@ -169,7 +174,7 @@ export function SalesLandingPanel({ content, onOpenModal }: Props) {
               <div className="rounded-xl border border-border bg-white p-6 h-full hover:border-teal-200 transition-all flex flex-col">
                 <p className="text-[10px] font-bold uppercase tracking-widest mb-2" style={{ color: SALES_COLOR }}>{card.role}</p>
                 <h3 className="font-serif font-semibold text-gray-900 mb-2">{card.title}</h3>
-                <p className="text-sm text-muted-fg mb-4 flex-1">{card.desc}</p>
+                <p className="text-sm text-muted-fg mb-4 flex-1 leading-relaxed">{card.desc}</p>
                 {card.outcome && (
                   <blockquote className="text-xs text-gray-600 italic border-l-2 border-teal-300 pl-3 leading-relaxed">
                     &ldquo;{card.outcome}&rdquo;
@@ -181,43 +186,50 @@ export function SalesLandingPanel({ content, onOpenModal }: Props) {
         </div>
       </section>
 
-      {/* ROI */}
-      <section className="py-16 sm:py-24 bg-secondary border-y border-border">
+      {/* Commercial Case — dark blue design */}
+      <section className="py-16 sm:py-24 bg-primary-800 section-dark relative overflow-hidden">
         <div className="page-container">
-          <Reveal className="text-center mb-12 max-w-2xl mx-auto">
-            <p className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: SALES_COLOR }}>{content.roi.eyebrow}</p>
-            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+          <Reveal className="text-center mb-10 sm:mb-12">
+            <SectionCategoryLabel colorClass="text-white/50">{content.roi.eyebrow}</SectionCategoryLabel>
+            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-white mb-4">
               {content.roi.title}{" "}
-              <span className="italic" style={{ color: SALES_COLOR }}>{content.roi.titleAccent}</span>
+              <span className="text-accent italic">{content.roi.titleAccent}</span>
             </h2>
-            <p className="text-muted-fg text-lg">{content.roi.description}</p>
+            <p className="text-white/65 text-base sm:text-lg max-w-3xl mx-auto leading-relaxed">
+              {content.roi.description}
+            </p>
           </Reveal>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-10">
-            {content.roi.stats.map((stat, i) => (
-              <Reveal key={stat.label} delay={i * 0.08}>
-                <div className="rounded-xl border border-border bg-white p-5 text-center">
-                  <p className="font-serif text-xl sm:text-2xl font-bold text-gray-900 mb-1">{stat.value}</p>
-                  <p className="text-xs text-muted-fg">{stat.label}</p>
-                </div>
-              </Reveal>
-            ))}
+
+          <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-8 items-start">
+            <div className="grid grid-cols-2 gap-3 sm:gap-4">
+              {content.roi.stats.map((stat, i) => (
+                <Reveal key={stat.label} delay={i * 0.08}>
+                  <div className="rounded-xl border border-white/15 bg-white/5 p-4 sm:p-5">
+                    <p className="font-serif text-xl sm:text-2xl font-bold text-white mb-1">{stat.value}</p>
+                    <p className="text-xs sm:text-sm text-white/55 leading-snug">{stat.label}</p>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+            <Reveal delay={0.2}>
+              <blockquote className="rounded-xl border border-accent/40 bg-white/5 p-6 sm:p-8 h-full flex flex-col justify-center">
+                <p className="font-serif text-lg sm:text-xl text-white italic leading-relaxed mb-4">
+                  &ldquo;{content.roi.quote}&rdquo;
+                </p>
+                <footer className="text-sm text-white/50">— {content.roi.quoteAuthor}</footer>
+              </blockquote>
+            </Reveal>
           </div>
-          <Reveal delay={0.2}>
-            <blockquote className="max-w-2xl mx-auto text-center">
-              <p className="font-serif text-lg text-gray-800 italic mb-3">&ldquo;{content.roi.quote}&rdquo;</p>
-              <footer className="text-sm text-muted-fg">— {content.roi.quoteAuthor}</footer>
-            </blockquote>
-          </Reveal>
         </div>
       </section>
 
-      {/* Sales pricing */}
+      {/* Sales pricing — Pro & Elite only */}
       <section className="py-16 sm:py-24 page-container">
         <Reveal className="text-center mb-12">
-          <p className="text-xs font-bold uppercase tracking-widest mb-3" style={{ color: SALES_COLOR }}>Pricing</p>
+          <SectionCategoryLabel colorClass="text-teal-700">Pricing</SectionCategoryLabel>
           <h2 className="font-serif text-3xl sm:text-4xl font-bold text-gray-900">Built for Sales Professionals.</h2>
         </Reveal>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-3xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
           {content.pricing.map((tier, i) => (
             <Reveal key={tier.name} delay={i * 0.1}>
               <div
@@ -227,7 +239,7 @@ export function SalesLandingPanel({ content, onOpenModal }: Props) {
                     : "bg-white border border-border"
                 }`}
               >
-                <div className="p-7 flex-1">
+                <div className="p-6 sm:p-7 flex-1">
                   {tier.featured && (
                     <span className="inline-block text-[10px] font-bold uppercase tracking-widest bg-teal-600 text-white px-2 py-0.5 rounded mb-3">
                       Recommended
@@ -238,7 +250,7 @@ export function SalesLandingPanel({ content, onOpenModal }: Props) {
                     <span className="font-serif text-3xl font-bold">{tier.price}</span>
                     <span className={`text-sm ml-2 ${tier.featured ? "text-teal-200/70" : "text-muted-fg"}`}>{tier.billing}</span>
                   </div>
-                  <p className={`text-sm mb-5 ${tier.featured ? "text-teal-100/75" : "text-muted-fg"}`}>{tier.description}</p>
+                  <p className={`text-sm mb-5 leading-relaxed ${tier.featured ? "text-teal-100/75" : "text-muted-fg"}`}>{tier.description}</p>
                   <ul className="space-y-2.5">
                     {tier.features.map((f) => (
                       <li key={f} className="flex items-start gap-2 text-sm">
@@ -248,7 +260,7 @@ export function SalesLandingPanel({ content, onOpenModal }: Props) {
                     ))}
                   </ul>
                 </div>
-                <div className="p-7 pt-0">
+                <div className="p-6 sm:p-7 pt-0">
                   <Link href={tier.href} className="block">
                     <Button
                       className={`w-full ${tier.featured ? "bg-teal-600 hover:bg-teal-500 text-white border-0" : ""}`}
@@ -256,6 +268,7 @@ export function SalesLandingPanel({ content, onOpenModal }: Props) {
                       size="lg"
                     >
                       {tier.cta}
+                      <ArrowRight className="w-4 h-4" />
                     </Button>
                   </Link>
                 </div>
@@ -270,21 +283,38 @@ export function SalesLandingPanel({ content, onOpenModal }: Props) {
         <div className="relative z-10 page-container text-center">
           <Reveal>
             <h2 className="font-serif text-3xl sm:text-4xl font-bold text-white mb-4">
-              Start speaking the desk&apos;s language.
+              Start Speaking the Desk&apos;s Language.
             </h2>
-            <p className="text-teal-100/70 text-lg mb-8 max-w-lg mx-auto">
+            <p className="text-teal-100/70 text-base sm:text-lg mb-8 max-w-lg mx-auto leading-relaxed">
               Get the free Starter Pack — 5 infographics plus weekly market digest. No credit card required.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-              <Button size="xl" className="bg-teal-600 hover:bg-teal-700 text-white border-0" onClick={onOpenModal}>
+              <Button size="xl" className="bg-teal-600 hover:bg-teal-700 text-white border-0 w-full sm:w-auto" onClick={onOpenModal}>
                 Start Free — Starter Pack <ArrowRight className="w-5 h-5" />
               </Button>
-              <Link href="/starter-pack">
-                <Button size="xl" variant="outline-dark" className="border-teal-200/40 text-white">
-                  Preview Starter Pack
+              <a href="mailto:hello@commodityplaybook.com" className="w-full sm:w-auto">
+                <Button size="xl" variant="outline-dark" className="border-teal-200/40 text-white w-full sm:w-auto">
+                  Contact Us
                 </Button>
-              </Link>
+              </a>
             </div>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* Team licences */}
+      <section className="py-10 sm:py-12 bg-[#ecfdf5] border-t border-teal-100">
+        <div className="page-container max-w-3xl text-center">
+          <Reveal>
+            <SectionCategoryLabel colorClass="text-teal-700">Team Licences</SectionCategoryLabel>
+            <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
+              If you want to upskill your entire sales team on commodity trading before a major campaign or account push, contact us for team pricing. Available for 5+ seats with a custom onboarding session.
+            </p>
+            <a href="mailto:hello@commodityplaybook.com" className="inline-block mt-4">
+              <Button variant="outline" className="border-teal-300 text-teal-800 hover:bg-teal-50">
+                Contact Us
+              </Button>
+            </a>
           </Reveal>
         </div>
       </section>

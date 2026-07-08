@@ -4,8 +4,8 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import {
-  ArrowRight, Check, BookOpen, BarChart3, Users, Briefcase,
-  TrendingUp, Star, Zap, Award, ChevronRight, Play,
+  ArrowRight, Check, BookOpen, Users,
+  Star, Zap, ChevronRight,
   MessageSquare, FileText, Map, Target, Info,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -16,6 +16,9 @@ import {
 } from "@/components/animations";
 import { StarterPackModal } from "@/components/landing/starter-pack-modal";
 import { SalesLandingPanel } from "@/components/landing/sales-landing-panel";
+import { SectionCategoryLabel } from "@/components/landing/section-category-label";
+import { MembersStrip } from "@/components/landing/members-strip";
+import { ChapterAccordion } from "@/components/landing/chapter-accordion";
 import {
   DEFAULT_LANDING_CONTENT,
   type LandingContent,
@@ -104,11 +107,15 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
       </div>
 
       {activeTrack === "sales" ? (
-        <SalesLandingPanel content={content.sales} onOpenModal={() => setModalOpen(true)} />
+        <SalesLandingPanel
+          content={content.sales}
+          membersStrip={content.membersStrip}
+          onOpenModal={() => setModalOpen(true)}
+        />
       ) : (
         <>
           {/* Career Hero */}
-          <section className="relative min-h-[80vh] sm:min-h-[88vh] flex items-center bg-navy section-dark overflow-hidden">
+          <section className="relative min-h-[80vh] sm:min-h-[88vh] flex flex-col bg-navy section-dark overflow-hidden">
             <GradientOrbs />
             <HeroParticles count={16} />
             <div
@@ -118,14 +125,14 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
                 backgroundSize: "60px 60px",
               }}
             />
-            <div className="relative z-10 w-full max-w-[1200px] mx-auto px-4 sm:px-6 py-16 sm:py-24">
-              <div className="max-w-3xl">
+            <div className="relative z-10 w-full max-w-[1200px] mx-auto px-4 sm:px-6 py-16 sm:py-24 flex-1 flex items-center">
+              <div className="max-w-3xl w-full">
                 <Reveal>
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-accent/30 bg-accent/10 text-accent text-[10px] font-bold uppercase tracking-[0.2em] mb-5">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-accent/30 bg-accent/10 text-accent text-xs font-medium tracking-wide mb-5">
                     <span className="w-1.5 h-1.5 rounded-full bg-accent" />
                     {career.eyebrow}
                   </div>
-                  <h1 className="font-serif text-[clamp(36px,6.5vw,68px)] font-bold leading-[1.04] tracking-tight text-white mb-6">
+                  <h1 className="font-serif text-[clamp(32px,6.5vw,68px)] font-bold leading-[1.04] tracking-tight text-white mb-6">
                     {career.headline}{" "}
                     <span className="text-accent italic">{career.headlineAccent}</span>
                   </h1>
@@ -163,81 +170,24 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
                 </Reveal>
               </div>
             </div>
-          </section>
 
-          {/* Chapter Coverage */}
-          <section className="py-16 sm:py-24 bg-secondary border-y border-border">
-            <div className="page-container">
-              <Reveal className="text-center mb-14 max-w-2xl mx-auto">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-soft text-primary-800 text-xs font-bold uppercase tracking-widest mb-4">
-                  {content.chapterCoverage.eyebrow}
-                </div>
-                <h2 className="font-serif text-[clamp(28px,4vw,44px)] font-bold tracking-tight text-gray-900 mb-4">
-                  {content.chapterCoverage.title}
-                </h2>
-                <p className="text-muted-fg text-lg">{content.chapterCoverage.description}</p>
-              </Reveal>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 items-stretch">
-                {content.chapterCoverage.chapters.map((ch, i) => (
-                  <Reveal key={ch.letter} delay={i * 0.08} className="h-full">
-                    <div className="rounded-xl border border-border bg-white p-5 h-full flex flex-col hover:border-primary-line transition-colors">
-                      <div className="w-10 h-10 rounded-lg bg-primary-800 text-white font-serif font-bold text-lg flex items-center justify-center mb-3">
-                        {ch.letter}
-                      </div>
-                      <h3 className="font-serif font-semibold text-gray-900 text-sm mb-2">{ch.title}</h3>
-                      <p className="text-xs text-muted-fg leading-relaxed">{ch.desc}</p>
-                    </div>
-                  </Reveal>
-                ))}
-              </div>
+            <div className="relative z-10 w-full">
+              <MembersStrip label={content.membersStrip.label} companies={content.membersStrip.companies} variant="dark" />
             </div>
           </section>
 
-          {/* Case Study Sample */}
-          <section className="py-16 sm:py-24 page-container">
-            <Reveal className="text-center mb-12 max-w-2xl mx-auto">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-50 text-amber-800 text-xs font-bold uppercase tracking-widest mb-4">
-                {content.caseStudySample.eyebrow}
-              </div>
-              <h2 className="font-serif text-[clamp(28px,4vw,44px)] font-bold tracking-tight text-gray-900 mb-4">
-                {content.caseStudySample.title}
-              </h2>
-              <p className="text-muted-fg text-lg">{content.caseStudySample.description}</p>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <div className="rounded-2xl border border-border bg-white overflow-hidden max-w-3xl mx-auto">
-                <div className="px-6 py-4 bg-secondary border-b border-border flex flex-wrap items-center justify-between gap-2">
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-primary-800">{content.caseStudySample.tag}</span>
-                  <span className="text-xs text-muted-fg">{content.caseStudySample.sampleMeta}</span>
-                </div>
-                <div className="p-6 sm:p-8">
-                  <h3 className="font-serif text-xl font-bold text-gray-900 mb-6">{content.caseStudySample.sampleTitle}</h3>
-                  <div className="space-y-5">
-                    {content.caseStudySample.steps.map((step) => (
-                      <div key={step.label} className="border-l-2 border-primary-400 pl-4">
-                        <p className="text-[10px] font-bold uppercase tracking-widest text-primary-800 mb-1">{step.label}</p>
-                        <p className="text-sm text-gray-700 leading-relaxed">{step.text}</p>
-                      </div>
-                    ))}
-                  </div>
-                  <p className="text-sm text-muted-fg italic mt-6 pt-6 border-t border-border">{content.caseStudySample.unlockText}</p>
-                </div>
-              </div>
-            </Reveal>
-          </section>
-
-          {/* Product tiers — What's Inside */}
+          {/* What's Inside */}
           <section className="py-16 sm:py-24 page-container">
             <Reveal className="text-center mb-14">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-soft text-primary-800 text-xs font-bold uppercase tracking-widest mb-4">
-                <Zap className="w-3.5 h-3.5" /> What&apos;s Inside
-              </div>
+              <SectionCategoryLabel>What&apos;s Inside</SectionCategoryLabel>
               <h2 className="font-serif text-[clamp(28px,4vw,44px)] font-bold tracking-tight text-gray-900 mb-4 leading-[1.1]">
                 {content.whatsInside.titleLine1}
                 <br />
                 <span className="text-primary-400 italic">{content.whatsInside.titleLine2}</span>
               </h2>
-              <p className="text-muted-fg text-lg max-w-xl mx-auto">{content.whatsInside.description}</p>
+              <p className="text-muted-fg text-base sm:text-lg max-w-3xl mx-auto leading-relaxed">
+                {content.whatsInside.description}
+              </p>
             </Reveal>
             <StaggerChildren staggerDelay={0.08} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
               {content.whatsInside.features.map((f: LandingFeature) => {
@@ -254,8 +204,8 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
                           <Badge variant={f.tier === "Elite" ? "elite" : "pro"} size="sm">{f.tier}</Badge>
                         )}
                       </div>
-                      <div>
-                        <h3 className="font-serif font-semibold text-gray-900 mb-1.5">{f.title}</h3>
+                      <div className="flex-1">
+                        <h3 className="font-serif font-semibold text-gray-900 mb-2">{f.title}</h3>
                         <p className="text-sm text-muted-fg leading-relaxed">{f.desc}</p>
                       </div>
                     </div>
@@ -265,17 +215,36 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
             </StaggerChildren>
           </section>
 
-          {/* Pricing */}
-          <section className="bg-secondary py-16 sm:py-24">
+          {/* Chapter Coverage — accordion */}
+          <section className="py-16 sm:py-24 bg-secondary border-y border-border">
             <div className="page-container">
-              <Reveal className="text-center mb-14">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary-soft text-primary-800 text-xs font-bold uppercase tracking-widest mb-4">
-                  <Award className="w-3.5 h-3.5" /> Choose Your Plan
-                </div>
+              <Reveal className="text-center mb-10 sm:mb-14 max-w-3xl mx-auto">
+                <SectionCategoryLabel>{content.chapterCoverage.eyebrow}</SectionCategoryLabel>
                 <h2 className="font-serif text-[clamp(28px,4vw,44px)] font-bold tracking-tight text-gray-900 mb-4">
+                  {content.chapterCoverage.title}
+                </h2>
+                <p className="text-muted-fg text-base sm:text-lg leading-relaxed">
+                  {content.chapterCoverage.description}
+                </p>
+              </Reveal>
+              <Reveal delay={0.1}>
+                <ChapterAccordion chapters={content.chapterCoverage.chapters} />
+              </Reveal>
+            </div>
+          </section>
+
+          {/* Pricing */}
+          <section className="bg-primary-800 section-dark py-16 sm:py-24 relative overflow-hidden">
+            <GradientOrbs />
+            <div className="relative z-10 page-container">
+              <Reveal className="text-center mb-12 sm:mb-14">
+                <SectionCategoryLabel colorClass="text-white/50">Choose Your Plan</SectionCategoryLabel>
+                <h2 className="font-serif text-[clamp(28px,4vw,44px)] font-bold tracking-tight text-white mb-4">
                   {content.pricing.title}
                 </h2>
-                <p className="text-muted-fg text-lg max-w-lg mx-auto">{content.pricing.subtitle}</p>
+                <p className="text-white/65 text-base sm:text-lg max-w-none leading-relaxed px-0">
+                  {content.pricing.subtitle}
+                </p>
               </Reveal>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
                 {content.pricing.tiers.map((tier, i) => (
@@ -283,56 +252,53 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
                     <div
                       className={`relative rounded-2xl h-full flex flex-col group/tier ${
                         tier.highlight
-                          ? "bg-primary-800 text-white border-2 border-primary-400 shadow-2xl shadow-primary-800/30"
-                          : "bg-white border border-border"
+                          ? "bg-white text-gray-900 border-2 border-primary-400 shadow-2xl"
+                          : "bg-white/10 backdrop-blur-sm border border-white/20 text-white"
                       }`}
-                      title={tier.tooltip}
                     >
                       {tier.highlight && (
                         <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-primary-400 text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">
                           Most Popular
                         </div>
                       )}
-                      <div className="p-7 flex-1">
-                        <div className="flex items-center gap-2 mb-4">
-                          <Badge variant={tier.badge}>{tier.name}</Badge>
-                          <span
-                            className="text-[10px] text-muted-fg opacity-0 group-hover/tier:opacity-100 transition-opacity cursor-help hidden sm:inline"
-                            title={tier.tooltip}
-                          >
-                            ⓘ
-                          </span>
-                        </div>
-                        <p className={`text-xs mb-3 italic ${tier.highlight ? "text-white/60" : "text-muted-fg"}`} title={tier.tooltip}>
+                      <div className="p-6 sm:p-7 flex-1">
+                        <Badge
+                          variant={tier.badge}
+                          className={tier.highlight ? "mb-4" : "mb-4 bg-white/10 text-white border-white/20"}
+                        >
+                          {tier.name}
+                        </Badge>
+                        <p
+                          className={`text-sm mb-4 italic leading-relaxed ${
+                            tier.highlight ? "text-muted-fg" : "text-white/70"
+                          }`}
+                        >
                           {tier.tooltip}
                         </p>
                         <div className="mb-4">
-                          <span className={`font-serif text-4xl font-bold ${tier.highlight ? "text-white" : "text-gray-900"}`}>
+                          <span className={`font-serif text-3xl sm:text-4xl font-bold ${tier.highlight ? "text-gray-900" : "text-white"}`}>
                             {tier.price}
                           </span>
                           {tier.price !== "Free" && (
-                            <span className={`text-sm ml-2 ${tier.highlight ? "text-white/60" : "text-muted-fg"}`}>
+                            <span className={`text-sm ml-2 ${tier.highlight ? "text-muted-fg" : "text-white/60"}`}>
                               {tier.billing}
                             </span>
                           )}
                         </div>
-                        <p className={`text-sm mb-6 ${tier.highlight ? "text-white/70" : "text-muted-fg"}`}>
-                          {tier.description}
-                        </p>
-                        <ul className="space-y-3">
+                        <ul className="space-y-2.5">
                           {tier.features.map((f) => (
                             <li key={f} className="flex items-start gap-2.5 text-sm">
-                              <Check className={`w-4 h-4 mt-0.5 flex-shrink-0 ${tier.highlight ? "text-accent" : "text-primary-400"}`} />
-                              <span className={tier.highlight ? "text-white/85" : "text-gray-700"}>{f}</span>
+                              <Check className={`w-4 h-4 mt-0.5 flex-shrink-0 ${tier.highlight ? "text-primary-400" : "text-accent"}`} />
+                              <span className={tier.highlight ? "text-gray-700" : "text-white/85"}>{f}</span>
                             </li>
                           ))}
                         </ul>
                       </div>
-                      <div className="p-7 pt-0">
+                      <div className="p-6 sm:p-7 pt-0">
                         {tier.opensModal ? (
                           <Button
                             className="w-full"
-                            variant={tier.highlight ? "primary-dark" : "outline"}
+                            variant={tier.highlight ? "default" : "primary-dark"}
                             size="lg"
                             onClick={() => setModalOpen(true)}
                           >
@@ -342,7 +308,7 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
                           <Link href={tier.href} className="block">
                             <Button
                               className="w-full"
-                              variant={tier.highlight ? "primary-dark" : tier.name === "Starter" ? "outline" : "default"}
+                              variant={tier.highlight ? "default" : "primary-dark"}
                               size="lg"
                             >
                               {tier.cta}
@@ -356,7 +322,7 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
                 ))}
               </div>
               <Reveal className="text-center mt-8">
-                <Link href="/pricing" className="inline-flex items-center gap-1.5 text-sm text-muted-fg hover:text-primary-400 transition-colors">
+                <Link href="/pricing" className="inline-flex items-center gap-1.5 text-sm text-white/60 hover:text-white transition-colors">
                   View full feature comparison <ChevronRight className="w-4 h-4" />
                 </Link>
               </Reveal>
@@ -406,32 +372,20 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
                   <span className="text-accent italic">It&apos;s free to begin.</span>
                 </h2>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mt-8">
-                  <Button size="xl" variant="primary-dark" className="shadow-xl" onClick={() => setModalOpen(true)}>
+                  <Button size="xl" variant="primary-dark" className="shadow-xl w-full sm:w-auto" onClick={() => setModalOpen(true)}>
                     Start Free — Starter Pack <ArrowRight className="w-5 h-5" />
                   </Button>
-                  <Link href="/glossary">
-                    <Button size="xl" variant="outline-dark">Browse Glossary</Button>
-                  </Link>
+                  <a href="mailto:hello@commodityplaybook.com" className="w-full sm:w-auto">
+                    <Button size="xl" variant="outline-dark" className="w-full sm:w-auto">
+                      Contact Us
+                    </Button>
+                  </a>
                 </div>
               </Reveal>
             </div>
           </section>
         </>
       )}
-
-      {/* Members strip — both tracks */}
-      <section className="py-9 bg-secondary border-t border-border">
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 text-center">
-          <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-muted-fg mb-5">
-            {content.membersStrip.label}
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-8 sm:gap-12 opacity-60">
-            {content.membersStrip.companies.map((name) => (
-              <span key={name} className="font-serif font-bold text-lg text-gray-900">{name}</span>
-            ))}
-          </div>
-        </div>
-      </section>
 
       <StarterPackModal open={modalOpen} onClose={() => setModalOpen(false)} />
     </div>

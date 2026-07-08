@@ -54,7 +54,7 @@ export function FooterNewsletter() {
           onChange={(e) => setEmail(e.target.value)}
           placeholder="your@email.com"
           disabled={status === "loading"}
-          className="w-full sm:w-[236px] bg-white/[0.06] border border-white/[0.14] rounded-[7px] px-[17px] py-[11px] text-sm text-white placeholder:text-white/25 outline-none focus:border-white/[0.34] transition-colors disabled:opacity-60"
+          className="w-full sm:w-[236px] bg-[#1a1a1a] border border-white/20 rounded-[7px] px-[17px] py-[11px] text-sm text-white placeholder:text-white/30 outline-none focus:border-white/40 transition-colors disabled:opacity-60"
         />
         <button
           type="submit"

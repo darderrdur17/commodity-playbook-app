@@ -6,6 +6,7 @@ import {
   updateContentModule,
 } from "@/lib/content/repository";
 import { getModuleMeta } from "@/lib/content/modules";
+import { parseLandingContentPayload, formatLandingValidationErrors } from "@/lib/content/landing-schema";
 import { z } from "zod";
 import type { Tier } from "@prisma/client";
 
@@ -62,6 +63,20 @@ export async function PUT(
       JSON.stringify(parsed.data.payload);
     } catch {
       return NextResponse.json({ error: "Payload must be JSON-serializable" }, { status: 400 });
+    }
+
+    if (slug === "landing") {
+      const landingValidation = parseLandingContentPayload(parsed.data.payload);
+      if (!landingValidation.success) {
+        return NextResponse.json(
+          {
+            error: "Invalid landing content",
+            details: formatLandingValidationErrors(landingValidation),
+          },
+          { status: 400 }
+        );
+      }
+      parsed.data.payload = landingValidation.data;
     }
   }
 

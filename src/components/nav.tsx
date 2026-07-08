@@ -113,7 +113,7 @@ export function Nav() {
           style={{ height: NAV_HEIGHT }}
         >
           <div className="flex items-center min-w-0">
-            <Logo variant="header" priority imageClassName="h-9 sm:h-11 w-auto max-h-none" />
+            <Logo variant="header" priority imageClassName="h-10 sm:h-[52px] w-auto max-h-none" />
           </div>
 
           <nav className="hidden md:flex items-center justify-center gap-0.5">

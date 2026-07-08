@@ -129,7 +129,7 @@ export default function PricingPage() {
               <Badge variant="starter" className="mb-4">Starter</Badge>
               <div className="mb-5">
                 <div className="font-serif text-4xl font-bold text-gray-900 mb-1">Free</div>
-                <p className="text-sm text-muted-fg">Forever — no card required</p>
+                <p className="text-sm text-muted-fg">Only an email required</p>
               </div>
               <p className="text-sm text-muted-fg mb-6">
                 Your first step onto the desk. Explore the playbook and get desk-ready resources instantly.
@@ -159,7 +159,7 @@ export default function PricingPage() {
                   <span className="font-serif text-4xl font-bold">SGD 99</span>
                   <span className="text-white/60 text-sm">one-time</span>
                 </div>
-                <p className="text-sm text-white/60 mt-1">Lifetime access — no expiry</p>
+                <p className="text-sm text-white/60 mt-1">One-time purchase</p>
               </div>
               <p className="text-sm text-white/70 mb-6">
                 Everything you need to position yourself, prepare for interviews, and map your career.
@@ -178,7 +178,7 @@ export default function PricingPage() {
                 onClick={() => handlePurchase("pro")}
                 loading={loadingPlan === "pro"}
               >
-                Get Pro — SGD 99 <ArrowRight className="w-4 h-4" />
+                Get Pro <ArrowRight className="w-4 h-4" />
               </Button>
             </div>
           </Reveal>
@@ -192,7 +192,7 @@ export default function PricingPage() {
                   <span className="font-serif text-4xl font-bold text-gray-900">SGD 299</span>
                   <span className="text-sm text-muted-fg">/month</span>
                 </div>
-                <p className="text-sm text-muted-fg mt-1">Cancel anytime</p>
+                <p className="text-sm text-muted-fg mt-1">Live intelligence updates, and the full practitioner network</p>
               </div>
               <p className="text-sm text-muted-fg mb-6">
                 Live intelligence, mentor access, and the full practitioner network — for serious professionals.
@@ -210,7 +210,7 @@ export default function PricingPage() {
                 onClick={() => handlePurchase("elite")}
                 loading={loadingPlan === "elite"}
               >
-                Get Elite — SGD 299/mo <ArrowRight className="w-4 h-4" />
+                Get Elite <ArrowRight className="w-4 h-4" />
               </Button>
             </div>
           </Reveal>
