@@ -1,17 +1,35 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useState } from "react";
 import Link from "next/link";
 import {
-  ArrowRight, AlertCircle, Users, TrendingUp, Check,
+  ArrowRight, AlertCircle, Users, TrendingUp, Check, Download, Star,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Reveal } from "@/components/animations";
+import { Reveal, StaggerChildren, StaggerItem } from "@/components/animations";
 import { SectionCategoryLabel } from "@/components/landing/section-category-label";
 import { MembersStrip } from "@/components/landing/members-strip";
 import type { LandingContent } from "@/data/landing-content";
 
 const SALES_COLOR = "#0F766E";
+
+const SALES_TESTIMONIALS = [
+  {
+    quote: "After the Playbook, I stopped presenting to operations and started having commercial conversations with the desk. First call conversion improved immediately.",
+    name: "Marcus L.",
+    role: "Enterprise Software Sales",
+  },
+  {
+    quote: "Understanding how desks actually use AIS data changed how I demo. Win rate on enterprise accounts up 35%.",
+    name: "Nadia R.",
+    role: "Data Platform Sales",
+  },
+  {
+    quote: "The Playbook's risk chapter gave me the vocabulary to have real conversations with the CRO. Accelerated our deal cycle by 6 weeks.",
+    name: "Chris B.",
+    role: "Risk Technology Sales",
+  },
+];
 
 const PAIN_POINTS = [
   {
@@ -44,10 +62,30 @@ interface Props {
   content: LandingContent["sales"];
   membersStrip: LandingContent["membersStrip"];
   onOpenModal: () => void;
+  onOpenContactModal: () => void;
 }
 
-export function SalesLandingPanel({ content, membersStrip, onOpenModal }: Props) {
+export function SalesLandingPanel({ content, membersStrip, onOpenModal, onOpenContactModal }: Props) {
   const learnRef = useRef<HTMLElement>(null);
+  const [email, setEmail] = useState("");
+  const [subscribeStatus, setSubscribeStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+
+  async function handleStarterPackSubscribe(e: React.FormEvent) {
+    e.preventDefault();
+    setSubscribeStatus("loading");
+    try {
+      const res = await fetch("/api/newsletter/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email }),
+      });
+      if (!res.ok) throw new Error();
+      setSubscribeStatus("success");
+      setEmail("");
+    } catch {
+      setSubscribeStatus("error");
+    }
+  }
 
   return (
     <div className="sales-panel">
@@ -204,9 +242,9 @@ export function SalesLandingPanel({ content, membersStrip, onOpenModal }: Props)
             <div className="grid grid-cols-2 gap-3 sm:gap-4">
               {content.roi.stats.map((stat, i) => (
                 <Reveal key={stat.label} delay={i * 0.08}>
-                  <div className="rounded-xl border border-white/15 bg-white/5 p-4 sm:p-5">
-                    <p className="font-serif text-xl sm:text-2xl font-bold text-white mb-1">{stat.value}</p>
-                    <p className="text-xs sm:text-sm text-white/55 leading-snug">{stat.label}</p>
+                  <div className="rounded-xl p-4 sm:p-5" style={{ background: "#dcfce7" }}>
+                    <p className="font-serif text-xl sm:text-2xl font-bold text-gray-900 mb-1">{stat.value}</p>
+                    <p className="text-xs sm:text-sm text-gray-700 leading-snug">{stat.label}</p>
                   </div>
                 </Reveal>
               ))}
@@ -278,28 +316,94 @@ export function SalesLandingPanel({ content, membersStrip, onOpenModal }: Props)
         </div>
       </section>
 
-      {/* Sales CTA */}
-      <section className="py-16 sm:py-20 relative overflow-hidden" style={{ background: "#065F46" }}>
-        <div className="relative z-10 page-container text-center">
-          <Reveal>
-            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-white mb-4">
-              Start Speaking the Desk&apos;s Language.
-            </h2>
-            <p className="text-teal-100/70 text-base sm:text-lg mb-8 max-w-lg mx-auto leading-relaxed">
-              Get the free Starter Pack — 5 infographics plus weekly market digest. No credit card required.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-3">
-              <Button size="xl" className="bg-teal-600 hover:bg-teal-700 text-white border-0 w-full sm:w-auto" onClick={onOpenModal}>
-                Start Free — Starter Pack <ArrowRight className="w-5 h-5" />
-              </Button>
-              <a href="mailto:hello@commodityplaybook.com" className="w-full sm:w-auto">
-                <Button size="xl" variant="outline-dark" className="border-teal-200/40 text-white w-full sm:w-auto">
-                  Contact Us
-                </Button>
-              </a>
+      {/* Free Starter Pack signup */}
+      <section className="py-16 sm:py-20 page-container">
+        <Reveal>
+          <div className="rounded-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-8 lg:gap-10 p-8 sm:p-10 relative" style={{ background: "#065F46" }}>
+            <div className="absolute top-0 right-0 w-64 h-64 rounded-full opacity-15 blur-3xl" style={{ background: SALES_COLOR }} />
+            <div className="relative z-10">
+              <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-teal-200 mb-3">
+                Free Starter Pack
+              </p>
+              <h2 className="font-serif text-2xl sm:text-3xl font-bold text-white mb-3 leading-tight">
+                Get 5 desk infographics.
+                <br />
+                Download instantly, free.
+              </h2>
+              <p className="text-teal-100/75 text-sm sm:text-base leading-relaxed mb-5 max-w-md">
+                Five A4 reference sheets that show how commodity desks actually operate — before you walk into your next account meeting.
+              </p>
+              <div className="grid grid-cols-2 gap-x-4 gap-y-2">
+                {["Ecosystem Map", "LNG Cargo Flow", "Crack Spread Guide", "Price Benchmarks 101", "Trade Finance Flow"].map((item) => (
+                  <p key={item} className="flex items-center gap-1.5 text-sm text-teal-100/85">
+                    <Check className="w-3.5 h-3.5 text-teal-300 flex-shrink-0" /> {item}
+                  </p>
+                ))}
+              </div>
             </div>
-          </Reveal>
-        </div>
+            <div className="relative z-10 flex flex-col justify-center gap-2.5">
+              <form onSubmit={handleStarterPackSubscribe} className="flex flex-col gap-2.5">
+                <input
+                  type="email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  placeholder="your@email.com"
+                  disabled={subscribeStatus === "loading"}
+                  className="w-full h-12 px-4 rounded-lg bg-white text-gray-900 placeholder:text-gray-400 text-sm outline-none focus:ring-2 focus:ring-teal-300 disabled:opacity-60"
+                />
+                <Button
+                  type="submit"
+                  size="lg"
+                  className="w-full bg-white text-teal-900 hover:bg-white/90 border-0"
+                  loading={subscribeStatus === "loading"}
+                >
+                  <Download className="w-4 h-4" />
+                  Get the Free Pack
+                </Button>
+              </form>
+              <p className="text-xs text-teal-100/60 text-center">
+                {subscribeStatus === "success"
+                  ? "You're on the list — check your inbox!"
+                  : subscribeStatus === "error"
+                    ? "Something went wrong. Please try again."
+                    : "No spam. Unsubscribe anytime."}
+              </p>
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* Testimonials */}
+      <section className="py-16 sm:py-24 page-container">
+        <Reveal className="text-center mb-14">
+          <div className="flex items-center justify-center gap-1 mb-4">
+            {[...Array(5)].map((_, i) => (
+              <Star key={i} className="w-5 h-5 text-amber-400 fill-amber-400" />
+            ))}
+          </div>
+          <h2 className="font-serif text-[clamp(28px,4vw,44px)] font-bold tracking-tight text-gray-900">
+            Used by practitioners who mean it.
+          </h2>
+        </Reveal>
+        <StaggerChildren className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+          {SALES_TESTIMONIALS.map((t) => (
+            <StaggerItem key={t.name} className="h-full">
+              <div className="card-hover rounded-xl border border-border bg-white p-6 h-full flex flex-col gap-4">
+                <p className="text-gray-700 text-sm leading-relaxed flex-1 italic">&ldquo;{t.quote}&rdquo;</p>
+                <div className="flex items-center gap-3 pt-2 border-t border-border">
+                  <div className="w-9 h-9 rounded-full flex items-center justify-center text-white text-sm font-bold" style={{ background: SALES_COLOR }}>
+                    {t.name[0]}
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-gray-800">{t.name}</p>
+                    <p className="text-xs text-muted-fg">{t.role}</p>
+                  </div>
+                </div>
+              </div>
+            </StaggerItem>
+          ))}
+        </StaggerChildren>
       </section>
 
       {/* Team licences */}
@@ -307,14 +411,19 @@ export function SalesLandingPanel({ content, membersStrip, onOpenModal }: Props)
         <div className="page-container max-w-3xl text-center">
           <Reveal>
             <SectionCategoryLabel colorClass="text-teal-700">Team Licences</SectionCategoryLabel>
+            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-teal-900 mb-3">
+              Start Speaking the Desk&apos;s Language.
+            </h2>
             <p className="text-sm sm:text-base text-gray-700 leading-relaxed">
               If you want to upskill your entire sales team on commodity trading before a major campaign or account push, contact us for team pricing. Available for 5+ seats with a custom onboarding session.
             </p>
-            <a href="mailto:hello@commodityplaybook.com" className="inline-block mt-4">
-              <Button variant="outline" className="border-teal-300 text-teal-800 hover:bg-teal-50">
-                Contact Us
-              </Button>
-            </a>
+            <Button
+              variant="outline"
+              className="border-teal-300 text-teal-800 hover:bg-teal-50 mt-4"
+              onClick={onOpenContactModal}
+            >
+              Contact Us
+            </Button>
           </Reveal>
         </div>
       </section>

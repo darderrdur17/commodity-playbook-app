@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import {
-  ArrowRight, Check, BookOpen, Users,
+  ArrowRight, Check, BookOpen, Users, Lock,
   Star, Zap, ChevronRight,
   MessageSquare, FileText, Map, Target, Info,
 } from "lucide-react";
@@ -15,6 +15,7 @@ import {
   HeroParticles, GradientOrbs,
 } from "@/components/animations";
 import { StarterPackModal } from "@/components/landing/starter-pack-modal";
+import { ContactModal } from "@/components/landing/contact-modal";
 import { SalesLandingPanel } from "@/components/landing/sales-landing-panel";
 import { SectionCategoryLabel } from "@/components/landing/section-category-label";
 import { MembersStrip } from "@/components/landing/members-strip";
@@ -39,9 +40,9 @@ const TESTIMONIALS = [
     personaColor: "#0F766E",
   },
   {
-    quote: "The Desk Channel gave me actual desk language I could use in client calls. My close rate went up noticeably after week one.",
+    quote: "The Playbook gave me the commodity context I was missing — I finally understood the trade, not just the financing.",
     name: "James K.",
-    role: "B2B Sales, London",
+    role: "Commodity Trade Finance, London",
     personaColor: "#9A3412",
   },
   {
@@ -60,6 +61,7 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
   const searchParams = useSearchParams();
   const [activeTrack, setActiveTrack] = useState<Track>("career");
   const [modalOpen, setModalOpen] = useState(false);
+  const [contactOpen, setContactOpen] = useState(false);
 
   useEffect(() => {
     const track = searchParams.get("track");
@@ -72,9 +74,9 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
   const tierColors: Record<string, string> = { Pro: "#3280ff", Elite: "#B45309" };
 
   return (
-    <div className="overflow-hidden -mt-[calc(72px+env(safe-area-inset-top,0px))]">
+    <div className="overflow-hidden -mt-[calc(80px+env(safe-area-inset-top,0px))]">
       {/* Audience toggle — flush under nav */}
-      <div className="sticky top-[calc(72px+env(safe-area-inset-top,0px))] z-40 bg-white border-b border-border shadow-sm">
+      <div className="sticky top-[calc(80px+env(safe-area-inset-top,0px))] z-40 bg-white border-b border-border shadow-sm">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 flex items-stretch gap-0 overflow-x-auto scrollbar-none">
           <button
             type="button"
@@ -111,6 +113,7 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
           content={content.sales}
           membersStrip={content.membersStrip}
           onOpenModal={() => setModalOpen(true)}
+          onOpenContactModal={() => setContactOpen(true)}
         />
       ) : (
         <>
@@ -231,6 +234,50 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
                 <ChapterAccordion chapters={content.chapterCoverage.chapters} />
               </Reveal>
             </div>
+          </section>
+
+          {/* Case Studies sample */}
+          <section className="py-16 sm:py-24 page-container">
+            <Reveal className="text-center mb-12 sm:mb-14 max-w-3xl mx-auto">
+              <SectionCategoryLabel>{content.caseStudySample.eyebrow}</SectionCategoryLabel>
+              <h2 className="font-serif text-[clamp(28px,4vw,44px)] font-bold tracking-tight text-gray-900 mb-4">
+                {content.caseStudySample.title}{" "}
+                <span className="text-primary-400 italic">{content.caseStudySample.titleAccent}</span>
+              </h2>
+              <p className="text-muted-fg text-base sm:text-lg leading-relaxed">
+                {content.caseStudySample.description}
+              </p>
+            </Reveal>
+            <Reveal delay={0.1} className="max-w-3xl mx-auto">
+              <div className="rounded-2xl border border-border bg-white overflow-hidden">
+                <div className="px-6 sm:px-8 py-5 border-b border-border flex flex-wrap items-center justify-between gap-2">
+                  <Badge variant="pro" size="sm">{content.caseStudySample.tag}</Badge>
+                  <p className="text-xs text-muted-fg">{content.caseStudySample.sampleMeta}</p>
+                </div>
+                <div className="px-6 sm:px-8 py-6">
+                  <h3 className="font-serif text-lg sm:text-xl font-bold text-gray-900 mb-6">
+                    {content.caseStudySample.sampleTitle}
+                  </h3>
+                  <div className="space-y-5">
+                    {content.caseStudySample.steps.map((step) => (
+                      <div key={step.label} className="flex gap-4">
+                        <div className="w-1 rounded-full bg-primary-400/30 shrink-0" />
+                        <div>
+                          <p className="text-[11px] font-bold uppercase tracking-widest text-primary-400 mb-1">
+                            {step.label}
+                          </p>
+                          <p className="text-sm text-gray-700 leading-relaxed">{step.text}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className="px-6 sm:px-8 py-4 bg-secondary border-t border-border flex items-center gap-2.5">
+                  <Lock className="w-4 h-4 text-muted-fg shrink-0" />
+                  <p className="text-sm text-muted-fg">{content.caseStudySample.unlockText}</p>
+                </div>
+              </div>
+            </Reveal>
           </section>
 
           {/* Pricing */}
@@ -375,11 +422,14 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
                   <Button size="xl" variant="primary-dark" className="shadow-xl w-full sm:w-auto" onClick={() => setModalOpen(true)}>
                     Start Free — Starter Pack <ArrowRight className="w-5 h-5" />
                   </Button>
-                  <a href="mailto:hello@commodityplaybook.com" className="w-full sm:w-auto">
-                    <Button size="xl" variant="outline-dark" className="w-full sm:w-auto">
-                      Contact Us
-                    </Button>
-                  </a>
+                  <Button
+                    size="xl"
+                    variant="outline-dark"
+                    className="w-full sm:w-auto"
+                    onClick={() => setContactOpen(true)}
+                  >
+                    Contact Us
+                  </Button>
                 </div>
               </Reveal>
             </div>
@@ -388,6 +438,7 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
       )}
 
       <StarterPackModal open={modalOpen} onClose={() => setModalOpen(false)} />
+      <ContactModal open={contactOpen} onClose={() => setContactOpen(false)} />
     </div>
   );
 }

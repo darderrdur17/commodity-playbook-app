@@ -55,7 +55,7 @@ export const RESUME_TEMPLATES: ResumeTemplate[] = [
     id: "fresh_grad",
     persona: "FRESH_GRAD",
     label: "Fresh Graduate",
-    roleBand: "Student · Early career · Analytics / Scheduling / Risk entry tracks",
+    roleBand: "Undergraduate · Postgraduate · 0–2 Years Experience",
     positioningChallenge:
       "No trading experience is expected — but commercial curiosity is non-negotiable. The template shows you understand the market and have already started engaging with it before your first role.",
     templateFile: "fresh_grad_resume_template.docx",
@@ -96,8 +96,120 @@ export interface IndustryMapZone {
   zone: string;
   title: string;
   color: string;
+  muted?: boolean;
   roles: { name: string; tag?: string }[];
+}
+
+export interface TemplatePreviewSection {
+  label: string;
+  accent?: boolean;
+  barWidths: number[];
+}
+
+export interface TemplateCardDetails {
+  title: string;
+  whoThisIsFor: string;
+  highlights: string[];
+  previewTagline: string;
+  previewSections: TemplatePreviewSection[];
 }
 
 export const PERSONA_QUIZ_STEPS: PersonaQuizStep[] = resumeExtras.quizSteps as PersonaQuizStep[];
 export const INDUSTRY_MAP: IndustryMapZone[] = resumeExtras.industryMap as IndustryMapZone[];
+export const POSITIONING_PRINCIPLE = (
+  resumeExtras as {
+    positioningPrinciple?: { title: string; body: string };
+  }
+).positioningPrinciple ?? {
+  title: "The positioning principle that every template is built on",
+  body: "Hiring managers in commodity trading do not read resumes looking for impressive job titles. They read them looking for evidence that you understand how physical markets work and that you can contribute commercially from day one. Every template in this pack is built around that single insight — commercial awareness over career narrative.",
+};
+
+export const TEMPLATE_CARD_DETAILS: Record<string, TemplateCardDetails> = {
+  switcher: {
+    title: "Coming From Finance, Consulting, or Engineering",
+    whoThisIsFor:
+      "Professionals with 2–8 years of experience in banking, consulting, engineering, or O&G technical roles who are targeting a transition into commodity trading or a commercial role at an energy firm.",
+    highlights: [
+      "Market Knowledge section placed above work experience — your commercial awareness leads, not your job history",
+      "Pre-built bullet formula prompts: [what you analysed] + [market signal] + [commercial action]",
+      "Amber accent colour signals cross-industry credibility without screaming \"outsider\"",
+      "Guidance notes throughout explain the positioning logic behind each section",
+      "Skills section uses commodity-specific terms (Platts, crack spreads, EFS, JKM) not generic finance jargon",
+    ],
+    previewTagline: "THE SWITCHER — Cross-Industry Commercial Positioning",
+    previewSections: [
+      { label: "Market Knowledge", accent: true, barWidths: [90, 70, 80] },
+      { label: "Professional Experience", barWidths: [90, 60, 80, 50] },
+      { label: "Education · Skills", barWidths: [70, 50] },
+    ],
+  },
+  insider: {
+    title: "Already Inside the Industry, Moving Toward the Desk",
+    whoThisIsFor:
+      "Professionals already working inside a commodity trading firm in a non-desk function who want to move into a commercial, trading, or analytics role within the same firm or at a competitor.",
+    highlights: [
+      "Commercial & Desk Interaction section — places evidence of front-office exposure above operational detail",
+      "Bullet prompts use \"supported trading desk in…\" and \"flagged arbitrage opportunity that resulted in…\" language",
+      "Teal accent positions the profile as credible industry insider, not a lateral transfer",
+      "ETRM systems prominently featured — signals operational depth that analytical candidates lack",
+      "Framing guidance: \"execution-to-commercial bridge\" — you know how deals land, not just how they're structured",
+    ],
+    previewTagline: "THE INSIDER — Ops-to-Commercial Positioning",
+    previewSections: [
+      { label: "Commercial & Desk Interaction", accent: true, barWidths: [90, 70, 80] },
+      { label: "Professional Experience", barWidths: [90, 60, 80, 50] },
+    ],
+  },
+  analyst: {
+    title: "Quant / Analytics Background Moving Toward the Desk",
+    whoThisIsFor:
+      "Analytics professionals, quantitative researchers, or data scientists with commodity market exposure who want to move into a front-office trading or senior analytics role with direct commercial impact.",
+    highlights: [
+      "Market Views section — 2–3 dated, specific calls you made and what happened (the key differentiator)",
+      "Independent Project block for a GitHub data project — proves market engagement outside work",
+      "Every model bullet ends with a commercial implication — not just what was built but what decision it enabled",
+      "Technical tools woven into achievements, not listed in a skills block",
+      "Purple signals analytical depth and commercial ambition simultaneously",
+    ],
+    previewTagline: "ANALYST-TO-TRADER — Quantitative Commercial",
+    previewSections: [
+      { label: "Market Views", accent: true, barWidths: [90, 70] },
+      { label: "Experience · Independent Project", barWidths: [90, 60, 80] },
+    ],
+  },
+  vendor: {
+    title: "Market Intelligence Vendor Moving Into the Industry",
+    whoThisIsFor:
+      "Professionals at Platts, Argus, ICIS, Kpler, Vortexa, Wood Mac, or similar firms who have spent years advising trading desks and now want to join one — in an analytics, commercial, or intelligence role.",
+    highlights: [
+      "\"Your Hidden Edge\" advisory panel — explicitly unlocks the commercial value most vendor candidates undersell",
+      "Market Knowledge & Commercial Insight section replaces a generic \"account management\" section",
+      "Desk-Level Client Engagement section — shows the depth of relationship, not a headcount",
+      "All revenue metrics removed and replaced with market intelligence outputs",
+      "Cover letter hook guidance: open with a specific market observation from your coverage beat",
+    ],
+    previewTagline: "THE VENDOR — Market Intelligence to Desk",
+    previewSections: [
+      { label: "Market Knowledge & Insight", accent: true, barWidths: [90, 70, 80] },
+      { label: "Experience · Desk Engagement", barWidths: [90, 60] },
+    ],
+  },
+  fresh_grad: {
+    title: "Student or Early-Career — Building the Foundation",
+    whoThisIsFor:
+      "Undergraduates, recent graduates, and professionals with 0–2 years of experience who want to enter the commodity trading industry — in any function — and need to demonstrate commercial curiosity without direct experience.",
+    highlights: [
+      "\"What Skills Do You Need?\" guidance panel — a gold callout box that maps graduates to their entry track before they fill in a single bullet",
+      "Market Knowledge section prominently placed — your weekly EIA tracking or LNG price study goes here",
+      "Independent Projects section — even a basic Excel crack spread model demonstrates real engagement",
+      "Education elevated as primary section — coursework commercially reframed",
+      "Entry track selector: Analytics, Scheduling/Ops, or Risk — choose one before applying",
+    ],
+    previewTagline: "FRESH GRADUATE — Entry-Level Positioning",
+    previewSections: [
+      { label: "Market Knowledge · Skills Guide", accent: true, barWidths: [90, 60] },
+      { label: "Education · Projects · Activities", barWidths: [90, 70, 50] },
+    ],
+  },
+};

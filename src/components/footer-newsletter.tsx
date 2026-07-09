@@ -36,12 +36,12 @@ export function FooterNewsletter() {
   }
 
   return (
-    <div className="py-[34px] border-b border-white/[0.07] flex flex-col sm:flex-row sm:items-center sm:justify-between gap-7">
+    <div className="py-[34px] border-b border-border flex flex-col sm:flex-row sm:items-center sm:justify-between gap-7">
       <div className="flex flex-col gap-1.5">
-        <span className="font-serif text-xl font-bold italic text-white tracking-tight leading-tight">
+        <span className="font-serif text-xl font-bold italic text-gray-900 tracking-tight leading-tight">
           Stay close to the desk.
         </span>
-        <span className="text-[13.5px] text-white/[0.46] leading-snug">
+        <span className="text-[13.5px] text-muted-fg leading-snug">
           One short email. Industry happenings.
         </span>
       </div>
@@ -54,19 +54,19 @@ export function FooterNewsletter() {
           onChange={(e) => setEmail(e.target.value)}
           placeholder="your@email.com"
           disabled={status === "loading"}
-          className="w-full sm:w-[236px] bg-[#1a1a1a] border border-white/20 rounded-[7px] px-[17px] py-[11px] text-sm text-white placeholder:text-white/30 outline-none focus:border-white/40 transition-colors disabled:opacity-60"
+          className="w-full sm:w-[236px] bg-white border border-border rounded-[7px] px-[17px] py-[11px] text-sm text-gray-900 placeholder:text-gray-400 outline-none focus:border-primary-400 focus:ring-2 focus:ring-primary-400/20 transition-colors disabled:opacity-60"
         />
         <button
           type="submit"
           disabled={status === "loading"}
-          className="bg-white text-black border-none rounded-[7px] px-[22px] py-[11px] text-sm font-bold whitespace-nowrap hover:bg-white/90 hover:-translate-y-px transition-all disabled:opacity-60"
+          className="bg-primary-400 text-white border-none rounded-[7px] px-[22px] py-[11px] text-sm font-bold whitespace-nowrap hover:bg-primary-500 hover:-translate-y-px transition-all disabled:opacity-60"
         >
           {status === "loading" ? "…" : "I'm in →"}
         </button>
       </form>
 
       {message && (
-        <p className={`text-xs mt-2 ${status === "error" ? "text-red-400" : "text-emerald-400"}`}>
+        <p className={`text-xs mt-2 ${status === "error" ? "text-red-600" : "text-emerald-600"}`}>
           {message}
         </p>
       )}

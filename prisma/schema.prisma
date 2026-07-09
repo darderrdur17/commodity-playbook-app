@@ -230,6 +230,15 @@ model EmailSubscriber {
   updatedAt   DateTime @updatedAt
 }
 
+// ── Contact form submissions ─────────────────────────────────────────
+model ContactMessage {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  message   String   @db.Text
+  createdAt DateTime @default(now())
+}
+
 // ── Demo email log (Mentor Connect notifications preview) ───────────
 model DemoEmailLog {
   id        String   @id @default(cuid())

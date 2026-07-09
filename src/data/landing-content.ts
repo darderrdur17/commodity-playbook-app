@@ -94,6 +94,7 @@ export interface LandingContent {
   caseStudySample: {
     eyebrow: string;
     title: string;
+    titleAccent: string;
     description: string;
     tag: string;
     sampleTitle: string;
@@ -130,8 +131,8 @@ export const DEFAULT_LANDING_CONTENT: LandingContent = {
     ctaSecondary: "Preview Content",
     heroStats: [
       { value: 20, suffix: "+", label: "Years desk experience" },
-      { value: 5, suffix: "", label: "Full playbook chapters" },
-      { value: 120, suffix: "", label: "Downloadable assets" },
+      { value: 9, suffix: "", label: "Full playbook chapters" },
+      { value: 100, suffix: "+", label: "digital assets" },
       { value: 10, suffix: "+", label: "Deep case studies" },
     ],
   },
@@ -178,33 +179,33 @@ export const DEFAULT_LANDING_CONTENT: LandingContent = {
         name: "Pro",
         price: "SGD 99",
         billing: "one-time",
-        description: "One-time purchase. Everything you need to start selling smarter.",
+        description: "The foundation for selling smarter into commodity trading firms.",
         features: [
-          "Full Playbook — 5 chapters, 120+ assets",
-          "Market Knowledge Test",
-          "50 Practitioner Q&As",
-          "Free Data Sources Guide",
-          "20+ Infographics + glossary",
+          "Everything in Free Starter Pack",
+          "Full Playbook — all 9 chapters covering every desk function, with examples and frameworks",
+          "Market Knowledge Test — identify exactly which areas to study before key accounts",
+          "Desk Glossary — explain the way a senior trader would do",
+          "Sales Guide - key industry areas to look out for when selling",
         ],
         cta: "Get Pro",
         href: "/signup?plan=pro",
-        featured: true,
+        featured: false,
       },
       {
         name: "Elite",
         price: "SGD 199",
         billing: "per month",
-        description: "Live intelligence updates, and the full practitioner network.",
+        description: "For sales professionals who need ongoing desk intelligence",
         features: [
           "Everything in Pro",
-          "15 Asia Case Studies",
-          "The Desk Channel — 40 Q&As",
-          "Anonymous Mentor Connect",
-          "Market Job Openings",
-          "New monthly content",
+          "Global & Asian Case Studies - updated market events showing how desks think through commercial decisions",
+          "Desk Channel — Practitioner Q&As that reveal how traders frame every type of problem",
+          "Anonymous Mentor Connect - ask your real sales preparation questions to practitioners directly",
+          "Market Job Openings - track which firms are growing and hiring (your next target accounts)",
         ],
         cta: "Get Elite",
         href: "/signup?plan=elite",
+        featured: true,
       },
     ],
   },
@@ -243,9 +244,10 @@ export const DEFAULT_LANDING_CONTENT: LandingContent = {
     ],
   },
   caseStudySample: {
-    eyebrow: "Global and Asia Case Studies",
-    title: "Real Scenarios. Real Commercial Logic.",
-    description: "Each case study reconstructs a real market event the way a desk lived it — starting from the signal that appeared first, through the read, the supporting evidence, and the commercial decision it forced.",
+    eyebrow: "Learn with Examples",
+    title: "Case Studies.",
+    titleAccent: "Global & Asia.",
+    description: "Market scenarios with commercial logic — physical arbs, freight plays, cross-market reads, and supply disruptions. Each one shows how the desk thinks, what it sees, and what the P&L looked like.",
     tag: "Free Sample · Case C",
     sampleTitle: "COVID Contango — Singapore's Anchorage Fills",
     sampleMeta: "April–June 2020 · Crude oil · Trading & shipping",
@@ -266,7 +268,7 @@ export const DEFAULT_LANDING_CONTENT: LandingContent = {
       {
         icon: "BookOpen",
         title: "Full Playbook",
-        desc: "5 chapters covering every facet of commodity trading — markets, operations, finance, analytics, and career strategy.",
+        desc: "9 chapters covering every facet of commodity trading — markets, operations, finance, analytics, and career strategy.",
         tier: "Pro",
       },
       {
@@ -334,7 +336,7 @@ export const DEFAULT_LANDING_CONTENT: LandingContent = {
         tooltip: "One-time purchase",
         description: "Everything you need to position yourself and land the role.",
         features: [
-          "Full Playbook — all 5 chapters",
+          "Full Playbook — all 9 chapters",
           "Persona Analysis Quiz",
           "Tailored resume templates (5+)",
           "Career Roadmap (10 role blueprints)",
@@ -357,7 +359,7 @@ export const DEFAULT_LANDING_CONTENT: LandingContent = {
           "Deep-dive Global & Asia Case Studies (10+ ongoing)",
           "Desk Channel — Intelligent answers vetted by real practitioners (40+ Q&As)",
           "Anonymous Mentor Connect",
-          "Market Job Openings Tracker (Coming soon)",
+          "Market Job Openings Tracker (tailored to persona)",
         ],
         cta: "Get Elite",
         href: "/signup?plan=elite",

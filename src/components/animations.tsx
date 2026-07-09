@@ -118,11 +118,13 @@ export function AnimatedCounter({
 }) {
   const ref = useRef(null);
   const inView = useInView(ref, { once: true });
-  const [displayValue, setDisplayValue] = useState(0);
+  // Match SSR and first client paint to avoid hydration mismatch; animate after mount.
+  const [displayValue, setDisplayValue] = useState(value);
 
   useEffect(() => {
     if (!inView) return;
     let start = 0;
+    setDisplayValue(0);
     const increment = value / (duration * 60);
     const timer = setInterval(() => {
       start += increment;
@@ -138,7 +140,7 @@ export function AnimatedCounter({
 
   return (
     <span ref={ref} className={className}>
-      {prefix}{displayValue.toLocaleString()}{suffix}
+      {prefix}{displayValue}{suffix}
     </span>
   );
 }
@@ -149,8 +151,14 @@ function seededRandom(seed: number) {
   return x - Math.floor(x);
 }
 
-// Floating particles for hero sections
+// Floating particles for hero sections — client-only to avoid framer-motion SSR style mismatches
 export function HeroParticles({ count = 12 }: { count?: number }) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const particles = Array.from({ length: count }, (_, i) => ({
     id: i,
     x: seededRandom(i * 4 + 1) * 100,
@@ -160,6 +168,10 @@ export function HeroParticles({ count = 12 }: { count?: number }) {
     delay: seededRandom(i * 4 + 5) * 3,
     opacity: seededRandom(i * 4 + 6) * 0.3 + 0.1,
   }));
+
+  if (!mounted) {
+    return <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden />;
+  }
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">

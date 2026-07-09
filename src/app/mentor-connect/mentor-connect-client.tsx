@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Users, MessageSquare, Clock, CheckCircle, Send, X,
+  Users, MessageSquare, Clock, CheckCircle, Send, X, Lock,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -64,7 +64,7 @@ export function MentorConnectClient({ userTier, mentorCredits, questions }: Prop
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    if (!segment || question.length < 20) return;
+    if (!selectedMentor || !segment || question.length < 20) return;
     setSubmitting(true);
     setError("");
 
@@ -103,8 +103,8 @@ export function MentorConnectClient({ userTier, mentorCredits, questions }: Prop
           <h1 className="font-serif text-4xl font-bold text-white mb-3">
             One Question. <span className="text-accent italic">One Honest Answer.</span>
           </h1>
-          <p className="text-white/65 text-lg max-w-xl mb-6">
-            Anonymous access to {MENTOR_COUNT} vetted practitioners across 5 commodity trading segments. Browse mentors, pick the closest match, and submit one question per month.
+          <p className="text-white/65 text-lg max-w-2xl mb-6">
+            One question. One mentor. One honest answer. Choose from twenty-five anonymous practitioners across the five coverage segments. Your session ends once you&apos;ve finished using all 25 credits and the credits will get reset every month.
           </p>
           <div className="flex items-center gap-4 flex-wrap">
             <div className="glass-card px-4 py-2.5 text-white text-sm font-semibold">
@@ -176,7 +176,7 @@ export function MentorConnectClient({ userTier, mentorCredits, questions }: Prop
                 <h3 className="font-serif font-bold text-gray-900">{selectedMentor.headline}</h3>
                 <p className="text-sm text-muted-fg mt-1 italic">&ldquo;{selectedMentor.sampleReply.slice(0, 180)}…&rdquo;</p>
               </div>
-              <button type="button" onClick={() => setSelectedMentor(null)} className="text-muted-fg hover:text-gray-900">
+              <button type="button" onClick={() => { setSelectedMentor(null); setSegment(""); }} className="text-muted-fg hover:text-gray-900">
                 <X className="w-5 h-5" />
               </button>
             </motion.div>
@@ -204,24 +204,11 @@ export function MentorConnectClient({ userTier, mentorCredits, questions }: Prop
                 </motion.div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5">
-                  <div>
-                    <p className="text-sm font-medium text-gray-700 mb-2">Which segment?</p>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                      {SEGMENTS.map((s) => (
-                        <button
-                          key={s.value}
-                          type="button"
-                          onClick={() => setSegment(s.value)}
-                          className={`p-3 rounded-xl border-2 text-left transition-all ${
-                            segment === s.value ? "border-primary-400 bg-primary-soft" : "border-border hover:border-primary-line"
-                          }`}
-                        >
-                          <p className="font-semibold text-sm text-gray-900">{s.label}</p>
-                          <p className="text-xs text-muted-fg">{s.desc}</p>
-                        </button>
-                      ))}
-                    </div>
-                  </div>
+                  {!selectedMentor && (
+                    <p className="text-sm text-muted-fg bg-secondary rounded-lg px-4 py-3">
+                      Select a mentor above to unlock the question form.
+                    </p>
+                  )}
 
                   <div>
                     <label className="text-sm font-medium text-gray-700 block mb-2">
@@ -248,7 +235,7 @@ export function MentorConnectClient({ userTier, mentorCredits, questions }: Prop
 
                   {error && <p className="text-sm text-red-500 bg-red-50 border border-red-200 rounded-lg p-3">{error}</p>}
 
-                  <Button type="submit" className="w-full" size="lg" loading={submitting} disabled={!segment || question.length < 20 || mentorCredits < 1}>
+                  <Button type="submit" className="w-full" size="lg" loading={submitting} disabled={!selectedMentor || question.length < 20 || mentorCredits < 1}>
                     <Send className="w-4 h-4" />
                     Send to Mentor (1 credit)
                   </Button>
@@ -298,6 +285,55 @@ export function MentorConnectClient({ userTier, mentorCredits, questions }: Prop
             )}
           </div>
         </div>
+
+        {/* How the Session Works */}
+        <section className="mt-16 pt-12 border-t border-border">
+          <Reveal>
+            <h2 className="font-serif text-2xl sm:text-3xl font-bold text-gray-900 text-center mb-10">
+              How the Session Works
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-4xl mx-auto">
+              {[
+                {
+                  num: "01",
+                  title: "Pick a Mentor",
+                  body: "Browse five segments and twenty-five anonymous practitioners. Read their background and pick the one closest to your question.",
+                },
+                {
+                  num: "02",
+                  title: "Ask One Question",
+                  body: "Each mentor will only answer one question per session. Make it count — be specific, give context, ask the question only they can answer. Each question is one credit. You can return back to the same mentor with another question, but another credit will be used. Follow up answers can be done at the discretion of each mentor.",
+                },
+                {
+                  num: "03",
+                  title: "Session Ends at 25",
+                  body: "Once you've asked every mentor, the session is complete. Your full transcript stays saved on this device for future reference.",
+                },
+              ].map((step) => (
+                <div
+                  key={step.num}
+                  className="bg-white rounded-xl border border-border p-6 transition-all hover:border-primary-line hover:shadow-sm"
+                >
+                  <div className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-accent border border-primary-line text-xs font-bold text-primary-800 mb-4">
+                    {step.num}
+                  </div>
+                  <h3 className="font-serif font-bold text-lg text-gray-900 mb-2">{step.title}</h3>
+                  <p className="text-sm text-muted-fg leading-relaxed">{step.body}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="max-w-4xl mx-auto mt-9 flex gap-4 items-start rounded-r-lg border border-primary-line border-l-[3px] border-l-primary-400 bg-accent px-6 py-5">
+              <Lock className="w-5 h-5 text-primary-400 flex-shrink-0 mt-0.5" />
+              <div>
+                <p className="font-serif font-bold text-primary-800 mb-1">Strictly anonymous.</p>
+                <p className="text-sm text-secondary-fg leading-relaxed">
+                  Mentor identities are never disclosed. Conversations are stored locally on your device only. Nothing leaves this browser.
+                </p>
+              </div>
+            </div>
+          </Reveal>
+        </section>
       </TierGate>
     </div>
   );

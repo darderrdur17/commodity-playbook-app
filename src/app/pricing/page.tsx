@@ -26,7 +26,7 @@ const FEATURES_TABLE = [
     category: "Pro — SGD 99 one-time",
     color: "#3280ff",
     items: [
-      { name: "Full Playbook — all 5 chapters (200+ pages)", starter: false, pro: true, elite: true },
+      { name: "Full Playbook — all 9 chapters (100+ digital assets)", starter: false, pro: true, elite: true },
       { name: "Persona Analysis Quiz", starter: false, pro: true, elite: true },
       { name: "5 tailored resume templates (download)", starter: false, pro: true, elite: true },
       { name: "Career Roadmap (10 role blueprints)", starter: false, pro: true, elite: true },
@@ -38,10 +38,10 @@ const FEATURES_TABLE = [
     category: "Elite — SGD 299/month",
     color: "#B45309",
     items: [
-      { name: "10 deep-dive Case Studies with P&L", starter: false, pro: false, elite: true },
+      { name: "10+ deep-dive Global & Asia Case Studies with P&L", starter: false, pro: false, elite: true },
       { name: "Desk Channel — 40 Q&As across 5 segments", starter: false, pro: false, elite: true },
       { name: "Anonymous Mentor Connect (25 practitioners)", starter: false, pro: false, elite: true },
-      { name: "Market Job Openings tracker", starter: false, pro: false, elite: true },
+      { name: "Market Job Openings tracker (tailored to persona)", starter: false, pro: false, elite: true },
       { name: "Priority email support", starter: false, pro: false, elite: true },
       { name: "Early access to new content", starter: false, pro: false, elite: true },
     ],
@@ -55,7 +55,7 @@ const FAQS = [
   },
   {
     q: "Is the Pro plan really a one-time purchase?",
-    a: "Yes. You pay once and keep access forever — including all future updates to the 5 chapters, resume templates, career roadmap, interview questions, and knowledge test.",
+    a: "Yes. You pay once and keep access forever — including all future updates to the 9 chapters, resume templates, career roadmap, interview questions, and knowledge test.",
   },
   {
     q: "What happens to my Pro content if I cancel Elite?",
@@ -165,7 +165,7 @@ export default function PricingPage() {
                 Everything you need to position yourself, prepare for interviews, and map your career.
               </p>
               <ul className="space-y-2.5 mb-8 flex-1">
-                {["Full Playbook — all 5 chapters", "Persona Quiz + 5 resume templates", "Career Roadmap (10 role blueprints)", "50 Interview Questions + answers", "Market Knowledge Test"].map((f) => (
+                {["Full Playbook — all 9 chapters", "Persona Quiz + 5 resume templates", "Career Roadmap (10 role blueprints)", "50 Interview Questions + answers", "Market Knowledge Test"].map((f) => (
                   <li key={f} className="flex items-center gap-2 text-sm text-white/85">
                     <Check className="w-4 h-4 text-accent flex-shrink-0" /> {f}
                   </li>
@@ -198,7 +198,7 @@ export default function PricingPage() {
                 Live intelligence, mentor access, and the full practitioner network — for serious professionals.
               </p>
               <ul className="space-y-2.5 mb-8 flex-1">
-                {["Everything in Pro", "10 Case Studies with P&L breakdown", "Desk Channel — 40 Q&As (5 segments)", "Anonymous Mentor Connect", "Market Job Openings tracker"].map((f) => (
+                {["Everything in Pro", "10+ Global & Asia Case Studies with P&L", "Desk Channel — 40 Q&As (5 segments)", "Anonymous Mentor Connect", "Market Job Openings tracker (tailored to persona)"].map((f) => (
                   <li key={f} className="flex items-center gap-2 text-sm text-gray-700">
                     <Check className="w-4 h-4 text-amber-500 flex-shrink-0" /> {f}
                   </li>

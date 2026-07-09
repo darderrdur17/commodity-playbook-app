@@ -109,6 +109,7 @@ export const landingContentSchema = z.object({
   caseStudySample: z.object({
     eyebrow: z.string().min(1),
     title: z.string().min(1),
+    titleAccent: z.string().min(1),
     description: z.string().min(1),
     tag: z.string().min(1),
     sampleTitle: z.string().min(1),
