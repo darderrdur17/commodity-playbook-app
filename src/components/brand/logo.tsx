@@ -25,17 +25,17 @@ const SOURCES: Record<Exclude<LogoVariant, "lockup-dark">, { src: string; width:
 
 /** Header fits within 80px nav — Brand Kit horizontal wordmark */
 const HEADER_WRAPPER_CLASS =
-  "inline-flex items-center h-[44px] sm:h-[48px] md:h-[52px] max-h-full overflow-hidden max-w-[min(100%,180px)] sm:max-w-[min(100%,200px)] md:max-w-[min(100%,220px)] shrink-0";
+  "inline-flex items-center h-[52px] sm:h-[58px] md:h-[64px] max-h-full max-w-[min(100%,260px)] sm:max-w-[min(100%,300px)] md:max-w-[min(100%,340px)] shrink-0";
 
 const VARIANT_IMAGE_CLASS: Record<Exclude<LogoVariant, "lockup-dark">, string> = {
   header: "h-full w-auto max-w-full object-contain object-left",
   footer:
     "h-[160px] w-auto sm:h-[180px] md:h-[200px] lg:h-[220px] max-w-[min(100%,400px)] object-contain object-left",
   login:
-    "h-12 w-auto sm:h-14 md:h-16 max-w-[min(100%,280px)] object-contain object-left",
-  horizontal: "h-10 w-auto sm:h-11 max-w-[220px] object-contain object-left",
+    "h-14 w-auto sm:h-16 md:h-[4.5rem] max-w-[min(100%,340px)] object-contain object-left",
+  horizontal: "h-12 w-auto sm:h-14 max-w-[280px] object-contain object-left",
   mark: "h-9 w-9 sm:h-10 sm:w-10 object-contain",
-  white: "h-10 w-auto sm:h-11 max-w-[220px] object-contain object-left brightness-0 invert",
+  white: "h-14 w-auto sm:h-16 md:h-[4.5rem] max-w-[min(100%,340px)] object-contain object-left brightness-0 invert",
   "wordmark-tagline":
     "h-16 w-auto sm:h-[4.5rem] md:h-20 lg:h-[5.5rem] max-w-[min(100%,340px)] object-contain object-left",
 };
@@ -111,8 +111,8 @@ export function Logo({
         variant === "footer" || variant === "wordmark-tagline"
           ? "(max-width: 640px) 280px, 360px"
           : variant === "header"
-            ? "(max-width: 640px) 180px, 220px"
-            : "(max-width: 768px) 220px, 300px"
+            ? "(max-width: 640px) 260px, 340px"
+            : "(max-width: 768px) 280px, 340px"
       }
       className={cn(VARIANT_IMAGE_CLASS[variant], imageClassName)}
     />

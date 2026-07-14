@@ -75,13 +75,13 @@ function LoginForm() {
   }
 
   return (
-    <div className="min-h-screen flex">
+    <div className="min-h-[calc(100svh-80px-env(safe-area-inset-top,0px))] flex">
       {/* Left panel — dark hero */}
-      <div className="hidden lg:flex lg:w-1/2 relative bg-navy section-dark overflow-hidden flex-col justify-between p-12">
+      <div className="hidden lg:flex lg:w-1/2 relative bg-navy section-dark overflow-hidden flex-col justify-between p-12 pt-10">
         <GradientOrbs />
         <HeroParticles count={10} />
         <div className="relative z-10">
-          <Logo variant="login" href={false} />
+          <Logo variant="white" href="/" priority />
         </div>
         <div className="relative z-10">
           <div className="pill pill-dark mb-5 text-[10px]">

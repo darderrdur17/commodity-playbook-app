@@ -112,7 +112,7 @@ export function Nav() {
           className="max-w-[1200px] mx-auto px-4 sm:px-10 grid grid-cols-[1fr_auto_1fr] items-center"
           style={{ height: NAV_HEIGHT }}
         >
-          <div className="flex items-center min-w-0 h-full overflow-hidden">
+          <div className="flex items-center min-w-0 h-full">
             <Logo variant="header" priority />
           </div>
 
