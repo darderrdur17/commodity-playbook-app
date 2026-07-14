@@ -30,6 +30,7 @@ function SignupForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const plan = searchParams.get("plan") || "starter";
+  const callbackUrl = searchParams.get("callbackUrl") || "/onboarding";
   const [showPassword, setShowPassword] = useState(false);
   const [apiError, setApiError] = useState<string | null>(null);
 
@@ -76,7 +77,7 @@ function SignupForm() {
         redirect: false,
       });
 
-      router.push("/onboarding");
+      router.push(callbackUrl);
     } catch {
       setApiError("Network error. Please try again.");
     }
@@ -102,7 +103,7 @@ function SignupForm() {
             <span className="text-accent italic">the desk.</span>
           </h2>
           <p className="text-white/60 text-sm leading-relaxed max-w-xs">
-            5 infographics, Chapter A preview, the Desk Glossary, and Weekly Market Digest — all free.
+            5 infographics, Chapter A preview, the Desk Glossary, and Email Digest — all free.
           </p>
         </div>
         <div className="relative z-10 space-y-3">
@@ -129,7 +130,14 @@ function SignupForm() {
           <h1 className="font-serif text-3xl font-bold text-gray-900 mb-1.5">Create your account</h1>
           <p className="text-muted-fg text-sm mb-8">
             Already have one?{" "}
-            <Link href="/login" className="text-primary-400 hover:text-primary-500 font-medium">
+            <Link
+              href={
+                callbackUrl !== "/onboarding"
+                  ? `/login?callbackUrl=${encodeURIComponent(callbackUrl)}`
+                  : "/login"
+              }
+              className="text-primary-400 hover:text-primary-500 font-medium"
+            >
               Sign in
             </Link>
           </p>
@@ -139,7 +147,7 @@ function SignupForm() {
             type="button"
             variant="outline"
             className="w-full mb-6"
-            onClick={() => signIn("google", { callbackUrl: "/onboarding" })}
+            onClick={() => signIn("google", { callbackUrl })}
           >
             <svg className="w-4 h-4" viewBox="0 0 24 24">
               <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
@@ -239,7 +247,7 @@ function SignupForm() {
                 <Link href="/privacy" className="text-primary-400 hover:underline">Privacy Policy</Link>
                 {" "}and{" "}
                 <Link href="/terms" className="text-primary-400 hover:underline">Terms of Service</Link>.
-                I may receive the Weekly Market Digest and onboarding emails.
+                I may receive the Email Digest and onboarding emails.
               </span>
             </label>
             {errors.gdpr && (

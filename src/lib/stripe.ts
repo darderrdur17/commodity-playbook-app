@@ -28,7 +28,7 @@ export function getStripePrices() {
   }
 
   return {
-    PRO_ONE_TIME: pro,
+    PRO_MONTHLY: pro,
     ELITE_MONTHLY: elite,
   } as const;
 }
@@ -62,6 +62,6 @@ export async function createOrRetrieveCustomer(userId: string, email: string) {
 export function getTierFromPriceId(priceId: string) {
   const prices = getStripePrices();
   if (priceId === prices.ELITE_MONTHLY) return "ELITE";
-  if (priceId === prices.PRO_ONE_TIME) return "PRO";
+  if (priceId === prices.PRO_MONTHLY) return "PRO";
   return "STARTER";
 }

@@ -3,7 +3,7 @@ import { Reveal } from "@/components/animations";
 
 export const metadata = {
   title: "Privacy Policy",
-  description: "How Commodity Playbook collects, uses, and protects your personal data.",
+  description: "How CommodityPlaybook collects, uses, and protects your personal data.",
 };
 
 export default function PrivacyPage() {
@@ -20,7 +20,7 @@ export default function PrivacyPage() {
           <section>
             <h2 className="font-serif text-xl font-bold text-gray-900 mb-3">1. Who We Are</h2>
             <p className="leading-relaxed">
-              Commodity Playbook Pte. Ltd. (&quot;Commodity Playbook&quot;, &quot;we&quot;, &quot;us&quot;) operates the Commodity Playbook website and mobile application. We are the data controller for personal data collected through the Service. Contact:{" "}
+              CommodityPlaybook Pte. Ltd. (&quot;CommodityPlaybook&quot;, &quot;we&quot;, &quot;us&quot;) operates the CommodityPlaybook website and mobile application. We are the data controller for personal data collected through the Service. Contact:{" "}
               <a href="mailto:privacy@commodityplaybook.com" className="text-primary-400 hover:underline">
                 privacy@commodityplaybook.com
               </a>
@@ -45,7 +45,7 @@ export default function PrivacyPage() {
             <ul className="list-disc pl-5 space-y-2 leading-relaxed">
               <li>Provide and personalise the Service (tier access, persona-based recommendations)</li>
               <li>Process payments and manage subscriptions via Stripe</li>
-              <li>Send the Weekly Market Digest and onboarding emails (with your consent)</li>
+              <li>Send the Email Digest and onboarding emails (with your consent)</li>
               <li>Route Mentor Connect questions to practitioners anonymously</li>
               <li>Notify waitlist members when the job board launches</li>
               <li>Improve the Service through aggregated analytics</li>

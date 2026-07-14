@@ -124,5 +124,17 @@ export function mergeLandingContent(
     };
   }
 
+  if (cms.caseStudySample?.cards?.length) {
+    merged.caseStudySample = {
+      ...merged.caseStudySample,
+      ...cms.caseStudySample,
+      cards: mergeByKey(defaults.caseStudySample.cards, cms.caseStudySample.cards, "slug"),
+    };
+  }
+
+  if (cms.stats?.length) {
+    merged.stats = mergeByKey(defaults.stats, cms.stats, "label");
+  }
+
   return merged;
 }

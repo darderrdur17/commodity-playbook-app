@@ -14,7 +14,7 @@ async function main() {
 
   const modules = await syncAllContentModulesFromDefaults();
   console.log(
-    `[sync-cms] Content modules synced: ${modules.total} (${modules.created} created, ${modules.updated} updated)`
+    `[sync-cms] Content modules synced: ${modules.total} (${modules.created} created, ${modules.updated} updated, ${modules.unchanged} unchanged)`
   );
 
   const assets = await syncContentAssetsFromRepo();

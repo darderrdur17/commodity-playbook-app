@@ -43,8 +43,8 @@ export const PERSONA_LABELS: Record<string, { label: string; color: string; bg: 
 
 export const TIER_LABELS: Record<string, { label: string; price: string; color: string }> = {
   STARTER: { label: "Starter", price: "Free", color: "#16a34a" },
-  PRO: { label: "Pro", price: "SGD 99", color: "#3280ff" },
-  ELITE: { label: "Elite", price: "SGD 299/mo", color: "#B45309" },
+  PRO: { label: "Pro", price: "SGD 59/mo", color: "#3280ff" },
+  ELITE: { label: "Elite", price: "SGD 99/mo", color: "#B45309" },
 };
 
 export function isAdmin(role?: string | null): boolean {

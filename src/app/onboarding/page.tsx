@@ -225,7 +225,7 @@ export default function OnboardingPage() {
                   <span className="text-2xl">🧭</span>
                 </div>
                 <h2 className="font-serif text-2xl font-bold text-gray-900 mb-2">
-                  Welcome to Commodity Playbook
+                  Welcome to CommodityPlaybook
                 </h2>
                 <p className="text-muted-fg text-sm max-w-sm mx-auto">
                   Let's personalise your experience. Which track are you on?

@@ -54,7 +54,7 @@ export function DeskChannelClient({
             <span className="text-accent italic">People Who&apos;ve Been There.</span>
           </h1>
           <p className="text-white/65 text-base sm:text-lg max-w-xl mb-6">
-            40 questions across 5 categories — answered by vetted practitioners and the Commodity Playbook editorial team. Search the library. Can&apos;t find yours? Submit it below.
+            40 questions across 5 categories — answered by vetted practitioners and the CommodityPlaybook editorial team. Search the library. Can&apos;t find yours? Submit it below.
           </p>
           <BrandedSearchInput
             variant="dark"

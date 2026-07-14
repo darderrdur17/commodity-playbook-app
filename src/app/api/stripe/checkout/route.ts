@@ -33,8 +33,8 @@ export async function POST(req: NextRequest) {
     const customerId = await createOrRetrieveCustomer(userId, email);
     const origin = req.headers.get("origin") || process.env.NEXTAUTH_URL;
 
-    const priceId = plan === "elite" ? prices.ELITE_MONTHLY : prices.PRO_ONE_TIME;
-    const mode = plan === "elite" ? "subscription" : "payment";
+    const priceId = plan === "elite" ? prices.ELITE_MONTHLY : prices.PRO_MONTHLY;
+    const mode = "subscription";
 
     const checkoutSession = await stripe.checkout.sessions.create({
       customer: customerId,
@@ -43,7 +43,7 @@ export async function POST(req: NextRequest) {
       success_url: `${origin}/dashboard?upgraded=1`,
       cancel_url: `${origin}/pricing?cancelled=1`,
       metadata: { userId, plan },
-      subscription_data: mode === "subscription" ? { metadata: { userId } } : undefined,
+      subscription_data: { metadata: { userId } },
       allow_promotion_codes: true,
       billing_address_collection: "required",
     });

@@ -12,6 +12,7 @@ import { Badge } from "@/components/ui/badge";
 import { AnimatedProgress } from "@/components/animations";
 import { CHAPTERS, type PlaybookSection } from "@/data/playbook";
 import { getSectionAssets, type SectionAsset } from "@/data/playbook-assets";
+import { PRO_SUBSCRIPTION } from "@/data/pricing-shared";
 
 interface Props {
   chapter: (typeof CHAPTERS)[number];
@@ -311,12 +312,12 @@ export function ChapterClient({ chapter, sections, chapters, userTier = "STARTER
                   Unlock all {sections.length} sections
                 </h2>
                 <p className="text-sm text-primary-900/80 leading-relaxed max-w-xl">
-                  Unlock all {sections.length - FREE_CHAPTER_A_SECTIONS} remaining sections in Chapter A. Plus 4 more chapters, 20+ infographics, 5 resume templates, and the career roadmap. SGD 99, one-time purchase.
+                  Unlock all {sections.length - FREE_CHAPTER_A_SECTIONS} remaining sections in Chapter A. Plus 4 more chapters, 20+ infographics, 5 resume templates, and the career roadmap. {PRO_SUBSCRIPTION.fullNote}.
                 </p>
               </div>
               <div className="flex flex-col sm:flex-row gap-3 flex-shrink-0">
                 <Link href="/signup?plan=pro">
-                  <Button size="lg">Get Pro — SGD 99 →</Button>
+                  <Button size="lg">{PRO_SUBSCRIPTION.cta} →</Button>
                 </Link>
                 <Link href="/pricing">
                   <Button size="lg" variant="outline">Compare tiers</Button>

@@ -90,6 +90,7 @@ export const landingContentSchema = z.object({
       stats: z.array(z.object({ value: z.string().min(1), label: z.string().min(1) })).min(1),
       quote: z.string().min(1),
       quoteAuthor: z.string().min(1),
+      quoteSubtitle: z.string().optional(),
     }),
     pricing: z.array(salesPricingTierSchema).min(1),
   }),
@@ -111,11 +112,19 @@ export const landingContentSchema = z.object({
     title: z.string().min(1),
     titleAccent: z.string().min(1),
     description: z.string().min(1),
-    tag: z.string().min(1),
-    sampleTitle: z.string().min(1),
-    sampleMeta: z.string().min(1),
-    steps: z.array(z.object({ label: z.string().min(1), text: z.string().min(1) })),
-    unlockText: z.string().min(1),
+    cards: z.array(
+      z.object({
+        slug: z.string().min(1),
+        category: z.string().min(1),
+        title: z.string().min(1),
+        catchLine: z.string().min(1),
+        excerpt: z.string().min(1),
+        readMinutes: z.number(),
+      })
+    ).min(1),
+    categoryTags: z.array(z.string().min(1)).min(1),
+    disclaimer: z.string().min(1),
+    viewMoreHref: z.string().optional(),
   }),
   whatsInside: z.object({
     titleLine1: z.string().min(1),

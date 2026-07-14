@@ -1,14 +1,18 @@
 "use client";
 
 import React, { useRef, useState } from "react";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 import {
   ArrowRight, AlertCircle, Users, TrendingUp, Check, Download, Star,
+  ChevronDown, X,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Reveal, StaggerChildren, StaggerItem } from "@/components/animations";
 import { SectionCategoryLabel } from "@/components/landing/section-category-label";
 import { MembersStrip } from "@/components/landing/members-strip";
+import { startCheckout } from "@/lib/start-checkout";
+import { cn } from "@/lib/utils";
 import type { LandingContent } from "@/data/landing-content";
 
 const SALES_COLOR = "#0F766E";
@@ -17,17 +21,17 @@ const SALES_TESTIMONIALS = [
   {
     quote: "After the Playbook, I stopped presenting to operations and started having commercial conversations with the desk. First call conversion improved immediately.",
     name: "Marcus L.",
-    role: "Enterprise Software Sales",
+    role: "Enterprise Software Sales, Singapore",
   },
   {
     quote: "Understanding how desks actually use AIS data changed how I demo. Win rate on enterprise accounts up 35%.",
     name: "Nadia R.",
-    role: "Data Platform Sales",
+    role: "Market Data Sales, China",
   },
   {
     quote: "The Playbook's risk chapter gave me the vocabulary to have real conversations with the CRO. Accelerated our deal cycle by 6 weeks.",
     name: "Chris B.",
-    role: "Risk Technology Sales",
+    role: "Risk Technology Sales, London",
   },
 ];
 
@@ -35,28 +39,131 @@ const PAIN_POINTS = [
   {
     icon: AlertCircle,
     title: "You're Pitching to People Who Think in Barrels",
-    desc: "Traders don't think in annual recurring revenue, user seats, or implementation timelines. They think in cargo positions, freight rates, and margin at risk.",
+    desc: "Traders don't think in annual recurring revenue, user seats, or implementation timelines. They think in cargo positions, freight rates, and margin at risk. If your discovery call sounds like a software demo instead of a market conversation, you've already lost them.",
   },
   {
     icon: Users,
     title: "Your Champion Can't Sell You Internally",
-    desc: "Even when your champion sees the value, they struggle to articulate it to a trading desk in commercial terms. They need language that maps to P&L and risk exposure.",
+    desc: "Even when your champion sees the value, they struggle to articulate it to a trading desk in commercial terms. They need to explain how your solution maps to their P&L, their risk exposure, or their operational workflow — and most vendors don't give them the language to do it.",
   },
   {
     icon: TrendingUp,
     title: "You Can't Differentiate on Product Alone",
-    desc: "The vendor who wins understands the buyer's commercial context deeply enough to position their solution as the answer to a specific, felt problem.",
+    desc: "Your competitors have similar feature sets. The vendor who wins is the one who understands the buyer's commercial context deeply enough to position their solution as the answer to a specific, felt problem — not just another capability on a slide.",
   },
 ];
 
 const LEARN_ITEMS = [
-  { num: "01", title: "How the desk actually makes money", desc: "The six revenue levers — flat price, spread, freight, timing, quality, and optionality." },
-  { num: "02", title: "How trading desks use data and intelligence", desc: "How desks consume Platts, Argus, Kpler, Vortexa, and the Baltic Exchange." },
-  { num: "03", title: "How operations and scheduling work", desc: "The cargo lifecycle — nomination, NOR, laytime, demurrage, B/L, and vessel scheduling." },
-  { num: "04", title: "How risk and compliance think", desc: "VaR, position limits, basis risk, counterparty credit, sanctions — the constraints that shape every commercial decision." },
-  { num: "05", title: "How to map your solution to their P&L", desc: "Case studies teach you how traders think about market signals and decisions." },
-  { num: "06", title: "The language that builds immediate credibility", desc: "40 Q&As from real practitioners — what they care about and how they frame problems." },
+  {
+    num: "01",
+    title: "How the desk actually makes money",
+    desc: "The six revenue levers — flat price, spread, freight, timing, quality, and optionality. Where each function in a trading firm contributes to P&L, and where they lose it. The vocabulary traders use to describe commercial performance.",
+  },
+  {
+    num: "02",
+    title: "How trading desks use data and intelligence",
+    desc: "How desks consume Platts, Argus, Kpler, Vortexa, and the Baltic Exchange. What signals matter, how frequently they're checked, and what decisions they support. If you sell data or intelligence tools, this is your discovery framework.",
+  },
+  {
+    num: "03",
+    title: "How operations and scheduling work",
+    desc: "The cargo lifecycle — nomination, NOR, laytime, demurrage, B/L, and vessel scheduling. What an ETRM system does and why it matters. The language of operations teams who control implementation and adoption of your product.",
+  },
+  {
+    num: "04",
+    title: "How risk and compliance think",
+    desc: "VaR, position limits, basis risk, counterparty credit, sanctions — the constraints that shape every commercial decision. If your product touches risk or compliance functions, you need to understand these frameworks before your first meeting.",
+  },
+  {
+    num: "05",
+    title: "How to map your solution to their P&L",
+    desc: "The case studies in the Elite tier are real market events with commercial impact analysis. Reading them teaches you how traders think about market signals and decisions — and how to connect your solution to that exact thinking.",
+  },
+  {
+    num: "06",
+    title: "The language that builds immediate credibility",
+    desc: "The Desk Channel's 40 Q&As are real questions from real practitioners with real answers. Reading them tells you what trading professionals care about, how they frame problems, and which vocabulary signals that you understand their world.",
+  },
 ];
+
+const SALES_MARKET_NOTE = {
+  eyebrow: "Live · Every Tuesday Edition",
+  title: "The Market Note on the Sales Edge.",
+  description:
+    "Not a news digest. Each edition translates live market signals into language your buyers use — so you walk into sales conversations with context, not a product deck.",
+  topics: [
+    { tag: "Crude Oil", tagColor: "#2563eb", tagBg: "#dbeafe", title: "OPEC+ cut → Budget mood at major firms" },
+    { tag: "Freight", tagColor: "#b45309", tagBg: "#fef3c7", title: "VLCC Rate Spike → Maritime tech opportunity window" },
+    { tag: "LNG", tagColor: "#15803d", tagBg: "#dcfce7", title: "JKM/TTF Spread → What Asian desk buyers are weighing" },
+    { tag: "Gas", tagColor: "#7c3aed", tagBg: "#ede9fe", title: "European Storage → Energy sector account timing" },
+  ],
+};
+
+const SALES_FEATURE_TABLE = [
+  {
+    category: "Pro — SGD 99/month",
+    color: SALES_COLOR,
+    items: [
+      { name: "Full Playbook — all 9 chapters covering every desk function, with examples and frameworks", pro: true, elite: true },
+      { name: "Market Knowledge Test — identify exactly which areas to study before key accounts", pro: true, elite: true },
+      { name: "Desk Glossary — explain the way a senior trader would do", pro: true, elite: true },
+      { name: "Sales Guide - key industry areas to look out for when selling", pro: true, elite: true },
+      { name: "Weekly Sales Edge Note - highlight interesting market happenings to note from sales perspectives", pro: true, elite: true },
+    ],
+  },
+  {
+    category: "Elite — SGD 199/month",
+    color: "#065F46",
+    items: [
+      { name: "Global & Asian Case Studies - updated market events showing how desks think through commercial decisions", pro: false, elite: true },
+      { name: "Desk Channel — Practitioner Q&As that reveal how traders frame every type of problem", pro: false, elite: true },
+      { name: "Anonymous Mentor Connect - ask your real sales preparation questions to practitioners directly", pro: false, elite: true },
+      { name: "Market Role Openings - track which firms are growing and hiring (your next target accounts)", pro: false, elite: true },
+    ],
+  },
+];
+
+function LearnAccordionItem({
+  item,
+  defaultOpen = false,
+}: {
+  item: (typeof LEARN_ITEMS)[number];
+  defaultOpen?: boolean;
+}) {
+  const [isOpen, setIsOpen] = useState(defaultOpen);
+
+  return (
+    <div className="rounded-xl border border-border bg-white overflow-hidden hover:border-teal-200 transition-colors">
+      <button
+        type="button"
+        onClick={() => setIsOpen((prev) => !prev)}
+        className="w-full flex items-start gap-4 p-5 text-left hover:bg-secondary/40 transition-colors"
+        aria-expanded={isOpen}
+      >
+        <div
+          className="w-10 h-10 rounded-lg flex items-center justify-center font-serif font-bold text-sm flex-shrink-0"
+          style={{ background: "#CCFBF1", color: SALES_COLOR }}
+        >
+          {item.num}
+        </div>
+        <span className="flex-1 min-w-0 pt-1.5">
+          <span className="block font-semibold text-gray-900">{item.title}</span>
+        </span>
+        <ChevronDown
+          className={cn(
+            "w-4 h-4 text-muted-fg shrink-0 mt-2 transition-transform duration-200",
+            isOpen && "rotate-180"
+          )}
+        />
+      </button>
+      {isOpen && (
+        <div className="px-5 pb-5 pl-[4.25rem] border-t border-border/60">
+          <p className="text-sm text-muted-fg leading-relaxed pt-3">{item.desc}</p>
+        </div>
+      )}
+    </div>
+  );
+}
 
 interface Props {
   content: LandingContent["sales"];
@@ -65,10 +172,13 @@ interface Props {
   onOpenContactModal: () => void;
 }
 
-export function SalesLandingPanel({ content, membersStrip, onOpenModal, onOpenContactModal }: Props) {
+export function SalesLandingPanel({ content, membersStrip, onOpenContactModal }: Props) {
   const learnRef = useRef<HTMLElement>(null);
+  const router = useRouter();
+  const { data: session } = useSession();
   const [email, setEmail] = useState("");
   const [subscribeStatus, setSubscribeStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+  const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
 
   async function handleStarterPackSubscribe(e: React.FormEvent) {
     e.preventDefault();
@@ -84,6 +194,23 @@ export function SalesLandingPanel({ content, membersStrip, onOpenModal, onOpenCo
       setEmail("");
     } catch {
       setSubscribeStatus("error");
+    }
+  }
+
+  async function handlePurchase(plan: "pro" | "elite") {
+    if (!session?.user) {
+      router.push(`/signup?plan=${plan}&callbackUrl=/?track=sales`);
+      return;
+    }
+    setLoadingPlan(plan);
+    try {
+      const url = await startCheckout(plan);
+      if (url) window.location.href = url;
+      else router.push("/pricing");
+    } catch {
+      router.push("/pricing");
+    } finally {
+      setLoadingPlan(null);
     }
   }
 
@@ -106,10 +233,6 @@ export function SalesLandingPanel({ content, membersStrip, onOpenModal, onOpenCo
               {content.description}
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
-              <Button size="xl" className="bg-teal-600 hover:bg-teal-700 text-white border-0 w-full sm:w-auto" onClick={onOpenModal}>
-                {content.ctaPrimary}
-                <ArrowRight className="w-5 h-5" />
-              </Button>
               <Button
                 size="xl"
                 variant="outline-dark"
@@ -126,11 +249,7 @@ export function SalesLandingPanel({ content, membersStrip, onOpenModal, onOpenCo
               <Reveal key={stat.label} delay={i * 0.1}>
                 <div>
                   <p className="font-serif text-2xl sm:text-3xl font-bold text-white">
-                    {stat.animate === false ? (
-                      <>{stat.value}{stat.suffix}</>
-                    ) : (
-                      <>{stat.value}{stat.suffix}</>
-                    )}
+                    {stat.value}{stat.suffix}
                   </p>
                   <p className="text-teal-100/55 text-xs font-medium mt-1 max-w-[160px]">{stat.label}</p>
                 </div>
@@ -138,9 +257,9 @@ export function SalesLandingPanel({ content, membersStrip, onOpenModal, onOpenCo
             ))}
           </div>
         </div>
-
-        <MembersStrip label={membersStrip.label} companies={membersStrip.companies} variant="dark" />
       </section>
+
+      <MembersStrip label={membersStrip.label} companies={membersStrip.companies} variant="dark" />
 
       {/* Pain points */}
       <section className="py-16 sm:py-24 page-container">
@@ -177,23 +296,60 @@ export function SalesLandingPanel({ content, membersStrip, onOpenModal, onOpenCo
               The Commercial Context Your Buyers Live In.
             </h2>
             <p className="text-muted-fg text-base sm:text-lg leading-relaxed">
-              A working understanding of how commodity trading desks make money, manage risk, and evaluate vendors.
+              Not a glossary of terms. A working understanding of how commodity trading desks make money, manage risk, and evaluate vendors — so you can have conversations that resonate.
             </p>
           </Reveal>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {LEARN_ITEMS.map((item, i) => (
               <Reveal key={item.num} delay={i * 0.06}>
-                <div className="flex gap-4 p-5 rounded-xl border border-border bg-white hover:border-teal-200 transition-colors">
-                  <div className="w-10 h-10 rounded-lg flex items-center justify-center font-serif font-bold text-sm flex-shrink-0" style={{ background: "#CCFBF1", color: SALES_COLOR }}>
-                    {item.num}
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-gray-900 mb-1">{item.title}</h3>
-                    <p className="text-sm text-muted-fg leading-relaxed">{item.desc}</p>
-                  </div>
-                </div>
+                <LearnAccordionItem item={item} defaultOpen={i === 0} />
               </Reveal>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Market Note strip */}
+      <section className="py-16 sm:py-24 bg-[#f4f6f9]">
+        <div className="page-container">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 lg:items-center">
+            <Reveal>
+              <p className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.14em] mb-4" style={{ color: SALES_COLOR }}>
+                <span className="w-2 h-2 rounded-full animate-pulse flex-shrink-0" style={{ background: SALES_COLOR }} />
+                {SALES_MARKET_NOTE.eyebrow}
+              </p>
+              <h2 className="font-serif text-[clamp(28px,3.5vw,40px)] font-bold text-gray-900 leading-[1.15] mb-5">
+                {SALES_MARKET_NOTE.title}
+              </h2>
+              <p className="text-[15px] text-muted-fg leading-relaxed max-w-lg">
+                {SALES_MARKET_NOTE.description}
+              </p>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <div className="rounded-2xl bg-white p-6 sm:p-7 shadow-[0_4px_24px_rgba(6,95,70,0.07)]">
+                <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-gray-400 mb-1">
+                  Recent Topics
+                </p>
+                <ul>
+                  {SALES_MARKET_NOTE.topics.map((topic, index) => (
+                    <li
+                      key={topic.title}
+                      className={`flex items-center gap-4 py-[18px] ${
+                        index > 0 ? "border-t border-gray-100" : ""
+                      }`}
+                    >
+                      <span
+                        className="inline-flex items-center justify-center min-w-[78px] px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wide flex-shrink-0"
+                        style={{ color: topic.tagColor, backgroundColor: topic.tagBg }}
+                      >
+                        {topic.tag}
+                      </span>
+                      <p className="text-[13px] text-gray-800 leading-snug">{topic.title}</p>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -224,37 +380,43 @@ export function SalesLandingPanel({ content, membersStrip, onOpenModal, onOpenCo
         </div>
       </section>
 
-      {/* Commercial Case — dark blue design */}
+      {/* Commercial Case — ROI */}
       <section className="py-16 sm:py-24 bg-primary-800 section-dark relative overflow-hidden">
         <div className="page-container">
-          <Reveal className="text-center mb-10 sm:mb-12">
-            <SectionCategoryLabel colorClass="text-white/50">{content.roi.eyebrow}</SectionCategoryLabel>
-            <h2 className="font-serif text-3xl sm:text-4xl font-bold text-white mb-4">
-              {content.roi.title}{" "}
-              <span className="text-accent italic">{content.roi.titleAccent}</span>
-            </h2>
-            <p className="text-white/65 text-base sm:text-lg max-w-3xl mx-auto leading-relaxed">
-              {content.roi.description}
-            </p>
-          </Reveal>
-
-          <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-8 items-start">
-            <div className="grid grid-cols-2 gap-3 sm:gap-4">
-              {content.roi.stats.map((stat, i) => (
-                <Reveal key={stat.label} delay={i * 0.08}>
-                  <div className="rounded-xl p-4 sm:p-5" style={{ background: "#dcfce7" }}>
-                    <p className="font-serif text-xl sm:text-2xl font-bold text-gray-900 mb-1">{stat.value}</p>
-                    <p className="text-xs sm:text-sm text-gray-700 leading-snug">{stat.label}</p>
-                  </div>
-                </Reveal>
-              ))}
+          <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-8 lg:gap-12 items-start">
+            <div>
+              <Reveal>
+                <SectionCategoryLabel colorClass="text-white/50">{content.roi.eyebrow}</SectionCategoryLabel>
+                <h2 className="font-serif text-3xl sm:text-4xl font-bold text-white mb-4 mt-3">
+                  {content.roi.title}{" "}
+                  <span className="text-accent italic">{content.roi.titleAccent}</span>
+                </h2>
+                <p className="text-white/65 text-base sm:text-lg leading-relaxed mb-6">
+                  {content.roi.description}
+                </p>
+              </Reveal>
+              <div className="grid grid-cols-2 gap-3 sm:gap-4">
+                {content.roi.stats.map((stat, i) => (
+                  <Reveal key={stat.label} delay={i * 0.08}>
+                    <div className="rounded-xl p-4 sm:p-5" style={{ background: "#dcfce7" }}>
+                      <p className="font-serif text-xl sm:text-2xl font-bold text-gray-900 mb-1">{stat.value}</p>
+                      <p className="text-xs sm:text-sm text-gray-700 leading-snug">{stat.label}</p>
+                    </div>
+                  </Reveal>
+                ))}
+              </div>
             </div>
             <Reveal delay={0.2}>
               <blockquote className="rounded-xl border border-accent/40 bg-white/5 p-6 sm:p-8 h-full flex flex-col justify-center">
                 <p className="font-serif text-lg sm:text-xl text-white italic leading-relaxed mb-4">
                   &ldquo;{content.roi.quote}&rdquo;
                 </p>
-                <footer className="text-sm text-white/50">— {content.roi.quoteAuthor}</footer>
+                <footer>
+                  <p className="text-sm font-semibold text-white/80">— {content.roi.quoteAuthor}</p>
+                  {content.roi.quoteSubtitle && (
+                    <p className="text-sm text-white/50 mt-1">{content.roi.quoteSubtitle}</p>
+                  )}
+                </footer>
               </blockquote>
             </Reveal>
           </div>
@@ -299,21 +461,68 @@ export function SalesLandingPanel({ content, membersStrip, onOpenModal, onOpenCo
                   </ul>
                 </div>
                 <div className="p-6 sm:p-7 pt-0">
-                  <Link href={tier.href} className="block">
-                    <Button
-                      className={`w-full ${tier.featured ? "bg-teal-600 hover:bg-teal-500 text-white border-0" : ""}`}
-                      variant={tier.featured ? "default" : "outline"}
-                      size="lg"
-                    >
-                      {tier.cta}
-                      <ArrowRight className="w-4 h-4" />
-                    </Button>
-                  </Link>
+                  <Button
+                    className={`w-full ${tier.featured ? "bg-teal-600 hover:bg-teal-500 text-white border-0" : ""}`}
+                    variant={tier.featured ? "default" : "outline"}
+                    size="lg"
+                    onClick={() => handlePurchase(tier.name.toLowerCase() as "pro" | "elite")}
+                    loading={loadingPlan === tier.name.toLowerCase()}
+                  >
+                    {tier.cta}
+                    <ArrowRight className="w-4 h-4" />
+                  </Button>
                 </div>
               </div>
             </Reveal>
           ))}
         </div>
+
+        {/* Feature comparison */}
+        <Reveal className="mt-12 sm:mt-16">
+          <div className="text-center mb-6 sm:mb-8">
+            <h3 className="font-serif text-2xl sm:text-3xl font-bold text-gray-900">Feature Comparison</h3>
+            <p className="text-xs text-muted-fg mt-2 sm:hidden">Swipe to compare plans →</p>
+          </div>
+          <div className="rounded-2xl border border-border overflow-x-auto -mx-4 sm:mx-0 px-4 sm:px-0">
+            <div className="min-w-[480px]">
+              <div className="grid grid-cols-3 gap-0 bg-secondary">
+                <div className="p-4 col-span-1" />
+                {["Pro", "Elite"].map((t, idx) => (
+                  <div key={t} className="p-4 text-center border-l border-border">
+                    <p className="font-semibold text-sm text-gray-900">{t}</p>
+                    <p className="text-xs text-muted-fg">{["SGD 99/mo", "SGD 199/mo"][idx]}</p>
+                  </div>
+                ))}
+              </div>
+              {SALES_FEATURE_TABLE.map((group) => (
+                <React.Fragment key={group.category}>
+                  <div className="px-4 py-2.5 border-t border-border" style={{ background: `${group.color}08` }}>
+                    <p className="text-xs font-bold uppercase tracking-widest" style={{ color: group.color }}>
+                      {group.category}
+                    </p>
+                  </div>
+                  {group.items.map((item) => (
+                    <div
+                      key={item.name}
+                      className="grid grid-cols-3 border-t border-border hover:bg-secondary transition-colors"
+                    >
+                      <div className="p-3.5 col-span-1 text-sm text-gray-700">{item.name}</div>
+                      {(["pro", "elite"] as const).map((tier) => (
+                        <div key={tier} className="p-3.5 flex items-center justify-center border-l border-border">
+                          {item[tier] ? (
+                            <Check className="w-4 h-4 text-green-500" />
+                          ) : (
+                            <X className="w-4 h-4 text-gray-300" />
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  ))}
+                </React.Fragment>
+              ))}
+            </div>
+          </div>
+        </Reveal>
       </section>
 
       {/* Free Starter Pack signup */}
@@ -322,9 +531,6 @@ export function SalesLandingPanel({ content, membersStrip, onOpenModal, onOpenCo
           <div className="rounded-2xl overflow-hidden grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-8 lg:gap-10 p-8 sm:p-10 relative" style={{ background: "#065F46" }}>
             <div className="absolute top-0 right-0 w-64 h-64 rounded-full opacity-15 blur-3xl" style={{ background: SALES_COLOR }} />
             <div className="relative z-10">
-              <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-teal-200 mb-3">
-                Free Starter Pack
-              </p>
               <h2 className="font-serif text-2xl sm:text-3xl font-bold text-white mb-3 leading-tight">
                 Get 5 desk infographics.
                 <br />
@@ -359,7 +565,7 @@ export function SalesLandingPanel({ content, membersStrip, onOpenModal, onOpenCo
                   loading={subscribeStatus === "loading"}
                 >
                   <Download className="w-4 h-4" />
-                  Get the Free Pack
+                  Join Free - Upgrade Later
                 </Button>
               </form>
               <p className="text-xs text-teal-100/60 text-center">

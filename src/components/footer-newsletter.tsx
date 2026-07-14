@@ -2,10 +2,15 @@
 
 import React, { useState } from "react";
 
-export function FooterNewsletter() {
+interface FooterNewsletterProps {
+  variant?: "light" | "dark";
+}
+
+export function FooterNewsletter({ variant = "light" }: FooterNewsletterProps) {
   const [email, setEmail] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [message, setMessage] = useState("");
+  const isDark = variant === "dark";
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -36,12 +41,20 @@ export function FooterNewsletter() {
   }
 
   return (
-    <div className="py-[34px] border-b border-border flex flex-col sm:flex-row sm:items-center sm:justify-between gap-7">
+    <div
+      className={`py-[34px] border-b flex flex-col sm:flex-row sm:items-center sm:justify-between gap-7 ${
+        isDark ? "border-white/10" : "border-border"
+      }`}
+    >
       <div className="flex flex-col gap-1.5">
-        <span className="font-serif text-xl font-bold italic text-gray-900 tracking-tight leading-tight">
+        <span
+          className={`font-serif text-xl font-bold italic tracking-tight leading-tight ${
+            isDark ? "text-white" : "text-gray-900"
+          }`}
+        >
           Stay close to the desk.
         </span>
-        <span className="text-[13.5px] text-muted-fg leading-snug">
+        <span className={`text-[13.5px] leading-snug ${isDark ? "text-white/65" : "text-muted-fg"}`}>
           One short email. Industry happenings.
         </span>
       </div>
@@ -54,7 +67,7 @@ export function FooterNewsletter() {
           onChange={(e) => setEmail(e.target.value)}
           placeholder="your@email.com"
           disabled={status === "loading"}
-          className="w-full sm:w-[236px] bg-white border border-border rounded-[7px] px-[17px] py-[11px] text-sm text-gray-900 placeholder:text-gray-400 outline-none focus:border-primary-400 focus:ring-2 focus:ring-primary-400/20 transition-colors disabled:opacity-60"
+          className="w-full sm:w-[236px] bg-white border border-white/20 rounded-[7px] px-[17px] py-[11px] text-sm text-gray-900 placeholder:text-gray-400 outline-none focus:border-primary-400 focus:ring-2 focus:ring-primary-400/20 transition-colors disabled:opacity-60"
         />
         <button
           type="submit"
@@ -66,7 +79,7 @@ export function FooterNewsletter() {
       </form>
 
       {message && (
-        <p className={`text-xs mt-2 ${status === "error" ? "text-red-600" : "text-emerald-600"}`}>
+        <p className={`text-xs mt-2 ${status === "error" ? "text-red-400" : "text-emerald-400"}`}>
           {message}
         </p>
       )}

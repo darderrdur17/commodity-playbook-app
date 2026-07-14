@@ -16,6 +16,15 @@ export interface ChapterCoverage {
   desc: string;
 }
 
+export interface CaseStudyPreviewCard {
+  slug: string;
+  category: string;
+  title: string;
+  catchLine: string;
+  excerpt: string;
+  readMinutes: number;
+}
+
 export interface SalesWhoCard {
   role: string;
   title: string;
@@ -75,6 +84,7 @@ export interface LandingContent {
       stats: { value: string; label: string }[];
       quote: string;
       quoteAuthor: string;
+      quoteSubtitle?: string;
     };
     pricing: SalesPricingTier[];
   };
@@ -96,11 +106,10 @@ export interface LandingContent {
     title: string;
     titleAccent: string;
     description: string;
-    tag: string;
-    sampleTitle: string;
-    sampleMeta: string;
-    steps: { label: string; text: string }[];
-    unlockText: string;
+    cards: CaseStudyPreviewCard[];
+    categoryTags: string[];
+    disclaimer: string;
+    viewMoreHref?: string;
   };
   whatsInside: {
     titleLine1: string;
@@ -127,12 +136,12 @@ export const DEFAULT_LANDING_CONTENT: LandingContent = {
     headlineAccent: "the Desk Actually Works.",
     description:
       "The playbook most people never see. From fresh grad to senior coverage — whether you're entering the industry, switching roles, or moving from operations to the front office.",
-    ctaPrimary: "Start Free — Starter Pack",
+    ctaPrimary: "Join Free",
     ctaSecondary: "Preview Content",
     heroStats: [
       { value: 20, suffix: "+", label: "Years desk experience" },
       { value: 9, suffix: "", label: "Full playbook chapters" },
-      { value: 100, suffix: "+", label: "digital assets" },
+      { value: 120, suffix: "", label: "Downloadable assets" },
       { value: 10, suffix: "+", label: "Deep case studies" },
     ],
   },
@@ -142,7 +151,7 @@ export const DEFAULT_LANDING_CONTENT: LandingContent = {
     headlineAccent: "Desk-Level Credibility.",
     description:
       "Your buyers are traders, risk managers, schedulers, and analysts who can tell within two minutes whether you understand their world. The Playbook gives you the inside knowledge to have conversations at their level — not presentations at yours.",
-    ctaPrimary: "Start Free — Starter Pack",
+    ctaPrimary: "What You'll Learn",
     ctaSecondary: "What You'll Learn",
     stats: [
       { value: 2, suffix: " min", label: "How fast traders judge your credibility", animate: false },
@@ -161,31 +170,32 @@ export const DEFAULT_LANDING_CONTENT: LandingContent = {
     roi: {
       eyebrow: "The Commercial Case",
       title: "One Deal Pays for",
-      titleAccent: "a Year of Pro.",
+      titleAccent: "a Year of Elite.",
       description:
-        "Pro is SGD 99 one-time. If understanding the commodity trading desk helps you close one additional deal per year, the return is not close.",
+        "Elite is SGD 199/month. If understanding the commodity trading desk helps you close one additional deal per year — at even a fraction of typical contract values in this sector — the return is not close. The question is whether you can afford not to know this.",
       stats: [
         { value: "$250K–$2M+", label: "Typical ETRM / data platform ACV" },
-        { value: "SGD 99", label: "Full Pro access — one-time" },
+        { value: "SGD 2,388", label: "Full year of Elite access" },
         { value: "2 min", label: "How fast traders assess your credibility" },
-        { value: "6 wks", label: "Reported reduction in deal cycle" },
+        { value: "6 wks", label: "Reported reduction in deal cycle (user data)" },
       ],
       quote:
-        "I used to lose deals in the first five minutes. After the Playbook, I could hold a commercial conversation with a head of trading for forty-five.",
+        "I used to walk into commodity trading firms and talk about our platform's capabilities. Now I walk in and talk about their market — what Brent is doing, what the crack spread is signalling, what their freight book looks like. The conversation is completely different. So is our pipeline.",
       quoteAuthor: "Head of Enterprise Sales, APAC",
+      quoteSubtitle: "Market intelligence platform, Singapore",
     },
     pricing: [
       {
         name: "Pro",
         price: "SGD 99",
-        billing: "one-time",
-        description: "The foundation for selling smarter into commodity trading firms.",
+        billing: "per month",
+        description: "The toolkit for selling smarter into commodity trading space.",
         features: [
-          "Everything in Free Starter Pack",
           "Full Playbook — all 9 chapters covering every desk function, with examples and frameworks",
           "Market Knowledge Test — identify exactly which areas to study before key accounts",
           "Desk Glossary — explain the way a senior trader would do",
           "Sales Guide - key industry areas to look out for when selling",
+          "Weekly Sales Edge Note - highlight interesting market happenings to note from sales perspectives",
         ],
         cta: "Get Pro",
         href: "/signup?plan=pro",
@@ -201,7 +211,7 @@ export const DEFAULT_LANDING_CONTENT: LandingContent = {
           "Global & Asian Case Studies - updated market events showing how desks think through commercial decisions",
           "Desk Channel — Practitioner Q&As that reveal how traders frame every type of problem",
           "Anonymous Mentor Connect - ask your real sales preparation questions to practitioners directly",
-          "Market Job Openings - track which firms are growing and hiring (your next target accounts)",
+          "Market Role Openings - track which firms are growing and hiring (your next target accounts)",
         ],
         cta: "Get Elite",
         href: "/signup?plan=elite",
@@ -227,10 +237,10 @@ export const DEFAULT_LANDING_CONTENT: LandingContent = {
     ],
   },
   chapterCoverage: {
-    eyebrow: "The Full Playbook",
+    eyebrow: "The Playbook",
     title: "What We Cover.",
     description:
-      "The full surface area of commodity trading — from cargoes on the water to the desk's risk book.",
+      "Most people learn commodity markets from textbooks and headlines. This Playbook starts where the desk starts — cargoes, freight, arbitrage windows, and the commercial decisions that determine whether a trade makes money.",
     chapters: [
       { letter: "A", title: "Industry Foundations", desc: "Physical vs paper, the six revenue levers, pricing benchmarks, and how an oil trade actually makes money." },
       { letter: "B", title: "Physical & Paper Markets", desc: "MOC price assessment, spreads, the carry trade, OPEC signals, DES vs FOB, and managed money positioning." },
@@ -247,17 +257,41 @@ export const DEFAULT_LANDING_CONTENT: LandingContent = {
     eyebrow: "Learn with Examples",
     title: "Case Studies.",
     titleAccent: "Global & Asia.",
-    description: "Market scenarios with commercial logic — physical arbs, freight plays, cross-market reads, and supply disruptions. Each one shows how the desk thinks, what it sees, and what the P&L looked like.",
-    tag: "Free Sample · Case C",
-    sampleTitle: "COVID Contango — Singapore's Anchorage Fills",
-    sampleMeta: "April–June 2020 · Crude oil · Trading & shipping",
-    steps: [
-      { label: "1 · The Signal", text: "On 20 April 2020, WTI front-month settled at −$37.63/bbl. Brent's M1/M6 spread gapped out to roughly $18/bbl: a textbook contango." },
-      { label: "2 · The Read", text: "A contango that steep pays you to wait. If the gap between buying now and selling forward beats storage costs, storage itself becomes the trade." },
-      { label: "3 · The Evidence", text: "AIS vessel-tracking showed VLCCs anchoring off Singapore before any official inventory report confirmed the build." },
-      { label: "4 · The Decision", text: "Desks that locked storage early captured the carry. Timing, not direction, made the money." },
+    description:
+      "Market scenarios with commercial logic — physical arbs, freight plays, cross-market reads, and supply disruptions. Each one shows how the desk thinks, what it sees, and what the P&L looked like.",
+    cards: [
+      {
+        slug: "the-inventory-divergence",
+        category: "Physical arbitrage",
+        title: "The Inventory Divergence",
+        catchLine: "\"Three bullish draws. Flat price unmoved. Which signal do you trust?\"",
+        excerpt:
+          "EIA shows a 4.2mb crude draw — the third consecutive bullish surprise. Brent barely moves. The desk has to decide whether the physical signal is real or already priced in…",
+        readMinutes: 14,
+      },
+      {
+        slug: "the-cargo-diversion-window",
+        category: "Physical arbitrage",
+        title: "The Cargo Diversion Window",
+        catchLine: "\"JKM opened $4.40 above TTF. The vessel was already loading. The desk had 4 hours.\"",
+        excerpt:
+          "An LNG cargo is mid-load at a Trinidad terminal, originally destined for the UK. The JKM/TTF spread widens sharply after an unplanned Japanese terminal outage…",
+        readMinutes: 16,
+      },
+      {
+        slug: "when-the-dollar-spoke-first",
+        category: "Cross-market",
+        title: "When the Dollar Spoke First",
+        catchLine: "\"DXY strengthened 3.3% in 11 sessions. Brent's bulls were right — but three weeks early.\"",
+        excerpt:
+          "Three consecutive bullish EIA draws — and the price falls anyway. The US Dollar Index was strengthening quietly in the background, driving speculative long liquidation…",
+        readMinutes: 18,
+      },
     ],
-    unlockText: "That's one of 10+ worked case studies. Unlocks with Elite.",
+    categoryTags: ["Physical arb", "Cross-market", "Freight & logistics", "Supply disruption"],
+    disclaimer:
+      "Case studies reflect either real market scenarios or are illustrative for learning purposes. Figures and outcomes are used to demonstrate commercial logic, not investment advice.",
+    viewMoreHref: "/case-studies",
   },
   whatsInside: {
     titleLine1: "Every Resource You Need,",
@@ -315,26 +349,26 @@ export const DEFAULT_LANDING_CONTENT: LandingContent = {
         badge: "starter",
         highlight: false,
         tooltip: "Only an email required",
-        description: "Explore the playbook and get your first desk-ready resources.",
+        description: "The foundation for anyone entering commodity markets.",
         features: [
           "5 desk infographics",
           "Chapter A preview (3 free sections)",
-          "Desk Glossary (196 terms)",
-          "Weekly Market Digest",
+          "Desk Glossary",
+          "Email Digest",
           "Job Board waitlist",
         ],
-        cta: "Get Starter Free",
+        cta: "Join Free",
         href: "/signup",
         opensModal: true,
       },
       {
         name: "Pro",
-        price: "SGD 99",
-        billing: "one-time",
+        price: "SGD 59",
+        billing: "per month · cancel anytime",
         badge: "pro",
         highlight: true,
-        tooltip: "One-time purchase",
-        description: "Everything you need to position yourself and land the role.",
+        tooltip: "For professionals and learners going deeper into how commodity markets work.",
+        description: "For professionals and learners going deeper into how commodity markets work.",
         features: [
           "Full Playbook — all 9 chapters",
           "Persona Analysis Quiz",
@@ -342,18 +376,20 @@ export const DEFAULT_LANDING_CONTENT: LandingContent = {
           "Career Roadmap (10 role blueprints)",
           "Interview Questions + Answers (50+)",
           "Market Knowledge Test (gap analysis)",
+          "Resume Vetting (up to twice a year)",
+          "Career Navigation Guide — move across the industry with confidence",
         ],
         cta: "Get Pro",
-        href: "/signup?plan=pro",
+        href: "/pricing",
       },
       {
         name: "Elite",
-        price: "SGD 299",
-        billing: "per month",
+        price: "SGD 99",
+        billing: "per month · cancel anytime",
         badge: "elite",
         highlight: false,
-        tooltip: "Live intelligence updates, and the full practitioner network",
-        description: "Full commercial education plus live intelligence and mentor access.",
+        tooltip: "For long-term serious learners with long-term downstream careers.",
+        description: "For long-term serious learners with long-term downstream careers.",
         features: [
           "Everything in Pro",
           "Deep-dive Global & Asia Case Studies (10+ ongoing)",
@@ -362,12 +398,12 @@ export const DEFAULT_LANDING_CONTENT: LandingContent = {
           "Market Job Openings Tracker (tailored to persona)",
         ],
         cta: "Get Elite",
-        href: "/signup?plan=elite",
+        href: "/pricing",
       },
     ],
   },
   membersStrip: {
-    label: "Trusted by professionals moving to",
+    label: "Trusted professional moving to",
     companies: ["Vitol", "Glencore", "S&P Global", "Bloomberg", "Shell"],
   },
   footerTagline:

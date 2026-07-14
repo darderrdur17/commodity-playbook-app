@@ -22,8 +22,8 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   title: {
-    default: "Commodity Playbook — Build Your Career in Commodity Trading",
-    template: "%s | Commodity Playbook",
+    default: "CommodityPlaybook — Build Your Career in Commodity Trading",
+    template: "%s | CommodityPlaybook",
   },
   description:
     "The definitive career and sales guide for commodity trading. Starter, Pro, and Elite resources for anyone building a desk, breaking in, or selling into trading firms.",
@@ -40,8 +40,8 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_SG",
     url: "https://commodityplaybook.com",
-    siteName: "Commodity Playbook",
-    title: "Commodity Playbook — Build Your Career in Commodity Trading",
+    siteName: "CommodityPlaybook",
+    title: "CommodityPlaybook — Build Your Career in Commodity Trading",
     description:
       "The definitive career guide for commodity trading. From first desk to senior coverage.",
     images: [
@@ -49,13 +49,13 @@ export const metadata: Metadata = {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "Commodity Playbook",
+        alt: "CommodityPlaybook",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Commodity Playbook",
+    title: "CommodityPlaybook",
     description: "The definitive career guide for commodity trading.",
     images: ["/og-image.png"],
   },

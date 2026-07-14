@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { AnimatedProgress, Reveal, StaggerChildren, StaggerItem } from "@/components/animations";
 import { PERSONA_LABELS, TIER_LABELS, hasAccess, formatCurrency } from "@/lib/utils";
+import { PRO_SUBSCRIPTION, ELITE_SUBSCRIPTION } from "@/data/pricing-shared";
 
 interface Props {
   contentTiers?: Record<string, string>;
@@ -287,7 +288,7 @@ export function DashboardClient({ contentTiers = {}, user, stats }: Props) {
           <h2 className="font-serif text-xl font-bold text-gray-900">Your Content</h2>
           {!hasAccess(user.tier, "PRO") && (
             <Link href="/pricing">
-              <Button size="sm" variant="default">Unlock Pro — SGD 99</Button>
+              <Button size="sm" variant="default">{PRO_SUBSCRIPTION.unlockCta}</Button>
             </Link>
           )}
         </Reveal>
@@ -377,8 +378,8 @@ export function DashboardClient({ contentTiers = {}, user, stats }: Props) {
                 </h3>
                 <p className="text-white/60 text-sm">
                   {user.tier === "STARTER"
-                    ? "SGD 99 one-time — lifetime access."
-                    : "SGD 299/month — cancel anytime."}
+                    ? PRO_SUBSCRIPTION.fullNote
+                    : ELITE_SUBSCRIPTION.fullNote}
                 </p>
               </div>
               <Link href="/pricing" className="flex-shrink-0 w-full sm:w-auto">

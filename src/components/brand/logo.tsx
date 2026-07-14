@@ -12,31 +12,32 @@ type LogoVariant =
   | "wordmark-tagline"
   | "lockup-dark";
 
+/** Brand Kit-2 assets — header_logo1, footer_logo1, login_page_logo1 */
 const SOURCES: Record<Exclude<LogoVariant, "lockup-dark">, { src: string; width: number; height: number }> = {
-  horizontal: { src: "/brand/logo-horizontal.png", width: 220, height: 40 },
-  header: { src: "/brand/logo-horizontal.png", width: 540, height: 152 },
+  horizontal: { src: "/brand/header_logo1.png", width: 540, height: 152 },
+  header: { src: "/brand/header_logo1.png", width: 540, height: 152 },
   footer: { src: "/brand/footer_logo1.png", width: 400, height: 96 },
   login: { src: "/brand/login_page_logo1.png", width: 280, height: 56 },
   mark: { src: "/brand/logo-mark.png", width: 40, height: 40 },
-  white: { src: "/brand/logo-white.png", width: 220, height: 40 },
-  "wordmark-tagline": { src: "/brand/logo-wordmark-tagline.png", width: 280, height: 72 },
+  white: { src: "/brand/header_logo1.png", width: 540, height: 152 },
+  "wordmark-tagline": { src: "/brand/footer_logo1.png", width: 400, height: 96 },
 };
 
-/** Header fits within 80px nav — horizontal wordmark only, no tagline */
+/** Header fits within 80px nav — Brand Kit horizontal wordmark */
 const HEADER_WRAPPER_CLASS =
   "inline-flex items-center h-[44px] sm:h-[48px] md:h-[52px] max-h-full overflow-hidden max-w-[min(100%,180px)] sm:max-w-[min(100%,200px)] md:max-w-[min(100%,220px)] shrink-0";
 
-/** Responsive defaults — override per call site with imageClassName when needed */
 const VARIANT_IMAGE_CLASS: Record<Exclude<LogoVariant, "lockup-dark">, string> = {
   header: "h-full w-auto max-w-full object-contain object-left",
   footer:
-    "h-[132px] w-auto sm:h-[148px] md:h-[164px] lg:h-[180px] max-w-[min(100%,360px)] object-contain object-left",
+    "h-[160px] w-auto sm:h-[180px] md:h-[200px] lg:h-[220px] max-w-[min(100%,400px)] object-contain object-left",
   login:
     "h-12 w-auto sm:h-14 md:h-16 max-w-[min(100%,280px)] object-contain object-left",
   horizontal: "h-10 w-auto sm:h-11 max-w-[220px] object-contain object-left",
   mark: "h-9 w-9 sm:h-10 sm:w-10 object-contain",
-  white: "h-10 w-auto sm:h-11 max-w-[220px] object-contain object-left",
-  "wordmark-tagline": "h-14 w-auto sm:h-16 md:h-[4.5rem] max-w-[min(100%,320px)] object-contain object-left",
+  white: "h-10 w-auto sm:h-11 max-w-[220px] object-contain object-left brightness-0 invert",
+  "wordmark-tagline":
+    "h-16 w-auto sm:h-[4.5rem] md:h-20 lg:h-[5.5rem] max-w-[min(100%,340px)] object-contain object-left",
 };
 
 interface LogoProps {
@@ -49,7 +50,7 @@ interface LogoProps {
   showTagline?: boolean;
 }
 
-/** Icon + wordmark — matches nav on light, inverted on dark (no white PNG box) */
+/** Icon + wordmark — login / dark panels when PNG lockup is not used */
 function LogoLockupDark({
   className,
   showTagline = false,
@@ -61,23 +62,14 @@ function LogoLockupDark({
 }) {
   return (
     <span className={cn("inline-flex flex-col gap-2.5", className)}>
-      <span className="inline-flex items-center gap-2.5 sm:gap-3">
-        <Image
-          src="/brand/logo-mark.png"
-          alt=""
-          width={48}
-          height={48}
-          priority={priority}
-          className="h-10 w-10 sm:h-12 sm:w-12 md:h-14 md:w-14 object-contain shrink-0"
-          aria-hidden
-        />
-        <span className="font-sans font-bold text-[19px] sm:text-[22px] md:text-2xl tracking-tight leading-none">
-          <span className="text-white">Commodity</span>
-          <span className="bg-gradient-to-r from-white to-accent bg-clip-text text-transparent">
-            Playbook
-          </span>
-        </span>
-      </span>
+      <Image
+        src="/brand/login_page_logo1.png"
+        alt="CommodityPlaybook"
+        width={280}
+        height={56}
+        priority={priority}
+        className="h-12 w-auto sm:h-14 md:h-16 max-w-[min(100%,280px)] object-contain object-left"
+      />
       {showTagline && (
         <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.22em] text-white/80">
           Break in. Move up. Stay sharp.
@@ -116,7 +108,7 @@ export function Logo({
       height={height}
       priority={priority}
       sizes={
-        variant === "footer"
+        variant === "footer" || variant === "wordmark-tagline"
           ? "(max-width: 640px) 280px, 360px"
           : variant === "header"
             ? "(max-width: 640px) 180px, 220px"

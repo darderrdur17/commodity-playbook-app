@@ -17,9 +17,20 @@ const PROTECTED_PATHS = [
   "/admin",
 ];
 
+/** Starter-tier content — requires a free account before access */
+const STARTER_SIGNUP_PATHS = ["/glossary"];
+
 export const proxy = auth((req) => {
   const { pathname } = req.nextUrl;
   const isProtected = PROTECTED_PATHS.some((p) => pathname.startsWith(p));
+  const needsStarterSignup = STARTER_SIGNUP_PATHS.some((p) => pathname.startsWith(p));
+
+  if (needsStarterSignup && !req.auth) {
+    const signupUrl = new URL("/signup", req.url);
+    signupUrl.searchParams.set("plan", "starter");
+    signupUrl.searchParams.set("callbackUrl", pathname);
+    return NextResponse.redirect(signupUrl);
+  }
 
   if (isProtected && !req.auth) {
     const loginUrl = new URL("/login", req.url);

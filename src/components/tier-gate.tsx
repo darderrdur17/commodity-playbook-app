@@ -10,14 +10,14 @@ import { cn } from "@/lib/utils";
 const TIER_UPGRADE = {
   STARTER: {
     label: "Pro",
-    price: "SGD 99",
+    price: "SGD 59/mo",
     href: "/pricing",
     color: "#3280ff",
     description: "Unlock the full playbook, resume templates, career roadmap, and more.",
   },
   PRO: {
     label: "Elite",
-    price: "SGD 299/mo",
+    price: "SGD 99/mo",
     href: "/pricing",
     color: "#B45309",
     description: "Unlock case studies, the Desk Channel, Mentor Connect, and job openings.",

@@ -2,9 +2,10 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useSession } from "next-auth/react";
 import {
-  ArrowRight, Check, BookOpen, Users, Lock,
+  ArrowRight, Check, BookOpen, Users,
   Star, Zap, ChevronRight,
   MessageSquare, FileText, Map, Target, Info,
 } from "lucide-react";
@@ -20,6 +21,9 @@ import { SalesLandingPanel } from "@/components/landing/sales-landing-panel";
 import { SectionCategoryLabel } from "@/components/landing/section-category-label";
 import { MembersStrip } from "@/components/landing/members-strip";
 import { ChapterAccordion } from "@/components/landing/chapter-accordion";
+import { CaseStudiesPreview } from "@/components/landing/case-studies-preview";
+import { startCheckout } from "@/lib/start-checkout";
+import { PRICING_CONTENT_FOOTNOTE } from "@/data/pricing-shared";
 import {
   DEFAULT_LANDING_CONTENT,
   type LandingContent,
@@ -59,9 +63,12 @@ interface Props {
 
 export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) {
   const searchParams = useSearchParams();
+  const router = useRouter();
+  const { data: session } = useSession();
   const [activeTrack, setActiveTrack] = useState<Track>("career");
   const [modalOpen, setModalOpen] = useState(false);
   const [contactOpen, setContactOpen] = useState(false);
+  const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
 
   useEffect(() => {
     const track = searchParams.get("track");
@@ -69,6 +76,23 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
       setActiveTrack(track);
     }
   }, [searchParams]);
+
+  async function handlePurchase(plan: "pro" | "elite") {
+    if (!session?.user) {
+      router.push(`/signup?plan=${plan}&callbackUrl=/pricing`);
+      return;
+    }
+    setLoadingPlan(plan);
+    try {
+      const url = await startCheckout(plan);
+      if (url) window.location.href = url;
+      else router.push("/pricing");
+    } catch {
+      router.push("/pricing");
+    } finally {
+      setLoadingPlan(null);
+    }
+  }
 
   const career = content.career;
   const tierColors: Record<string, string> = { Pro: "#3280ff", Elite: "#B45309" };
@@ -128,7 +152,7 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
                 backgroundSize: "60px 60px",
               }}
             />
-            <div className="relative z-10 w-full max-w-[1200px] mx-auto px-4 sm:px-6 py-16 sm:py-24 flex-1 flex items-center">
+            <div className="relative z-10 w-full max-w-[1200px] mx-auto px-4 sm:px-6 pt-16 sm:pt-24 pb-16 sm:pb-20 flex-1 flex items-center">
               <div className="max-w-3xl w-full">
                 <Reveal>
                   <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-accent/30 bg-accent/10 text-accent text-xs font-medium tracking-wide mb-5">
@@ -173,11 +197,9 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
                 </Reveal>
               </div>
             </div>
-
-            <div className="relative z-10 w-full">
-              <MembersStrip label={content.membersStrip.label} companies={content.membersStrip.companies} variant="dark" />
-            </div>
           </section>
+
+          <MembersStrip label={content.membersStrip.label} companies={content.membersStrip.companies} variant="light" />
 
           {/* What's Inside */}
           <section className="py-16 sm:py-24 page-container">
@@ -236,7 +258,7 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
             </div>
           </section>
 
-          {/* Case Studies sample */}
+          {/* Case Studies preview */}
           <section className="py-16 sm:py-24 page-container">
             <Reveal className="text-center mb-12 sm:mb-14 max-w-3xl mx-auto">
               <SectionCategoryLabel>{content.caseStudySample.eyebrow}</SectionCategoryLabel>
@@ -248,35 +270,17 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
                 {content.caseStudySample.description}
               </p>
             </Reveal>
-            <Reveal delay={0.1} className="max-w-3xl mx-auto">
-              <div className="rounded-2xl border border-border bg-white overflow-hidden">
-                <div className="px-6 sm:px-8 py-5 border-b border-border flex flex-wrap items-center justify-between gap-2">
-                  <Badge variant="pro" size="sm">{content.caseStudySample.tag}</Badge>
-                  <p className="text-xs text-muted-fg">{content.caseStudySample.sampleMeta}</p>
-                </div>
-                <div className="px-6 sm:px-8 py-6">
-                  <h3 className="font-serif text-lg sm:text-xl font-bold text-gray-900 mb-6">
-                    {content.caseStudySample.sampleTitle}
-                  </h3>
-                  <div className="space-y-5">
-                    {content.caseStudySample.steps.map((step) => (
-                      <div key={step.label} className="flex gap-4">
-                        <div className="w-1 rounded-full bg-primary-400/30 shrink-0" />
-                        <div>
-                          <p className="text-[11px] font-bold uppercase tracking-widest text-primary-400 mb-1">
-                            {step.label}
-                          </p>
-                          <p className="text-sm text-gray-700 leading-relaxed">{step.text}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                <div className="px-6 sm:px-8 py-4 bg-secondary border-t border-border flex items-center gap-2.5">
-                  <Lock className="w-4 h-4 text-muted-fg shrink-0" />
-                  <p className="text-sm text-muted-fg">{content.caseStudySample.unlockText}</p>
-                </div>
-              </div>
+            <Reveal delay={0.1}>
+              <CaseStudiesPreview
+                cards={
+                  content.caseStudySample.cards?.length
+                    ? content.caseStudySample.cards
+                    : DEFAULT_LANDING_CONTENT.caseStudySample.cards
+                }
+                categoryTags={content.caseStudySample.categoryTags}
+                disclaimer={content.caseStudySample.disclaimer}
+                viewMoreHref={content.caseStudySample.viewMoreHref}
+              />
             </Reveal>
           </section>
 
@@ -340,6 +344,11 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
                             </li>
                           ))}
                         </ul>
+                        {(tier.name === "Pro" || tier.name === "Elite") && (
+                          <p className={`text-xs italic mt-4 ${tier.highlight ? "text-muted-fg" : "text-white/55"}`}>
+                            {PRICING_CONTENT_FOOTNOTE}
+                          </p>
+                        )}
                       </div>
                       <div className="p-6 sm:p-7 pt-0">
                         {tier.opensModal ? (
@@ -350,6 +359,17 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
                             onClick={() => setModalOpen(true)}
                           >
                             {tier.cta}
+                          </Button>
+                        ) : tier.name === "Pro" || tier.name === "Elite" ? (
+                          <Button
+                            className="w-full"
+                            variant={tier.highlight ? "default" : "primary-dark"}
+                            size="lg"
+                            onClick={() => handlePurchase(tier.name.toLowerCase() as "pro" | "elite")}
+                            loading={loadingPlan === tier.name.toLowerCase()}
+                          >
+                            {tier.cta}
+                            <ArrowRight className="w-4 h-4" />
                           </Button>
                         ) : (
                           <Link href={tier.href} className="block">
@@ -420,7 +440,7 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
                 </h2>
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 mt-8">
                   <Button size="xl" variant="primary-dark" className="shadow-xl w-full sm:w-auto" onClick={() => setModalOpen(true)}>
-                    Start Free — Starter Pack <ArrowRight className="w-5 h-5" />
+                    {career.ctaPrimary} <ArrowRight className="w-5 h-5" />
                   </Button>
                   <Button
                     size="xl"

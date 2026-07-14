@@ -3,7 +3,7 @@ import type { Tier } from "@prisma/client";
 import { CONTENT_MODULE_META, getModuleMeta, type ContentSlug } from "./modules";
 import { GLOSSARY_TERMS } from "@/data/glossary";
 import { getDefaultPayload, getAllDefaultPayloads } from "./defaults";
-import { mergeLandingContent } from "./merge";
+import { deepMerge, mergeLandingContent } from "./merge";
 import type { LandingContent } from "@/data/landing-content";
 import { applyCmsSchemaSql } from "@/lib/setup-database";
 
@@ -89,15 +89,30 @@ export async function syncGlossaryFromDefaults() {
   return { updated: true, termCount: GLOSSARY_TERMS.length, created: false };
 }
 
-/** Modules where CMS wording edits must survive deploys (merged, not replaced). */
-const CMS_WORDING_MODULES: ContentSlug[] = ["landing"];
+/** Merge repo defaults with CMS on deploy — admin edits preserved, new code fields added. */
+function mergeModulePayloadOnDeploy(
+  slug: ContentSlug,
+  defaults: object,
+  existing: object
+): object {
+  if (slug === "landing") {
+    return mergeLandingContent(
+      defaults as LandingContent,
+      existing as Partial<LandingContent>
+    ) as object;
+  }
 
-/** Push repo defaults into CMS — wording modules merge; data modules replace. */
+  // CMS values win on conflicts; repo defaults fill missing keys/sections.
+  return deepMerge(defaults as Record<string, unknown>, existing as Record<string, unknown>);
+}
+
+/** Push repo defaults into CMS — never fully replace existing admin-edited modules. */
 export async function syncAllContentModulesFromDefaults() {
   await ensureContentInfrastructure();
   const defaults = getAllDefaultPayloads();
   let updated = 0;
   let created = 0;
+  let unchanged = 0;
 
   for (const meta of CONTENT_MODULE_META) {
     const slug = meta.slug as ContentSlug;
@@ -120,14 +135,19 @@ export async function syncAllContentModulesFromDefaults() {
       continue;
     }
 
-    const payload: object = CMS_WORDING_MODULES.includes(slug)
-      ? slug === "landing"
-        ? (mergeLandingContent(
-            defaultPayload as LandingContent,
-            existing.payload as Partial<LandingContent>
-          ) as object)
-        : (existing.payload as object)
-      : defaultPayload;
+    const payload = mergeModulePayloadOnDeploy(
+      slug,
+      defaultPayload,
+      existing.payload as object
+    );
+
+    const payloadChanged =
+      JSON.stringify(existing.payload) !== JSON.stringify(payload);
+
+    if (!payloadChanged) {
+      unchanged++;
+      continue;
+    }
 
     await prisma.contentModule.update({
       where: { slug },
@@ -139,7 +159,7 @@ export async function syncAllContentModulesFromDefaults() {
     updated++;
   }
 
-  return { updated, created, total: CONTENT_MODULE_META.length };
+  return { updated, created, unchanged, total: CONTENT_MODULE_META.length };
 }
 
 export async function listContentModules() {

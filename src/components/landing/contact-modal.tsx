@@ -125,7 +125,7 @@ export function ContactModal({ open, onClose }: Props) {
                     Send message
                   </Button>
                   <p className="text-[11px] text-muted-fg text-center">
-                    Commodity Playbook · Singapore
+                    CommodityPlaybook · Singapore
                   </p>
                 </form>
               </>
@@ -138,7 +138,7 @@ export function ContactModal({ open, onClose }: Props) {
                 <p className="text-sm text-muted-fg mb-2 max-w-xs mx-auto">
                   Thanks for reaching out — we&apos;ll be in touch within one business day.
                 </p>
-                <p className="text-[11px] text-muted-fg">Commodity Playbook · Singapore</p>
+                <p className="text-[11px] text-muted-fg">CommodityPlaybook · Singapore</p>
               </div>
             )}
           </motion.div>

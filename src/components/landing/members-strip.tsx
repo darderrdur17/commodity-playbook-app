@@ -12,7 +12,7 @@ export function MembersStrip({ label, companies, variant = "light" }: MembersStr
       className={
         isDark
           ? "py-8 sm:py-9 bg-[#f1f4f8] border-t border-[#e2e6ec]"
-          : "py-8 sm:py-9 bg-[#f5f0e8] border-y border-[#e8e0d4]"
+          : "py-10 sm:py-12 bg-[#f1f4f8] border-y border-[#e2e6ec]"
       }
     >
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 text-center">
