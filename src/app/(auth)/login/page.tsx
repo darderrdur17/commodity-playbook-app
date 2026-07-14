@@ -15,6 +15,7 @@ import { Badge } from "@/components/ui/badge";
 import { GradientOrbs, HeroParticles } from "@/components/animations";
 import { Logo } from "@/components/brand/logo";
 import { DEMO_ACCOUNTS, DEMO_PASSWORD } from "@/data/demo-accounts";
+import { MAIN_MIN_HEIGHT_BELOW_NAV } from "@/lib/layout-constants";
 
 const schema = z.object({
   email: z.string().email("Please enter a valid email address"),
@@ -75,7 +76,7 @@ function LoginForm() {
   }
 
   return (
-    <div className="min-h-[calc(100svh-80px-env(safe-area-inset-top,0px))] flex">
+    <div className="flex" style={{ minHeight: MAIN_MIN_HEIGHT_BELOW_NAV }}>
       {/* Left panel — dark hero */}
       <div className="hidden lg:flex lg:w-1/2 relative bg-navy section-dark overflow-hidden flex-col justify-between p-12 pt-10">
         <GradientOrbs />

@@ -23,6 +23,7 @@ import { MembersStrip } from "@/components/landing/members-strip";
 import { ChapterAccordion } from "@/components/landing/chapter-accordion";
 import { CaseStudiesPreview } from "@/components/landing/case-studies-preview";
 import { startCheckout } from "@/lib/start-checkout";
+import { NAV_OFFSET } from "@/lib/layout-constants";
 import { PRICING_CONTENT_FOOTNOTE } from "@/data/pricing-shared";
 import {
   DEFAULT_LANDING_CONTENT,
@@ -98,9 +99,9 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
   const tierColors: Record<string, string> = { Pro: "#3280ff", Elite: "#B45309" };
 
   return (
-    <div className="overflow-hidden -mt-[calc(80px+env(safe-area-inset-top,0px))]">
+    <div className="overflow-hidden" style={{ marginTop: `calc(-1 * (${NAV_OFFSET}))` }}>
       {/* Audience toggle — flush under nav */}
-      <div className="sticky top-[calc(80px+env(safe-area-inset-top,0px))] z-40 bg-white border-b border-border shadow-sm">
+      <div className="sticky z-40 bg-white border-b border-border shadow-sm" style={{ top: NAV_OFFSET }}>
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 flex items-stretch gap-0 overflow-x-auto scrollbar-none">
           <button
             type="button"

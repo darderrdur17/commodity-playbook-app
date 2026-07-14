@@ -23,9 +23,9 @@ const SOURCES: Record<Exclude<LogoVariant, "lockup-dark">, { src: string; width:
   "wordmark-tagline": { src: "/brand/footer_logo1.png", width: 400, height: 96 },
 };
 
-/** Header fits within 80px nav — Brand Kit horizontal wordmark */
+/** Header fits within app nav — Brand Kit horizontal wordmark */
 const HEADER_WRAPPER_CLASS =
-  "inline-flex items-center h-[52px] sm:h-[58px] md:h-[64px] max-h-full max-w-[min(100%,260px)] sm:max-w-[min(100%,300px)] md:max-w-[min(100%,340px)] shrink-0";
+  "inline-flex items-center h-[64px] sm:h-[72px] md:h-[80px] max-h-full max-w-[min(100%,320px)] sm:max-w-[420px] md:max-w-[480px] lg:max-w-[520px] shrink-0";
 
 const VARIANT_IMAGE_CLASS: Record<Exclude<LogoVariant, "lockup-dark">, string> = {
   header: "h-full w-auto max-w-full object-contain object-left",
@@ -111,8 +111,8 @@ export function Logo({
         variant === "footer" || variant === "wordmark-tagline"
           ? "(max-width: 640px) 280px, 360px"
           : variant === "header"
-            ? "(max-width: 640px) 260px, 340px"
-            : "(max-width: 768px) 280px, 340px"
+            ? "(max-width: 640px) 320px, 520px"
+            : "(max-width: 768px) 320px, 520px"
       }
       className={cn(VARIANT_IMAGE_CLASS[variant], imageClassName)}
     />

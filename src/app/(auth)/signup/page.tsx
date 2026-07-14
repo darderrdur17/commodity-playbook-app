@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { GradientOrbs, HeroParticles } from "@/components/animations";
 import { Logo } from "@/components/brand/logo";
+import { MAIN_MIN_HEIGHT_BELOW_NAV } from "@/lib/layout-constants";
 
 const schema = z.object({
   name: z.string().min(2, "Please enter your name"),
@@ -84,7 +85,7 @@ function SignupForm() {
   }
 
   return (
-    <div className="min-h-[calc(100svh-80px-env(safe-area-inset-top,0px))] flex">
+    <div className="flex" style={{ minHeight: MAIN_MIN_HEIGHT_BELOW_NAV }}>
       {/* Left panel */}
       <div className="hidden lg:flex lg:w-1/2 relative bg-primary-800 section-dark overflow-hidden flex-col justify-between p-12 pt-10">
         <GradientOrbs />

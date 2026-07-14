@@ -11,7 +11,7 @@ import { cn, isAdmin } from "@/lib/utils";
 import { signOut, useSession } from "next-auth/react";
 import { Logo } from "@/components/brand/logo";
 
-const NAV_HEIGHT = "80px";
+import { NAV_HEIGHT, NAV_OFFSET, NAV_HEIGHT_PX } from "@/lib/layout-constants";
 
 const SIMPLE_LINKS = [
   { label: "Playbook", href: "/playbook" },
@@ -112,7 +112,7 @@ export function Nav() {
           className="max-w-[1200px] mx-auto px-4 sm:px-10 grid grid-cols-[1fr_auto_1fr] items-center"
           style={{ height: NAV_HEIGHT }}
         >
-          <div className="flex items-center min-w-0 h-full">
+          <div className="flex items-center min-w-0 h-full justify-self-start pr-2 sm:pr-4">
             <Logo variant="header" priority />
           </div>
 
@@ -335,7 +335,11 @@ export function Nav() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.25, ease: "easeInOut" }}
-            className="fixed top-[calc(80px+env(safe-area-inset-top,0px))] left-0 right-0 z-40 bg-white border-b border-[#e4e7ec] overflow-hidden max-h-[calc(100dvh-80px-env(safe-area-inset-top,0px))] overflow-y-auto"
+            className="fixed left-0 right-0 z-40 bg-white border-b border-[#e4e7ec] overflow-hidden overflow-y-auto"
+            style={{
+              top: NAV_OFFSET,
+              maxHeight: `calc(100dvh - ${NAV_HEIGHT_PX}px - env(safe-area-inset-top, 0px))`,
+            }}
           >
             <nav className="max-w-[1200px] mx-auto px-4 sm:px-6 py-4 flex flex-col gap-1">
               <p className="px-3 text-[10px] font-bold uppercase tracking-widest text-[#b0bec5] mb-1">

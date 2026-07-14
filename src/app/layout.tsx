@@ -5,6 +5,7 @@ import { Nav } from "@/components/nav";
 import { Footer } from "@/components/footer";
 import { SessionProvider } from "@/components/session-provider";
 import { Toaster } from "@/components/ui/toaster";
+import { NAV_OFFSET } from "@/lib/layout-constants";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -87,7 +88,7 @@ export default function RootLayout({
       <body className="font-sans antialiased bg-white text-gray-800 min-h-screen flex flex-col overflow-x-hidden">
         <SessionProvider>
           <Nav />
-          <main className="flex-1 pt-[calc(80px+env(safe-area-inset-top,0px))] pb-[max(1rem,env(safe-area-inset-bottom))]">{children}</main>
+          <main className="flex-1 pb-[max(1rem,env(safe-area-inset-bottom))]" style={{ paddingTop: NAV_OFFSET }}>{children}</main>
           <Footer />
           <Toaster />
         </SessionProvider>
