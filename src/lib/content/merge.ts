@@ -108,24 +108,7 @@ export function mergeLandingContent(
   if (cms.sales?.whoCards?.length) {
     merged.sales = {
       ...merged.sales,
-      ...cms.sales,
       whoCards: mergeByKey(defaults.sales.whoCards, cms.sales.whoCards, "title"),
-    };
-  }
-
-  if (cms.sales?.pricing?.length) {
-    merged.sales = {
-      ...merged.sales,
-      ...cms.sales,
-      pricing: mergeByKey(defaults.sales.pricing, cms.sales.pricing, "name"),
-    };
-  }
-
-  if (cms.sales?.roi?.stats?.length) {
-    merged.sales.roi = {
-      ...merged.sales.roi,
-      ...cms.sales.roi,
-      stats: mergeByKey(defaults.sales.roi.stats, cms.sales.roi.stats, "label"),
     };
   }
 
@@ -140,7 +123,6 @@ export function mergeLandingContent(
   if (cms.sales?.stats?.length) {
     merged.sales = {
       ...merged.sales,
-      ...cms.sales,
       stats: mergeByKey(defaults.sales.stats, cms.sales.stats, "label"),
     };
   }
@@ -155,6 +137,30 @@ export function mergeLandingContent(
   if (cms.stats?.length) {
     merged.stats = mergeByKey(defaults.stats, cms.stats, "label");
   }
+
+  // Sales pricing + ROI — repo defaults win; must run last (no later cms.sales spread)
+  merged.sales = {
+    ...merged.sales,
+    pricing: mergeByKeyDefaultsWin(
+      defaults.sales.pricing,
+      cms.sales?.pricing ?? [],
+      "name"
+    ),
+    roi: {
+      ...merged.sales.roi,
+      title: defaults.sales.roi.title,
+      titleAccent: defaults.sales.roi.titleAccent,
+      description: defaults.sales.roi.description,
+      quote: defaults.sales.roi.quote,
+      quoteAuthor: defaults.sales.roi.quoteAuthor,
+      quoteSubtitle: defaults.sales.roi.quoteSubtitle,
+      stats: mergeByKeyDefaultsWin(
+        defaults.sales.roi.stats,
+        cms.sales?.roi?.stats ?? [],
+        "label"
+      ),
+    },
+  };
 
   return merged;
 }

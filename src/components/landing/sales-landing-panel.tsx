@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import {
   ArrowRight, AlertCircle, Users, TrendingUp, Check, Download, Star,
-  ChevronDown, X,
+  ChevronDown, ChevronRight, X,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Reveal, StaggerChildren, StaggerItem } from "@/components/animations";
@@ -179,6 +179,7 @@ export function SalesLandingPanel({ content, membersStrip, onOpenContactModal }:
   const [email, setEmail] = useState("");
   const [subscribeStatus, setSubscribeStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
+  const [showFeatureComparison, setShowFeatureComparison] = useState(false);
 
   async function handleStarterPackSubscribe(e: React.FormEvent) {
     e.preventDefault();
@@ -299,13 +300,13 @@ export function SalesLandingPanel({ content, membersStrip, onOpenContactModal }:
               Not a glossary of terms. A working understanding of how commodity trading desks make money, manage risk, and evaluate vendors — so you can have conversations that resonate.
             </p>
           </Reveal>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <StaggerChildren className="grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
             {LEARN_ITEMS.map((item, i) => (
-              <Reveal key={item.num} delay={i * 0.06}>
+              <StaggerItem key={item.num} className="self-start w-full">
                 <LearnAccordionItem item={item} defaultOpen={i === 0} />
-              </Reveal>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerChildren>
         </div>
       </section>
 
@@ -477,52 +478,70 @@ export function SalesLandingPanel({ content, membersStrip, onOpenContactModal }:
           ))}
         </div>
 
-        {/* Feature comparison */}
-        <Reveal className="mt-12 sm:mt-16">
-          <div className="text-center mb-6 sm:mb-8">
-            <h3 className="font-serif text-2xl sm:text-3xl font-bold text-gray-900">Feature Comparison</h3>
-            <p className="text-xs text-muted-fg mt-2 sm:hidden">Swipe to compare plans →</p>
-          </div>
-          <div className="rounded-2xl border border-border overflow-x-auto -mx-4 sm:mx-0 px-4 sm:px-0">
-            <div className="min-w-[480px]">
-              <div className="grid grid-cols-3 gap-0 bg-secondary">
-                <div className="p-4 col-span-1" />
-                {["Pro", "Elite"].map((t, idx) => (
-                  <div key={t} className="p-4 text-center border-l border-border">
-                    <p className="font-semibold text-sm text-gray-900">{t}</p>
-                    <p className="text-xs text-muted-fg">{["SGD 99/mo", "SGD 199/mo"][idx]}</p>
-                  </div>
-                ))}
-              </div>
-              {SALES_FEATURE_TABLE.map((group) => (
-                <React.Fragment key={group.category}>
-                  <div className="px-4 py-2.5 border-t border-border" style={{ background: `${group.color}08` }}>
-                    <p className="text-xs font-bold uppercase tracking-widest" style={{ color: group.color }}>
-                      {group.category}
-                    </p>
-                  </div>
-                  {group.items.map((item) => (
-                    <div
-                      key={item.name}
-                      className="grid grid-cols-3 border-t border-border hover:bg-secondary transition-colors"
-                    >
-                      <div className="p-3.5 col-span-1 text-sm text-gray-700">{item.name}</div>
-                      {(["pro", "elite"] as const).map((tier) => (
-                        <div key={tier} className="p-3.5 flex items-center justify-center border-l border-border">
-                          {item[tier] ? (
-                            <Check className="w-4 h-4 text-green-500" />
-                          ) : (
-                            <X className="w-4 h-4 text-gray-300" />
-                          )}
-                        </div>
-                      ))}
+        <Reveal className="text-center mt-8">
+          <button
+            type="button"
+            onClick={() => setShowFeatureComparison((prev) => !prev)}
+            className="inline-flex items-center gap-1.5 text-sm text-teal-700 hover:text-teal-900 transition-colors"
+            aria-expanded={showFeatureComparison}
+          >
+            View full feature comparison
+            <ChevronRight
+              className={cn(
+                "w-4 h-4 transition-transform duration-200",
+                showFeatureComparison && "rotate-90"
+              )}
+            />
+          </button>
+        </Reveal>
+
+        {showFeatureComparison && (
+          <Reveal className="mt-8 sm:mt-10">
+            <div className="text-center mb-6 sm:mb-8">
+              <h3 className="font-serif text-2xl sm:text-3xl font-bold text-gray-900">Feature Comparison</h3>
+              <p className="text-xs text-muted-fg mt-2 sm:hidden">Swipe to compare plans →</p>
+            </div>
+            <div className="rounded-2xl border border-border overflow-x-auto -mx-4 sm:mx-0 px-4 sm:px-0">
+              <div className="min-w-[480px]">
+                <div className="grid grid-cols-3 gap-0 bg-secondary">
+                  <div className="p-4 col-span-1" />
+                  {["Pro", "Elite"].map((t, idx) => (
+                    <div key={t} className="p-4 text-center border-l border-border">
+                      <p className="font-semibold text-sm text-gray-900">{t}</p>
+                      <p className="text-xs text-muted-fg">{["SGD 99/mo", "SGD 199/mo"][idx]}</p>
                     </div>
                   ))}
-                </React.Fragment>
-              ))}
+                </div>
+                {SALES_FEATURE_TABLE.map((group) => (
+                  <React.Fragment key={group.category}>
+                    <div className="px-4 py-2.5 border-t border-border" style={{ background: `${group.color}08` }}>
+                      <p className="text-xs font-bold uppercase tracking-widest" style={{ color: group.color }}>
+                        {group.category}
+                      </p>
+                    </div>
+                    {group.items.map((item) => (
+                      <div
+                        key={item.name}
+                        className="grid grid-cols-3 border-t border-border hover:bg-secondary transition-colors"
+                      >
+                        <div className="p-3.5 col-span-1 text-sm text-gray-700">{item.name}</div>
+                        {(["pro", "elite"] as const).map((tier) => (
+                          <div key={tier} className="p-3.5 flex items-center justify-center border-l border-border">
+                            {item[tier] ? (
+                              <Check className="w-4 h-4 text-green-500" />
+                            ) : (
+                              <X className="w-4 h-4 text-gray-300" />
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    ))}
+                  </React.Fragment>
+                ))}
+              </div>
             </div>
-          </div>
-        </Reveal>
+          </Reveal>
+        )}
       </section>
 
       {/* Free Starter Pack signup */}

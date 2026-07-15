@@ -311,7 +311,7 @@ export function Nav() {
                   </Button>
                 </Link>
                 <Link href="/signup">
-                  <Button size="sm">Get Started Free</Button>
+                  <Button size="sm">Join Free</Button>
                 </Link>
               </div>
             )}
@@ -403,7 +403,7 @@ export function Nav() {
                     </Button>
                   </Link>
                   <Link href="/signup">
-                    <Button className="w-full">Get Started Free</Button>
+                    <Button className="w-full">Join Free</Button>
                   </Link>
                 </div>
               )}
