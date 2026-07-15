@@ -4,22 +4,10 @@ import { prisma } from "@/lib/prisma";
 import { buildContentAssetKey } from "@/lib/content/asset-files";
 import { RESUME_TEMPLATES } from "@/data/resume-templates";
 
-const REPO_RESUME_DIR = path.resolve(
-  process.cwd(),
-  "content-sources/Pro Pack/2.Persona Analysis Quiz_Resume Templates"
-);
-const SHARED_RESUME_DIR = path.resolve(
-  process.cwd(),
-  "../CommodityPlaybook - Shared Folder/Pro Pack/2.Persona Analysis Quiz_Resume Templates"
-);
 const PUBLIC_TEMPLATES_DIR = path.resolve(process.cwd(), "public/templates");
 
 function resolveTemplatePath(fileName: string): string | null {
-  const candidates = [
-    path.join(REPO_RESUME_DIR, fileName),
-    path.join(SHARED_RESUME_DIR, fileName),
-    path.join(PUBLIC_TEMPLATES_DIR, fileName),
-  ];
+  const candidates = [path.join(PUBLIC_TEMPLATES_DIR, fileName)];
   for (const p of candidates) {
     if (fs.existsSync(p)) return p;
   }
@@ -28,7 +16,7 @@ function resolveTemplatePath(fileName: string): string | null {
 
 const DOCX_MIME = "application/vnd.openxmlformats-officedocument.wordprocessingml.document";
 
-/** Seed or refresh Pro resume .docx files from the shared Starter Pack folder. */
+/** Seed or refresh Pro resume .docx files from public/templates. */
 export async function syncResumeTemplateAssets() {
   const admin = await prisma.user.findFirst({
     where: { role: "ADMIN" },

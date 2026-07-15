@@ -3,9 +3,7 @@
  * Regenerate src/data/glossary.ts from desk-glossary_updated_24.06.html
  * Usage: node scripts/extract-glossary.mjs
  *
- * Source priority:
- * 1. content-sources/ in repo (used on Vercel — Shared Folder is NOT in git)
- * 2. ../CommodityPlaybook - Shared Folder/ (local dev fallback)
+ * Source: content-sources/desk-glossary_updated_24.06.html
  */
 import fs from "fs";
 import path from "path";
@@ -13,24 +11,8 @@ import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const outPath = path.resolve(__dirname, "../src/data/glossary.ts");
-
-const CANDIDATE_PATHS = [
-  path.resolve(__dirname, "../content-sources/desk-glossary_updated_24.06.html"),
-  path.resolve(
-    __dirname,
-    "../../CommodityPlaybook - Shared Folder/Starter Pack/3. desk-glossary_updated_24.06.html"
-  ),
-];
-
-function resolveHtmlPath() {
-  for (const p of CANDIDATE_PATHS) {
-    if (fs.existsSync(p)) return p;
-  }
-  return null;
-}
-
-const htmlPath = resolveHtmlPath();
-if (!htmlPath) {
+const htmlPath = path.resolve(__dirname, "../content-sources/desk-glossary_updated_24.06.html");
+if (!fs.existsSync(htmlPath)) {
   if (fs.existsSync(outPath)) {
     console.warn(
       "Glossary HTML source not found — keeping existing src/data/glossary.ts (Vercel-safe fallback)."

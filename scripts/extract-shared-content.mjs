@@ -113,71 +113,18 @@ function extractCaseStudies() {
   return cards;
 }
 
-function extractCaseStudyDetail() {
-  const html = read("Elite Pack/case-study-07.html");
-  const sections = [];
-  const re = /class="cs-section-title">([^<]+)<\/div>[\s\S]*?class="cs-section-body">([\s\S]*?)<\/div>\s*<\/div>\s*(?=<div class="cs-section|<div class="self-test|$)/g;
-  let m;
-  while ((m = re.exec(html))) {
-    const paras = [];
-    const pRe = /<p>([\s\S]*?)<\/p>/g;
-    let pm;
-    while ((pm = pRe.exec(m[2]))) {
-      const t = stripHtml(pm[1]);
-      if (t) paras.push(t);
-    }
-    if (paras.length) sections.push({ title: m[1].trim(), paragraphs: paras });
-  }
-  return sections;
-}
-
-function extractResumeTemplates() {
-  const html = read(
-    "Pro Pack/2.Persona Analysis Quiz_Resume Templates/commodity-playbook-resume.html"
-  );
-  const templates = [];
-  const ids = ["switcher", "insider", "analyst", "vendor", "fresh_grad"];
-  const labels = ["The Switcher", "The Insider", "Analyst-to-Trader", "The Vendor", "Fresh Graduate"];
-  const personas = ["CAREER_SWITCHER", "INSIDER", "ANALYST_TRADER", "VENDOR", "FRESH_GRAD"];
-  const files = [
-    "switcher_resume_template.docx",
-    "insider_resume_template.docx",
-    "analyst_trader_resume_template.docx",
-    "vendor_resume_template.docx",
-    "fresh_grad_resume_template.docx",
-  ];
-  ids.forEach((id, i) => {
-    const block = html.match(new RegExp(`id="template-${id}"[\\s\\S]*?id="template-`))?.[0] || "";
-    const challenge = block.match(/tc-challenge-text">([^<]+)/)?.[1] || "";
-    const role = block.match(/tc-role-band">([^<]+)/)?.[1] || "";
-    templates.push({
-      id,
-      persona: personas[i],
-      label: labels[i],
-      roleBand: role,
-      positioningChallenge: challenge,
-      templateFile: files[i],
-    });
-  });
-  return templates;
-}
-
 // --- main ---
 const playbook = {};
 for (const ch of ["a", "b", "c", "d", "e"]) {
   playbook[ch] = extractPlaybookChapter(ch);
 }
 
+const caseStudies = extractCaseStudies();
+
 fs.mkdirSync(OUT, { recursive: true });
 fs.writeFileSync(path.join(OUT, "playbook-sections.json"), JSON.stringify(playbook, null, 2));
-fs.writeFileSync(path.join(OUT, "case-studies-index.json"), JSON.stringify(extractCaseStudies(), null, 2));
-fs.writeFileSync(
-  path.join(OUT, "case-study-04.json"),
-  JSON.stringify(extractCaseStudyDetail(), null, 2)
-);
-fs.writeFileSync(path.join(OUT, "resume-templates.json"), JSON.stringify(extractResumeTemplates(), null, 2));
+fs.writeFileSync(path.join(OUT, "case-studies-index.json"), JSON.stringify(caseStudies, null, 2));
 
 console.log("Extracted:");
 console.log("  playbook sections:", Object.fromEntries(Object.entries(playbook).map(([k, v]) => [k, v.length])));
-console.log("  case studies:", extractCaseStudies().length);
-console.log("  resume templates:", extractResumeTemplates().length);
+console.log("  case studies:", caseStudies.length);
