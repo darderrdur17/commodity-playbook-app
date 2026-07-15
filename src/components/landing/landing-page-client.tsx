@@ -99,7 +99,10 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
   const tierColors: Record<string, string> = { Pro: "#3280ff", Elite: "#B45309" };
 
   return (
-    <div className="overflow-hidden" style={{ marginTop: `calc(-1 * (${NAV_OFFSET}))` }}>
+    <div
+      className="overflow-hidden -mb-[max(1rem,env(safe-area-inset-bottom,0px))]"
+      style={{ marginTop: `calc(-1 * (${NAV_OFFSET}))` }}
+    >
       {/* Audience toggle — flush under nav */}
       <div className="sticky z-40 bg-white border-b border-border shadow-sm" style={{ top: NAV_OFFSET }}>
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 flex items-stretch gap-0 overflow-x-auto scrollbar-none">
@@ -142,8 +145,8 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
         />
       ) : (
         <>
-          {/* Career Hero */}
-          <section className="relative min-h-[80vh] sm:min-h-[88vh] flex flex-col bg-navy section-dark overflow-hidden">
+          {/* Career Hero — padding matches starter-pack blue sections */}
+          <section className="relative bg-navy section-dark overflow-hidden py-16 sm:py-24 lg:py-28">
             <GradientOrbs />
             <HeroParticles count={16} />
             <div
@@ -153,8 +156,8 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
                 backgroundSize: "60px 60px",
               }}
             />
-            <div className="relative z-10 w-full max-w-[1200px] mx-auto px-4 sm:px-6 pt-16 sm:pt-24 pb-16 sm:pb-20 flex-1 flex items-center">
-              <div className="max-w-3xl w-full">
+            <div className="relative z-10 page-container">
+              <div className="max-w-3xl">
                 <Reveal>
                   <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-accent/30 bg-accent/10 text-accent text-xs font-medium tracking-wide mb-5">
                     <span className="w-1.5 h-1.5 rounded-full bg-accent" />
@@ -183,19 +186,19 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
                       </Button>
                     </Link>
                   </div>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 mt-12 pt-10 border-t border-white/10">
-                    {career.heroStats.map((stat, i) => (
-                      <Reveal key={stat.label} delay={0.2 + i * 0.08}>
-                        <div className="text-left sm:text-center">
-                          <p className="font-serif text-2xl sm:text-3xl font-bold text-white">
-                            <AnimatedCounter value={stat.value} suffix={stat.suffix} />
-                          </p>
-                          <p className="text-white/50 text-xs font-medium mt-1 max-w-[160px] sm:mx-auto">{stat.label}</p>
-                        </div>
-                      </Reveal>
-                    ))}
-                  </div>
                 </Reveal>
+              </div>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8 mt-12 sm:mt-14 pt-10 border-t border-white/10 max-w-4xl">
+                {career.heroStats.map((stat, i) => (
+                  <Reveal key={stat.label} delay={0.2 + i * 0.08}>
+                    <div className="text-left sm:text-center">
+                      <p className="font-serif text-2xl sm:text-3xl font-bold text-white">
+                        <AnimatedCounter value={stat.value} suffix={stat.suffix} />
+                      </p>
+                      <p className="text-white/50 text-xs font-medium mt-1 max-w-[160px] sm:mx-auto">{stat.label}</p>
+                    </div>
+                  </Reveal>
+                ))}
               </div>
             </div>
           </section>
@@ -429,8 +432,8 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
             </StaggerChildren>
           </section>
 
-          {/* CTA */}
-          <section className="bg-primary-800 section-dark py-16 sm:py-20 relative overflow-hidden">
+          {/* CTA — flush against footer (no white gap) */}
+          <section className="bg-primary-800 section-dark py-16 sm:py-24 relative overflow-hidden">
             <GradientOrbs />
             <div className="relative z-10 page-container text-center">
               <Reveal>

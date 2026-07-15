@@ -42,6 +42,19 @@ export function mergeByKey<T>(
   });
 }
 
+/** Same as mergeByKey but repo defaults win over CMS on conflicting fields. */
+export function mergeByKeyDefaultsWin<T>(
+  defaults: T[],
+  overrides: T[],
+  key: keyof T
+): T[] {
+  const overrideMap = new Map(overrides.map((item) => [String(item[key]), item]));
+  return defaults.map((item) => {
+    const match = overrideMap.get(String(item[key]));
+    return match ? ({ ...match, ...item } as T) : item;
+  });
+}
+
 /** Merge CMS landing copy over code defaults without losing new chapters/tiers from deploys. */
 export function mergeLandingContent(
   defaults: LandingContent,
@@ -52,17 +65,24 @@ export function mergeLandingContent(
     cms as PlainObject
   ) as unknown as LandingContent;
 
-  if (cms.chapterCoverage?.chapters?.length) {
-    merged.chapterCoverage = {
-      ...merged.chapterCoverage,
-      ...cms.chapterCoverage,
-      chapters: mergeByKey(
-        defaults.chapterCoverage.chapters,
-        cms.chapterCoverage.chapters,
-        "letter"
-      ),
-    };
-  }
+  // Repo-managed sections — code defaults win so deploys reflect latest copy/structure
+  merged.chapterCoverage = {
+    ...defaults.chapterCoverage,
+    chapters: mergeByKeyDefaultsWin(
+      defaults.chapterCoverage.chapters,
+      cms.chapterCoverage?.chapters ?? [],
+      "letter"
+    ),
+  };
+
+  merged.caseStudySample = {
+    ...defaults.caseStudySample,
+    cards: mergeByKeyDefaultsWin(
+      defaults.caseStudySample.cards,
+      cms.caseStudySample?.cards ?? [],
+      "slug"
+    ),
+  };
 
   if (cms.whatsInside?.features?.length) {
     merged.whatsInside = {
@@ -78,10 +98,11 @@ export function mergeLandingContent(
 
   if (cms.pricing?.tiers?.length) {
     merged.pricing = {
-      ...merged.pricing,
-      ...cms.pricing,
-      tiers: mergeByKey(defaults.pricing.tiers, cms.pricing.tiers, "name"),
+      ...defaults.pricing,
+      tiers: mergeByKeyDefaultsWin(defaults.pricing.tiers, cms.pricing.tiers, "name"),
     };
+  } else {
+    merged.pricing = defaults.pricing;
   }
 
   if (cms.sales?.whoCards?.length) {
@@ -124,13 +145,12 @@ export function mergeLandingContent(
     };
   }
 
-  if (cms.caseStudySample?.cards?.length) {
-    merged.caseStudySample = {
-      ...merged.caseStudySample,
-      ...cms.caseStudySample,
-      cards: mergeByKey(defaults.caseStudySample.cards, cms.caseStudySample.cards, "slug"),
-    };
-  }
+  // Repo-managed career CTAs stay in sync with deploys
+  merged.career = {
+    ...merged.career,
+    ctaPrimary: defaults.career.ctaPrimary,
+    ctaSecondary: defaults.career.ctaSecondary,
+  };
 
   if (cms.stats?.length) {
     merged.stats = mergeByKey(defaults.stats, cms.stats, "label");
