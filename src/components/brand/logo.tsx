@@ -115,7 +115,7 @@ export function Logo({
         variant === "footer" || variant === "wordmark-tagline"
           ? "(max-width: 640px) 280px, 360px"
           : variant === "header"
-            ? "(max-width: 640px) 360px, 680px"
+            ? "(max-width: 640px) 280px, 480px"
             : "(max-width: 768px) 320px, 520px"
       }
       className={cn(VARIANT_IMAGE_CLASS[variant], imageClassName)}

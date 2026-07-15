@@ -109,10 +109,10 @@ export function Nav() {
         )}
       >
         <div
-          className="max-w-[1200px] mx-auto px-4 sm:px-10 grid grid-cols-[1fr_auto_1fr] items-center"
+          className="max-w-[1200px] mx-auto px-4 sm:px-10 grid grid-cols-[1fr_auto_1fr] items-center min-h-0"
           style={{ height: NAV_HEIGHT }}
         >
-          <div className="flex items-center min-w-0 h-full justify-self-start overflow-visible pr-1 sm:pr-2">
+          <div className="flex items-center min-w-0 min-h-0 h-full max-h-full justify-self-start overflow-hidden pr-1 sm:pr-2">
             <Logo variant="header" priority />
           </div>
 

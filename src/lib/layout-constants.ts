@@ -1,5 +1,5 @@
 /** Fixed app header height — keep logo + layout offsets in sync */
-export const NAV_HEIGHT_PX = 112;
+export const NAV_HEIGHT_PX = 88;
 
 export const NAV_HEIGHT = `${NAV_HEIGHT_PX}px`;
 
@@ -23,16 +23,16 @@ export const LANDING_HERO_TOP = "pt-12 sm:pt-16 lg:pt-20";
 export const LANDING_HERO_BOTTOM = "pb-16 sm:pb-24 lg:pb-28";
 export const PAGE_HERO_TOP = "pt-12 sm:pt-16 lg:pt-20";
 
-/** Primary nav wordmark — header_logo1.png */
+/** Primary nav wordmark — header_logo1.png (explicit height; avoid h-full in grid nav) */
 export const PROMINENT_WORDMARK_WRAPPER =
-  "inline-flex items-center h-full min-h-0 max-w-[min(100%,360px)] sm:max-w-[520px] md:max-w-[600px] lg:max-w-[680px] shrink-0 overflow-visible";
+  "inline-flex items-center h-16 sm:h-[72px] md:h-20 max-h-full max-w-[min(100%,300px)] sm:max-w-[380px] md:max-w-[440px] lg:max-w-[500px] shrink-0 overflow-hidden";
 
 /** Standalone wordmark (auth panels, etc.) — matches nav visual weight */
 export const PROMINENT_WORDMARK_STANDALONE =
-  "inline-flex items-center h-[92px] sm:h-[104px] md:h-[112px] max-w-[min(100%,360px)] sm:max-w-[520px] md:max-w-[600px] lg:max-w-[680px] shrink-0 overflow-visible";
+  "inline-flex items-center h-16 sm:h-[72px] md:h-20 max-w-[min(100%,300px)] sm:max-w-[380px] md:max-w-[440px] lg:max-w-[500px] shrink-0 overflow-hidden";
 
 export const PROMINENT_WORDMARK_IMAGE =
-  "h-full w-auto max-w-full object-contain object-left scale-[1.08] origin-left";
+  "h-full w-auto max-w-full object-contain object-left";
 
 export const HERO_EYEBROW_BASE =
   "inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium tracking-wide mb-6 sm:mb-7";
