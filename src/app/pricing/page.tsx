@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Reveal, GradientOrbs } from "@/components/animations";
 import { startCheckout } from "@/lib/start-checkout";
+import { PAGE_HERO_TOP } from "@/lib/layout-constants";
 import {
   PRICING_CTA,
   PRICING_CONTENT_FOOTNOTE,
@@ -71,7 +72,7 @@ export default function PricingPage() {
 
   return (
     <div className="overflow-hidden">
-      <section className="bg-primary-800 section-dark py-14 sm:py-20 relative overflow-hidden">
+      <section className={`bg-primary-800 section-dark ${PAGE_HERO_TOP} pb-14 sm:pb-20 relative overflow-hidden`}>
         <GradientOrbs />
         <div className="relative z-10 page-container text-center">
           <Reveal>

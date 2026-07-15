@@ -14,6 +14,7 @@ import {
 } from "@/data/starter-pack";
 import { StarterPackModal } from "@/components/landing/starter-pack-modal";
 import { startCheckout } from "@/lib/start-checkout";
+import { PAGE_HERO_TOP } from "@/lib/layout-constants";
 
 export function StarterPackClient({
   assetUrls = {},
@@ -48,7 +49,7 @@ export function StarterPackClient({
   return (
     <div>
       {/* Hero */}
-      <section className="bg-primary-800 section-dark py-16 sm:py-24 relative overflow-hidden">
+      <section className={`bg-primary-800 section-dark ${PAGE_HERO_TOP} pb-16 sm:pb-24 relative overflow-hidden`}>
         <div className="absolute inset-0 opacity-[0.04]" style={{
           backgroundImage: "linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)",
           backgroundSize: "60px 60px",

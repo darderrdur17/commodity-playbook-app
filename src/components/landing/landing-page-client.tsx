@@ -7,8 +7,9 @@ import { useSession } from "next-auth/react";
 import {
   ArrowRight, Check, BookOpen, Users,
   Star, Zap, ChevronRight,
-  MessageSquare, FileText, Map, Target, Info,
+  MessageSquare, FileText, Map, Target,
 } from "lucide-react";
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {
@@ -18,12 +19,13 @@ import {
 import { StarterPackModal } from "@/components/landing/starter-pack-modal";
 import { ContactModal } from "@/components/landing/contact-modal";
 import { SalesLandingPanel } from "@/components/landing/sales-landing-panel";
+import { TrackAudienceBar } from "@/components/landing/track-audience-bar";
 import { SectionCategoryLabel } from "@/components/landing/section-category-label";
 import { MembersStrip } from "@/components/landing/members-strip";
 import { ChapterAccordion } from "@/components/landing/chapter-accordion";
 import { CaseStudiesPreview } from "@/components/landing/case-studies-preview";
 import { startCheckout } from "@/lib/start-checkout";
-import { NAV_OFFSET } from "@/lib/layout-constants";
+import { NAV_OFFSET, LANDING_HERO_TOP, LANDING_HERO_BOTTOM, HERO_EYEBROW_BASE } from "@/lib/layout-constants";
 import { PRICING_CONTENT_FOOTNOTE } from "@/data/pricing-shared";
 import {
   DEFAULT_LANDING_CONTENT,
@@ -103,38 +105,7 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
       className="overflow-hidden -mb-[max(1rem,env(safe-area-inset-bottom,0px))]"
       style={{ marginTop: `calc(-1 * (${NAV_OFFSET}))` }}
     >
-      {/* Audience toggle — flush under nav */}
-      <div className="sticky z-40 bg-white border-b border-border shadow-sm" style={{ top: NAV_OFFSET }}>
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 flex items-stretch gap-0 overflow-x-auto scrollbar-none">
-          <button
-            type="button"
-            onClick={() => setActiveTrack("career")}
-            className={`flex items-center gap-2 px-4 sm:px-6 py-3 text-xs sm:text-sm font-semibold whitespace-nowrap border-b-2 transition-all ${
-              activeTrack === "career"
-                ? "border-primary-400 text-primary-400"
-                : "border-transparent text-muted-fg hover:text-gray-900"
-            }`}
-          >
-            I invest my career in commodity markets
-          </button>
-          <div className="w-px h-5 bg-border flex-shrink-0 mx-1 self-center" />
-          <button
-            type="button"
-            onClick={() => setActiveTrack("sales")}
-            className={`flex items-center gap-2 px-4 sm:px-6 py-3 text-xs sm:text-sm font-semibold whitespace-nowrap border-b-2 transition-all ${
-              activeTrack === "sales"
-                ? "border-teal-600 text-teal-700"
-                : "border-transparent text-muted-fg hover:text-gray-900"
-            }`}
-          >
-            I sell solutions into commodity trading firms
-          </button>
-          <p className="hidden lg:flex items-center gap-1.5 ml-auto text-xs text-muted-fg whitespace-nowrap py-3">
-            <Info className="w-3.5 h-3.5" />
-            Select your track to see the right content
-          </p>
-        </div>
-      </div>
+      <TrackAudienceBar activeTrack={activeTrack} onTrackChange={setActiveTrack} />
 
       {activeTrack === "sales" ? (
         <SalesLandingPanel
@@ -146,7 +117,7 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
       ) : (
         <>
           {/* Career Hero — padding matches starter-pack blue sections */}
-          <section className="relative bg-navy section-dark overflow-hidden py-16 sm:py-24 lg:py-28">
+          <section className={`relative bg-navy section-dark overflow-hidden ${LANDING_HERO_TOP} ${LANDING_HERO_BOTTOM}`}>
             <GradientOrbs />
             <HeroParticles count={16} />
             <div
@@ -159,7 +130,7 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
             <div className="relative z-10 page-container">
               <div className="max-w-3xl">
                 <Reveal>
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-accent/30 bg-accent/10 text-accent text-xs font-medium tracking-wide mb-5">
+                  <div className={cn(HERO_EYEBROW_BASE, "border border-accent/30 bg-accent/10 text-accent")}>
                     <span className="w-1.5 h-1.5 rounded-full bg-accent" />
                     {career.eyebrow}
                   </div>

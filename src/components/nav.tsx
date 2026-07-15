@@ -103,7 +103,7 @@ export function Nav() {
     <>
       <header
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+          "fixed top-0 left-0 right-0 z-50 transition-all duration-300 overflow-visible",
           "pt-[env(safe-area-inset-top)] bg-white border-b border-[#e4e7ec]",
           scrolled ? "shadow-[0_1px_4px_rgba(0,0,0,0.06)]" : "shadow-[0_1px_4px_rgba(0,0,0,0.04)]"
         )}
@@ -112,7 +112,7 @@ export function Nav() {
           className="max-w-[1200px] mx-auto px-4 sm:px-10 grid grid-cols-[1fr_auto_1fr] items-center"
           style={{ height: NAV_HEIGHT }}
         >
-          <div className="flex items-center min-w-0 h-full justify-self-start pr-2 sm:pr-4">
+          <div className="flex items-center min-w-0 h-full justify-self-start overflow-visible pr-1 sm:pr-2">
             <Logo variant="header" priority />
           </div>
 

@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Reveal } from "@/components/animations";
 import { formatDate } from "@/lib/utils";
+import { PAGE_HERO_TOP } from "@/lib/layout-constants";
 
 interface DemoEmail {
   id: string;
@@ -46,7 +47,7 @@ export default function DemoEmailsPage() {
 
   return (
     <div className="min-h-screen bg-secondary">
-      <section className="bg-primary-800 section-dark py-10 px-4 sm:px-6">
+      <section className={`bg-primary-800 section-dark ${PAGE_HERO_TOP} pb-10 px-4 sm:px-6`}>
         <div className="max-w-[960px] mx-auto">
           <Link href="/demo/mentor-flow" className="inline-flex items-center gap-1.5 text-sm text-white/60 hover:text-white mb-4">
             <ArrowLeft className="w-4 h-4" /> Mentor flow demo

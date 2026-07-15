@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Reveal, StaggerChildren, StaggerItem } from "@/components/animations";
 import { DEMO_ACCOUNTS, DEMO_PASSWORD, MENTOR_FLOW_DEMO } from "@/data/demo-accounts";
+import { PAGE_HERO_TOP } from "@/lib/layout-constants";
 import { PERSONA_LABELS } from "@/lib/utils";
 
 export default function DemoPage() {
@@ -54,7 +55,7 @@ export default function DemoPage() {
   return (
     <div className="min-h-screen bg-secondary">
       {/* Hero */}
-      <section className="bg-primary-800 section-dark py-12 sm:py-16 px-4 sm:px-6">
+      <section className={`bg-primary-800 section-dark ${PAGE_HERO_TOP} pb-12 sm:pb-16 px-4 sm:px-6`}>
         <div className="max-w-[900px] mx-auto text-center">
           <Reveal>
             <div className="pill pill-dark mb-4 mx-auto">

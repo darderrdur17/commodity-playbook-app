@@ -1,6 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import {
+  PROMINENT_WORDMARK_IMAGE,
+  PROMINENT_WORDMARK_STANDALONE,
+  PROMINENT_WORDMARK_WRAPPER,
+} from "@/lib/layout-constants";
 
 type LogoVariant =
   | "horizontal"
@@ -23,19 +28,18 @@ const SOURCES: Record<Exclude<LogoVariant, "lockup-dark">, { src: string; width:
   "wordmark-tagline": { src: "/brand/footer_logo1.png", width: 400, height: 96 },
 };
 
-/** Header fits within app nav — Brand Kit horizontal wordmark */
-const HEADER_WRAPPER_CLASS =
-  "inline-flex items-center h-[64px] sm:h-[72px] md:h-[80px] max-h-full max-w-[min(100%,320px)] sm:max-w-[420px] md:max-w-[480px] lg:max-w-[520px] shrink-0";
+/** Primary nav wordmark — uses layout-constants for site-wide sizing */
+const HEADER_WRAPPER_CLASS = PROMINENT_WORDMARK_WRAPPER;
 
 const VARIANT_IMAGE_CLASS: Record<Exclude<LogoVariant, "lockup-dark">, string> = {
-  header: "h-full w-auto max-w-full object-contain object-left",
+  header: PROMINENT_WORDMARK_IMAGE,
   footer:
     "h-[160px] w-auto sm:h-[180px] md:h-[200px] lg:h-[220px] max-w-[min(100%,400px)] object-contain object-left",
   login:
     "h-14 w-auto sm:h-16 md:h-[4.5rem] max-w-[min(100%,340px)] object-contain object-left",
   horizontal: "h-12 w-auto sm:h-14 max-w-[280px] object-contain object-left",
   mark: "h-9 w-9 sm:h-10 sm:w-10 object-contain",
-  white: "h-14 w-auto sm:h-16 md:h-[4.5rem] max-w-[min(100%,340px)] object-contain object-left brightness-0 invert",
+  white: cn(PROMINENT_WORDMARK_IMAGE, "brightness-0 invert"),
   "wordmark-tagline":
     "h-16 w-auto sm:h-[4.5rem] md:h-20 lg:h-[5.5rem] max-w-[min(100%,340px)] object-contain object-left",
 };
@@ -111,7 +115,7 @@ export function Logo({
         variant === "footer" || variant === "wordmark-tagline"
           ? "(max-width: 640px) 280px, 360px"
           : variant === "header"
-            ? "(max-width: 640px) 320px, 520px"
+            ? "(max-width: 640px) 360px, 680px"
             : "(max-width: 768px) 320px, 520px"
       }
       className={cn(VARIANT_IMAGE_CLASS[variant], imageClassName)}
@@ -120,6 +124,8 @@ export function Logo({
   const img =
     variant === "header" ? (
       <span className={HEADER_WRAPPER_CLASS}>{image}</span>
+    ) : variant === "white" ? (
+      <span className={PROMINENT_WORDMARK_STANDALONE}>{image}</span>
     ) : (
       image
     );

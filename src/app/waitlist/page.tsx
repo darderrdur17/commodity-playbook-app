@@ -8,6 +8,7 @@ import { useSession } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Reveal } from "@/components/animations";
+import { PAGE_HERO_TOP } from "@/lib/layout-constants";
 
 export default function WaitlistPage() {
   const { data: session } = useSession();
@@ -49,7 +50,7 @@ export default function WaitlistPage() {
 
   return (
     <div className="min-h-screen bg-secondary">
-      <section className="bg-primary-800 section-dark py-16 px-6">
+      <section className={`bg-primary-800 section-dark ${PAGE_HERO_TOP} pb-16 px-6`}>
         <div className="page-container text-center py-12 sm:py-16">
           <Reveal>
             <div className="pill pill-dark mb-4 mx-auto">

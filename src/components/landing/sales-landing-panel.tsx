@@ -13,6 +13,7 @@ import { SectionCategoryLabel } from "@/components/landing/section-category-labe
 import { MembersStrip } from "@/components/landing/members-strip";
 import { startCheckout } from "@/lib/start-checkout";
 import { cn } from "@/lib/utils";
+import { LANDING_HERO_TOP, LANDING_HERO_BOTTOM, HERO_EYEBROW_BASE } from "@/lib/layout-constants";
 import type { LandingContent } from "@/data/landing-content";
 
 const SALES_COLOR = "#0F766E";
@@ -220,9 +221,9 @@ export function SalesLandingPanel({ content, membersStrip, onOpenContactModal }:
       {/* Hero */}
       <section className="relative overflow-hidden flex flex-col" style={{ background: "#065F46" }}>
         <div className="absolute top-0 right-0 w-96 h-96 rounded-full opacity-20 blur-3xl" style={{ background: SALES_COLOR }} />
-        <div className="relative z-10 max-w-[1200px] mx-auto px-4 sm:px-6 py-16 sm:py-24 w-full">
+        <div className={`relative z-10 max-w-[1200px] mx-auto px-4 sm:px-6 ${LANDING_HERO_TOP} ${LANDING_HERO_BOTTOM} w-full`}>
           <Reveal>
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full border border-teal-200/30 bg-teal-200/10 text-teal-100 text-xs font-medium tracking-wide mb-6">
+            <div className={cn(HERO_EYEBROW_BASE, "border border-teal-200/30 bg-teal-200/10 text-teal-100")}>
               <span className="w-1.5 h-1.5 rounded-full bg-teal-200 animate-pulse" />
               {content.eyebrow}
             </div>
