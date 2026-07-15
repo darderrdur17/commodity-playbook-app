@@ -120,13 +120,6 @@ export function mergeLandingContent(
     };
   }
 
-  if (cms.sales?.stats?.length) {
-    merged.sales = {
-      ...merged.sales,
-      stats: mergeByKey(defaults.sales.stats, cms.sales.stats, "label"),
-    };
-  }
-
   // Repo-managed career CTAs stay in sync with deploys
   merged.career = {
     ...merged.career,
@@ -138,9 +131,15 @@ export function mergeLandingContent(
     merged.stats = mergeByKey(defaults.stats, cms.stats, "label");
   }
 
-  // Sales pricing + ROI — repo defaults win; must run last (no later cms.sales spread)
+  // Sales pricing, ROI, and hero stats — no admin editor for these, so repo defaults
+  // always win over stale CMS seed data. Must run last (no later cms.sales spread).
   merged.sales = {
     ...merged.sales,
+    stats: mergeByKeyDefaultsWin(
+      defaults.sales.stats,
+      cms.sales?.stats ?? [],
+      "label"
+    ),
     pricing: mergeByKeyDefaultsWin(
       defaults.sales.pricing,
       cms.sales?.pricing ?? [],
