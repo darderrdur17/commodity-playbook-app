@@ -25,7 +25,7 @@ import { MembersStrip } from "@/components/landing/members-strip";
 import { ChapterAccordion } from "@/components/landing/chapter-accordion";
 import { CaseStudiesPreview } from "@/components/landing/case-studies-preview";
 import { startCheckout } from "@/lib/start-checkout";
-import { NAV_OFFSET, LANDING_HERO_TOP, LANDING_HERO_BOTTOM, HERO_EYEBROW_BASE } from "@/lib/layout-constants";
+import { LANDING_HERO_TOP, LANDING_HERO_BOTTOM, HERO_EYEBROW_BASE } from "@/lib/layout-constants";
 import { PRICING_CONTENT_FOOTNOTE } from "@/data/pricing-shared";
 import {
   DEFAULT_LANDING_CONTENT,
@@ -101,10 +101,7 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
   const tierColors: Record<string, string> = { Pro: "#3280ff", Elite: "#B45309" };
 
   return (
-    <div
-      className="overflow-hidden -mb-[max(1rem,env(safe-area-inset-bottom,0px))]"
-      style={{ marginTop: `calc(-1 * (${NAV_OFFSET}))` }}
-    >
+    <div className="overflow-x-hidden -mb-[max(1rem,env(safe-area-inset-bottom,0px))]">
       <TrackAudienceBar activeTrack={activeTrack} onTrackChange={setActiveTrack} />
 
       {activeTrack === "sales" ? (
@@ -129,11 +126,11 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
             />
             <div className="relative z-10 page-container">
               <div className="max-w-3xl">
+                <div className={cn(HERO_EYEBROW_BASE, "border border-accent/30 bg-accent/10 text-accent")}>
+                  <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+                  {career.eyebrow}
+                </div>
                 <Reveal>
-                  <div className={cn(HERO_EYEBROW_BASE, "border border-accent/30 bg-accent/10 text-accent")}>
-                    <span className="w-1.5 h-1.5 rounded-full bg-accent" />
-                    {career.eyebrow}
-                  </div>
                   <h1 className="font-serif text-[clamp(32px,6.5vw,68px)] font-bold leading-[1.04] tracking-tight text-white mb-6">
                     {career.headline}{" "}
                     <span className="text-accent italic">{career.headlineAccent}</span>
@@ -404,7 +401,7 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
           </section>
 
           {/* CTA — flush against footer (no white gap) */}
-          <section className="bg-primary-800 section-dark py-16 sm:py-24 relative overflow-hidden">
+          <section className={`bg-primary-800 section-dark ${LANDING_HERO_TOP} ${LANDING_HERO_BOTTOM} relative overflow-hidden mb-[calc(-1*max(1rem,env(safe-area-inset-bottom,0px)))]`}>
             <GradientOrbs />
             <div className="relative z-10 page-container text-center">
               <Reveal>

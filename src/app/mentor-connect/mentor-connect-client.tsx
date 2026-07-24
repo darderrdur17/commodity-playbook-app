@@ -58,8 +58,96 @@ export function MentorConnectClient({ userTier, mentorCredits, questions }: Prop
   const isElite = userTier === "ELITE";
 
   function openMentor(mentor: MentorProfile, segmentId: string, segmentTitle: string) {
+    if (selectedMentor?.id === mentor.id) {
+      setSelectedMentor(null);
+      setSegment("");
+      setQuestion("");
+      return;
+    }
     setSelectedMentor({ ...mentor, segmentId, segmentTitle });
     setSegment(SEGMENT_API_MAP[segmentId] || segmentId);
+    setSubmitted(false);
+  }
+
+  function clearMentorSelection() {
+    setSelectedMentor(null);
+    setSegment("");
+    setQuestion("");
+  }
+
+  function renderQuestionForm(variant: "inline" | "panel") {
+    if (submitted) {
+      return (
+        <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} className="text-center py-6 sm:py-8">
+          <div className="w-14 h-14 rounded-full bg-green-50 flex items-center justify-center mx-auto mb-4">
+            <CheckCircle className="w-7 h-7 text-green-500" />
+          </div>
+          <h3 className="font-serif text-xl font-bold text-gray-900 mb-2">Question sent!</h3>
+          <p className="text-muted-fg text-sm mb-5">
+            Your question has been anonymously routed to a practitioner in that segment.
+          </p>
+          <Button variant="outline" onClick={() => setSubmitted(false)}>Ask another question</Button>
+        </motion.div>
+      );
+    }
+
+    return (
+      <form onSubmit={handleSubmit} className="space-y-4">
+        {variant === "panel" && !selectedMentor && (
+          <p className="text-sm text-muted-fg bg-secondary rounded-lg px-4 py-3">
+            Select a mentor above to unlock the question form.
+          </p>
+        )}
+
+        {variant === "inline" && selectedMentor && (
+          <div className="rounded-lg border border-primary-line bg-white px-4 py-3">
+            <p className="text-[10px] font-bold uppercase tracking-widest text-primary-800 mb-1">Asking</p>
+            <p className="font-serif font-semibold text-sm text-gray-900">{selectedMentor.headline}</p>
+            <p className="text-xs text-muted-fg mt-1">{selectedMentor.segmentTitle}</p>
+          </div>
+        )}
+
+        <div>
+          <label className="text-sm font-medium text-gray-700 block mb-2">
+            Your question <span className="text-muted-fg font-normal">(min. 20 characters)</span>
+          </label>
+          <textarea
+            value={question}
+            onChange={(e) => setQuestion(e.target.value)}
+            placeholder="Be specific — give context, name the commodity or function, ask the question only they can answer."
+            className="w-full h-32 px-3 py-2.5 rounded-lg border border-border text-sm resize-none focus:outline-none focus:ring-2 focus:ring-primary-400"
+          />
+          <p className={`text-xs mt-1 ${question.length >= 20 ? "text-green-600" : "text-muted-fg"}`}>
+            {question.length}/500 characters
+          </p>
+        </div>
+
+        <label className="flex items-center gap-2.5 cursor-pointer">
+          <input type="checkbox" checked={isPublic} onChange={(e) => setIsPublic(e.target.checked)} className="rounded accent-primary-400" />
+          <div>
+            <p className="text-sm font-medium text-gray-800">Allow anonymous sharing</p>
+            <p className="text-xs text-muted-fg">Share your Q&A so others can benefit</p>
+          </div>
+        </label>
+
+        {error && <p className="text-sm text-red-500 bg-red-50 border border-red-200 rounded-lg p-3">{error}</p>}
+
+        <div className="flex flex-col sm:flex-row gap-2">
+          {variant === "inline" && (
+            <Button type="button" variant="outline" className="w-full sm:w-auto" onClick={clearMentorSelection}>
+              Cancel
+            </Button>
+          )}
+          <Button type="submit" className="w-full sm:flex-1" size="lg" loading={submitting} disabled={!selectedMentor || question.length < 20 || mentorCredits < 1}>
+            <Send className="w-4 h-4" />
+            Send to Mentor (1 credit)
+          </Button>
+        </div>
+        {mentorCredits < 1 && (
+          <p className="text-xs text-center text-muted-fg">No credits remaining. Credits refresh monthly.</p>
+        )}
+      </form>
+    );
   }
 
   async function handleSubmit(e: React.FormEvent) {
@@ -132,29 +220,41 @@ export function MentorConnectClient({ userTier, mentorCredits, questions }: Prop
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
                   {seg.mentors.map((mentor) => (
-                    <button
-                      key={mentor.id}
-                      type="button"
-                      onClick={() => openMentor(mentor, seg.id, seg.title)}
-                      className={`text-left rounded-xl border bg-white p-4 h-full transition-all hover:-translate-y-1 hover:border-primary-line hover:shadow-md ${
-                        selectedMentor?.id === mentor.id ? "border-primary-400 ring-2 ring-primary-400/20" : "border-border"
-                      }`}
-                    >
-                      <div className="flex items-start justify-between mb-3">
-                        <div className="w-10 h-10 rounded-full bg-primary-soft border border-primary-line flex items-center justify-center">
-                          <Users className="w-4 h-4 text-primary-800" />
+                    <React.Fragment key={mentor.id}>
+                      <button
+                        type="button"
+                        onClick={() => openMentor(mentor, seg.id, seg.title)}
+                        className={`text-left rounded-xl border bg-white p-4 h-full transition-all hover:-translate-y-1 hover:border-primary-line hover:shadow-md ${
+                          selectedMentor?.id === mentor.id ? "border-primary-400 ring-2 ring-primary-400/20" : "border-border"
+                        }`}
+                      >
+                        <div className="flex items-start justify-between mb-3">
+                          <div className="w-10 h-10 rounded-full bg-primary-soft border border-primary-line flex items-center justify-center">
+                            <Users className="w-4 h-4 text-primary-800" />
+                          </div>
+                          <span className="text-[10px] font-semibold text-muted-fg uppercase tracking-wider">{mentor.years} yrs</span>
                         </div>
-                        <span className="text-[10px] font-semibold text-muted-fg uppercase tracking-wider">{mentor.years} yrs</span>
-                      </div>
-                      <p className="text-[10px] font-bold text-primary-800 tracking-wider mb-1">{mentor.id}</p>
-                      <h3 className="font-serif font-bold text-sm text-gray-900 mb-2 leading-snug">{mentor.headline}</h3>
-                      <p className="text-xs text-muted-fg line-clamp-3 mb-3">{mentor.bio}</p>
-                      <div className="flex flex-wrap gap-1">
-                        {mentor.tags.slice(0, 2).map((tag) => (
-                          <span key={tag} className="text-[10px] px-2 py-0.5 rounded-full bg-secondary text-muted-fg">{tag}</span>
-                        ))}
-                      </div>
-                    </button>
+                        <p className="text-[10px] font-bold text-primary-800 tracking-wider mb-1">{mentor.id}</p>
+                        <h3 className="font-serif font-bold text-sm text-gray-900 mb-2 leading-snug">{mentor.headline}</h3>
+                        <p className="text-xs text-muted-fg line-clamp-3 mb-3">{mentor.bio}</p>
+                        <div className="flex flex-wrap gap-1">
+                          {mentor.tags.slice(0, 2).map((tag) => (
+                            <span key={tag} className="text-[10px] px-2 py-0.5 rounded-full bg-secondary text-muted-fg">{tag}</span>
+                          ))}
+                        </div>
+                      </button>
+                      {selectedMentor?.id === mentor.id && (
+                        <div className="lg:hidden col-span-full rounded-xl border border-primary-line bg-primary-soft p-4 sm:p-5">
+                          <div className="flex items-start justify-between gap-3 mb-4">
+                            <h3 className="font-serif font-bold text-gray-900 text-sm sm:text-base">Ask this mentor</h3>
+                            <button type="button" onClick={clearMentorSelection} className="text-muted-fg hover:text-gray-900 shrink-0" aria-label="Close">
+                              <X className="w-5 h-5" />
+                            </button>
+                          </div>
+                          {renderQuestionForm("inline")}
+                        </div>
+                      )}
+                    </React.Fragment>
                   ))}
                 </div>
               </div>
@@ -162,21 +262,21 @@ export function MentorConnectClient({ userTier, mentorCredits, questions }: Prop
           </div>
         </section>
 
-        {/* Selected mentor preview */}
+        {/* Selected mentor preview — desktop only (mobile uses inline form under card) */}
         <AnimatePresence>
           {selectedMentor && (
             <motion.div
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 8 }}
-              className="mb-8 rounded-xl border border-primary-line bg-primary-soft p-5 flex flex-col sm:flex-row sm:items-start gap-4"
+              className="hidden lg:flex mb-8 rounded-xl border border-primary-line bg-primary-soft p-5 flex-col sm:flex-row sm:items-start gap-4"
             >
               <div className="flex-1">
                 <p className="text-[10px] font-bold uppercase tracking-widest text-primary-800 mb-1">Selected mentor</p>
                 <h3 className="font-serif font-bold text-gray-900">{selectedMentor.headline}</h3>
                 <p className="text-sm text-muted-fg mt-1 italic">&ldquo;{selectedMentor.sampleReply.slice(0, 180)}…&rdquo;</p>
               </div>
-              <button type="button" onClick={() => { setSelectedMentor(null); setSegment(""); }} className="text-muted-fg hover:text-gray-900">
+              <button type="button" onClick={clearMentorSelection} className="text-muted-fg hover:text-gray-900">
                 <X className="w-5 h-5" />
               </button>
             </motion.div>
@@ -184,70 +284,18 @@ export function MentorConnectClient({ userTier, mentorCredits, questions }: Prop
         </AnimatePresence>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2">
+          <div className="hidden lg:block lg:col-span-2">
             <div className="bg-white rounded-2xl border border-border p-7">
               <h2 className="font-serif text-xl font-bold text-gray-900 mb-5 flex items-center gap-2">
                 <MessageSquare className="w-5 h-5 text-primary-400" />
                 Ask a Mentor
               </h2>
 
-              {submitted ? (
-                <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} className="text-center py-8">
-                  <div className="w-14 h-14 rounded-full bg-green-50 flex items-center justify-center mx-auto mb-4">
-                    <CheckCircle className="w-7 h-7 text-green-500" />
-                  </div>
-                  <h3 className="font-serif text-xl font-bold text-gray-900 mb-2">Question sent!</h3>
-                  <p className="text-muted-fg text-sm mb-5">
-                    Your question has been anonymously routed to a practitioner in that segment.
-                  </p>
-                  <Button variant="outline" onClick={() => setSubmitted(false)}>Ask another question</Button>
-                </motion.div>
-              ) : (
-                <form onSubmit={handleSubmit} className="space-y-5">
-                  {!selectedMentor && (
-                    <p className="text-sm text-muted-fg bg-secondary rounded-lg px-4 py-3">
-                      Select a mentor above to unlock the question form.
-                    </p>
-                  )}
-
-                  <div>
-                    <label className="text-sm font-medium text-gray-700 block mb-2">
-                      Your question <span className="text-muted-fg font-normal">(min. 20 characters)</span>
-                    </label>
-                    <textarea
-                      value={question}
-                      onChange={(e) => setQuestion(e.target.value)}
-                      placeholder="Be specific — give context, name the commodity or function, ask the question only they can answer."
-                      className="w-full h-32 px-3 py-2.5 rounded-lg border border-border text-sm resize-none focus:outline-none focus:ring-2 focus:ring-primary-400"
-                    />
-                    <p className={`text-xs mt-1 ${question.length >= 20 ? "text-green-600" : "text-muted-fg"}`}>
-                      {question.length}/500 characters
-                    </p>
-                  </div>
-
-                  <label className="flex items-center gap-2.5 cursor-pointer">
-                    <input type="checkbox" checked={isPublic} onChange={(e) => setIsPublic(e.target.checked)} className="rounded accent-primary-400" />
-                    <div>
-                      <p className="text-sm font-medium text-gray-800">Allow anonymous sharing</p>
-                      <p className="text-xs text-muted-fg">Share your Q&A so others can benefit</p>
-                    </div>
-                  </label>
-
-                  {error && <p className="text-sm text-red-500 bg-red-50 border border-red-200 rounded-lg p-3">{error}</p>}
-
-                  <Button type="submit" className="w-full" size="lg" loading={submitting} disabled={!selectedMentor || question.length < 20 || mentorCredits < 1}>
-                    <Send className="w-4 h-4" />
-                    Send to Mentor (1 credit)
-                  </Button>
-                  {mentorCredits < 1 && (
-                    <p className="text-xs text-center text-muted-fg">No credits remaining. Credits refresh monthly.</p>
-                  )}
-                </form>
-              )}
+              {renderQuestionForm("panel")}
             </div>
           </div>
 
-          <div>
+          <div className="lg:col-span-1">
             <h2 className="font-serif text-lg font-bold text-gray-900 mb-1 flex items-center gap-2">
               <Clock className="w-4 h-4 text-muted-fg" /> My Questions
             </h2>

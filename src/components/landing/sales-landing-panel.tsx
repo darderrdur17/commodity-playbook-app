@@ -126,18 +126,18 @@ const SALES_FEATURE_TABLE = [
 
 function LearnAccordionItem({
   item,
-  defaultOpen = false,
+  isOpen,
+  onToggle,
 }: {
   item: (typeof LEARN_ITEMS)[number];
-  defaultOpen?: boolean;
+  isOpen: boolean;
+  onToggle: () => void;
 }) {
-  const [isOpen, setIsOpen] = useState(defaultOpen);
-
   return (
-    <div className="rounded-xl border border-border bg-white overflow-hidden hover:border-teal-200 transition-colors">
+    <div className="rounded-xl border border-border bg-white overflow-hidden hover:border-teal-200 transition-colors self-start w-full">
       <button
         type="button"
-        onClick={() => setIsOpen((prev) => !prev)}
+        onClick={onToggle}
         className="w-full flex items-start gap-4 p-5 text-left hover:bg-secondary/40 transition-colors"
         aria-expanded={isOpen}
       >
@@ -162,6 +162,23 @@ function LearnAccordionItem({
           <p className="text-sm text-muted-fg leading-relaxed pt-3">{item.desc}</p>
         </div>
       )}
+    </div>
+  );
+}
+
+function LearnAccordion() {
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
+
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
+      {LEARN_ITEMS.map((item, i) => (
+        <LearnAccordionItem
+          key={item.num}
+          item={item}
+          isOpen={openIndex === i}
+          onToggle={() => setOpenIndex(openIndex === i ? null : i)}
+        />
+      ))}
     </div>
   );
 }
@@ -219,14 +236,14 @@ export function SalesLandingPanel({ content, membersStrip, onOpenContactModal }:
   return (
     <div className="sales-panel">
       {/* Hero */}
-      <section className="relative overflow-hidden flex flex-col" style={{ background: "#065F46" }}>
+      <section className={`relative overflow-hidden flex flex-col ${LANDING_HERO_TOP} ${LANDING_HERO_BOTTOM}`} style={{ background: "#065F46" }}>
         <div className="absolute top-0 right-0 w-96 h-96 rounded-full opacity-20 blur-3xl" style={{ background: SALES_COLOR }} />
-        <div className={`relative z-10 max-w-[1200px] mx-auto px-4 sm:px-6 ${LANDING_HERO_TOP} ${LANDING_HERO_BOTTOM} w-full`}>
+        <div className="relative z-10 page-container w-full">
+          <div className={cn(HERO_EYEBROW_BASE, "border border-teal-200/30 bg-teal-200/10 text-teal-100")}>
+            <span className="w-1.5 h-1.5 rounded-full bg-teal-200 animate-pulse" />
+            {content.eyebrow}
+          </div>
           <Reveal>
-            <div className={cn(HERO_EYEBROW_BASE, "border border-teal-200/30 bg-teal-200/10 text-teal-100")}>
-              <span className="w-1.5 h-1.5 rounded-full bg-teal-200 animate-pulse" />
-              {content.eyebrow}
-            </div>
             <h1 className="font-serif text-[clamp(32px,6vw,64px)] font-bold leading-[1.05] text-white mb-6 max-w-3xl">
               {content.headline}{" "}
               <span className="text-teal-100 italic">{content.headlineAccent}</span>
@@ -301,13 +318,9 @@ export function SalesLandingPanel({ content, membersStrip, onOpenContactModal }:
               Not a glossary of terms. A working understanding of how commodity trading desks make money, manage risk, and evaluate vendors — so you can have conversations that resonate.
             </p>
           </Reveal>
-          <StaggerChildren className="grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
-            {LEARN_ITEMS.map((item, i) => (
-              <StaggerItem key={item.num} className="self-start w-full">
-                <LearnAccordionItem item={item} defaultOpen={i === 0} />
-              </StaggerItem>
-            ))}
-          </StaggerChildren>
+          <Reveal delay={0.1}>
+            <LearnAccordion />
+          </Reveal>
         </div>
       </section>
 
@@ -506,10 +519,10 @@ export function SalesLandingPanel({ content, membersStrip, onOpenContactModal }:
               <div className="min-w-[480px]">
                 <div className="grid grid-cols-3 gap-0 bg-secondary">
                   <div className="p-4 col-span-1" />
-                  {["Pro", "Elite"].map((t, idx) => (
-                    <div key={t} className="p-4 text-center border-l border-border">
-                      <p className="font-semibold text-sm text-gray-900">{t}</p>
-                      <p className="text-xs text-muted-fg">{["SGD 99/mo", "SGD 199/mo"][idx]}</p>
+                  {content.pricing.map((tier) => (
+                    <div key={tier.name} className="p-4 text-center border-l border-border">
+                      <p className="font-semibold text-sm text-gray-900">{tier.name}</p>
+                      <p className="text-xs text-muted-fg">{tier.price} · {tier.billing}</p>
                     </div>
                   ))}
                 </div>

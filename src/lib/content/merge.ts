@@ -65,9 +65,11 @@ export function mergeLandingContent(
     cms as PlainObject
   ) as unknown as LandingContent;
 
-  // Repo-managed sections — code defaults win so deploys reflect latest copy/structure
+  // Repo-managed sections — code defaults always win for headers + structure
   merged.chapterCoverage = {
-    ...defaults.chapterCoverage,
+    eyebrow: defaults.chapterCoverage.eyebrow,
+    title: defaults.chapterCoverage.title,
+    description: defaults.chapterCoverage.description,
     chapters: mergeByKeyDefaultsWin(
       defaults.chapterCoverage.chapters,
       cms.chapterCoverage?.chapters ?? [],
@@ -76,7 +78,13 @@ export function mergeLandingContent(
   };
 
   merged.caseStudySample = {
-    ...defaults.caseStudySample,
+    eyebrow: defaults.caseStudySample.eyebrow,
+    title: defaults.caseStudySample.title,
+    titleAccent: defaults.caseStudySample.titleAccent,
+    description: defaults.caseStudySample.description,
+    categoryTags: defaults.caseStudySample.categoryTags,
+    disclaimer: defaults.caseStudySample.disclaimer,
+    viewMoreHref: defaults.caseStudySample.viewMoreHref,
     cards: mergeByKeyDefaultsWin(
       defaults.caseStudySample.cards,
       cms.caseStudySample?.cards ?? [],
@@ -84,17 +92,14 @@ export function mergeLandingContent(
     ),
   };
 
-  if (cms.whatsInside?.features?.length) {
-    merged.whatsInside = {
-      ...merged.whatsInside,
-      ...cms.whatsInside,
-      features: mergeByKey(
-        defaults.whatsInside.features,
-        cms.whatsInside.features,
-        "title"
-      ),
-    };
-  }
+  merged.whatsInside = {
+    ...defaults.whatsInside,
+    features: mergeByKeyDefaultsWin(
+      defaults.whatsInside.features,
+      cms.whatsInside?.features ?? [],
+      "title"
+    ),
+  };
 
   if (cms.pricing?.tiers?.length) {
     merged.pricing = {
@@ -140,11 +145,7 @@ export function mergeLandingContent(
       cms.sales?.stats ?? [],
       "label"
     ),
-    pricing: mergeByKeyDefaultsWin(
-      defaults.sales.pricing,
-      cms.sales?.pricing ?? [],
-      "name"
-    ),
+    pricing: defaults.sales.pricing,
     roi: {
       ...merged.sales.roi,
       title: defaults.sales.roi.title,

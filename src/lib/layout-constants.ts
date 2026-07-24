@@ -19,17 +19,21 @@ export const TRACK_BAR_INNER =
 export const TRACK_TAB_BASE =
   "flex items-center gap-2 px-4 sm:px-6 py-3.5 sm:py-4 text-xs sm:text-sm font-semibold whitespace-nowrap border-b-2 transition-all";
 
-export const LANDING_HERO_TOP = "pt-12 sm:pt-16 lg:pt-20";
-export const LANDING_HERO_BOTTOM = "pb-16 sm:pb-24 lg:pb-28";
+/** Standard blue-section hero padding (starter pack pattern) */
 export const PAGE_HERO_TOP = "pt-12 sm:pt-16 lg:pt-20";
+export const PAGE_HERO_BOTTOM = "pb-16 sm:pb-24";
+
+/** Landing career/sales heroes — same rhythm as PAGE_HERO */
+export const LANDING_HERO_TOP = PAGE_HERO_TOP;
+export const LANDING_HERO_BOTTOM = PAGE_HERO_BOTTOM;
 
 /** Primary nav wordmark — header_logo1.png (explicit height; avoid h-full in grid nav) */
 export const PROMINENT_WORDMARK_WRAPPER =
-  "inline-flex items-center h-16 sm:h-[72px] md:h-20 max-h-full max-w-[min(100%,300px)] sm:max-w-[380px] md:max-w-[440px] lg:max-w-[500px] shrink-0 overflow-hidden";
+  "inline-flex items-center h-[76px] sm:h-[82px] md:h-[86px] max-h-full max-w-[min(100%,340px)] sm:max-w-[420px] md:max-w-[480px] lg:max-w-[540px] shrink-0 overflow-hidden";
 
 /** Standalone wordmark (auth panels, etc.) — matches nav visual weight */
 export const PROMINENT_WORDMARK_STANDALONE =
-  "inline-flex items-center h-16 sm:h-[72px] md:h-20 max-w-[min(100%,300px)] sm:max-w-[380px] md:max-w-[440px] lg:max-w-[500px] shrink-0 overflow-hidden";
+  "inline-flex items-center h-[76px] sm:h-[82px] md:h-[86px] max-w-[min(100%,340px)] sm:max-w-[420px] md:max-w-[480px] lg:max-w-[540px] shrink-0 overflow-hidden";
 
 export const PROMINENT_WORDMARK_IMAGE =
   "h-full w-auto max-w-full object-contain object-left";
