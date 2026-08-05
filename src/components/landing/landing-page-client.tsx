@@ -23,7 +23,7 @@ import { TrackAudienceBar } from "@/components/landing/track-audience-bar";
 import { SectionCategoryLabel } from "@/components/landing/section-category-label";
 import { MembersStrip } from "@/components/landing/members-strip";
 import { ChapterAccordion } from "@/components/landing/chapter-accordion";
-import { CaseStudiesPreview } from "@/components/landing/case-studies-preview";
+import { CaseStudiesSection } from "@/components/landing/case-studies-section";
 import { startCheckout } from "@/lib/start-checkout";
 import {
   LANDING_HERO_TOP,
@@ -252,27 +252,7 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
             </div>
           </section>
 
-          {/* Case Studies preview */}
-          <section className="py-16 sm:py-24 page-container">
-            <Reveal className="text-center mb-12 sm:mb-14 max-w-3xl mx-auto">
-              <SectionCategoryLabel>{caseStudySample.eyebrow}</SectionCategoryLabel>
-              <h2 className="font-serif text-[clamp(28px,4vw,44px)] font-bold tracking-tight text-gray-900 mb-4">
-                {caseStudySample.title}{" "}
-                <span className="text-primary-400 italic">{caseStudySample.titleAccent}</span>
-              </h2>
-              <p className="text-muted-fg text-base sm:text-lg leading-relaxed">
-                {caseStudySample.description}
-              </p>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <CaseStudiesPreview
-                cards={caseStudySample.cards}
-                categoryTags={caseStudySample.categoryTags}
-                disclaimer={caseStudySample.disclaimer}
-                viewMoreHref={caseStudySample.viewMoreHref}
-              />
-            </Reveal>
-          </section>
+          <CaseStudiesSection content={caseStudySample} />
 
           {/* Pricing */}
           <section className={`bg-primary-800 section-dark ${PAGE_SECTION_PY} relative overflow-hidden`}>
