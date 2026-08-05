@@ -2,8 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useSession } from "next-auth/react";
+import { useSearchParams } from "next/navigation";
 import {
   ArrowRight, Check, BookOpen, Users,
   Star, Zap, ChevronRight,
@@ -24,7 +23,6 @@ import { SectionCategoryLabel } from "@/components/landing/section-category-labe
 import { MembersStrip } from "@/components/landing/members-strip";
 import { ChapterAccordion } from "@/components/landing/chapter-accordion";
 import { CaseStudiesSection } from "@/components/landing/case-studies-section";
-import { startCheckout } from "@/lib/start-checkout";
 import {
   LANDING_HERO_TOP,
   LANDING_HERO_BOTTOM,
@@ -41,6 +39,7 @@ import {
   resolveCaseStudySample,
   resolveChapterCoverage,
   resolveCareerContent,
+  resolvePricing,
   resolveSalesContent,
   resolveWhatsInside,
 } from "@/lib/content/merge";
@@ -78,12 +77,9 @@ interface Props {
 
 export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) {
   const searchParams = useSearchParams();
-  const router = useRouter();
-  const { data: session } = useSession();
   const [activeTrack, setActiveTrack] = useState<Track>("career");
   const [modalOpen, setModalOpen] = useState(false);
   const [contactOpen, setContactOpen] = useState(false);
-  const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
 
   useEffect(() => {
     const track = searchParams.get("track");
@@ -92,29 +88,13 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
     }
   }, [searchParams]);
 
-  async function handlePurchase(plan: "pro" | "elite") {
-    if (!session?.user) {
-      router.push(`/signup?plan=${plan}&callbackUrl=/pricing`);
-      return;
-    }
-    setLoadingPlan(plan);
-    try {
-      const url = await startCheckout(plan);
-      if (url) window.location.href = url;
-      else router.push("/pricing");
-    } catch {
-      router.push("/pricing");
-    } finally {
-      setLoadingPlan(null);
-    }
-  }
-
   const career = resolveCareerContent(DEFAULT_LANDING_CONTENT, content.career);
   const tierColors: Record<string, string> = { Pro: "#3280ff", Elite: "#B45309" };
   // Repo-managed section copy always comes from code defaults (stale CMS cannot win).
   const whatsInside = resolveWhatsInside(DEFAULT_LANDING_CONTENT, content.whatsInside);
   const chapterCoverage = resolveChapterCoverage(DEFAULT_LANDING_CONTENT, content.chapterCoverage);
   const caseStudySample = resolveCaseStudySample(DEFAULT_LANDING_CONTENT, content.caseStudySample);
+  const pricing = resolvePricing(DEFAULT_LANDING_CONTENT, content.pricing);
   const sales = resolveSalesContent(DEFAULT_LANDING_CONTENT, content.sales);
 
   return (
@@ -261,14 +241,14 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
               <Reveal className="text-center mb-12 sm:mb-14">
                 <SectionCategoryLabel colorClass="text-white/50">Choose Your Plan</SectionCategoryLabel>
                 <h2 className="font-serif text-[clamp(28px,4vw,44px)] font-bold tracking-tight text-white mb-4">
-                  {content.pricing.title}
+                  {pricing.title}
                 </h2>
                 <p className="text-white/65 text-base sm:text-lg max-w-none leading-relaxed px-0">
-                  {content.pricing.subtitle}
+                  {pricing.subtitle}
                 </p>
               </Reveal>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
-                {content.pricing.tiers.map((tier, i) => (
+                {pricing.tiers.map((tier, i) => (
                   <Reveal key={tier.name} delay={i * 0.1} className="h-full">
                     <div
                       className={`relative rounded-2xl h-full flex flex-col group/tier ${
@@ -331,16 +311,16 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
                             {tier.cta}
                           </Button>
                         ) : tier.name === "Pro" || tier.name === "Elite" ? (
-                          <Button
-                            className="w-full"
-                            variant={tier.highlight ? "default" : "primary-dark"}
-                            size="lg"
-                            onClick={() => handlePurchase(tier.name.toLowerCase() as "pro" | "elite")}
-                            loading={loadingPlan === tier.name.toLowerCase()}
-                          >
-                            {tier.cta}
-                            <ArrowRight className="w-4 h-4" />
-                          </Button>
+                          <Link href={`/pricing?plan=${tier.name.toLowerCase()}`} className="block">
+                            <Button
+                              className="w-full"
+                              variant={tier.highlight ? "default" : "primary-dark"}
+                              size="lg"
+                            >
+                              {tier.cta}
+                              <ArrowRight className="w-4 h-4" />
+                            </Button>
+                          </Link>
                         ) : (
                           <Link href={tier.href} className="block">
                             <Button

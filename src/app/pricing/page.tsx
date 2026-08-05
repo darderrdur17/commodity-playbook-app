@@ -1,8 +1,8 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import { Check, X, ArrowRight, Zap, Shield, HelpCircle } from "lucide-react";
 import { useSession } from "next-auth/react";
@@ -49,12 +49,24 @@ const FAQS = [
 export default function PricingPage() {
   const { data: session } = useSession();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   const starter = PRICING_TIERS[0];
   const pro = PRICING_TIERS[1];
   const elite = PRICING_TIERS[2];
+
+  useEffect(() => {
+    const plan = searchParams.get("plan");
+    if (plan !== "pro" && plan !== "elite") return;
+    const el = document.getElementById(`plan-${plan}`);
+    if (!el) return;
+    const timer = window.setTimeout(() => {
+      el.scrollIntoView({ behavior: "smooth", block: "center" });
+    }, 150);
+    return () => window.clearTimeout(timer);
+  }, [searchParams]);
 
   async function handlePurchase(plan: "pro" | "elite") {
     if (!session) {
@@ -115,7 +127,7 @@ export default function PricingPage() {
           </Reveal>
 
           <Reveal delay={0.1}>
-            <div className="relative bg-primary-800 rounded-2xl border-2 border-primary-400 p-7 h-full flex flex-col text-white shadow-2xl shadow-primary-800/30">
+            <div id="plan-pro" className="relative bg-primary-800 rounded-2xl border-2 border-primary-400 p-7 h-full flex flex-col text-white shadow-2xl shadow-primary-800/30 scroll-mt-24">
               <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-primary-400 text-white text-[10px] font-bold uppercase tracking-widest px-4 py-1 rounded-full">
                 Most Popular
               </div>
@@ -150,7 +162,7 @@ export default function PricingPage() {
           </Reveal>
 
           <Reveal delay={0.2}>
-            <div className="bg-white rounded-2xl border border-border p-7 h-full flex flex-col">
+            <div id="plan-elite" className="bg-white rounded-2xl border border-border p-7 h-full flex flex-col scroll-mt-24">
               <Badge variant="elite" className="mb-4">
                 {elite.name}
               </Badge>

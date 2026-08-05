@@ -110,6 +110,14 @@ export function resolveWhatsInside(
   };
 }
 
+/** Career track pricing — repo defaults always win over stale CMS (e.g. one-time Pro, old feature lists). */
+export function resolvePricing(
+  defaults: LandingContent,
+  _cms?: Partial<LandingContent["pricing"]>
+): LandingContent["pricing"] {
+  return defaults.pricing;
+}
+
 /** Repo-managed sales pricing — code defaults always win over stale CMS (e.g. old Starter/one-time tiers). */
 export function resolveSalesPricing(
   defaults: LandingContent,
@@ -216,14 +224,7 @@ export function mergeLandingContent(
   merged.whatsInside = resolveWhatsInside(defaults, cms.whatsInside);
   merged.groundLevelView = resolveGroundLevelView(defaults, cms.groundLevelView);
 
-  if (cms.pricing?.tiers?.length) {
-    merged.pricing = {
-      ...defaults.pricing,
-      tiers: mergeByKeyDefaultsWin(defaults.pricing.tiers, cms.pricing.tiers, "name"),
-    };
-  } else {
-    merged.pricing = defaults.pricing;
-  }
+  merged.pricing = resolvePricing(defaults, cms.pricing);
 
   if (cms.sales?.whoCards?.length) {
     merged.sales = {
