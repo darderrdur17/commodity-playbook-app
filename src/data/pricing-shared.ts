@@ -70,7 +70,7 @@ export function buildSalesFeatureTable(pricing: SalesPricingTier[]) {
 /** Shared pricing copy — landing page and /pricing stay in sync */
 export const PRICING_HERO = {
   eyebrow: "Simple Pricing",
-  title: "Simple pricing -",
+  title: "Simple pricing",
   subtitle:
     "No lock-in on Pro and Elite. Cancel anytime. The only commitment is to getting ahead.",
 };

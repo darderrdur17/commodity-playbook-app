@@ -377,7 +377,7 @@ export const DEFAULT_LANDING_CONTENT: LandingContent = {
           "Interview Questions + Answers (50+)",
           "Market Knowledge Test (gap analysis)",
           "Resume Vetting (up to twice a year)",
-          "Career Navigation Guide (curated by practitioners)",
+          "Career Navigation Guide — move across the industry with confidence",
         ],
         cta: "Get Pro",
         href: "/pricing",

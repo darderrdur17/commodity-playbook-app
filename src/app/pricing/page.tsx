@@ -7,13 +7,12 @@ import { motion } from "framer-motion";
 import { Check, X, ArrowRight, Zap, Shield, HelpCircle } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Reveal, GradientOrbs } from "@/components/animations";
+import { PricingTierGrid } from "@/components/pricing/pricing-tier-grid";
 import { startCheckout } from "@/lib/start-checkout";
 import { PAGE_HERO_TOP } from "@/lib/layout-constants";
 import {
   PRICING_CTA,
-  PRICING_CONTENT_FOOTNOTE,
   PRICING_FEATURE_TABLE,
   PRICING_HERO,
   PRICING_TIERS,
@@ -52,10 +51,6 @@ export default function PricingPage() {
   const searchParams = useSearchParams();
   const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
-
-  const starter = PRICING_TIERS[0];
-  const pro = PRICING_TIERS[1];
-  const elite = PRICING_TIERS[2];
 
   useEffect(() => {
     const plan = searchParams.get("plan");
@@ -100,98 +95,12 @@ export default function PricingPage() {
       </section>
 
       <section className="page-container -mt-8 mb-12 sm:mb-16 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Reveal>
-            <div className="bg-white rounded-2xl border border-border p-7 h-full flex flex-col">
-              <Badge variant="starter" className="mb-4">
-                {starter.name}
-              </Badge>
-              <div className="mb-5">
-                <div className="font-serif text-4xl font-bold text-gray-900 mb-1">{starter.price}</div>
-                <p className="text-sm text-muted-fg">{starter.tooltip}</p>
-              </div>
-              <p className="text-sm text-muted-fg mb-6">{starter.description}</p>
-              <ul className="space-y-2.5 mb-8 flex-1">
-                {starter.features.map((f) => (
-                  <li key={f} className="flex items-center gap-2 text-sm text-gray-700">
-                    <Check className="w-4 h-4 text-green-500 flex-shrink-0" /> {f}
-                  </li>
-                ))}
-              </ul>
-              <Link href="/signup">
-                <Button variant="outline" className="w-full" size="lg">
-                  {starter.cta}
-                </Button>
-              </Link>
-            </div>
-          </Reveal>
-
-          <Reveal delay={0.1}>
-            <div id="plan-pro" className="relative bg-primary-800 rounded-2xl border-2 border-primary-400 p-7 h-full flex flex-col text-white shadow-2xl shadow-primary-800/30 scroll-mt-24">
-              <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-primary-400 text-white text-[10px] font-bold uppercase tracking-widest px-4 py-1 rounded-full">
-                Most Popular
-              </div>
-              <Badge variant="pro" className="mb-4 bg-white/10 text-white border-white/20">
-                {pro.name}
-              </Badge>
-              <div className="mb-5">
-                <div className="flex items-baseline gap-2 flex-wrap">
-                  <span className="font-serif text-4xl font-bold">{pro.price}</span>
-                  <span className="text-white/60 text-sm">{pro.billing}</span>
-                </div>
-              </div>
-              <p className="text-sm text-white/70 mb-6">{pro.description}</p>
-              <ul className="space-y-2.5 mb-4 flex-1">
-                {pro.features.map((f) => (
-                  <li key={f} className="flex items-center gap-2 text-sm text-white/85">
-                    <Check className="w-4 h-4 text-accent flex-shrink-0" /> {f}
-                  </li>
-                ))}
-              </ul>
-              <p className="text-xs text-white/55 italic mb-6">{PRICING_CONTENT_FOOTNOTE}</p>
-              <Button
-                variant="primary-dark"
-                size="lg"
-                className="w-full"
-                onClick={() => handlePurchase("pro")}
-                loading={loadingPlan === "pro"}
-              >
-                {pro.cta} <ArrowRight className="w-4 h-4" />
-              </Button>
-            </div>
-          </Reveal>
-
-          <Reveal delay={0.2}>
-            <div id="plan-elite" className="bg-white rounded-2xl border border-border p-7 h-full flex flex-col scroll-mt-24">
-              <Badge variant="elite" className="mb-4">
-                {elite.name}
-              </Badge>
-              <div className="mb-5">
-                <div className="flex items-baseline gap-2 flex-wrap">
-                  <span className="font-serif text-4xl font-bold text-gray-900">{elite.price}</span>
-                  <span className="text-sm text-muted-fg">{elite.billing}</span>
-                </div>
-              </div>
-              <p className="text-sm text-muted-fg mb-6">{elite.description}</p>
-              <ul className="space-y-2.5 mb-4 flex-1">
-                {elite.features.map((f) => (
-                  <li key={f} className="flex items-center gap-2 text-sm text-gray-700">
-                    <Check className="w-4 h-4 text-amber-500 flex-shrink-0" /> {f}
-                  </li>
-                ))}
-              </ul>
-              <p className="text-xs text-muted-fg italic mb-6">{PRICING_CONTENT_FOOTNOTE}</p>
-              <Button
-                className="w-full bg-amber-500 hover:bg-amber-600 text-white"
-                size="lg"
-                onClick={() => handlePurchase("elite")}
-                loading={loadingPlan === "elite"}
-              >
-                {elite.cta} <ArrowRight className="w-4 h-4" />
-              </Button>
-            </div>
-          </Reveal>
-        </div>
+        <PricingTierGrid
+          tiers={PRICING_TIERS}
+          variant="page"
+          onPurchase={handlePurchase}
+          loadingPlan={loadingPlan}
+        />
       </section>
 
       <section className="page-container mb-12 sm:mb-20">

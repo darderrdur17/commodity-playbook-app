@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import {
-  ArrowRight, Check, BookOpen, Users,
+  ArrowRight, BookOpen, Users,
   Star, Zap, ChevronRight,
   MessageSquare, FileText, Map, Target,
 } from "lucide-react";
@@ -23,13 +23,13 @@ import { SectionCategoryLabel } from "@/components/landing/section-category-labe
 import { MembersStrip } from "@/components/landing/members-strip";
 import { ChapterAccordion } from "@/components/landing/chapter-accordion";
 import { CaseStudiesSection } from "@/components/landing/case-studies-section";
+import { PricingTierGrid } from "@/components/pricing/pricing-tier-grid";
 import {
   LANDING_HERO_TOP,
   LANDING_HERO_BOTTOM,
   HERO_EYEBROW_BASE,
   PAGE_SECTION_PY,
 } from "@/lib/layout-constants";
-import { PRICING_CONTENT_FOOTNOTE } from "@/data/pricing-shared";
 import {
   DEFAULT_LANDING_CONTENT,
   type LandingContent,
@@ -247,97 +247,11 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
                   {pricing.subtitle}
                 </p>
               </Reveal>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
-                {pricing.tiers.map((tier, i) => (
-                  <Reveal key={tier.name} delay={i * 0.1} className="h-full">
-                    <div
-                      className={`relative rounded-2xl h-full flex flex-col group/tier ${
-                        tier.highlight
-                          ? "bg-white text-gray-900 border-2 border-primary-400 shadow-2xl"
-                          : "bg-white/10 backdrop-blur-sm border border-white/20 text-white"
-                      }`}
-                    >
-                      {tier.highlight && (
-                        <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-primary-400 text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">
-                          Most Popular
-                        </div>
-                      )}
-                      <div className="p-6 sm:p-7 flex-1">
-                        <Badge
-                          variant={tier.badge}
-                          className={tier.highlight ? "mb-4" : "mb-4 bg-white/10 text-white border-white/20"}
-                        >
-                          {tier.name}
-                        </Badge>
-                        <p
-                          className={`text-sm mb-4 italic leading-relaxed ${
-                            tier.highlight ? "text-muted-fg" : "text-white/70"
-                          }`}
-                        >
-                          {tier.tooltip}
-                        </p>
-                        <div className="mb-4">
-                          <span className={`font-serif text-3xl sm:text-4xl font-bold ${tier.highlight ? "text-gray-900" : "text-white"}`}>
-                            {tier.price}
-                          </span>
-                          {tier.price !== "Free" && (
-                            <span className={`text-sm ml-2 ${tier.highlight ? "text-muted-fg" : "text-white/60"}`}>
-                              {tier.billing}
-                            </span>
-                          )}
-                        </div>
-                        <ul className="space-y-2.5">
-                          {tier.features.map((f) => (
-                            <li key={f} className="flex items-start gap-2.5 text-sm">
-                              <Check className={`w-4 h-4 mt-0.5 flex-shrink-0 ${tier.highlight ? "text-primary-400" : "text-accent"}`} />
-                              <span className={tier.highlight ? "text-gray-700" : "text-white/85"}>{f}</span>
-                            </li>
-                          ))}
-                        </ul>
-                        {(tier.name === "Pro" || tier.name === "Elite") && (
-                          <p className={`text-xs italic mt-4 ${tier.highlight ? "text-muted-fg" : "text-white/55"}`}>
-                            {PRICING_CONTENT_FOOTNOTE}
-                          </p>
-                        )}
-                      </div>
-                      <div className="p-6 sm:p-7 pt-0">
-                        {tier.opensModal ? (
-                          <Button
-                            className="w-full"
-                            variant={tier.highlight ? "default" : "primary-dark"}
-                            size="lg"
-                            onClick={() => setModalOpen(true)}
-                          >
-                            {tier.cta}
-                          </Button>
-                        ) : tier.name === "Pro" || tier.name === "Elite" ? (
-                          <Link href={`/pricing?plan=${tier.name.toLowerCase()}`} className="block">
-                            <Button
-                              className="w-full"
-                              variant={tier.highlight ? "default" : "primary-dark"}
-                              size="lg"
-                            >
-                              {tier.cta}
-                              <ArrowRight className="w-4 h-4" />
-                            </Button>
-                          </Link>
-                        ) : (
-                          <Link href={tier.href} className="block">
-                            <Button
-                              className="w-full"
-                              variant={tier.highlight ? "default" : "primary-dark"}
-                              size="lg"
-                            >
-                              {tier.cta}
-                              <ArrowRight className="w-4 h-4" />
-                            </Button>
-                          </Link>
-                        )}
-                      </div>
-                    </div>
-                  </Reveal>
-                ))}
-              </div>
+              <PricingTierGrid
+                tiers={pricing.tiers}
+                variant="landing"
+                onStarterModal={() => setModalOpen(true)}
+              />
               <Reveal className="text-center mt-8">
                 <Link href="/pricing" className="inline-flex items-center gap-1.5 text-sm text-white/60 hover:text-white transition-colors">
                   View full feature comparison <ChevronRight className="w-4 h-4" />
