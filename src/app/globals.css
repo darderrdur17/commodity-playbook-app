@@ -228,8 +228,8 @@
     background: rgba(223,242,255,0.1);
   }
 
-  /* Consistent page horizontal padding on mobile */
+  /* Shared content grid — horizontal rhythm matches Nav (px-4 sm:px-10) */
   .page-container {
-    @apply w-full max-w-[1200px] mx-auto px-4 sm:px-6;
+    @apply w-full max-w-[1200px] mx-auto px-4 sm:px-10;
   }
 }

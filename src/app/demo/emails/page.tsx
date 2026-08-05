@@ -47,8 +47,8 @@ export default function DemoEmailsPage() {
 
   return (
     <div className="min-h-screen bg-secondary">
-      <section className={`bg-primary-800 section-dark ${PAGE_HERO_TOP} pb-10 px-4 sm:px-6`}>
-        <div className="max-w-[960px] mx-auto">
+      <section className={`bg-primary-800 section-dark ${PAGE_HERO_TOP} pb-10`}>
+        <div className="page-container max-w-[960px]">
           <Link href="/demo/mentor-flow" className="inline-flex items-center gap-1.5 text-sm text-white/60 hover:text-white mb-4">
             <ArrowLeft className="w-4 h-4" /> Mentor flow demo
           </Link>
@@ -64,7 +64,7 @@ export default function DemoEmailsPage() {
         </div>
       </section>
 
-      <div className="max-w-[960px] mx-auto px-4 sm:px-6 py-8">
+      <div className="page-container max-w-[960px] py-8">
         <div className="flex justify-end mb-4">
           <Button variant="outline" size="sm" onClick={load} loading={loading}>
             <RefreshCw className="w-4 h-4" /> Refresh

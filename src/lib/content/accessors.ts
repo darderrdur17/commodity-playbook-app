@@ -108,12 +108,21 @@ export async function getCareerRoles() {
     roles: typeof CAREER_ROLES;
     functionMatrix?: typeof import("@/data/career-roadmap-extras").FUNCTION_MATRIX;
     timeline12Month?: typeof import("@/data/career-roadmap-extras").TIMELINE_12_MONTH;
+    navigationGuide?: typeof import("@/data/career-roadmap-extras").NAVIGATION_GUIDE;
+    compBenchmarks?: typeof import("@/data/career-roadmap-extras").COMP_BENCHMARKS;
   }>("career-roadmap");
-  const { FUNCTION_MATRIX, TIMELINE_12_MONTH } = await import("@/data/career-roadmap-extras");
+  const {
+    FUNCTION_MATRIX,
+    TIMELINE_12_MONTH,
+    NAVIGATION_GUIDE,
+    COMP_BENCHMARKS,
+  } = await import("@/data/career-roadmap-extras");
   return {
     roles: data.roles ?? CAREER_ROLES,
     functionMatrix: data.functionMatrix ?? FUNCTION_MATRIX,
     timeline12Month: data.timeline12Month ?? TIMELINE_12_MONTH,
+    navigationGuide: data.navigationGuide ?? NAVIGATION_GUIDE,
+    compBenchmarks: data.compBenchmarks ?? COMP_BENCHMARKS,
   };
 }
 

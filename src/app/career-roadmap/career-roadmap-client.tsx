@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { TierGate } from "@/components/tier-gate";
 import { Reveal } from "@/components/animations";
 import { CAREER_ROLES, type CareerRole } from "@/data/career-roadmap";
-import type { FunctionMatrixRow, TimelineQuarter } from "@/data/career-roadmap-extras";
+import type { FunctionMatrixRow, TimelineQuarter, NavigationGuide, CompBenchmarks } from "@/data/career-roadmap-extras";
 import { getPersonaCareerGuide, getRecommendedRoleSlugs } from "@/data/persona-career";
 import { PERSONA_LABELS } from "@/lib/utils";
 import { PERSONA_ARCHETYPES } from "@/data/persona-archetypes";
@@ -34,6 +34,8 @@ interface Props {
   roles?: CareerRole[];
   functionMatrix?: FunctionMatrixRow[];
   timeline12Month?: TimelineQuarter[];
+  navigationGuide?: NavigationGuide;
+  compBenchmarks?: CompBenchmarks;
   requiredTier?: "PRO" | "ELITE";
 }
 
@@ -43,6 +45,8 @@ export function CareerRoadmapClient({
   roles = CAREER_ROLES,
   functionMatrix = [],
   timeline12Month = [],
+  navigationGuide,
+  compBenchmarks,
   requiredTier = "PRO",
 }: Props) {
   const [activeSlug, setActiveSlug] = useState(roles[0]?.slug ?? "");
@@ -353,6 +357,72 @@ export function CareerRoadmapClient({
                 </Reveal>
               ))}
             </div>
+          </section>
+        )}
+
+        {/* Career Navigation Guide */}
+        {navigationGuide && navigationGuide.sections.length > 0 && (
+          <section className="mt-16">
+            <Reveal className="mb-8 max-w-2xl">
+              <p className="text-xs font-bold uppercase tracking-widest text-primary-800 mb-2">
+                {navigationGuide.eyebrow}
+              </p>
+              <h2 className="font-serif text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
+                {navigationGuide.title}
+              </h2>
+              <p className="text-muted-fg text-sm leading-relaxed">{navigationGuide.description}</p>
+            </Reveal>
+            <div className="space-y-5">
+              {navigationGuide.sections.map((section, index) => (
+                <Reveal key={section.title} delay={index * 0.05}>
+                  <div className="rounded-2xl border border-border bg-white p-6 sm:p-7">
+                    <h3 className="font-serif text-lg font-bold text-gray-900 mb-3">{section.title}</h3>
+                    <p className="text-sm text-gray-700 leading-relaxed mb-4">{section.body}</p>
+                    <ul className="space-y-2">
+                      {section.bullets.map((bullet) => (
+                        <li key={bullet.slice(0, 48)} className="text-sm text-gray-700 flex gap-2.5">
+                          <span className="text-primary-400 flex-shrink-0 mt-0.5">·</span>
+                          <span>{bullet}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+          </section>
+        )}
+
+        {/* Comp benchmarks */}
+        {compBenchmarks && compBenchmarks.cards.length > 0 && (
+          <section className="mt-16 pt-16 border-t border-border">
+            <Reveal className="mb-8 text-center max-w-2xl mx-auto">
+              <p className="text-xs font-bold uppercase tracking-widest text-primary-800 mb-2">
+                {compBenchmarks.eyebrow}
+              </p>
+              <h2 className="font-serif text-2xl sm:text-3xl font-bold text-gray-900 mb-2">
+                {compBenchmarks.title}
+              </h2>
+              <p className="text-muted-fg text-sm leading-relaxed">{compBenchmarks.description}</p>
+            </Reveal>
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {compBenchmarks.cards.map((card, index) => (
+                <Reveal key={card.role} delay={index * 0.04}>
+                  <div className="rounded-xl border border-border bg-white p-5 h-full">
+                    <p className="text-sm font-semibold text-primary-800 mb-2">{card.role}</p>
+                    <p className="font-serif text-2xl font-bold text-gray-900 mb-1">{card.range}</p>
+                    <p className="text-xs text-muted-fg">{card.note}</p>
+                  </div>
+                </Reveal>
+              ))}
+            </div>
+            {compBenchmarks.footnote && (
+              <Reveal className="mt-6">
+                <p className="text-xs text-muted-fg text-center max-w-2xl mx-auto leading-relaxed">
+                  {compBenchmarks.footnote}
+                </p>
+              </Reveal>
+            )}
           </section>
         )}
       </TierGate>

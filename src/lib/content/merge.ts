@@ -55,6 +55,151 @@ export function mergeByKeyDefaultsWin<T>(
   });
 }
 
+/** Repo-managed case study headers — code defaults always win over stale CMS copy. */
+export function resolveCaseStudySample(
+  defaults: LandingContent,
+  cms?: Partial<LandingContent["caseStudySample"]>
+): LandingContent["caseStudySample"] {
+  return {
+    eyebrow: defaults.caseStudySample.eyebrow,
+    title: defaults.caseStudySample.title,
+    titleAccent: defaults.caseStudySample.titleAccent,
+    description: defaults.caseStudySample.description,
+    categoryTags: defaults.caseStudySample.categoryTags,
+    disclaimer: defaults.caseStudySample.disclaimer,
+    viewMoreHref: defaults.caseStudySample.viewMoreHref,
+    cards: mergeByKeyDefaultsWin(
+      defaults.caseStudySample.cards,
+      cms?.cards ?? [],
+      "slug"
+    ),
+  };
+}
+
+/** Repo-managed chapter coverage headers — code defaults always win over stale CMS copy. */
+export function resolveChapterCoverage(
+  defaults: LandingContent,
+  cms?: Partial<LandingContent["chapterCoverage"]>
+): LandingContent["chapterCoverage"] {
+  return {
+    eyebrow: defaults.chapterCoverage.eyebrow,
+    title: defaults.chapterCoverage.title,
+    description: defaults.chapterCoverage.description,
+    chapters: mergeByKeyDefaultsWin(
+      defaults.chapterCoverage.chapters,
+      cms?.chapters ?? [],
+      "letter"
+    ),
+  };
+}
+
+/** Repo-managed What's Inside copy — headers from code; feature rows merge by title. */
+export function resolveWhatsInside(
+  defaults: LandingContent,
+  cms?: Partial<LandingContent["whatsInside"]>
+): LandingContent["whatsInside"] {
+  return {
+    titleLine1: defaults.whatsInside.titleLine1,
+    titleLine2: defaults.whatsInside.titleLine2,
+    description: defaults.whatsInside.description,
+    features: mergeByKeyDefaultsWin(
+      defaults.whatsInside.features,
+      cms?.features ?? [],
+      "title"
+    ),
+  };
+}
+
+/** Repo-managed sales pricing — code defaults always win over stale CMS (e.g. old Starter/one-time tiers). */
+export function resolveSalesPricing(
+  defaults: LandingContent,
+  _cms?: Partial<LandingContent["sales"]>
+): LandingContent["sales"]["pricing"] {
+  return defaults.sales.pricing;
+}
+
+/** Repo-managed sales ROI copy — headers from code; stat rows merge by label. */
+export function resolveSalesRoi(
+  defaults: LandingContent,
+  cms?: Partial<LandingContent["sales"]>
+): LandingContent["sales"]["roi"] {
+  return {
+    eyebrow: defaults.sales.roi.eyebrow,
+    title: defaults.sales.roi.title,
+    titleAccent: defaults.sales.roi.titleAccent,
+    description: defaults.sales.roi.description,
+    quote: defaults.sales.roi.quote,
+    quoteAuthor: defaults.sales.roi.quoteAuthor,
+    quoteSubtitle: defaults.sales.roi.quoteSubtitle,
+    stats: mergeByKeyDefaultsWin(
+      defaults.sales.roi.stats,
+      cms?.roi?.stats ?? [],
+      "label"
+    ),
+  };
+}
+
+/** Career hero copy — repo defaults win over stale CMS seed data. */
+export function resolveCareerContent(
+  defaults: LandingContent,
+  cms?: Partial<LandingContent["career"]>
+): LandingContent["career"] {
+  const base = cms ? { ...defaults.career, ...cms } : defaults.career;
+  return {
+    ...base,
+    eyebrow: defaults.career.eyebrow,
+    headline: defaults.career.headline,
+    headlineAccent: defaults.career.headlineAccent,
+    description: defaults.career.description,
+    heroStats: mergeByKeyDefaultsWin(
+      defaults.career.heroStats,
+      cms?.heroStats ?? [],
+      "label"
+    ),
+    ctaPrimary: defaults.career.ctaPrimary,
+    ctaSecondary: defaults.career.ctaSecondary,
+  };
+}
+
+/** Sales track sections that must stay in sync with repo deploys, not stale CMS seed data. */
+export function resolveSalesContent(
+  defaults: LandingContent,
+  cms?: Partial<LandingContent["sales"]>
+): LandingContent["sales"] {
+  const base = cms ? { ...defaults.sales, ...cms } : defaults.sales;
+  return {
+    ...base,
+    eyebrow: defaults.sales.eyebrow,
+    headline: defaults.sales.headline,
+    headlineAccent: defaults.sales.headlineAccent,
+    description: defaults.sales.description,
+    stats: mergeByKeyDefaultsWin(
+      defaults.sales.stats,
+      cms?.stats ?? [],
+      "label"
+    ),
+    pricing: resolveSalesPricing(defaults, cms),
+    roi: resolveSalesRoi(defaults, cms),
+  };
+}
+
+/** Repo-managed ground-level section — not on landing today, but protected for CMS/admin parity. */
+export function resolveGroundLevelView(
+  defaults: LandingContent,
+  cms?: Partial<LandingContent["groundLevelView"]>
+): LandingContent["groundLevelView"] {
+  return {
+    eyebrow: defaults.groundLevelView.eyebrow,
+    title: defaults.groundLevelView.title,
+    description: defaults.groundLevelView.description,
+    features: mergeByKeyDefaultsWin(
+      defaults.groundLevelView.features,
+      cms?.features ?? [],
+      "title"
+    ),
+  };
+}
+
 /** Merge CMS landing copy over code defaults without losing new chapters/tiers from deploys. */
 export function mergeLandingContent(
   defaults: LandingContent,
@@ -66,40 +211,10 @@ export function mergeLandingContent(
   ) as unknown as LandingContent;
 
   // Repo-managed sections — code defaults always win for headers + structure
-  merged.chapterCoverage = {
-    eyebrow: defaults.chapterCoverage.eyebrow,
-    title: defaults.chapterCoverage.title,
-    description: defaults.chapterCoverage.description,
-    chapters: mergeByKeyDefaultsWin(
-      defaults.chapterCoverage.chapters,
-      cms.chapterCoverage?.chapters ?? [],
-      "letter"
-    ),
-  };
-
-  merged.caseStudySample = {
-    eyebrow: defaults.caseStudySample.eyebrow,
-    title: defaults.caseStudySample.title,
-    titleAccent: defaults.caseStudySample.titleAccent,
-    description: defaults.caseStudySample.description,
-    categoryTags: defaults.caseStudySample.categoryTags,
-    disclaimer: defaults.caseStudySample.disclaimer,
-    viewMoreHref: defaults.caseStudySample.viewMoreHref,
-    cards: mergeByKeyDefaultsWin(
-      defaults.caseStudySample.cards,
-      cms.caseStudySample?.cards ?? [],
-      "slug"
-    ),
-  };
-
-  merged.whatsInside = {
-    ...defaults.whatsInside,
-    features: mergeByKeyDefaultsWin(
-      defaults.whatsInside.features,
-      cms.whatsInside?.features ?? [],
-      "title"
-    ),
-  };
+  merged.chapterCoverage = resolveChapterCoverage(defaults, cms.chapterCoverage);
+  merged.caseStudySample = resolveCaseStudySample(defaults, cms.caseStudySample);
+  merged.whatsInside = resolveWhatsInside(defaults, cms.whatsInside);
+  merged.groundLevelView = resolveGroundLevelView(defaults, cms.groundLevelView);
 
   if (cms.pricing?.tiers?.length) {
     merged.pricing = {
@@ -136,30 +251,11 @@ export function mergeLandingContent(
     merged.stats = mergeByKey(defaults.stats, cms.stats, "label");
   }
 
-  // Sales pricing, ROI, and hero stats — no admin editor for these, so repo defaults
-  // always win over stale CMS seed data. Must run last (no later cms.sales spread).
+  // Sales pricing, ROI, and hero stats — repo defaults win over stale CMS seed data.
   merged.sales = {
     ...merged.sales,
-    stats: mergeByKeyDefaultsWin(
-      defaults.sales.stats,
-      cms.sales?.stats ?? [],
-      "label"
-    ),
-    pricing: defaults.sales.pricing,
-    roi: {
-      ...merged.sales.roi,
-      title: defaults.sales.roi.title,
-      titleAccent: defaults.sales.roi.titleAccent,
-      description: defaults.sales.roi.description,
-      quote: defaults.sales.roi.quote,
-      quoteAuthor: defaults.sales.roi.quoteAuthor,
-      quoteSubtitle: defaults.sales.roi.quoteSubtitle,
-      stats: mergeByKeyDefaultsWin(
-        defaults.sales.roi.stats,
-        cms.sales?.roi?.stats ?? [],
-        "label"
-      ),
-    },
+    ...resolveSalesContent(defaults, cms.sales),
+    whoCards: merged.sales.whoCards,
   };
 
   return merged;

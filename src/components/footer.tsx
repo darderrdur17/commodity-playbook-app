@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Logo } from "@/components/brand/logo";
 import { FooterNewsletter } from "@/components/footer-newsletter";
 import { ContactModal } from "@/components/landing/contact-modal";
+import { FOOTER_BOTTOM_SAFE_PADDING } from "@/lib/layout-constants";
 
 const FOOTER_LINKS = {
   Contents: [
@@ -83,7 +84,10 @@ export function Footer() {
 
         <FooterNewsletter variant="dark" />
 
-        <div className="py-5 pb-[26px] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-t border-white/10">
+        <div
+          className="py-5 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-t border-white/10"
+          style={{ paddingBottom: `max(26px, ${FOOTER_BOTTOM_SAFE_PADDING})` }}
+        >
           <p className="text-[13px] text-white/60">
             © 2026. CommodityPlaybook. All rights reserved.
           </p>

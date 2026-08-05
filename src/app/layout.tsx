@@ -22,6 +22,9 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ?? "https://commodityplaybook.com"
+  ),
   title: {
     default: "CommodityPlaybook — Build Your Career in Commodity Trading",
     template: "%s | CommodityPlaybook",
@@ -88,7 +91,7 @@ export default function RootLayout({
       <body className="font-sans antialiased bg-white text-gray-800 min-h-screen flex flex-col overflow-x-hidden">
         <SessionProvider>
           <Nav />
-          <main className="flex-1 pb-[max(1rem,env(safe-area-inset-bottom))]" style={{ paddingTop: NAV_OFFSET }}>{children}</main>
+          <main className="flex-1" style={{ paddingTop: NAV_OFFSET }}>{children}</main>
           <Footer />
           <Toaster />
         </SessionProvider>

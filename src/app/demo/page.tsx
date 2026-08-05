@@ -55,8 +55,8 @@ export default function DemoPage() {
   return (
     <div className="min-h-screen bg-secondary">
       {/* Hero */}
-      <section className={`bg-primary-800 section-dark ${PAGE_HERO_TOP} pb-12 sm:pb-16 px-4 sm:px-6`}>
-        <div className="max-w-[900px] mx-auto text-center">
+      <section className={`bg-primary-800 section-dark ${PAGE_HERO_TOP} pb-12 sm:pb-16`}>
+        <div className="page-container max-w-[900px] text-center">
           <Reveal>
             <div className="pill pill-dark mb-4 mx-auto">
               <span className="w-1.5 h-1.5 rounded-full bg-accent" />
@@ -83,7 +83,7 @@ export default function DemoPage() {
         </div>
       </section>
 
-      <div className="max-w-[900px] mx-auto px-4 sm:px-6 py-8 sm:py-10">
+      <div className="page-container max-w-[900px] py-8 sm:py-10">
         {error && (
           <div className="mb-6 p-4 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm">
             {error}

@@ -15,7 +15,7 @@ export function MembersStrip({ label, companies, variant = "light" }: MembersStr
           : "py-10 sm:py-12 bg-[#f1f4f8] border-y border-[#e2e6ec]"
       }
     >
-      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 text-center">
+      <div className="page-container text-center">
         <p className="text-[11px] font-bold uppercase tracking-[0.2em] mb-4 sm:mb-5 text-muted-fg">
           {label}
         </p>

@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
+import React, { useMemo, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 import {
@@ -13,8 +13,14 @@ import { SectionCategoryLabel } from "@/components/landing/section-category-labe
 import { MembersStrip } from "@/components/landing/members-strip";
 import { startCheckout } from "@/lib/start-checkout";
 import { cn } from "@/lib/utils";
-import { LANDING_HERO_TOP, LANDING_HERO_BOTTOM, HERO_EYEBROW_BASE } from "@/lib/layout-constants";
+import {
+  LANDING_HERO_TOP,
+  LANDING_HERO_BOTTOM,
+  HERO_EYEBROW_BASE,
+  PAGE_SECTION_PY,
+} from "@/lib/layout-constants";
 import type { LandingContent } from "@/data/landing-content";
+import { buildSalesFeatureTable } from "@/data/pricing-shared";
 
 const SALES_COLOR = "#0F766E";
 
@@ -100,30 +106,6 @@ const SALES_MARKET_NOTE = {
   ],
 };
 
-const SALES_FEATURE_TABLE = [
-  {
-    category: "Pro — SGD 99/month",
-    color: SALES_COLOR,
-    items: [
-      { name: "Full Playbook — all 9 chapters covering every desk function, with examples and frameworks", pro: true, elite: true },
-      { name: "Market Knowledge Test — identify exactly which areas to study before key accounts", pro: true, elite: true },
-      { name: "Desk Glossary — explain the way a senior trader would do", pro: true, elite: true },
-      { name: "Sales Guide - key industry areas to look out for when selling", pro: true, elite: true },
-      { name: "Weekly Sales Edge Note - highlight interesting market happenings to note from sales perspectives", pro: true, elite: true },
-    ],
-  },
-  {
-    category: "Elite — SGD 199/month",
-    color: "#065F46",
-    items: [
-      { name: "Global & Asian Case Studies - updated market events showing how desks think through commercial decisions", pro: false, elite: true },
-      { name: "Desk Channel — Practitioner Q&As that reveal how traders frame every type of problem", pro: false, elite: true },
-      { name: "Anonymous Mentor Connect - ask your real sales preparation questions to practitioners directly", pro: false, elite: true },
-      { name: "Market Role Openings - track which firms are growing and hiring (your next target accounts)", pro: false, elite: true },
-    ],
-  },
-];
-
 function LearnAccordionItem({
   item,
   isOpen,
@@ -134,7 +116,7 @@ function LearnAccordionItem({
   onToggle: () => void;
 }) {
   return (
-    <div className="rounded-xl border border-border bg-white overflow-hidden hover:border-teal-200 transition-colors self-start w-full">
+    <div className="rounded-xl border border-border bg-white overflow-hidden hover:border-teal-200 transition-colors self-start w-full min-w-0">
       <button
         type="button"
         onClick={onToggle}
@@ -151,6 +133,7 @@ function LearnAccordionItem({
           <span className="block font-semibold text-gray-900">{item.title}</span>
         </span>
         <ChevronDown
+          aria-hidden
           className={cn(
             "w-4 h-4 text-muted-fg shrink-0 mt-2 transition-transform duration-200",
             isOpen && "rotate-180"
@@ -170,13 +153,13 @@ function LearnAccordion() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 items-start">
+    <div className="grid w-full min-w-0 grid-cols-1 md:grid-cols-2 gap-4 items-start">
       {LEARN_ITEMS.map((item, i) => (
         <LearnAccordionItem
           key={item.num}
           item={item}
           isOpen={openIndex === i}
-          onToggle={() => setOpenIndex(openIndex === i ? null : i)}
+          onToggle={() => setOpenIndex((prev) => (prev === i ? null : i))}
         />
       ))}
     </div>
@@ -198,6 +181,10 @@ export function SalesLandingPanel({ content, membersStrip, onOpenContactModal }:
   const [subscribeStatus, setSubscribeStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
   const [loadingPlan, setLoadingPlan] = useState<string | null>(null);
   const [showFeatureComparison, setShowFeatureComparison] = useState(false);
+  const featureTable = useMemo(
+    () => buildSalesFeatureTable(content.pricing),
+    [content.pricing]
+  );
 
   async function handleStarterPackSubscribe(e: React.FormEvent) {
     e.preventDefault();
@@ -235,14 +222,14 @@ export function SalesLandingPanel({ content, membersStrip, onOpenContactModal }:
 
   return (
     <div className="sales-panel">
-      {/* Hero */}
-      <section className={`relative overflow-hidden flex flex-col ${LANDING_HERO_TOP} ${LANDING_HERO_BOTTOM}`} style={{ background: "#065F46" }}>
+      {/* Hero — eyebrow outside Reveal; overflow-x only so top padding is not clipped */}
+      <section className={`relative overflow-x-hidden flex flex-col ${LANDING_HERO_TOP} ${LANDING_HERO_BOTTOM}`} style={{ background: "#065F46" }}>
         <div className="absolute top-0 right-0 w-96 h-96 rounded-full opacity-20 blur-3xl" style={{ background: SALES_COLOR }} />
         <div className="relative z-10 page-container w-full">
-          <div className={cn(HERO_EYEBROW_BASE, "border border-teal-200/30 bg-teal-200/10 text-teal-100")}>
-            <span className="w-1.5 h-1.5 rounded-full bg-teal-200 animate-pulse" />
+          <p className={cn(HERO_EYEBROW_BASE, "border border-teal-200/30 bg-teal-200/10 text-teal-100 not-prose")}>
+            <span className="w-1.5 h-1.5 rounded-full bg-teal-200 animate-pulse shrink-0" aria-hidden />
             {content.eyebrow}
-          </div>
+          </p>
           <Reveal>
             <h1 className="font-serif text-[clamp(32px,6vw,64px)] font-bold leading-[1.05] text-white mb-6 max-w-3xl">
               {content.headline}{" "}
@@ -318,7 +305,7 @@ export function SalesLandingPanel({ content, membersStrip, onOpenContactModal }:
               Not a glossary of terms. A working understanding of how commodity trading desks make money, manage risk, and evaluate vendors — so you can have conversations that resonate.
             </p>
           </Reveal>
-          <Reveal delay={0.1}>
+          <Reveal delay={0.1} className="w-full min-w-0">
             <LearnAccordion />
           </Reveal>
         </div>
@@ -396,7 +383,7 @@ export function SalesLandingPanel({ content, membersStrip, onOpenContactModal }:
       </section>
 
       {/* Commercial Case — ROI */}
-      <section className="py-16 sm:py-24 bg-primary-800 section-dark relative overflow-hidden">
+      <section className={`${PAGE_SECTION_PY} bg-primary-800 section-dark relative overflow-hidden`}>
         <div className="page-container">
           <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-8 lg:gap-12 items-start">
             <div>
@@ -526,7 +513,7 @@ export function SalesLandingPanel({ content, membersStrip, onOpenContactModal }:
                     </div>
                   ))}
                 </div>
-                {SALES_FEATURE_TABLE.map((group) => (
+                {featureTable.map((group) => (
                   <React.Fragment key={group.category}>
                     <div className="px-4 py-2.5 border-t border-border" style={{ background: `${group.color}08` }}>
                       <p className="text-xs font-bold uppercase tracking-widest" style={{ color: group.color }}>

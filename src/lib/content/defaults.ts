@@ -6,7 +6,12 @@ import { GLOSSARY_TERMS } from "@/data/glossary";
 import { INTERVIEW_QUESTIONS, INTERVIEW_CATEGORIES, INTERVIEW_TABS } from "@/data/interview-questions";
 import { KNOWLEDGE_TEST } from "@/data/knowledge-test";
 import { CAREER_ROLES } from "@/data/career-roadmap";
-import { FUNCTION_MATRIX, TIMELINE_12_MONTH } from "@/data/career-roadmap-extras";
+import {
+  FUNCTION_MATRIX,
+  TIMELINE_12_MONTH,
+  NAVIGATION_GUIDE,
+  COMP_BENCHMARKS,
+} from "@/data/career-roadmap-extras";
 import {
   RESUME_TEMPLATES,
   PERSONA_QUIZ_QUESTIONS,
@@ -35,7 +40,13 @@ export function getDefaultPayload(slug: ContentSlug): unknown {
     case "knowledge-test":
       return { questions: KNOWLEDGE_TEST };
     case "career-roadmap":
-      return { roles: CAREER_ROLES, functionMatrix: FUNCTION_MATRIX, timeline12Month: TIMELINE_12_MONTH };
+      return {
+        roles: CAREER_ROLES,
+        functionMatrix: FUNCTION_MATRIX,
+        timeline12Month: TIMELINE_12_MONTH,
+        navigationGuide: NAVIGATION_GUIDE,
+        compBenchmarks: COMP_BENCHMARKS,
+      };
     case "resume-templates":
       return {
         templates: RESUME_TEMPLATES,

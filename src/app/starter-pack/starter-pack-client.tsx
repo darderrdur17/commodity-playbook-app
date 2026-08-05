@@ -14,7 +14,7 @@ import {
 } from "@/data/starter-pack";
 import { StarterPackModal } from "@/components/landing/starter-pack-modal";
 import { startCheckout } from "@/lib/start-checkout";
-import { PAGE_HERO_TOP, PAGE_HERO_BOTTOM } from "@/lib/layout-constants";
+import { PAGE_HERO_TOP, PAGE_HERO_BOTTOM, PAGE_CTA_PY } from "@/lib/layout-constants";
 
 export function StarterPackClient({
   assetUrls = {},
@@ -216,7 +216,7 @@ export function StarterPackClient({
         </div>
       </section>
 
-      <section className="bg-primary-800 section-dark py-14 sm:py-16">
+      <section className={`bg-primary-800 section-dark ${PAGE_CTA_PY}`}>
         <div className="page-container flex flex-col md:flex-row md:items-center md:justify-between gap-6">
           <div className="max-w-xl">
             <h2 className="font-serif text-2xl sm:text-3xl font-bold text-white mb-3">

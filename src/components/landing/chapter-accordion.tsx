@@ -11,18 +11,18 @@ interface ChapterAccordionProps {
 
 function ChapterAccordionItem({
   chapter,
-  defaultOpen = false,
+  isOpen,
+  onToggle,
 }: {
   chapter: ChapterCoverage;
-  defaultOpen?: boolean;
+  isOpen: boolean;
+  onToggle: () => void;
 }) {
-  const [isOpen, setIsOpen] = useState(defaultOpen);
-
   return (
-    <div className="rounded-xl border border-border bg-white overflow-hidden hover:border-primary-300 transition-colors">
+    <div className="rounded-xl border border-border bg-white overflow-hidden hover:border-primary-300 transition-colors self-start w-full min-w-0">
       <button
         type="button"
-        onClick={() => setIsOpen((prev) => !prev)}
+        onClick={onToggle}
         className="w-full flex items-start gap-3.5 px-4 sm:px-5 py-4 text-left hover:bg-secondary/60 transition-colors"
         aria-expanded={isOpen}
       >
@@ -51,10 +51,17 @@ function ChapterAccordionItem({
 }
 
 export function ChapterAccordion({ chapters }: ChapterAccordionProps) {
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
+
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 items-start">
-      {chapters.map((ch, index) => (
-        <ChapterAccordionItem key={ch.letter} chapter={ch} defaultOpen={index === 0} />
+    <div className="grid w-full min-w-0 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-start">
+      {chapters.map((chapter, index) => (
+        <ChapterAccordionItem
+          key={chapter.letter}
+          chapter={chapter}
+          isOpen={openIndex === index}
+          onToggle={() => setOpenIndex(openIndex === index ? null : index)}
+        />
       ))}
     </div>
   );

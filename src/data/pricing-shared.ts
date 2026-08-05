@@ -1,4 +1,4 @@
-import { DEFAULT_LANDING_CONTENT } from "./landing-content";
+import { DEFAULT_LANDING_CONTENT, type SalesPricingTier } from "./landing-content";
 
 /** Career track subscription copy — landing, in-app gates, and upgrade prompts */
 export const PRO_SUBSCRIPTION = {
@@ -20,6 +20,52 @@ export const ELITE_SUBSCRIPTION = {
   cta: "Get Elite",
   unlockCta: "Unlock Elite",
 } as const;
+
+/** Sales track subscription copy — landing sales panel */
+export const SALES_PRO_SUBSCRIPTION = {
+  price: "SGD 99",
+  period: "per month",
+  label: "SGD 99/month",
+  fullNote: "SGD 99/month — cancel anytime",
+  cta: "Get Pro",
+} as const;
+
+export const SALES_ELITE_SUBSCRIPTION = {
+  price: "SGD 199",
+  period: "per month",
+  label: "SGD 199/month",
+  fullNote: "SGD 199/month — cancel anytime",
+  cta: "Get Elite",
+} as const;
+
+export const SALES_PRICING_TIERS = DEFAULT_LANDING_CONTENT.sales.pricing;
+
+function formatSalesTierCategory(tier: SalesPricingTier): string {
+  const period = tier.billing === "per month" ? "month" : tier.billing;
+  return `${tier.name} — ${tier.price}/${period}`;
+}
+
+/** Feature comparison rows for sales Pro / Elite — driven by landing-content tiers */
+export function buildSalesFeatureTable(pricing: SalesPricingTier[]) {
+  const pro = pricing.find((t) => t.name.toLowerCase() === "pro");
+  const elite = pricing.find((t) => t.name.toLowerCase() === "elite");
+  if (!pro || !elite) return [];
+
+  return [
+    {
+      category: formatSalesTierCategory(pro),
+      color: "#0F766E",
+      items: pro.features.map((name) => ({ name, pro: true, elite: true })),
+    },
+    {
+      category: formatSalesTierCategory(elite),
+      color: "#065F46",
+      items: elite.features
+        .filter((f) => !/^everything in pro$/i.test(f))
+        .map((name) => ({ name, pro: false, elite: true })),
+    },
+  ];
+}
 
 /** Shared pricing copy — landing page and /pricing stay in sync */
 export const PRICING_HERO = {

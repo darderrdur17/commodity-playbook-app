@@ -30,6 +30,8 @@ export default async function CareerRoadmapPage() {
       roles={careerData.roles}
       functionMatrix={careerData.functionMatrix}
       timeline12Month={careerData.timeline12Month}
+      navigationGuide={careerData.navigationGuide}
+      compBenchmarks={careerData.compBenchmarks}
       requiredTier={requiredTier as "PRO" | "ELITE"}
     />
   );

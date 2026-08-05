@@ -48,7 +48,7 @@ export const CONTENT_MODULE_META: ContentModuleMeta[] = [
   {
     slug: "career-roadmap",
     title: "Career Roadmap",
-    description: "10 role blueprints with comp and upgrade paths",
+    description: "10 role blueprints, 12-month plan, navigation guide, and comp benchmarks",
     requiredTier: "PRO",
   },
   {

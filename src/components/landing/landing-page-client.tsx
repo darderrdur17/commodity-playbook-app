@@ -25,13 +25,25 @@ import { MembersStrip } from "@/components/landing/members-strip";
 import { ChapterAccordion } from "@/components/landing/chapter-accordion";
 import { CaseStudiesPreview } from "@/components/landing/case-studies-preview";
 import { startCheckout } from "@/lib/start-checkout";
-import { LANDING_HERO_TOP, LANDING_HERO_BOTTOM, HERO_EYEBROW_BASE } from "@/lib/layout-constants";
+import {
+  LANDING_HERO_TOP,
+  LANDING_HERO_BOTTOM,
+  HERO_EYEBROW_BASE,
+  PAGE_SECTION_PY,
+} from "@/lib/layout-constants";
 import { PRICING_CONTENT_FOOTNOTE } from "@/data/pricing-shared";
 import {
   DEFAULT_LANDING_CONTENT,
   type LandingContent,
   type LandingFeature,
 } from "@/data/landing-content";
+import {
+  resolveCaseStudySample,
+  resolveChapterCoverage,
+  resolveCareerContent,
+  resolveSalesContent,
+  resolveWhatsInside,
+} from "@/lib/content/merge";
 
 type Track = "career" | "sales";
 
@@ -97,24 +109,29 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
     }
   }
 
-  const career = content.career;
+  const career = resolveCareerContent(DEFAULT_LANDING_CONTENT, content.career);
   const tierColors: Record<string, string> = { Pro: "#3280ff", Elite: "#B45309" };
+  // Repo-managed section copy always comes from code defaults (stale CMS cannot win).
+  const whatsInside = resolveWhatsInside(DEFAULT_LANDING_CONTENT, content.whatsInside);
+  const chapterCoverage = resolveChapterCoverage(DEFAULT_LANDING_CONTENT, content.chapterCoverage);
+  const caseStudySample = resolveCaseStudySample(DEFAULT_LANDING_CONTENT, content.caseStudySample);
+  const sales = resolveSalesContent(DEFAULT_LANDING_CONTENT, content.sales);
 
   return (
-    <div className="overflow-x-hidden -mb-[max(1rem,env(safe-area-inset-bottom,0px))]">
+    <>
       <TrackAudienceBar activeTrack={activeTrack} onTrackChange={setActiveTrack} />
 
       {activeTrack === "sales" ? (
         <SalesLandingPanel
-          content={content.sales}
+          content={sales}
           membersStrip={content.membersStrip}
           onOpenModal={() => setModalOpen(true)}
           onOpenContactModal={() => setContactOpen(true)}
         />
       ) : (
         <>
-          {/* Career Hero — padding matches starter-pack blue sections */}
-          <section className={`relative bg-navy section-dark overflow-hidden ${LANDING_HERO_TOP} ${LANDING_HERO_BOTTOM}`}>
+          {/* Career Hero — eyebrow stays outside Reveal; overflow-x only so top padding is not clipped */}
+          <section className={`relative bg-navy section-dark overflow-x-hidden ${LANDING_HERO_TOP} ${LANDING_HERO_BOTTOM}`}>
             <GradientOrbs />
             <HeroParticles count={16} />
             <div
@@ -126,10 +143,15 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
             />
             <div className="relative z-10 page-container">
               <div className="max-w-3xl">
-                <div className={cn(HERO_EYEBROW_BASE, "border border-accent/30 bg-accent/10 text-accent")}>
-                  <span className="w-1.5 h-1.5 rounded-full bg-accent" />
+                <p
+                  className={cn(
+                    HERO_EYEBROW_BASE,
+                    "border border-accent/30 bg-accent/10 text-accent not-prose"
+                  )}
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-accent shrink-0" aria-hidden />
                   {career.eyebrow}
-                </div>
+                </p>
                 <Reveal>
                   <h1 className="font-serif text-[clamp(32px,6.5vw,68px)] font-bold leading-[1.04] tracking-tight text-white mb-6">
                     {career.headline}{" "}
@@ -178,16 +200,16 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
             <Reveal className="text-center mb-14">
               <SectionCategoryLabel>What&apos;s Inside</SectionCategoryLabel>
               <h2 className="font-serif text-[clamp(28px,4vw,44px)] font-bold tracking-tight text-gray-900 mb-4 leading-[1.1]">
-                {content.whatsInside.titleLine1}
+                {whatsInside.titleLine1}
                 <br />
-                <span className="text-primary-400 italic">{content.whatsInside.titleLine2}</span>
+                <span className="text-primary-400 italic">{whatsInside.titleLine2}</span>
               </h2>
               <p className="text-muted-fg text-base sm:text-lg max-w-3xl mx-auto leading-relaxed">
-                {content.whatsInside.description}
+                {whatsInside.description}
               </p>
             </Reveal>
             <StaggerChildren staggerDelay={0.08} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-              {content.whatsInside.features.map((f: LandingFeature) => {
+              {whatsInside.features.map((f: LandingFeature) => {
                 const Icon = ICON_MAP[f.icon] || BookOpen;
                 const color = f.tier ? tierColors[f.tier] : "#3280ff";
                 return (
@@ -216,16 +238,16 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
           <section className="py-16 sm:py-24 bg-secondary border-y border-border">
             <div className="page-container">
               <Reveal className="text-center mb-10 sm:mb-14 max-w-3xl mx-auto">
-                <SectionCategoryLabel>{content.chapterCoverage.eyebrow}</SectionCategoryLabel>
+                <SectionCategoryLabel>{chapterCoverage.eyebrow}</SectionCategoryLabel>
                 <h2 className="font-serif text-[clamp(28px,4vw,44px)] font-bold tracking-tight text-gray-900 mb-4">
-                  {content.chapterCoverage.title}
+                  {chapterCoverage.title}
                 </h2>
                 <p className="text-muted-fg text-base sm:text-lg leading-relaxed">
-                  {content.chapterCoverage.description}
+                  {chapterCoverage.description}
                 </p>
               </Reveal>
-              <Reveal delay={0.1}>
-                <ChapterAccordion chapters={content.chapterCoverage.chapters} />
+              <Reveal delay={0.1} className="w-full min-w-0">
+                <ChapterAccordion chapters={chapterCoverage.chapters} />
               </Reveal>
             </div>
           </section>
@@ -233,31 +255,27 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
           {/* Case Studies preview */}
           <section className="py-16 sm:py-24 page-container">
             <Reveal className="text-center mb-12 sm:mb-14 max-w-3xl mx-auto">
-              <SectionCategoryLabel>{content.caseStudySample.eyebrow}</SectionCategoryLabel>
+              <SectionCategoryLabel>{caseStudySample.eyebrow}</SectionCategoryLabel>
               <h2 className="font-serif text-[clamp(28px,4vw,44px)] font-bold tracking-tight text-gray-900 mb-4">
-                {content.caseStudySample.title}{" "}
-                <span className="text-primary-400 italic">{content.caseStudySample.titleAccent}</span>
+                {caseStudySample.title}{" "}
+                <span className="text-primary-400 italic">{caseStudySample.titleAccent}</span>
               </h2>
               <p className="text-muted-fg text-base sm:text-lg leading-relaxed">
-                {content.caseStudySample.description}
+                {caseStudySample.description}
               </p>
             </Reveal>
             <Reveal delay={0.1}>
               <CaseStudiesPreview
-                cards={
-                  content.caseStudySample.cards?.length
-                    ? content.caseStudySample.cards
-                    : DEFAULT_LANDING_CONTENT.caseStudySample.cards
-                }
-                categoryTags={content.caseStudySample.categoryTags}
-                disclaimer={content.caseStudySample.disclaimer}
-                viewMoreHref={content.caseStudySample.viewMoreHref}
+                cards={caseStudySample.cards}
+                categoryTags={caseStudySample.categoryTags}
+                disclaimer={caseStudySample.disclaimer}
+                viewMoreHref={caseStudySample.viewMoreHref}
               />
             </Reveal>
           </section>
 
           {/* Pricing */}
-          <section className="bg-primary-800 section-dark py-16 sm:py-24 relative overflow-hidden">
+          <section className={`bg-primary-800 section-dark ${PAGE_SECTION_PY} relative overflow-hidden`}>
             <GradientOrbs />
             <div className="relative z-10 page-container">
               <Reveal className="text-center mb-12 sm:mb-14">
@@ -401,7 +419,7 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
           </section>
 
           {/* CTA — flush against footer (no white gap) */}
-          <section className={`bg-primary-800 section-dark ${LANDING_HERO_TOP} ${LANDING_HERO_BOTTOM} relative overflow-hidden mb-[calc(-1*max(1rem,env(safe-area-inset-bottom,0px)))]`}>
+          <section className={`bg-primary-800 section-dark ${LANDING_HERO_TOP} ${LANDING_HERO_BOTTOM} relative overflow-hidden`}>
             <GradientOrbs />
             <div className="relative z-10 page-container text-center">
               <Reveal>
@@ -431,6 +449,6 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
 
       <StarterPackModal open={modalOpen} onClose={() => setModalOpen(false)} />
       <ContactModal open={contactOpen} onClose={() => setContactOpen(false)} />
-    </div>
+    </>
   );
 }

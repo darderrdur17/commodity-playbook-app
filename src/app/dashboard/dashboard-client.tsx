@@ -59,7 +59,7 @@ const CONTENT_CARDS = [
     slug: "career-roadmap",
     icon: Map,
     title: "Career Roadmap",
-    desc: "10 role blueprints with comp benchmarks and action plans",
+    desc: "10 role blueprints, navigation guide, comp benchmarks, and 12-month action plans",
     href: "/career-roadmap",
     requiredTier: "PRO",
     badge: "10 Roles",

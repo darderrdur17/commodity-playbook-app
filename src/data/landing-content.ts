@@ -314,7 +314,7 @@ export const DEFAULT_LANDING_CONTENT: LandingContent = {
       {
         icon: "Map",
         title: "Career Roadmap",
-        desc: "10 role blueprints with comp benchmarks, skills matrices, and 90-day action plans for every stage.",
+        desc: "10 role blueprints, navigation guide, comp benchmarks, and 90-day action plans for every stage.",
         tier: "Pro",
       },
       {

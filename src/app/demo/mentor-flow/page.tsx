@@ -37,8 +37,8 @@ export default function MentorFlowDemoPage() {
 
   return (
     <div className="min-h-screen bg-secondary">
-      <section className={`bg-primary-800 section-dark ${PAGE_HERO_TOP} pb-10 sm:pb-14 px-4 sm:px-6`}>
-        <div className="max-w-[900px] mx-auto">
+      <section className={`bg-primary-800 section-dark ${PAGE_HERO_TOP} pb-10 sm:pb-14`}>
+        <div className="page-container max-w-[900px]">
           <Link href="/demo" className="inline-flex items-center gap-1.5 text-sm text-white/60 hover:text-white mb-4">
             <ArrowLeft className="w-4 h-4" /> All demo accounts
           </Link>
@@ -61,7 +61,7 @@ export default function MentorFlowDemoPage() {
         </div>
       </section>
 
-      <div className="max-w-[900px] mx-auto px-4 sm:px-6 py-8 sm:py-10">
+      <div className="page-container max-w-[900px] py-8 sm:py-10">
         {error && (
           <div className="mb-6 p-4 rounded-xl bg-red-50 border border-red-200 text-red-700 text-sm">{error}</div>
         )}

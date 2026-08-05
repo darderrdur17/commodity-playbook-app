@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -75,7 +75,7 @@ export function MentorConnectClient({ userTier, mentorCredits, questions }: Prop
     setQuestion("");
   }
 
-  function renderQuestionForm(variant: "inline" | "panel") {
+  function renderQuestionForm() {
     if (submitted) {
       return (
         <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} className="text-center py-6 sm:py-8">
@@ -93,13 +93,7 @@ export function MentorConnectClient({ userTier, mentorCredits, questions }: Prop
 
     return (
       <form onSubmit={handleSubmit} className="space-y-4">
-        {variant === "panel" && !selectedMentor && (
-          <p className="text-sm text-muted-fg bg-secondary rounded-lg px-4 py-3">
-            Select a mentor above to unlock the question form.
-          </p>
-        )}
-
-        {variant === "inline" && selectedMentor && (
+        {selectedMentor && (
           <div className="rounded-lg border border-primary-line bg-white px-4 py-3">
             <p className="text-[10px] font-bold uppercase tracking-widest text-primary-800 mb-1">Asking</p>
             <p className="font-serif font-semibold text-sm text-gray-900">{selectedMentor.headline}</p>
@@ -133,11 +127,9 @@ export function MentorConnectClient({ userTier, mentorCredits, questions }: Prop
         {error && <p className="text-sm text-red-500 bg-red-50 border border-red-200 rounded-lg p-3">{error}</p>}
 
         <div className="flex flex-col sm:flex-row gap-2">
-          {variant === "inline" && (
-            <Button type="button" variant="outline" className="w-full sm:w-auto" onClick={clearMentorSelection}>
-              Cancel
-            </Button>
-          )}
+          <Button type="button" variant="outline" className="w-full sm:w-auto" onClick={clearMentorSelection}>
+            Cancel
+          </Button>
           <Button type="submit" className="w-full sm:flex-1" size="lg" loading={submitting} disabled={!selectedMentor || question.length < 20 || mentorCredits < 1}>
             <Send className="w-4 h-4" />
             Send to Mentor (1 credit)
@@ -150,7 +142,7 @@ export function MentorConnectClient({ userTier, mentorCredits, questions }: Prop
     );
   }
 
-  async function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault();
     if (!selectedMentor || !segment || question.length < 20) return;
     setSubmitting(true);
@@ -219,80 +211,82 @@ export function MentorConnectClient({ userTier, mentorCredits, questions }: Prop
                   <p className="text-sm text-muted-fg">{seg.blurb}</p>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-                  {seg.mentors.map((mentor) => (
-                    <React.Fragment key={mentor.id}>
-                      <button
-                        type="button"
-                        onClick={() => openMentor(mentor, seg.id, seg.title)}
-                        className={`text-left rounded-xl border bg-white p-4 h-full transition-all hover:-translate-y-1 hover:border-primary-line hover:shadow-md ${
-                          selectedMentor?.id === mentor.id ? "border-primary-400 ring-2 ring-primary-400/20" : "border-border"
-                        }`}
-                      >
-                        <div className="flex items-start justify-between mb-3">
-                          <div className="w-10 h-10 rounded-full bg-primary-soft border border-primary-line flex items-center justify-center">
-                            <Users className="w-4 h-4 text-primary-800" />
+                  {seg.mentors.map((mentor) => {
+                    const isExpanded = selectedMentor?.id === mentor.id;
+                    const formId = `mentor-form-${mentor.id}`;
+
+                    return (
+                      <div key={mentor.id} className="flex flex-col min-w-0">
+                        <button
+                          type="button"
+                          onClick={() => openMentor(mentor, seg.id, seg.title)}
+                          aria-expanded={isExpanded}
+                          aria-controls={formId}
+                          className={`text-left rounded-xl border bg-white p-4 h-full transition-all hover:-translate-y-1 hover:border-primary-line hover:shadow-md ${
+                            isExpanded ? "border-primary-400 ring-2 ring-primary-400/20 rounded-b-none" : "border-border"
+                          }`}
+                        >
+                          <div className="flex items-start justify-between mb-3">
+                            <div className="w-10 h-10 rounded-full bg-primary-soft border border-primary-line flex items-center justify-center">
+                              <Users className="w-4 h-4 text-primary-800" />
+                            </div>
+                            <span className="text-[10px] font-semibold text-muted-fg uppercase tracking-wider">{mentor.years} yrs</span>
                           </div>
-                          <span className="text-[10px] font-semibold text-muted-fg uppercase tracking-wider">{mentor.years} yrs</span>
-                        </div>
-                        <p className="text-[10px] font-bold text-primary-800 tracking-wider mb-1">{mentor.id}</p>
-                        <h3 className="font-serif font-bold text-sm text-gray-900 mb-2 leading-snug">{mentor.headline}</h3>
-                        <p className="text-xs text-muted-fg line-clamp-3 mb-3">{mentor.bio}</p>
-                        <div className="flex flex-wrap gap-1">
-                          {mentor.tags.slice(0, 2).map((tag) => (
-                            <span key={tag} className="text-[10px] px-2 py-0.5 rounded-full bg-secondary text-muted-fg">{tag}</span>
-                          ))}
-                        </div>
-                      </button>
-                      {selectedMentor?.id === mentor.id && (
-                        <div className="lg:hidden col-span-full rounded-xl border border-primary-line bg-primary-soft p-4 sm:p-5">
-                          <div className="flex items-start justify-between gap-3 mb-4">
-                            <h3 className="font-serif font-bold text-gray-900 text-sm sm:text-base">Ask this mentor</h3>
-                            <button type="button" onClick={clearMentorSelection} className="text-muted-fg hover:text-gray-900 shrink-0" aria-label="Close">
-                              <X className="w-5 h-5" />
-                            </button>
+                          <p className="text-[10px] font-bold text-primary-800 tracking-wider mb-1">{mentor.id}</p>
+                          <h3 className="font-serif font-bold text-sm text-gray-900 mb-2 leading-snug">{mentor.headline}</h3>
+                          <p className="text-xs text-muted-fg line-clamp-3 mb-3">{mentor.bio}</p>
+                          <div className="flex flex-wrap gap-1">
+                            {mentor.tags.slice(0, 2).map((tag) => (
+                              <span key={tag} className="text-[10px] px-2 py-0.5 rounded-full bg-secondary text-muted-fg">{tag}</span>
+                            ))}
                           </div>
-                          {renderQuestionForm("inline")}
-                        </div>
-                      )}
-                    </React.Fragment>
-                  ))}
+                        </button>
+                        <AnimatePresence initial={false}>
+                          {isExpanded && (
+                            <motion.div
+                              id={formId}
+                              role="region"
+                              aria-label={`Ask ${mentor.headline}`}
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: "auto", opacity: 1 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              transition={{ duration: 0.25, ease: "easeInOut" }}
+                              className="overflow-hidden"
+                            >
+                              <div className="rounded-b-xl border border-t-0 border-primary-line bg-primary-soft p-4 sm:p-5">
+                                <div className="flex items-start justify-between gap-3 mb-4">
+                                  <h3 className="font-serif font-bold text-gray-900 text-sm sm:text-base">Ask this mentor</h3>
+                                  <button type="button" onClick={clearMentorSelection} className="text-muted-fg hover:text-gray-900 shrink-0" aria-label="Close question form">
+                                    <X className="w-5 h-5" />
+                                  </button>
+                                </div>
+                                {renderQuestionForm()}
+                              </div>
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             ))}
           </div>
         </section>
 
-        {/* Selected mentor preview — desktop only (mobile uses inline form under card) */}
-        <AnimatePresence>
-          {selectedMentor && (
-            <motion.div
-              initial={{ opacity: 0, y: 8 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 8 }}
-              className="hidden lg:flex mb-8 rounded-xl border border-primary-line bg-primary-soft p-5 flex-col sm:flex-row sm:items-start gap-4"
-            >
-              <div className="flex-1">
-                <p className="text-[10px] font-bold uppercase tracking-widest text-primary-800 mb-1">Selected mentor</p>
-                <h3 className="font-serif font-bold text-gray-900">{selectedMentor.headline}</h3>
-                <p className="text-sm text-muted-fg mt-1 italic">&ldquo;{selectedMentor.sampleReply.slice(0, 180)}…&rdquo;</p>
-              </div>
-              <button type="button" onClick={clearMentorSelection} className="text-muted-fg hover:text-gray-900">
-                <X className="w-5 h-5" />
-              </button>
-            </motion.div>
-          )}
-        </AnimatePresence>
-
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="hidden lg:block lg:col-span-2">
-            <div className="bg-white rounded-2xl border border-border p-7">
-              <h2 className="font-serif text-xl font-bold text-gray-900 mb-5 flex items-center gap-2">
-                <MessageSquare className="w-5 h-5 text-primary-400" />
-                Ask a Mentor
-              </h2>
-
-              {renderQuestionForm("panel")}
-            </div>
+          <div className="lg:col-span-2">
+            {!selectedMentor && (
+              <div className="bg-white rounded-2xl border border-border p-6 sm:p-7">
+                <h2 className="font-serif text-xl font-bold text-gray-900 mb-3 flex items-center gap-2">
+                  <MessageSquare className="w-5 h-5 text-primary-400" />
+                  Ask a Mentor
+                </h2>
+                <p className="text-sm text-muted-fg bg-secondary rounded-lg px-4 py-3">
+                  Tap a mentor above to open the question form inline — no need to scroll to the bottom.
+                </p>
+              </div>
+            )}
           </div>
 
           <div className="lg:col-span-1">

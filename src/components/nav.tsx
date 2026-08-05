@@ -341,7 +341,7 @@ export function Nav() {
               maxHeight: `calc(100dvh - ${NAV_HEIGHT_PX}px - env(safe-area-inset-top, 0px))`,
             }}
           >
-            <nav className="max-w-[1200px] mx-auto px-4 sm:px-6 py-4 flex flex-col gap-1">
+            <nav className="page-container py-4 flex flex-col gap-1">
               <p className="px-3 text-[10px] font-bold uppercase tracking-widest text-[#b0bec5] mb-1">
                 Your track
               </p>

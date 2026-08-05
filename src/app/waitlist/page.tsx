@@ -50,8 +50,8 @@ export default function WaitlistPage() {
 
   return (
     <div className="min-h-screen bg-secondary">
-      <section className={`bg-primary-800 section-dark ${PAGE_HERO_TOP} pb-16 px-6`}>
-        <div className="page-container text-center py-12 sm:py-16">
+      <section className={`bg-primary-800 section-dark ${PAGE_HERO_TOP} pb-16`}>
+        <div className="page-container text-center">
           <Reveal>
             <div className="pill pill-dark mb-4 mx-auto">
               <Bell className="w-3 h-3" /> Coming Soon
