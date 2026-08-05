@@ -295,7 +295,7 @@ export const DEFAULT_LANDING_CONTENT: LandingContent = {
   },
   whatsInside: {
     titleLine1: "Every Resource You Need,",
-    titleLine2: "Nothing You Don't.",
+    titleLine2: "Nothing You Don't",
     description:
       "Built from 20+ years inside trading, analytics, and market intelligence by practitioners, validated by desk veterans. Structured for how commodity professionals actually learn and work.",
     features: [

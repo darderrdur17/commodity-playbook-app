@@ -199,10 +199,10 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
           <section className="py-16 sm:py-24 page-container">
             <Reveal className="text-center mb-14">
               <SectionCategoryLabel>What&apos;s Inside</SectionCategoryLabel>
-              <h2 className="font-serif text-[clamp(28px,4vw,44px)] font-bold tracking-tight text-gray-900 mb-4 leading-[1.1]">
+              <h2 className="font-serif text-[clamp(28px,4vw,44px)] font-bold tracking-tight text-gray-900 mb-4 leading-[1.1] normal-case">
                 {whatsInside.titleLine1}
                 <br />
-                <span className="text-primary-400 italic">{whatsInside.titleLine2}</span>
+                <span className="text-primary-400 italic normal-case">{whatsInside.titleLine2}</span>
               </h2>
               <p className="text-muted-fg text-base sm:text-lg max-w-3xl mx-auto leading-relaxed">
                 {whatsInside.description}
