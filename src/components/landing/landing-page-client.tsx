@@ -246,9 +246,9 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
                   {chapterCoverage.description}
                 </p>
               </Reveal>
-              <Reveal delay={0.1} className="w-full min-w-0">
+              <div className="w-full min-w-0">
                 <ChapterAccordion chapters={chapterCoverage.chapters} />
-              </Reveal>
+              </div>
             </div>
           </section>
 
