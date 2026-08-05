@@ -6,6 +6,7 @@ import {
   PROMINENT_WORDMARK_STANDALONE,
   PROMINENT_WORDMARK_WRAPPER,
 } from "@/lib/layout-constants";
+import { BRAND_NAME } from "@/lib/brand";
 
 type LogoVariant =
   | "horizontal"
@@ -68,7 +69,7 @@ function LogoLockupDark({
     <span className={cn("inline-flex flex-col gap-2.5", className)}>
       <Image
         src="/brand/login_page_logo1.png"
-        alt="CommodityPlaybook"
+        alt={BRAND_NAME}
         width={280}
         height={56}
         priority={priority}
@@ -107,7 +108,7 @@ export function Logo({
   const image = (
     <Image
       src={src}
-      alt="CommodityPlaybook"
+      alt={BRAND_NAME}
       width={width}
       height={height}
       priority={priority}

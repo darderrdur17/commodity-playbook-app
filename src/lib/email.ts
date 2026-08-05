@@ -1,5 +1,6 @@
 import { Resend } from "resend";
 import { logDemoEmail, type DemoEmailKind } from "@/lib/demo-email-log";
+import { BRAND_NAME, BRAND_TAGLINE } from "@/lib/brand";
 
 const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
@@ -8,7 +9,7 @@ export function isEmailConfigured(): boolean {
 }
 
 function fromAddress() {
-  return process.env.RESEND_FROM_EMAIL || "CommodityPlaybook <onboarding@resend.dev>";
+  return process.env.RESEND_FROM_EMAIL || `${BRAND_NAME} <onboarding@resend.dev>`;
 }
 
 function appUrl() {
@@ -84,7 +85,7 @@ export async function sendMenteeAnswerEmail(params: {
 }) {
   const name = params.memberName?.split(" ")[0] || "there";
   const link = menteeMentorConnectUrl();
-  const text = `Hi ${name},\n\nA practitioner has answered your ${params.segmentLabel} question on CommodityPlaybook.\n\nYour question:\n${params.question}\n\nAnswer:\n${params.answer}\n\nView in Mentor Connect: ${link}`;
+  const text = `Hi ${name},\n\nA practitioner has answered your ${params.segmentLabel} question on ${BRAND_NAME}.\n\nYour question:\n${params.question}\n\nAnswer:\n${params.answer}\n\nView in Mentor Connect: ${link}`;
   const html = `
       <div style="font-family:system-ui,sans-serif;max-width:560px;margin:0 auto;color:#1a1a1a">
         <p style="color:#0830a0;font-weight:700;font-size:12px;letter-spacing:0.08em;text-transform:uppercase">Mentor Connect</p>
@@ -100,7 +101,7 @@ export async function sendMenteeAnswerEmail(params: {
           <p style="margin:0;font-size:14px;line-height:1.6;color:#0830a0">${escapeHtml(params.answer)}</p>
         </div>
         <p><a href="${link}" style="display:inline-block;background:#0830a0;color:#fff;padding:12px 20px;border-radius:8px;text-decoration:none;font-weight:600">View in Mentor Connect</a></p>
-        <p style="font-size:12px;color:#677184;margin-top:24px">CommodityPlaybook · Break in. Move up. Stay sharp.</p>
+        <p style="font-size:12px;color:#677184;margin-top:24px">${BRAND_NAME} · ${BRAND_TAGLINE}</p>
       </div>
     `;
 

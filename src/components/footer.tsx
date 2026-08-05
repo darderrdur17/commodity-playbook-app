@@ -6,6 +6,7 @@ import { Logo } from "@/components/brand/logo";
 import { FooterNewsletter } from "@/components/footer-newsletter";
 import { ContactModal } from "@/components/landing/contact-modal";
 import { FOOTER_BOTTOM_SAFE_PADDING } from "@/lib/layout-constants";
+import { BRAND_NAME } from "@/lib/brand";
 
 const FOOTER_LINKS = {
   Contents: [
@@ -89,7 +90,7 @@ export function Footer() {
           style={{ paddingBottom: `max(26px, ${FOOTER_BOTTOM_SAFE_PADDING})` }}
         >
           <p className="text-[13px] text-white/60">
-            © 2026. CommodityPlaybook. All rights reserved.
+            © 2026. {BRAND_NAME}. All rights reserved.
           </p>
           <div className="flex items-center gap-[18px] text-[13px]">
             <Link

@@ -7,6 +7,7 @@ import { ArrowRight, ArrowLeft, Check } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { GradientOrbs } from "@/components/animations";
+import { BRAND_NAME } from "@/lib/brand";
 
 // ─── QUIZ QUESTIONS ──────────────────────────────────────────────────
 const QUIZ = [
@@ -225,7 +226,7 @@ export default function OnboardingPage() {
                   <span className="text-2xl">🧭</span>
                 </div>
                 <h2 className="font-serif text-2xl font-bold text-gray-900 mb-2">
-                  Welcome to CommodityPlaybook
+                  Welcome to {BRAND_NAME}
                 </h2>
                 <p className="text-muted-fg text-sm max-w-sm mx-auto">
                   Let's personalise your experience. Which track are you on?

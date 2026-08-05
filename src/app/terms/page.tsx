@@ -1,9 +1,10 @@
 import Link from "next/link";
 import { Reveal } from "@/components/animations";
+import { BRAND_LEGAL_NAME, BRAND_NAME } from "@/lib/brand";
 
 export const metadata = {
   title: "Terms of Service",
-  description: "Terms and conditions for using CommodityPlaybook.",
+  description: `Terms and conditions for using ${BRAND_NAME}.`,
 };
 
 export default function TermsPage() {
@@ -20,14 +21,14 @@ export default function TermsPage() {
           <section>
             <h2 className="font-serif text-xl font-bold text-gray-900 mb-3">1. Agreement to Terms</h2>
             <p className="leading-relaxed">
-              By accessing or using CommodityPlaybook (&quot;the Service&quot;), operated by CommodityPlaybook Pte. Ltd. (&quot;we&quot;, &quot;us&quot;, or &quot;our&quot;), you agree to be bound by these Terms of Service. If you do not agree, do not use the Service.
+              By accessing or using {BRAND_NAME} (&quot;the Service&quot;), operated by {BRAND_LEGAL_NAME} (&quot;we&quot;, &quot;us&quot;, or &quot;our&quot;), you agree to be bound by these Terms of Service. If you do not agree, do not use the Service.
             </p>
           </section>
 
           <section>
             <h2 className="font-serif text-xl font-bold text-gray-900 mb-3">2. Description of Service</h2>
             <p className="leading-relaxed">
-              CommodityPlaybook provides educational content, career resources, and community features related to commodity trading careers. Content is for informational and educational purposes only and does not constitute financial, investment, or trading advice.
+              {BRAND_NAME} provides educational content, career resources, and community features related to commodity trading careers. Content is for informational and educational purposes only and does not constitute financial, investment, or trading advice.
             </p>
           </section>
 
@@ -65,7 +66,7 @@ export default function TermsPage() {
           <section>
             <h2 className="font-serif text-xl font-bold text-gray-900 mb-3">6. Intellectual Property</h2>
             <p className="leading-relaxed">
-              All content, trademarks, and materials on the Service are owned by CommodityPlaybook or its licensors. Your membership grants a personal, non-transferable, non-exclusive licence to access content for your own professional development. Resume templates may be used for your personal job applications only.
+              All content, trademarks, and materials on the Service are owned by {BRAND_NAME} or its licensors. Your membership grants a personal, non-transferable, non-exclusive licence to access content for your own professional development. Resume templates may be used for your personal job applications only.
             </p>
           </section>
 
@@ -86,7 +87,7 @@ export default function TermsPage() {
           <section>
             <h2 className="font-serif text-xl font-bold text-gray-900 mb-3">9. Limitation of Liability</h2>
             <p className="leading-relaxed">
-              To the maximum extent permitted by law, CommodityPlaybook shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of the Service. Our total liability shall not exceed the amount you paid us in the twelve months preceding the claim.
+              To the maximum extent permitted by law, {BRAND_NAME} shall not be liable for any indirect, incidental, special, or consequential damages arising from your use of the Service. Our total liability shall not exceed the amount you paid us in the twelve months preceding the claim.
             </p>
           </section>
 

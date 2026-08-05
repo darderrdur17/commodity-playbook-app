@@ -9,6 +9,7 @@ import { DESK_CATEGORIES, DESK_QA, type DeskCategory, type DeskQA } from "@/data
 import { TierGate } from "@/components/tier-gate";
 import { Reveal } from "@/components/animations";
 import { Button } from "@/components/ui/button";
+import { BRAND_NAME } from "@/lib/brand";
 
 interface Props {
   userTier: string;
@@ -54,7 +55,7 @@ export function DeskChannelClient({
             <span className="text-accent italic">People Who&apos;ve Been There.</span>
           </h1>
           <p className="text-white/65 text-base sm:text-lg max-w-xl mb-6">
-            40 questions across 5 categories — answered by vetted practitioners and the CommodityPlaybook editorial team. Search the library. Can&apos;t find yours? Submit it below.
+            40 questions across 5 categories — answered by vetted practitioners and the {BRAND_NAME} editorial team. Search the library. Can&apos;t find yours? Submit it below.
           </p>
           <BrandedSearchInput
             variant="dark"

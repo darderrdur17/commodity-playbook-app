@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Send, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { BRAND_NAME } from "@/lib/brand";
 
 interface Props {
   open: boolean;
@@ -125,7 +126,7 @@ export function ContactModal({ open, onClose }: Props) {
                     Send message
                   </Button>
                   <p className="text-[11px] text-muted-fg text-center">
-                    CommodityPlaybook · Singapore
+                    {BRAND_NAME} · Singapore
                   </p>
                 </form>
               </>
@@ -138,7 +139,7 @@ export function ContactModal({ open, onClose }: Props) {
                 <p className="text-sm text-muted-fg mb-2 max-w-xs mx-auto">
                   Thanks for reaching out — we&apos;ll be in touch within one business day.
                 </p>
-                <p className="text-[11px] text-muted-fg">CommodityPlaybook · Singapore</p>
+                <p className="text-[11px] text-muted-fg">{BRAND_NAME} · Singapore</p>
               </div>
             )}
           </motion.div>
