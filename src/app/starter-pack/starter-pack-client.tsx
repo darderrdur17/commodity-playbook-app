@@ -4,9 +4,10 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
-import { ArrowRight, Download, Lock, Check, BookOpen } from "lucide-react";
+import { ArrowRight, Download, Lock, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Reveal, StaggerChildren, StaggerItem } from "@/components/animations";
+import { MarketNoteStrip } from "@/components/landing/market-note-strip";
 import {
   STARTER_INFOGRAPHICS,
   STARTER_MARKET_NOTE,
@@ -24,7 +25,6 @@ export function StarterPackClient({
   isLoggedIn?: boolean;
 }) {
   const [modalOpen, setModalOpen] = useState(false);
-  const [subscribed, setSubscribed] = useState(false);
   const [loadingPro, setLoadingPro] = useState(false);
   const router = useRouter();
   const { data: session } = useSession();
@@ -114,58 +114,18 @@ export function StarterPackClient({
         </StaggerChildren>
       </section>
 
-      {/* Market note */}
-      <section className="py-16 sm:py-24 bg-[#f4f6f9]">
-        <div className="page-container">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 lg:items-center">
-            <Reveal>
-              <p className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.14em] text-primary-400 mb-4">
-                <span className="w-2 h-2 rounded-full bg-primary-400 animate-pulse flex-shrink-0" />
-                {STARTER_MARKET_NOTE.eyebrow}
-              </p>
-              <h2 className="font-serif text-[clamp(28px,3.5vw,40px)] font-bold text-primary-800 leading-[1.15] mb-5">
-                {STARTER_MARKET_NOTE.title}
-              </h2>
-              <p className="text-[15px] text-muted-fg leading-relaxed mb-8 max-w-lg">
-                {STARTER_MARKET_NOTE.description}
-              </p>
-              {subscribed ? (
-                <div className="flex items-center gap-2 text-sm text-green-600 font-bold">
-                  <Check className="w-4 h-4 flex-shrink-0" strokeWidth={2.5} />
-                  {STARTER_MARKET_NOTE.subscribed}
-                </div>
-              ) : (
-                <Button onClick={() => setModalOpen(true)}>Subscribe with Starter Pack</Button>
-              )}
-            </Reveal>
-            <Reveal delay={0.1}>
-              <div className="rounded-2xl bg-white p-6 sm:p-7 shadow-[0_4px_24px_rgba(8,48,160,0.07)]">
-                <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-gray-400 mb-1">
-                  Recent topics
-                </p>
-                <ul>
-                  {STARTER_MARKET_NOTE.sampleTopics.map((topic, index) => (
-                    <li
-                      key={topic.title}
-                      className={`flex items-center gap-4 py-[18px] ${
-                        index > 0 ? "border-t border-gray-100" : ""
-                      }`}
-                    >
-                      <span
-                        className="inline-flex items-center justify-center min-w-[78px] px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wide flex-shrink-0"
-                        style={{ color: topic.tagColor, backgroundColor: topic.tagBg }}
-                      >
-                        {topic.tag}
-                      </span>
-                      <p className="text-[13px] text-gray-800 leading-snug">{topic.title}</p>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </section>
+      <MarketNoteStrip
+        eyebrow={STARTER_MARKET_NOTE.eyebrow}
+        title={STARTER_MARKET_NOTE.title}
+        description={STARTER_MARKET_NOTE.description}
+        topics={STARTER_MARKET_NOTE.topics}
+        variant="bullets"
+        cta={{
+          label: "Upgrade to Pro",
+          onClick: handleUpgradePro,
+          loading: loadingPro,
+        }}
+      />
 
       {/* Chapter A preview */}
       <section className="py-16 sm:py-24 page-container">
@@ -238,7 +198,7 @@ export function StarterPackClient({
         </div>
       </section>
 
-      <StarterPackModal open={modalOpen} onClose={() => { setModalOpen(false); setSubscribed(true); }} />
+      <StarterPackModal open={modalOpen} onClose={() => setModalOpen(false)} />
     </div>
   );
 }

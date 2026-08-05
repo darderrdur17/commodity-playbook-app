@@ -1,3 +1,5 @@
+import { CAREER_MARKET_NOTE } from "@/data/market-notes";
+
 export interface StarterInfographic {
   id: string;
   num: string;
@@ -50,51 +52,9 @@ export const STARTER_INFOGRAPHICS: StarterInfographic[] = [
   },
 ];
 
-export interface StarterMarketNoteTopic {
-  tag: string;
-  tagColor: string;
-  tagBg: string;
-  title: string;
-}
-
 export const STARTER_MARKET_NOTE = {
-  eyebrow: "Live · Every Tuesday Edition",
-  title: "The Market Note That Builds Your Desk Credibility.",
-  description:
-    "Not just a market digest — a career intelligence briefing. Each note breaks down how the desk would explain it, so you walk into interviews and conversations already sounding like you are rooted to the same space.",
-  subscribed: "You're subscribed. First note lands next Tuesday.",
-  sampleTopics: [
-    {
-      tag: "MARKET",
-      tagColor: "#2563eb",
-      tagBg: "#dbeafe",
-      title: "Why the EIA draw didn't move flat price — and how to explain that in an interview",
-    },
-    {
-      tag: "CAREER",
-      tagColor: "#b45309",
-      tagBg: "#fef3c7",
-      title: "What 'commercial awareness' actually means to a hiring desk",
-    },
-    {
-      tag: "DESK",
-      tagColor: "#15803d",
-      tagBg: "#dcfce7",
-      title: "How a physical trader sizes a position — the logic behind the number",
-    },
-    {
-      tag: "INTERVIEW",
-      tagColor: "#7c3aed",
-      tagBg: "#ede9fe",
-      title: "Five questions every commodity trading interview asks — and what they're testing",
-    },
-    {
-      tag: "POSITION",
-      tagColor: "#db2777",
-      tagBg: "#fce7f3",
-      title: "How to position a non-commodity background as commercial experience",
-    },
-  ] satisfies StarterMarketNoteTopic[],
+  ...CAREER_MARKET_NOTE,
+  subscribed: "You're subscribed. First note lands next Monday.",
 };
 
 export const STARTER_CHAPTER_PREVIEW = {

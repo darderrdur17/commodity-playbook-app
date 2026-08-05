@@ -1,0 +1,120 @@
+"use client";
+
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
+import { Reveal } from "@/components/animations";
+import { Button } from "@/components/ui/button";
+
+import type { MarketNoteTopic } from "@/data/market-notes";
+
+interface Props {
+  eyebrow: string;
+  title: string;
+  description: string;
+  topics: MarketNoteTopic[];
+  accentColor?: string;
+  /** Career/starter: simple bullet list. Sales: tagged rows. */
+  variant?: "bullets" | "tags";
+  cta?: {
+    label: string;
+    onClick?: () => void;
+    href?: string;
+    loading?: boolean;
+  };
+}
+
+export function MarketNoteStrip({
+  eyebrow,
+  title,
+  description,
+  topics,
+  accentColor = "#3280ff",
+  variant = "tags",
+  cta,
+}: Props) {
+  return (
+    <section className="py-16 sm:py-24 bg-[#f4f6f9]">
+      <div className="page-container">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 lg:items-center">
+          <Reveal>
+            <p
+              className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.14em] mb-4"
+              style={{ color: accentColor }}
+            >
+              <span
+                className="w-2 h-2 rounded-full animate-pulse flex-shrink-0"
+                style={{ background: accentColor }}
+              />
+              {eyebrow}
+            </p>
+            <h2 className="font-serif text-[clamp(28px,3.5vw,40px)] font-bold text-primary-800 leading-[1.15] mb-5">
+              {title}
+            </h2>
+            <p className="text-[15px] text-muted-fg leading-relaxed max-w-lg">{description}</p>
+            {cta && (
+              <div className="mt-8">
+                {cta.href ? (
+                  <Link href={cta.href}>
+                    <Button size="lg" loading={cta.loading}>
+                      {cta.label} <ArrowRight className="w-4 h-4" />
+                    </Button>
+                  </Link>
+                ) : (
+                  <Button size="lg" onClick={cta.onClick} loading={cta.loading}>
+                    {cta.label} <ArrowRight className="w-4 h-4" />
+                  </Button>
+                )}
+              </div>
+            )}
+          </Reveal>
+          <Reveal delay={0.1}>
+            <div className="rounded-2xl bg-white p-6 sm:p-7 shadow-[0_4px_24px_rgba(8,48,160,0.07)]">
+              <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-gray-400 mb-1">
+                Recent Topics
+              </p>
+              {variant === "bullets" ? (
+                <ul className="mt-2 space-y-0">
+                  {topics.map((topic, index) => (
+                    <li
+                      key={topic.title}
+                      className={`flex items-center gap-3 py-4 text-[14px] text-gray-800 ${
+                        index > 0 ? "border-t border-gray-100" : ""
+                      }`}
+                    >
+                      <span
+                        className="w-2 h-2 rounded-full flex-shrink-0"
+                        style={{ background: accentColor }}
+                      />
+                      {topic.title}
+                    </li>
+                  ))}
+                </ul>
+              ) : (
+                <ul>
+                  {topics.map((topic, index) => (
+                    <li
+                      key={topic.title}
+                      className={`flex items-center gap-4 py-[18px] ${
+                        index > 0 ? "border-t border-gray-100" : ""
+                      }`}
+                    >
+                      {topic.tag && (
+                        <span
+                          className="inline-flex items-center justify-center min-w-[78px] px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wide flex-shrink-0"
+                          style={{ color: topic.tagColor, backgroundColor: topic.tagBg }}
+                        >
+                          {topic.tag}
+                        </span>
+                      )}
+                      <p className="text-[13px] text-gray-800 leading-snug">{topic.title}</p>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </Reveal>
+        </div>
+      </div>
+    </section>
+  );
+}

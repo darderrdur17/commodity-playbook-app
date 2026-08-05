@@ -23,6 +23,7 @@ import { SectionCategoryLabel } from "@/components/landing/section-category-labe
 import { MembersStrip } from "@/components/landing/members-strip";
 import { ChapterAccordion } from "@/components/landing/chapter-accordion";
 import { CaseStudiesSection } from "@/components/landing/case-studies-section";
+import { MarketNoteStrip } from "@/components/landing/market-note-strip";
 import { PricingTierGrid } from "@/components/pricing/pricing-tier-grid";
 import {
   LANDING_HERO_TOP,
@@ -43,6 +44,7 @@ import {
   resolveSalesContent,
   resolveWhatsInside,
 } from "@/lib/content/merge";
+import { CAREER_MARKET_NOTE } from "@/data/market-notes";
 
 type Track = "career" | "sales";
 
@@ -233,6 +235,8 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
           </section>
 
           <CaseStudiesSection content={caseStudySample} />
+
+          <MarketNoteStrip {...CAREER_MARKET_NOTE} variant="bullets" />
 
           {/* Pricing */}
           <section className={`bg-primary-800 section-dark ${PAGE_SECTION_PY} relative overflow-hidden`}>

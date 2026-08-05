@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Reveal, StaggerChildren, StaggerItem } from "@/components/animations";
 import { SectionCategoryLabel } from "@/components/landing/section-category-label";
 import { MembersStrip } from "@/components/landing/members-strip";
+import { MarketNoteStrip } from "@/components/landing/market-note-strip";
 import { startCheckout } from "@/lib/start-checkout";
 import { cn } from "@/lib/utils";
 import {
@@ -21,6 +22,7 @@ import {
 } from "@/lib/layout-constants";
 import type { LandingContent } from "@/data/landing-content";
 import { buildSalesFeatureTable } from "@/data/pricing-shared";
+import { SALES_MARKET_NOTE } from "@/data/market-notes";
 
 const SALES_COLOR = "#0F766E";
 
@@ -92,19 +94,6 @@ const LEARN_ITEMS = [
     desc: "The Desk Channel's 40 Q&As are real questions from real practitioners with real answers. Reading them tells you what trading professionals care about, how they frame problems, and which vocabulary signals that you understand their world.",
   },
 ];
-
-const SALES_MARKET_NOTE = {
-  eyebrow: "Live · Every Tuesday Edition",
-  title: "The Market Note on the Sales Edge.",
-  description:
-    "Not a news digest. Each edition translates live market signals into language your buyers use — so you walk into sales conversations with context, not a product deck.",
-  topics: [
-    { tag: "Crude Oil", tagColor: "#2563eb", tagBg: "#dbeafe", title: "OPEC+ cut → Budget mood at major firms" },
-    { tag: "Freight", tagColor: "#b45309", tagBg: "#fef3c7", title: "VLCC Rate Spike → Maritime tech opportunity window" },
-    { tag: "LNG", tagColor: "#15803d", tagBg: "#dcfce7", title: "JKM/TTF Spread → What Asian desk buyers are weighing" },
-    { tag: "Gas", tagColor: "#7c3aed", tagBg: "#ede9fe", title: "European Storage → Energy sector account timing" },
-  ],
-};
 
 function LearnAccordionItem({
   item,
@@ -302,7 +291,7 @@ export function SalesLandingPanel({ content, membersStrip, onOpenContactModal }:
               The Commercial Context Your Buyers Live In.
             </h2>
             <p className="text-muted-fg text-base sm:text-lg leading-relaxed">
-              Not a glossary of terms. A working understanding of how commodity trading desks make money, manage risk, and evaluate vendors — so you can have conversations that resonate.
+              A working understanding of how commodity trading desks make money, manage risk, and evaluate vendors.
             </p>
           </Reveal>
           <Reveal delay={0.1} className="w-full min-w-0">
@@ -311,50 +300,11 @@ export function SalesLandingPanel({ content, membersStrip, onOpenContactModal }:
         </div>
       </section>
 
-      {/* Market Note strip */}
-      <section className="py-16 sm:py-24 bg-[#f4f6f9]">
-        <div className="page-container">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 lg:items-center">
-            <Reveal>
-              <p className="flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.14em] mb-4" style={{ color: SALES_COLOR }}>
-                <span className="w-2 h-2 rounded-full animate-pulse flex-shrink-0" style={{ background: SALES_COLOR }} />
-                {SALES_MARKET_NOTE.eyebrow}
-              </p>
-              <h2 className="font-serif text-[clamp(28px,3.5vw,40px)] font-bold text-gray-900 leading-[1.15] mb-5">
-                {SALES_MARKET_NOTE.title}
-              </h2>
-              <p className="text-[15px] text-muted-fg leading-relaxed max-w-lg">
-                {SALES_MARKET_NOTE.description}
-              </p>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <div className="rounded-2xl bg-white p-6 sm:p-7 shadow-[0_4px_24px_rgba(6,95,70,0.07)]">
-                <p className="text-[11px] font-bold uppercase tracking-[0.14em] text-gray-400 mb-1">
-                  Recent Topics
-                </p>
-                <ul>
-                  {SALES_MARKET_NOTE.topics.map((topic, index) => (
-                    <li
-                      key={topic.title}
-                      className={`flex items-center gap-4 py-[18px] ${
-                        index > 0 ? "border-t border-gray-100" : ""
-                      }`}
-                    >
-                      <span
-                        className="inline-flex items-center justify-center min-w-[78px] px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wide flex-shrink-0"
-                        style={{ color: topic.tagColor, backgroundColor: topic.tagBg }}
-                      >
-                        {topic.tag}
-                      </span>
-                      <p className="text-[13px] text-gray-800 leading-snug">{topic.title}</p>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </Reveal>
-          </div>
-        </div>
-      </section>
+      <MarketNoteStrip
+        {...SALES_MARKET_NOTE}
+        accentColor={SALES_COLOR}
+        variant="tags"
+      />
 
       {/* Who this is for */}
       <section className="py-16 sm:py-24 page-container">
@@ -391,7 +341,7 @@ export function SalesLandingPanel({ content, membersStrip, onOpenContactModal }:
                 <SectionCategoryLabel colorClass="text-white/50">{content.roi.eyebrow}</SectionCategoryLabel>
                 <h2 className="font-serif text-3xl sm:text-4xl font-bold text-white mb-4 mt-3">
                   {content.roi.title}{" "}
-                  <span className="text-accent italic">{content.roi.titleAccent}</span>
+                  <span className="italic" style={{ color: "#dcfce7" }}>{content.roi.titleAccent}</span>
                 </h2>
                 <p className="text-white/65 text-base sm:text-lg leading-relaxed mb-6">
                   {content.roi.description}
