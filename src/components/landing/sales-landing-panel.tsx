@@ -86,7 +86,7 @@ const LEARN_ITEMS = [
   {
     num: "05",
     title: "How to map your solution to their P&L",
-    desc: "The case studies in the Elite tier are real market events with commercial impact analysis. Reading them teaches you how traders think about market signals and decisions — and how to connect your solution to that exact thinking.",
+    desc: "The 15 Asia case studies in the Pro tier are real market events with commercial impact analysis. Reading them teaches you how traders think about market signals and decisions — and how to connect your solution to that exact thinking.",
   },
   {
     num: "06",
