@@ -25,7 +25,6 @@ function TierCard({
 }: {
   tier: LandingTier;
   variant: "landing" | "page";
-  index: number;
   onStarterModal?: () => void;
   onPurchase?: (plan: "pro" | "elite") => void;
   loadingPlan?: string | null;
@@ -245,7 +244,6 @@ export function PricingTierGrid({
             <TierCard
               tier={tier}
               variant={variant}
-              index={i}
               onStarterModal={onStarterModal}
               onPurchase={onPurchase}
               loadingPlan={loadingPlan}
@@ -256,7 +254,6 @@ export function PricingTierGrid({
             <TierCard
               tier={tier}
               variant={variant}
-              index={i}
               onStarterModal={onStarterModal}
               onPurchase={onPurchase}
               loadingPlan={loadingPlan}

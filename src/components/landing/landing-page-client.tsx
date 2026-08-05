@@ -234,9 +234,9 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
             </div>
           </section>
 
-          <CaseStudiesSection content={caseStudySample} />
-
           <MarketNoteStrip {...CAREER_MARKET_NOTE} variant="bullets" />
+
+          <CaseStudiesSection content={caseStudySample} />
 
           {/* Pricing */}
           <section className={`bg-primary-800 section-dark ${PAGE_SECTION_PY} relative overflow-hidden`}>

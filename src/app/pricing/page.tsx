@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { Suspense, useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
@@ -45,7 +45,7 @@ const FAQS = [
   },
 ];
 
-export default function PricingPage() {
+function PricingPageContent() {
   const { data: session } = useSession();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -199,5 +199,19 @@ export default function PricingPage() {
         </div>
       </section>
     </div>
+  );
+}
+
+export default function PricingPage() {
+  return (
+    <Suspense
+      fallback={
+        <div className="min-h-[40vh] flex items-center justify-center">
+          <div className="animate-spin w-6 h-6 border-2 border-primary-400 border-t-transparent rounded-full" />
+        </div>
+      }
+    >
+      <PricingPageContent />
+    </Suspense>
   );
 }
