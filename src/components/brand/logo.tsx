@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import {
-  PROMINENT_WORDMARK_IMAGE,
   PROMINENT_WORDMARK_STANDALONE,
   PROMINENT_WORDMARK_WRAPPER,
 } from "@/lib/layout-constants";
@@ -18,39 +17,39 @@ type LogoVariant =
   | "wordmark-tagline"
   | "lockup-dark";
 
-/** CommodityPlaybook gradient lockup — transparent PNG (~4.3:1) */
-const LOCKUP = { src: "/brand/header_logo1.png", width: 798, height: 184 } as const;
+/** Green–cyan gradient lockup (footer / dark backgrounds) */
+const GRADIENT_LOCKUP = { src: "/brand/header_logo1.png", width: 798, height: 184 } as const;
 const MARK = { src: "/brand/logo-mark.png", width: 184, height: 184 } as const;
-/** Blue script lockup for dark footer — from footer brand kit SVG */
-const FOOTER = { src: "/brand/footer_logo1.png", width: 1197, height: 300 } as const;
+/** Blue script lockup (header / light backgrounds) */
+const BLUE_LOCKUP = { src: "/brand/footer_logo1.png", width: 1197, height: 300 } as const;
 
 const SOURCES: Record<Exclude<LogoVariant, "lockup-dark">, { src: string; width: number; height: number }> = {
-  horizontal: LOCKUP,
-  header: LOCKUP,
-  footer: FOOTER,
-  login: { src: "/brand/login_page_logo1.png", width: LOCKUP.width, height: LOCKUP.height },
+  horizontal: BLUE_LOCKUP,
+  header: BLUE_LOCKUP,
+  footer: GRADIENT_LOCKUP,
+  login: { src: "/brand/login_page_logo1.png", width: GRADIENT_LOCKUP.width, height: GRADIENT_LOCKUP.height },
   mark: MARK,
-  white: LOCKUP,
-  "wordmark-tagline": FOOTER,
+  white: BLUE_LOCKUP,
+  "wordmark-tagline": GRADIENT_LOCKUP,
 };
 
 /** Primary nav wordmark — uses layout-constants for site-wide sizing */
 const HEADER_WRAPPER_CLASS = PROMINENT_WORDMARK_WRAPPER;
 
-const HORIZONTAL_LOGO_CLASS =
+const GRADIENT_LOGO_CLASS =
   "h-10 w-auto sm:h-11 md:h-12 max-w-[min(100%,320px)] sm:max-w-[380px] md:max-w-[440px] object-contain object-left";
 
-const FOOTER_LOGO_CLASS =
+const BLUE_LOGO_CLASS =
   "h-11 w-auto sm:h-12 md:h-14 max-w-[min(100%,300px)] sm:max-w-[360px] md:max-w-[420px] object-contain object-left";
 
 const VARIANT_IMAGE_CLASS: Record<Exclude<LogoVariant, "lockup-dark">, string> = {
-  header: PROMINENT_WORDMARK_IMAGE,
-  footer: FOOTER_LOGO_CLASS,
-  login: HORIZONTAL_LOGO_CLASS,
-  horizontal: HORIZONTAL_LOGO_CLASS,
+  header: BLUE_LOGO_CLASS,
+  footer: cn(GRADIENT_LOGO_CLASS, "sm:max-w-[420px] md:max-w-[480px]"),
+  login: GRADIENT_LOGO_CLASS,
+  horizontal: BLUE_LOGO_CLASS,
   mark: "h-9 w-9 sm:h-10 sm:w-10 object-contain",
-  white: PROMINENT_WORDMARK_IMAGE,
-  "wordmark-tagline": FOOTER_LOGO_CLASS,
+  white: BLUE_LOGO_CLASS,
+  "wordmark-tagline": cn(GRADIENT_LOGO_CLASS, "md:max-w-[520px]"),
 };
 
 interface LogoProps {
@@ -76,12 +75,12 @@ function LogoLockupDark({
   return (
     <span className={cn("inline-flex flex-col gap-2.5", className)}>
       <Image
-        src={LOCKUP.src}
+        src={BLUE_LOCKUP.src}
         alt={BRAND_NAME}
-        width={LOCKUP.width}
-        height={LOCKUP.height}
+        width={BLUE_LOCKUP.width}
+        height={BLUE_LOCKUP.height}
         priority={priority}
-        className={HORIZONTAL_LOGO_CLASS}
+        className={BLUE_LOGO_CLASS}
       />
       {showTagline && (
         <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.22em] text-white/80">
@@ -131,10 +130,8 @@ export function Logo({
     />
   );
   const img =
-    variant === "header" ? (
-      <span className={HEADER_WRAPPER_CLASS}>{image}</span>
-    ) : variant === "white" ? (
-      <span className={PROMINENT_WORDMARK_STANDALONE}>{image}</span>
+    variant === "header" || variant === "white" ? (
+      <span className={variant === "header" ? HEADER_WRAPPER_CLASS : PROMINENT_WORDMARK_STANDALONE}>{image}</span>
     ) : (
       image
     );
