@@ -12,10 +12,10 @@ const SOURCES: Record<LogoVariant, number> = {
 };
 
 const HEIGHTS: Record<LogoVariant, number> = {
-  horizontal: 36,
-  mark: 32,
-  white: 36,
-  "wordmark-tagline": 56,
+  horizontal: 44,
+  mark: 36,
+  white: 44,
+  "wordmark-tagline": 48,
 };
 
 export function Logo({
@@ -54,7 +54,7 @@ export function BrandSearchPrefix() {
 }
 
 const styles = StyleSheet.create({
-  image: { width: 220, maxWidth: "100%" },
+  image: { width: 280, maxWidth: "100%" },
   searchPrefix: {
     paddingLeft: 12,
     paddingRight: 8,

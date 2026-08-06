@@ -18,31 +18,34 @@ type LogoVariant =
   | "wordmark-tagline"
   | "lockup-dark";
 
-/** Brand Kit-2 assets — header_logo1, footer_logo1, login_page_logo1 */
+/** CommodityPlaybook gradient lockup — transparent PNG (~4.3:1) */
+const LOCKUP = { src: "/brand/header_logo1.png", width: 798, height: 184 } as const;
+const MARK = { src: "/brand/logo-mark.png", width: 184, height: 184 } as const;
+
 const SOURCES: Record<Exclude<LogoVariant, "lockup-dark">, { src: string; width: number; height: number }> = {
-  horizontal: { src: "/brand/header_logo1.png", width: 540, height: 152 },
-  header: { src: "/brand/header_logo1.png", width: 540, height: 152 },
-  footer: { src: "/brand/footer_logo1.png", width: 400, height: 96 },
-  login: { src: "/brand/login_page_logo1.png", width: 280, height: 56 },
-  mark: { src: "/brand/logo-mark.png", width: 40, height: 40 },
-  white: { src: "/brand/header_logo1.png", width: 540, height: 152 },
-  "wordmark-tagline": { src: "/brand/footer_logo1.png", width: 400, height: 96 },
+  horizontal: LOCKUP,
+  header: LOCKUP,
+  footer: { src: "/brand/footer_logo1.png", width: LOCKUP.width, height: LOCKUP.height },
+  login: { src: "/brand/login_page_logo1.png", width: LOCKUP.width, height: LOCKUP.height },
+  mark: MARK,
+  white: LOCKUP,
+  "wordmark-tagline": { src: "/brand/footer_logo1.png", width: LOCKUP.width, height: LOCKUP.height },
 };
 
 /** Primary nav wordmark — uses layout-constants for site-wide sizing */
 const HEADER_WRAPPER_CLASS = PROMINENT_WORDMARK_WRAPPER;
 
+const HORIZONTAL_LOGO_CLASS =
+  "h-10 w-auto sm:h-11 md:h-12 max-w-[min(100%,320px)] sm:max-w-[380px] md:max-w-[440px] object-contain object-left";
+
 const VARIANT_IMAGE_CLASS: Record<Exclude<LogoVariant, "lockup-dark">, string> = {
   header: PROMINENT_WORDMARK_IMAGE,
-  footer:
-    "h-[160px] w-auto sm:h-[180px] md:h-[200px] lg:h-[220px] max-w-[min(100%,400px)] object-contain object-left",
-  login:
-    "h-14 w-auto sm:h-16 md:h-[4.5rem] max-w-[min(100%,340px)] object-contain object-left",
-  horizontal: "h-12 w-auto sm:h-14 max-w-[280px] object-contain object-left",
+  footer: cn(HORIZONTAL_LOGO_CLASS, "sm:max-w-[420px] md:max-w-[480px]"),
+  login: HORIZONTAL_LOGO_CLASS,
+  horizontal: HORIZONTAL_LOGO_CLASS,
   mark: "h-9 w-9 sm:h-10 sm:w-10 object-contain",
-  white: cn(PROMINENT_WORDMARK_IMAGE, "brightness-0 invert"),
-  "wordmark-tagline":
-    "h-16 w-auto sm:h-[4.5rem] md:h-20 lg:h-[5.5rem] max-w-[min(100%,340px)] object-contain object-left",
+  white: PROMINENT_WORDMARK_IMAGE,
+  "wordmark-tagline": cn(HORIZONTAL_LOGO_CLASS, "md:max-w-[520px]"),
 };
 
 interface LogoProps {
@@ -68,12 +71,12 @@ function LogoLockupDark({
   return (
     <span className={cn("inline-flex flex-col gap-2.5", className)}>
       <Image
-        src="/brand/login_page_logo1.png"
+        src={LOCKUP.src}
         alt={BRAND_NAME}
-        width={280}
-        height={56}
+        width={LOCKUP.width}
+        height={LOCKUP.height}
         priority={priority}
-        className="h-12 w-auto sm:h-14 md:h-16 max-w-[min(100%,280px)] object-contain object-left"
+        className={HORIZONTAL_LOGO_CLASS}
       />
       {showTagline && (
         <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.22em] text-white/80">

@@ -7,6 +7,7 @@ import { ArrowRight, ArrowLeft, Check } from "lucide-react";
 import { useSession } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { GradientOrbs } from "@/components/animations";
+import { Logo } from "@/components/brand/logo";
 import { BRAND_NAME } from "@/lib/brand";
 
 // ─── QUIZ QUESTIONS ──────────────────────────────────────────────────
@@ -222,8 +223,8 @@ export default function OnboardingPage() {
               className="bg-white rounded-2xl border border-border p-8"
             >
               <div className="text-center mb-8">
-                <div className="w-14 h-14 mx-auto rounded-2xl bg-primary-soft flex items-center justify-center mb-4">
-                  <span className="text-2xl">🧭</span>
+                <div className="flex justify-center mb-4">
+                  <Logo variant="horizontal" href={false} />
                 </div>
                 <h2 className="font-serif text-2xl font-bold text-gray-900 mb-2">
                   Welcome to {BRAND_NAME}

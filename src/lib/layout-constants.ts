@@ -1,5 +1,5 @@
 /** Fixed app header height — keep logo + layout offsets in sync */
-export const NAV_HEIGHT_PX = 88;
+export const NAV_HEIGHT_PX = 72;
 
 export const NAV_HEIGHT = `${NAV_HEIGHT_PX}px`;
 
@@ -45,13 +45,13 @@ export const PAGE_SECTION_PY = "py-16 sm:py-24";
 /** Compact CTA bands before footer */
 export const PAGE_CTA_PY = "py-14 sm:py-16";
 
-/** Primary nav wordmark — header_logo1.png (explicit height; avoid h-full in grid nav) */
+/** Primary nav wordmark — gradient lockup (~4.3:1); explicit height keeps nav grid aligned */
 export const PROMINENT_WORDMARK_WRAPPER =
-  "inline-flex items-center h-[76px] sm:h-[82px] md:h-[86px] max-h-full max-w-[min(100%,340px)] sm:max-w-[420px] md:max-w-[480px] lg:max-w-[540px] shrink-0 overflow-hidden";
+  "inline-flex items-center h-11 sm:h-12 md:h-[3.25rem] max-h-full max-w-[min(100%,320px)] sm:max-w-[400px] md:max-w-[460px] lg:max-w-[520px] shrink-0 overflow-hidden";
 
 /** Standalone wordmark (auth panels, etc.) — matches nav visual weight */
 export const PROMINENT_WORDMARK_STANDALONE =
-  "inline-flex items-center h-[76px] sm:h-[82px] md:h-[86px] max-w-[min(100%,340px)] sm:max-w-[420px] md:max-w-[480px] lg:max-w-[540px] shrink-0 overflow-hidden";
+  "inline-flex items-center h-11 sm:h-12 md:h-[3.25rem] max-w-[min(100%,320px)] sm:max-w-[400px] md:max-w-[460px] lg:max-w-[520px] shrink-0 overflow-hidden";
 
 export const PROMINENT_WORDMARK_IMAGE =
   "h-full w-auto max-w-full object-contain object-left";
