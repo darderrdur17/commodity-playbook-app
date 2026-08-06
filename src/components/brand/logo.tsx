@@ -21,15 +21,17 @@ type LogoVariant =
 /** CommodityPlaybook gradient lockup — transparent PNG (~4.3:1) */
 const LOCKUP = { src: "/brand/header_logo1.png", width: 798, height: 184 } as const;
 const MARK = { src: "/brand/logo-mark.png", width: 184, height: 184 } as const;
+/** Blue script lockup for dark footer — from footer brand kit SVG */
+const FOOTER = { src: "/brand/footer_logo1.png", width: 1197, height: 300 } as const;
 
 const SOURCES: Record<Exclude<LogoVariant, "lockup-dark">, { src: string; width: number; height: number }> = {
   horizontal: LOCKUP,
   header: LOCKUP,
-  footer: { src: "/brand/footer_logo1.png", width: LOCKUP.width, height: LOCKUP.height },
+  footer: FOOTER,
   login: { src: "/brand/login_page_logo1.png", width: LOCKUP.width, height: LOCKUP.height },
   mark: MARK,
   white: LOCKUP,
-  "wordmark-tagline": { src: "/brand/footer_logo1.png", width: LOCKUP.width, height: LOCKUP.height },
+  "wordmark-tagline": FOOTER,
 };
 
 /** Primary nav wordmark — uses layout-constants for site-wide sizing */
@@ -38,14 +40,17 @@ const HEADER_WRAPPER_CLASS = PROMINENT_WORDMARK_WRAPPER;
 const HORIZONTAL_LOGO_CLASS =
   "h-10 w-auto sm:h-11 md:h-12 max-w-[min(100%,320px)] sm:max-w-[380px] md:max-w-[440px] object-contain object-left";
 
+const FOOTER_LOGO_CLASS =
+  "h-11 w-auto sm:h-12 md:h-14 max-w-[min(100%,300px)] sm:max-w-[360px] md:max-w-[420px] object-contain object-left";
+
 const VARIANT_IMAGE_CLASS: Record<Exclude<LogoVariant, "lockup-dark">, string> = {
   header: PROMINENT_WORDMARK_IMAGE,
-  footer: cn(HORIZONTAL_LOGO_CLASS, "sm:max-w-[420px] md:max-w-[480px]"),
+  footer: FOOTER_LOGO_CLASS,
   login: HORIZONTAL_LOGO_CLASS,
   horizontal: HORIZONTAL_LOGO_CLASS,
   mark: "h-9 w-9 sm:h-10 sm:w-10 object-contain",
   white: PROMINENT_WORDMARK_IMAGE,
-  "wordmark-tagline": cn(HORIZONTAL_LOGO_CLASS, "md:max-w-[520px]"),
+  "wordmark-tagline": FOOTER_LOGO_CLASS,
 };
 
 interface LogoProps {
