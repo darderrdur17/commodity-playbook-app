@@ -39,7 +39,6 @@ import { PERSONA_ARCHETYPES } from "@/data/persona-archetypes";
 import { scorePersonaQuiz, type PersonaId } from "@/lib/persona-quiz";
 import { personaIdToApi } from "@/lib/persona-map";
 import { PERSONA_LABELS } from "@/lib/utils";
-import { PRO_SUBSCRIPTION } from "@/data/pricing-shared";
 import {
   resolveResumeTemplateDownloadUrl,
   resolveResumeTemplateFileUrl,
@@ -167,9 +166,8 @@ function ResumeVettingSection() {
             <div className="rounded-lg border border-white/20 bg-white/10 px-4 py-3">
               <p className="text-[10px] font-bold uppercase tracking-widest text-white/50 mb-1">Included in</p>
               <p className="text-sm text-white/80 leading-relaxed">
-                Pro Pack subscribers get <strong className="text-white">2 resume vetting reviews per year</strong> —
-                included in your Pro subscription ({PRO_SUBSCRIPTION.fullNote}). Starter members can purchase additional reviews at SGD 49 per
-                review.
+                Pro and Elite subscribers get <strong className="text-white">2 resume vetting reviews per year</strong>.
+                Starter members can purchase additional reviews at SGD 49 per review advisory.
               </p>
             </div>
           </Reveal>
