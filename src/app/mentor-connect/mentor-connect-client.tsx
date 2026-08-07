@@ -130,29 +130,28 @@ export function MentorConnectClient({ userTier, mentorCredits, questions }: Prop
       </section>
 
       <TierGate requiredTier="ELITE" userTier={userTier}>
-        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_320px] xl:grid-cols-[minmax(0,1fr)_360px] gap-8 lg:gap-10 items-start">
-          {/* Mentor browse + inline ask panel */}
-          <section>
-            <Reveal className="mb-8">
-              <p className="text-xs font-bold uppercase tracking-widest text-primary-800 mb-2">Browse mentors</p>
-              <h2 className="font-serif text-2xl font-bold text-gray-900">25 Practitioners. Five Segments.</h2>
-              <p className="text-sm text-muted-fg mt-2">
-                Tap a mentor to open the question panel right here — no scrolling to the bottom of the page.
-              </p>
-            </Reveal>
+        {/* Mentor browse + inline ask panel — full width */}
+        <section className="mb-14">
+          <Reveal className="mb-8">
+            <p className="text-xs font-bold uppercase tracking-widest text-primary-800 mb-2">Browse mentors</p>
+            <h2 className="font-serif text-2xl font-bold text-gray-900">25 Practitioners. Five Segments.</h2>
+            <p className="text-sm text-muted-fg mt-2">
+              Tap a mentor to open the question panel right here — no scrolling to the bottom of the page.
+            </p>
+          </Reveal>
 
-            <div className="space-y-10">
-              {MENTOR_SEGMENTS.map((seg) => {
-                const panelOpen = selectedMentor?.segmentId === seg.id;
+          <div className="space-y-10">
+            {MENTOR_SEGMENTS.map((seg) => {
+              const panelOpen = selectedMentor?.segmentId === seg.id;
 
-                return (
-                  <div key={seg.id}>
-                    <div className="mb-4 pb-4 border-b border-border">
-                      <p className="text-[10px] font-bold uppercase tracking-widest text-primary-800">{seg.num} · {seg.title}</p>
-                      <p className="text-sm text-muted-fg mt-1">{seg.blurb}</p>
-                    </div>
+              return (
+                <div key={seg.id}>
+                  <div className="mb-4 pb-4 border-b border-border">
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-primary-800">{seg.num} · {seg.title}</p>
+                    <p className="text-sm text-muted-fg mt-1">{seg.blurb}</p>
+                  </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
                       {seg.mentors.map((mentor) => {
                         const isSelected = selectedMentor?.id === mentor.id;
 
@@ -216,48 +215,47 @@ export function MentorConnectClient({ userTier, mentorCredits, questions }: Prop
                   </div>
                 );
               })}
-            </div>
-          </section>
+          </div>
+        </section>
 
-          {/* My Questions sidebar */}
-          <aside className="lg:sticky lg:top-24">
-            <h2 className="font-serif text-lg font-bold text-gray-900 mb-1 flex items-center gap-2">
-              <Clock className="w-4 h-4 text-muted-fg" /> My Questions
-            </h2>
-            <p className="text-xs text-muted-fg mb-4">
-              Answers sync here when a mentor responds — you&apos;ll also receive an email notification.
-            </p>
-            {questions.length === 0 ? (
-              <div className="bg-white rounded-xl border border-border p-6 text-center">
-                <Users className="w-8 h-8 text-muted-fg mx-auto mb-3" />
-                <p className="text-sm text-muted-fg">No questions yet. Pick a mentor and ask your first question.</p>
-              </div>
-            ) : (
-              <div className="space-y-3 max-h-[70vh] overflow-y-auto pr-1">
-                {questions.map((q) => (
-                  <div key={q.id} className="bg-white rounded-xl border border-border p-4">
-                    <div className="flex items-start justify-between gap-2 mb-2">
-                      <Badge variant={q.isAnswered ? "success" : "secondary"} size="sm">
-                        {q.isAnswered ? "Answered" : "Pending"}
-                      </Badge>
-                      <span className="text-xs text-muted-fg">{formatDate(q.createdAt)}</span>
-                    </div>
-                    <p className="text-xs font-bold uppercase tracking-wider text-muted-fg mb-1">
-                      {SEGMENTS.find((s) => s.value === q.segment)?.label}
-                    </p>
-                    <p className="text-sm text-gray-700 mb-2 line-clamp-3">{q.question}</p>
-                    {q.isAnswered && q.answer && (
-                      <div className="bg-primary-soft border border-primary-line rounded-lg p-3 mt-2">
-                        <p className="text-xs font-bold uppercase tracking-wider text-primary-800 mb-1">Answer</p>
-                        <p className="text-sm text-primary-800 line-clamp-4">{q.answer}</p>
-                      </div>
-                    )}
+        {/* My Questions — below mentor grid */}
+        <section className="mb-14 pt-10 border-t border-border">
+          <h2 className="font-serif text-xl sm:text-2xl font-bold text-gray-900 mb-1 flex items-center gap-2">
+            <Clock className="w-5 h-5 text-muted-fg" /> My Questions
+          </h2>
+          <p className="text-sm text-muted-fg mb-6">
+            Answers sync here when a mentor responds — you&apos;ll also receive an email notification.
+          </p>
+          {questions.length === 0 ? (
+            <div className="bg-white rounded-xl border border-border p-8 text-center max-w-xl">
+              <Users className="w-8 h-8 text-muted-fg mx-auto mb-3" />
+              <p className="text-sm text-muted-fg">No questions yet. Pick a mentor above and ask your first question.</p>
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+              {questions.map((q) => (
+                <div key={q.id} className="bg-white rounded-xl border border-border p-4 sm:p-5">
+                  <div className="flex items-start justify-between gap-2 mb-2">
+                    <Badge variant={q.isAnswered ? "success" : "secondary"} size="sm">
+                      {q.isAnswered ? "Answered" : "Pending"}
+                    </Badge>
+                    <span className="text-xs text-muted-fg">{formatDate(q.createdAt)}</span>
                   </div>
-                ))}
-              </div>
-            )}
-          </aside>
-        </div>
+                  <p className="text-xs font-bold uppercase tracking-wider text-muted-fg mb-1">
+                    {SEGMENTS.find((s) => s.value === q.segment)?.label}
+                  </p>
+                  <p className="text-sm text-gray-700 mb-2">{q.question}</p>
+                  {q.isAnswered && q.answer && (
+                    <div className="bg-primary-soft border border-primary-line rounded-lg p-3 mt-2">
+                      <p className="text-xs font-bold uppercase tracking-wider text-primary-800 mb-1">Answer</p>
+                      <p className="text-sm text-primary-800">{q.answer}</p>
+                    </div>
+                  )}
+                </div>
+              ))}
+            </div>
+          )}
+        </section>
 
         {/* How the Session Works */}
         <section className="mt-16 pt-12 border-t border-border">
