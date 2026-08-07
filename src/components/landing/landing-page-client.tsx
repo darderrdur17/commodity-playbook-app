@@ -234,7 +234,7 @@ export function LandingPageClient({ content = DEFAULT_LANDING_CONTENT }: Props) 
             </div>
           </section>
 
-          <MarketNoteStrip {...CAREER_MARKET_NOTE} variant="bullets" />
+          <MarketNoteStrip {...CAREER_MARKET_NOTE} variant="tags" />
 
           <CaseStudiesSection content={caseStudySample} />
 

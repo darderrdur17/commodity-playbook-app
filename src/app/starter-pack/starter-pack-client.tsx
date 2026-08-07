@@ -119,7 +119,8 @@ export function StarterPackClient({
         title={STARTER_MARKET_NOTE.title}
         description={STARTER_MARKET_NOTE.description}
         topics={STARTER_MARKET_NOTE.topics}
-        variant="bullets"
+        variant="tags"
+        subscribedNote={STARTER_MARKET_NOTE.subscribed}
         cta={{
           label: "Upgrade to Pro",
           onClick: handleUpgradePro,

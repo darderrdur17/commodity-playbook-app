@@ -54,7 +54,7 @@ export const STARTER_INFOGRAPHICS: StarterInfographic[] = [
 
 export const STARTER_MARKET_NOTE = {
   ...CAREER_MARKET_NOTE,
-  subscribed: "You're subscribed. First note lands next Monday.",
+  subscribed: "You're subscribed. First note lands next Tuesday.",
 };
 
 export const STARTER_CHAPTER_PREVIEW = {

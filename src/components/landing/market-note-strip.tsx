@@ -21,6 +21,8 @@ interface Props {
     href?: string;
     loading?: boolean;
   };
+  /** Optional green confirmation line below description (e.g. starter-pack subscribe state) */
+  subscribedNote?: string;
 }
 
 export function MarketNoteStrip({
@@ -31,6 +33,7 @@ export function MarketNoteStrip({
   accentColor = "#3280ff",
   variant = "tags",
   cta,
+  subscribedNote,
 }: Props) {
   return (
     <section className="py-16 sm:py-24 bg-[#f4f6f9]">
@@ -51,6 +54,12 @@ export function MarketNoteStrip({
               {title}
             </h2>
             <p className="text-[15px] text-muted-fg leading-relaxed max-w-lg">{description}</p>
+            {subscribedNote && (
+              <p className="mt-5 flex items-center gap-2 text-sm font-medium text-green-700">
+                <span aria-hidden>✓</span>
+                {subscribedNote}
+              </p>
+            )}
             {cta && (
               <div className="mt-8">
                 {cta.href ? (
