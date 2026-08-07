@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useState, useEffect, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import {
   Users, MessageSquare, Clock, CheckCircle, Send, X, Lock,
 } from "lucide-react";
@@ -109,7 +109,9 @@ export function MentorConnectClient({ userTier, mentorCredits, questions }: Prop
             value={question}
             onChange={(e) => setQuestion(e.target.value)}
             placeholder="Be specific — give context, name the commodity or function, ask the question only they can answer."
-            className="w-full h-32 px-3 py-2.5 rounded-lg border border-border text-sm resize-none focus:outline-none focus:ring-2 focus:ring-primary-400"
+            rows={8}
+            maxLength={500}
+            className="w-full min-h-[200px] sm:min-h-[240px] px-4 py-3.5 rounded-xl border border-border text-sm sm:text-base leading-relaxed resize-y focus:outline-none focus:ring-2 focus:ring-primary-400 focus:border-primary-400 bg-white"
           />
           <p className={`text-xs mt-1 ${question.length >= 20 ? "text-green-600" : "text-muted-fg"}`}>
             {question.length}/500 characters
@@ -213,7 +215,6 @@ export function MentorConnectClient({ userTier, mentorCredits, questions }: Prop
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
                   {seg.mentors.map((mentor) => {
                     const isExpanded = selectedMentor?.id === mentor.id;
-                    const formId = `mentor-form-${mentor.id}`;
 
                     return (
                       <div key={mentor.id} className="flex flex-col min-w-0">
@@ -221,9 +222,9 @@ export function MentorConnectClient({ userTier, mentorCredits, questions }: Prop
                           type="button"
                           onClick={() => openMentor(mentor, seg.id, seg.title)}
                           aria-expanded={isExpanded}
-                          aria-controls={formId}
+                          aria-controls="mentor-question-panel"
                           className={`text-left rounded-xl border bg-white p-4 h-full transition-all hover:-translate-y-1 hover:border-primary-line hover:shadow-md ${
-                            isExpanded ? "border-primary-400 ring-2 ring-primary-400/20 rounded-b-none" : "border-border"
+                            isExpanded ? "border-primary-400 ring-2 ring-primary-400/20" : "border-border"
                           }`}
                         >
                           <div className="flex items-start justify-between mb-3">
@@ -241,30 +242,6 @@ export function MentorConnectClient({ userTier, mentorCredits, questions }: Prop
                             ))}
                           </div>
                         </button>
-                        <AnimatePresence initial={false}>
-                          {isExpanded && (
-                            <motion.div
-                              id={formId}
-                              role="region"
-                              aria-label={`Ask ${mentor.headline}`}
-                              initial={{ height: 0, opacity: 0 }}
-                              animate={{ height: "auto", opacity: 1 }}
-                              exit={{ height: 0, opacity: 0 }}
-                              transition={{ duration: 0.25, ease: "easeInOut" }}
-                              className="overflow-hidden"
-                            >
-                              <div className="rounded-b-xl border border-t-0 border-primary-line bg-primary-soft p-4 sm:p-5">
-                                <div className="flex items-start justify-between gap-3 mb-4">
-                                  <h3 className="font-serif font-bold text-gray-900 text-sm sm:text-base">Ask this mentor</h3>
-                                  <button type="button" onClick={clearMentorSelection} className="text-muted-fg hover:text-gray-900 shrink-0" aria-label="Close question form">
-                                    <X className="w-5 h-5" />
-                                  </button>
-                                </div>
-                                {renderQuestionForm()}
-                              </div>
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
                       </div>
                     );
                   })}
@@ -276,14 +253,40 @@ export function MentorConnectClient({ userTier, mentorCredits, questions }: Prop
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2">
-            {!selectedMentor && (
+            {selectedMentor ? (
+              <div
+                id="mentor-question-panel"
+                role="region"
+                aria-label={`Ask ${selectedMentor.headline}`}
+                className="bg-white rounded-2xl border border-primary-line shadow-sm p-6 sm:p-8"
+              >
+                <div className="flex items-start justify-between gap-4 mb-6">
+                  <div>
+                    <h2 className="font-serif text-xl sm:text-2xl font-bold text-gray-900 flex items-center gap-2">
+                      <MessageSquare className="w-5 h-5 text-primary-400 shrink-0" />
+                      Ask this mentor
+                    </h2>
+                    <p className="text-sm text-muted-fg mt-1">Use the full panel below — give enough context for a useful answer.</p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={clearMentorSelection}
+                    className="text-muted-fg hover:text-gray-900 shrink-0 p-1"
+                    aria-label="Close question form"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+                {renderQuestionForm()}
+              </div>
+            ) : (
               <div className="bg-white rounded-2xl border border-border p-6 sm:p-7">
                 <h2 className="font-serif text-xl font-bold text-gray-900 mb-3 flex items-center gap-2">
                   <MessageSquare className="w-5 h-5 text-primary-400" />
                   Ask a Mentor
                 </h2>
                 <p className="text-sm text-muted-fg bg-secondary rounded-lg px-4 py-3">
-                  Tap a mentor above to open the question form inline — no need to scroll to the bottom.
+                  Tap a mentor above to open the question form here — you&apos;ll get a full-width panel to write your question.
                 </p>
               </div>
             )}
