@@ -1,15 +1,13 @@
 "use client";
 
-import { useState, useEffect, type FormEvent } from "react";
+import { useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
-import { motion } from "framer-motion";
-import {
-  Users, MessageSquare, Clock, CheckCircle, Send, X, Lock,
-} from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { AnimatePresence } from "framer-motion";
+import { Users, MessageSquare, Clock, Lock } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { TierGate } from "@/components/tier-gate";
 import { Reveal } from "@/components/animations";
+import { MentorAskPanel } from "@/components/mentor-connect/mentor-ask-panel";
 import { formatDate } from "@/lib/utils";
 import { MENTOR_SEGMENTS, MENTOR_COUNT, type MentorProfile } from "@/data/mentors";
 
@@ -45,6 +43,8 @@ interface Props {
   questions: Question[];
 }
 
+type SelectedMentor = MentorProfile & { segmentId: string; segmentTitle: string };
+
 export function MentorConnectClient({ userTier, mentorCredits, questions }: Props) {
   const router = useRouter();
   const [segment, setSegment] = useState("");
@@ -53,100 +53,27 @@ export function MentorConnectClient({ userTier, mentorCredits, questions }: Prop
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
-  const [selectedMentor, setSelectedMentor] = useState<(MentorProfile & { segmentId: string; segmentTitle: string }) | null>(null);
+  const [selectedMentor, setSelectedMentor] = useState<SelectedMentor | null>(null);
 
   const isElite = userTier === "ELITE";
 
-  useEffect(() => {
-    if (!selectedMentor) return;
-    document.getElementById("mentor-question-panel")?.scrollIntoView({ behavior: "smooth", block: "nearest" });
-  }, [selectedMentor]);
-
   function openMentor(mentor: MentorProfile, segmentId: string, segmentTitle: string) {
     if (selectedMentor?.id === mentor.id) {
-      setSelectedMentor(null);
-      setSegment("");
-      setQuestion("");
+      clearMentorSelection();
       return;
     }
     setSelectedMentor({ ...mentor, segmentId, segmentTitle });
     setSegment(SEGMENT_API_MAP[segmentId] || segmentId);
     setSubmitted(false);
+    setError("");
   }
 
   function clearMentorSelection() {
     setSelectedMentor(null);
     setSegment("");
     setQuestion("");
-  }
-
-  function renderQuestionForm() {
-    if (submitted) {
-      return (
-        <motion.div initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }} className="text-center py-6 sm:py-8">
-          <div className="w-14 h-14 rounded-full bg-green-50 flex items-center justify-center mx-auto mb-4">
-            <CheckCircle className="w-7 h-7 text-green-500" />
-          </div>
-          <h3 className="font-serif text-xl font-bold text-gray-900 mb-2">Question sent!</h3>
-          <p className="text-muted-fg text-sm mb-5">
-            Your question has been anonymously routed to a practitioner in that segment.
-          </p>
-          <Button variant="outline" onClick={() => setSubmitted(false)}>Ask another question</Button>
-        </motion.div>
-      );
-    }
-
-    return (
-      <form onSubmit={handleSubmit} className="space-y-4">
-        {selectedMentor && (
-          <div className="rounded-lg border border-primary-line bg-white px-4 py-3">
-            <p className="text-[10px] font-bold uppercase tracking-widest text-primary-800 mb-1">Asking</p>
-            <p className="font-serif font-semibold text-sm text-gray-900">{selectedMentor.headline}</p>
-            <p className="text-xs text-muted-fg mt-1">{selectedMentor.segmentTitle}</p>
-          </div>
-        )}
-
-        <div>
-          <label className="text-sm font-medium text-gray-700 block mb-2">
-            Your question <span className="text-muted-fg font-normal">(min. 20 characters)</span>
-          </label>
-          <textarea
-            value={question}
-            onChange={(e) => setQuestion(e.target.value)}
-            placeholder="Be specific — give context, name the commodity or function, ask the question only they can answer."
-            rows={8}
-            maxLength={500}
-            className="w-full min-h-[200px] sm:min-h-[240px] px-4 py-3.5 rounded-xl border border-border text-sm sm:text-base leading-relaxed resize-y focus:outline-none focus:ring-2 focus:ring-primary-400 focus:border-primary-400 bg-white"
-          />
-          <p className={`text-xs mt-1 ${question.length >= 20 ? "text-green-600" : "text-muted-fg"}`}>
-            {question.length}/500 characters
-          </p>
-        </div>
-
-        <label className="flex items-center gap-2.5 cursor-pointer">
-          <input type="checkbox" checked={isPublic} onChange={(e) => setIsPublic(e.target.checked)} className="rounded accent-primary-400" />
-          <div>
-            <p className="text-sm font-medium text-gray-800">Allow anonymous sharing</p>
-            <p className="text-xs text-muted-fg">Share your Q&A so others can benefit</p>
-          </div>
-        </label>
-
-        {error && <p className="text-sm text-red-500 bg-red-50 border border-red-200 rounded-lg p-3">{error}</p>}
-
-        <div className="flex flex-col sm:flex-row gap-2">
-          <Button type="button" variant="outline" className="w-full sm:w-auto" onClick={clearMentorSelection}>
-            Cancel
-          </Button>
-          <Button type="submit" className="w-full sm:flex-1" size="lg" loading={submitting} disabled={!selectedMentor || question.length < 20 || mentorCredits < 1}>
-            <Send className="w-4 h-4" />
-            Send to Mentor (1 credit)
-          </Button>
-        </div>
-        {mentorCredits < 1 && (
-          <p className="text-xs text-center text-muted-fg">No credits remaining. Credits refresh monthly.</p>
-        )}
-      </form>
-    );
+    setSubmitted(false);
+    setError("");
   }
 
   async function handleSubmit(e: FormEvent) {
@@ -168,7 +95,6 @@ export function MentorConnectClient({ userTier, mentorCredits, questions }: Prop
         setSubmitted(true);
         setQuestion("");
         setSegment("");
-        setSelectedMentor(null);
         router.refresh();
       }
     } catch {
@@ -204,100 +130,97 @@ export function MentorConnectClient({ userTier, mentorCredits, questions }: Prop
       </section>
 
       <TierGate requiredTier="ELITE" userTier={userTier}>
-        {/* Mentor grid */}
-        <section className="mb-12">
-          <Reveal className="mb-8">
-            <p className="text-xs font-bold uppercase tracking-widest text-primary-800 mb-2">Browse mentors</p>
-            <h2 className="font-serif text-2xl font-bold text-gray-900">25 Practitioners. Five Segments.</h2>
-          </Reveal>
-          <div className="space-y-10">
-            {MENTOR_SEGMENTS.map((seg) => (
-              <div key={seg.id}>
-                <div className="mb-4">
-                  <p className="text-[10px] font-bold uppercase tracking-widest text-primary-800">{seg.num} · {seg.title}</p>
-                  <p className="text-sm text-muted-fg">{seg.blurb}</p>
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
-                  {seg.mentors.map((mentor) => {
-                    const isExpanded = selectedMentor?.id === mentor.id;
+        <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1fr)_320px] xl:grid-cols-[minmax(0,1fr)_360px] gap-8 lg:gap-10 items-start">
+          {/* Mentor browse + inline ask panel */}
+          <section>
+            <Reveal className="mb-8">
+              <p className="text-xs font-bold uppercase tracking-widest text-primary-800 mb-2">Browse mentors</p>
+              <h2 className="font-serif text-2xl font-bold text-gray-900">25 Practitioners. Five Segments.</h2>
+              <p className="text-sm text-muted-fg mt-2">
+                Tap a mentor to open the question panel right here — no scrolling to the bottom of the page.
+              </p>
+            </Reveal>
 
-                    return (
-                      <div key={mentor.id} className="flex flex-col min-w-0">
-                        <button
-                          type="button"
-                          onClick={() => openMentor(mentor, seg.id, seg.title)}
-                          aria-expanded={isExpanded}
-                          aria-controls="mentor-question-panel"
-                          className={`text-left rounded-xl border bg-white p-4 h-full transition-all hover:-translate-y-1 hover:border-primary-line hover:shadow-md ${
-                            isExpanded ? "border-primary-400 ring-2 ring-primary-400/20" : "border-border"
-                          }`}
-                        >
-                          <div className="flex items-start justify-between mb-3">
-                            <div className="w-10 h-10 rounded-full bg-primary-soft border border-primary-line flex items-center justify-center">
-                              <Users className="w-4 h-4 text-primary-800" />
+            <div className="space-y-10">
+              {MENTOR_SEGMENTS.map((seg) => {
+                const panelOpen = selectedMentor?.segmentId === seg.id;
+
+                return (
+                  <div key={seg.id}>
+                    <div className="mb-4 pb-4 border-b border-border">
+                      <p className="text-[10px] font-bold uppercase tracking-widest text-primary-800">{seg.num} · {seg.title}</p>
+                      <p className="text-sm text-muted-fg mt-1">{seg.blurb}</p>
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+                      {seg.mentors.map((mentor) => {
+                        const isSelected = selectedMentor?.id === mentor.id;
+
+                        return (
+                          <button
+                            key={mentor.id}
+                            type="button"
+                            onClick={() => openMentor(mentor, seg.id, seg.title)}
+                            aria-expanded={isSelected}
+                            className={`text-left rounded-xl border bg-white p-4 h-full transition-all hover:-translate-y-1 hover:border-primary-line hover:shadow-md ${
+                              isSelected
+                                ? "border-primary-400 ring-2 ring-primary-400/20 shadow-md"
+                                : "border-border"
+                            }`}
+                          >
+                            <div className="flex items-start justify-between mb-3">
+                              <div className="w-10 h-10 rounded-full bg-primary-soft border border-primary-line flex items-center justify-center">
+                                <Users className="w-4 h-4 text-primary-800" />
+                              </div>
+                              <span className="text-[10px] font-semibold text-muted-fg uppercase tracking-wider">{mentor.years} yrs</span>
                             </div>
-                            <span className="text-[10px] font-semibold text-muted-fg uppercase tracking-wider">{mentor.years} yrs</span>
-                          </div>
-                          <p className="text-[10px] font-bold text-primary-800 tracking-wider mb-1">{mentor.id}</p>
-                          <h3 className="font-serif font-bold text-sm text-gray-900 mb-2 leading-snug">{mentor.headline}</h3>
-                          <p className="text-xs text-muted-fg line-clamp-3 mb-3">{mentor.bio}</p>
-                          <div className="flex flex-wrap gap-1">
-                            {mentor.tags.slice(0, 2).map((tag) => (
-                              <span key={tag} className="text-[10px] px-2 py-0.5 rounded-full bg-secondary text-muted-fg">{tag}</span>
-                            ))}
-                          </div>
-                        </button>
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
+                            <p className="text-[10px] font-bold text-primary-800 tracking-wider mb-1">{mentor.id}</p>
+                            <h3 className="font-serif font-bold text-sm text-gray-900 mb-2 leading-snug">{mentor.headline}</h3>
+                            <p className="text-xs text-muted-fg line-clamp-3 mb-3">{mentor.bio}</p>
+                            <div className="flex flex-wrap gap-1 mb-3">
+                              {mentor.tags.slice(0, 2).map((tag) => (
+                                <span key={tag} className="text-[10px] px-2 py-0.5 rounded-full bg-secondary text-muted-fg">{tag}</span>
+                              ))}
+                            </div>
+                            <p className="flex items-center gap-1.5 text-xs font-semibold text-primary-400">
+                              <MessageSquare className="w-3.5 h-3.5" />
+                              {isSelected ? "Writing question…" : "Ask one question"}
+                            </p>
+                          </button>
+                        );
+                      })}
+                    </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-2">
-            {selectedMentor ? (
-              <div
-                id="mentor-question-panel"
-                role="region"
-                aria-label={`Ask ${selectedMentor.headline}`}
-                className="bg-white rounded-2xl border border-primary-line shadow-sm p-6 sm:p-8"
-              >
-                <div className="flex items-start justify-between gap-4 mb-6">
-                  <div>
-                    <h2 className="font-serif text-xl sm:text-2xl font-bold text-gray-900 flex items-center gap-2">
-                      <MessageSquare className="w-5 h-5 text-primary-400 shrink-0" />
-                      Ask this mentor
-                    </h2>
-                    <p className="text-sm text-muted-fg mt-1">Use the full panel below — give enough context for a useful answer.</p>
+                    <AnimatePresence mode="wait">
+                      {panelOpen && selectedMentor && (
+                        <MentorAskPanel
+                          key={selectedMentor.id}
+                          mentor={selectedMentor}
+                          question={question}
+                          isPublic={isPublic}
+                          submitting={submitting}
+                          submitted={submitted}
+                          error={error}
+                          mentorCredits={mentorCredits}
+                          onQuestionChange={setQuestion}
+                          onIsPublicChange={setIsPublic}
+                          onClose={clearMentorSelection}
+                          onSubmit={handleSubmit}
+                          onAskAnother={() => {
+                            setSubmitted(false);
+                            clearMentorSelection();
+                          }}
+                        />
+                      )}
+                    </AnimatePresence>
                   </div>
-                  <button
-                    type="button"
-                    onClick={clearMentorSelection}
-                    className="text-muted-fg hover:text-gray-900 shrink-0 p-1"
-                    aria-label="Close question form"
-                  >
-                    <X className="w-5 h-5" />
-                  </button>
-                </div>
-                {renderQuestionForm()}
-              </div>
-            ) : (
-              <div className="bg-white rounded-2xl border border-border p-6 sm:p-7">
-                <h2 className="font-serif text-xl font-bold text-gray-900 mb-3 flex items-center gap-2">
-                  <MessageSquare className="w-5 h-5 text-primary-400" />
-                  Ask a Mentor
-                </h2>
-                <p className="text-sm text-muted-fg bg-secondary rounded-lg px-4 py-3">
-                  Tap a mentor above to open the question form here — you&apos;ll get a full-width panel to write your question.
-                </p>
-              </div>
-            )}
-          </div>
+                );
+              })}
+            </div>
+          </section>
 
-          <div className="lg:col-span-1">
+          {/* My Questions sidebar */}
+          <aside className="lg:sticky lg:top-24">
             <h2 className="font-serif text-lg font-bold text-gray-900 mb-1 flex items-center gap-2">
               <Clock className="w-4 h-4 text-muted-fg" /> My Questions
             </h2>
@@ -310,7 +233,7 @@ export function MentorConnectClient({ userTier, mentorCredits, questions }: Prop
                 <p className="text-sm text-muted-fg">No questions yet. Pick a mentor and ask your first question.</p>
               </div>
             ) : (
-              <div className="space-y-3">
+              <div className="space-y-3 max-h-[70vh] overflow-y-auto pr-1">
                 {questions.map((q) => (
                   <div key={q.id} className="bg-white rounded-xl border border-border p-4">
                     <div className="flex items-start justify-between gap-2 mb-2">
@@ -322,18 +245,18 @@ export function MentorConnectClient({ userTier, mentorCredits, questions }: Prop
                     <p className="text-xs font-bold uppercase tracking-wider text-muted-fg mb-1">
                       {SEGMENTS.find((s) => s.value === q.segment)?.label}
                     </p>
-                    <p className="text-sm text-gray-700 mb-2 line-clamp-2">{q.question}</p>
+                    <p className="text-sm text-gray-700 mb-2 line-clamp-3">{q.question}</p>
                     {q.isAnswered && q.answer && (
                       <div className="bg-primary-soft border border-primary-line rounded-lg p-3 mt-2">
                         <p className="text-xs font-bold uppercase tracking-wider text-primary-800 mb-1">Answer</p>
-                        <p className="text-sm text-primary-800">{q.answer}</p>
+                        <p className="text-sm text-primary-800 line-clamp-4">{q.answer}</p>
                       </div>
                     )}
                   </div>
                 ))}
               </div>
             )}
-          </div>
+          </aside>
         </div>
 
         {/* How the Session Works */}
@@ -378,7 +301,7 @@ export function MentorConnectClient({ userTier, mentorCredits, questions }: Prop
               <div>
                 <p className="font-serif font-bold text-primary-800 mb-1">Strictly anonymous.</p>
                 <p className="text-sm text-secondary-fg leading-relaxed">
-                  Mentor identities are never disclosed. Conversations are stored locally on your device only. Nothing leaves this browser.
+                  Mentor identities are never disclosed. Your questions are routed anonymously and answers appear in My Questions when ready.
                 </p>
               </div>
             </div>
