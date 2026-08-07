@@ -57,6 +57,11 @@ export function MentorConnectClient({ userTier, mentorCredits, questions }: Prop
 
   const isElite = userTier === "ELITE";
 
+  useEffect(() => {
+    if (!selectedMentor) return;
+    document.getElementById("mentor-question-panel")?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+  }, [selectedMentor]);
+
   function openMentor(mentor: MentorProfile, segmentId: string, segmentTitle: string) {
     if (selectedMentor?.id === mentor.id) {
       setSelectedMentor(null);
