@@ -14,13 +14,11 @@ interface SelectedMentor extends MentorProfile {
 interface Props {
   mentor: SelectedMentor;
   question: string;
-  isPublic: boolean;
   submitting: boolean;
   submitted: boolean;
   error: string;
   mentorCredits: number;
   onQuestionChange: (value: string) => void;
-  onIsPublicChange: (value: boolean) => void;
   onClose: () => void;
   onSubmit: (e: FormEvent) => void;
   onAskAnother: () => void;
@@ -29,13 +27,11 @@ interface Props {
 export function MentorAskPanel({
   mentor,
   question,
-  isPublic,
   submitting,
   submitted,
   error,
   mentorCredits,
   onQuestionChange,
-  onIsPublicChange,
   onClose,
   onSubmit,
   onAskAnother,
@@ -135,19 +131,6 @@ export function MentorAskPanel({
               {question.length}/500 characters · This question uses 1 credit once sent.
             </p>
           </div>
-
-          <label className="flex items-start gap-2.5 cursor-pointer mt-4">
-            <input
-              type="checkbox"
-              checked={isPublic}
-              onChange={(e) => onIsPublicChange(e.target.checked)}
-              className="rounded accent-primary-400 mt-0.5"
-            />
-            <div>
-              <p className="text-sm font-medium text-gray-800">Allow anonymous sharing</p>
-              <p className="text-xs text-muted-fg">Share your Q&amp;A so others can benefit</p>
-            </div>
-          </label>
 
           {error && (
             <p className="text-sm text-red-600 bg-red-50 border border-red-200 rounded-lg p-3 mt-4">{error}</p>

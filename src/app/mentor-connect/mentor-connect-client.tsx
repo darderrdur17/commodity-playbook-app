@@ -49,7 +49,6 @@ export function MentorConnectClient({ userTier, mentorCredits, questions }: Prop
   const router = useRouter();
   const [segment, setSegment] = useState("");
   const [question, setQuestion] = useState("");
-  const [isPublic, setIsPublic] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
@@ -86,7 +85,7 @@ export function MentorConnectClient({ userTier, mentorCredits, questions }: Prop
       const res = await fetch("/api/mentor-connect", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ segment, question, isPublic }),
+        body: JSON.stringify({ segment, question }),
       });
       if (!res.ok) {
         const data = await res.json();
@@ -196,13 +195,11 @@ export function MentorConnectClient({ userTier, mentorCredits, questions }: Prop
                           key={selectedMentor.id}
                           mentor={selectedMentor}
                           question={question}
-                          isPublic={isPublic}
                           submitting={submitting}
                           submitted={submitted}
                           error={error}
                           mentorCredits={mentorCredits}
                           onQuestionChange={setQuestion}
-                          onIsPublicChange={setIsPublic}
                           onClose={clearMentorSelection}
                           onSubmit={handleSubmit}
                           onAskAnother={() => {
